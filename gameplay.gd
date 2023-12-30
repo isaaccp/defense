@@ -31,6 +31,9 @@ func _play_next_level():
 	var level = level_scene.instantiate()
 	level.initialize(characters)
 	level_parent.add_child(level, true)
-	level.freeze()
+	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.show_character_config(true)
+	await ui_layer.hud.config_ready
+	ui_layer.hud.show_character_config(false)
+	level.freeze(false)

@@ -2,16 +2,17 @@ extends Control
 
 class_name HudCharacterView
 
-@export var title: Label
-@export var configure_behavior_button: Button
-
 var character: Character
 
 signal configure_behavior_selected
+signal readiness_updated(ready: bool)
 
+func _ready():
+	%ConfigContainer.hide()
+	
 func initialize(character_: Character) -> void:
 	character = character_
-	title.text = character.short_name()
+	%Title.text = character.short_name()
 
 func is_local() -> bool:
 	if OnlineMatch.match_mode == OnlineMatch.MatchMode.NONE:
@@ -22,9 +23,12 @@ func is_local() -> bool:
 func show_config(show: bool) -> void:
 	if show:
 		if is_local():
-			configure_behavior_button.show()
+			%ConfigContainer.show()
 	else:
-		configure_behavior_button.hide()
+		%ConfigContainer.hide()
 
 func _on_configure_behavior_button_pressed():
 	configure_behavior_selected.emit()
+
+func _on_ready_button_toggled(toggled_on: bool):
+	readiness_updated.emit(toggled_on)

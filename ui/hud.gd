@@ -32,15 +32,21 @@ var message_tween = {
 const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
+var characters_ready = {}
+
+signal config_ready
+
 func _ready():
 	for label in message_label.values():
 		label.hide()
 
 func set_characters(characters: Node) -> void:
-	for character in characters.get_children():
+	for i in characters.get_child_count():
+		var character = characters.get_child(i)
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
 		view.initialize(character)
 		view.configure_behavior_selected.connect(_on_configure_behavior_selected.bind(character))
+		view.readiness_updated.connect(_on_readiness_updated.bind(i))
 		character_views.add_child(view)
 		
 func _on_configure_behavior_selected(character: Character):
@@ -51,6 +57,14 @@ func _on_configure_behavior_selected(character: Character):
 	programming_ui.initialize(character)
 	%ProgrammingUIParent.add_child(programming_ui)
 
+func _on_readiness_updated(ready: bool, character_idx: int):
+	if ready:
+		characters_ready[character_idx] = true
+		if characters_ready.size() == character_views.get_child_count():
+			config_ready.emit()
+	else:
+		characters_ready.erase(character_idx)
+		
 func show_character_config(show: bool):
 	for view in character_views.get_children():
 		view.show_config(show)

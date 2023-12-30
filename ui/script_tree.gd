@@ -17,7 +17,10 @@ func _ready():
 	tree.set_column_title(2, "Condition")
 	tree.set_column_title(3, "Action")
 
-	_add_empty()
+func load_behavior(behavior: Behavior) -> void:
+	assert(is_inside_tree(), "Needs to be called inside tree")
+	for rule in behavior.rules:
+		_add_prefilled(rule)
 
 func _add_empty() -> TreeItem:
 	var create = self.create_item(_root)
@@ -27,6 +30,19 @@ func _add_empty() -> TreeItem:
 	create.set_text(2, "[Condition]")
 	create.set_text(3, "[Action]")
 	return create
+	
+func _add_prefilled(rule: Rule) -> TreeItem:
+	var create = self.create_item(_root)
+	create.add_button(0, delete_icon, 0, true, "Delete")
+	create.set_selectable(0, false)
+	create.set_text(1, str(rule.target_selection))
+	create.set_metadata(1, rule.target_selection.id)
+	create.set_text(2, "Always")
+	create.set_metadata(2, 0)
+	create.set_text(3, str(rule.action))
+	create.set_metadata(3, rule.action.id)
+	return create
+	
 
 func _is_empty(item: TreeItem) -> bool:
 	for c in range(columns):

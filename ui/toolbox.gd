@@ -16,7 +16,7 @@ func action_metadata(column: int, id: ActionDef.Id) -> Dictionary:
 	return {"column": column, "id": id}
 
 func condition_metadata(column: int) -> Dictionary:
-	return {"column": column}
+	return {"column": column, "id": 0}
 	
 func _ready():
 	var tree = self
@@ -55,4 +55,4 @@ func _get_drag_data(at_position: Vector2):
 	var preview = Label.new()
 	preview.text = item.get_text(0)
 	set_drag_preview(preview)
-	return {"type": item.get_metadata(0).column, "text": preview.text, "id": item, "has_placeholders": preview.text.contains("{")}
+	return {"type": item.get_metadata(0).column, "text": preview.text, "id": item.get_metadata(0).id, "has_placeholders": preview.text.contains("{")}

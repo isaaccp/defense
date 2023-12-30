@@ -12,9 +12,9 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 		character.position = starting_positions.get_child(i).position
 		characters.add_child(character)
 
-func freeze():
-	_freeze_tree(characters, true)
-	_freeze_tree(enemies, true)
+func freeze(frozen: bool):
+	_freeze_tree(characters, frozen)
+	_freeze_tree(enemies, frozen)
 		
 func _freeze_node(node: Node, frozen: bool):
 	node.set_process(!frozen)

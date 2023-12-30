@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqmsmsumhossr"]
+[gd_scene load_steps=2 format=3 uid="uid://cqmsmsumhossr"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_veies"]
-[ext_resource type="PackedScene" uid="uid://c7bsv7cscwbmr" path="res://ui/programming_ui.tscn" id="2_05xmd"]
 
 [node name="HUD" type="Control" node_paths=PackedStringArray("peer", "time", "main_message", "bottom_message", "character_views")]
 layout_mode = 3
@@ -91,11 +90,3 @@ offset_right = 400.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ProgrammingUI" parent="ProgrammingUIParent" instance=ExtResource("2_05xmd")]
-layout_mode = 2
-anchors_preset = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
