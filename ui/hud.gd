@@ -32,9 +32,7 @@ var message_tween = {
 const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
-var characters_ready = {}
-
-signal config_ready
+signal readiness_updated(character_idx: int, ready: bool)
 
 func _ready():
 	for label in message_label.values():
@@ -66,12 +64,7 @@ func _close_programming_ui():
 	show_character_config(true)
 			
 func _on_readiness_updated(ready: bool, character_idx: int):
-	if ready:
-		characters_ready[character_idx] = true
-		if characters_ready.size() == character_views.get_child_count():
-			config_ready.emit()
-	else:
-		characters_ready.erase(character_idx)
+	readiness_updated.emit(character_idx, ready)
 		
 func show_character_config(show: bool):
 	for view in character_views.get_children():

@@ -16,3 +16,4 @@ level_parent = NodePath("LevelParent")
 spawn_path = NodePath("../LevelParent")
 
 [connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]
+[connection signal="readiness_updated" from="GameplayUILayer" to="." method="_on_readiness_updated"]

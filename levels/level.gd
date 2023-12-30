@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Level
+
 @export var characters: Node2D
 @export var enemies: Node2D
 @export var starting_positions: Node
