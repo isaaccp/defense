@@ -20,8 +20,8 @@ func physics_process(target: Node2D, delta: float):
 		sword_attack.entity_hit.connect(_on_entity_hit)
 		Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
 
+# TODO: Probably could be moved to base class.
 func _on_entity_hit(hit_entity: BehaviorEntity):
-	print("%s was pre-hit!" % hit_entity.name)
 	if friendly_fire:  # No checks needed.
 		_process_hit(hit_entity)
 	else:
