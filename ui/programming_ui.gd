@@ -15,7 +15,10 @@ func initialize(character_: Character):
 	)
 
 func _ready():
-	%Script.load_behavior(character.behavior)
+	if is_instance_valid(character):
+		%Title.text = "Configuring behavior for %s" % character.short_name()
+		if character.behavior:
+			%Script.load_behavior(character.behavior)
 
 func _on_save_button_pressed():
 	# character.behavior = ...

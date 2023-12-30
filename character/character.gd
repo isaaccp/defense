@@ -14,7 +14,7 @@ func _ready():
 		behavior = spec.default_behavior
 
 func short_name() -> String:
-	return Enum.character_id_string(id)
+	return "%s (%d)" % [Enum.character_id_string(id), idx]
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

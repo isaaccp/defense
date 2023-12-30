@@ -22,32 +22,53 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xf4ix")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme = SubResource("Theme_8i0e7")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 split_offset = 150
 
-[node name="ScriptMargin" type="MarginContainer" parent="VBoxContainer/MarginContainer/HSplitContainer"]
+[node name="ScriptMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
 layout_mode = 2
 text = "Script"
 
-[node name="Script" type="Tree" parent="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+[node name="Script" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -60,43 +81,43 @@ script = ExtResource("2_dh7cw")
 delete_icon = ExtResource("2_nopvd")
 edit_icon = ExtResource("3_6ohbm")
 
-[node name="ConfigPane" parent="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" instance=ExtResource("4_5vsiq")]
+[node name="ConfigPane" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" instance=ExtResource("4_5vsiq")]
 unique_name_in_owner = true
 visible = false
 
-[node name="ToolsMargin" type="MarginContainer" parent="VBoxContainer/MarginContainer/HSplitContainer"]
+[node name="ToolsMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
 layout_mode = 2
 text = "Components"
 
-[node name="Toolbox" type="Tree" parent="VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="Toolbox" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_pkup4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
 
-[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
 
-[connection signal="button_clicked" from="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" to="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_button_clicked"]
-[connection signal="config_confirmed" from="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script/ConfigPane" to="VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_config_pane_config_confirmed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="button_clicked" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" to="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_button_clicked"]
+[connection signal="config_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script/ConfigPane" to="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_config_pane_config_confirmed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]

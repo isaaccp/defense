@@ -55,8 +55,16 @@ func _on_configure_behavior_selected(character: Character):
 		child.queue_free()
 	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
 	programming_ui.initialize(character)
+	programming_ui.done.connect(_close_programming_ui)
 	%ProgrammingUIParent.add_child(programming_ui)
+	show_character_config(false)
 
+func _close_programming_ui():
+	for child in %ProgrammingUIParent.get_children():
+			child.queue_free()
+	%ProgrammingUIParent.hide()
+	show_character_config(true)
+			
 func _on_readiness_updated(ready: bool, character_idx: int):
 	if ready:
 		characters_ready[character_idx] = true
