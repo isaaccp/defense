@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ccsmicw86ld33"
+path="res://.godot/imported/Run.aseprite-6eb1b8b0e7be22dbd86607d139a524de.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Shaman/Run/Run.aseprite"
+dest_files=["res://.godot/imported/Run.aseprite-6eb1b8b0e7be22dbd86607d139a524de.res"]
+
+[params]
+

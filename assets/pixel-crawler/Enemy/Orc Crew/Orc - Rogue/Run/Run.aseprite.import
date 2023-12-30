@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bist1q1bpbkfr"
+path="res://.godot/imported/Run.aseprite-48e7177653f287778a863813ba8b7d5a.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Rogue/Run/Run.aseprite"
+dest_files=["res://.godot/imported/Run.aseprite-48e7177653f287778a863813ba8b7d5a.res"]
+
+[params]
+

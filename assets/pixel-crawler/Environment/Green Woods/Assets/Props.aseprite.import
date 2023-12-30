@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bafk6gcouvbh8"
+path="res://.godot/imported/Props.aseprite-dc6eaabf125d48c2249c2dcd6f814fe9.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.aseprite"
+dest_files=["res://.godot/imported/Props.aseprite-dc6eaabf125d48c2249c2dcd6f814fe9.res"]
+
+[params]
+

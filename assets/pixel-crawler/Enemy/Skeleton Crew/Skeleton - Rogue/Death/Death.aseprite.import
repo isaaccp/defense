@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://oudn2ondkd4k"
+path="res://.godot/imported/Death.aseprite-a82d72acf888a2da0602e3c8db7958a7.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Skeleton Crew/Skeleton - Rogue/Death/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-a82d72acf888a2da0602e3c8db7958a7.res"]
+
+[params]
+

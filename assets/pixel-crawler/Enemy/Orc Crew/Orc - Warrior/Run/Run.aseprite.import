@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://se0aom38nen6"
+path="res://.godot/imported/Run.aseprite-39fa05cf7daeecace761d5695baaa5dc.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Run/Run.aseprite"
+dest_files=["res://.godot/imported/Run.aseprite-39fa05cf7daeecace761d5695baaa5dc.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cdg824nf2r5s1"
+path="res://.godot/imported/Idle.aseprite-737fdfc74ce21c10643f6fb356848e57.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Idle/Idle.aseprite"
+dest_files=["res://.godot/imported/Idle.aseprite-737fdfc74ce21c10643f6fb356848e57.res"]
+
+[params]
+

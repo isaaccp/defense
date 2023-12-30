@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bxd8xwxka2eb0"
+path="res://.godot/imported/Props.aseprite-e66fda5374131c0f9d11c2d8cd6aea18.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Environment/Dungeon Prison/Assets/Props.aseprite"
+dest_files=["res://.godot/imported/Props.aseprite-e66fda5374131c0f9d11c2d8cd6aea18.res"]
+
+[params]
+

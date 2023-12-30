@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cm7t6ep60x875"
+path="res://.godot/imported/Death.aseprite-5c23c411c1367f435211b841829507c9.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Rogue/Death/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-5c23c411c1367f435211b841829507c9.res"]
+
+[params]
+

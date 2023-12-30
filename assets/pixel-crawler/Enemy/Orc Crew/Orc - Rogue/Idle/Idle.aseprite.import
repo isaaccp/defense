@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cck8vahk76wo8"
+path="res://.godot/imported/Idle.aseprite-3a75803c19beb67184efab106c362d60.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Rogue/Idle/Idle.aseprite"
+dest_files=["res://.godot/imported/Idle.aseprite-3a75803c19beb67184efab106c362d60.res"]
+
+[params]
+

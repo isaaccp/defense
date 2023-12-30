@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnj8f2u164smp"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_g21hv"]
+[ext_resource type="Texture2D" uid="uid://j5ydtmod36hx" path="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Run/Run-Sheet.png" id="1_k24g3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8ty6"]
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
+script = ExtResource("1_g21hv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k24g3")
+offset = Vector2(0, -16)
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_k8ty6")

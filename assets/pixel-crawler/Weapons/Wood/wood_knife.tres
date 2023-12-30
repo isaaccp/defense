@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://t283qahbfs0p"]
+
+[ext_resource type="Texture2D" uid="uid://kplst8r0gp2t" path="res://assets/pixel-crawler/Weapons/Wood/Wood.png" id="1_05iay"]
+
+[resource]
+atlas = ExtResource("1_05iay")
+region = Rect2(32, 16, 16, 32)

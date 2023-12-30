@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://fev0xiqjwfnp"
+path="res://.godot/imported/Death.aseprite-05ad3a40aea32ffdf1268bd0a58d2870.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/Heroes/Rogue/Death/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-05ad3a40aea32ffdf1268bd0a58d2870.res"]
+
+[params]
+
