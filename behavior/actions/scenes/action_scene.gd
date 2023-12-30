@@ -18,6 +18,5 @@ func get_entity(area: Area2D) -> BehaviorEntity:
 	return null
 
 func _on_area_2d_area_entered(area: Area2D):
-	print("area entered")
 	var entity = get_entity(area)
 	entity_hit.emit(entity)
