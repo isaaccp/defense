@@ -29,7 +29,7 @@ func _physics_process(delta):
 	if not rule or action.abortable or action.finished:
 		var result = behavior.choose(self)
 		# There is nothing to do.
-		if result.is_empty() and action.finished:
+		if result.is_empty() and (not action or action.finished):
 			return
 		if not result.is_empty():
 			if result.rule != rule or result.target != target or action.finished:

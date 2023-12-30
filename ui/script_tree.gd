@@ -1,9 +1,18 @@
 extends Tree
 
+class_name ScriptTree
+
 @export var delete_icon: Texture2D
 @export var edit_icon: Texture2D
 
 var _root: TreeItem
+
+enum Column {
+	DELETE_ICON = 0,
+	TARGET = 1,
+	CONDITION = 2,
+	ACTION = 3,
+}
 
 func _ready():
 	# Note: This is currently only used as a list, not actually a tree.
@@ -12,10 +21,10 @@ func _ready():
 	_root = tree.create_item()
 	tree.hide_root = true
 
-	tree.set_column_expand(0, false)
-	tree.set_column_title(1, "Target")
-	tree.set_column_title(2, "Condition")
-	tree.set_column_title(3, "Action")
+	tree.set_column_expand(Column.DELETE_ICON, false)
+	tree.set_column_title(Column.TARGET, "Target")
+	tree.set_column_title(Column.CONDITION, "Condition")
+	tree.set_column_title(Column.ACTION, "Action")
 
 func load_behavior(behavior: Behavior) -> void:
 	assert(is_inside_tree(), "Needs to be called inside tree")
@@ -26,24 +35,26 @@ func _add_empty() -> TreeItem:
 	var create = self.create_item(_root)
 	create.add_button(0, delete_icon, 0, true, "Delete")
 	create.set_selectable(0, false)
-	create.set_text(1, "[Target]")
-	create.set_text(2, "[Condition]")
-	create.set_text(3, "[Action]")
+	create.set_text(Column.TARGET, "[Target]")
+	create.set_metadata(Column.TARGET, 0)
+	create.set_text(Column.CONDITION, "[Condition]")
+	create.set_metadata(Column.CONDITION, 0)
+	create.set_text(Column.ACTION, "[Action]")
+	create.set_metadata(Column.ACTION, 0)
 	return create
 	
 func _add_prefilled(rule: Rule) -> TreeItem:
 	var create = self.create_item(_root)
-	create.add_button(0, delete_icon, 0, true, "Delete")
-	create.set_selectable(0, false)
-	create.set_text(1, str(rule.target_selection))
-	create.set_metadata(1, rule.target_selection.id)
-	create.set_text(2, "Always")
-	create.set_metadata(2, 0)
-	create.set_text(3, str(rule.action))
-	create.set_metadata(3, rule.action.id)
+	create.add_button(Column.DELETE_ICON, delete_icon, 0, false, "Delete")
+	create.set_selectable(Column.DELETE_ICON, false)
+	create.set_text(Column.TARGET, str(rule.target_selection))
+	create.set_metadata(Column.TARGET, rule.target_selection.id)
+	create.set_text(Column.CONDITION, "Always")
+	create.set_metadata(Column.CONDITION, 0)
+	create.set_text(Column.ACTION, str(rule.action))
+	create.set_metadata(Column.ACTION, rule.action.id)
 	return create
 	
-
 func _is_empty(item: TreeItem) -> bool:
 	for c in range(columns):
 		if item.get_metadata(c) != null:
@@ -84,7 +95,7 @@ func _drop_data(at_position: Vector2, data):
 		# Add a new blank item for creating new behaviors
 		_add_empty()
 
-	item.set_button_disabled(0, 0, false)
+	item.set_button_disabled(Column.DELETE_ICON, 0, false)
 	item.set_text(col, data.text)
 	item.set_metadata(col, data.id)
 	if data.has_placeholders:
@@ -93,10 +104,27 @@ func _drop_data(at_position: Vector2, data):
 		item.erase_button(col, 0)
 
 func _on_button_clicked(item, column, button_id, _mouse_button_index):
-	if column == 0 and button_id == 0: # delete
+	if column == Column.DELETE_ICON and button_id == 0: # delete
 		item.free()
-	if column != 0 and button_id == 0: # config
+	if column != Column.DELETE_ICON and button_id == 0: # config
 		%ConfigPane.setup(item, column)
 
 func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 	item.set_text(col, result)
+
+func get_behavior() -> Behavior:
+	var behavior = Behavior.new()
+	for child in _root.get_children():
+		var target = child.get_metadata(Column.TARGET) as TargetSelectionDef.Id
+		var action = child.get_metadata(Column.ACTION) as ActionDef.Id
+		if target == TargetSelectionDef.Id.UNSPECIFIED:
+			continue
+		if action == ActionDef.Id.UNSPECIFIED:
+			continue
+		var rule = Rule.new()
+		rule.target_selection = TargetSelectionDef.new()
+		rule.target_selection.id = target
+		rule.action = ActionDef.new()
+		rule.action.id = action
+		behavior.rules.append(rule)
+	return behavior
