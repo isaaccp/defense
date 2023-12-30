@@ -2,7 +2,8 @@ extends Node2D
 
 class_name BehaviorEntity
 
-@export var speed = 60
+@export var speed: float
+@export var max_hit_points: int
 @export var action_sprites: Node2D
 
 # Mostly should be set through set_behavior(), but exported for visibility and
@@ -12,10 +13,19 @@ class_name BehaviorEntity
 @export var rule: Rule
 @export var target: Node2D
 @export var action: Action
+@export var hit_points: int:
+	set(value):
+		if hit_points != value:
+			hit_points = value
+			health_updated.emit(hit_points, max_hit_points)
+
+@export var destroyed = false
+
+signal health_updated(hit_points: int, max_hit_points: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	hit_points = max_hit_points
 
 func set_behavior(behavior_: Behavior):
 	behavior = behavior_
@@ -48,6 +58,14 @@ func _physics_process(delta):
 		target = null
 	action.physics_process(target, delta)
 
+func take_damage(damage: int) -> void:
+	if hit_points < damage:
+		hit_points = 0
+	else:
+		hit_points -= damage
+	if hit_points <= 0:
+		destroyed = true
+	
 func is_enemy(entity: BehaviorEntity) -> bool:
 	assert(false, "Should never be called")
 	return true

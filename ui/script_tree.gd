@@ -30,6 +30,7 @@ func load_behavior(behavior: Behavior) -> void:
 	assert(is_inside_tree(), "Needs to be called inside tree")
 	for rule in behavior.rules:
 		_add_prefilled(rule)
+	_add_empty()
 
 func _add_empty() -> TreeItem:
 	var create = self.create_item(_root)

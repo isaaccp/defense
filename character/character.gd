@@ -9,16 +9,15 @@ class_name Character
 @export var spec: CharacterSpec
 
 func _ready():
-	# TODO: Hack for now.
+	speed = spec.speed
+	max_hit_points = spec.max_hit_points
+	
 	if behavior == null:
 		behavior = spec.default_behavior
-
+	super()
+	
 func short_name() -> String:
 	return "%s (%d)" % [Enum.character_id_string(id), idx]
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func is_enemy(entity: BehaviorEntity) -> bool:
 	return entity.is_in_group(Groups.ENEMIES)

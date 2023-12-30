@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnj8f2u164smp"]
+[gd_scene load_steps=6 format=3 uid="uid://cnj8f2u164smp"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_g21hv"]
 [ext_resource type="Texture2D" uid="uid://j5ydtmod36hx" path="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Run/Run-Sheet.png" id="1_k24g3"]
+[ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="2_i8po1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k8ty6"]
 
@@ -10,7 +11,10 @@
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("action_sprites") groups=["enemies"]]
 y_sort_enabled = true
 script = ExtResource("1_g21hv")
+speed = 100.0
+max_hit_points = 10
 action_sprites = NodePath("ActionSprites")
+behavior = ExtResource("2_i8po1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_k24g3")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dme6lif4cwji3"]
+[gd_scene load_steps=4 format=3 uid="uid://dme6lif4cwji3"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_0mtgw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4y0tt"]
 
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("action_sprites") groups=["characters"]]
 y_sort_enabled = true
@@ -14,3 +16,11 @@ position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_7fvau")
 
 [node name="ActionSprites" type="Node2D" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_4y0tt")
