@@ -11,3 +11,9 @@ static func make_action(action_def: ActionDef) -> Action:
 	var action = actions[action_def.id].new() as Action
 	action.def = action_def
 	return action
+
+static func all_actions() -> Array[ActionDef.Id]:
+	var all: Array[ActionDef.Id] = []
+	for id in actions.keys():
+		all.append(id as ActionDef.Id)
+	return all

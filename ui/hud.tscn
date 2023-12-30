@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqmsmsumhossr"]
+[gd_scene load_steps=3 format=3 uid="uid://cqmsmsumhossr"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_veies"]
+[ext_resource type="PackedScene" uid="uid://c7bsv7cscwbmr" path="res://ui/programming_ui.tscn" id="2_05xmd"]
 
-[node name="HUD" type="Control" node_paths=PackedStringArray("peer", "time", "coins", "main_message", "bottom_message")]
-visible = false
+[node name="HUD" type="Control" node_paths=PackedStringArray("peer", "time", "main_message", "bottom_message", "character_views")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,9 +14,9 @@ mouse_filter = 1
 script = ExtResource("1_veies")
 peer = NodePath("VBoxContainer/Peer")
 time = NodePath("Time")
-coins = NodePath("VBoxContainer/Coins")
 main_message = NodePath("MainMessage")
 bottom_message = NodePath("BottomMessage")
+character_views = NodePath("CharacterViews")
 
 [node name="Time" type="Label" parent="."]
 layout_mode = 1
@@ -37,9 +37,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Peer" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Coins" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="MainMessage" type="Label" parent="."]
@@ -65,3 +62,40 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 18
 text = "Bottom Message"
 horizontal_alignment = 1
+
+[node name="CharacterViews" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ProgrammingUIParent" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -200.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgrammingUI" parent="ProgrammingUIParent" instance=ExtResource("2_05xmd")]
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5

@@ -97,6 +97,9 @@ class Player:
 			username = username,
 			peer_id = peer_id,
 		}
+	
+	func _to_string() -> String:
+		return "session_id: %s, peer_id: %d, username: %s" % [session_id, peer_id, username]
 
 static func serialize_players(_players: Dictionary) -> Dictionary:
 	var result := {}
@@ -273,7 +276,7 @@ func get_players_by_peer_id() -> Dictionary:
 func get_sorted_players() -> Array:
 	var sorted_players = players.values()
 	if sorted_players.is_empty():
-		return [Player.new("local", "local", 0)]
+		return [Player.new("local", "local", 1)]
 	sorted_players.sort_custom(func(a, b): return a.peer_id < b.peer_id)
 	return sorted_players
 

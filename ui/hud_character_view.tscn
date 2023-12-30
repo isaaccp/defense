@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://do57hfqasnkkh"]
+
+[ext_resource type="Script" path="res://ui/hud_character_view.gd" id="1_xuorh"]
+
+[node name="HudCharacterView" type="PanelContainer" node_paths=PackedStringArray("title", "configure_behavior_button")]
+offset_right = 167.0
+offset_bottom = 66.0
+script = ExtResource("1_xuorh")
+title = NodePath("MarginContainer/VBoxContainer/Title")
+configure_behavior_button = NodePath("MarginContainer/VBoxContainer/ConfigureBehaviorButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Character Id + Name"
+
+[node name="ConfigureBehaviorButton" type="Button" parent="MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Configure Behavior"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigureBehaviorButton" to="." method="_on_configure_behavior_button_pressed"]

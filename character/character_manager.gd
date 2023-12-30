@@ -24,7 +24,7 @@ static func description(id: Enum.CharacterId) -> String:
 
 static func make_character(id: Enum.CharacterId) -> Character:
 	var character = character_scene.instantiate() as Character
-	character.character_id = id
+	character.id = id
 	character.spec = make_character_spec(id)
 	character.add_child(character.spec)
 	return character

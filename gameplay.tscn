@@ -13,7 +13,6 @@ level_parent = NodePath("LevelParent")
 [node name="LevelParent" type="Node2D" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://level.tscn")
 spawn_path = NodePath("../LevelParent")
 
 [connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]

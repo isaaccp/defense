@@ -2,14 +2,20 @@ extends BehaviorEntity
 
 class_name Character
 
-var character_id: Enum.CharacterId
-var spec: CharacterSpec
+@export_group("debug")
+@export var id: Enum.CharacterId
+@export var idx: int
+@export var peer_id: int
+@export var spec: CharacterSpec
 
 func _ready():
 	# TODO: Hack for now.
 	if behavior == null:
 		behavior = spec.default_behavior
 
+func short_name() -> String:
+	return Enum.character_id_string(id)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

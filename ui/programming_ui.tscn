@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7bsv7cscwbmr"]
+
+[ext_resource type="Script" path="res://ui/programming_ui.gd" id="1_xf4ix"]
+[ext_resource type="Script" path="res://ui/script_tree.gd" id="2_dh7cw"]
+[ext_resource type="Texture2D" uid="uid://c8t68dpweqvr3" path="res://ui/Remove.svg" id="2_nopvd"]
+[ext_resource type="Script" path="res://ui/toolbox.gd" id="2_pkup4"]
+[ext_resource type="Texture2D" uid="uid://b0vdhdrhn6cj1" path="res://ui/Edit.svg" id="3_6ohbm"]
+[ext_resource type="PackedScene" uid="uid://c3oy80g32pyjn" path="res://ui/config_pane.tscn" id="4_5vsiq"]
+
+[sub_resource type="Theme" id="Theme_8i0e7"]
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+
+[node name="ProgrammingUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xf4ix")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_8i0e7")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+split_offset = 150
+
+[node name="ScriptMargin" type="MarginContainer" parent="MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/ScriptMargin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+layout_mode = 2
+text = "Script"
+
+[node name="Script" type="Tree" parent="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+script = ExtResource("2_dh7cw")
+delete_icon = ExtResource("2_nopvd")
+edit_icon = ExtResource("3_6ohbm")
+
+[node name="ConfigPane" parent="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" instance=ExtResource("4_5vsiq")]
+unique_name_in_owner = true
+visible = false
+
+[node name="ToolsMargin" type="MarginContainer" parent="MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/ToolsMargin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+layout_mode = 2
+text = "Components"
+
+[node name="Toolbox" type="Tree" parent="MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_pkup4")
+
+[connection signal="button_clicked" from="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" to="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_button_clicked"]
+[connection signal="config_confirmed" from="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script/ConfigPane" to="MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_config_pane_config_confirmed"]

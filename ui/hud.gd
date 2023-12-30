@@ -5,9 +5,9 @@ class_name Hud
 @export_group("Internal")
 @export var peer: Label
 @export var time: Label
-@export var coins: Label
 @export var main_message: Label
 @export var bottom_message: Label
+@export var character_views: Container
 
 enum MessageType {
 	MAIN,
@@ -29,23 +29,39 @@ var message_tween = {
 	MessageType.BOTTOM: null,
 }
 
+const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
+const programming_ui_scene = preload("res://ui/programming_ui.tscn")
+
 func _ready():
 	for label in message_label.values():
 		label.hide()
 
-func set_peer(peer_id: int):
+func set_characters(characters: Node) -> void:
+	for character in characters.get_children():
+		var view = hud_character_view_scene.instantiate() as HudCharacterView
+		view.initialize(character)
+		view.configure_behavior_selected.connect(_on_configure_behavior_selected.bind(character))
+		character_views.add_child(view)
+		
+func _on_configure_behavior_selected(character: Character):
+	%ProgrammingUIParent.show()
+	for child in %ProgrammingUIParent.get_children():
+		child.queue_free()
+	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
+	programming_ui.initialize(character)
+	%ProgrammingUIParent.add_child(programming_ui)
+
+func show_character_config(show: bool):
+	for view in character_views.get_children():
+		view.show_config(show)
+
+func set_peer(peer_id: int) -> void:
 	peer.text = "Peer: %d" % peer_id
 
-func set_time(time_secs: int):
+func set_time(time_secs: int) -> void:
 	var minutes = time_secs / 60
 	var seconds = time_secs % 60
 	time.text = "%02d:%02d" % [minutes, seconds]
-
-func set_coins(_coins: int, target: int):
-	if target == -1:
-		coins.text = "Coins: %d/<inf>" % _coins
-	else:
-		coins.text = "Coins: %d/%d" % [_coins, target]
 
 func show_main_message(message: String, timeout: float = 5.0) -> void:
 	_show_message.rpc(message, MessageType.MAIN, timeout)

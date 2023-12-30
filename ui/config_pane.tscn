@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3oy80g32pyjn"]
+
+[ext_resource type="Script" path="res://ui/config_pane.gd" id="1_07o2i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m262d"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.454902, 0.627451, 0.733333, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qi8l2"]
+line_spacing = 2.0
+font_size = 14
+font_color = Color(0.819608, 0.819608, 0.819608, 1)
+shadow_color = Color(0, 0, 0, 0.14902)
+
+[node name="ConfigPane" type="PopupPanel"]
+gui_embed_subwindows = true
+title = "Config"
+initial_position = 2
+size = Vector2i(600, 200)
+visible = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_m262d")
+script = ExtResource("1_07o2i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 596.0
+offset_bottom = 196.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Option Setup	"
+label_settings = SubResource("LabelSettings_qi8l2")
+
+[node name="Input" type="HFlowContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+alignment = 2
+
+[node name="OK" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OK
+"
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel
+"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/OK" to="." method="_on_ok_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

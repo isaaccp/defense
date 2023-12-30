@@ -9,3 +9,9 @@ static var target_selections = {
 static func select_target(entity: BehaviorEntity, action: Action, target_selection_def: TargetSelectionDef) -> Node2D:
 	var target_selection = target_selections[target_selection_def.id]
 	return target_selection.select_target(entity, action, target_selection_def)
+
+static func all_target_selections() -> Array[TargetSelectionDef.Id]:
+	var all: Array[TargetSelectionDef.Id] = []
+	for id in target_selections.keys():
+		all.append(id as TargetSelectionDef.Id)
+	return all

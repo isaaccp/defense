@@ -8,7 +8,8 @@ class_name Gameplay
 
 const level_scene = preload("res://levels/level.tscn")
 
-var character_selections: Array[Enum.CharacterId]
+@export_group("Debug")
+@export var characters: Array[GameplayCharacter] = []
 
 func start():
 	ui_layer.show()
@@ -16,13 +17,20 @@ func start():
 	ui_layer.character_selection_screen.set_characters(2)
 	ui_layer.show_screen(ui_layer.character_selection_screen)
 
-func _on_character_selection_screen_selection_ready(character_selections_: Array[Enum.CharacterId]):
+func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
 	ui_layer.hide_screen()
-	character_selections = character_selections_
-	print(character_selections)
+	var players = OnlineMatch.get_sorted_players()
+	for selection in range(character_selections.size()):
+		var gameplay_character = GameplayCharacter.new()
+		gameplay_character.character_id = character_selections[selection]
+		gameplay_character.peer_id = players[selection % players.size()].peer_id
+		characters.append(gameplay_character)
 	_play_next_level.call_deferred()
 
 func _play_next_level():
 	var level = level_scene.instantiate()
-	level.initialize(character_selections)
+	level.initialize(characters)
 	level_parent.add_child(level, true)
+	level.freeze()
+	ui_layer.hud.set_characters(level.characters)
+	ui_layer.hud.show_character_config(true)
