@@ -27,10 +27,13 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ConfigureBehaviorButton" type="Button" parent="MarginContainer/VBoxContainer/ConfigContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Configure Behavior"
 
 [node name="ReadyButton" type="CheckButton" parent="MarginContainer/VBoxContainer/ConfigContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Ready"
 
