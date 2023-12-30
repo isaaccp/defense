@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsmo4loybi63o"]
+[gd_scene load_steps=5 format=3 uid="uid://bsmo4loybi63o"]
 
 [ext_resource type="TileSet" uid="uid://cpd8yv3x2ulyq" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/tiles.tres" id="1_jjil5"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_wcymq"]
 [ext_resource type="PackedScene" uid="uid://cnj8f2u164smp" path="res://enemy.tscn" id="3_vtjqc"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ga831"]
+vertices = PackedVector2Array(1175, 676, -22, 676, -22, -23, 1175, -23)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -33, 1185, -34, 1185, 686, -32, 686)])
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("characters", "enemies", "starting_positions")]
 script = ExtResource("1_wcymq")
@@ -37,3 +42,6 @@ position = Vector2(280, 187)
 
 [node name="Enemy2" parent="YSorted/Enemies" instance=ExtResource("3_vtjqc")]
 position = Vector2(428, 72)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_ga831")

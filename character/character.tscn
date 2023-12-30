@@ -6,10 +6,11 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4y0tt"]
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("action_sprites") groups=["characters"]]
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("action_sprites", "navigation_agent") groups=["characters"]]
 y_sort_enabled = true
 script = ExtResource("1_0mtgw")
 action_sprites = NodePath("ActionSprites")
+navigation_agent = NodePath("NavigationAgent2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -24,3 +25,5 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_4y0tt")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

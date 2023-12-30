@@ -5,6 +5,7 @@ class_name BehaviorEntity
 @export var speed: float
 @export var max_hit_points: int
 @export var action_sprites: Node2D
+@export var navigation_agent: NavigationAgent2D
 
 # Mostly should be set through set_behavior(), but exported for visibility and
 # debugging.
@@ -27,6 +28,9 @@ var elapsed_time: float = 0.0
 var abortable_action_check_period = 0.1
 var next_abortable_action_check_time = -1
 
+# Need to skip first physics_frame for navigation.
+var first = true
+
 signal health_updated(hit_points: int, max_hit_points: int)
 
 # Called when the node enters the scene tree for the first time.
@@ -36,7 +40,11 @@ func _ready():
 func set_behavior(behavior_: Behavior):
 	behavior = behavior_
 	
-func _physics_process(delta):
+func _physics_process(delta: float):
+	if first:
+		first = false
+		return
+		
 	elapsed_time += delta
 	
 	# TODO: Remove this, for now some enemies don't have behavior.
