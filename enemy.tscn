@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnj8f2u164smp"]
+[gd_scene load_steps=5 format=3 uid="uid://cnj8f2u164smp"]
 
 [ext_resource type="Script" path="res://enemy.gd" id="1_g21hv"]
 [ext_resource type="Texture2D" uid="uid://j5ydtmod36hx" path="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Run/Run-Sheet.png" id="1_k24g3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k8ty6"]
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgtdu"]
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("action_sprites") groups=["enemies"]]
 y_sort_enabled = true
 script = ExtResource("1_g21hv")
+action_sprites = NodePath("ActionSprites")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_k24g3")
@@ -17,3 +20,13 @@ hframes = 6
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_k8ty6")
+
+[node name="ActionSprites" type="Node2D" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_dgtdu")

@@ -19,6 +19,7 @@ y_sort_enabled = true
 
 [node name="Character" parent="YSorted/Characters" instance=ExtResource("2_uylnh")]
 position = Vector2(100, 125)
+behavior = null
 
 [node name="Enemies" type="Node2D" parent="YSorted"]
 y_sort_enabled = true

@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://23jvuhba7v7d"]
+
+[ext_resource type="Texture2D" uid="uid://crn0raslm5ryy" path="res://assets/white_slash_wide/File1.png" id="1_h20pf"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_sepy6"]
+[ext_resource type="Texture2D" uid="uid://f2ccfhe4beoq" path="res://assets/white_slash_wide/File2.png" id="2_h04o4"]
+[ext_resource type="Texture2D" uid="uid://osaea2wfo24" path="res://assets/white_slash_wide/File3.png" id="3_q7pfw"]
+[ext_resource type="Texture2D" uid="uid://bdthkfufa5lso" path="res://assets/white_slash_wide/File4.png" id="4_wu028"]
+[ext_resource type="Texture2D" uid="uid://ci73uwwqej7pe" path="res://assets/white_slash_wide/File5.png" id="5_coi3d"]
+[ext_resource type="Texture2D" uid="uid://b8wycalvfaypv" path="res://assets/white_slash_wide/File6.png" id="6_hyvcc"]
+
+[sub_resource type="Animation" id="Animation_4x5cj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_h20pf")]
+}
+
+[sub_resource type="Animation" id="Animation_4cdsn"]
+resource_name = "auto"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_h20pf"), ExtResource("2_h04o4"), ExtResource("3_q7pfw"), ExtResource("4_wu028"), ExtResource("5_coi3d"), ExtResource("6_hyvcc")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rrca"]
+_data = {
+"RESET": SubResource("Animation_4x5cj"),
+"auto": SubResource("Animation_4cdsn")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pu55x"]
+radius = 8.0
+
+[node name="SwordAttack" type="Node2D"]
+script = ExtResource("1_sepy6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.075, 0.05)
+texture = ExtResource("1_h20pf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_3rrca")
+}
+autoplay = "auto"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(10, 0)
+shape = SubResource("CircleShape2D_pu55x")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

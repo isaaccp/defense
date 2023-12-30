@@ -18,3 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://global.gd"
+
+[layer_names]
+
+2d_physics/layer_1="Entities"
+2d_physics/layer_2="Actions"
+2d_physics/layer_3="Hurtbox"
