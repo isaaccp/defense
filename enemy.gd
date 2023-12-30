@@ -1,5 +1,7 @@
 extends BehaviorEntity
 
+class_name Enemy
+
 func is_enemy(entity: BehaviorEntity) -> bool:
 	return entity.is_in_group(Groups.CHARACTERS)
 

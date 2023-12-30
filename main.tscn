@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c12h44gjppwem"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_u00ew"]
+[ext_resource type="PackedScene" uid="uid://d1ab1h7rtohbt" path="res://ui/ui_layer.tscn" id="2_81ey6"]
+[ext_resource type="PackedScene" uid="uid://cpvryr0tdcnfy" path="res://gameplay.tscn" id="3_7l8ug"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("ui_layer", "gameplay")]
+script = ExtResource("1_u00ew")
+ui_layer = NodePath("UILayer")
+gameplay = NodePath("Gameplay")
+
+[node name="UILayer" parent="." instance=ExtResource("2_81ey6")]
+
+[node name="Gameplay" parent="." instance=ExtResource("3_7l8ug")]
+
+[connection signal="ready_screen_ready_pressed" from="UILayer" to="." method="_on_ready_screen_ready_pressed"]
+[connection signal="title_screen_connect_selected" from="UILayer" to="." method="_on_title_screen_connect_selected"]
+[connection signal="title_screen_local_selected" from="UILayer" to="." method="_on_title_screen_local_selected"]

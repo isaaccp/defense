@@ -1,5 +1,15 @@
 extends BehaviorEntity
 
+class_name Character
+
+var character_id: Enum.CharacterId
+var spec: CharacterSpec
+
+func _ready():
+	# TODO: Hack for now.
+	if behavior == null:
+		behavior = spec.default_behavior
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

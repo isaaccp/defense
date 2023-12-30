@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvgoqpr65uay"]
+
+[ext_resource type="Script" path="res://ui/ready_screen.gd" id="1_apkvj"]
+
+[node name="ReadyScreen" type="Control" node_paths=PackedStringArray("ready_button", "match_id_container", "match_id_line_edit", "status_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_apkvj")
+ready_button = NodePath("PanelContainer/VBoxContainer/ReadyButton")
+match_id_container = NodePath("PanelContainer/VBoxContainer/MatchIdContainer")
+match_id_line_edit = NodePath("PanelContainer/VBoxContainer/MatchIdContainer/LineEdit")
+status_container = NodePath("PanelContainer/VBoxContainer/StatusContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MatchIdContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MatchIdContainer"]
+layout_mode = 2
+text = "Match ID"
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/MatchIdContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="MatchCopyButton" type="Button" parent="PanelContainer/VBoxContainer/MatchIdContainer"]
+layout_mode = 2
+text = "Copy"
+
+[node name="StatusContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ReadyButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Ready!"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MatchIdContainer/MatchCopyButton" to="." method="_on_match_copy_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ReadyButton" to="." method="_on_ready_button_pressed"]

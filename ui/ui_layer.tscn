@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1ab1h7rtohbt"]
+
+[ext_resource type="Script" path="res://ui/ui_layer.gd" id="1_8smwk"]
+[ext_resource type="PackedScene" uid="uid://cys516tfuqeh3" path="res://ui/title_screen.tscn" id="2_5d83l"]
+[ext_resource type="PackedScene" uid="uid://bylu7ejd83wf" path="res://ui/match_screen.tscn" id="3_d456q"]
+[ext_resource type="PackedScene" uid="uid://dvgoqpr65uay" path="res://ui/ready_screen.tscn" id="4_teaj2"]
+
+[node name="UILayer" type="CanvasLayer" node_paths=PackedStringArray("title_screen", "match_screen", "ready_screen", "overlay_message", "screens", "initial_screen")]
+process_mode = 3
+script = ExtResource("1_8smwk")
+title_screen = NodePath("Screens/TitleScreen")
+match_screen = NodePath("Screens/MatchScreen")
+ready_screen = NodePath("Screens/ReadyScreen")
+overlay_message = NodePath("Overlay/Message")
+screens = NodePath("Screens")
+initial_screen = NodePath("Screens/TitleScreen")
+
+[node name="Screens" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleScreen" parent="Screens" instance=ExtResource("2_5d83l")]
+visible = false
+layout_mode = 1
+
+[node name="MatchScreen" parent="Screens" instance=ExtResource("3_d456q")]
+visible = false
+layout_mode = 1
+
+[node name="ReadyScreen" parent="Screens" instance=ExtResource("4_teaj2")]
+visible = false
+layout_mode = 1
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Message" type="Label" parent="Overlay"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.05
+anchor_bottom = 0.05
+
+[connection signal="connect_selected" from="Screens/TitleScreen" to="." method="_on_title_screen_connect_selected"]
+[connection signal="local_selected" from="Screens/TitleScreen" to="." method="_on_title_screen_local_selected"]
+[connection signal="ready_pressed" from="Screens/ReadyScreen" to="." method="_on_ready_screen_ready_pressed"]

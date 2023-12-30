@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpvryr0tdcnfy"]
+
+[ext_resource type="Script" path="res://gameplay.gd" id="1_2toda"]
+[ext_resource type="PackedScene" uid="uid://5ity5n7jy3b8" path="res://ui/gameplay_ui_layer.tscn" id="1_3xnco"]
+
+[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("ui_layer", "level_parent")]
+script = ExtResource("1_2toda")
+ui_layer = NodePath("GameplayUILayer")
+level_parent = NodePath("LevelParent")
+
+[node name="GameplayUILayer" parent="." instance=ExtResource("1_3xnco")]
+
+[node name="LevelParent" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://level.tscn")
+spawn_path = NodePath("../LevelParent")
+
+[connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]

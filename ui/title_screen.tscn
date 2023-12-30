@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cys516tfuqeh3"]
+
+[ext_resource type="Script" path="res://ui/title_screen.gd" id="1_rjeij"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rjeij")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -20.0
+offset_right = 36.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LocalGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play Local"
+
+[node name="MultiplayerGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play Multiplayer	"
+
+[node name="FallbackMultiplayerGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "<Local Nakama>"
+
+[connection signal="pressed" from="VBoxContainer/LocalGameButton" to="." method="_on_local_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MultiplayerGameButton" to="." method="_on_multiplayer_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/FallbackMultiplayerGameButton" to="." method="_on_fallback_multiplayer_game_button_pressed"]
