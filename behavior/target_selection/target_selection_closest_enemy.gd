@@ -1,18 +1,23 @@
 extends Object
 
-static func select_target(entity: BehaviorEntity, target_selection_def: TargetSelectionDef) -> Node2D:
+static func select_target(entity: BehaviorEntity, action: Action, target_selection_def: TargetSelectionDef) -> Node2D:
 	var nodes = null
 	if entity.is_in_group("characters"):
 		nodes = Global.get_tree().get_nodes_in_group("enemies")
 	else:
 		nodes = Global.get_tree().get_nodes_in_group("characters")
-	var closest = _nearest_node(nodes, entity.position)
+	var closest = _nearest_node(nodes, entity.position, func(node: Node2D):
+		var range = action.distance
+		return range < 0 or node.position.distance_to(entity.position) < range
+	)
 	return closest
 
-static func _nearest_node(nodes: Array, location: Vector2):
+static func _nearest_node(nodes: Array, location: Vector2, filter: Callable = func(node: Node2D): return true):
 	var min_distance = -1.0
 	var nearest: Node
 	for node in nodes:
+		if not filter.call(node):
+			continue
 		var distance = location.distance_squared_to(node.global_position)
 		if min_distance < 0 or distance < min_distance:
 			nearest = node

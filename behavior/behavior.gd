@@ -7,7 +7,9 @@ class_name Behavior
 # TODO: Return BehaviorResult or such.
 func choose(entity: BehaviorEntity) -> Dictionary:
 	for rule in rules:
-		var target = TargetSelectionManager.select_target(entity, rule.target_selection)
+		# TODO: Construct actions only once when added to the behavior.
+		var action = ActionManager.make_action(rule.action)
+		var target = TargetSelectionManager.select_target(entity, action, rule.target_selection)
 		if target:
-			return {"rule": rule, "target": target}
+			return {"rule": rule, "target": target, "action": action}
 	return {}

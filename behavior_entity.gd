@@ -23,11 +23,13 @@ func _physics_process(delta):
 	# TODO: Remove this, for now some enemies don't have behavior.
 	if not behavior:
 		return
-	if not rule:
+	if not rule or action.abortable:
 		var result = behavior.choose(self)
-		rule = result.rule
-		target = result.target
-		action = ActionManager.make_action(rule.action)
+		if result.rule != rule:
+			rule = result.rule
+			print("Switched to rule: %s" % rule)
+			target = result.target
+			action = ActionManager.make_action(rule.action)
 	if not rule:
 		print("Unable to choose a rule for %s" % name)
 		return

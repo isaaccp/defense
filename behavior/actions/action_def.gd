@@ -5,7 +5,10 @@ class_name ActionDef
 enum Id {
 	UNSPECIFIED,
 	MOVE_TO,
-	MELEE_ATTACK,
+	SWORD_ATTACK,
 }
 
 @export var id: Id
+
+func _to_string() -> String:
+	return Id.keys()[id]
