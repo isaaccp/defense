@@ -1,8 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsmo4loybi63o"]
+[gd_scene load_steps=15 format=3 uid="uid://bsmo4loybi63o"]
 
 [ext_resource type="TileSet" uid="uid://cpd8yv3x2ulyq" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/tiles.tres" id="1_jjil5"]
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character.tscn" id="2_uylnh"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_ibrf0"]
 [ext_resource type="PackedScene" uid="uid://cnj8f2u164smp" path="res://enemy.tscn" id="3_vtjqc"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="4_ao5wu"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="5_la2cf"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="6_7svg7"]
+
+[sub_resource type="Resource" id="Resource_n3iq1"]
+script = ExtResource("3_ibrf0")
+id = 2
+
+[sub_resource type="Resource" id="Resource_y3vxr"]
+script = ExtResource("5_la2cf")
+id = 1
+
+[sub_resource type="Resource" id="Resource_wd5yu"]
+script = ExtResource("4_ao5wu")
+target_selection = SubResource("Resource_y3vxr")
+action = SubResource("Resource_n3iq1")
+
+[sub_resource type="Resource" id="Resource_2a2bv"]
+script = ExtResource("3_ibrf0")
+id = 1
+
+[sub_resource type="Resource" id="Resource_xhu8e"]
+script = ExtResource("5_la2cf")
+id = 1
+
+[sub_resource type="Resource" id="Resource_dla4s"]
+script = ExtResource("4_ao5wu")
+target_selection = SubResource("Resource_xhu8e")
+action = SubResource("Resource_2a2bv")
+
+[sub_resource type="Resource" id="Resource_57w1k"]
+script = ExtResource("6_7svg7")
+rules = Array[ExtResource("4_ao5wu")]([SubResource("Resource_wd5yu"), SubResource("Resource_dla4s")])
 
 [node name="Level" type="Node2D"]
 
@@ -19,7 +53,7 @@ y_sort_enabled = true
 
 [node name="Character" parent="YSorted/Characters" instance=ExtResource("2_uylnh")]
 position = Vector2(100, 125)
-behavior = null
+behavior = SubResource("Resource_57w1k")
 
 [node name="Enemies" type="Node2D" parent="YSorted"]
 y_sort_enabled = true

@@ -17,10 +17,7 @@ func physics_process(target: Node2D, delta: float):
 		# need to do.
 		entity.action_sprites.add_child(sword_attack)
 		sword_attack.entity_hit.connect(_on_entity_hit)
-		# TODO: Connect some signals here to notify of end of action. For now
-		# hack a timer.
-		var timer = Global.get_tree().create_timer(2.0, false)
-		timer.timeout.connect(action_finished)
+		Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
 
 func _on_entity_hit(hit_entity: BehaviorEntity):
 	if friendly_fire:  # No checks needed.
@@ -31,6 +28,8 @@ func _on_entity_hit(hit_entity: BehaviorEntity):
 	
 func _process_hit(hit_entity: BehaviorEntity):
 	print("%s was hit!" % hit_entity.name)
+	# TODO: do damage or something, for now, it's a disintegrating hit.
+	hit_entity.queue_free()
 
 func action_finished():
 	sword_attack.queue_free()

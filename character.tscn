@@ -1,41 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://dme6lif4cwji3"]
+[gd_scene load_steps=4 format=3 uid="uid://dme6lif4cwji3"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_1jpry"]
 [ext_resource type="Texture2D" uid="uid://dm0bbpth5g22j" path="res://assets/pixel-crawler/Heroes/Knight/Run/Run.png" id="1_bt7mk"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_1qi02"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="3_wkpw5"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="4_m75hi"]
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="5_mnoic"]
-
-[sub_resource type="Resource" id="Resource_frlcp"]
-script = ExtResource("2_1qi02")
-id = 2
-
-[sub_resource type="Resource" id="Resource_pg0ba"]
-script = ExtResource("4_m75hi")
-id = 1
-
-[sub_resource type="Resource" id="Resource_0j1o8"]
-script = ExtResource("3_wkpw5")
-target_selection = SubResource("Resource_pg0ba")
-action = SubResource("Resource_frlcp")
-
-[sub_resource type="Resource" id="Resource_khvyp"]
-script = ExtResource("2_1qi02")
-id = 1
-
-[sub_resource type="Resource" id="Resource_a4hwp"]
-script = ExtResource("4_m75hi")
-id = 1
-
-[sub_resource type="Resource" id="Resource_71tnh"]
-script = ExtResource("3_wkpw5")
-target_selection = SubResource("Resource_a4hwp")
-action = SubResource("Resource_khvyp")
-
-[sub_resource type="Resource" id="Resource_uvded"]
-script = ExtResource("5_mnoic")
-rules = Array[ExtResource("3_wkpw5")]([SubResource("Resource_0j1o8"), SubResource("Resource_71tnh")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
 
@@ -43,7 +9,6 @@ rules = Array[ExtResource("3_wkpw5")]([SubResource("Resource_0j1o8"), SubResourc
 y_sort_enabled = true
 script = ExtResource("1_1jpry")
 action_sprites = NodePath("ActionSprites")
-behavior = SubResource("Resource_uvded")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_bt7mk")

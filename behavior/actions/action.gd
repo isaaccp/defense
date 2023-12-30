@@ -31,5 +31,4 @@ func physics_process(target: Node2D, delta: float):
 	pass
 
 func action_finished():
-	print("Action is finished!", Time.get_ticks_msec())
 	finished = true
