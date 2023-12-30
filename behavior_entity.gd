@@ -20,6 +20,12 @@ class_name BehaviorEntity
 			health_updated.emit(hit_points, max_hit_points)
 
 @export var destroyed = false
+# Keep track of time so we can do pause/freeze-aware stuff.
+var elapsed_time: float = 0.0
+# How often to check whether a higher-priority action should
+# stop an abortable action.
+var abortable_action_check_period = 0.1
+var next_abortable_action_check_time = -1
 
 signal health_updated(hit_points: int, max_hit_points: int)
 
@@ -31,12 +37,12 @@ func set_behavior(behavior_: Behavior):
 	behavior = behavior_
 	
 func _physics_process(delta):
+	elapsed_time += delta
+	
 	# TODO: Remove this, for now some enemies don't have behavior.
 	if not behavior:
 		return
-	# TODO: If action is abortable, we should only check every e.g. 0.1
-	# seconds instead of every frame.
-	if not rule or action.abortable or action.finished:
+	if not rule or (action.abortable and next_abortable_action_check_time > elapsed_time) or action.finished:
 		var result = behavior.choose(self)
 		# There is nothing to do.
 		if result.is_empty() and (not action or action.finished):
@@ -48,6 +54,8 @@ func _physics_process(delta):
 				target = result.target
 				action = ActionManager.make_action(rule.action)
 				action.set_entity(self)
+		if action.abortable:
+			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 	if not rule:
 		print("Unable to choose a rule for %s" % name)
 		return
