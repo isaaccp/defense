@@ -5,7 +5,8 @@ class_name ProgrammingUI
 var character: Character
 @onready var script_tree: ScriptTree = %Script
 
-signal done
+signal canceled
+signal saved(behavior: Behavior)
 
 func initialize(character_: Character):
 	# TODO: Actually filter those depending on character, etc.
@@ -22,8 +23,7 @@ func _ready():
 			script_tree.load_behavior(character.behavior)
 
 func _on_save_button_pressed():
-	character.behavior = script_tree.get_behavior()
-	done.emit()
+	saved.emit(script_tree.get_behavior())
 
 func _on_cancel_button_pressed():
-	done.emit()
+	canceled.emit()

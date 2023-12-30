@@ -17,8 +17,8 @@ class_name BehaviorEntity
 func _ready():
 	pass # Replace with function body.
 
-#func set_behavior(behavior_: Behavior):
-#	behavior = behavior_
+func set_behavior(behavior_: Behavior):
+	behavior = behavior_
 	
 func _physics_process(delta):
 	# TODO: Remove this, for now some enemies don't have behavior.

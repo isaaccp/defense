@@ -33,6 +33,7 @@ const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
 signal readiness_updated(character_idx: int, ready: bool)
+signal behavior_modified(character_idx: int, behavior: Behavior)
 
 func _ready():
 	for label in message_label.values():
@@ -53,16 +54,21 @@ func _on_configure_behavior_selected(character: Character):
 		child.queue_free()
 	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
 	programming_ui.initialize(character)
-	programming_ui.done.connect(_close_programming_ui)
+	programming_ui.saved.connect(_save_and_close.bind(character.idx))
+	programming_ui.canceled.connect(_close)
 	%ProgrammingUIParent.add_child(programming_ui)
 	show_character_config(false)
 
-func _close_programming_ui():
+func _save_and_close(behavior: Behavior, character_idx: int):
+	behavior_modified.emit(character_idx, behavior)
+	_close()
+	
+func _close():
 	for child in %ProgrammingUIParent.get_children():
 			child.queue_free()
 	%ProgrammingUIParent.hide()
 	show_character_config(true)
-			
+	
 func _on_readiness_updated(ready: bool, character_idx: int):
 	readiness_updated.emit(character_idx, ready)
 		

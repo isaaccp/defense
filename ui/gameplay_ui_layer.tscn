@@ -38,4 +38,5 @@ layout_mode = 1
 mouse_filter = 2
 
 [connection signal="selection_ready" from="Screens/CharacterSelectionScreen" to="." method="_on_character_selection_screen_selection_ready"]
+[connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
 [connection signal="readiness_updated" from="Overlay/HUD" to="." method="_on_readiness_updated"]

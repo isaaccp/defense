@@ -38,6 +38,18 @@ func _play_next_level():
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.show_character_config(true)
 	# Everything is set up, wait until all players are ready.
+
+func _on_behavior_modified(character_idx: int, behavior: Behavior):
+	_update_behavior(character_idx, behavior)
+	_on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
+	
+@rpc("any_peer")
+func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedByteArray):
+	var behavior = Behavior.deserialize(serialized_behavior)
+	_update_behavior(character_idx, behavior)
+	
+func _update_behavior(character_idx: int, behavior: Behavior):
+	level.characters.get_child(character_idx).set_behavior(behavior)
 	
 func _on_readiness_updated(character_idx: int, ready: bool):
 	if ready:
