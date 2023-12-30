@@ -1,11 +1,12 @@
-extends Node2D
+extends CharacterBody2D
 
 class_name BehaviorEntity
 
 @export var speed: float
 @export var max_hit_points: int
-@export var action_sprites: Node2D
-@export var navigation_agent: NavigationAgent2D
+
+@onready var navigation_agent = $NavigationAgent2D
+@onready var action_sprites = $ActionSprites
 
 # Mostly should be set through set_behavior(), but exported for visibility and
 # debugging.
@@ -35,6 +36,8 @@ signal health_updated(hit_points: int, max_hit_points: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	assert(is_instance_valid(navigation_agent), "Must have a NavigationAgent2D node")
+	assert(is_instance_valid(action_sprites), "Must have an ActionSprites node")
 	hit_points = max_hit_points
 
 func set_behavior(behavior_: Behavior):
@@ -44,9 +47,12 @@ func _physics_process(delta: float):
 	if first:
 		first = false
 		return
-		
-	elapsed_time += delta
 	
+	if destroyed:
+		return
+	
+	elapsed_time += delta
+		
 	# TODO: Remove this, for now some enemies don't have behavior.
 	if not behavior:
 		return
@@ -58,8 +64,10 @@ func _physics_process(delta: float):
 		if not result.is_empty():
 			if result.rule != rule or result.target != target or action.finished:
 				rule = result.rule
-				print("Switched to rule: %s" % rule)
+				print("%s: Switched to rule: %s" % [name, rule])
 				target = result.target
+				if action and not action.finished:
+					action.action_finished()
 				action = ActionManager.make_action(rule.action)
 				action.set_entity(self)
 		if action.abortable:
@@ -73,6 +81,12 @@ func _physics_process(delta: float):
 	if not is_instance_valid(target):
 		target = null
 	action.physics_process(target, delta)
+	if velocity.length() < 0.1:
+		play_anim("idle")
+	else:
+		play_anim("run")
+	if not is_zero_approx(velocity.x):
+		flip_h(velocity.x < 0)
 
 func take_damage(damage: int) -> void:
 	if hit_points < damage:
@@ -81,6 +95,7 @@ func take_damage(damage: int) -> void:
 		hit_points -= damage
 	if hit_points <= 0:
 		destroyed = true
+		play_anim("death")
 	
 func is_enemy(entity: BehaviorEntity) -> bool:
 	assert(false, "Should never be called")
@@ -89,3 +104,9 @@ func is_enemy(entity: BehaviorEntity) -> bool:
 func enemies() -> Array[Node]:
 	assert(false, "Should never be called")
 	return []
+
+func play_anim(animation: String) -> void:
+	assert(false, "Should never be called")
+
+func flip_h(flip: bool) -> void:
+	assert(false, "Should never be called")

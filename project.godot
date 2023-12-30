@@ -22,6 +22,10 @@ OnlineMatch="*res://autoload/online_match.gd"
 Online="*res://autoload/online.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+
 [layer_names]
 
 2d_physics/layer_1="Entities"

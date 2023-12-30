@@ -6,14 +6,14 @@ var sword_attack: Node2D
 var damage = 5
 
 func _init():
-	distance = 50
+	distance = 40
 
 func physics_process(target: Node2D, delta: float):
 	if not sword_attack:
 		var dir = (target.position - entity.position).normalized()
 		sword_attack = sword_attack_scene.instantiate()
 		sword_attack.look_at(sword_attack.position + dir)
-		sword_attack.position += dir * 30
+		sword_attack.position += dir * 35
 		# TODO: Likely make a method for this, but unclear what it may
 		# need to do.
 		entity.action_sprites.add_child(sword_attack)

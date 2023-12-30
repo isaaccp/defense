@@ -1,26 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnj8f2u164smp"]
+[gd_scene load_steps=6 format=3 uid="uid://cvb6tsmt412un"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_g21hv"]
-[ext_resource type="Texture2D" uid="uid://j5ydtmod36hx" path="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Run/Run-Sheet.png" id="1_k24g3"]
-[ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="2_i8po1"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_2cddm"]
+[ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="2_vvk0t"]
+[ext_resource type="Texture2D" uid="uid://j5ydtmod36hx" path="res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Run/Run-Sheet.png" id="3_yeyge"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k8ty6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgtdu"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("action_sprites", "navigation_agent") groups=["enemies"]]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["enemies"]]
 y_sort_enabled = true
-script = ExtResource("1_g21hv")
+script = ExtResource("1_2cddm")
+sprite = NodePath("Sprite2D")
 speed = 100.0
 max_hit_points = 10
-action_sprites = NodePath("ActionSprites")
-navigation_agent = NodePath("NavigationAgent2D")
-behavior = ExtResource("2_i8po1")
+behavior = ExtResource("2_vvk0t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_k24g3")
+texture = ExtResource("3_yeyge")
 offset = Vector2(0, -16)
 hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

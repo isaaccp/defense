@@ -24,3 +24,9 @@ func is_enemy(entity: BehaviorEntity) -> bool:
 
 func enemies() -> Array[Node]:
 	return get_tree().get_nodes_in_group(Groups.ENEMIES)
+
+func play_anim(anim: String):
+	spec.anim_player.play(anim)
+
+func flip_h(flip: bool) -> void:
+	spec.sprite.flip_h = flip
