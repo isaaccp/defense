@@ -13,7 +13,7 @@ func physics_process(target: Node2D, delta: float):
 		first = false
 		var dir = (target.position - body.position).normalized()
 		sword_attack = sword_attack_scene.instantiate()
-		sword_attack.initialize(side_component)
+		sword_attack.initialize(attributes_component, side_component)
 		sword_attack.look_at(sword_attack.position + dir)
 		sword_attack.position += dir * 35
 		action_sprites.add_child(sword_attack)
