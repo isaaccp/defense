@@ -9,4 +9,3 @@ monitorable = false
 script = ExtResource("1_0spwr")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="hurtbox_hit" from="." to="." method="_on_hurtbox_hit"]

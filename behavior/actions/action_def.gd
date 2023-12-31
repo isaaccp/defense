@@ -6,6 +6,7 @@ enum Id {
 	UNSPECIFIED,
 	MOVE_TO,
 	SWORD_ATTACK,
+	BOW_ATTACK,
 }
 
 @export var id: Id

@@ -2,16 +2,28 @@ extends Node
 
 class_name AutoFreeComponent
 
-@export_group("Required")
+@export_group("Optional")
+# If > 0, free after this time.
+@export var free_after_secs: float = -1.0
+# If animation_player is provided, will free after animation finishes.
 @export var animation_player: AnimationPlayer
-@export var free_on_finished = true
+# If hitbox_component is provided, will free after all hits used.
+@export var hitbox_component: HitboxComponent
+# TODO: Implement "free if it goes out of screen"
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	if free_on_finished:
+	if animation_player:
 		animation_player.animation_finished.connect(
-			func(_anim):
-				var parent = get_parent()
-				if is_instance_valid(parent):
-					parent.queue_free()
-		)
+			func(_anim): AutoFreeComponent._free_parent(self))
+	if hitbox_component:
+		hitbox_component.all_hits_used.connect(
+			AutoFreeComponent._free_parent.bind(self))
+	if free_after_secs > 0:
+		get_tree().create_timer(free_after_secs, false).timeout.connect(
+			AutoFreeComponent._free_parent.bind(self))
+
+static func _free_parent(node: Node) -> void:
+	if is_instance_valid(node):
+		var parent = node.get_parent()
+		if is_instance_valid(parent):
+			parent.queue_free()

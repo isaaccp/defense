@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds8tatkvscrat"]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_kb4ja"]
+[ext_resource type="Texture2D" uid="uid://ba26gk4dnp335" path="res://assets/kyrises_rpg_icon_pack/icons/32x32/arrow_02d.png" id="1_mhrg3"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="2_qnqde"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="3_x2rxh"]
+[ext_resource type="PackedScene" uid="uid://7n8lpv1d2bgf" path="res://behavior/actions/scenes/components/straight_move_component.tscn" id="5_kn6qc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
+radius = 5.0
+
+[node name="Arrow" type="Node2D"]
+script = ExtResource("1_kb4ja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 2.35619
+texture = ExtResource("1_mhrg3")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("2_qnqde")]
+action_scene = NodePath("..")
+damage = 3
+hits = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(15, 0)
+shape = SubResource("CircleShape2D_rcqhs")
+
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("hitbox_component") instance=ExtResource("3_x2rxh")]
+hitbox_component = NodePath("../HitboxComponent")
+
+[node name="StraightMoveComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("5_kn6qc")]
+action_scene = NodePath("..")
+speed = 200.0

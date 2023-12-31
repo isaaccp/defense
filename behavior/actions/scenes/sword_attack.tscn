@@ -50,9 +50,8 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_pu55x"]
 radius = 8.0
 
-[node name="SwordAttack" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
+[node name="SwordAttack" type="Node2D"]
 script = ExtResource("1_sepy6")
-hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.075, 0.05)
@@ -65,8 +64,8 @@ libraries = {
 autoplay = "auto"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("8_kcqxb")]
-damage = 5
 action_scene = NodePath("..")
+damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(10, 0)

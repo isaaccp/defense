@@ -5,6 +5,7 @@ class_name ActionManager
 static var actions = {
 	ActionDef.Id.MOVE_TO: preload("res://behavior/actions/move_to_action.gd"),
 	ActionDef.Id.SWORD_ATTACK: preload("res://behavior/actions/sword_attack_action.gd"),
+	ActionDef.Id.BOW_ATTACK: preload("res://behavior/actions/bow_attack_action.gd"),
 }
 
 static func make_action(action_def: ActionDef) -> Action:
