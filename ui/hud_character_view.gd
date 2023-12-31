@@ -19,6 +19,8 @@ func initialize(character_: Character) -> void:
 	health.health_updated.connect(_on_health_updated)
 	var status = Component.get_or_die(character, StatusComponent.component) as StatusComponent
 	status.statuses_changed.connect(_on_statuses_changed)
+	var behavior = Component.get_or_die(character, BehaviorComponent.component) as BehaviorComponent
+	behavior.behavior_updated.connect(_on_behavior_updated)
 	%Title.text = character.short_name()
 
 func is_local() -> bool:
@@ -46,7 +48,15 @@ func _on_statuses_changed(statuses: Array):
 	hud_status_display.clear()
 	for status_id in statuses:
 		hud_status_display.add_status(status_id)
-	
+
+func _on_behavior_updated(action_id: ActionDef.Id, target: Target):
+	# TODO: Do something with target, e.g. hovering could highlight the 
+	# target in the level.
+	var text = "Idle"
+	if action_id != ActionDef.Id.UNSPECIFIED:
+		text = "%s" % ActionDef.name(action_id)
+	%ActionLabel.text = text
+
 func _on_configure_behavior_button_pressed():
 	configure_behavior_selected.emit()
 

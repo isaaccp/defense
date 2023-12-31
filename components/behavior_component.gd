@@ -2,6 +2,10 @@ extends Node2D
 
 class_name BehaviorComponent
 
+const component: StringName = &"BehaviorComponent"
+
+signal behavior_updated(action: ActionDef.Id, target: Target)
+
 @export_group("Required")
 @export var body: CharacterBody2D
 @export var navigation_agent: NavigationAgent2D
@@ -18,7 +22,7 @@ class_name BehaviorComponent
 
 @export_group("Debug")
 @export var rule: Rule
-@export var target: Node2D
+@export var target: Target
 @export var action: Action
 
 # Keep track of time so we can do pause/freeze-aware stuff.
@@ -44,34 +48,49 @@ func _physics_process(delta: float):
 	
 	elapsed_time += delta
 		
-	# TODO: Remove this, for now some enemies don't have behavior.
-	if not behavior:
-		return
-	if not rule or (action.abortable and next_abortable_action_check_time > elapsed_time) or action.finished:
+	assert(behavior, "Missing behavior")
+		
+	# For change detection.
+	var prev_action_id = _action_id(action)
+	var prev_target = target
+	
+	# If action is finished, clear everything so we re-evaluate.
+	if action and action.finished:
+		rule = null
+		action = null
+		target = null
+	# After this point, if action is still set, we can assume is not finished.
+	if not rule or (action.abortable and next_abortable_action_check_time < elapsed_time):
 		var result = behavior.choose(body, side_component)
-		# There is nothing to do.
-		if result.is_empty() and (not action or action.finished):
-			return
 		if not result.is_empty():
-			if result.rule != rule or result.target != target or action.finished:
+			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule
 				print("%s: Switched to rule: %s" % [get_parent().name, rule])
 				target = result.target
-				if action and not action.finished:
+				if action:
 					action.action_finished()
 				action = ActionManager.make_action(rule.action)
-				action.initialize(body, navigation_agent, action_sprites, side_component, attributes_component, status_component)
-		if action.abortable:
+				action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component)
+		if action and action.abortable:
 			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
+	_emit_updated_if_changed(prev_action_id, prev_target)
+	# No rule implies no action.
 	if not rule:
-		print("Unable to choose a rule for %s" % name)
 		return
-	# It is possible that the target dies while we are running the
-	# action. The action must be able to deal with null target
-	# (except on the first invocation of physics_process).
-	if not is_instance_valid(target):
-		target = null
-	action.physics_process(target, delta)
+	action.physics_process(delta)
+	_post_action()
+	
+static func _action_id(action: Action) -> ActionDef.Id:
+	if action:
+		return action.def.id
+	return ActionDef.Id.UNSPECIFIED
+
+func _emit_updated_if_changed(prev_action_id: ActionDef.Id, prev_target: Target):
+	var action_id = _action_id(action)
+	if prev_action_id != action_id or prev_target != target:
+		behavior_updated.emit(action_id, target)
+
+func _post_action():
 	if body.velocity.length() < 0.1:
 		animation_player.play("idle")
 	else:

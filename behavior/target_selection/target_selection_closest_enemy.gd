@@ -1,14 +1,14 @@
 extends Object
 
-static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Node2D:
-	return _nearest_node(side_component.enemies(), body.position, func(node: Node2D):
-		# TODO: Can this be better?
-		var health_component = node.get_node_or_null("HealthComponent")
+static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Target:
+	var nearest_node = _nearest_node(side_component.enemies(), body.position, func(node: Node2D):
+		var health_component = Component.get_or_null(node, HealthComponent.component)
 		if health_component and health_component.is_dead:
 			return false
 		var distance = action.distance
 		return distance < 0 or node.position.distance_to(body.position) < distance
 	)
+	return Target.make_node_target(nearest_node)
 
 static func _nearest_node(nodes: Array, location: Vector2, filter: Callable = func(node: Node2D): return true):
 	var min_distance = -1.0

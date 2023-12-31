@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://statuses/status_library.gd" id="1_yu84l"]
 [ext_resource type="Resource" uid="uid://oo1hidfkxg3s" path="res://statuses/swiftness.tres" id="2_dsu3d"]
-[ext_resource type="Resource" path="res://statuses/strength_surge.tres" id="3_nfefr"]
+[ext_resource type="Resource" uid="uid://dc77p3ji8krp1" path="res://statuses/strength_surge.tres" id="3_nfefr"]
 
 [resource]
 script = ExtResource("1_yu84l")

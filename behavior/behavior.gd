@@ -10,7 +10,7 @@ func choose(body: CharacterBody2D, side_component: SideComponent) -> Dictionary:
 		# TODO: Construct actions only once when added to the behavior.
 		var action = ActionManager.make_action(rule.action)
 		var target = TargetSelectionManager.select_target(body, side_component, action, rule.target_selection)
-		if target:
+		if target.valid():
 			return {"rule": rule, "target": target, "action": action}
 	return {}
 

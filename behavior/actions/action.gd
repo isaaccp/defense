@@ -9,11 +9,18 @@ class_name Action
 # If that's the case, we'll check if higher priority actions can be
 # executed periodically during execution.
 @export var abortable = false
+# Target type supported by this action. As we only have one, put it here
+# by now with a default value. If later we have moer, we'll have to move
+# it to the ActionDef so e.g. the script editor can know which target types
+# are acceptable for a given action.
+@export var target_type_supported = Target.Type.NODE
 # How far can this action be taken.
 @export var distance = -1
 # Whether this action is considered finished.
 @export var finished = false
 
+
+var target: Target
 var body: CharacterBody2D
 var action_sprites: Node2D
 var navigation_agent: NavigationAgent2D
@@ -21,23 +28,29 @@ var side_component: SideComponent
 var attributes_component: AttributesComponent
 var status_component: StatusComponent
 
-func initialize(body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
+func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
 				action_sprites_: Node2D, side_component_: SideComponent,
 				attributes_component_: AttributesComponent,
 				status_component_: StatusComponent) -> void:
+	target = target_
+	assert(target.type == target_type_supported, "Unsupported target type: %s" % target.type)
 	body = body_
 	navigation_agent = navigation_agent_
 	action_sprites = action_sprites_
 	side_component = side_component_
 	attributes_component = attributes_component_
 	status_component = status_component_
-	
-# Returns true if the preconditions needed to execute this action are met.
-func can_be_executed(target: Node2D) -> bool:
-	return distance < 0 or body.position.distance_to(target.position) < distance
+	post_initialize()
+
+# Called before the first invocation of physics_process.
+# 'target' is as initially returned when choosing an action.
+func post_initialize():
+	pass
 	
 # Runs the appropriate physics process for entity.
-func physics_process(target: Node2D, delta: float):
+# 'target' may have decayed, e.g. a 'node' pointed to by 'target' may no
+# longer exist. Must check for it by hand.
+func physics_process(delta: float):
 	pass
 
 func action_finished():
