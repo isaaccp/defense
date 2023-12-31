@@ -9,7 +9,10 @@ var tower_health: HealthComponent
 
 func before_each():
 	level = basic_tower_test_level_scene.instantiate()
-	level.initialize([])
+	level.initialize([
+		GameplayCharacter.make_gameplay_character(Enum.CharacterId.KNIGHT),
+		GameplayCharacter.make_gameplay_character(Enum.CharacterId.KNIGHT),
+	])
 	add_child_autoqfree(level)
 	# Set up tower.
 	tower = level.towers.get_child(0)
@@ -18,3 +21,10 @@ func before_each():
 func test_tower_destruction_fails_level():
 	await wait_for_signal(level.level_failed, 3, "Waiting for level to fail")
 	assert_signal_emitted(level, "level_failed")
+
+func test_enemy_destruction_finishes_level():
+	# Drop enemies on top of characters so they are easily dispatched.
+	level.enemies.get_child(0).position = level.characters.get_child(0).position
+	level.enemies.get_child(1).position = level.characters.get_child(1).position	
+	await wait_for_signal(level.level_finished, 3, "Waiting for level to finish")
+	assert_signal_emitted(level, "level_finished")
