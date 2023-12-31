@@ -11,9 +11,11 @@ class HealthUpdate extends RefCounted:
 	var max_health: int
 	var is_heal: bool
 	
-@export var max_health: int
+@export_group("Required")
+@export var attributes_component: AttributesComponent
 
-@export_group("debug")
+@export_group("Debug")
+@export var max_health: int
 @export var health: int:
 	set(value):
 		var prev_health = health
@@ -26,9 +28,12 @@ class HealthUpdate extends RefCounted:
 		health_updated.emit(update)
 @export var is_dead: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	heal_full.call_deferred()
+	_initialize.call_deferred()
+
+func _initialize():
+	max_health = attributes_component.health
+	heal_full()
 
 func heal_full():
 	health = max_health

@@ -303,8 +303,8 @@ shape = SubResource("CircleShape2D_k8ty6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_i0i1j")]
-max_health = 10
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("3_i0i1j")]
+attributes_component = NodePath("../AttributesComponent")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("4_4qy4m")]
 side_component = NodePath("../SideComponent")
@@ -333,3 +333,4 @@ side = 2
 
 [node name="AttributesComponent" parent="." instance=ExtResource("11_6d7ui")]
 speed = 30.0
+health = 10

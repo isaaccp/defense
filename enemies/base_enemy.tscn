@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkxmuee84wtoj"]
+
+[ext_resource type="Texture2D" uid="uid://ygxmkjfwslys" path="res://enemies/Run.png" id="3_g6uhg"]
+[ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="4_he7s5"]
+[ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="5_s5sa1"]
+[ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="6_v211g"]
+[ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="7_ajm0a"]
+[ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="8_567i8"]
+[ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_hnhby"]
+[ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_yatxq"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5x0w4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8ty6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgtdu"]
+
+[node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_g6uhg")
+offset = Vector2(0, -16)
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"player": "Sprite2D/AnimationPlayer",
+"source": "res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Death/Death.aseprite"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_5x0w4")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_k8ty6")
+
+[node name="ActionSprites" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("4_he7s5")]
+attributes_component = NodePath("../AttributesComponent")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("5_s5sa1")]
+side_component = NodePath("../SideComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_dgtdu")
+
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "health_component") instance=ExtResource("6_v211g")]
+body = NodePath("..")
+navigation_agent = NodePath("../NavigationAgent2D")
+action_sprites = NodePath("../ActionSprites")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
+sprite = NodePath("../Sprite2D")
+side_component = NodePath("../SideComponent")
+attributes_component = NodePath("../AttributesComponent")
+health_component = NodePath("../HealthComponent")
+behavior = ExtResource("7_ajm0a")
+
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player") instance=ExtResource("8_567i8")]
+health_component = NodePath("../HealthComponent")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
+
+[node name="SideComponent" parent="." instance=ExtResource("9_hnhby")]
+side = 2
+
+[node name="AttributesComponent" parent="." instance=ExtResource("10_yatxq")]
