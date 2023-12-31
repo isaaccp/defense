@@ -17,10 +17,5 @@ var behavior: Behavior:
 	get:
 		return behavior_component.behavior
 
-signal health_updated(health_update: HealthComponent.HealthUpdate)
-
-func _ready():
-	health_component.health_updated.connect(func(update): health_updated.emit(update))
-	
 func short_name() -> String:
 	return "%s (%d)" % [Enum.character_id_string(id), idx]

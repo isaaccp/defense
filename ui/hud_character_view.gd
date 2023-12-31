@@ -12,7 +12,10 @@ func _ready():
 	
 func initialize(character_: Character) -> void:
 	character = character_
-	character.health_updated.connect(_on_health_updated)
+	var health = Component.get_or_die(character, HealthComponent.component) as HealthComponent
+	health.health_updated.connect(_on_health_updated)
+	var status = Component.get_or_die(character, StatusComponent.component) as StatusComponent
+	status.statuses_changed.connect(_on_statuses_changed)
 	%Title.text = character.short_name()
 
 func is_local() -> bool:
@@ -35,6 +38,9 @@ func _on_health_updated(health_update: HealthComponent.HealthUpdate):
 	%HealthBar.max_value = health_update.max_health
 	%HealthBar.value = health_update.health
 	%HealthLabel.text = "%d / %d" % [health_update.health, health_update.max_health]
+	
+func _on_statuses_changed(statuses: Array):
+	print("statuses changed!")
 	
 func _on_configure_behavior_button_pressed():
 	configure_behavior_selected.emit()

@@ -2,6 +2,8 @@ extends Node2D
 
 class_name HealthComponent
 
+const component: StringName = &"HealthComponent"
+
 signal health_updated(update: HealthUpdate)
 signal died
 

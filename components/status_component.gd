@@ -2,6 +2,8 @@ extends Node
 
 class_name StatusComponent
 
+const component: StringName = &"StatusComponent"
+
 @export_group("Required")
 # For statuses that cause damage.
 @export var health_component: HealthComponent
@@ -15,6 +17,8 @@ class_name StatusComponent
 # Keep track of time to know when to expire.
 @export var elapsed_time: float = 0.0
 
+signal statuses_changed(statuses: Array)
+	
 class StatusState extends RefCounted:
 	# Remains until explicitly removed.
 	var permanent: bool
@@ -36,6 +40,7 @@ func _process(delta: float):
 	elapsed_time += delta
 
 func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
+	var changed = false
 	# Update status state.
 	var key = _key(action_id, status_id)
 	var new_status_state: StatusState
@@ -47,7 +52,10 @@ func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
 	# Update current statuses.
 	if not current_statuses.has(status_id):
 		current_statuses[status_id] = {}
+		changed = true
 	current_statuses[status_id][action_id] = true
+	if changed:
+		statuses_changed.emit(get_statuses())
 
 func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id):
 	# Delete status state.
@@ -59,6 +67,7 @@ func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id):
 		status_data.erase(action_id)
 		if status_data.is_empty():
 			current_statuses.erase(status_id)
+			statuses_changed.emit(get_statuses())
 
 # TODO: If Godot gets better at Dictionary typing, make return type Array[StatusDef.Id]
 func get_statuses() -> Array:
