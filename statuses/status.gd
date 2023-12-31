@@ -6,6 +6,6 @@ class_name StatusDef
 # We may want to make them something more substantial later.
 enum Id {
 	UNSPECIFIED,
-	FAST,
+	SWIFTNESS,
 	STRENGTHENED,
 }

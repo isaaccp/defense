@@ -13,7 +13,7 @@ func physics_process(target: Node2D, delta: float):
 		first = false
 		var dir = (target.position - body.position).normalized()
 		arrow = arrow_scene.instantiate() as ActionScene
-		arrow.initialize(attributes_component, side_component)
+		_initialize_action_scene(arrow)
 		arrow.look_at(arrow.position + dir)
 		arrow.position += dir * 35
 		action_sprites.add_child(arrow)

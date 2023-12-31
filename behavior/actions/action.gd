@@ -42,3 +42,6 @@ func physics_process(target: Node2D, delta: float):
 
 func action_finished():
 	finished = true
+
+func _initialize_action_scene(action_scene: ActionScene) -> void:
+	action_scene.initialize(def, attributes_component, side_component)

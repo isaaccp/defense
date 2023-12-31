@@ -13,7 +13,7 @@ func physics_process(target: Node2D, delta: float):
 	if first:
 		first = false
 		original_position = body.global_position
-		status_component.set_status(StatusDef.Id.FAST, -1)
+		status_component.set_status(def.id, StatusDef.Id.SWIFTNESS, -1)
 	if not is_instance_valid(target):
 		action_finished()
 		return
@@ -29,7 +29,7 @@ func _start_target_position_refresh(target: Node2D):
 
 func action_finished():
 	body.velocity = Vector2.ZERO
-	status_component.remove_status(StatusDef.Id.FAST)
+	status_component.remove_status(def.id, StatusDef.Id.SWIFTNESS)
 	if original_position.distance_squared_to(body.global_position) > charge_threshold_squared:
-		status_component.set_status(StatusDef.Id.STRENGTHENED, 2.0)
+		status_component.set_status(def.id, StatusDef.Id.STRENGTHENED, 2.0)
 	super()
