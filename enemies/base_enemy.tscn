@@ -17,6 +17,7 @@ load_path = "res://.godot/imported/Run.png-e089e7a498d33b0801b0d0d47b50f444.ctex
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

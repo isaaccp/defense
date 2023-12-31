@@ -271,6 +271,7 @@ _data = {
 
 [node name="OrcWarrior" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

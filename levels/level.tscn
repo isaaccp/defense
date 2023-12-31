@@ -50,9 +50,11 @@ position = Vector2(520, 312)
 
 [node name="OrcArcher" parent="YSorted/Enemies" instance=ExtResource("4_yo5dd")]
 position = Vector2(619, 273)
+collision_mask = 1
 
 [node name="OrcArcher2" parent="YSorted/Enemies" instance=ExtResource("4_yo5dd")]
 position = Vector2(505, 399)
+collision_mask = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ga831")
