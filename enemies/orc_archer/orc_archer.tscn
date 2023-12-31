@@ -296,6 +296,7 @@ rules = Array[ExtResource("6_7enri")]([SubResource("Resource_wa52o"), SubResourc
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_qlkp2")
+offset = Vector2(0, -16)
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,

@@ -31,3 +31,4 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 2d_physics/layer_1="Entities"
 2d_physics/layer_2="Actions"
 2d_physics/layer_3="Hurtbox"
+2d_physics/layer_4="Obstacles"

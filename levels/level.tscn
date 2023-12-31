@@ -2,8 +2,8 @@
 
 [ext_resource type="TileSet" uid="uid://cpd8yv3x2ulyq" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/tiles.tres" id="1_jjil5"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_wcymq"]
-[ext_resource type="PackedScene" uid="uid://cvb6tsmt412un" path="res://enemies/orc_warrior/orc_warrior.tscn" id="3_a07ve"]
-[ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="4_yo5dd"]
+[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="3_5k3ur"]
+[ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="4_ims0g"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ga831"]
 vertices = PackedVector2Array(1175, 676, -22, 676, -22, -23, 1175, -23)
@@ -39,22 +39,11 @@ y_sort_enabled = true
 [node name="Enemies" type="Node2D" parent="YSorted"]
 y_sort_enabled = true
 
-[node name="TopEnemy" parent="YSorted/Enemies" instance=ExtResource("3_a07ve")]
-position = Vector2(614, 177)
+[node name="OrcWarrior" parent="YSorted/Enemies" instance=ExtResource("3_5k3ur")]
+position = Vector2(248, 63)
 
-[node name="Enemy" parent="YSorted/Enemies" instance=ExtResource("3_a07ve")]
-position = Vector2(407, 270)
-
-[node name="Enemy2" parent="YSorted/Enemies" instance=ExtResource("3_a07ve")]
-position = Vector2(520, 312)
-
-[node name="OrcArcher" parent="YSorted/Enemies" instance=ExtResource("4_yo5dd")]
-position = Vector2(619, 273)
-collision_mask = 1
-
-[node name="OrcArcher2" parent="YSorted/Enemies" instance=ExtResource("4_yo5dd")]
-position = Vector2(505, 399)
-collision_mask = 1
+[node name="OrcArcher" parent="YSorted/Enemies" instance=ExtResource("4_ims0g")]
+position = Vector2(314, 31)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ga831")
