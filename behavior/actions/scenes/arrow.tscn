@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ds8tatkvscrat"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_kb4ja"]
-[ext_resource type="Texture2D" uid="uid://b23fdqdnm37cc" path="res://assets/kyrises_rpg_icon_pack/icons/16x16/arrow_01a.png" id="2_5jobf"]
+[ext_resource type="Texture2D" uid="uid://byax400l32s7t" path="res://assets/kyrises_rpg_icon_pack/icons/16x16/arrow_01a.png" id="2_5jobf"]
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="2_qnqde"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="3_x2rxh"]
 [ext_resource type="PackedScene" uid="uid://7n8lpv1d2bgf" path="res://behavior/actions/scenes/components/straight_move_component.tscn" id="5_kn6qc"]

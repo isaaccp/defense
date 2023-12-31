@@ -1,20 +1,34 @@
 [remap]
 
-importer="texture_atlas"
-type="Texture2D"
-uid="uid://cy230ma8s83iv"
-path="res://.godot/imported/coin_01a.png-379a127171a5cc50a46c15cad0abcf7b.res"
-group_file="res://assets/kyrises_rpg_icon_pack/spritesheet/coin_spritesheet_16x16.png"
-valid=true
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dq4uu76jfnrdi"
+path="res://.godot/imported/coin_01a.png-379a127171a5cc50a46c15cad0abcf7b.ctex"
+metadata={
+"vram_texture": false
+}
+
 [deps]
 
-
 source_file="res://assets/kyrises_rpg_icon_pack/icons/16x16/coin_01a.png"
-dest_files=["res://.godot/imported/coin_01a.png-379a127171a5cc50a46c15cad0abcf7b.res"]
+dest_files=["res://.godot/imported/coin_01a.png-379a127171a5cc50a46c15cad0abcf7b.ctex"]
 
 [params]
 
-atlas_file="res://assets/kyrises_rpg_icon_pack/spritesheet/coin_spritesheet_16x16.png"
-import_mode=0
-crop_to_region=false
-trim_alpha_border_from_region=true
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=1
