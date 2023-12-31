@@ -7,7 +7,6 @@ class_name Hud
 @export var time: Label
 @export var main_message: Label
 @export var bottom_message: Label
-@export var character_views: Container
 
 enum MessageType {
 	MAIN,
@@ -30,6 +29,7 @@ var message_tween = {
 }
 
 const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
+const hud_tower_view_scene = preload("res://ui/hud_tower_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
 signal readiness_updated(character_idx: int, ready: bool)
@@ -46,8 +46,15 @@ func set_characters(characters: Node) -> void:
 		view.initialize(character)
 		view.configure_behavior_selected.connect(_on_configure_behavior_selected.bind(character))
 		view.readiness_updated.connect(_on_readiness_updated.bind(i))
-		character_views.add_child(view)
+		%CharacterViews.add_child(view)
 
+func set_towers(towers: Node) -> void:
+	# For now let's handle only one tower.
+	var tower = towers.get_child(0)
+	var view = hud_tower_view_scene.instantiate() as HudTowerView
+	view.initialize(tower)
+	%TowerHud.add_child(view)
+	
 func _on_configure_behavior_selected(character: Character):
 	%ProgrammingUIParent.show()
 	for child in %ProgrammingUIParent.get_children():
@@ -73,7 +80,7 @@ func _on_readiness_updated(ready: bool, character_idx: int):
 	readiness_updated.emit(character_idx, ready)
 
 func show_character_config(show: bool):
-	for view in character_views.get_children():
+	for view in %CharacterViews.get_children():
 		view.show_config(show)
 
 func set_peer(peer_id: int) -> void:

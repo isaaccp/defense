@@ -6,20 +6,29 @@ class_name SideComponent
 @export var side: Groups.GroupType
 
 @export_group("Debug")
-var enemy_group: String
+var enemy_groups: Array[String]
 
 func _ready():
 	assert(side != Groups.GroupType.UNSPECIFIED)
 	if side == Groups.GroupType.CHARACTERS:
-		enemy_group = Groups.ENEMIES
+		enemy_groups = [Groups.ENEMIES]
 	else:
-		enemy_group = Groups.CHARACTERS
+		enemy_groups = [Groups.CHARACTERS, Groups.TOWERS]
 		
 func is_enemy_node(node: Node2D) -> bool:
-	return node.is_in_group(enemy_group)
+	for group in enemy_groups:
+		if node.is_in_group(group):
+			return true
+	return false
 
-func is_enemy(side_component: SideComponent) -> bool:
-	return side_component.side != side
+func is_enemy(other: SideComponent) -> bool:
+	if side == Groups.GroupType.CHARACTERS or side == Groups.GroupType.TOWERS:
+		return other.side == Groups.GroupType.ENEMIES
+	else:
+		return other.side == Groups.GroupType.CHARACTERS or other.side == Groups.GroupType.TOWERS
 
-func enemies() -> Array[Node]:
-	return get_tree().get_nodes_in_group(enemy_group)
+func enemies() -> Array:
+	var nodes = []
+	for group in enemy_groups:
+		nodes.append_array(get_tree().get_nodes_in_group(group))
+	return nodes

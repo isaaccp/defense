@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://camb4jx7y3ygt"]
+
+[ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
+[ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="2_narhj"]
+[ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="3_enchd"]
+[ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="4_asgae"]
+[ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="5_5ko8r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l7o0"]
+atlas = ExtResource("1_58km4")
+region = Rect2(224, 88, 32, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w54le"]
+atlas = ExtResource("1_58km4")
+region = Rect2(256, 88, 32, 72)
+
+[sub_resource type="Animation" id="Animation_nhmel"]
+resource_name = "glow"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7qu8f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jknt"]
+_data = {
+"RESET": SubResource("Animation_7qu8f"),
+"glow": SubResource("Animation_nhmel")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fatgc"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0vh8"]
+radius = 15.0
+
+[node name="Column" type="StaticBody2D" groups=["towers"]]
+collision_layer = 8
+
+[node name="Column" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+texture = SubResource("AtlasTexture_0l7o0")
+
+[node name="Glyphs" type="Sprite2D" parent="Column"]
+self_modulate = Color(1, 1, 1, 0)
+texture = SubResource("AtlasTexture_w54le")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Column/Glyphs"]
+libraries = {
+"": SubResource("AnimationLibrary_4jknt")
+}
+autoplay = "glow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fatgc")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("2_narhj")]
+side_component = NodePath("../SideComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_h0vh8")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("3_enchd")]
+attributes_component = NodePath("../AttributesComponent")
+
+[node name="SideComponent" parent="." instance=ExtResource("4_asgae")]
+side = 1
+
+[node name="AttributesComponent" parent="." instance=ExtResource("5_5ko8r")]
+health = 80

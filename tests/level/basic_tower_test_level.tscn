@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6iaoe1retjcv"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ey8bv"]
+[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_2xijh"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="3_psc1g"]
+
+[node name="Level" instance=ExtResource("1_ey8bv")]
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(129, 119)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(43, 203)
+
+[node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_2xijh")]
+position = Vector2(242, 144)
+
+[node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_2xijh")]
+position = Vector2(359, 227)
+
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_psc1g")]
+position = Vector2(299, 199)
+
+[node name="AttributesComponent" parent="YSorted/Towers/Column" index="5"]
+health = 20
+
+[editable path="YSorted/Towers/Column"]

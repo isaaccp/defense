@@ -22,6 +22,10 @@ OnlineMatch="*res://autoload/online_match.gd"
 Online="*res://autoload/online.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/behavior_editor/plugin.cfg", "res://addons/gut/plugin.cfg")

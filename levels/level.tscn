@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsmo4loybi63o"]
+[gd_scene load_steps=7 format=3 uid="uid://bsmo4loybi63o"]
 
 [ext_resource type="TileSet" uid="uid://cpd8yv3x2ulyq" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/tiles.tres" id="1_jjil5"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_wcymq"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="3_5k3ur"]
 [ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="4_ims0g"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="5_vko5a"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ga831"]
 vertices = PackedVector2Array(1175, 676, -22, 676, -22, -23, 1175, -23)
@@ -11,10 +12,11 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -33, 1185, -34, 1185, 686, -32, 686)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("characters", "enemies", "starting_positions")]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("characters", "enemies", "towers", "starting_positions")]
 script = ExtResource("1_wcymq")
 characters = NodePath("YSorted/Characters")
 enemies = NodePath("YSorted/Enemies")
+towers = NodePath("YSorted/Towers")
 starting_positions = NodePath("StartingPositions")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -25,10 +27,10 @@ layer_0/tile_data = PackedInt32Array(2752585, 393216, 8, 2687049, 393216, 8, 262
 [node name="StartingPositions" type="Node2D" parent="."]
 
 [node name="First" type="Node2D" parent="StartingPositions"]
-position = Vector2(55, 53)
+position = Vector2(613, 201)
 
 [node name="Second" type="Node2D" parent="StartingPositions"]
-position = Vector2(66, 125)
+position = Vector2(639, 291)
 
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -40,10 +42,21 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="OrcWarrior" parent="YSorted/Enemies" instance=ExtResource("3_5k3ur")]
-position = Vector2(248, 63)
+position = Vector2(416, 162)
+
+[node name="OrcWarrior2" parent="YSorted/Enemies" instance=ExtResource("3_5k3ur")]
+position = Vector2(415, 330)
 
 [node name="OrcArcher" parent="YSorted/Enemies" instance=ExtResource("4_ims0g")]
-position = Vector2(314, 31)
+position = Vector2(363, 267)
+
+[node name="OrcArcher2" parent="YSorted/Enemies" instance=ExtResource("4_ims0g")]
+position = Vector2(351, 355)
+
+[node name="Towers" type="Node2D" parent="YSorted"]
+
+[node name="ColumnOfMatthias" parent="YSorted/Towers" instance=ExtResource("5_vko5a")]
+position = Vector2(556, 314)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ga831")
