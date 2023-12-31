@@ -24,7 +24,7 @@ Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/behavior_editor/plugin.cfg")
 
 [layer_names]
 

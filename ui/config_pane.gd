@@ -1,3 +1,4 @@
+@tool
 extends PopupPanel
 
 var _item: TreeItem
