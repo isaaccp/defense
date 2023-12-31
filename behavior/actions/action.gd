@@ -20,13 +20,16 @@ var body: CharacterBody2D
 var action_sprites: Node2D
 var navigation_agent: NavigationAgent2D
 var side_component: SideComponent
+var attributes_component: AttributesComponent
 
 func initialize(body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
-				action_sprites_: Node2D, side_component_: SideComponent) -> void:
+				action_sprites_: Node2D, side_component_: SideComponent,
+				attributes_component_: AttributesComponent) -> void:
 	body = body_
 	navigation_agent = navigation_agent_
 	action_sprites = action_sprites_
 	side_component = side_component_
+	attributes_component = attributes_component_
 	
 # Returns true if the preconditions needed to execute this action are met.
 func can_be_executed(target: Node2D) -> bool:

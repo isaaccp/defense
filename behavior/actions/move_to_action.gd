@@ -10,7 +10,7 @@ func physics_process(target: Node2D, delta: float):
 		return
 	_start_target_position_refresh(target)
 	var next = navigation_agent.get_next_path_position()
-	body.velocity = body.position.direction_to(next) * body.speed
+	body.velocity = body.position.direction_to(next) * attributes_component.speed
 	body.move_and_slide()
 	
 func _start_target_position_refresh(target: Node2D):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dme6lif4cwji3"]
+[gd_scene load_steps=18 format=3 uid="uid://dme6lif4cwji3"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_0mtgw"]
 [ext_resource type="Texture2D" uid="uid://ennk52fhox3v" path="res://character/knight/Run.png" id="2_rxykb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="7_mtdjn"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="7_p2f2o"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_5f6fu"]
+[ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_i8ose"]
 
 [sub_resource type="Animation" id="Animation_0nufx"]
 length = 0.001
@@ -270,7 +271,6 @@ _data = {
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "behavior_component") groups=["characters"]]
 y_sort_enabled = true
 script = ExtResource("1_0mtgw")
-speed = 60.0
 health_component = NodePath("HealthComponent")
 behavior_component = NodePath("BehaviorComponent")
 
@@ -313,13 +313,14 @@ health_component = NodePath("../HealthComponent")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 free_on_death = false
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "health_component") instance=ExtResource("6_p1m4u")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "health_component") instance=ExtResource("6_p1m4u")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 sprite = NodePath("../Sprite2D")
 side_component = NodePath("../SideComponent")
+attributes_component = NodePath("../AttributesComponent")
 health_component = NodePath("../HealthComponent")
 behavior = ExtResource("7_mtdjn")
 
@@ -332,3 +333,6 @@ shape = SubResource("CapsuleShape2D_4y0tt")
 
 [node name="SideComponent" parent="." instance=ExtResource("9_5f6fu")]
 side = 1
+
+[node name="AttributesComponent" parent="." instance=ExtResource("10_i8ose")]
+speed = 50.0

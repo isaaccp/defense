@@ -9,6 +9,7 @@ class_name BehaviorComponent
 @export var animation_player: AnimationPlayer
 @export var sprite: Sprite2D
 @export var side_component: SideComponent
+@export var attributes_component: AttributesComponent
 
 @export_group("Optional")
 @export var health_component: HealthComponent
@@ -53,12 +54,12 @@ func _physics_process(delta: float):
 		if not result.is_empty():
 			if result.rule != rule or result.target != target or action.finished:
 				rule = result.rule
-				print("%s: Switched to rule: %s" % [name, rule])
+				print("%s: Switched to rule: %s" % [get_parent().name, rule])
 				target = result.target
 				if action and not action.finished:
 					action.action_finished()
 				action = ActionManager.make_action(rule.action)
-				action.initialize(body, navigation_agent, action_sprites, side_component)
+				action.initialize(body, navigation_agent, action_sprites, side_component, attributes_component)
 		if action.abortable:
 			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 	if not rule:

@@ -3,7 +3,6 @@ extends Node2D
 class_name Character
 
 @export_group("Required")
-@export var speed: float
 @export var health_component: HealthComponent
 @export var behavior_component: BehaviorComponent
 
