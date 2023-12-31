@@ -1,3 +1,4 @@
+@tool
 extends Tree
 
 class_name ScriptTree
@@ -28,37 +29,43 @@ func _ready():
 
 func load_behavior(behavior: Behavior) -> void:
 	assert(is_inside_tree(), "Needs to be called inside tree")
+	for c in _root.get_children():
+		_root.remove_child(c)
 	for rule in behavior.rules:
 		_add_prefilled(rule)
 	_add_empty()
 
 func _add_empty() -> TreeItem:
-	var create = self.create_item(_root)
-	create.add_button(0, delete_icon, 0, true, "Delete")
-	create.set_selectable(0, false)
-	create.set_text(Column.TARGET, "[Target]")
-	create.set_metadata(Column.TARGET, 0)
-	create.set_text(Column.CONDITION, "[Condition]")
-	create.set_metadata(Column.CONDITION, 0)
-	create.set_text(Column.ACTION, "[Action]")
-	create.set_metadata(Column.ACTION, 0)
-	return create
-	
+	var row = self.create_item(_root)
+	row.add_button(0, delete_icon, 0, true, "Delete")
+	row.set_selectable(0, false)
+	row.set_text(Column.TARGET, "[Target]")
+	row.set_metadata(Column.TARGET, 0)
+	# TODO: Set back to a placeholder when there's a proper condition type.
+	row.set_text(Column.CONDITION, "Always")
+	row.set_metadata(Column.CONDITION, 0)
+	row.set_text(Column.ACTION, "[Action]")
+	row.set_metadata(Column.ACTION, 0)
+	return row
+
 func _add_prefilled(rule: Rule) -> TreeItem:
-	var create = self.create_item(_root)
-	create.add_button(Column.DELETE_ICON, delete_icon, 0, false, "Delete")
-	create.set_selectable(Column.DELETE_ICON, false)
-	create.set_text(Column.TARGET, str(rule.target_selection))
-	create.set_metadata(Column.TARGET, rule.target_selection.id)
-	create.set_text(Column.CONDITION, "Always")
-	create.set_metadata(Column.CONDITION, 0)
-	create.set_text(Column.ACTION, str(rule.action))
-	create.set_metadata(Column.ACTION, rule.action.id)
-	return create
-	
+	var row = self.create_item(_root)
+	row.add_button(Column.DELETE_ICON, delete_icon, 0, false, "Delete")
+	row.set_selectable(Column.DELETE_ICON, false)
+	row.set_text(Column.TARGET, str(rule.target_selection))
+	row.set_metadata(Column.TARGET, rule.target_selection.id)
+	row.set_text(Column.CONDITION, "Always")
+	row.set_metadata(Column.CONDITION, 0)
+	row.set_text(Column.ACTION, str(rule.action))
+	row.set_metadata(Column.ACTION, rule.action.id)
+	return row
+
 func _is_empty(item: TreeItem) -> bool:
-	for c in range(columns):
-		if item.get_metadata(c) != null:
+	for c in range(1, columns): # Skip delete
+		var meta = item.get_metadata(c)
+		# _add_empty leaves the delete button null but 0s the rest,
+		# but either is empty enough for our purposes.
+		if meta != null && meta != 0:
 			return false
 	return true
 
@@ -84,6 +91,7 @@ func _drop_data(at_position: Vector2, data):
 	var item = get_item_at_position(at_position)
 	var col = get_column_at_position(at_position)
 
+	var was_empty: bool
 	if offset < 0:
 		var new = _add_empty()
 		new.move_before(item)
@@ -93,8 +101,10 @@ func _drop_data(at_position: Vector2, data):
 		new.move_after(item)
 		item = new
 	elif _is_empty(item):
-		# Add a new blank item for creating new behaviors
-		_add_empty()
+		# While "Always" is the only condition,
+		# dropping it on a row could leave it "empty".
+		# So check again after setting.
+		was_empty = true
 
 	item.set_button_disabled(Column.DELETE_ICON, 0, false)
 	item.set_text(col, data.text)
@@ -103,6 +113,10 @@ func _drop_data(at_position: Vector2, data):
 		item.add_button(col, edit_icon, 0, false, "Configure")
 	elif item.get_button_count(col) > 0:
 		item.erase_button(col, 0)
+
+	if was_empty and not _is_empty(item):
+		# Replace the blank item we just filled in
+		_add_empty()
 
 func _on_button_clicked(item, column, button_id, _mouse_button_index):
 	if column == Column.DELETE_ICON and button_id == 0: # delete
@@ -116,12 +130,10 @@ func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 func get_behavior() -> Behavior:
 	var behavior = Behavior.new()
 	for child in _root.get_children():
+		if _is_empty(child):
+			continue
 		var target = child.get_metadata(Column.TARGET) as TargetSelectionDef.Id
 		var action = child.get_metadata(Column.ACTION) as ActionDef.Id
-		if target == TargetSelectionDef.Id.UNSPECIFIED:
-			continue
-		if action == ActionDef.Id.UNSPECIFIED:
-			continue
 		var rule = Rule.new()
 		rule.target_selection = TargetSelectionDef.new()
 		rule.target_selection.id = target
