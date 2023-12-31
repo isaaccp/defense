@@ -13,9 +13,9 @@ class_name BehaviorComponent
 
 @export_group("Optional")
 @export var health_component: HealthComponent
+@export var behavior: Behavior
 
 @export_group("Debug")
-@export var behavior: Behavior
 @export var rule: Rule
 @export var target: Node2D
 @export var action: Action

@@ -2,10 +2,12 @@ extends Node2D
 
 class_name ActionScene
 
-signal hurtbox_hit(hurtbox: HurtboxComponent)
+@export_group("Optional")
+# Optional, but hurtbox_hit won't happen without it.
+@export var hitbox_component: HitboxComponent
 
-func _on_area_2d_area_entered(area: Area2D):
-	var hurtbox = area as HurtboxComponent
-	if not hurtbox:
-		assert(false, "Unexpected hit area was not hurtbox")
-	hurtbox_hit.emit(hurtbox)
+# From Body components.
+var side_component: SideComponent
+
+func initialize(side_component_: SideComponent):
+	side_component = side_component_

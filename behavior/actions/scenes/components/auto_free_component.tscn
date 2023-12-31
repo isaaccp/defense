@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://buar5p2nbmhkd"]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="1_1cgke"]
+
+[node name="AutoFreeComponent" type="Node"]
+script = ExtResource("1_1cgke")

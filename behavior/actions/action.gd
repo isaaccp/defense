@@ -13,8 +13,6 @@ class_name Action
 @export var distance = -1
 # Whether this action is considered finished.
 @export var finished = false
-# Whether this action can hurt allies.
-@export var friendly_fire = false
 
 var body: CharacterBody2D
 var action_sprites: Node2D

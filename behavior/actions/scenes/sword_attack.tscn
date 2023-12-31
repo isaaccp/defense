@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://23jvuhba7v7d"]
+[gd_scene load_steps=14 format=3 uid="uid://23jvuhba7v7d"]
 
 [ext_resource type="Texture2D" uid="uid://crn0raslm5ryy" path="res://assets/white_slash_wide/File1.png" id="1_h20pf"]
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_sepy6"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bdthkfufa5lso" path="res://assets/white_slash_wide/File4.png" id="4_wu028"]
 [ext_resource type="Texture2D" uid="uid://ci73uwwqej7pe" path="res://assets/white_slash_wide/File5.png" id="5_coi3d"]
 [ext_resource type="Texture2D" uid="uid://b8wycalvfaypv" path="res://assets/white_slash_wide/File6.png" id="6_hyvcc"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="8_kcqxb"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="9_2r54y"]
 
 [sub_resource type="Animation" id="Animation_4x5cj"]
 length = 0.001
@@ -26,7 +28,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_4cdsn"]
 resource_name = "auto"
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -49,8 +50,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_pu55x"]
 radius = 8.0
 
-[node name="SwordAttack" type="Node2D"]
+[node name="SwordAttack" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_sepy6")
+hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.075, 0.05)
@@ -62,13 +64,13 @@ libraries = {
 }
 autoplay = "auto"
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 4
-monitorable = false
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("8_kcqxb")]
+damage = 5
+action_scene = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(10, 0)
 shape = SubResource("CircleShape2D_pu55x")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("9_2r54y")]
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
