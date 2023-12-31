@@ -314,8 +314,7 @@ libraries = {
 "": SubResource("AnimationLibrary_ia46g")
 }
 
-[node name="BehaviorComponent" parent="." index="6" node_paths=PackedStringArray("animation_player")]
-animation_player = NodePath("../Sprite2D/AnimationPlayer")
+[node name="BehaviorComponent" parent="." index="6"]
 behavior = SubResource("Resource_rdjj3")
 
 [node name="AttributesComponent" parent="." index="9"]

@@ -8,6 +8,7 @@ enum Id {
 	MOVE_TO,
 	SWORD_ATTACK,
 	BOW_ATTACK,
+	CHARGE,
 }
 
 @export var id: Id

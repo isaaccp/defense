@@ -10,6 +10,7 @@ class_name BehaviorComponent
 @export var sprite: Sprite2D
 @export var side_component: SideComponent
 @export var attributes_component: AttributesComponent
+@export var status_component: StatusComponent
 
 @export_group("Optional")
 @export var health_component: HealthComponent
@@ -59,7 +60,7 @@ func _physics_process(delta: float):
 				if action and not action.finished:
 					action.action_finished()
 				action = ActionManager.make_action(rule.action)
-				action.initialize(body, navigation_agent, action_sprites, side_component, attributes_component)
+				action.initialize(body, navigation_agent, action_sprites, side_component, attributes_component, status_component)
 		if action.abortable:
 			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 	if not rule:

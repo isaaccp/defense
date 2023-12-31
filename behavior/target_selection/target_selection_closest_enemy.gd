@@ -2,6 +2,10 @@ extends Object
 
 static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Node2D:
 	return _nearest_node(side_component.enemies(), body.position, func(node: Node2D):
+		# TODO: Can this be better?
+		var health_component = node.get_node_or_null("HealthComponent")
+		if health_component and health_component.is_dead:
+			return false
 		var distance = action.distance
 		return distance < 0 or node.position.distance_to(body.position) < distance
 	)

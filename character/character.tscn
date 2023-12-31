@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dme6lif4cwji3"]
+[gd_scene load_steps=19 format=3 uid="uid://dme6lif4cwji3"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_0mtgw"]
 [ext_resource type="Texture2D" uid="uid://ennk52fhox3v" path="res://character/knight/Run.png" id="2_rxykb"]
@@ -6,10 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cvoj8nscg4q6p" path="res://character/knight/Death.png" id="3_4jfpj"]
 [ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="3_15loy"]
 [ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="6_p1m4u"]
-[ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="7_mtdjn"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="7_p2f2o"]
+[ext_resource type="Resource" uid="uid://bqup0xqgl0kxe" path="res://behavior/resources/charge_plus_sword_attack.tres" id="8_vccxw"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_5f6fu"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_i8ose"]
+[ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="11_8mhrp"]
 
 [sub_resource type="Animation" id="Animation_0nufx"]
 length = 0.001
@@ -276,7 +277,7 @@ behavior_component = NodePath("BehaviorComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_rxykb")
+texture = ExtResource("3_4jfpj")
 offset = Vector2(0, -16)
 hframes = 3
 vframes = 2
@@ -305,19 +306,21 @@ shape = SubResource("CircleShape2D_7fvau")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="AttributesComponent" parent="." instance=ExtResource("10_i8ose")]
+[node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("10_i8ose")]
 speed = 50.0
 health = 40
+status_component = NodePath("../StatusComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("2_snnn5")]
 attributes_component = NodePath("../AttributesComponent")
 
-[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player") instance=ExtResource("3_15loy")]
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("3_15loy")]
 health_component = NodePath("../HealthComponent")
 animation_player = NodePath("../Sprite2D/AnimationPlayer")
 free_on_death = false
+collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "health_component") instance=ExtResource("6_p1m4u")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "status_component", "health_component") instance=ExtResource("6_p1m4u")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -325,8 +328,9 @@ animation_player = NodePath("../Sprite2D/AnimationPlayer")
 sprite = NodePath("../Sprite2D")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
+status_component = NodePath("../StatusComponent")
 health_component = NodePath("../HealthComponent")
-behavior = ExtResource("7_mtdjn")
+behavior = ExtResource("8_vccxw")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("7_p2f2o")]
 side_component = NodePath("../SideComponent")
@@ -337,3 +341,6 @@ shape = SubResource("CapsuleShape2D_4y0tt")
 
 [node name="SideComponent" parent="." instance=ExtResource("9_5f6fu")]
 side = 1
+
+[node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_8mhrp")]
+health_component = NodePath("../HealthComponent")

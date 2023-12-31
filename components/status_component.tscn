@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmkit8mj702l7"]
+
+[ext_resource type="Script" path="res://components/status_component.gd" id="1_jc6is"]
+
+[node name="StatusComponent" type="Node"]
+script = ExtResource("1_jc6is")
