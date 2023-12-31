@@ -51,7 +51,7 @@ func _on_statuses_changed(statuses: Array):
 
 func _on_behavior_updated(action_id: ActionDef.Id, target: Target):
 	# TODO: Do something with target, e.g. hovering could highlight the 
-	# target in the level.
+	# target in the level.	
 	var text = "Idle"
 	if action_id != ActionDef.Id.UNSPECIFIED:
 		text = "%s" % ActionDef.name(action_id)

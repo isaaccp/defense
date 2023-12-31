@@ -17,7 +17,12 @@ class HealthUpdate extends RefCounted:
 @export var attributes_component: AttributesComponent
 
 @export_group("Debug")
-@export var max_health: int
+@export var max_health: int:
+	set(value):
+		max_health = value
+		if health > max_health:
+			health = max_health
+
 @export var health: int:
 	set(value):
 		var prev_health = health

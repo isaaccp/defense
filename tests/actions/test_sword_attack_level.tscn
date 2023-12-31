@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6iaoe1retjcv"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ey8bv"]
+[ext_resource type="PackedScene" uid="uid://cvb6tsmt412un" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_r5bpi"]
+
+[node name="Level" instance=ExtResource("1_ey8bv")]
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(129, 119)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(43, 203)
+
+[node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_r5bpi")]
+position = Vector2(167, 119)

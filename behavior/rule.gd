@@ -10,3 +10,9 @@ func _to_string() -> String:
 		target_selection,
 		action,
 	]
+
+static func make(target_selection: TargetSelectionDef, action: ActionDef) -> Rule:
+	var rule = Rule.new()
+	rule.target_selection = target_selection
+	rule.action = action
+	return rule
