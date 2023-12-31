@@ -31,5 +31,5 @@ func action_finished():
 	body.velocity = Vector2.ZERO
 	status_component.remove_status(def.id, StatusDef.Id.SWIFTNESS)
 	if original_position.distance_squared_to(body.global_position) > charge_threshold_squared:
-		status_component.set_status(def.id, StatusDef.Id.STRENGTHENED, 2.0)
+		status_component.set_status(def.id, StatusDef.Id.STRENGTH_SURGE, 2.0)
 	super()

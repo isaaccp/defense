@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://do57hfqasnkkh"]
+[gd_scene load_steps=5 format=3 uid="uid://do57hfqasnkkh"]
 
 [ext_resource type="Script" path="res://ui/hud_character_view.gd" id="1_xuorh"]
+[ext_resource type="PackedScene" uid="uid://djdh7mp64thdi" path="res://ui/hud_status_display.tscn" id="2_aw5xw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2xvb"]
 bg_color = Color(0, 0, 0, 1)
@@ -15,6 +16,7 @@ corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
 [node name="HudCharacterView" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
 offset_right = 167.0
 offset_bottom = 66.0
 script = ExtResource("1_xuorh")
@@ -78,6 +80,23 @@ text = "Configure Behavior"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Ready"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_top = 2
+
+[node name="HudStatusDisplay" parent="Control/MarginContainer" instance=ExtResource("2_aw5xw")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigureBehaviorButton" to="." method="_on_configure_behavior_button_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ConfigContainer/ReadyButton" to="." method="_on_ready_button_toggled"]

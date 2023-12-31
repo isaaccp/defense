@@ -91,6 +91,6 @@ func adjusted_health(base_health: int) -> int:
 func adjusted_damage_multiplier(base_damage_multiplier: float) -> float:
 	var damage_multiplier = base_damage_multiplier
 	for status in get_statuses():
-		if status == StatusDef.Id.STRENGTHENED:
+		if status == StatusDef.Id.STRENGTH_SURGE:
 			damage_multiplier *= 2.0
 	return damage_multiplier

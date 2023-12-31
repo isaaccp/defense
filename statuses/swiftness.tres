@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatusDef" load_steps=3 format=3 uid="uid://oo1hidfkxg3s"]
+
+[ext_resource type="Texture2D" uid="uid://d2wsw86gt74tc" path="res://assets/status/buffs/swiftness.png" id="1_vdhmt"]
+[ext_resource type="Script" path="res://statuses/status.gd" id="2_k4hov"]
+
+[resource]
+script = ExtResource("2_k4hov")
+id = 1
+description = "Move at 1.5x the usual speed"
+icon = ExtResource("1_vdhmt")

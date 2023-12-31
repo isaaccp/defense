@@ -1,4 +1,4 @@
-extends Object
+extends Resource
 
 class_name StatusDef
 
@@ -7,5 +7,9 @@ class_name StatusDef
 enum Id {
 	UNSPECIFIED,
 	SWIFTNESS,
-	STRENGTHENED,
+	STRENGTH_SURGE,
 }
+
+@export var id: Id
+@export var description: String
+@export var icon: Texture2D

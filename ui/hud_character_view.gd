@@ -7,8 +7,11 @@ var character: Character
 signal configure_behavior_selected
 signal readiness_updated(ready: bool)
 
+@onready var hud_status_display: HudStatusDisplay = %HudStatusDisplay
+
 func _ready():
 	%ConfigContainer.hide()
+	hud_status_display.clear()
 	
 func initialize(character_: Character) -> void:
 	character = character_
@@ -40,7 +43,9 @@ func _on_health_updated(health_update: HealthComponent.HealthUpdate):
 	%HealthLabel.text = "%d / %d" % [health_update.health, health_update.max_health]
 	
 func _on_statuses_changed(statuses: Array):
-	print("statuses changed!")
+	hud_status_display.clear()
+	for status_id in statuses:
+		hud_status_display.add_status(status_id)
 	
 func _on_configure_behavior_button_pressed():
 	configure_behavior_selected.emit()

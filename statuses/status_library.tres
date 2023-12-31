@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StatusLibrary" load_steps=4 format=3 uid="uid://dlkrl1i2r8pii"]
+
+[ext_resource type="Script" path="res://statuses/status_library.gd" id="1_yu84l"]
+[ext_resource type="Resource" uid="uid://oo1hidfkxg3s" path="res://statuses/swiftness.tres" id="2_dsu3d"]
+[ext_resource type="Resource" path="res://statuses/strength_surge.tres" id="3_nfefr"]
+
+[resource]
+script = ExtResource("1_yu84l")
+statuses = Array[Resource("res://statuses/status.gd")]([ExtResource("2_dsu3d"), ExtResource("3_nfefr")])
