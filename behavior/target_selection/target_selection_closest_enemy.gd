@@ -1,9 +1,9 @@
 extends Object
 
-static func select_target(entity: BehaviorEntity, action: Action, target_selection_def: TargetSelectionDef) -> Node2D:
-	return _nearest_node(entity.enemies(), entity.position, func(node: Node2D):
+static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Node2D:
+	return _nearest_node(side_component.enemies(), body.position, func(node: Node2D):
 		var distance = action.distance
-		return distance < 0 or node.position.distance_to(entity.position) < distance
+		return distance < 0 or node.position.distance_to(body.position) < distance
 	)
 
 static func _nearest_node(nodes: Array, location: Vector2, filter: Callable = func(node: Node2D): return true):

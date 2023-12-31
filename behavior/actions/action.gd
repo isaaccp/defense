@@ -16,15 +16,21 @@ class_name Action
 # Whether this action can hurt allies.
 @export var friendly_fire = false
 
-# Reference to entity running this action.
-var entity: BehaviorEntity
+var body: CharacterBody2D
+var action_sprites: Node2D
+var navigation_agent: NavigationAgent2D
+var side_component: SideComponent
 
-func set_entity(entity_: BehaviorEntity) -> void:
-	entity = entity_
+func initialize(body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
+				action_sprites_: Node2D, side_component_: SideComponent) -> void:
+	body = body_
+	navigation_agent = navigation_agent_
+	action_sprites = action_sprites_
+	side_component = side_component_
 	
 # Returns true if the preconditions needed to execute this action are met.
 func can_be_executed(target: Node2D) -> bool:
-	return distance < 0 or entity.position.distance_to(target.position) < distance
+	return distance < 0 or body.position.distance_to(target.position) < distance
 	
 # Runs the appropriate physics process for entity.
 func physics_process(target: Node2D, delta: float):

@@ -8,6 +8,7 @@
 vertices = PackedVector2Array(1175, 676, -22, 676, -22, -23, 1175, -23)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -33, 1185, -34, 1185, 686, -32, 686)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("characters", "enemies", "starting_positions")]
 script = ExtResource("1_wcymq")

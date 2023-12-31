@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsdk1y14j0cry"]
+
+[ext_resource type="Script" path="res://components/side_component.gd" id="1_u8hsu"]
+
+[node name="SideComponent" type="Node"]
+script = ExtResource("1_u8hsu")

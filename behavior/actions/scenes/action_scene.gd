@@ -2,21 +2,10 @@ extends Node2D
 
 class_name ActionScene
 
-signal entity_hit(entity: BehaviorEntity)
-
-func _ready():
-	pass
-	#add_child(Camera2D.new())
-	#look_at(position + Vector2.LEFT)
-	
-func get_entity(area: Area2D) -> BehaviorEntity:
-	var current = area.get_parent()
-	while is_instance_valid(current):
-		if current is BehaviorEntity:
-			return current
-	assert(false, "Should never happen")
-	return null
+signal hurtbox_hit(hurtbox: HurtboxComponent)
 
 func _on_area_2d_area_entered(area: Area2D):
-	var entity = get_entity(area)
-	entity_hit.emit(entity)
+	var hurtbox = area as HurtboxComponent
+	if not hurtbox:
+		assert(false, "Unexpected hit area was not hurtbox")
+	hurtbox_hit.emit(hurtbox)

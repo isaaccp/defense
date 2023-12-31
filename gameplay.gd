@@ -49,7 +49,7 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 	_update_behavior(character_idx, behavior)
 	
 func _update_behavior(character_idx: int, behavior: Behavior):
-	level.characters.get_child(character_idx).set_behavior(behavior)
+	level.characters.get_child(character_idx).behavior = behavior
 	
 func _on_readiness_updated(character_idx: int, ready: bool):
 	if ready:

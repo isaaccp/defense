@@ -10,30 +10,25 @@ func _init():
 
 func physics_process(target: Node2D, delta: float):
 	if not sword_attack:
-		var dir = (target.position - entity.position).normalized()
+		var dir = (target.position - body.position).normalized()
 		sword_attack = sword_attack_scene.instantiate()
 		sword_attack.look_at(sword_attack.position + dir)
 		sword_attack.position += dir * 35
 		# TODO: Likely make a method for this, but unclear what it may
 		# need to do.
-		entity.action_sprites.add_child(sword_attack)
-		sword_attack.entity_hit.connect(_on_entity_hit)
+		action_sprites.add_child(sword_attack)
+		sword_attack.hurtbox_hit.connect(_on_hurtbox_hit)
 		Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
 
 # TODO: Probably could be moved to base class.
-func _on_entity_hit(hit_entity: BehaviorEntity):
+func _on_hurtbox_hit(hurtbox: HurtboxComponent):
 	if friendly_fire:  # No checks needed.
-		_process_hit(hit_entity)
+		if hurtbox.can_handle_collision():
+			hurtbox.handle_collision(damage)
 	else:
-		if entity.is_enemy(hit_entity):
-			_process_hit(hit_entity)
-	
-func _process_hit(hit_entity: BehaviorEntity):
-	# TODO: Add damage to entity for stats.
-	print("%s was hit!" % hit_entity.name)
-	hit_entity.take_damage(damage)
-	if hit_entity.destroyed:
-		hit_entity.queue_free()
+		if side_component.is_enemy(hurtbox.side_component):
+			if hurtbox.can_handle_collision():
+				hurtbox.handle_collision(damage)
 
 func action_finished():
 	sword_attack.queue_free()
