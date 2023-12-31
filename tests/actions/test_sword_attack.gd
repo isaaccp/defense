@@ -1,7 +1,7 @@
 extends GutTest
 
 # Level has 1 enemy.
-const test_sword_attack_level_scene = preload("res://tests/actions/test_sword_attack_level.tscn")
+const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
 
 var level: Level
 var character: Node2D
@@ -27,7 +27,7 @@ func make_sword_behavior(move: bool = false) -> Behavior:
 	return behavior
 	
 func before_each():
-	level = test_sword_attack_level_scene.instantiate()
+	level = basic_test_level_scene.instantiate()
 	level.initialize([GameplayCharacter.make_gameplay_character(Enum.CharacterId.KNIGHT)])
 	add_child_autoqfree(level)
 	# Set up character.

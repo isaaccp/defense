@@ -1,5 +1,7 @@
 extends Action
 
+class_name SwordAttackAction
+
 const sword_attack_scene = preload("res://behavior/actions/scenes/sword_attack.tscn")
 
 var sword_attack: ActionScene

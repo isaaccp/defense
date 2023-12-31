@@ -2,6 +2,8 @@ extends Area2D
 
 class_name HitboxComponent
 
+const component = &"HitboxComponent"
+
 @export_group("Required")
 @export var action_scene: ActionScene
 # Damage on hit.
