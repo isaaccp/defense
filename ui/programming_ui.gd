@@ -11,11 +11,11 @@ signal saved(behavior: Behavior)
 
 func initialize(character_: Character):
 	assert(is_inside_tree(), "Needs to be called inside tree")
-	# TODO: Actually filter those depending on character, etc.
 	character = character_
+	var skill_manager = Component.get_skill_manager_component_or_die(character)
 	%Toolbox.initialize(
-		TargetSelectionManager.all_target_selections(),
-		ActionManager.all_actions(),
+		skill_manager.target_types(),
+		skill_manager.actions(),
 	)
 	if is_instance_valid(character):
 		%Title.text = "Configuring behavior for %s" % character.short_name()

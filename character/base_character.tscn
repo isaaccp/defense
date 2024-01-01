@@ -59,11 +59,10 @@ animation_player = NodePath("../Sprite2D/AnimationPlayer")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "status_component", "health_component") instance=ExtResource("7_01gwr")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "side_component", "attributes_component", "status_component", "health_component") instance=ExtResource("7_01gwr")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
-animation_player = NodePath("")
 sprite = NodePath("../Sprite2D")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
