@@ -1,6 +1,6 @@
 extends Resource
 
-class_name SkillUnlockState
+class_name SkillTreeState
 
 @export var actions: Array[ActionDef.Id]:
 	get:
@@ -30,7 +30,7 @@ func unlocked(skill: Skill) -> bool:
 			return skill.target_selection_def.id in target_selections
 	return false
 
-static func make_full() -> SkillUnlockState:
-	var skill_unlock_state = SkillUnlockState.new()
-	skill_unlock_state.full = true
-	return skill_unlock_state
+static func make_full() -> SkillTreeState:
+	var skill_tree_state = SkillTreeState.new()
+	skill_tree_state.full = true
+	return skill_tree_state

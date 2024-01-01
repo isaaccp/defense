@@ -36,7 +36,7 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 			character_selections[selection],
 			players[selection % players.size()].peer_id,
 			Behavior.new(),
-			level_provider.skill_unlock_state,
+			level_provider.skill_tree_state,
 		)
 		characters.append(gameplay_character)
 	_play_level.call_deferred()

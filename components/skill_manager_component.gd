@@ -14,17 +14,17 @@ const component = &"SkillManagerComponent"
 
 @export_group("Debug")
 
-var skill_unlock_state: SkillUnlockState:
+var skill_tree_state: SkillTreeState:
 	get:
 		if persistent_game_state_component:
-			return persistent_game_state_component.state.skill_unlock_state
-		return SkillUnlockState.make_full()
+			return persistent_game_state_component.state.skill_tree_state
+		return SkillTreeState.make_full()
 	set(value):
 		pass
 
 func target_types() -> Array:
-	return skill_unlock_state.target_selections
+	return skill_tree_state.target_selections
 
 func actions() -> Array:
-	return skill_unlock_state.actions
+	return skill_tree_state.actions
 

@@ -6,7 +6,7 @@ class_name LevelProvider
 @export var levels: Array[PackedScene]
 
 # Unlocked skills on start.
-@export var skill_unlock_state: SkillUnlockState
+@export var skill_tree_state: SkillTreeState
 
 var current_level = -1
 
