@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="1_rjeij"]
 [ext_resource type="Resource" uid="uid://dt5j8naupi576" path="res://levels/tutorial/tutorial_levels.tres" id="2_lxxxu"]
 [ext_resource type="Script" path="res://game_mode.gd" id="3_kbg0v"]
-[ext_resource type="Resource" uid="uid://b0yoqi26vefv2" path="res://levels/default_level_provider.tres" id="4_qmvax"]
+[ext_resource type="Resource" uid="uid://d1ix5kyitpnfk" path="res://levels/main/main_levels.tres" id="4_xkub8"]
 
 [sub_resource type="Resource" id="Resource_xuhfk"]
 script = ExtResource("3_kbg0v")
@@ -13,12 +13,12 @@ level_provider = ExtResource("2_lxxxu")
 [sub_resource type="Resource" id="Resource_xdj1d"]
 script = ExtResource("3_kbg0v")
 online = 0
-level_provider = ExtResource("4_qmvax")
+level_provider = ExtResource("4_xkub8")
 
 [sub_resource type="Resource" id="Resource_3yys3"]
 script = ExtResource("3_kbg0v")
 online = 1
-level_provider = ExtResource("4_qmvax")
+level_provider = ExtResource("4_xkub8")
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3

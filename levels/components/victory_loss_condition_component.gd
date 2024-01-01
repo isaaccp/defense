@@ -152,9 +152,9 @@ func get_text_loss_condition(loss_type: LossType) -> String:
 		LossType.ANY_CHARACTER_DIED:
 			return "Any character dies"
 		LossType.ALL_CHARACTERS_DIED:
-			return "All characters dies"
+			return "All characters die"
 		LossType.TOWER_DIED:
-			return "The tower dies"
+			return "Tower dies"
 		LossType.TIME:
 			return "Time (%0.1fs) runs out" % time
 	return "Unspecified"	
