@@ -28,6 +28,9 @@ func equals(other: Target) -> bool:
 			return node == other.node
 	return false
 	
+static func make_invalid() -> Target:
+	return Target.new()
+	
 static func make_node_target(node_: Node2D) -> Target:
 	var target = Target.new()
 	target.type = Type.NODE

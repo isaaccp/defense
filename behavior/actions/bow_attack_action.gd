@@ -5,7 +5,9 @@ const arrow_scene = preload("res://behavior/actions/scenes/arrow.tscn")
 var arrow: ActionScene
 
 func _init():
-	distance = 300
+	# TODO: Enable this when archers have a way to get away from enemies.
+	# min_distance = 100
+	max_distance = 300
 
 func post_initialize():
 	var dir = (target.node.position - body.position).normalized()

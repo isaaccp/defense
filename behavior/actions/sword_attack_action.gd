@@ -7,7 +7,7 @@ const sword_attack_scene = preload("res://behavior/actions/scenes/sword_attack.t
 var sword_attack: ActionScene
 
 func _init():
-	distance = 40
+	max_distance = 40
 
 func post_initialize():
 	var dir = (target.node.position - body.position).normalized()

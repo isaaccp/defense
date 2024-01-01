@@ -1,13 +1,18 @@
 extends Object
 
 static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Target:
+	var max_distance_squared = action.max_distance * action.max_distance
+	var min_distance_squared = action.min_distance * action.min_distance
 	var nearest_node = _nearest_node(side_component.enemies(), body.position, func(node: Node2D):
 		var health_component = Component.get_or_null(node, HealthComponent.component)
 		if health_component and health_component.is_dead:
 			return false
-		var distance = action.distance
-		return distance < 0 or node.position.distance_to(body.position) < distance
+		var distance_squared = node.position.distance_squared_to(body.position)
+		return min_distance_squared < distance_squared and distance_squared < max_distance_squared
 	)
+	# nearest_node may be null, but that's fine as it'll make the Target
+	# invalid. Alternatively we could check for null and return
+	# Target.make_invalid() instead.
 	return Target.make_node_target(nearest_node)
 
 static func _nearest_node(nodes: Array, location: Vector2, filter: Callable = func(node: Node2D): return true):

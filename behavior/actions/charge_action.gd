@@ -19,6 +19,9 @@ func physics_process(delta: float):
 		action_finished()
 		return
 	_start_target_position_refresh(target)
+	if navigation_agent.is_navigation_finished():
+		body.velocity = Vector2.ZERO
+		return
 	var next = navigation_agent.get_next_path_position()
 	body.velocity = body.position.direction_to(next) * attributes_component.speed
 	body.move_and_slide()

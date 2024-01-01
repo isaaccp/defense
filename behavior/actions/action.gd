@@ -15,7 +15,9 @@ class_name Action
 # are acceptable for a given action.
 @export var target_type_supported = Target.Type.NODE
 # How far can this action be taken.
-@export var distance = -1
+@export var max_distance = 10_000_000
+# How close can this action be taken.
+@export var min_distance = -1
 # Whether this action is considered finished.
 @export var finished = false
 
