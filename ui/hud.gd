@@ -80,7 +80,7 @@ func _on_configure_behavior_selected(character: Character):
 	programming_ui.initialize(character)
 	programming_ui.saved.connect(_save_and_close.bind(character.idx))
 	programming_ui.canceled.connect(_close)
-	show_character_config(false)
+	show_character_button(false)
 
 func _save_and_close(behavior: Behavior, character_idx: int):
 	behavior_modified.emit(character_idx, behavior)
@@ -90,14 +90,14 @@ func _close():
 	for child in %ProgrammingUIParent.get_children():
 			child.queue_free()
 	%ProgrammingUIParent.hide()
-	show_character_config(true)
+	show_character_button(true)
 
 func _on_readiness_updated(ready: bool, character_idx: int):
 	readiness_updated.emit(character_idx, ready)
 
-func show_character_config(show: bool):
+func show_character_button(show: bool, text: String = ""):
 	for view in %CharacterViews.get_children():
-		view.show_config(show)
+		view.show_button(show, text)
 
 func set_peer(peer_id: int) -> void:
 	peer.text = "Peer: %d" % peer_id

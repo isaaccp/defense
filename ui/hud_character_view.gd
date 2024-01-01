@@ -29,8 +29,10 @@ func is_local() -> bool:
 	var multiplayer_id = multiplayer.get_unique_id()
 	return multiplayer_id == character.peer_id
 	
-func show_config(show: bool) -> void:
+func show_button(show: bool, text: String) -> void:
 	if show:
+		if not text.is_empty():
+			%ConfigureBehaviorButton.text = text
 		%ConfigContainer.show()
 		if is_local():
 			%ConfigureBehaviorButton.show()

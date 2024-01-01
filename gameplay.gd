@@ -55,7 +55,7 @@ func _play_level(advance: bool = true):
 	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
-	ui_layer.hud.show_character_config(true)
+	ui_layer.hud.show_character_button(true, "Configure Behavior")
 	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
 	
@@ -108,7 +108,7 @@ func _on_readiness_updated(character_idx: int, ready: bool):
 		characters_ready.erase(character_idx)
 		
 func _start_level():
-	ui_layer.hud.show_character_config(false)
+	ui_layer.hud.show_character_button(false)
 	ui_layer.hud.show_victory_loss_text(false)
 	ui_layer.hud.show_main_message("Fight!", 1.0)
 	await get_tree().create_timer(1.0).timeout

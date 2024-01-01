@@ -6,17 +6,12 @@
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("ui_layer", "gameplay")]
 script = ExtResource("1_u00ew")
-ui_layer = NodePath("")
-gameplay = NodePath("")
+ui_layer = NodePath("UILayer")
+gameplay = NodePath("Gameplay")
 
-[node name="UILayer" parent="." node_paths=PackedStringArray("title_screen", "match_screen", "ready_screen", "overlay_message", "screens", "initial_screen") instance=ExtResource("2_81ey6")]
-title_screen = NodePath("")
-match_screen = NodePath("")
-ready_screen = NodePath("")
-overlay_message = NodePath("")
-screens = NodePath("")
-initial_screen = NodePath("")
+[node name="UILayer" parent="." instance=ExtResource("2_81ey6")]
 
-[node name="Gameplay" parent="." node_paths=PackedStringArray("ui_layer", "level_parent") instance=ExtResource("3_7l8ug")]
-ui_layer = NodePath("")
-level_parent = NodePath("")
+[node name="Gameplay" parent="." instance=ExtResource("3_7l8ug")]
+
+[connection signal="ready_screen_ready_pressed" from="UILayer" to="." method="_on_ready_screen_ready_pressed"]
+[connection signal="title_screen_game_mode_selected" from="UILayer" to="." method="_on_title_screen_game_mode_selected"]
