@@ -32,8 +32,7 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 		var gameplay_character = GameplayCharacter.make(
 			character_selections[selection],
 			players[selection % players.size()].peer_id,
-			Behavior.new(),
-			# preload("res://behavior/resources/charge_plus_sword_attack.tres"),
+			level_provider.behavior,
 			level_provider.skill_tree_state,
 		)
 		characters.append(gameplay_character)

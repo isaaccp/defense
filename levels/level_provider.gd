@@ -8,6 +8,9 @@ class_name LevelProvider
 # Unlocked skills on start.
 @export var skill_tree_state: SkillTreeState
 
+# Initial behavior for characters.
+@export var behavior: Behavior
+
 var current_level = -1
 
 func next_level() -> PackedScene:
