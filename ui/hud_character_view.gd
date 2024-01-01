@@ -57,7 +57,7 @@ func _on_behavior_updated(action_id: ActionDef.Id, target: Target):
 	# target in the level.
 	var text = "Idle"
 	if action_id != ActionDef.Id.UNSPECIFIED:
-		text = "%s" % ActionDef.name(action_id)
+		text = "%s" % ActionDef.action_name(action_id)
 	%ActionLabel.text = text
 
 func _on_config_button_pressed():

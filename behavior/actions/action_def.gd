@@ -13,7 +13,7 @@ enum Id {
 
 @export var id: Id
 
-static func name(action_id: Id) -> String:
+static func action_name(action_id: Id) -> String:
 	return Id.keys()[action_id].capitalize()
 
 static func make(action_id: Id) -> ActionDef:
@@ -21,5 +21,8 @@ static func make(action_id: Id) -> ActionDef:
 	action.id = action_id
 	return action
 
+func name() -> String:
+	return action_name(id)
+
 func _to_string() -> String:
-	return name(id)
+	return action_name(id)

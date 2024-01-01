@@ -18,7 +18,7 @@ func initialize(target_types: Array[TargetSelectionDef.Id], action_types: Array[
 	targets.set_selectable(0, false)
 	for target_type in target_types:
 		var target = tree.create_item(targets)
-		target.set_text(0, TargetSelectionDef.name(target_type))
+		target.set_text(0, TargetSelectionDef.target_selection_name(target_type))
 		target.set_metadata(0, target_metadata(0, target_type))
 
 	var triggers = tree.create_item(_root)
@@ -34,7 +34,7 @@ func initialize(target_types: Array[TargetSelectionDef.Id], action_types: Array[
 	actions.set_selectable(0, false)
 	for action_type in action_types:
 		var action = tree.create_item(actions)
-		action.set_text(0, ActionDef.name(action_type))
+		action.set_text(0, ActionDef.action_name(action_type))
 		action.set_metadata(0, action_metadata(2, action_type))
 
 func target_metadata(column: int, id: TargetSelectionDef.Id) -> Dictionary:

@@ -15,3 +15,12 @@ enum SkillType {
 @export var parent: Skill
 # Not saved but set when loading tree.
 var tree_type: SkillTree.TreeType
+
+func name() -> String:
+	match skill_type:
+		SkillType.ACTION:
+			return action_def.name()
+		SkillType.TARGET:
+			return target_selection_def.name()
+	assert(false, "Unsupported skill type")
+	return "<bug>"
