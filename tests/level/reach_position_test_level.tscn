@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://d22wgbtwbkgqy"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ohbh0"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="3_obbgj"]
+
+[node name="Level" instance=ExtResource("1_ohbh0")]
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(199, 145)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(401, 274)
+
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_obbgj")]
+position = Vector2(299, 199)
+
+[node name="AttributesComponent" parent="YSorted/Towers/Column" index="5"]
+health = 20
+
+[node name="VictoryLossConditionComponent" parent="." index="4" node_paths=PackedStringArray("position")]
+victory = Array[int]([])
+position = NodePath("../YSorted/Towers/Column")
+
+[editable path="YSorted/Towers/Column"]

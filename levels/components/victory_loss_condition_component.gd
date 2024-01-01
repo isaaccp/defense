@@ -41,6 +41,8 @@ signal level_failed
 @export var dead_characters = 0
 @export var done = false
 
+const position_check_interval = 0.25
+
 func _ready():
 	if VictoryType.KILL_ALL_ENEMIES in victory:
 		assert(enemies)
@@ -62,8 +64,20 @@ func _ready():
 		health_component.died.connect(_on_tower_died)
 		
 func _start_position_check():
-	pass
-	# TODO: Implement.
+	var distance_squared = distance * distance
+	while not done:
+		await get_tree().create_timer(position_check_interval, false).timeout
+		var count = 0
+		for character in characters.get_children():
+			if character.global_position.distance_squared_to(position.global_position) < distance_squared:
+				if VictoryType.ONE_REACH_POSITION in victory:
+					_emit(true)
+					return
+				count += 1
+		if VictoryType.ALL_REACH_POSITION in victory:
+			if count == characters.get_child_count():
+				_emit(true)
+				return
 	
 func _on_removing_enemy(node: Node):
 	# TODO: Will need changes when we have spawners.

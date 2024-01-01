@@ -28,7 +28,7 @@ func _ready():
 func freeze(frozen: bool):
 	_freeze_tree(characters, frozen)
 	_freeze_tree(enemies, frozen)
-		
+	
 func _freeze_node(node: Node, frozen: bool):
 	node.set_process(!frozen)
 	node.set_physics_process(!frozen)
