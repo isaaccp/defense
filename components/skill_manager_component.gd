@@ -23,8 +23,8 @@ var skill_tree_state: SkillTreeState:
 		pass
 
 func target_types() -> Array:
-	return skill_tree_state.target_selections
+	return skill_tree_state.acquired_target_selections
 
 func actions() -> Array:
-	return skill_tree_state.actions
+	return skill_tree_state.acquired_actions
 

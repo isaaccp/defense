@@ -2,26 +2,47 @@ extends Resource
 
 class_name SkillTreeState
 
-@export var actions: Array[ActionDef.Id]:
+@export var acquired_actions: Array[ActionDef.Id]:
 	get:
-		if full:
+		if full_acquired:
 			return ActionManager.all_actions()
-		return actions
+		return acquired_actions
 		
-@export var target_selections: Array[TargetSelectionDef.Id]:
+@export var acquired_target_selections: Array[TargetSelectionDef.Id]:
 	get:
-		if full:
+		if full_acquired:
 			return TargetSelectionManager.all_target_selections()
-		return target_selections
+		return acquired_target_selections
+
+@export var unlocked_actions: Array[ActionDef.Id]:
+	get:
+		if full_unlocked:
+			return ActionManager.all_actions()
+		return unlocked_actions
+		
+@export var unlocked_target_selections: Array[TargetSelectionDef.Id]:
+	get:
+		if full_unlocked:
+			return TargetSelectionManager.all_target_selections()
+		return unlocked_target_selections
 		
 # If set, all actions/targets are available.
-@export var full = false
+@export var full_acquired = false
+@export var full_unlocked = false
 
 # TODO: Make dictionaries so it's faster to check unlocked.
 
 func unlocked(skill: Skill) -> bool:
-	if full:
+	if full_unlocked:
 		return true
+	return _skill_in(skill, unlocked_actions, unlocked_target_selections)
+
+func acquired(skill: Skill) -> bool:
+	if full_acquired:
+		return true
+	return _skill_in(skill, acquired_actions, acquired_target_selections)
+		
+func _skill_in(skill: Skill, actions: Array[ActionDef.Id], target_selections: Array[TargetSelectionDef.Id]):
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
