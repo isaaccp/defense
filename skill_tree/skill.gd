@@ -24,3 +24,6 @@ func name() -> String:
 			return target_selection_def.name()
 	assert(false, "Unsupported skill type")
 	return "<bug>"
+
+func type_name() -> String:
+	return SkillType.keys()[skill_type]

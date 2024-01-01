@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3tgkiips2p08"]
+[gd_scene load_steps=4 format=3 uid="uid://b6b6ijc8m8kca"]
 
-[ext_resource type="Script" path="res://ui/skill_tree.gd" id="1_slnfp"]
+[ext_resource type="Script" path="res://ui/skill_tree_ui.gd" id="1_44fad"]
+
+[sub_resource type="Theme" id="Theme_un8q3"]
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lxjg"]
+font_size = 14
 
 [node name="SkillTree" type="Control"]
 layout_mode = 3
@@ -9,4 +18,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_slnfp")
+theme = SubResource("Theme_un8q3")
+script = ExtResource("1_44fad")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "{Character} Skill Tree"
+
+[node name="Status" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "General XP: 10
+Tree XP: 20"
+label_settings = SubResource("LabelSettings_6lxjg")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Trees" type="TabContainer" parent="MarginContainer/VBoxContainer/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Info" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Info about selected node..."
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Buy"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="OK" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "OK"
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"
