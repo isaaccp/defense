@@ -86,6 +86,7 @@ func _on_level_end(success: bool):
 			_credits()
 			return
 		# TODO: Calculate XP, etc, show stats.
+		_grant_xp(level)
 		ui_layer.show_screen(ui_layer.upgrade_screen)
 		ui_layer.hud.start_character_setup(
 			"Acquire Skills",
@@ -94,6 +95,12 @@ func _on_level_end(success: bool):
 
 func _on_upgrade_done():
 	_play_level(true)
+
+func _grant_xp(level: Level):
+	# Level will be freed up on next frame, so this can't do
+	# any await, etc.
+	for character in characters:
+		character.grant_xp(100)
 
 func _credits():
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
