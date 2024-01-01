@@ -13,3 +13,5 @@ enum SkillType {
 @export var action_def: ActionDef
 @export var target_selection_def: TargetSelectionDef
 @export var parent: Skill
+# Not saved but set when loading tree.
+var tree_type: SkillTree.TreeType
