@@ -46,6 +46,7 @@ signal level_failed
 @export var done = false
 
 const position_check_interval = 0.25
+var timer: SceneTreeTimer
 
 func _ready():
 	if VictoryType.KILL_ALL_ENEMIES in victory:
@@ -69,7 +70,8 @@ func _ready():
 	if VictoryType.TIME in victory or LossType.TIME in loss:
 		assert(not is_zero_approx(time))
 		var victory = VictoryType.TIME in victory
-		await get_tree().create_timer(time).timeout.connect(
+		timer = get_tree().create_timer(time, false)
+		await timer.timeout.connect(
 			func(): _emit(victory)
 		)
 		

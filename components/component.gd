@@ -2,6 +2,7 @@ extends RefCounted
 
 class_name Component
 
+# Body components.
 static func get_or_die(node: Node, component_name: String) -> Node:
 	var component = get_or_null(node, component_name)
 	assert(component, "Couldn't find wanted component")
@@ -24,6 +25,13 @@ static func get_behavior_component_or_die(node: Node) -> BehaviorComponent:
 
 static func get_status_component_or_die(node: Node) -> StatusComponent:
 	var component = get_or_die(node, StatusComponent.component) as StatusComponent
+	if not component:
+		assert(false)
+	return component
+
+# Level components.
+static func get_victory_loss_condition_component_or_die(node: Node) -> VictoryLossConditionComponent:
+	var component = get_or_die(node, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
 	if not component:
 		assert(false)
 	return component

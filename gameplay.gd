@@ -42,11 +42,11 @@ func _play_level(advance: bool = true):
 	level = level_scene.instantiate() as Level
 	level.initialize(characters)
 	_set_character_behaviors()
-	level.level_failed.connect(_on_level_failed)
-	level.level_finished.connect(_on_level_finished)
+	var victory = Component.get_victory_loss_condition_component_or_die(level)
+	victory.level_failed.connect(_on_level_failed)
+	victory.level_finished.connect(_on_level_finished)
 	level_parent.add_child(level, true)
 	level.freeze(true)
-	ui_layer.hud.show()
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
 	ui_layer.hud.show_character_config(true)
@@ -76,7 +76,6 @@ func _on_level_end(success: bool):
 	ui_layer.hud.show_main_message(message, 5.0)
 	await get_tree().create_timer(5.0).timeout
 	level.queue_free()
-	ui_layer.hud.hide()
 	_play_level(success)
 
 func _on_behavior_modified(character_idx: int, behavior: Behavior):

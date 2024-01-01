@@ -8,13 +8,15 @@ const move_sword_behavior = preload("res://behavior/resources/basic_move_plus_sw
 class LevelTest extends GutTest:
 	var level: Level
 	var scene: PackedScene
-
+	var victory: VictoryLossConditionComponent
+	
 	func before_each():
 		level = scene.instantiate()
 		level.initialize([
 			GameplayCharacter.make(Enum.CharacterId.KNIGHT),
 			GameplayCharacter.make(Enum.CharacterId.KNIGHT),
 		])
+		victory = Component.get_or_die(level, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
 
 	func set_character_behaviors(behavior0: Behavior, behavior1: Behavior):
 		var character0 = level.characters.get_child(0)
@@ -37,15 +39,15 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 		tower_health = Component.get_health_component_or_die(tower)
 		
 	func test_tower_destruction_fails_level():
-		await wait_for_signal(level.level_failed, 3, "Waiting for level to fail")
-		assert_signal_emitted(level, "level_failed")
+		await wait_for_signal(victory.level_failed, 3, "Waiting for level to fail")
+		assert_signal_emitted(victory, "level_failed")
 
 	func test_enemy_destruction_finishes_level():
 		# Drop enemies on top of characters so they are easily dispatched.
 		level.enemies.get_child(0).position = level.characters.get_child(0).position + Vector2.RIGHT * 50
 		level.enemies.get_child(1).position = level.characters.get_child(1).position + Vector2.RIGHT * 50
-		await wait_for_signal(level.level_finished, 5, "Waiting for level to finish")
-		assert_signal_emitted(level, "level_finished")
+		await wait_for_signal(victory.level_finished, 5, "Waiting for level to finish")
+		assert_signal_emitted(victory, "level_finished")
 
 class TestPositionReachedConditions extends LevelTest:
 	func make_move_behavior() -> Behavior:
@@ -63,7 +65,6 @@ class TestPositionReachedConditions extends LevelTest:
 		super()
 	
 	func set_victory_type(victory_type: VictoryLossConditionComponent.VictoryType):
-		var victory = Component.get_or_die(level, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
 		var victory_types: Array[VictoryLossConditionComponent.VictoryType] = [victory_type]
 		victory.victory = victory_types
 		
@@ -71,31 +72,28 @@ class TestPositionReachedConditions extends LevelTest:
 		set_victory_type(VictoryLossConditionComponent.VictoryType.ONE_REACH_POSITION)
 		add_child_autoqfree(level)
 		set_character_behaviors(Behavior.new(), make_move_behavior())
-		await wait_for_signal(level.level_finished, 3, "Waiting for level to finish")
-		assert_signal_emitted(level, "level_finished")
+		await wait_for_signal(victory.level_finished, 3, "Waiting for level to finish")
+		assert_signal_emitted(victory, "level_finished")
 
 	func test_all_reach_position_fail():
 		set_victory_type(VictoryLossConditionComponent.VictoryType.ALL_REACH_POSITION)
 		add_child_autoqfree(level)
 		set_character_behaviors(Behavior.new(), make_move_behavior())
-		await wait_for_signal(level.level_finished, 3, "Waiting for level to NOT finish")
-		assert_signal_not_emitted(level, "level_finished")
+		await wait_for_signal(victory.level_finished, 3, "Waiting for level to NOT finish")
+		assert_signal_not_emitted(victory, "level_finished")
 
 	func test_all_reach_position_victory():
 		set_victory_type(VictoryLossConditionComponent.VictoryType.ALL_REACH_POSITION)
 		add_child_autoqfree(level)
 		set_character_behaviors(make_move_behavior(), make_move_behavior())
-		await wait_for_signal(level.level_finished, 3, "Waiting for level to NOT finish")
-		assert_signal_emitted(level, "level_finished")
+		await wait_for_signal(victory.level_finished, 3, "Waiting for level to NOT finish")
+		assert_signal_emitted(victory, "level_finished")
 
 class TestTimeConditions extends LevelTest:
-		
-	var victory: VictoryLossConditionComponent
 	
 	func before_each():
 		scene = basic_tower_test_level_scene
 		super()
-		victory = Component.get_or_die(level, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
 
 	func test_time_victory():
 		var victory_types: Array[VictoryLossConditionComponent.VictoryType] = [VictoryLossConditionComponent.VictoryType.TIME]
@@ -103,8 +101,8 @@ class TestTimeConditions extends LevelTest:
 		victory.time = 1.0
 		add_child_autoqfree(level)
 		set_character_behaviors(Behavior.new(), Behavior.new())		
-		await wait_for_signal(level.level_finished, 2, "Waiting for victory")
-		assert_signal_emitted(level, "level_finished")
+		await wait_for_signal(victory.level_finished, 2, "Waiting for victory")
+		assert_signal_emitted(victory, "level_finished")
 		
 	func test_time_loss():
 		var loss_types: Array[VictoryLossConditionComponent.LossType] = [VictoryLossConditionComponent.LossType.TIME]
@@ -112,5 +110,5 @@ class TestTimeConditions extends LevelTest:
 		victory.time = 1.0
 		add_child_autoqfree(level)
 		set_character_behaviors(Behavior.new(), Behavior.new())
-		await wait_for_signal(level.level_failed, 2, "Waiting for loss")
-		assert_signal_emitted(level, "level_failed")
+		await wait_for_signal(victory.level_failed, 2, "Waiting for loss")
+		assert_signal_emitted(victory, "level_failed")

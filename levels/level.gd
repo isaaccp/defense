@@ -7,11 +7,6 @@ class_name Level
 @export var towers: Node2D
 @export var starting_positions: Node
 
-# Resurface those as it seems cleaner than making gameplay care about
-# level internals.
-signal level_finished
-signal level_failed
-
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
 		var character = CharacterManager.make_character(gameplay_characters[i].character_id)
@@ -19,11 +14,6 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 		character.peer_id = gameplay_characters[i].peer_id
 		character.position = starting_positions.get_child(i).position
 		characters.add_child(character)
-		
-func _ready():
-	var victory_loss_condition = Component.get_or_die(self, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
-	victory_loss_condition.level_failed.connect(func(): level_failed.emit())
-	victory_loss_condition.level_finished.connect(func(): level_finished.emit())
 
 func freeze(frozen: bool):
 	_freeze_tree(characters, frozen)
