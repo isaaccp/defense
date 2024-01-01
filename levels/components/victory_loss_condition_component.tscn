@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://p5kkbbs2wbjn"]
+
+[ext_resource type="Script" path="res://levels/components/victory_loss_condition_component.gd" id="1_dob00"]
+
+[node name="VictoryLossConditionComponent" type="Node"]
+script = ExtResource("1_dob00")

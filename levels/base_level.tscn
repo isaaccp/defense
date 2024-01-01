@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl8b780p2i84w"]
+[gd_scene load_steps=5 format=3 uid="uid://dl8b780p2i84w"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_7c17s"]
 [ext_resource type="TileSet" uid="uid://cpd8yv3x2ulyq" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/tiles.tres" id="2_i2kvy"]
+[ext_resource type="PackedScene" uid="uid://p5kkbbs2wbjn" path="res://levels/components/victory_loss_condition_component.tscn" id="3_4hhq1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ga831"]
 vertices = PackedVector2Array(1175, 676, -22, 676, -22, -23, 1175, -23)
@@ -41,5 +42,13 @@ y_sort_enabled = true
 [node name="Towers" type="Node2D" parent="YSorted"]
 y_sort_enabled = true
 
+[node name="Decoration" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ga831")
+
+[node name="VictoryLossConditionComponent" parent="." node_paths=PackedStringArray("characters", "towers", "enemies") instance=ExtResource("3_4hhq1")]
+characters = NodePath("../YSorted/Characters")
+towers = NodePath("../YSorted/Towers")
+enemies = NodePath("../YSorted/Enemies")
