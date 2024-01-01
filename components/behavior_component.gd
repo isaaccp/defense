@@ -47,7 +47,7 @@ func _physics_process(delta: float):
 		return
 	
 	elapsed_time += delta
-		
+	
 	assert(behavior, "Missing behavior")
 		
 	# For change detection.

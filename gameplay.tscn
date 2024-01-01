@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://gameplay.gd" id="1_2toda"]
 [ext_resource type="PackedScene" uid="uid://5ity5n7jy3b8" path="res://ui/gameplay_ui_layer.tscn" id="1_3xnco"]
-[ext_resource type="Resource" uid="uid://ci4u37qbsl6w1" path="res://levels/default_level_provider.tres" id="2_beouq"]
+[ext_resource type="Resource" uid="uid://dt5j8naupi576" path="res://levels/tutorial/tutorial_levels.tres" id="2_bu0tv"]
 
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("ui_layer", "level_parent")]
 script = ExtResource("1_2toda")
-level_provider = ExtResource("2_beouq")
+level_provider = ExtResource("2_bu0tv")
 ui_layer = NodePath("GameplayUILayer")
 level_parent = NodePath("LevelParent")
 

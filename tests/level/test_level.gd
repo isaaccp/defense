@@ -9,12 +9,11 @@ class LevelTest extends GutTest:
 	var level: Level
 	var scene: PackedScene
 
-	
 	func before_each():
 		level = scene.instantiate()
 		level.initialize([
-			GameplayCharacter.make_gameplay_character(Enum.CharacterId.KNIGHT),
-			GameplayCharacter.make_gameplay_character(Enum.CharacterId.KNIGHT),
+			GameplayCharacter.make(Enum.CharacterId.KNIGHT),
+			GameplayCharacter.make(Enum.CharacterId.KNIGHT),
 		])
 
 	func set_character_behaviors(behavior0: Behavior, behavior1: Behavior):
@@ -88,3 +87,30 @@ class TestPositionReachedConditions extends LevelTest:
 		set_character_behaviors(make_move_behavior(), make_move_behavior())
 		await wait_for_signal(level.level_finished, 3, "Waiting for level to NOT finish")
 		assert_signal_emitted(level, "level_finished")
+
+class TestTimeConditions extends LevelTest:
+		
+	var victory: VictoryLossConditionComponent
+	
+	func before_each():
+		scene = basic_tower_test_level_scene
+		super()
+		victory = Component.get_or_die(level, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
+
+	func test_time_victory():
+		var victory_types: Array[VictoryLossConditionComponent.VictoryType] = [VictoryLossConditionComponent.VictoryType.TIME]
+		victory.victory = victory_types
+		victory.time = 1.0
+		add_child_autoqfree(level)
+		set_character_behaviors(Behavior.new(), Behavior.new())		
+		await wait_for_signal(level.level_finished, 2, "Waiting for victory")
+		assert_signal_emitted(level, "level_finished")
+		
+	func test_time_loss():
+		var loss_types: Array[VictoryLossConditionComponent.LossType] = [VictoryLossConditionComponent.LossType.TIME]
+		victory.loss = loss_types
+		victory.time = 1.0
+		add_child_autoqfree(level)
+		set_character_behaviors(Behavior.new(), Behavior.new())
+		await wait_for_signal(level.level_failed, 2, "Waiting for loss")
+		assert_signal_emitted(level, "level_failed")

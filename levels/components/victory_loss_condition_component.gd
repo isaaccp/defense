@@ -9,6 +9,7 @@ enum VictoryType {
 	KILL_ALL_ENEMIES,
 	ONE_REACH_POSITION,
 	ALL_REACH_POSITION,
+	TIME,
 }
 
 enum LossType {
@@ -16,6 +17,7 @@ enum LossType {
 	ANY_CHARACTER_DIED,
 	ALL_CHARACTERS_DIED,
 	TOWER_DIED,
+	TIME,
 }
 
 signal level_finished
@@ -36,6 +38,8 @@ signal level_failed
 @export var position: Node2D
 # Distance from position for considering it reached.
 @export var distance = 30
+# Required if either timed victory or loss.
+@export var time: float
 
 @export_group("Debug")
 @export var dead_characters = 0
@@ -62,6 +66,12 @@ func _ready():
 		var tower = towers.get_child(0)
 		var health_component = Component.get_health_component_or_die(tower)
 		health_component.died.connect(_on_tower_died)
+	if VictoryType.TIME in victory or LossType.TIME in loss:
+		assert(not is_zero_approx(time))
+		var victory = VictoryType.TIME in victory
+		await get_tree().create_timer(time).timeout.connect(
+			func(): _emit(victory)
+		)
 		
 func _start_position_check():
 	var distance_squared = distance * distance

@@ -28,7 +28,7 @@ func make_sword_behavior(move: bool = false) -> Behavior:
 	
 func before_each():
 	level = basic_test_level_scene.instantiate()
-	level.initialize([GameplayCharacter.make_gameplay_character(Enum.CharacterId.KNIGHT)])
+	level.initialize([GameplayCharacter.make(Enum.CharacterId.KNIGHT)])
 	add_child_autoqfree(level)
 	# Set up character.
 	character = level.characters.get_child(0)

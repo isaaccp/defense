@@ -25,9 +25,10 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 	ui_layer.hide_screen()
 	var players = OnlineMatch.get_sorted_players()
 	for selection in range(character_selections.size()):
-		var gameplay_character = GameplayCharacter.new()
-		gameplay_character.character_id = character_selections[selection]
-		gameplay_character.peer_id = players[selection % players.size()].peer_id
+		var gameplay_character = GameplayCharacter.make(
+			character_selections[selection],
+			players[selection % players.size()].peer_id,
+		)
 		characters.append(gameplay_character)
 	_play_level.call_deferred()
 
@@ -40,6 +41,7 @@ func _play_level(advance: bool = true):
 			return
 	level = level_scene.instantiate() as Level
 	level.initialize(characters)
+	_set_character_behaviors()
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
 	level_parent.add_child(level, true)
@@ -51,6 +53,12 @@ func _play_level(advance: bool = true):
 	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
 
+func _set_character_behaviors():
+	for i in level.characters.get_child_count():
+		var character = level.characters.get_child(i)
+		var behavior = Component.get_behavior_component_or_die(character)
+		behavior.behavior = characters[i].behavior
+		
 func _on_level_failed():
 	_on_level_end(false)
 	
