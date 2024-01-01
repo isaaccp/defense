@@ -4,7 +4,7 @@ class_name HudCharacterView
 
 var character: Character
 
-signal configure_behavior_selected
+signal config_button_pressed
 signal readiness_updated(ready: bool)
 
 @onready var hud_status_display: HudStatusDisplay = %HudStatusDisplay
@@ -32,10 +32,10 @@ func is_local() -> bool:
 func show_button(show: bool, text: String) -> void:
 	if show:
 		if not text.is_empty():
-			%ConfigureBehaviorButton.text = text
+			%ConfigButton.text = text
 		%ConfigContainer.show()
 		if is_local():
-			%ConfigureBehaviorButton.show()
+			%ConfigButton.show()
 		else:
 			%ReadyButton.disabled = true
 	else:
@@ -59,8 +59,8 @@ func _on_behavior_updated(action_id: ActionDef.Id, target: Target):
 		text = "%s" % ActionDef.name(action_id)
 	%ActionLabel.text = text
 
-func _on_configure_behavior_button_pressed():
-	configure_behavior_selected.emit()
+func _on_config_button_pressed():
+	config_button_pressed.emit()
 
 func _on_ready_button_toggled(toggled_on: bool):
 	_ready_button_toggled(toggled_on)

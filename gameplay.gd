@@ -55,8 +55,9 @@ func _play_level(advance: bool = true):
 	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
-	ui_layer.hud.show_character_button(true, "Configure Behavior")
+	ui_layer.hud.start_behavior_setup()
 	ui_layer.hud.show_main_message("Prepare", 2.0)
+	ui_layer.hud.all_ready.connect(_on_all_ready, CONNECT_ONE_SHOT)
 	# Everything is set up, wait until all players are ready.
 	
 func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
@@ -97,15 +98,8 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 func _update_behavior(character_idx: int, behavior: Behavior):
 	characters[character_idx].behavior = behavior
 	
-func _on_readiness_updated(character_idx: int, ready: bool):
-	if ready:
-		characters_ready[character_idx] = true
-		if characters_ready.size() == characters.size():
-			# Clear for next time.
-			characters_ready.clear()
-			_start_level()
-	else:
-		characters_ready.erase(character_idx)
+func _on_all_ready():
+	_start_level()
 		
 func _start_level():
 	ui_layer.hud.show_character_button(false)

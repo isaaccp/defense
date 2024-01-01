@@ -8,6 +8,9 @@ class_name Hud
 @export var main_message: Label
 @export var bottom_message: Label
 
+var characters: Array[Character]
+var characters_ready: Dictionary
+
 enum MessageType {
 	MAIN,
 	BOTTOM,
@@ -32,22 +35,24 @@ const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
 const hud_tower_view_scene = preload("res://ui/hud_tower_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
-signal readiness_updated(character_idx: int, ready: bool)
+signal all_ready
 signal behavior_modified(character_idx: int, behavior: Behavior)
 
 func _ready():
 	for label in message_label.values():
 		label.hide()
 
-func set_characters(characters: Node) -> void:
+func set_characters(character_node: Node) -> void:
+	characters.clear()
+	for character in character_node.get_children():
+		characters.append(character)
+
 	for view in %CharacterViews.get_children():
 		view.queue_free()
-	for i in characters.get_child_count():
-		var character = characters.get_child(i)
+		
+	for i in characters.size():
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
-		view.initialize(character)
-		view.configure_behavior_selected.connect(_on_configure_behavior_selected.bind(character))
-		view.readiness_updated.connect(_on_readiness_updated.bind(i))
+		view.initialize(characters[i])
 		%CharacterViews.add_child(view)
 
 func set_towers(towers: Node) -> void:
@@ -70,15 +75,37 @@ func show_victory_loss_text(visible: bool = true):
 	if visible:
 		show_victory_loss(true)
 	%VictoryLoss.show_text(visible)
+
+func start_behavior_setup():
+	start_character_setup("Configure Behavior", _on_configure_behavior_pressed)
 	
-func _on_configure_behavior_selected(character: Character):
+func start_character_setup(text: String, callback: Callable):
+	show_character_button(true, text)
+	characters_ready.clear()
+	for i in %CharacterViews.get_child_count():
+		var view = %CharacterViews.get_child(i)
+		view.config_button_pressed.connect(callback.bind(i))
+		view.readiness_updated.connect(_on_readiness_updated.bind(i))
+	
+func _on_readiness_updated(ready: bool, character_idx: int):
+	if ready:
+		characters_ready[character_idx] = true
+		if characters_ready.size() == characters.size():
+			# Clear for next time.
+			characters_ready.clear()
+			all_ready.emit()
+	else:
+		characters_ready.erase(character_idx)
+		
+func _on_configure_behavior_pressed(character_idx: int):
+	var character = characters[character_idx]
 	%ProgrammingUIParent.show()
 	for child in %ProgrammingUIParent.get_children():
 		child.queue_free()
 	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
 	%ProgrammingUIParent.add_child(programming_ui)
 	programming_ui.initialize(character)
-	programming_ui.saved.connect(_save_and_close.bind(character.idx))
+	programming_ui.saved.connect(_save_and_close.bind(character_idx))
 	programming_ui.canceled.connect(_close)
 	show_character_button(false)
 
@@ -91,9 +118,6 @@ func _close():
 			child.queue_free()
 	%ProgrammingUIParent.hide()
 	show_character_button(true)
-
-func _on_readiness_updated(ready: bool, character_idx: int):
-	readiness_updated.emit(character_idx, ready)
 
 func show_character_button(show: bool, text: String = ""):
 	for view in %CharacterViews.get_children():
