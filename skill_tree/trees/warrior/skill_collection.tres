@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="SkillCollection" load_steps=4 format=3 uid="uid://cqwcqo8at37ue"]
-
-[ext_resource type="Script" path="res://skill_tree/skill_collection.gd" id="1_0kkve"]
-[ext_resource type="Resource" uid="uid://sexr888fkv0c" path="res://skill_tree/skills/warrior/charge_action.tres" id="2_j8flw"]
-[ext_resource type="Resource" uid="uid://c2g37ki4ajw5e" path="res://skill_tree/skills/warrior/sword_attack_action.tres" id="3_e5ed1"]
-
-[resource]
-script = ExtResource("1_0kkve")
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_j8flw"), ExtResource("3_e5ed1")])

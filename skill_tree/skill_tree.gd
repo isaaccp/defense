@@ -1,8 +1,9 @@
 @tool
 extends Resource
 
-class_name SkillCollection
+class_name SkillTree
 
+@export var tree_type: Skill.TreeType
 @export var skills: Array[Skill]
 
 func add(skill: Skill):
