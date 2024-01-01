@@ -47,7 +47,7 @@ _data = {
 "auto": SubResource("Animation_4cdsn")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pu55x"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khm1e"]
 radius = 8.0
 
 [node name="SwordAttack" type="Node2D"]
@@ -66,10 +66,12 @@ autoplay = "auto"
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("8_kcqxb")]
 action_scene = NodePath("..")
 damage = 5
+hits = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(10, 0)
-shape = SubResource("CircleShape2D_pu55x")
+position = Vector2(5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_khm1e")
 
 [node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("9_2r54y")]
 animation_player = NodePath("../Sprite2D/AnimationPlayer")

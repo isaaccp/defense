@@ -24,7 +24,7 @@ func test_tower_destruction_fails_level():
 
 func test_enemy_destruction_finishes_level():
 	# Drop enemies on top of characters so they are easily dispatched.
-	level.enemies.get_child(0).position = level.characters.get_child(0).position
-	level.enemies.get_child(1).position = level.characters.get_child(1).position	
-	await wait_for_signal(level.level_finished, 3, "Waiting for level to finish")
+	level.enemies.get_child(0).position = level.characters.get_child(0).position + Vector2.RIGHT * 50
+	level.enemies.get_child(1).position = level.characters.get_child(1).position + Vector2.RIGHT * 50
+	await wait_for_signal(level.level_finished, 5, "Waiting for level to finish")
 	assert_signal_emitted(level, "level_finished")
