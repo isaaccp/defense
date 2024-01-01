@@ -140,9 +140,9 @@ func get_text_victory_condition(victory_type: VictoryType) -> String:
 			return "Destroy all the enemies"
 		# TODO: Somethign fancy for positions so we can highlight it in the map.
 		VictoryType.ONE_REACH_POSITION:
-			return "Have one character reach target"
+			return "Have one character reach [hint='%s']target[/hint]" % position.name.capitalize()
 		VictoryType.ALL_REACH_POSITION:
-			return "Have all characters reach target"
+			return "Have all characters reach [hint='%s']target[/hint]" % position.name.capitalize()
 		VictoryType.TIME:
 			return "Time (%0.1fs) runs out" % time
 	return "Unspecified"
