@@ -1,0 +1,13 @@
+extends Resource
+
+class_name LevelProvider
+
+@export var levels: Array[PackedScene]
+
+var current_level = -1
+
+func next_level() -> PackedScene:
+	current_level += 1
+	if current_level >= levels.size():
+		return null
+	return levels[current_level]

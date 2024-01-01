@@ -2,15 +2,16 @@ extends Node2D
 
 class_name Gameplay
 
+@export var level_provider: LevelProvider
+
 @export_group("Internal")
 @export var ui_layer: GameplayUILayer
 @export var level_parent: Node2D
 
-const level_scene = preload("res://levels/level.tscn")
-
 @export_group("Debug")
 @export var characters: Array[GameplayCharacter] = []
 
+var level_scene: PackedScene
 var level: Level
 var characters_ready = {}
 
@@ -28,17 +29,47 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 		gameplay_character.character_id = character_selections[selection]
 		gameplay_character.peer_id = players[selection % players.size()].peer_id
 		characters.append(gameplay_character)
-	_play_next_level.call_deferred()
+	_play_level.call_deferred()
 
-func _play_next_level():
-	level = level_scene.instantiate()
+func _play_level(advance: bool = true):
+	if advance:
+		level_scene = level_provider.next_level()
+		if level_scene == null:
+			ui_layer.hud.show_main_message("You rolled credits!", 5.0)
+			print("Finished the game")
+			return
+	level = level_scene.instantiate() as Level
 	level.initialize(characters)
+	level.level_failed.connect(_on_level_failed)
+	level.level_finished.connect(_on_level_finished)
 	level_parent.add_child(level, true)
 	level.freeze(true)
+	ui_layer.hud.show()
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
 	ui_layer.hud.show_character_config(true)
+	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
+
+func _on_level_failed():
+	_on_level_end(false)
+	
+func _on_level_finished():
+	_on_level_end(true)
+	
+func _on_level_end(success: bool):
+	var message: String
+	if success:
+		message = "Level finished!"
+	else:
+		message = "Level failed!"
+	# TODO: Maybe later have a way to inspect level, e.g. see
+	# health of enemies, inspect logs, etc before moving on.
+	ui_layer.hud.show_main_message(message, 5.0)
+	await get_tree().create_timer(5.0).timeout
+	level.queue_free()
+	ui_layer.hud.hide()
+	_play_level(success)
 
 func _on_behavior_modified(character_idx: int, behavior: Behavior):
 	_update_behavior(character_idx, behavior)
@@ -50,16 +81,22 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 	_update_behavior(character_idx, behavior)
 	
 func _update_behavior(character_idx: int, behavior: Behavior):
+	# Save in level and gameplaycharacter for next level.
 	level.characters.get_child(character_idx).behavior = behavior
+	characters[character_idx].behavior = behavior
 	
 func _on_readiness_updated(character_idx: int, ready: bool):
 	if ready:
 		characters_ready[character_idx] = true
 		if characters_ready.size() == characters.size():
+			# Clear for next time.
+			characters_ready.clear()
 			_start_level()
 	else:
 		characters_ready.erase(character_idx)
 		
 func _start_level():
 	ui_layer.hud.show_character_config(false)
+	ui_layer.hud.show_main_message("Fight!", 1.0)
+	await get_tree().create_timer(1.0).timeout
 	level.freeze(false)

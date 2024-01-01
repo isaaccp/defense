@@ -40,6 +40,8 @@ func _ready():
 		label.hide()
 
 func set_characters(characters: Node) -> void:
+	for view in %CharacterViews.get_children():
+		view.queue_free()
 	for i in characters.get_child_count():
 		var character = characters.get_child(i)
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
@@ -49,6 +51,8 @@ func set_characters(characters: Node) -> void:
 		%CharacterViews.add_child(view)
 
 func set_towers(towers: Node) -> void:
+	for view in %TowerHud.get_children():
+		view.queue_free()
 	# For now let's handle only one tower.
 	var tower = towers.get_child(0)
 	var view = hud_tower_view_scene.instantiate() as HudTowerView

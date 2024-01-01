@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=3 format=3 uid="uid://ci4u37qbsl6w1"]
+
+[ext_resource type="PackedScene" uid="uid://bsmo4loybi63o" path="res://levels/level.tscn" id="1_yg0do"]
+[ext_resource type="Script" path="res://levels/level_provider.gd" id="2_ntxql"]
+
+[resource]
+script = ExtResource("2_ntxql")
+levels = Array[PackedScene]([ExtResource("1_yg0do"), ExtResource("1_yg0do")])
