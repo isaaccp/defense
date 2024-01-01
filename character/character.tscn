@@ -270,7 +270,7 @@ _data = {
 
 [node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "behavior_component") groups=["characters"]]
 y_sort_enabled = true
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_0mtgw")
 health_component = NodePath("HealthComponent")
 behavior_component = NodePath("BehaviorComponent")

@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmpg7h70fd2ji"]
+
+[ext_resource type="Script" path="res://character/character.gd" id="1_1mnbb"]
+[ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="4_r4r2v"]
+[ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="5_xneld"]
+[ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="6_oxs12"]
+[ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="7_01gwr"]
+[ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="8_mrif0"]
+[ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_4wyt1"]
+[ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="10_lydou"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4y0tt"]
+
+[node name="BaseCharacter" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "behavior_component") groups=["characters"]]
+y_sort_enabled = true
+collision_mask = 8
+script = ExtResource("1_1mnbb")
+health_component = NodePath("HealthComponent")
+behavior_component = NodePath("BehaviorComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -16)
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"player": "Sprite2D/AnimationPlayer",
+"source": "res://assets/pixel-crawler/Heroes/Knight/Run/Run.aseprite"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_7fvau")
+
+[node name="ActionSprites" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("4_r4r2v")]
+status_component = NodePath("../StatusComponent")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("5_xneld")]
+attributes_component = NodePath("../AttributesComponent")
+
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("6_oxs12")]
+health_component = NodePath("../HealthComponent")
+animation_player = NodePath("../Sprite2D/AnimationPlayer")
+free_on_death = false
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "status_component", "health_component") instance=ExtResource("7_01gwr")]
+body = NodePath("..")
+navigation_agent = NodePath("../NavigationAgent2D")
+action_sprites = NodePath("../ActionSprites")
+animation_player = NodePath("")
+sprite = NodePath("../Sprite2D")
+side_component = NodePath("../SideComponent")
+attributes_component = NodePath("../AttributesComponent")
+status_component = NodePath("../StatusComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("8_mrif0")]
+side_component = NodePath("../SideComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CapsuleShape2D_4y0tt")
+
+[node name="SideComponent" parent="." instance=ExtResource("9_4wyt1")]
+side = 1
+
+[node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_lydou")]
+health_component = NodePath("../HealthComponent")
