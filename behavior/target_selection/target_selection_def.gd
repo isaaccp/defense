@@ -6,6 +6,7 @@ class_name TargetSelectionDef
 enum Id {
 	UNSPECIFIED,
 	CLOSEST_ENEMY,
+	TOWER,
 }
 
 @export var id: Id
