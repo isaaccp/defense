@@ -30,28 +30,67 @@ class_name SkillTreeState
 @export var full_acquired = false
 @export var full_unlocked = false
 
-# TODO: Make dictionaries so it's faster to check unlocked.
-
+# TODO: Make dictionaries so it's faster to check unlocked, etc.
 func unlocked(skill: Skill) -> bool:
-	if full_unlocked:
-		return true
-	return _skill_in(skill, unlocked_actions, unlocked_target_selections)
+	return _skill_in(skill, StateType.UNLOCKED)
 
 func acquired(skill: Skill) -> bool:
-	if full_acquired:
+	return _skill_in(skill, StateType.ACQUIRED)
+
+func acquire(skill: Skill):
+	assert(not acquired(skill), "Skill already acquired!")
+	assert(unlocked(skill), "Skill not unlocked yet!")
+	_add_skill_to(skill, StateType.ACQUIRED)
+
+func unlock(skill: Skill):
+	# TODO: Add prerequisites for unlocking.
+	assert(not unlocked(skill), "Skill already unlocked!")
+	_add_skill_to(skill, StateType.UNLOCKED)
+	
+func _skill_in(skill: Skill, state_type: StateType):
+	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
+	if _full(state_type):
 		return true
-	return _skill_in(skill, acquired_actions, acquired_target_selections)
-		
-func _skill_in(skill: Skill, actions: Array[ActionDef.Id], target_selections: Array[TargetSelectionDef.Id]):
+	match skill.skill_type:
+		Skill.SkillType.ACTION:
+			return skill.action_def.id in _actions(state_type)
+		Skill.SkillType.ACTION:
+			return skill.target_selection_def.id in _target_selections(state_type)
+	return false
+
+func _add_skill_to(skill: Skill, state_type: StateType):
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
-			return skill.action_def.id in actions
+			_actions(state_type).append(skill.action_def.id)
 		Skill.SkillType.ACTION:
-			return skill.target_selection_def.id in target_selections
-	return false
-
+			_target_selections(state_type).append(skill.target_selection_def.id)
+		
 static func make_full() -> SkillTreeState:
 	var skill_tree_state = SkillTreeState.new()
 	skill_tree_state.full = true
 	return skill_tree_state
+
+# For handling unlocked/acquired more easily.
+enum StateType {
+	UNLOCKED,
+	ACQUIRED,
+}
+
+func _actions(state_type: StateType) -> Array[ActionDef.Id]:
+	if state_type == StateType.ACQUIRED:
+		return acquired_actions
+	else:
+		return unlocked_actions
+
+func _target_selections(state_type: StateType) -> Array[TargetSelectionDef.Id]:
+	if state_type == StateType.ACQUIRED:
+		return acquired_target_selections
+	else:
+		return unlocked_target_selections
+
+func _full(state_type: StateType) -> bool:
+	if state_type == StateType.ACQUIRED:
+		return full_acquired
+	else:
+		return full_unlocked
