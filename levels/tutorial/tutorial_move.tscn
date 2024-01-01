@@ -13,6 +13,3 @@ position = Vector2(85, 362)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("2_7ckkc")]
 position = Vector2(554, 304)
-
-[node name="VictoryConditionComponent" parent="." index="4" node_paths=PackedStringArray("position")]
-position = NodePath("../YSorted/Towers/Column")
