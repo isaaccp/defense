@@ -14,5 +14,4 @@ gameplay = NodePath("Gameplay")
 [node name="Gameplay" parent="." instance=ExtResource("3_7l8ug")]
 
 [connection signal="ready_screen_ready_pressed" from="UILayer" to="." method="_on_ready_screen_ready_pressed"]
-[connection signal="title_screen_connect_selected" from="UILayer" to="." method="_on_title_screen_connect_selected"]
-[connection signal="title_screen_local_selected" from="UILayer" to="." method="_on_title_screen_local_selected"]
+[connection signal="title_screen_game_mode_selected" from="UILayer" to="." method="_on_title_screen_game_mode_selected"]

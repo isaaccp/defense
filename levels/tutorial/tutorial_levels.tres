@@ -5,4 +5,5 @@
 
 [resource]
 script = ExtResource("1_mhg3q")
+players = 1
 levels = Array[PackedScene]([ExtResource("1_u2h2n")])

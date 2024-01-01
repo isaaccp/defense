@@ -52,6 +52,5 @@ anchor_top = 0.05
 anchor_right = 0.05
 anchor_bottom = 0.05
 
-[connection signal="connect_selected" from="Screens/TitleScreen" to="." method="_on_title_screen_connect_selected"]
-[connection signal="local_selected" from="Screens/TitleScreen" to="." method="_on_title_screen_local_selected"]
+[connection signal="game_mode_selected" from="Screens/TitleScreen" to="." method="_on_title_screen_game_mode_selected"]
 [connection signal="ready_pressed" from="Screens/ReadyScreen" to="." method="_on_ready_screen_ready_pressed"]

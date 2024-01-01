@@ -9,17 +9,19 @@ class_name Main
 var players_ready := {}
 var character_selections = {}
 var game_over = false
+var game_mode: GameMode
 
 func _ready():
 	# TODO: Just to make it faster for dev, remove later.
 	# _on_title_screen_connect_selected.call_deferred()
 	pass
 
-func _on_title_screen_local_selected():
-	start_gameplay()
-
-func _on_title_screen_connect_selected(fallback: bool):
-	ui_layer.show_screen(ui_layer.match_screen, {'fallback': fallback})
+func _on_title_screen_game_mode_selected(mode: GameMode, fallback: bool):
+	game_mode = mode
+	if mode.is_local():
+		start_gameplay()
+	else:
+		ui_layer.show_screen(ui_layer.match_screen, {'fallback': fallback})		
 
 func _on_ready_screen_ready_pressed():
 	player_ready.rpc(OnlineMatch.get_my_session_id())
@@ -40,5 +42,4 @@ func start_gameplay():
 	ui_layer.hide_screen()
 	ui_layer.hide()
 	print("Start game")
-	gameplay.start()
-	# TODO: Initialize gameplay
+	gameplay.start(game_mode)

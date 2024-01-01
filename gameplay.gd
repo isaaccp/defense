@@ -15,7 +15,8 @@ var level_scene: PackedScene
 var level: Level
 var characters_ready = {}
 
-func start():
+func start(game_mode: GameMode):
+	level_provider = game_mode.level_provider
 	ui_layer.show()
 	ui_layer.hud.set_peer(multiplayer.get_unique_id())
 	ui_layer.character_selection_screen.set_characters(2)

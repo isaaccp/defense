@@ -2,6 +2,7 @@ extends Resource
 
 class_name LevelProvider
 
+@export var players: int
 @export var levels: Array[PackedScene]
 
 var current_level = -1

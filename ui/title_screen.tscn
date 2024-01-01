@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cys516tfuqeh3"]
+[gd_scene load_steps=8 format=3 uid="uid://cys516tfuqeh3"]
 
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="1_rjeij"]
+[ext_resource type="Resource" uid="uid://dt5j8naupi576" path="res://levels/tutorial/tutorial_levels.tres" id="2_lxxxu"]
+[ext_resource type="Script" path="res://game_mode.gd" id="3_kbg0v"]
+[ext_resource type="Resource" uid="uid://b0yoqi26vefv2" path="res://levels/default_level_provider.tres" id="4_qmvax"]
+
+[sub_resource type="Resource" id="Resource_xuhfk"]
+script = ExtResource("3_kbg0v")
+online = 0
+level_provider = ExtResource("2_lxxxu")
+
+[sub_resource type="Resource" id="Resource_xdj1d"]
+script = ExtResource("3_kbg0v")
+online = 0
+level_provider = ExtResource("4_qmvax")
+
+[sub_resource type="Resource" id="Resource_3yys3"]
+script = ExtResource("3_kbg0v")
+online = 1
+level_provider = ExtResource("4_qmvax")
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +28,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rjeij")
+tutorial_game_mode = SubResource("Resource_xuhfk")
+local_game_mode = SubResource("Resource_xdj1d")
+multiplayer_game_mode = SubResource("Resource_3yys3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -25,6 +46,10 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TutorialButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Play Tutorial"
+
 [node name="LocalGameButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Play Local"
@@ -37,6 +62,7 @@ text = "Play Multiplayer	"
 layout_mode = 2
 text = "<Local Nakama>"
 
+[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LocalGameButton" to="." method="_on_local_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MultiplayerGameButton" to="." method="_on_multiplayer_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/FallbackMultiplayerGameButton" to="." method="_on_fallback_multiplayer_game_button_pressed"]
