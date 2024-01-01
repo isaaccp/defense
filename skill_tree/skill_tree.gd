@@ -7,6 +7,7 @@ enum TreeType {
 	UNSPECIFIED,
 	GENERAL,
 	WARRIOR,
+	ROGUE,
 }
 
 @export var tree_type: TreeType
