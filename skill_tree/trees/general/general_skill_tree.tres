@@ -7,5 +7,5 @@
 
 [resource]
 script = ExtResource("1_sstov")
-tree_type = 0
+tree_type = 1
 skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_ysiki"), ExtResource("3_xovp1"), ExtResource("4_jyhan")])

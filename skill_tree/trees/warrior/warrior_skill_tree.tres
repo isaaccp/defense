@@ -6,5 +6,5 @@
 
 [resource]
 script = ExtResource("1_61adr")
-tree_type = 0
+tree_type = 2
 skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_v3016"), ExtResource("3_a7c7g")])
