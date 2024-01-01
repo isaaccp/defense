@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=5 format=3 uid="uid://d1ix5kyitpnfk"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://d1ix5kyitpnfk"]
 
 [ext_resource type="PackedScene" uid="uid://dddksx04cyoa4" path="res://levels/main/few_enemies.tscn" id="1_sf8nm"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_3n011"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_nmw86"]
+[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_02m5g"]
 
 [sub_resource type="Resource" id="Resource_bkluy"]
 script = ExtResource("3_nmw86")
+skill_tree_collection = ExtResource("4_02m5g")
 acquired_actions = Array[int]([1, 2])
 acquired_target_selections = Array[int]([1])
 unlocked_actions = Array[int]([1, 2, 4])
@@ -16,5 +18,5 @@ full_unlocked = false
 [resource]
 script = ExtResource("2_3n011")
 players = 2
-levels = Array[PackedScene]([ExtResource("1_sf8nm")])
+levels = Array[PackedScene]([ExtResource("1_sf8nm"), ExtResource("1_sf8nm")])
 skill_tree_state = SubResource("Resource_bkluy")

@@ -3,9 +3,6 @@ extends Node2D
 class_name Gameplay
 
 @export_group("Required")
-# Unused for now, but likely needed later to show
-# skill tree outside of levels.
-@export var skill_tree_collection: SkillTreeCollection
 
 @export_group("Internal")
 @export var ui_layer: GameplayUILayer
@@ -81,7 +78,12 @@ func _on_level_end(success: bool):
 	await get_tree().create_timer(5.0).timeout
 	ui_layer.hud.show_victory_loss(false)
 	level.queue_free()
-	_play_level(success)
+	if not success:
+		_play_level(false)
+	else:
+		# TODO: Calculate XP, etc, show stats.
+		# ui_layer.show_screen(ui_layer.upgrade_screen)
+		_play_level(true)
 
 func _on_behavior_modified(character_idx: int, behavior: Behavior):
 	_update_behavior(character_idx, behavior)

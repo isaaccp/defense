@@ -2,6 +2,9 @@ extends Resource
 
 class_name SkillTreeState
 
+# Unclear if we actually need this here yet.
+@export var skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
+
 @export var acquired_actions: Array[ActionDef.Id]:
 	get:
 		if full_acquired:
@@ -36,6 +39,22 @@ func unlocked(skill: Skill) -> bool:
 
 func acquired(skill: Skill) -> bool:
 	return _skill_in(skill, StateType.ACQUIRED)
+
+func can_acquire(skill: Skill) -> bool:
+	if acquired(skill):
+		return false
+	if not unlocked(skill):
+		return false
+	if skill.parent and not acquired(skill.parent):
+		return false
+	return true
+
+func can_unlock(skill: Skill) -> bool:
+	if unlocked(skill):
+		return false
+	if skill.parent and not unlocked(skill.parent):
+		return false
+	return true
 
 func acquire(skill: Skill):
 	assert(not acquired(skill), "Skill already acquired!")

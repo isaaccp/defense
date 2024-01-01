@@ -7,6 +7,7 @@ class_name GameplayUILayer
 # instead of having to proxy them through here.
 @export_group("Internal")
 @export var character_selection_screen: Screen
+@export var upgrade_screen: Screen
 @export var hud: Hud
 
 signal character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId])
