@@ -14,33 +14,32 @@ func _initialize_text(
 		victory_type: VictoryLossConditionComponent.VictoryType = VictoryLossConditionComponent.VictoryType.UNSPECIFIED,
 		loss_type: VictoryLossConditionComponent.LossType = VictoryLossConditionComponent.LossType.UNSPECIFIED):
 	var text = ""
-	text += "Win Conditions\n"
+	text += "[color=green]Win Conditions[/color]\n"
 	text += "[ul]\n"
 	var victory_text = ""
 	for type in victory_loss.victory:
-		var triggered = "( )"
+		var color = "white"
 		if type == victory_type:
-			triggered = "(*)"
-		victory_text += "%s %s\n" % [triggered, victory_loss.get_text_victory_condition(type)]
+			color = "green"
+		victory_text += "[color=%s]%s[/color]\n" % [color, victory_loss.get_text_victory_condition(type)]
 	if victory_text.is_empty():
 		text += "None"
 	else:
 		text += victory_text
 	text += "[/ul]\n"
-	text += "Loss Conditions\n"
+	text += "[color=red]Loss Conditions[/color]\n"
 	text += "[ul]"
 	var loss_text = ""
 	for type in victory_loss.loss:
-		var triggered = "( )"
+		var color = "white"
 		if type == loss_type:
-			triggered = "(*)"
-		loss_text += "%s %s\n" % [triggered, victory_loss.get_text_loss_condition(type)]
+			color = "red"
+		loss_text += "[color=%s]%s[/color]\n" % [color, victory_loss.get_text_loss_condition(type)]
 	if loss_text.is_empty():
 		text += "None"
 	else:
 		text += loss_text
 	text += "[/ul]\n"
-	print(text)
 	conditions_text.text = text
 	
 func show_text(visible: bool = true):
