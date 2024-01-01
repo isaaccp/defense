@@ -10,7 +10,6 @@ id = 4
 
 [resource]
 script = ExtResource("3_qfnvl")
-tree_type = 2
 skill_type = 1
 action_def = SubResource("Resource_j86ti")
 parent = ExtResource("2_1jgod")

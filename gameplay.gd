@@ -2,13 +2,17 @@ extends Node2D
 
 class_name Gameplay
 
-@export var level_provider: LevelProvider
+@export_group("Required")
+# Unused for now, but likely needed later to show
+# skill tree outside of levels.
+@export var skill_tree_collection: SkillTreeCollection
 
 @export_group("Internal")
 @export var ui_layer: GameplayUILayer
 @export var level_parent: Node2D
 
 @export_group("Debug")
+@export var level_provider: LevelProvider
 @export var characters: Array[GameplayCharacter] = []
 
 var level_scene: PackedScene
@@ -31,6 +35,8 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 		var gameplay_character = GameplayCharacter.make(
 			character_selections[selection],
 			players[selection % players.size()].peer_id,
+			Behavior.new(),
+			level_provider.skill_unlock_state,
 		)
 		characters.append(gameplay_character)
 	_play_level.call_deferred()

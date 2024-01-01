@@ -9,6 +9,5 @@ id = 2
 
 [resource]
 script = ExtResource("1_mc5d8")
-tree_type = 1
 skill_type = 2
 target_selection_def = SubResource("Resource_j3v74")
