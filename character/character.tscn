@@ -347,6 +347,7 @@ side = 1
 [node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_8mhrp")]
 health_component = NodePath("../HealthComponent")
 
-[node name="SkillManagerComponent" parent="." instance=ExtResource("11_wqx4k")]
+[node name="SkillManagerComponent" parent="." node_paths=PackedStringArray("persistent_game_state_component") instance=ExtResource("11_wqx4k")]
+persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("12_abtbt")]
