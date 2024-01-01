@@ -5,7 +5,7 @@ class_name HudTowerView
 func initialize(tower: Node2D) -> void:
 	var health = Component.get_health_component_or_die(tower)
 	health.health_updated.connect(_on_health_updated)
-	%Title.text = tower.name
+	%Title.text = tower.name.capitalize()
 
 func _on_health_updated(health_update: HealthComponent.HealthUpdate):
 	%HealthBar.max_value = health_update.max_health
