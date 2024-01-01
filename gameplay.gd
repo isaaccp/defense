@@ -44,7 +44,6 @@ func _play_level(advance: bool = true):
 			return
 	level = level_scene.instantiate() as Level
 	level.initialize(characters)
-	_set_character_behaviors()
 	var victory = Component.get_victory_loss_condition_component_or_die(level)
 	victory.level_failed.connect(_on_level_failed)
 	victory.level_finished.connect(_on_level_finished)
@@ -56,13 +55,7 @@ func _play_level(advance: bool = true):
 	ui_layer.hud.show_character_config(true)
 	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
-
-func _set_character_behaviors():
-	for i in level.characters.get_child_count():
-		var character = level.characters.get_child(i)
-		var behavior = Component.get_behavior_component_or_die(character)
-		behavior.behavior = characters[i].behavior
-		
+	
 func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
 	_on_level_end(false)
 	
@@ -94,8 +87,6 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 	_update_behavior(character_idx, behavior)
 	
 func _update_behavior(character_idx: int, behavior: Behavior):
-	# Save in level and gameplaycharacter for next level.
-	level.characters.get_child(character_idx).behavior = behavior
 	characters[character_idx].behavior = behavior
 	
 func _on_readiness_updated(character_idx: int, ready: bool):

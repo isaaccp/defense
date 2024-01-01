@@ -13,7 +13,9 @@ static func character_name(id: Enum.CharacterId) -> String:
 static func description(id: Enum.CharacterId) -> String:
 	return "TODO"
 
-static func make_character(id: Enum.CharacterId) -> Character:
+static func make_character(game_state: GameplayCharacter) -> Character:
 	var character = character_scene.instantiate() as Character
-	character.id = id
+	character.id = game_state.character_id
+	var persistent_game_state = Component.get_persistent_game_state_component_or_die(character)
+	persistent_game_state.state = game_state
 	return character

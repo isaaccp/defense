@@ -19,10 +19,8 @@ class LevelTest extends GutTest:
 		victory = Component.get_or_die(level, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
 
 	func set_character_behaviors(behavior0: Behavior, behavior1: Behavior):
-		var character0 = level.characters.get_child(0)
-		var character1 = level.characters.get_child(1)
-		Component.get_behavior_component_or_die(character0).behavior = behavior0
-		Component.get_behavior_component_or_die(character1).behavior = behavior1
+		TestUtils.set_character_behavior(level.characters.get_child(0), behavior0)
+		TestUtils.set_character_behavior(level.characters.get_child(1), behavior1)
 
 class TestTowerEnemyDestructionConditions extends LevelTest:
 

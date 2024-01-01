@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqq1u1lvtpoqe"]
+
+[ext_resource type="Script" path="res://components/persistent_game_state_component.gd" id="1_qjr0w"]
+
+[node name="PersistentGameStateComponent" type="Node"]
+script = ExtResource("1_qjr0w")

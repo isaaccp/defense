@@ -9,7 +9,7 @@ class_name Level
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
-		var character = CharacterManager.make_character(gameplay_characters[i].character_id)
+		var character = CharacterManager.make_character(gameplay_characters[i])
 		character.idx = i
 		character.peer_id = gameplay_characters[i].peer_id
 		character.position = starting_positions.get_child(i).position

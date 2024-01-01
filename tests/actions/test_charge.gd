@@ -48,7 +48,7 @@ func before_each():
 
 func test_charge_short_distance():
 	# Due to short distance, strength surge shouldn't trigger.
-	character.behavior = make_charge_behavior()
+	TestUtils.set_character_behavior(character, make_charge_behavior())
 	
 	# Put the enemy close to the character, less than charge threshold distance.
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
@@ -69,7 +69,7 @@ func test_charge_short_distance():
 func test_charge_long_distance():
 	# Due to short distance, strength surge should trigger shortly after 
 	# swiftness stop.
-	character.behavior = make_charge_behavior()
+	TestUtils.set_character_behavior(character, make_charge_behavior())
 	
 	# Put the enemy close to the character, less than charge threshold distance.
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold * 1.5

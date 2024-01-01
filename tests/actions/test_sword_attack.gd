@@ -40,7 +40,7 @@ func before_each():
 
 func test_sword_works_within_distance():
 	# Basic sword attack only behavior.
-	character.behavior = make_sword_behavior()
+	TestUtils.set_character_behavior(character, make_sword_behavior())
 	
 	# Put the enemy close to the character.
 	enemy.position = character.position + Vector2.RIGHT * 30
@@ -52,7 +52,7 @@ func test_sword_works_within_distance():
 
 func test_sword_doesnt_work_out_of_distance():
 	# Basic sword attack only behavior.
-	character.behavior = make_sword_behavior()
+	TestUtils.set_character_behavior(character, make_sword_behavior())
 	
 	# Put the enemy far from the character.
 	enemy.position = character.position + Vector2.RIGHT * 100
@@ -65,7 +65,7 @@ func test_sword_doesnt_work_out_of_distance():
 
 func test_move_and_sword_works_out_of_distance():
 	# Sword attack with move fallback.
-	character.behavior = make_sword_behavior(true)
+	TestUtils.set_character_behavior(character, make_sword_behavior(true))
 	
 	# Put the enemy far from the character.
 	enemy.position = character.position + Vector2.RIGHT * 100

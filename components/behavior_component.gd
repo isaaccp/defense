@@ -17,8 +17,14 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 @export var status_component: StatusComponent
 
 @export_group("Optional")
+# If set, behavior is obtained through there.
+@export var persistent_game_state_component: PersistentGameStateComponent
 @export var health_component: HealthComponent
-@export var behavior: Behavior
+@export var behavior: Behavior:
+	get:
+		if persistent_game_state_component:
+			return persistent_game_state_component.state.behavior
+		return behavior
 
 @export_group("Debug")
 @export var rule: Rule
@@ -34,9 +40,6 @@ var next_abortable_action_check_time: float
 
 # Need to skip first physics_frame for navigation.
 var first = true
-
-func _ready():
-	pass
 
 func _physics_process(delta: float):
 	if first:
