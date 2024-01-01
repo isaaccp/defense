@@ -1,7 +1,7 @@
 extends Control
 
 class_name HudTowerView
-	
+
 func initialize(tower: Node2D) -> void:
 	var health = Component.get_health_component_or_die(tower)
 	health.health_updated.connect(_on_health_updated)

@@ -59,13 +59,13 @@ func _play_level(advance: bool = true):
 	ui_layer.hud.start_behavior_setup(_on_all_behaviors_ready)
 	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
-	
+
 func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
 	_on_level_end(false)
-	
+
 func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType):
 	_on_level_end(true)
-	
+
 func _on_level_end(success: bool):
 	var message: String
 	if success:
@@ -91,29 +91,29 @@ func _on_level_end(success: bool):
 			"Acquire Skills",
 			ui_layer.upgrade_screen.on_acquired_skills_pressed,
 			_on_upgrade_done)
-	
+
 func _on_upgrade_done():
 	_play_level(true)
 
 func _credits():
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
-	
+
 func _on_behavior_modified(character_idx: int, behavior: Behavior):
 	_update_behavior(character_idx, behavior)
 	_on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
-	
+
 @rpc("any_peer")
 func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedByteArray):
 	var behavior = Behavior.deserialize(serialized_behavior)
 	_update_behavior(character_idx, behavior)
-	
+
 func _update_behavior(character_idx: int, behavior: Behavior):
 	characters[character_idx].behavior = behavior
-	
+
 func _on_all_behaviors_ready():
 	_start_level()
-		
+
 func _start_level():
 	ui_layer.hud.show_character_button(false)
 	ui_layer.hud.show_victory_loss_text(false)

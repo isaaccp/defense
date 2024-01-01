@@ -19,6 +19,6 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 
 func _on_readiness_updated(character_idx: int, ready: bool):
 	readiness_updated.emit(character_idx, ready)
-	
+
 func _on_behavior_modified(character_idx: int, behavior: Behavior):
 	behavior_modified.emit(character_idx, behavior)

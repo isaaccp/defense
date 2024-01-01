@@ -49,7 +49,7 @@ func set_characters(character_node: Node) -> void:
 
 	for view in %CharacterViews.get_children():
 		view.queue_free()
-		
+
 	for i in characters.size():
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
 		view.initialize(characters[i])
@@ -73,7 +73,7 @@ func set_victory_loss(victory_loss: VictoryLossConditionComponent):
 
 func show_victory_loss(visible: bool = true):
 	%VictoryLoss.visible = visible
-	
+
 func show_victory_loss_text(visible: bool = true):
 	if visible:
 		show_victory_loss(true)
@@ -81,7 +81,7 @@ func show_victory_loss_text(visible: bool = true):
 
 func start_behavior_setup(all_ready_callback: Callable):
 	start_character_setup("Configure Behavior", _on_configure_behavior_pressed, all_ready_callback)
-	
+
 func start_character_setup(text: String, buton_pressed_callback: Callable, all_ready_callback: Callable):
 	all_ready.connect(all_ready_callback, CONNECT_ONE_SHOT)
 	show_character_button(true, text)
@@ -97,7 +97,7 @@ func _reset_character_setup():
 		var connections = view.config_button_pressed.get_connections()
 		for c in connections:
 			view.config_button_pressed.disconnect(c.callable)
-		
+
 func _on_readiness_updated(ready: bool, character_idx: int):
 	if ready:
 		characters_ready[character_idx] = true
@@ -106,7 +106,7 @@ func _on_readiness_updated(ready: bool, character_idx: int):
 			_reset_character_setup()
 	else:
 		characters_ready.erase(character_idx)
-	
+
 func _on_configure_behavior_pressed(character_idx: int):
 	var character = characters[character_idx]
 	%ProgrammingUIParent.show()

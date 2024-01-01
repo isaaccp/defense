@@ -80,7 +80,7 @@ func level_started():
 				else:
 					_emit_loss(LossType.TIME)
 		)
-		
+
 func _start_position_check():
 	var distance_squared = distance * distance
 	while not done:
@@ -96,7 +96,7 @@ func _start_position_check():
 			if count == characters.get_child_count():
 				_emit_victory(VictoryType.ALL_REACH_POSITION)
 				return
-	
+
 func _on_removing_enemy(node: Node):
 	# TODO: Will need changes when we have spawners.
 	# If this is the last enemy and it's dead, declare victory.
@@ -120,7 +120,7 @@ func _emit_victory(victory_type: VictoryType):
 
 func _emit_loss(loss_type: LossType):
 	_emit(false, VictoryType.UNSPECIFIED, loss_type)
-	
+
 func _emit(success: bool, victory_type: VictoryType, loss_type: LossType):
 	# Do not emit more than once.
 	if done:
@@ -159,7 +159,7 @@ func get_text_loss_condition(loss_type: LossType) -> String:
 			return "Tower dies"
 		LossType.TIME:
 			return "Time (%0.1fs) runs out" % time
-	return "Unspecified"	
+	return "Unspecified"
 static func victory_type_name(victory: VictoryType):
 	return VictoryType.keys()[victory]
 

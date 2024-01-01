@@ -10,7 +10,7 @@ class_name SkillTreeState
 		if full_acquired:
 			return ActionManager.all_actions()
 		return acquired_actions
-		
+
 @export var acquired_target_selections: Array[TargetSelectionDef.Id]:
 	get:
 		if full_acquired:
@@ -22,13 +22,13 @@ class_name SkillTreeState
 		if full_unlocked:
 			return ActionManager.all_actions()
 		return unlocked_actions
-		
+
 @export var unlocked_target_selections: Array[TargetSelectionDef.Id]:
 	get:
 		if full_unlocked:
 			return TargetSelectionManager.all_target_selections()
 		return unlocked_target_selections
-		
+
 # If set, all actions/targets are available.
 @export var full_acquired = false
 @export var full_unlocked = false
@@ -65,7 +65,7 @@ func unlock(skill: Skill):
 	# TODO: Add prerequisites for unlocking.
 	assert(not unlocked(skill), "Skill already unlocked!")
 	_add_skill_to(skill, StateType.UNLOCKED)
-	
+
 func _skill_in(skill: Skill, state_type: StateType):
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	if _full(state_type):
@@ -84,7 +84,7 @@ func _add_skill_to(skill: Skill, state_type: StateType):
 			_actions(state_type).append(skill.action_def.id)
 		Skill.SkillType.ACTION:
 			_target_selections(state_type).append(skill.target_selection_def.id)
-		
+
 static func make_full() -> SkillTreeState:
 	var skill_tree_state = SkillTreeState.new()
 	skill_tree_state.full = true

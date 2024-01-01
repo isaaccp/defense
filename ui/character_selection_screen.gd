@@ -12,7 +12,7 @@ var selections_wanted: int
 
 func set_characters(num_characters: int) -> void:
 	selections_wanted = num_characters
-	
+
 func _on_show(info: Dictionary = {}) -> void:
 	sorted_players = OnlineMatch.get_sorted_players()
 	clear_characters()

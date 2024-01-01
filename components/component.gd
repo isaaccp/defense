@@ -16,7 +16,7 @@ static func get_health_component_or_die(node: Node) -> HealthComponent:
 	if not component:
 		assert(false)
 	return component
-	
+
 static func get_behavior_component_or_die(node: Node) -> BehaviorComponent:
 	var component = get_or_die(node, BehaviorComponent.component) as BehaviorComponent
 	if not component:
@@ -28,7 +28,7 @@ static func get_status_component_or_die(node: Node) -> StatusComponent:
 	if not component:
 		assert(false)
 	return component
-	
+
 static func get_skill_manager_component_or_die(node: Node) -> SkillManagerComponent:
 	var component = get_or_die(node, SkillManagerComponent.component) as SkillManagerComponent
 	if not component:
@@ -40,7 +40,7 @@ static func get_persistent_game_state_component_or_die(node: Node) -> Persistent
 	if not component:
 		assert(false)
 	return component
-	
+
 # Level components.
 static func get_victory_loss_condition_component_or_die(node: Node) -> VictoryLossConditionComponent:
 	var component = get_or_die(node, VictoryLossConditionComponent.component) as VictoryLossConditionComponent

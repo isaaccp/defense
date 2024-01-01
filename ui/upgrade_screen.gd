@@ -9,6 +9,6 @@ func set_characters(characters: Array[GameplayCharacter]):
 
 func on_acquired_skills_pressed(character_idx: int):
 	print("acquire skills: %d" % character_idx)
-	
+
 func _on_show(info: Dictionary = {}) -> void:
 	pass
