@@ -1,5 +1,7 @@
 extends Action
 
+class_name MoveToAction
+
 func _init():
 	abortable = true
 	min_distance = 25
