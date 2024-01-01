@@ -17,9 +17,11 @@ var characters_ready = {}
 
 func start(game_mode: GameMode):
 	level_provider = game_mode.level_provider
+	if game_mode.is_multiplayer():
+		assert(level_provider.players == 2)
 	ui_layer.show()
 	ui_layer.hud.set_peer(multiplayer.get_unique_id())
-	ui_layer.character_selection_screen.set_characters(2)
+	ui_layer.character_selection_screen.set_characters(level_provider.players)
 	ui_layer.show_screen(ui_layer.character_selection_screen)
 
 func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):

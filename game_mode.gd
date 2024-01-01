@@ -12,3 +12,6 @@ enum OnlineType {
 
 func is_local():
 	return online == OnlineType.LOCAL
+
+func is_multiplayer():
+	return online == OnlineType.CONNECT
