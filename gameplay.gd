@@ -45,6 +45,7 @@ func _play_level(advance: bool = true):
 	var victory = Component.get_victory_loss_condition_component_or_die(level)
 	victory.level_failed.connect(_on_level_failed)
 	victory.level_finished.connect(_on_level_finished)
+	ui_layer.hud.set_victory_loss(victory)
 	level_parent.add_child(level, true)
 	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
@@ -59,10 +60,10 @@ func _set_character_behaviors():
 		var behavior = Component.get_behavior_component_or_die(character)
 		behavior.behavior = characters[i].behavior
 		
-func _on_level_failed():
+func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
 	_on_level_end(false)
 	
-func _on_level_finished():
+func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType):
 	_on_level_end(true)
 	
 func _on_level_end(success: bool):
@@ -71,10 +72,12 @@ func _on_level_end(success: bool):
 		message = "Level finished!"
 	else:
 		message = "Level failed!"
+	ui_layer.hud.show_victory_loss_text(true)
 	# TODO: Maybe later have a way to inspect level, e.g. see
 	# health of enemies, inspect logs, etc before moving on.
 	ui_layer.hud.show_main_message(message, 5.0)
 	await get_tree().create_timer(5.0).timeout
+	ui_layer.hud.show_victory_loss(false)
 	level.queue_free()
 	_play_level(success)
 
@@ -104,6 +107,7 @@ func _on_readiness_updated(character_idx: int, ready: bool):
 		
 func _start_level():
 	ui_layer.hud.show_character_config(false)
+	ui_layer.hud.show_victory_loss_text(false)
 	ui_layer.hud.show_main_message("Fight!", 1.0)
 	await get_tree().create_timer(1.0).timeout
 	level.freeze(false)

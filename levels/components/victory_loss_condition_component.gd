@@ -20,8 +20,8 @@ enum LossType {
 	TIME,
 }
 
-signal level_finished
-signal level_failed
+signal level_finished(victory_type: VictoryType)
+signal level_failed(loss_type: LossType)
 
 @export_group("Required")
 @export var victory: Array[VictoryType] = [VictoryType.KILL_ALL_ENEMIES]
@@ -72,7 +72,11 @@ func _ready():
 		var victory = VictoryType.TIME in victory
 		timer = get_tree().create_timer(time, false)
 		await timer.timeout.connect(
-			func(): _emit(victory)
+			func():
+				if victory:
+					_emit_victory(VictoryType.TIME)
+				else:
+					_emit_loss(LossType.TIME)
 		)
 		
 func _start_position_check():
@@ -83,12 +87,12 @@ func _start_position_check():
 		for character in characters.get_children():
 			if character.global_position.distance_squared_to(position.global_position) < distance_squared:
 				if VictoryType.ONE_REACH_POSITION in victory:
-					_emit(true)
+					_emit_victory(VictoryType.ONE_REACH_POSITION)
 					return
 				count += 1
 		if VictoryType.ALL_REACH_POSITION in victory:
 			if count == characters.get_child_count():
-				_emit(true)
+				_emit_victory(VictoryType.ALL_REACH_POSITION)
 				return
 	
 func _on_removing_enemy(node: Node):
@@ -96,24 +100,66 @@ func _on_removing_enemy(node: Node):
 	# If this is the last enemy and it's dead, declare victory.
 	if enemies.get_child_count() == 1:
 		if Component.get_health_component_or_die(node).is_dead:
-			_emit(true)
+			_emit_victory(VictoryType.KILL_ALL_ENEMIES)
 
 func _on_character_died():
 	if LossType.ANY_CHARACTER_DIED in loss:
-		_emit(false)
+		_emit_loss(LossType.ANY_CHARACTER_DIED)
 	elif LossType.ALL_CHARACTERS_DIED:
 		dead_characters += 1
 		if dead_characters == characters.get_child_count():
-			_emit(false)
+			_emit_loss(LossType.ALL_CHARACTERS_DIED)
 
 func _on_tower_died():
-	_emit(false)
+	_emit_loss(LossType.TOWER_DIED)
 
-func _emit(success: bool):
+func _emit_victory(victory_type: VictoryType):
+	_emit(true, victory_type, LossType.UNSPECIFIED)
+
+func _emit_loss(loss_type: LossType):
+	_emit(false, VictoryType.UNSPECIFIED, loss_type)
+	
+func _emit(success: bool, victory_type: VictoryType, loss_type: LossType):
 	# Do not emit more than once.
 	if done:
 		return
 	if success:
-		level_finished.emit()
+		level_finished.emit(victory_type)
 	else:
-		level_failed.emit()
+		level_failed.emit(loss_type)
+
+#func get_text_victory_conditions() -> Array[String]:
+	#var victory_conditions: Array[String] = []
+	#for type in victory:
+		#victory_conditions.append(get_text_victory_condition(type))
+	#return victory_conditions
+
+func get_text_victory_condition(victory_type: VictoryType) -> String:
+	match victory_type:
+		VictoryType.KILL_ALL_ENEMIES:
+			return "Destroy all the enemies"
+		# TODO: Somethign fancy for positions so we can highlight it in the map.
+		VictoryType.ONE_REACH_POSITION:
+			return "Have one character reach target"
+		VictoryType.ALL_REACH_POSITION:
+			return "Have all characters reach target"
+		VictoryType.TIME:
+			return "Time (%0.1fs) runs out" % time
+	return "Unspecified"
+
+func get_text_loss_condition(loss_type: LossType) -> String:
+	match loss_type:
+		LossType.ANY_CHARACTER_DIED:
+			return "Any character dies"
+		LossType.ALL_CHARACTERS_DIED:
+			return "All characters dies"
+		LossType.TOWER_DIED:
+			return "The tower dies"
+		LossType.TIME:
+			return "Time (%0.1fs) runs out" % time
+	return "Unspecified"	
+static func victory_type_name(victory: VictoryType):
+	return VictoryType.keys()[victory]
+
+static func loss_type_name(loss: LossType):
+	return LossType.keys()[loss]

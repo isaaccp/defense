@@ -58,6 +58,18 @@ func set_towers(towers: Node) -> void:
 	var view = hud_tower_view_scene.instantiate() as HudTowerView
 	view.initialize(tower)
 	%TowerHud.add_child(view)
+
+func set_victory_loss(victory_loss: VictoryLossConditionComponent):
+	%VictoryLoss.initialize(victory_loss)
+	show_victory_loss_text()
+
+func show_victory_loss(visible: bool = true):
+	%VictoryLoss.visible = visible
+	
+func show_victory_loss_text(visible: bool = true):
+	if visible:
+		show_victory_loss(true)
+	%VictoryLoss.show_text(visible)
 	
 func _on_configure_behavior_selected(character: Character):
 	%ProgrammingUIParent.show()
