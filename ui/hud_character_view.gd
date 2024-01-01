@@ -34,6 +34,7 @@ func show_button(show: bool, text: String) -> void:
 		if not text.is_empty():
 			%ConfigButton.text = text
 		%ConfigContainer.show()
+		%ReadyButton.set_pressed_no_signal(false)
 		if is_local():
 			%ConfigButton.show()
 		else:

@@ -81,22 +81,29 @@ func start_behavior_setup():
 	
 func start_character_setup(text: String, callback: Callable):
 	show_character_button(true, text)
-	characters_ready.clear()
 	for i in %CharacterViews.get_child_count():
-		var view = %CharacterViews.get_child(i)
+		var view = %CharacterViews.get_child(i) as HudCharacterView
 		view.config_button_pressed.connect(callback.bind(i))
 		view.readiness_updated.connect(_on_readiness_updated.bind(i))
-	
+
+func _reset_character_setup():
+	# Clear for next time.
+	characters_ready.clear()
+	for i in %CharacterViews.get_child_count():
+		var view = %CharacterViews.get_child(i) as HudCharacterView
+		var connections = view.config_button_pressed.get_connections()
+		for c in connections:
+			view.config_button_pressed.disconnect(c.callable)
+		
 func _on_readiness_updated(ready: bool, character_idx: int):
 	if ready:
 		characters_ready[character_idx] = true
 		if characters_ready.size() == characters.size():
-			# Clear for next time.
-			characters_ready.clear()
 			all_ready.emit()
+			_reset_character_setup()
 	else:
 		characters_ready.erase(character_idx)
-		
+	
 func _on_configure_behavior_pressed(character_idx: int):
 	var character = characters[character_idx]
 	%ProgrammingUIParent.show()
