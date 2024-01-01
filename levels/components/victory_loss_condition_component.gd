@@ -67,6 +67,8 @@ func _ready():
 		var tower = towers.get_child(0)
 		var health_component = Component.get_health_component_or_die(tower)
 		health_component.died.connect(_on_tower_died)
+
+func level_started():
 	if VictoryType.TIME in victory or LossType.TIME in loss:
 		assert(not is_zero_approx(time))
 		var victory = VictoryType.TIME in victory

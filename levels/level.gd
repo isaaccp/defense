@@ -15,6 +15,12 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 		character.position = starting_positions.get_child(i).position
 		characters.add_child(character)
 
+func start():
+	freeze(false)
+	# TODO: Maybe instead make a component that handles freeze/unfreeze
+	# and can then be passed to VictoryLoss.
+	Component.get_victory_loss_condition_component_or_die(self).level_started()
+
 func freeze(frozen: bool):
 	_freeze_tree(characters, frozen)
 	_freeze_tree(enemies, frozen)

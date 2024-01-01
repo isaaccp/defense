@@ -53,11 +53,14 @@ func set_characters(character_node: Node) -> void:
 	for i in characters.size():
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
 		view.initialize(characters[i])
+		view.readiness_updated.connect(_on_readiness_updated.bind(i))
 		%CharacterViews.add_child(view)
 
 func set_towers(towers: Node) -> void:
 	for view in %TowerHud.get_children():
 		view.queue_free()
+	if towers.get_child_count() == 0:
+		return
 	# For now let's handle only one tower.
 	var tower = towers.get_child(0)
 	var view = hud_tower_view_scene.instantiate() as HudTowerView
@@ -76,15 +79,15 @@ func show_victory_loss_text(visible: bool = true):
 		show_victory_loss(true)
 	%VictoryLoss.show_text(visible)
 
-func start_behavior_setup():
-	start_character_setup("Configure Behavior", _on_configure_behavior_pressed)
+func start_behavior_setup(all_ready_callback: Callable):
+	start_character_setup("Configure Behavior", _on_configure_behavior_pressed, all_ready_callback)
 	
-func start_character_setup(text: String, callback: Callable):
+func start_character_setup(text: String, buton_pressed_callback: Callable, all_ready_callback: Callable):
+	all_ready.connect(all_ready_callback, CONNECT_ONE_SHOT)
 	show_character_button(true, text)
 	for i in %CharacterViews.get_child_count():
 		var view = %CharacterViews.get_child(i) as HudCharacterView
-		view.config_button_pressed.connect(callback.bind(i))
-		view.readiness_updated.connect(_on_readiness_updated.bind(i))
+		view.config_button_pressed.connect(buton_pressed_callback.bind(i))
 
 func _reset_character_setup():
 	# Clear for next time.

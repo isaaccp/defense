@@ -19,13 +19,10 @@ position = Vector2(394, 338)
 [node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_i4rgi")]
 position = Vector2(438, 248)
 
-[node name="OrcArcher" parent="YSorted/Enemies" index="2" instance=ExtResource("3_hgw50")]
-position = Vector2(519, 344)
-
-[node name="OrcArcher2" parent="YSorted/Enemies" index="3" instance=ExtResource("3_hgw50")]
+[node name="OrcArcher2" parent="YSorted/Enemies" index="2" instance=ExtResource("3_hgw50")]
 position = Vector2(459, 419)
 
-[node name="OrcArcher3" parent="YSorted/Enemies" index="4" instance=ExtResource("3_hgw50")]
+[node name="OrcArcher3" parent="YSorted/Enemies" index="3" instance=ExtResource("3_hgw50")]
 position = Vector2(559, 277)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_7r67v")]

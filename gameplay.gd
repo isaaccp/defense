@@ -33,6 +33,7 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 			character_selections[selection],
 			players[selection % players.size()].peer_id,
 			Behavior.new(),
+			# preload("res://behavior/resources/charge_plus_sword_attack.tres"),
 			level_provider.skill_tree_state,
 		)
 		characters.append(gameplay_character)
@@ -41,9 +42,9 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 func _play_level(advance: bool = true):
 	if advance:
 		level_scene = level_provider.next_level()
+		# Should only happen if there are no levels.
 		if level_scene == null:
-			ui_layer.hud.show_main_message("You rolled credits!", 5.0)
-			print("Finished the game")
+			_credits()
 			return
 	level = level_scene.instantiate() as Level
 	level.initialize(characters)
@@ -55,9 +56,8 @@ func _play_level(advance: bool = true):
 	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
-	ui_layer.hud.start_behavior_setup()
+	ui_layer.hud.start_behavior_setup(_on_all_behaviors_ready)
 	ui_layer.hud.show_main_message("Prepare", 2.0)
-	ui_layer.hud.all_ready.connect(_on_all_ready, CONNECT_ONE_SHOT)
 	# Everything is set up, wait until all players are ready.
 	
 func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
@@ -75,17 +75,30 @@ func _on_level_end(success: bool):
 	ui_layer.hud.show_victory_loss_text(true)
 	# TODO: Maybe later have a way to inspect level, e.g. see
 	# health of enemies, inspect logs, etc before moving on.
-	ui_layer.hud.show_main_message(message, 5.0)
-	await get_tree().create_timer(5.0).timeout
+	ui_layer.hud.show_main_message(message, 3.0)
+	await get_tree().create_timer(3.0).timeout
 	ui_layer.hud.show_victory_loss(false)
 	level.queue_free()
 	if not success:
 		_play_level(false)
 	else:
+		if level_provider.last_level():
+			_credits()
+			return
 		# TODO: Calculate XP, etc, show stats.
-		# ui_layer.show_screen(ui_layer.upgrade_screen)
-		_play_level(true)
+		ui_layer.show_screen(ui_layer.upgrade_screen)
+		ui_layer.hud.start_character_setup(
+			"Acquire Skills",
+			ui_layer.upgrade_screen.on_acquired_skills_pressed,
+			_on_upgrade_done)
+	
+func _on_upgrade_done():
+	_play_level(true)
 
+func _credits():
+	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
+	print("Finished the game")
+	
 func _on_behavior_modified(character_idx: int, behavior: Behavior):
 	_update_behavior(character_idx, behavior)
 	_on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
@@ -98,7 +111,7 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 func _update_behavior(character_idx: int, behavior: Behavior):
 	characters[character_idx].behavior = behavior
 	
-func _on_all_ready():
+func _on_all_behaviors_ready():
 	_start_level()
 		
 func _start_level():
@@ -106,4 +119,4 @@ func _start_level():
 	ui_layer.hud.show_victory_loss_text(false)
 	ui_layer.hud.show_main_message("Fight!", 1.0)
 	await get_tree().create_timer(1.0).timeout
-	level.freeze(false)
+	level.start()
