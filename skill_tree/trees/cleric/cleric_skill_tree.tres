@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkillTree" load_steps=3 format=3 uid="uid://56yiv1nm0u2l"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_50w7a"]
+[ext_resource type="Resource" uid="uid://4g8i30s0x8jv" path="res://skill_tree/skills/cleric/heal.tres" id="2_ebpk6"]
+
+[resource]
+script = ExtResource("1_50w7a")
+tree_type = 4
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_ebpk6")])

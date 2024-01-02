@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=5 format=3 uid="uid://b8ceknne8lmn"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=6 format=3 uid="uid://b8ceknne8lmn"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_sstov"]
 [ext_resource type="Resource" uid="uid://bpfckr2evihqa" path="res://skill_tree/skills/general/closest_enemy_target.tres" id="2_ysiki"]
 [ext_resource type="Resource" uid="uid://c43inufxpga3" path="res://skill_tree/skills/general/move_to_action.tres" id="3_xovp1"]
 [ext_resource type="Resource" uid="uid://bd5sxds610d28" path="res://skill_tree/skills/general/tower_target.tres" id="4_jyhan"]
+[ext_resource type="Resource" uid="uid://c4rmgksytb2os" path="res://skill_tree/skills/general/self_target.tres" id="4_mv154"]
 
 [resource]
 script = ExtResource("1_sstov")
 tree_type = 1
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_ysiki"), ExtResource("3_xovp1"), ExtResource("4_jyhan")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_ysiki"), ExtResource("3_xovp1"), ExtResource("4_mv154"), ExtResource("4_jyhan")])

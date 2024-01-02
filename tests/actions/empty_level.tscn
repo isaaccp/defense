@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://6rlfd84dcqvj"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_f6smi"]
+
+[node name="Level" instance=ExtResource("1_f6smi")]
+
+[node name="VictoryLossConditionComponent" parent="." index="4"]
+loss = Array[int]([2])

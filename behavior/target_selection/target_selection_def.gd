@@ -7,6 +7,7 @@ enum Id {
 	UNSPECIFIED,
 	CLOSEST_ENEMY,
 	TOWER,
+	SELF,
 }
 
 @export var id: Id

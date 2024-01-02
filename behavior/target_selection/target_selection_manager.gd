@@ -6,6 +6,7 @@ class_name TargetSelectionManager
 static var target_selections = {
 	TargetSelectionDef.Id.CLOSEST_ENEMY: preload("res://behavior/target_selection/target_selection_closest_enemy.gd"),
 	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/target_selection_tower.gd"),
+	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/target_selection_self.gd"),
 }
 
 static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Target:

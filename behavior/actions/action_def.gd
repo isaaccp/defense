@@ -10,6 +10,7 @@ enum Id {
 	BOW_ATTACK,
 	CHARGE,
 	MULTI_SHOT,
+	HEAL,
 }
 
 @export var id: Id

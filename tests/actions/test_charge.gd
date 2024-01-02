@@ -49,15 +49,15 @@ func before_each():
 func test_charge_short_distance():
 	# Due to short distance, strength surge shouldn't trigger.
 	TestUtils.set_character_behavior(character, make_charge_behavior())
-	
+
 	# Put the enemy close to the character, less than charge threshold distance.
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
-	
+
 	watch_signals(character_behavior)
 	watch_signals(character_status)
-	
+
 	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
-	
+
 	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
@@ -67,18 +67,18 @@ func test_charge_short_distance():
 	assert_eq(health_update.prev_health - health_update.health, sword_damage)
 
 func test_charge_long_distance():
-	# Due to short distance, strength surge should trigger shortly after 
+	# Due to short distance, strength surge should trigger shortly after
 	# swiftness stop.
 	TestUtils.set_character_behavior(character, make_charge_behavior())
-	
+
 	# Put the enemy close to the character, less than charge threshold distance.
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold * 1.5
-	
+
 	watch_signals(character_behavior)
 	watch_signals(character_status)
-	
+
 	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
-	
+
 	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)

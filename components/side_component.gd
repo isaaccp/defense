@@ -14,12 +14,18 @@ func _ready():
 		enemy_groups = [Groups.ENEMIES]
 	else:
 		enemy_groups = [Groups.CHARACTERS, Groups.TOWERS]
-		
+
 func is_enemy_node(node: Node2D) -> bool:
 	for group in enemy_groups:
 		if node.is_in_group(group):
 			return true
 	return false
+
+func is_ally(other: SideComponent) -> bool:
+	if side in [Groups.GroupType.CHARACTERS, Groups.GroupType.TOWERS]:
+		return other.side in [Groups.GroupType.CHARACTERS, Groups.GroupType.TOWERS]
+	else:
+		return other.side == Groups.GroupType.ENEMIES
 
 func is_enemy(other: SideComponent) -> bool:
 	if side == Groups.GroupType.CHARACTERS or side == Groups.GroupType.TOWERS:
