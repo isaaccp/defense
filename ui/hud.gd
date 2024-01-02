@@ -48,6 +48,7 @@ func set_characters(character_node: Node) -> void:
 		characters.append(character)
 
 	for view in %CharacterViews.get_children():
+		%CharacterViews.remove_child(view)
 		view.queue_free()
 
 	for i in characters.size():
