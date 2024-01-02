@@ -1,19 +1,15 @@
 extends Control
 
+var skill_tree_state: SkillTreeState
 var _skills: Dictionary # GraphNode name -> Skill resource
 
-func _ready():
-	# Just For testing...
-	# FIXME: State contains the collection currently.
-	initialize(preload("res://skill_tree/trees/skill_tree_collection.tres"), null)
-
-func initialize(trees: SkillTreeCollection, state: SkillTreeState):
-	# FIXME: Use the TreeCollection in state.
+func initialize(character: GameplayCharacter):
+	skill_tree_state = character.skill_tree_state
 	# FIXME: Add param for XP state (per character?).
 	# FIXME: Mark acquired skills from state.
 	# FIXME: Support re-init
 	var tabs = %Trees as TabContainer
-	for t in trees.skill_trees:
+	for t in skill_tree_state.skill_tree_collection.skill_trees:
 		var seen: Dictionary
 		# TODO: The graph should be an instanced scene, probably
 		var graph = GraphEdit.new()

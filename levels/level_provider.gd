@@ -9,7 +9,7 @@ class_name LevelProvider
 @export var skill_tree_state: SkillTreeState
 
 # Initial behavior for characters.
-@export var behavior: Behavior
+@export var behavior: Behavior = Behavior.new()
 
 var current_level = -1
 

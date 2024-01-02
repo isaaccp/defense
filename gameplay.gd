@@ -87,6 +87,7 @@ func _on_level_end(success: bool):
 		# TODO: Calculate XP, etc, show stats.
 		_grant_xp(level)
 		ui_layer.show_screen(ui_layer.upgrade_screen)
+		ui_layer.upgrade_screen.set_characters(characters)
 		ui_layer.hud.start_character_setup(
 			"Acquire Skills",
 			ui_layer.upgrade_screen.on_acquired_skills_pressed,

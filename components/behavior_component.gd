@@ -45,18 +45,18 @@ func _physics_process(delta: float):
 	if first:
 		first = false
 		return
-	
+
 	if health_component and health_component.is_dead:
 		return
-	
+
 	elapsed_time += delta
-	
+
 	assert(behavior, "Missing behavior")
-		
+
 	# For change detection.
 	var prev_action_id = _action_id(action)
 	var prev_target = target
-	
+
 	# If action is finished, clear everything so we re-evaluate.
 	if action and action.finished:
 		rule = null
@@ -82,7 +82,7 @@ func _physics_process(delta: float):
 		return
 	action.physics_process(delta)
 	_post_action()
-	
+
 static func _action_id(action: Action) -> ActionDef.Id:
 	if action:
 		return action.def.id
