@@ -81,6 +81,4 @@ alignment = 2
 layout_mode = 2
 text = "OK"
 
-[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Cancel"
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/OK" to="." method="_on_ok_pressed"]

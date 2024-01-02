@@ -3,6 +3,9 @@ extends Control
 var skill_tree_state: SkillTreeState
 var _skills: Dictionary # GraphNode name -> Skill resource
 
+signal ok_pressed
+signal cancel_pressed
+
 func initialize(character: GameplayCharacter):
 	skill_tree_state = character.skill_tree_state
 	# FIXME: Add param for XP state (per character?).
@@ -51,3 +54,6 @@ func initialize(character: GameplayCharacter):
 func _on_node_selected(n: Node):
 	var skill = _skills[n.name] as Skill
 	%Info.text = "Name: %s\nType: %s\n..." % [skill.name(), skill.type_name()]
+
+func _on_ok_pressed():
+	ok_pressed.emit()
