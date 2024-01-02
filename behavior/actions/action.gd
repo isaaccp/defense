@@ -18,6 +18,9 @@ class_name Action
 @export var max_distance = 10_000_000
 # How close can this action be taken.
 @export var min_distance = -1
+# How long until this action can be triggered again.
+# Ignored if negative.
+@export var cooldown = -1.0
 # Whether this action is considered finished.
 @export var finished = false
 
@@ -48,7 +51,7 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 # 'target' is as initially returned when choosing an action.
 func post_initialize():
 	pass
-	
+
 # Runs the appropriate physics process for entity.
 # 'target' may have decayed, e.g. a 'node' pointed to by 'target' may no
 # longer exist. Must check for it by hand.

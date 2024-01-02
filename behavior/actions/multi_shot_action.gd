@@ -2,6 +2,9 @@ extends BowAttackAction
 
 var shots = 3
 
+func _init():
+	cooldown = 2.0
+
 func post_initialize():
 	for i in range(shots):
 		spawn_arrow()

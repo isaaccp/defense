@@ -30,9 +30,9 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 @export var rule: Rule
 @export var target: Target
 @export var action: Action
-
+@export var action_cooldowns: Dictionary
 # Keep track of time so we can do pause/freeze-aware stuff.
-var elapsed_time: float = 0.0
+@export var elapsed_time: float = 0.0
 # How often to check whether a higher-priority action should
 # stop an abortable action.
 var abortable_action_check_period = 0.1
@@ -59,12 +59,13 @@ func _physics_process(delta: float):
 
 	# If action is finished, clear everything so we re-evaluate.
 	if action and action.finished:
+		_on_action_finished(action)
 		rule = null
 		action = null
 		target = null
 	# After this point, if action is still set, we can assume is not finished.
 	if not rule or (action.abortable and next_abortable_action_check_time < elapsed_time):
-		var result = behavior.choose(body, side_component)
+		var result = behavior.choose(body, side_component, action_cooldowns, elapsed_time)
 		if not result.is_empty():
 			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule
@@ -72,6 +73,7 @@ func _physics_process(delta: float):
 				target = result.target
 				if action:
 					action.action_finished()
+					_on_action_finished(action)
 				action = ActionManager.make_action(rule.action)
 				action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component)
 		if action and action.abortable:
@@ -82,6 +84,11 @@ func _physics_process(delta: float):
 		return
 	action.physics_process(delta)
 	_post_action()
+
+func _on_action_finished(action: Action):
+	assert(action.finished)
+	if action.cooldown > 0:
+		action_cooldowns[action.def.id] = elapsed_time + action.cooldown
 
 static func _action_id(action: Action) -> ActionDef.Id:
 	if action:

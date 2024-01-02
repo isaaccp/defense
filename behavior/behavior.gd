@@ -5,8 +5,14 @@ class_name Behavior
 @export var rules: Array[Rule]
 
 # TODO: Return BehaviorResult or such.
-func choose(body: CharacterBody2D, side_component: SideComponent) -> Dictionary:
+func choose(body: CharacterBody2D, side_component: SideComponent,
+			action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 	for rule in rules:
+		# Check cooldowns.
+		if action_cooldowns.has(rule.action.id):
+			var can_run_after = action_cooldowns[rule.action.id]
+			if elapsed_time < can_run_after:
+				continue
 		# TODO: Construct actions only once when added to the behavior.
 		var action = ActionManager.make_action(rule.action)
 		var target = TargetSelectionManager.select_target(body, side_component, action, rule.target_selection)
