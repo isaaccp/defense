@@ -15,13 +15,13 @@ func _ready():
 		# So it works as a standalone scene for easy testing.
 		if test_character:
 			initialize(test_character)
-	setup_tree()
+	_setup_tree()
 
 func initialize(gameplay_character: GameplayCharacter):
 	character = gameplay_character
 	skill_tree_state = character.skill_tree_state
 
-func setup_tree():
+func _setup_tree():
 	%Title.text = "%s: Skill Tree" % character.name
 	%Status.text = "XP: %d" % character.xp
 	# FIXME: Mark acquired skills from state.
