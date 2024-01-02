@@ -38,6 +38,7 @@ layout_mode = 2
 text = "{Character} Skill Tree"
 
 [node name="Status" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "General XP: 10
 Tree XP: 20"

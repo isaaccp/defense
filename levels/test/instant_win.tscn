@@ -7,4 +7,4 @@
 [node name="VictoryLossConditionComponent" parent="." index="4"]
 victory = Array[int]([4])
 loss = Array[int]([2])
-time = 1.0
+time = 0.25

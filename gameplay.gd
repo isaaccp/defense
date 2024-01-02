@@ -29,8 +29,13 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 	ui_layer.hide_screen()
 	var players = OnlineMatch.get_sorted_players()
 	for selection in range(character_selections.size()):
+		var character_id = character_selections[selection]
+		# TODO: Remove the number when we don't allow two of
+		# the same character.
+		var character_name = "%s (%d)" % [Enum.character_id_string(character_id), selection]
 		var gameplay_character = GameplayCharacter.make(
-			character_selections[selection],
+			character_id,
+			character_name,
 			players[selection % players.size()].peer_id,
 			level_provider.behavior,
 			level_provider.skill_tree_state,

@@ -8,9 +8,9 @@ signal cancel_pressed
 
 func initialize(character: GameplayCharacter):
 	skill_tree_state = character.skill_tree_state
-	# FIXME: Add param for XP state (per character?).
+	%Title.text = "%s: Skill Tree" % character.name
+	%Status.text = "XP: %d" % character.xp
 	# FIXME: Mark acquired skills from state.
-	# FIXME: Support re-init
 	var tabs = %Trees as TabContainer
 	for t in skill_tree_state.skill_tree_collection.skill_trees:
 		var seen: Dictionary
