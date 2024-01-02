@@ -39,12 +39,7 @@ func _setup_tree():
 		for s in t.skills:
 			var skill = GraphNode.new()
 			skill.draggable = false
-			if s.target_selection_def:
-				skill.title = s.target_selection_def.to_string()
-			elif s.action_def:
-				skill.title = s.action_def.to_string()
-			else:
-				skill.title = "unrecognized skill type"
+			skill.title = s.name()
 			var icon = TextureRect.new()
 			# FIXME: Just a placeholder. GraphNode wants some content to associate connection ports with.
 			icon.texture = preload("res://assets/kyrises_rpg_icon_pack/icons/48x48/book_02a.png")

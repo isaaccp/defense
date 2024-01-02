@@ -7,11 +7,13 @@ enum SkillType {
 	UNSPECIFIED,
 	ACTION,
 	TARGET,
+	CONDITION,
 }
 
 @export var skill_type: SkillType
 @export var action_def: ActionDef
 @export var target_selection_def: TargetSelectionDef
+@export var condition_def: ConditionDef
 @export var parent: Skill
 # Not saved but set when loading tree.
 var tree_type: SkillTree.TreeType
@@ -22,6 +24,8 @@ func name() -> String:
 			return action_def.name()
 		SkillType.TARGET:
 			return target_selection_def.name()
+		SkillType.CONDITION:
+			return condition_def.name()
 	assert(false, "Unsupported skill type")
 	return "<bug>"
 
