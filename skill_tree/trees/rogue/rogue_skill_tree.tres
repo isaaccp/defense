@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=3 format=3 uid="uid://h2hjs51jl43e"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=4 format=3 uid="uid://h2hjs51jl43e"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_n1yi2"]
 [ext_resource type="Resource" uid="uid://btputiv2naqbp" path="res://skill_tree/skills/rogue/bow_attack.tres" id="2_8t3ec"]
+[ext_resource type="Resource" uid="uid://btyj0rc5d86ew" path="res://skill_tree/skills/rogue/multi_shot.tres" id="3_oaa2n"]
 
 [resource]
 script = ExtResource("1_n1yi2")
 tree_type = 3
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_8t3ec")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_8t3ec"), ExtResource("3_oaa2n")])
