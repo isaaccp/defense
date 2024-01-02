@@ -187,3 +187,10 @@ func _show_message(message: String, message_type: MessageType, timeout: float = 
 	if current_generation != message_generation[message_type]:
 		return
 	label.hide()
+
+# For testing.
+func character_view_count() -> int:
+	return %CharacterViews.get_child_count()
+
+func character_view(i: int) -> HudCharacterView:
+	return %CharacterViews.get_child(i)

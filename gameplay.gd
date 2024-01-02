@@ -12,9 +12,15 @@ class_name Gameplay
 @export var level_provider: LevelProvider
 @export var characters: Array[GameplayCharacter] = []
 
+# Not constants so tests can speed them up.
+var ready_to_fight_wait = 1.0
+var level_end_wait = 3.0
+
 var level_scene: PackedScene
 var level: Level
 var characters_ready = {}
+
+signal level_started
 
 func start(game_mode: GameMode):
 	level_provider = game_mode.level_provider
@@ -79,8 +85,8 @@ func _on_level_end(success: bool):
 	ui_layer.hud.show_victory_loss_text(true)
 	# TODO: Maybe later have a way to inspect level, e.g. see
 	# health of enemies, inspect logs, etc before moving on.
-	ui_layer.hud.show_main_message(message, 3.0)
-	await get_tree().create_timer(3.0).timeout
+	ui_layer.hud.show_main_message(message, level_end_wait)
+	await get_tree().create_timer(level_end_wait).timeout
 	ui_layer.hud.show_victory_loss(false)
 	level.queue_free()
 	if not success:
@@ -129,6 +135,7 @@ func _on_all_behaviors_ready():
 func _start_level():
 	ui_layer.hud.show_character_button(false)
 	ui_layer.hud.show_victory_loss_text(false)
-	ui_layer.hud.show_main_message("Fight!", 1.0)
-	await get_tree().create_timer(1.0).timeout
+	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
+	await get_tree().create_timer(ready_to_fight_wait).timeout
 	level.start()
+	level_started.emit()

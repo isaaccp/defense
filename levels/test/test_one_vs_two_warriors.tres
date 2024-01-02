@@ -1,43 +1,54 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=17 format=3 uid="uid://bmvux5rjsxklv"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=20 format=3 uid="uid://bmvux5rjsxklv"]
 
 [ext_resource type="PackedScene" uid="uid://bl8mdgqo1xlv0" path="res://levels/test/test_one_vs_two_level.tscn" id="1_61jmt"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_rbq5t"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_dmu74"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="2_eqjg6"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="2_sudk3"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_apwm0"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_gxqp6"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_loqg3"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_uoups"]
 [ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_vdgij"]
 
-[sub_resource type="Resource" id="Resource_a152q"]
+[sub_resource type="Resource" id="Resource_3o0xq"]
 script = ExtResource("1_rbq5t")
 id = 5
 
-[sub_resource type="Resource" id="Resource_rt81u"]
+[sub_resource type="Resource" id="Resource_viwve"]
+script = ExtResource("3_gxqp6")
+id = 1
+condition_script = ExtResource("2_sudk3")
+type = 1
+abstract = false
+
+[sub_resource type="Resource" id="Resource_4835u"]
 script = ExtResource("3_loqg3")
 id = 1
 
-[sub_resource type="Resource" id="Resource_jcqna"]
+[sub_resource type="Resource" id="Resource_41sac"]
 script = ExtResource("2_eqjg6")
-target_selection = SubResource("Resource_rt81u")
-action = SubResource("Resource_a152q")
+target_selection = SubResource("Resource_4835u")
+action = SubResource("Resource_3o0xq")
+condition = SubResource("Resource_viwve")
 
-[sub_resource type="Resource" id="Resource_1u3av"]
+[sub_resource type="Resource" id="Resource_7dma5"]
 script = ExtResource("1_rbq5t")
 id = 1
 
-[sub_resource type="Resource" id="Resource_n470h"]
+[sub_resource type="Resource" id="Resource_va7py"]
 script = ExtResource("3_loqg3")
 id = 1
 
-[sub_resource type="Resource" id="Resource_sex5l"]
+[sub_resource type="Resource" id="Resource_feq6q"]
 script = ExtResource("2_eqjg6")
-target_selection = SubResource("Resource_n470h")
-action = SubResource("Resource_1u3av")
+target_selection = SubResource("Resource_va7py")
+action = SubResource("Resource_7dma5")
+condition = SubResource("Resource_viwve")
 
 [sub_resource type="Resource" id="Resource_nat2w"]
 script = ExtResource("4_uoups")
-rules = Array[ExtResource("2_eqjg6")]([SubResource("Resource_jcqna"), SubResource("Resource_sex5l")])
+rules = Array[ExtResource("2_eqjg6")]([SubResource("Resource_41sac"), SubResource("Resource_feq6q")])
 
 [sub_resource type="Resource" id="Resource_dk353"]
 script = ExtResource("3_apwm0")

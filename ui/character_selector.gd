@@ -1,5 +1,7 @@
 extends Container
 
+class_name CharacterSelector
+
 @export var label: Label
 @export var options: Container
 

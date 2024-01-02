@@ -1,5 +1,7 @@
 extends Button
 
+class_name RichButton
+
 @export var label: RichTextLabel
 
 var label_text: String:

@@ -1,5 +1,7 @@
 extends Screen
 
+class_name CharacterSelectionScreen
+
 @export var characters_container: Container
 
 const character_selector_scene = preload("res://ui/character_selector.tscn")
@@ -49,3 +51,10 @@ func _notify_selection(character_idx: int, character_id: Enum.CharacterId):
 	else:
 		var character_container = characters_container.get_child(character_idx)
 		character_container.disable_and_show_selection(character_id)
+
+# For testing.
+func character_selector_count() -> int:
+	return characters_container.get_child_count()
+
+func character_selector(i: int) -> CharacterSelector:
+	return characters_container.get_child(i)

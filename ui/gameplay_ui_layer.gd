@@ -6,7 +6,7 @@ class_name GameplayUILayer
 # add the scene directly in gameplay so I can connect directly to signals
 # instead of having to proxy them through here.
 @export_group("Internal")
-@export var character_selection_screen: Screen
+@export var character_selection_screen: CharacterSelectionScreen
 @export var upgrade_screen: Screen
 @export var hud: Hud
 

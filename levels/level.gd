@@ -7,6 +7,8 @@ class_name Level
 @export var towers: Node2D
 @export var starting_positions: Node
 
+var is_frozen: bool = false
+
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
 		var character = CharacterManager.make_character(gameplay_characters[i])
@@ -22,6 +24,7 @@ func start():
 	Component.get_victory_loss_condition_component_or_die(self).level_started()
 
 func freeze(frozen: bool):
+	is_frozen = frozen
 	_freeze_tree(characters, frozen)
 	_freeze_tree(enemies, frozen)
 

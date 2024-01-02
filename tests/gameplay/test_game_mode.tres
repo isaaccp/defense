@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="GameMode" load_steps=3 format=3 uid="uid://bce8p4nihiqo7"]
+
+[ext_resource type="Resource" uid="uid://bcc8y2omvq0ou" path="res://levels/test/test_instant_win_upgrade.tres" id="1_m8po7"]
+[ext_resource type="Script" path="res://game_mode.gd" id="1_wueem"]
+
+[resource]
+script = ExtResource("1_wueem")
+online = 0
+level_provider = ExtResource("1_m8po7")
