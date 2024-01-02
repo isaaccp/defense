@@ -6,7 +6,7 @@ var _skills: Dictionary # GraphNode name -> Skill resource
 signal ok_pressed
 signal cancel_pressed
 
-@export_group("Debug")
+@export_group("Testing")
 @export var test_character: GameplayCharacter
 
 func _ready():
