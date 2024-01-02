@@ -16,6 +16,7 @@ func initialize(character_: Character):
 	%Toolbox.initialize(
 		skill_manager.target_types(),
 		skill_manager.actions(),
+		skill_manager.conditions(),
 	)
 	if is_instance_valid(character):
 		%Title.text = "Configuring behavior for %s" % character.short_name()
@@ -31,6 +32,7 @@ func editor_initialize(b: Behavior):
 	%Toolbox.initialize(
 		TargetSelectionManager.all_target_selections(),
 		ActionManager.all_actions(),
+		ConditionManager.all_conditions(),
 	)
 	%Title.text = "Editing %s" % b.resource_path
 	script_tree.load_behavior(b)

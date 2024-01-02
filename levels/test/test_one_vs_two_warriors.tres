@@ -44,8 +44,10 @@ script = ExtResource("3_apwm0")
 skill_tree_collection = ExtResource("4_vdgij")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
+acquired_conditions = Array[int]([1])
 unlocked_actions = Array[int]([])
 unlocked_target_selections = Array[int]([])
+unlocked_conditions = Array[int]([])
 full_acquired = false
 full_unlocked = false
 

@@ -8,7 +8,11 @@ func _ready():
 	_root = tree.create_item()
 	tree.hide_root = true
 
-func initialize(target_types: Array[TargetSelectionDef.Id], action_types: Array[ActionDef.Id]):
+func initialize(
+		target_types: Array[TargetSelectionDef.Id],
+		action_types: Array[ActionDef.Id],
+		condition_types: Array[ConditionDef.Id],
+	):
 	var tree = self
 	for c in _root.get_children():
 		_root.remove_child(c)
@@ -22,12 +26,12 @@ func initialize(target_types: Array[TargetSelectionDef.Id], action_types: Array[
 		target.set_metadata(0, target_metadata(0, target_type))
 
 	var triggers = tree.create_item(_root)
-	triggers.set_text(0, "Trigger Conditions")
+	triggers.set_text(0, "Conditions")
 	triggers.set_selectable(0, false)
-	for n in ["Always"]:
+	for condition_type in condition_types:
 		var trigger = tree.create_item(triggers)
-		trigger.set_text(0, n)
-		trigger.set_metadata(0, condition_metadata(1))
+		trigger.set_text(0, ConditionDef.condition_name(condition_type))
+		trigger.set_metadata(0, condition_metadata(1, condition_type))
 
 	var actions = tree.create_item(_root)
 	actions.set_text(0, "Actions")
@@ -43,8 +47,8 @@ func target_metadata(column: int, id: TargetSelectionDef.Id) -> Dictionary:
 func action_metadata(column: int, id: ActionDef.Id) -> Dictionary:
 	return {"column": column, "id": id}
 
-func condition_metadata(column: int) -> Dictionary:
-	return {"column": column, "id": 0}
+func condition_metadata(column: int, id: ConditionDef.Id) -> Dictionary:
+	return {"column": column, "id": id}
 
 func _get_drag_data(at_position: Vector2):
 	var item = get_item_at_position(at_position)

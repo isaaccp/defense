@@ -17,6 +17,12 @@ class_name SkillTreeState
 			return TargetSelectionManager.all_target_selections()
 		return acquired_target_selections
 
+@export var acquired_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
+	get:
+		if full_acquired:
+			return ConditionManager.all_conditions()
+		return acquired_conditions
+
 @export var unlocked_actions: Array[ActionDef.Id]:
 	get:
 		if full_unlocked:
@@ -28,6 +34,12 @@ class_name SkillTreeState
 		if full_unlocked:
 			return TargetSelectionManager.all_target_selections()
 		return unlocked_target_selections
+
+@export var unlocked_conditions: Array[ConditionDef.Id]:
+	get:
+		if full_unlocked:
+			return ConditionManager.all_conditions()
+		return unlocked_conditions
 
 # If set, all actions/targets are available.
 @export var full_acquired = false

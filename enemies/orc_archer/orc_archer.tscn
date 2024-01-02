@@ -1,13 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=24 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
 [ext_resource type="Texture2D" uid="uid://dcavx0naa8mgn" path="res://enemies/orc_archer/Death.png" id="2_qlkp2"]
 [ext_resource type="Texture2D" uid="uid://e61vy14vtwyo" path="res://enemies/orc_archer/Run.png" id="3_c2ix8"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="5_6dr4y"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="6_7enri"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="7_1mph8"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="5_kue6n"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="6_icvrm"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="7_yhyp2"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="8_kcejl"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="8_pcifi"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="9_apbeu"]
 
 [sub_resource type="Animation" id="Animation_sy2pk"]
 length = 0.001
@@ -262,35 +264,44 @@ _data = {
 "run": SubResource("Animation_1ki3q")
 }
 
-[sub_resource type="Resource" id="Resource_k7jwh"]
-script = ExtResource("5_6dr4y")
+[sub_resource type="Resource" id="Resource_apcir"]
+script = ExtResource("5_kue6n")
 id = 3
 
-[sub_resource type="Resource" id="Resource_df5s6"]
-script = ExtResource("7_1mph8")
+[sub_resource type="Resource" id="Resource_viwve"]
+script = ExtResource("7_yhyp2")
+id = 1
+condition_script = ExtResource("6_icvrm")
+type = 1
+abstract = false
+
+[sub_resource type="Resource" id="Resource_4alqh"]
+script = ExtResource("9_apbeu")
 id = 1
 
-[sub_resource type="Resource" id="Resource_wa52o"]
-script = ExtResource("6_7enri")
-target_selection = SubResource("Resource_df5s6")
-action = SubResource("Resource_k7jwh")
+[sub_resource type="Resource" id="Resource_7bga8"]
+script = ExtResource("8_pcifi")
+target_selection = SubResource("Resource_4alqh")
+action = SubResource("Resource_apcir")
+condition = SubResource("Resource_viwve")
 
-[sub_resource type="Resource" id="Resource_bh8rr"]
-script = ExtResource("5_6dr4y")
+[sub_resource type="Resource" id="Resource_tes1g"]
+script = ExtResource("5_kue6n")
 id = 1
 
-[sub_resource type="Resource" id="Resource_udpe1"]
-script = ExtResource("7_1mph8")
+[sub_resource type="Resource" id="Resource_lrqp8"]
+script = ExtResource("9_apbeu")
 id = 1
 
-[sub_resource type="Resource" id="Resource_ph28e"]
-script = ExtResource("6_7enri")
-target_selection = SubResource("Resource_udpe1")
-action = SubResource("Resource_bh8rr")
+[sub_resource type="Resource" id="Resource_qis0j"]
+script = ExtResource("8_pcifi")
+target_selection = SubResource("Resource_lrqp8")
+action = SubResource("Resource_tes1g")
+condition = SubResource("Resource_viwve")
 
-[sub_resource type="Resource" id="Resource_rdjj3"]
+[sub_resource type="Resource" id="Resource_7dfw4"]
 script = ExtResource("8_kcejl")
-rules = Array[ExtResource("6_7enri")]([SubResource("Resource_wa52o"), SubResource("Resource_ph28e")])
+rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_7bga8"), SubResource("Resource_qis0j")])
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
 
@@ -316,7 +327,7 @@ libraries = {
 }
 
 [node name="BehaviorComponent" parent="." index="6"]
-behavior = SubResource("Resource_rdjj3")
+behavior = SubResource("Resource_7dfw4")
 
 [node name="AttributesComponent" parent="." index="9"]
 speed = 30.0

@@ -3,49 +3,45 @@
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_31vv2"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_12fml"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="2_jsr0t"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="2_p6p8m"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_wwn20"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
 
-[sub_resource type="Resource" id="Resource_litbs"]
+[sub_resource type="Resource" id="Resource_jlf3i"]
 script = ExtResource("1_31vv2")
 id = 2
 
-[sub_resource type="Resource" id="Resource_l4gug"]
+[sub_resource type="Resource" id="Resource_viwve"]
 script = ExtResource("2_12fml")
 id = 1
+condition_script = ExtResource("2_p6p8m")
 type = 1
 abstract = false
 
-[sub_resource type="Resource" id="Resource_tnefb"]
+[sub_resource type="Resource" id="Resource_1sjih"]
 script = ExtResource("3_wwn20")
 id = 1
 
-[sub_resource type="Resource" id="Resource_cgv0q"]
+[sub_resource type="Resource" id="Resource_36xgi"]
 script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_tnefb")
-action = SubResource("Resource_litbs")
-condition = SubResource("Resource_l4gug")
+target_selection = SubResource("Resource_1sjih")
+action = SubResource("Resource_jlf3i")
+condition = SubResource("Resource_viwve")
 
-[sub_resource type="Resource" id="Resource_ylbgn"]
+[sub_resource type="Resource" id="Resource_81htf"]
 script = ExtResource("1_31vv2")
 id = 1
 
-[sub_resource type="Resource" id="Resource_un0he"]
-script = ExtResource("2_12fml")
-id = 1
-type = 1
-abstract = false
-
-[sub_resource type="Resource" id="Resource_r34u6"]
+[sub_resource type="Resource" id="Resource_54mfd"]
 script = ExtResource("3_wwn20")
 id = 1
 
-[sub_resource type="Resource" id="Resource_1rh4s"]
+[sub_resource type="Resource" id="Resource_hagxt"]
 script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_r34u6")
-action = SubResource("Resource_ylbgn")
-condition = SubResource("Resource_un0he")
+target_selection = SubResource("Resource_54mfd")
+action = SubResource("Resource_81htf")
+condition = SubResource("Resource_viwve")
 
 [resource]
 script = ExtResource("4_vgf0t")
-rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_cgv0q"), SubResource("Resource_1rh4s")])
+rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_36xgi"), SubResource("Resource_hagxt")])

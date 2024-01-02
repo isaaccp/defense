@@ -28,3 +28,5 @@ func target_types() -> Array:
 func actions() -> Array:
 	return skill_tree_state.acquired_actions
 
+func conditions() -> Array:
+	return skill_tree_state.acquired_conditions

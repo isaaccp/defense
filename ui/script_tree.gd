@@ -41,8 +41,7 @@ func _add_empty() -> TreeItem:
 	row.set_selectable(0, false)
 	row.set_text(Column.TARGET, "[Target]")
 	row.set_metadata(Column.TARGET, 0)
-	# TODO: Set back to a placeholder when there's a proper condition type.
-	row.set_text(Column.CONDITION, "Always")
+	row.set_text(Column.CONDITION, "[Condition]")
 	row.set_metadata(Column.CONDITION, 0)
 	row.set_text(Column.ACTION, "[Action]")
 	row.set_metadata(Column.ACTION, 0)
@@ -54,8 +53,8 @@ func _add_prefilled(rule: Rule) -> TreeItem:
 	row.set_selectable(Column.DELETE_ICON, false)
 	row.set_text(Column.TARGET, str(rule.target_selection))
 	row.set_metadata(Column.TARGET, rule.target_selection.id)
-	row.set_text(Column.CONDITION, "Always")
-	row.set_metadata(Column.CONDITION, 0)
+	row.set_text(Column.CONDITION, str(rule.condition))
+	row.set_metadata(Column.CONDITION, rule.condition.id)
 	row.set_text(Column.ACTION, str(rule.action))
 	row.set_metadata(Column.ACTION, rule.action.id)
 	return row
@@ -132,8 +131,16 @@ func get_behavior() -> Behavior:
 	for child in _root.get_children():
 		if _is_empty(child):
 			continue
-		var target = child.get_metadata(Column.TARGET) as TargetSelectionDef.Id
-		var action = child.get_metadata(Column.ACTION) as ActionDef.Id
-		var rule = Rule.make(TargetSelectionDef.make(target), ActionDef.make(action))
+		var target_id = child.get_metadata(Column.TARGET) as TargetSelectionDef.Id
+		var action_id = child.get_metadata(Column.ACTION) as ActionDef.Id
+		var condition_id = child.get_metadata(Column.CONDITION) as ConditionDef.Id
+		var condition = ConditionManager.lookup(condition_id)
+		condition.abstract = false
+		# TODO: Depending on condition type, get parameters.
+		var rule = Rule.make(
+			TargetSelectionDef.make(target_id),
+			ActionDef.make(action_id),
+			condition
+		)
 		behavior.rules.append(rule)
 	return behavior

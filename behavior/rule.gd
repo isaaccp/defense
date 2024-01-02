@@ -13,10 +13,10 @@ func _to_string() -> String:
 		condition,
 	]
 
-static func make(target_selection: TargetSelectionDef, action: ActionDef) -> Rule:
+static func make(target_selection: TargetSelectionDef, action: ActionDef, condition: ConditionDef = ConditionManager.make_instance(ConditionDef.Id.ALWAYS)) -> Rule:
 	var rule = Rule.new()
 	rule.target_selection = target_selection
 	rule.action = action
-	# TODO: Stop hardcoding and pass along.
-	rule.condition = ConditionDef.make_instance(ConditionDef.Id.ALWAYS, ConditionDef.Type.ANY)
+	assert(not condition.abstract)
+	rule.condition = condition
 	return rule
