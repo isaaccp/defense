@@ -10,9 +10,11 @@ signal cancel_pressed
 @export var test_character: GameplayCharacter
 
 func _ready():
-	# So it works as a standalone scene for easy testing.
-	if test_character:
-		initialize(test_character)
+	# Only when launched with F6.
+	if get_parent() == get_tree().root:
+		# So it works as a standalone scene for easy testing.
+		if test_character:
+			initialize(test_character)
 
 func initialize(character: GameplayCharacter):
 	skill_tree_state = character.skill_tree_state

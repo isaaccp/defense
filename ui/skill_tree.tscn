@@ -27,7 +27,7 @@ name = "Bob"
 character_id = 1
 peer_id = 1
 skill_tree_state = SubResource("Resource_mqxpj")
-xp = 0
+xp = 100
 total_xp = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_6lxjg"]
