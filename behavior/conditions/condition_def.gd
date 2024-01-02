@@ -6,6 +6,7 @@ enum Id {
 	# TODO: Should first one be just always?
 	UNSPECIFIED,
 	ALWAYS,
+	TARGET_HEALTH,
 }
 
 # Type of condition.
@@ -25,7 +26,7 @@ enum Type {
 @export var id: Id
 @export var condition_script: GDScript
 @export var type: Type
-# Some way to specify placeholders.
+@export var params: ConditionParams
 
 # If true, it means it hasn't been parameterized through editor. Can't
 # be used in a rule, etc.

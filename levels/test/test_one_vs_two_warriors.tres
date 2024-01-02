@@ -20,6 +20,9 @@ script = ExtResource("3_gxqp6")
 id = 1
 condition_script = ExtResource("2_sudk3")
 type = 1
+editor_string = ""
+cmp = 0
+int_value = 0
 abstract = false
 
 [sub_resource type="Resource" id="Resource_4835u"]
@@ -55,7 +58,7 @@ script = ExtResource("3_apwm0")
 skill_tree_collection = ExtResource("4_vdgij")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
-acquired_conditions = Array[int]([1])
+acquired_conditions = Array[int]([1, 2])
 unlocked_actions = Array[int]([])
 unlocked_target_selections = Array[int]([])
 unlocked_conditions = Array[int]([])

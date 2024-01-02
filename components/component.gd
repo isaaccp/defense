@@ -11,8 +11,11 @@ static func get_or_die(node: Node, component_name: String) -> Node:
 static func get_or_null(node: Node, component_name: String) -> Node:
 	return node.get_node_or_null(component_name)
 
+static func get_health_component_or_null(node: Node) -> HealthComponent:
+	return get_or_die(node, HealthComponent.component) as HealthComponent
+
 static func get_health_component_or_die(node: Node) -> HealthComponent:
-	var component = get_or_die(node, HealthComponent.component) as HealthComponent
+	var component = get_health_component_or_null(node)
 	if not component:
 		assert(false)
 	return component

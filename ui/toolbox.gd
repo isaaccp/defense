@@ -30,7 +30,13 @@ func initialize(
 	triggers.set_selectable(0, false)
 	for condition_type in condition_types:
 		var trigger = tree.create_item(triggers)
-		trigger.set_text(0, ConditionDef.condition_name(condition_type))
+		# Somehow making editor string default to name() returns
+		# empty string on editor.
+		var condition = ConditionManager.lookup(condition_type)
+		var text = condition.params.editor_string
+		if text.is_empty():
+			text = ConditionDef.condition_name(condition_type)
+		trigger.set_text(0, text)
 		trigger.set_metadata(0, condition_metadata(1, condition_type))
 
 	var actions = tree.create_item(_root)

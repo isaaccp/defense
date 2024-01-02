@@ -5,6 +5,7 @@ class_name ConditionManager
 
 static var conditions = {
 	ConditionDef.Id.ALWAYS: preload("res://skill_tree/skills/general/always_condition.tres"),
+	ConditionDef.Id.TARGET_HEALTH: preload("res://skill_tree/skills/general/target_health_condition.tres"),
 }
 
 static func lookup(id: ConditionDef.Id) -> ConditionDef:
