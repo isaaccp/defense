@@ -6,6 +6,14 @@ var _skills: Dictionary # GraphNode name -> Skill resource
 signal ok_pressed
 signal cancel_pressed
 
+@export_group("Debug")
+@export var test_character: GameplayCharacter
+
+func _ready():
+	# So it works as a standalone scene for easy testing.
+	if test_character:
+		initialize(test_character)
+
 func initialize(character: GameplayCharacter):
 	skill_tree_state = character.skill_tree_state
 	%Title.text = "%s: Skill Tree" % character.name
