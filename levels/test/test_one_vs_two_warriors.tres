@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_a152q"]
 script = ExtResource("1_rbq5t")
-id = 3
+id = 5
 
 [sub_resource type="Resource" id="Resource_rt81u"]
 script = ExtResource("3_loqg3")

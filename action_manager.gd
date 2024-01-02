@@ -8,6 +8,7 @@ static var actions = {
 	ActionDef.Id.SWORD_ATTACK: preload("res://behavior/actions/sword_attack_action.gd"),
 	ActionDef.Id.BOW_ATTACK: preload("res://behavior/actions/bow_attack_action.gd"),
 	ActionDef.Id.CHARGE: preload("res://behavior/actions/charge_action.gd"),
+	ActionDef.Id.MULTI_SHOT: preload("res://behavior/actions/multi_shot_action.gd"),
 }
 
 static func make_action(action_def: ActionDef) -> Action:
