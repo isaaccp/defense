@@ -134,10 +134,6 @@ func get_behavior() -> Behavior:
 			continue
 		var target = child.get_metadata(Column.TARGET) as TargetSelectionDef.Id
 		var action = child.get_metadata(Column.ACTION) as ActionDef.Id
-		var rule = Rule.new()
-		rule.target_selection = TargetSelectionDef.new()
-		rule.target_selection.id = target
-		rule.action = ActionDef.new()
-		rule.action.id = action
+		var rule = Rule.make(TargetSelectionDef.make(target), ActionDef.make(action))
 		behavior.rules.append(rule)
 	return behavior

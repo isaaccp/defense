@@ -1,13 +1,20 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=11 format=3 uid="uid://bqup0xqgl0kxe"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=14 format=3 uid="uid://bqup0xqgl0kxe"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_hjg7n"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="2_7xnd2"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_n25oo"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_5u5kq"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_6didq"]
 
 [sub_resource type="Resource" id="Resource_8acf1"]
 script = ExtResource("1_hjg7n")
 id = 2
+
+[sub_resource type="Resource" id="Resource_lk77u"]
+script = ExtResource("2_n25oo")
+id = 1
+type = 1
+abstract = false
 
 [sub_resource type="Resource" id="Resource_tvddv"]
 script = ExtResource("3_5u5kq")
@@ -17,10 +24,17 @@ id = 1
 script = ExtResource("2_7xnd2")
 target_selection = SubResource("Resource_tvddv")
 action = SubResource("Resource_8acf1")
+condition = SubResource("Resource_lk77u")
 
 [sub_resource type="Resource" id="Resource_v0umy"]
 script = ExtResource("1_hjg7n")
 id = 4
+
+[sub_resource type="Resource" id="Resource_jmmtn"]
+script = ExtResource("2_n25oo")
+id = 1
+type = 1
+abstract = true
 
 [sub_resource type="Resource" id="Resource_e8eqj"]
 script = ExtResource("3_5u5kq")
@@ -30,6 +44,7 @@ id = 1
 script = ExtResource("2_7xnd2")
 target_selection = SubResource("Resource_e8eqj")
 action = SubResource("Resource_v0umy")
+condition = SubResource("Resource_jmmtn")
 
 [resource]
 script = ExtResource("4_6didq")

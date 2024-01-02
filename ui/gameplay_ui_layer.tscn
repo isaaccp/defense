@@ -28,6 +28,7 @@ layout_mode = 1
 
 [node name="UpgradeScreen" parent="Screens" instance=ExtResource("3_p6rmb")]
 visible = false
+layout_mode = 1
 
 [node name="Overlay" type="Control" parent="."]
 layout_mode = 3

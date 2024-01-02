@@ -1,9 +1,11 @@
 extends Object
 
-static func select_target(body: CharacterBody2D, side_component: SideComponent, action: Action, target_selection_def: TargetSelectionDef) -> Target:
+static func select_target(target_selection_def: TargetSelectionDef, evaluator: TargetNodeConditionEvaluator, action: Action, body: CharacterBody2D, side_component: SideComponent) -> Target:
 	var max_distance_squared = action.max_distance * action.max_distance
 	var min_distance_squared = action.min_distance * action.min_distance
 	var nearest_node = _nearest_node(side_component.enemies(), body.position, func(node: Node2D):
+		if evaluator and not evaluator.evaluate(node):
+			return false
 		var health_component = Component.get_or_null(node, HealthComponent.component)
 		if health_component and health_component.is_dead:
 			return false

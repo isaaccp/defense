@@ -14,8 +14,23 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 			if elapsed_time < can_run_after:
 				continue
 		# TODO: Construct actions only once when added to the behavior.
+		var target_node_evaluator: TargetNodeConditionEvaluator = null
+		match rule.condition.type:
+			ConditionDef.Type.ANY:
+				var evaluator = ConditionManager.make_any_condition_evaluator(rule.condition)
+				if not evaluator.evaluate():
+					continue
+			ConditionDef.Type.SELF:
+				var evaluator = ConditionManager.make_self_condition_evaluator(rule.condition, body)
+				if not evaluator.evaluate():
+					continue
+			ConditionDef.Type.GLOBAL:
+				# TODO: Implement.
+				pass
+			ConditionDef.Type.TARGET_NODE:
+				target_node_evaluator = ConditionManager.make_target_node_condition_evaluator(rule.condition)
 		var action = ActionManager.make_action(rule.action)
-		var target = TargetSelectionManager.select_target(body, side_component, action, rule.target_selection)
+		var target = TargetSelectionManager.select_target(rule.target_selection, target_node_evaluator, action, body, side_component)
 		if target.valid():
 			return {"rule": rule, "target": target, "action": action}
 	return {}
@@ -34,9 +49,10 @@ static func deserialize(serialized_behavior: PackedByteArray) -> Behavior:
 	var behavior = Behavior.new()
 	var data = bytes_to_var(serialized_behavior)
 	for serialized_rule in data:
-		var rule = Rule.new()
-		rule.target_selection = TargetSelectionDef.make(serialized_rule.target)
-		rule.action = ActionDef.make(serialized_rule.action)
+		var rule = Rule.make(
+			TargetSelectionDef.make(serialized_rule.target),
+			ActionDef.make(serialized_rule.action)
+		)
 		behavior.rules.append(rule)
 	return behavior
 
