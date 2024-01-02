@@ -3,6 +3,13 @@ extends Control
 var character: GameplayCharacter
 var skill_tree_state: SkillTreeState
 
+# TODO: Move (to Skill?) to use elsewhere
+var _skill_colors = {
+	Skill.SkillType.ACTION: Color.DARK_RED,
+	Skill.SkillType.CONDITION: Color.DARK_KHAKI,
+	Skill.SkillType.TARGET: Color.GREEN_YELLOW,
+}
+
 signal ok_pressed
 
 @export_group("Testing")
@@ -44,7 +51,7 @@ func _setup_tree():
 		var graph = GraphEdit.new()
 		graph.show_grid = false
 		graph.show_menu = false
-		graph.minimap_enabled = false
+		graph.minimap_enabled = true
 		graph.panning_scheme = GraphEdit.SCROLL_PANS
 		graph.name = SkillTree.TreeType.keys()[t.tree_type]
 		tabs.add_child(graph)
@@ -63,6 +70,9 @@ func _setup_tree():
 			skill.set_meta("modulate", skill.modulate)
 			skill.draggable = false
 			skill.title = s.name()
+
+			if s.skill_type in _skill_colors:
+				skill.self_modulate = _skill_colors[s.skill_type]
 			var icon = TextureRect.new()
 			# FIXME: Just a placeholder. GraphNode wants some content to associate connection ports with.
 			icon.texture = preload("res://assets/kyrises_rpg_icon_pack/icons/48x48/book_02a.png")
