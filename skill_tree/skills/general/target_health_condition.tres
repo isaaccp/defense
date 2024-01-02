@@ -1,18 +1,25 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=6 format=3 uid="uid://bs245ql4s67t4"]
+[gd_resource type="Resource" script_class="Skill" load_steps=8 format=3 uid="uid://bs245ql4s67t4"]
 
 [ext_resource type="Script" path="res://behavior/conditions/health_target_node_condition_evaluator.gd" id="1_ibe0p"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="2_8p2uu"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_y37y8"]
 [ext_resource type="Resource" uid="uid://oi7u5elqkl67" path="res://skill_tree/skills/general/always_condition.tres" id="3_1ojfb"]
 [ext_resource type="Script" path="res://skill_tree/skill.gd" id="3_7lyuu"]
+
+[sub_resource type="Resource" id="Resource_7h2n2"]
+script = ExtResource("2_8p2uu")
+editor_string = "health {cmp} {int_value}"
+cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_u53bd"]
 script = ExtResource("2_y37y8")
 id = 2
 condition_script = ExtResource("1_ibe0p")
 type = 2
-editor_string = "health {cmp} {int_value}"
-cmp = 0
-int_value = 0
+params = SubResource("Resource_7h2n2")
 abstract = true
 
 [resource]

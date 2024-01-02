@@ -3,6 +3,7 @@ extends PopupPanel
 
 var _item: TreeItem
 var _col: int
+var _params: ConditionParams
 var _set: Array[bool]
 
 @onready var input = %Input
@@ -12,72 +13,74 @@ signal config_confirmed(item: TreeItem, col: int, result: String)
 # NOTE: Just for testing the scene quickly, could be removed.
 func _ready():
 	%OK.disabled = true
-	_parse_opts("{bar} baz {qux} etc")
 
 func setup(item: TreeItem, col: int) -> void:
 	_item = item
 	_col = col
+	var metadata = item.get_metadata(col)
+	_params = item.get_metadata(col).data as ConditionParams
 
 	for c in input.get_children():
 		input.remove_child(c)
 	%OK.disabled = true
-	_parse_opts(item.get_text(col))
+	_populate()
 	show()
 
-func _parse_opts(txt: String):
-	# FIXME: Use real metadata structure to figure this out.
-	var re = RegEx.new()
-	re.compile('(?<prefix>.*?){(?<placeholder>.+?)}')
-	var result = re.search_all(txt)
-	var end = 0
-	var idx = 0
-	_set.resize(0)
-	for r in result:
-		var pre = r.get_string("prefix")
-		var l = Label.new()
-		l.text = pre
-		input.add_child(l)
+func _add_text(text: String):
+	var l = Label.new()
+	l.text = text
+	input.add_child(l)
 
-		var holder = r.get_string("placeholder")
-		var opt = OptionButton.new()
-		opt.add_item(holder, 0)
-		opt.set_item_disabled(0, true)
-		opt.fit_to_longest_item = false
+func _add_placeholder(placeholder_id: ConditionParams.PlaceholderId):
+	match placeholder_id:
+		ConditionParams.PlaceholderId.CMP:
+			var opt = OptionButton.new()
+			opt.add_item(ConditionParams.placeholder_name(placeholder_id), 0)
+			opt.set_item_disabled(0, true)
+			opt.fit_to_longest_item = false
+			for op in ConditionParams.CmpOp.values():
+				if op == ConditionParams.CmpOp.UNSPECIFIED:
+					continue
+				opt.add_item(ConditionParams.cmp_op_text(op), op)
+			if _params.placeholder_set(ConditionParams.PlaceholderId.CMP):
+				opt.select(_params.get_placeholder_value(ConditionParams.PlaceholderId.CMP))
+			else:
+				opt.select(0)
+			opt.item_selected.connect(_on_opt_selected.bind(placeholder_id))
+			input.add_child(opt)
+		ConditionParams.PlaceholderId.INT_VALUE:
+			var spin_box = SpinBox.new()
+			spin_box.max_value = 999
+			spin_box.set_update_on_text_changed(true)
+			spin_box.set_select_all_on_focus(true)
+			if _params.placeholder_set(ConditionParams.PlaceholderId.INT_VALUE):
+				spin_box.set_value(_params.get_placeholder_value(ConditionParams.PlaceholderId.INT_VALUE))
+			spin_box.value_changed.connect(_on_int_value_updated.bind(placeholder_id, spin_box))
+			input.add_child(spin_box)
 
-		# FIXME: From metadata
-		opt.add_item("Some long option name")
-		opt.add_item("HP")
-		opt.select(0)
-		opt.item_selected.connect(_on_opt_selected.bind(idx))
-		input.add_child(opt)
-		_set.append(false)
+func _populate():
+	for part in _params.parts:
+		if part is String:
+			_add_text(part)
+		elif part is ConditionParams.PlaceholderId:
+			_add_placeholder(part)
 
-		end = r.get_end()
-		idx += 1
+func _check_ok():
+	if _params.all_set():
+		%OK.disabled = false
 
-	var eol = txt.substr(end)
-	var t = Label.new()
-	t.text = eol
-	input.add_child(t)
+func _on_opt_selected(selection: int, placeholder: ConditionParams.PlaceholderId):
+	_params.set_placeholder_value(placeholder, selection)
+	_check_ok()
 
-func _on_opt_selected(_selection: int, placeholder: int):
-	# Make sure everything has been filled in before enabling the OK button
-	_set[placeholder] = true
-	for v in _set:
-		if not v:
-			return
-	%OK.disabled = false
+func _on_int_value_updated(value: float, placeholder: ConditionParams.PlaceholderId, spin_box: SpinBox):
+	var int_value = int(value)
+	spin_box.set_value_no_signal(int_value)
+	_params.set_placeholder_value(placeholder, int_value)
+	_check_ok()
 
-func results() -> String:
-	# FIXME: Structured result (the full behavior or something?)
-	var out := ""
-	for c in input.get_children():
-		if c is Label:
-			out += c.text
-		if c is OptionButton:
-			# Keep the placeholder so you can edit again...
-			out += "{%s}" % c.text
-	return out
+func results() -> ConditionParams:
+	return _params
 
 func _on_ok_pressed():
 	config_confirmed.emit(_item, _col, results())

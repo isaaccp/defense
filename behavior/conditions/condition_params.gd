@@ -29,23 +29,99 @@ enum PlaceholderId {
 @export var cmp: CmpOp
 @export var int_value: IntValue
 
-@export_group("Debug")
-@export var valid: bool = true
-@export var placeholders: Array[PlaceholderId]
+# Exporting those makes the duplicate(true) end up in a weird situation.
+# If we want them back, we could always just trigger parse manually afterwards.
+# @export_group("Debug")
+var valid: bool = true
+var placeholders: Array[PlaceholderId]
+var parts: Array[Variant]
 
+func _init():
+	_parse()
+
+func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
+	match placeholder:
+		PlaceholderId.CMP:
+			assert(typeof(value) == TYPE_INT)
+			cmp = value as CmpOp
+		PlaceholderId.INT_VALUE:
+			assert(typeof(value) == TYPE_INT)
+			int_value = IntValue.make(value)
+
+func get_placeholder_string(placeholder: PlaceholderId) -> String:
+	match placeholder:
+		PlaceholderId.CMP:
+			return cmp_op_text(cmp)
+		PlaceholderId.INT_VALUE:
+			return str(int_value.value)
+	assert(false, "Unreachable")
+	return "<bug>"
+
+# Precondition: placeholder_set() has returned true for this placeholder.
+func get_placeholder_value(placeholder: PlaceholderId) -> Variant:
+	match placeholder:
+		PlaceholderId.CMP:
+			return cmp
+		PlaceholderId.INT_VALUE:
+			return int_value.value
+	assert(false, "Unreachable")
+	return null
+
+func all_set() -> bool:
+	if not valid:
+		return false
+	var ret = true
+	for placeholder in placeholders:
+		ret = placeholder_set(placeholder)
+		if not ret:
+			break
+	return ret
+
+func interpolated_text() -> String:
+	var text = ""
+	for part in parts:
+		if part is String:
+			text += part
+		elif part is PlaceholderId:
+			if placeholder_set(part):
+				var value = get_placeholder_string(part)
+				text += str(value)
+			else:
+				text += _placeholder_text(part)
+	return text
+
+func _placeholder_text(placeholder: PlaceholderId) -> String:
+	return "{%s}" % PlaceholderId.keys()[placeholder].to_lower()
+
+func placeholder_set(placeholder: PlaceholderId) -> bool:
+	match placeholder:
+		PlaceholderId.CMP:
+			return cmp != CmpOp.UNSPECIFIED
+		PlaceholderId.INT_VALUE:
+			return int_value and int_value.defined
+	assert(false, "unreachable")
+	return false
 
 func _parse():
 	# TODO: Maybe check for mismatched { }.
 	placeholders.clear()
 	var re = RegEx.new()
-	re.compile('{(?<placeholder>.+?)}')
+	re.compile('(?<prefix>.*?){(?<placeholder>.+?)}')
 	var result = re.search_all(editor_string)
+	var end = 0
 	for r in result:
+		var prefix = r.get_string("prefix")
+		if not prefix.is_empty():
+			_add_part(prefix)
 		var holder = r.get_string("placeholder")
 		var added = _add_placeholder(holder)
 		if not added:
 			valid = false
 			return
+		end = r.get_end()
+	var eol = editor_string.substr(end)
+	if not eol.is_empty():
+		_add_part(eol)
 	valid = true
 
 func _id_from_placeholder(holder: String) -> PlaceholderId:
@@ -54,6 +130,9 @@ func _id_from_placeholder(holder: String) -> PlaceholderId:
 		return PlaceholderId.UNSPECIFIED
 	return PlaceholderId.get(upper)
 
+func _add_part(v: Variant):
+	parts.append(v)
+
 func _add_placeholder(holder: String) -> bool:
 	var id = _id_from_placeholder(holder)
 	if id == PlaceholderId.UNSPECIFIED:
@@ -61,4 +140,23 @@ func _add_placeholder(holder: String) -> bool:
 	if id in placeholders:
 		return false
 	placeholders.append(id)
+	_add_part(id)
 	return true
+
+static func placeholder_name(id: PlaceholderId) -> String:
+	return PlaceholderId.keys()[id]
+
+static func cmp_op_text(op: CmpOp) -> String:
+	match op:
+		ConditionParams.CmpOp.LT:
+			return "<"
+		ConditionParams.CmpOp.LE:
+			return "<="
+		ConditionParams.CmpOp.EQ:
+			return "="
+		ConditionParams.CmpOp.GE:
+			return ">="
+		ConditionParams.CmpOp.GT:
+			return ">"
+	assert(false, "unreachable")
+	return "<bug>"

@@ -78,7 +78,7 @@ alignment = 1
 [node name="ProgrammingUIParent" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(800, 400)
+custom_minimum_size = Vector2(900, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

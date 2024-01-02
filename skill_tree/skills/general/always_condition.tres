@@ -9,9 +9,6 @@ script = ExtResource("1_1630n")
 id = 1
 condition_script = ExtResource("1_754pk")
 type = 1
-editor_string = ""
-cmp = 0
-int_value = 0
 abstract = true
 
 [resource]

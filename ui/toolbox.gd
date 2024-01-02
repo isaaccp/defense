@@ -30,14 +30,9 @@ func initialize(
 	triggers.set_selectable(0, false)
 	for condition_type in condition_types:
 		var trigger = tree.create_item(triggers)
-		# Somehow making editor string default to name() returns
-		# empty string on editor.
-		var condition = ConditionManager.lookup(condition_type)
-		var text = condition.params.editor_string
-		if text.is_empty():
-			text = ConditionDef.condition_name(condition_type)
-		trigger.set_text(0, text)
-		trigger.set_metadata(0, condition_metadata(1, condition_type))
+		var condition = ConditionManager.make_instance(condition_type)
+		trigger.set_text(0, condition.name())
+		trigger.set_metadata(0, condition_metadata(1, condition_type, condition.params))
 
 	var actions = tree.create_item(_root)
 	actions.set_text(0, "Actions")
@@ -53,8 +48,8 @@ func target_metadata(column: int, id: TargetSelectionDef.Id) -> Dictionary:
 func action_metadata(column: int, id: ActionDef.Id) -> Dictionary:
 	return {"column": column, "id": id}
 
-func condition_metadata(column: int, id: ConditionDef.Id) -> Dictionary:
-	return {"column": column, "id": id}
+func condition_metadata(column: int, id: ConditionDef.Id, params: ConditionParams) -> Dictionary:
+	return {"column": column, "id": id, "params": params}
 
 func _get_drag_data(at_position: Vector2):
 	var item = get_item_at_position(at_position)
@@ -63,4 +58,7 @@ func _get_drag_data(at_position: Vector2):
 	var preview = Label.new()
 	preview.text = item.get_text(0)
 	set_drag_preview(preview)
-	return {"type": item.get_metadata(0).column, "text": preview.text, "id": item.get_metadata(0).id, "has_placeholders": preview.text.contains("{")}
+	var metadata = item.get_metadata(0)
+	if metadata.has("params"):
+		preview.text = metadata.params.editor_string
+	return {"type": metadata.column, "text": preview.text, "id": metadata.id, "params": metadata.get("params")}

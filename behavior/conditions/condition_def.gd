@@ -26,7 +26,7 @@ enum Type {
 @export var id: Id
 @export var condition_script: GDScript
 @export var type: Type
-@export var params: ConditionParams
+@export var params: ConditionParams = ConditionParams.new()
 
 # If true, it means it hasn't been parameterized through editor. Can't
 # be used in a rule, etc.
@@ -53,4 +53,7 @@ func name() -> String:
 	return condition_name(id)
 
 func _to_string() -> String:
-	return condition_name(id)
+	if not params or params.placeholders.size() == 0:
+		return condition_name(id)
+	else:
+		return params.interpolated_text()

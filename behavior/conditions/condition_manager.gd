@@ -12,10 +12,7 @@ static func lookup(id: ConditionDef.Id) -> ConditionDef:
 	return conditions[id].condition_def
 
 static func make_instance(id: ConditionDef.Id) -> ConditionDef:
-	var condition = lookup(id)
-	# TODO: For now assert this, later we may add support to
-	# specify parameters and we can verify parameters match.
-	assert(condition.type == ConditionDef.Type.ANY)
+	var condition = lookup(id).duplicate(true)
 	condition.abstract = false
 	return condition
 

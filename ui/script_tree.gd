@@ -40,11 +40,11 @@ func _add_empty() -> TreeItem:
 	row.add_button(0, delete_icon, 0, true, "Delete")
 	row.set_selectable(0, false)
 	row.set_text(Column.TARGET, "[Target]")
-	row.set_metadata(Column.TARGET, 0)
+	row.set_metadata(Column.TARGET, _metadata(0))
 	row.set_text(Column.CONDITION, "[Condition]")
-	row.set_metadata(Column.CONDITION, 0)
+	row.set_metadata(Column.CONDITION, _metadata(0))
 	row.set_text(Column.ACTION, "[Action]")
-	row.set_metadata(Column.ACTION, 0)
+	row.set_metadata(Column.ACTION, _metadata(0))
 	return row
 
 func _add_prefilled(rule: Rule) -> TreeItem:
@@ -52,11 +52,11 @@ func _add_prefilled(rule: Rule) -> TreeItem:
 	row.add_button(Column.DELETE_ICON, delete_icon, 0, false, "Delete")
 	row.set_selectable(Column.DELETE_ICON, false)
 	row.set_text(Column.TARGET, str(rule.target_selection))
-	row.set_metadata(Column.TARGET, rule.target_selection.id)
+	row.set_metadata(Column.TARGET, _metadata(rule.target_selection.id))
 	row.set_text(Column.CONDITION, str(rule.condition))
-	row.set_metadata(Column.CONDITION, rule.condition.id)
+	row.set_metadata(Column.CONDITION, _metadata(rule.condition.id, rule.condition.params))
 	row.set_text(Column.ACTION, str(rule.action))
-	row.set_metadata(Column.ACTION, rule.action.id)
+	row.set_metadata(Column.ACTION, _metadata(rule.action.id))
 	return row
 
 func _is_empty(item: TreeItem) -> bool:
@@ -64,9 +64,12 @@ func _is_empty(item: TreeItem) -> bool:
 		var meta = item.get_metadata(c)
 		# _add_empty leaves the delete button null but 0s the rest,
 		# but either is empty enough for our purposes.
-		if meta != null && meta != 0:
+		if meta != null && meta.id != 0:
 			return false
 	return true
+
+func _metadata(id: int, data: Variant = null) -> Dictionary:
+	return {"id": id, "data": data}
 
 func _can_drop_data(at_position: Vector2, data) -> bool:
 	var item = get_item_at_position(at_position)
@@ -107,8 +110,8 @@ func _drop_data(at_position: Vector2, data):
 
 	item.set_button_disabled(Column.DELETE_ICON, 0, false)
 	item.set_text(col, data.text)
-	item.set_metadata(col, data.id)
-	if data.has_placeholders:
+	item.set_metadata(col, _metadata(data.id, data.params))
+	if data.params:
 		item.add_button(col, edit_icon, 0, false, "Configure")
 	elif item.get_button_count(col) > 0:
 		item.erase_button(col, 0)
@@ -124,19 +127,20 @@ func _on_button_clicked(item, column, button_id, _mouse_button_index):
 		%ConfigPane.setup(item, column)
 
 func _on_config_pane_config_confirmed(item: TreeItem, col, result):
-	item.set_text(col, result)
+	var params = result as ConditionParams
+	var text = params.interpolated_text()
+	item.set_text(col, text)
 
 func get_behavior() -> Behavior:
 	var behavior = Behavior.new()
 	for child in _root.get_children():
 		if _is_empty(child):
 			continue
-		var target_id = child.get_metadata(Column.TARGET) as TargetSelectionDef.Id
-		var action_id = child.get_metadata(Column.ACTION) as ActionDef.Id
-		var condition_id = child.get_metadata(Column.CONDITION) as ConditionDef.Id
-		var condition = ConditionManager.lookup(condition_id)
-		condition.abstract = false
-		# TODO: Depending on condition type, get parameters.
+		var target_id = child.get_metadata(Column.TARGET).id as TargetSelectionDef.Id
+		var action_id = child.get_metadata(Column.ACTION).id as ActionDef.Id
+		var condition_id = child.get_metadata(Column.CONDITION).id as ConditionDef.Id
+		var condition = ConditionManager.make_instance(condition_id)
+		condition.params = child.get_metadata(Column.CONDITION).data as ConditionParams
 		var rule = Rule.make(
 			TargetSelectionDef.make(target_id),
 			ActionDef.make(action_id),
