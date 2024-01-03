@@ -33,6 +33,10 @@ func _on_hud_restart_requested():
 func show_log_viewer(logging_component: LoggingComponent):
 	%LogViewer.show_log(logging_component)
 
+func hide_log_viewer():
+	%LogViewer.reset()
+	%LogViewer.hide()
+
 func show_upgrade_window(character: Character):
 	show_screen(%UpgradeCharacterScreen)
 	%UpgradeCharacterScreen.show_upgrades(character)
