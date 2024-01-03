@@ -25,19 +25,21 @@ signal ok_pressed
 var purchase_cost = 50
 var available_upgrades: int
 var force_acquire_all_upgrades: bool
+var hide_locked_skills: bool
 
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
 		if test_character:
-			initialize(test_character, false)
+			initialize(test_character, false, true)
 	_setup_tree()
 
-func initialize(gameplay_character: GameplayCharacter, force_acquire_all: bool):
+func initialize(gameplay_character: GameplayCharacter, force_acquire_all: bool, show_all: bool):
 	character = gameplay_character
 	skill_tree_state = character.skill_tree_state
 	force_acquire_all_upgrades = force_acquire_all
+	hide_locked_skills = not show_all
 
 func _tint(s: Skill) -> Color:
 	var type_mod = Color.WHITE
@@ -69,6 +71,8 @@ func _setup_tree():
 		graph.set_meta("tree_type", t.tree_type)
 		_tabs.add_child(graph)
 		for s in t.skills:
+			if hide_locked_skills and not skill_tree_state.unlocked(s):
+				continue
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
 			skill.set_meta("skill", s)
