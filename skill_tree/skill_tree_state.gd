@@ -137,6 +137,7 @@ func _full(state_type: StateType) -> bool:
 		return full_unlocked
 
 # Used for tutorial levels, etc that need to add to a tree.
+# TODO: Don't add duplicates.
 func add(other: SkillTreeState):
 	unlocked_actions += other.unlocked_actions
 	unlocked_target_selections += other.unlocked_target_selections
