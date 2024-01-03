@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://bpfckr2evihqa"]
+[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://bpfckr2evihqa"]
 
 [ext_resource type="Script" path="res://skill_tree/skill.gd" id="1_1l0ka"]
+[ext_resource type="Resource" uid="uid://bd5sxds610d28" path="res://skill_tree/skills/general/tower_target.tres" id="1_xylbi"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_2f6nw"]
 
 [sub_resource type="Resource" id="Resource_j16g3"]
@@ -11,3 +12,4 @@ id = 1
 script = ExtResource("1_1l0ka")
 skill_type = 2
 target_selection_def = SubResource("Resource_j16g3")
+parent = ExtResource("1_xylbi")
