@@ -311,11 +311,12 @@ shape = SubResource("CircleShape2D_7fvau")
 
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("10_i8ose")]
 speed = 50.0
-health = 40
+health = 50
 status_component = NodePath("../StatusComponent")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("2_snnn5")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("2_snnn5")]
 attributes_component = NodePath("../AttributesComponent")
+logging_component = NodePath("../LoggingComponent")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("3_15loy")]
 health_component = NodePath("../HealthComponent")
@@ -346,8 +347,9 @@ shape = SubResource("CapsuleShape2D_4y0tt")
 [node name="SideComponent" parent="." instance=ExtResource("9_5f6fu")]
 side = 1
 
-[node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("11_8mhrp")]
+[node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component", "logging_component") instance=ExtResource("11_8mhrp")]
 health_component = NodePath("../HealthComponent")
+logging_component = NodePath("../LoggingComponent")
 
 [node name="SkillManagerComponent" parent="." node_paths=PackedStringArray("persistent_game_state_component") instance=ExtResource("11_wqx4k")]
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")

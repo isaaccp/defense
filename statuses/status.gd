@@ -13,3 +13,6 @@ enum Id {
 @export var id: Id
 @export var description: String
 @export var icon: Texture2D
+
+static func name(id: Id) -> String:
+	return Id.keys()[id].capitalize()

@@ -8,6 +8,9 @@ const component: StringName = &"StatusComponent"
 # For statuses that cause damage.
 @export var health_component: HealthComponent
 
+@export_group("Optional")
+@export var logging_component: LoggingComponent
+
 @export_group("Debug")
 # Used to keep detailed state about statuses. Keyed by (action_id, status_id) so
 # multiple actions can provide a status without removing it too early.
@@ -18,20 +21,20 @@ const component: StringName = &"StatusComponent"
 @export var elapsed_time: float = 0.0
 
 signal statuses_changed(statuses: Array)
-	
+
 class StatusState extends RefCounted:
 	# Remains until explicitly removed.
 	var permanent: bool
 	# Gets removed after this time.
 	var expiration_time: float
-	
+
 	func _init(permanent_: bool, expiration_time_: float):
 		permanent = permanent_
 		expiration_time = expiration_time_
 
 	func is_expired(elapsed_time: float):
 		return not permanent and expiration_time < elapsed_time
-	
+
 static func _key(action_id: ActionDef.Id, status_id: StatusDef.Id) -> Dictionary:
 	return {&"action": action_id, &"status": status_id}
 
@@ -40,6 +43,8 @@ func _process(delta: float):
 	elapsed_time += delta
 
 func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
+	var time_str = "%0.1fs" % time if time > 0 else "indefinite"
+	_log("%s provided by %s (%s)" % [StatusDef.name(status_id), ActionDef.action_name(action_id), time_str])
 	var changed = false
 	# Update status state.
 	var key = _key(action_id, status_id)
@@ -55,9 +60,12 @@ func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
 		changed = true
 	current_statuses[status_id][action_id] = true
 	if changed:
+		_log("%s status added" % StatusDef.name(status_id))
 		statuses_changed.emit(get_statuses())
 
-func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id):
+func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id, expired = false):
+	var reason = "expired" if expired else "removed"
+	_log("%s (from %s) %s" % [StatusDef.name(status_id), ActionDef.action_name(action_id), reason])
 	# Delete status state.
 	var key = _key(action_id, status_id)
 	status_metadata.erase(key)
@@ -67,6 +75,7 @@ func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id):
 		status_data.erase(action_id)
 		if status_data.is_empty():
 			current_statuses.erase(status_id)
+			_log("%s status removed" % StatusDef.name(status_id))
 			statuses_changed.emit(get_statuses())
 
 # TODO: If Godot gets better at Dictionary typing, make return type Array[StatusDef.Id]
@@ -76,7 +85,7 @@ func get_statuses() -> Array:
 func _expire_statuses():
 	for key in status_metadata.keys():
 		if status_metadata[key].is_expired(elapsed_time):
-			remove_status(key.action, key.status)
+			remove_status(key.action, key.status, true)
 
 func adjusted_speed(base_speed: float) -> int:
 	var speed = base_speed
@@ -84,7 +93,7 @@ func adjusted_speed(base_speed: float) -> int:
 		if status == StatusDef.Id.SWIFTNESS:
 			speed *= 1.5
 	return speed
-	
+
 func adjusted_health(base_health: int) -> int:
 	return base_health
 
@@ -94,3 +103,8 @@ func adjusted_damage_multiplier(base_damage_multiplier: float) -> float:
 		if status == StatusDef.Id.STRENGTH_SURGE:
 			damage_multiplier *= 2.0
 	return damage_multiplier
+
+func _log(message: String):
+	if not logging_component:
+		return
+	logging_component.add_log_entry(LoggingComponent.LogType.STATUS, message)

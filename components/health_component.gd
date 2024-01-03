@@ -16,6 +16,9 @@ class HealthUpdate extends RefCounted:
 @export_group("Required")
 @export var attributes_component: AttributesComponent
 
+@export_group("Optional")
+@export var logging_component: LoggingComponent
+
 @export_group("Debug")
 @export var max_health: int:
 	set(value):
@@ -27,13 +30,21 @@ class HealthUpdate extends RefCounted:
 	set(value):
 		var prev_health = health
 		health = clampi(value, 0, max_health)
+		# Do not emit/log on initial heal.
+		if initial_heal:
+			initial_heal = false
+			return
 		var update = HealthUpdate.new()
 		update.health = health
 		update.prev_health = prev_health
 		update.is_heal = health > prev_health
 		update.max_health = max_health
+		_log("Health: %d -> %d" % [update.prev_health, update.health])
 		health_updated.emit(update)
 @export var is_dead: bool = false
+
+# To avoid
+var initial_heal = true
 
 func _ready():
 	_initialize.call_deferred()
@@ -51,5 +62,11 @@ func heal(dmg: int):
 func damage(dmg: int):
 	health -= dmg
 	if health == 0 and not is_dead:
+		_log("Died")
 		is_dead = true
 		died.emit()
+
+func _log(message: String):
+	if not logging_component:
+		return
+	logging_component.add_log_entry(LoggingComponent.LogType.HEALTH, message)

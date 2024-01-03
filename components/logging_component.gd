@@ -18,6 +18,7 @@ enum LogType {
 	UNSPECIFIED,
 	BEHAVIOR,
 	HEALTH,
+	STATUS,
 }
 
 class LogEntry extends RefCounted:
