@@ -70,7 +70,7 @@ func _physics_process(delta: float):
 		if not result.is_empty():
 			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule
-				_log("Switched to rule: %s" % rule)
+				_log("%s" % rule)
 				target = result.target
 				if action:
 					action.action_finished()
@@ -89,7 +89,9 @@ func _physics_process(delta: float):
 func _on_action_finished(action: Action):
 	assert(action.finished)
 	if action.cooldown > 0:
-		action_cooldowns[action.def.id] = elapsed_time + action.cooldown
+		var eligible_at = elapsed_time + action.cooldown
+		action_cooldowns[action.def.id] = eligible_at
+		_log("Started %0.1f cooldown for %s, eligible at %0.2f" % [ action.cooldown, action.def.name(), eligible_at])
 
 static func _action_id(action: Action) -> ActionDef.Id:
 	if action:
