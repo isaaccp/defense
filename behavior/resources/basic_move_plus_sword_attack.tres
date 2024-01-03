@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=16 format=3 uid="uid://c4v0m5wsagpid"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=15 format=3 uid="uid://c4v0m5wsagpid"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_31vv2"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_12fml"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="2_jsr0t"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="2_p6p8m"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="3_okvei"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_wwn20"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
@@ -12,7 +11,7 @@
 script = ExtResource("1_31vv2")
 id = 2
 
-[sub_resource type="Resource" id="Resource_tptwh"]
+[sub_resource type="Resource" id="Resource_0t8g6"]
 script = ExtResource("3_okvei")
 editor_string = ""
 cmp = 0
@@ -20,9 +19,8 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_viwve"]
 script = ExtResource("2_12fml")
 id = 1
-condition_script = ExtResource("2_p6p8m")
 type = 1
-params = SubResource("Resource_tptwh")
+params = SubResource("Resource_0t8g6")
 abstract = false
 
 [sub_resource type="Resource" id="Resource_1sjih"]
