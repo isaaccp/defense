@@ -2,7 +2,6 @@ extends Control
 
 var character: GameplayCharacter
 var skill_tree_state: SkillTreeState
-var _skills: Dictionary # GraphNode name -> Skill resource
 
 signal ok_pressed
 
@@ -10,9 +9,10 @@ signal ok_pressed
 @export var test_character: GameplayCharacter
 
 @export_group("Debug")
+@export var selected_node: Node
 @export var selected_skill: Skill
 
-const skill_node_scene = preload("res://ui/skill_node.tscn")
+# const skill_node_scene = preload("res://ui/skill_node.tscn")
 
 # Do something better later.
 var purchase_cost = 50
@@ -44,7 +44,6 @@ func _setup_tree():
 		graph.panning_scheme = GraphEdit.SCROLL_PANS
 		graph.name = SkillTree.TreeType.keys()[t.tree_type]
 		tabs.add_child(graph)
-		var can_purchase_count = 0
 		for s in t.skills:
 			# TODO: May need different modes, showing locked or not.
 			if not skill_tree_state.unlocked(s):
@@ -52,13 +51,11 @@ func _setup_tree():
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
 			if not skill_tree_state.acquired(s):
-				var eligible_for_purchase = not s.parent or skill_tree_state.acquired(s.parent)
-				var can_afford = character.xp > purchase_cost
-				if eligible_for_purchase and can_afford:
-					can_purchase_count += 1
+				if _can_purchase(s):
 					skill.modulate = Color(1, 1, 1, 0.7)
 				else:
 					skill.modulate = Color(1, 1, 1, 0.25)
+			skill.set_meta("modulate", skill.modulate)
 			skill.set_meta("modulate", skill.modulate)
 			skill.draggable = false
 			skill.title = s.name()
@@ -71,10 +68,7 @@ func _setup_tree():
 			skill.mouse_exited.connect(_on_node_exited.bind(skill, s))
 			graph.add_child(skill)
 			seen[s] = skill
-			_skills[skill.name] = s
-		# Make this a nice thing.
-		if can_purchase_count != 0:
-			graph.name += " (%d)" % can_purchase_count
+			skill.set_meta("skill", s)
 		for s in seen:
 			# Have to do this in a second pass because we don't necessarily
 			# see children after their parents.
@@ -86,6 +80,18 @@ func _setup_tree():
 				graph.connect_node(parent.name, parent.get_output_port_slot(0), child.name, child.get_input_port_slot(0))
 		graph.arrange_nodes()
 		graph.node_selected.connect(_on_node_selected)
+	_update_can_purchase_counts()
+
+func _can_purchase(skill: Skill) -> bool:
+	if skill_tree_state.acquired(skill):
+		return false
+	if not skill_tree_state.unlocked(skill):
+		return false
+	if skill.parent and not skill_tree_state.acquired(skill.parent):
+		return false
+	if not character.has_xp(purchase_cost):
+		return false
+	return true
 
 func _on_node_entered(node: GraphNode, skill: Skill):
 	node.modulate = Color.WHITE
@@ -94,11 +100,33 @@ func _on_node_exited(node: GraphNode, skill: Skill):
 	node.modulate = node.get_meta("modulate")
 
 func _on_node_selected(n: Node):
-	selected_skill = _skills[n.name] as Skill
+	selected_node = n
+	selected_skill = n.get_meta("skill")
+	%BuyButton.disabled = not _can_purchase(selected_skill)
 	%Info.text = "Name: %s\nType: %s\n..." % [selected_skill.name(), selected_skill.type_name()]
 
 func _on_ok_pressed():
 	ok_pressed.emit()
 
 func _on_buy_button_pressed():
-	pass
+	assert(character.has_xp(purchase_cost), "should not happen")
+	character.use_xp(purchase_cost)
+	skill_tree_state.acquire(selected_skill)
+	selected_node.modulate = Color(1, 1, 1, 1)
+	selected_node.set_meta("modulate", Color(1, 1, 1, 1))
+	%BuyButton.disabled = true
+	_update_can_purchase_counts()
+
+func _update_can_purchase_counts():
+	var tabs = %Trees as TabContainer
+	for i in range(skill_tree_state.skill_tree_collection.skill_trees.size()):
+		var t = skill_tree_state.skill_tree_collection.skill_trees[i]
+		var can_purchase_count = 0
+		for s in t.skills:
+			if _can_purchase(s):
+				can_purchase_count += 1
+		# Make this a nice thing.
+		var graph_name = SkillTree.TreeType.keys()[t.tree_type]
+		if can_purchase_count > 0:
+			graph_name += " (%d)" % can_purchase_count
+		tabs.get_child(i).name = graph_name
