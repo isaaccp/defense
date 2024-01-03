@@ -55,6 +55,7 @@ func _setup_tree():
 	%Title.text = "%s: Skill Tree" % character.name
 
 	var tabs = %Trees as TabContainer
+	tabs.tab_changed.connect(_on_tab_changed)
 	for t in skill_tree_state.skill_tree_collection.skill_trees:
 		var seen: Dictionary
 		# TODO: The graph should be an instanced scene, probably
@@ -125,11 +126,17 @@ func _on_node_exited(node: GraphNode, skill: Skill):
 	node.self_modulate = _tint(skill)
 
 func _on_node_selected(n: Node):
+	if selected_node:
+		selected_node.selected = false
 	selected_node = n
 	selected_skill = n.get_meta("skill")
 	_update_info_panel(selected_skill)
 
 func _update_info_panel(skill: Skill):
+	if not skill:
+		%BuyButton.disabled = true
+		%Info.text = "Select a skill..."
+		return
 	%BuyButton.disabled = not _can_purchase(skill)
 	%Info.text = "Name: %s\nType: %s\nState: %s\n..." % [
 		skill.name(), skill.type_name(), _skill_state(skill)]
@@ -174,3 +181,8 @@ func _update_can_purchase_counts():
 		tabs.get_child(i).name = graph_name
 		total_count += can_purchase_count
 	available_upgrades = total_count
+
+func _on_tab_changed(_tab: int):
+	if selected_node:
+		selected_node.selected = false
+	_update_info_panel(null)
