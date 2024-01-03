@@ -3,6 +3,8 @@ extends Control
 var character: GameplayCharacter
 var skill_tree_state: SkillTreeState
 
+@onready var _tabs = %Trees as TabContainer
+
 # TODO: Move (to Skill?) to use elsewhere
 var _skill_colors = {
 	Skill.SkillType.ACTION: Color.DARK_RED,
@@ -54,10 +56,9 @@ func _tint(s: Skill) -> Color:
 func _setup_tree():
 	%Title.text = "%s: Skill Tree" % character.name
 
-	var tabs = %Trees as TabContainer
-	tabs.tab_changed.connect(_on_tab_changed)
+	_tabs.tab_changed.connect(_on_tab_changed)
 	for t in skill_tree_state.skill_tree_collection.skill_trees:
-		var seen: Dictionary
+		var seen := {}
 		# TODO: The graph should be an instanced scene, probably
 		var graph = GraphEdit.new()
 		graph.show_grid = false
@@ -65,7 +66,8 @@ func _setup_tree():
 		graph.minimap_enabled = true
 		graph.panning_scheme = GraphEdit.SCROLL_PANS
 		graph.name = SkillTree.TreeType.keys()[t.tree_type]
-		tabs.add_child(graph)
+		graph.set_meta("tree_type", t.tree_type)
+		_tabs.add_child(graph)
 		for s in t.skills:
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
@@ -96,7 +98,7 @@ func _setup_tree():
 				graph.connect_node(parent.name, parent.get_output_port_slot(0), child.name, child.get_input_port_slot(0))
 		graph.arrange_nodes()
 		graph.node_selected.connect(_on_node_selected)
-	_update_can_purchase_counts()
+	_update_purchase_state()
 
 func _can_purchase(skill: Skill) -> bool:
 	if skill_tree_state.acquired(skill):
@@ -137,7 +139,7 @@ func _avail_icon(skill: Skill) -> TextureRect:
 			out.self_modulate = Color.LIGHT_GREEN
 		"Need XP":
 			out.texture = preload("res://ui/icons/Unlock.svg")
-			out.self_modulate = Color.DARK_SLATE_GRAY
+			out.self_modulate = Color.DARK_GRAY
 		"Available":
 			out.texture = preload("res://ui/icons/Unlock.svg")
 			out.self_modulate = Color.LIGHT_GREEN
@@ -192,26 +194,34 @@ func _on_buy_button_pressed():
 	skill_tree_state.acquire(selected_skill)
 	selected_node.self_modulate = _tint(selected_skill)
 	_update_info_panel(selected_skill)
-	_update_can_purchase_counts()
+	_update_purchase_state()
 
-func _update_can_purchase_counts():
+func _update_purchase_state():
 	%Status.text = "XP: %d" % character.xp
 
 	var total_count = 0
-	var tabs = %Trees as TabContainer
-	for i in range(skill_tree_state.skill_tree_collection.skill_trees.size()):
-		var t = skill_tree_state.skill_tree_collection.skill_trees[i]
+	for tab in _tabs.get_children():
 		var can_purchase_count = 0
-		for s in t.skills:
+		for node in tab.get_children():
+			var s = node.get_meta("skill")
 			if _can_purchase(s):
 				can_purchase_count += 1
-		# Make this a nice thing.
-		var graph_name = SkillTree.TreeType.keys()[t.tree_type]
+			# We may have satisfied prereqs or run out of XP after a purchase,
+			# so we update icons for the whole graph.
+			_update_node_icon(node, s)
+		# TODO: Make this a nice thing.
+		var graph_name = SkillTree.TreeType.keys()[tab.get_meta('tree_type')]
 		if can_purchase_count > 0:
 			graph_name += " (%d)" % can_purchase_count
-		tabs.get_child(i).name = graph_name
+		tab.name = graph_name
 		total_count += can_purchase_count
 	available_upgrades = total_count
+
+func _update_node_icon(node: GraphNode, skill: Skill):
+	var titlebar = node.get_titlebar_hbox()
+	var old = titlebar.get_child(1)
+	old.replace_by(_avail_icon(skill))
+	old.queue_free()
 
 func _on_tab_changed(_tab: int):
 	if selected_node:
