@@ -109,7 +109,7 @@ func _grant_xp(level: Level):
 	# Level will be freed up on next frame, so this can't do
 	# any await, etc.
 	for character in characters:
-		character.grant_xp(100)
+		character.grant_xp(level.xp)
 
 func _credits():
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)

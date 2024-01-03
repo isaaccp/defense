@@ -37,6 +37,8 @@ func _setup_tree():
 		graph.name = SkillTree.TreeType.keys()[t.tree_type]
 		tabs.add_child(graph)
 		for s in t.skills:
+			if not skill_tree_state.unlocked(s):
+				continue
 			var skill = GraphNode.new()
 			skill.draggable = false
 			skill.title = s.name()

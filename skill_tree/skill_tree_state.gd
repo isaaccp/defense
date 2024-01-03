@@ -85,8 +85,10 @@ func _skill_in(skill: Skill, state_type: StateType):
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
 			return skill.action_def.id in _actions(state_type)
-		Skill.SkillType.ACTION:
+		Skill.SkillType.TARGET:
 			return skill.target_selection_def.id in _target_selections(state_type)
+		Skill.SkillType.CONDITION:
+			return skill.condition_def.id in _conditions(state_type)
 	return false
 
 func _add_skill_to(skill: Skill, state_type: StateType):
@@ -120,8 +122,23 @@ func _target_selections(state_type: StateType) -> Array[TargetSelectionDef.Id]:
 	else:
 		return unlocked_target_selections
 
+func _conditions(state_type: StateType) -> Array[ConditionDef.Id]:
+	if state_type == StateType.ACQUIRED:
+		return acquired_conditions
+	else:
+		return unlocked_conditions
+
 func _full(state_type: StateType) -> bool:
 	if state_type == StateType.ACQUIRED:
 		return full_acquired
 	else:
 		return full_unlocked
+
+# Used for tutorial levels, etc that need to add to a tree.
+func add(other: SkillTreeState):
+	unlocked_actions += other.unlocked_actions
+	unlocked_target_selections += other.unlocked_target_selections
+	unlocked_conditions += other.unlocked_target_selections
+	acquired_actions += other.acquired_actions
+	acquired_target_selections += other.acquired_target_selections
+	acquired_conditions += other.acquired_target_selections
