@@ -29,14 +29,14 @@ static func make_any_condition_evaluator(condition: ConditionDef) -> AnyConditio
 
 static func make_self_condition_evaluator(condition: ConditionDef, body: Node2D) -> SelfConditionEvaluator:
 	assert(not condition.abstract)
-	var evaluator = scripts[condition.id].condition_script.new() as SelfConditionEvaluator
+	var evaluator = scripts[condition.id].new() as SelfConditionEvaluator
 	evaluator.def = condition
 	evaluator.body = body
 	return evaluator
 
 static func make_target_node_condition_evaluator(condition: ConditionDef) -> TargetNodeConditionEvaluator:
 	assert(not condition.abstract)
-	var evaluator = scripts[condition.id].condition_script.new() as TargetNodeConditionEvaluator
+	var evaluator = scripts[condition.id].new() as TargetNodeConditionEvaluator
 	evaluator.def = condition
 	return evaluator
 
