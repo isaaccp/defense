@@ -6,6 +6,10 @@ signal pause_pressed
 
 var hud: Hud
 
+func _ready():
+	if not %DoubleSpeedButton.button_pressed:
+		%DoubleSpeedButton.modulate = Color(1, 1, 1, 0.5)
+
 func initialize(hud_: Hud):
 	hud = hud_
 
@@ -38,3 +42,17 @@ func _on_restart_dialog_confirmed():
 
 func _on_restart_dialog_canceled():
 	_pause(false)
+
+func _on_double_speed_button_toggled(toggled_on):
+	if toggled_on:
+		%DoubleSpeedButton.modulate = Color.WHITE
+		Engine.time_scale = 2.0
+	else:
+		%DoubleSpeedButton.modulate = Color(1, 1, 1, 0.5)
+		Engine.time_scale = 1.0
+
+func _on_visibility_changed():
+	# Ensure that we restore time scale if hidden.
+	Engine.time_scale = 1.0
+	if visible and %DoubleSpeedButton.button_pressed:
+		Engine.time_scale = 2.0

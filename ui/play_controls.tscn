@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://br8aaytuluka5"]
+[gd_scene load_steps=6 format=3 uid="uid://br8aaytuluka5"]
 
 [ext_resource type="Script" path="res://ui/play_controls.gd" id="1_tj244"]
 [ext_resource type="Texture2D" uid="uid://bnk26hbnbge1h" path="res://assets/button-ui/play_orange.tres" id="2_4nyx3"]
 [ext_resource type="Texture2D" uid="uid://bs8veuec51qdc" path="res://assets/button-ui/restart_orange.tres" id="3_5l35u"]
 [ext_resource type="Texture2D" uid="uid://dbiwhsh3kiyfl" path="res://assets/button-ui/pause_orange.tres" id="3_w27bm"]
+[ext_resource type="Texture2D" uid="uid://v00c5s5p41jd" path="res://assets/button-ui/double_speed_orange.tres" id="5_mn52b"]
 
 [node name="PlayControls" type="PanelContainer"]
 process_mode = 3
@@ -40,6 +41,14 @@ layout_mode = 2
 texture_normal = ExtResource("3_5l35u")
 stretch_mode = 4
 
+[node name="DoubleSpeedButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_mn52b")
+stretch_mode = 4
+
 [node name="RestartDialog" type="ConfirmationDialog" parent="."]
 unique_name_in_owner = true
 title = "Confirm level restart"
@@ -47,8 +56,10 @@ initial_position = 1
 ok_button_text = "Restart"
 cancel_button_text = "Unpause"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/DoubleSpeedButton" to="." method="_on_double_speed_button_toggled"]
 [connection signal="canceled" from="RestartDialog" to="." method="_on_restart_dialog_canceled"]
 [connection signal="confirmed" from="RestartDialog" to="." method="_on_restart_dialog_confirmed"]
