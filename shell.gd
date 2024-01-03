@@ -3,5 +3,5 @@
 extends EditorScript
 
 func _run():
-	# Write stuff to test!
-	pass
+	var f = 0.5
+	print("%.1f" % f)

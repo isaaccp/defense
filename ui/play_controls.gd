@@ -5,29 +5,36 @@ signal play_pressed
 signal pause_pressed
 
 var hud: Hud
+var speeds = [1, 2, 0.5]
+var current_speed = 0
+
+var _is_root = false
 
 func _ready():
-	if not %DoubleSpeedButton.button_pressed:
-		%DoubleSpeedButton.modulate = Color(1, 1, 1, 0.5)
+	if get_parent() == get_tree().root:
+		_is_root = true
 
 func initialize(hud_: Hud):
 	hud = hud_
 
 func _pause(pause: bool = true):
-	get_tree().paused = pause
+	if not _is_root:
+		get_tree().paused = pause
 
 func _on_stop_button_pressed():
 	# TODO: pause.
 	%RestartDialog.show()
 
 func _on_pause_button_pressed():
-	hud.show_main_message("Paused", 1.0)
+	if not _is_root:
+		hud.show_main_message("Paused", 1.0)
 	%PlayButton.show()
 	%PauseButton.hide()
 	_pause()
 
 func _on_play_button_pressed():
-	hud.hide_main_message()
+	if not _is_root:
+		hud.hide_main_message()
 	%PlayButton.hide()
 	%PauseButton.show()
 	_pause(false)
@@ -43,16 +50,19 @@ func _on_restart_dialog_confirmed():
 func _on_restart_dialog_canceled():
 	_pause(false)
 
-func _on_double_speed_button_toggled(toggled_on):
-	if toggled_on:
-		%DoubleSpeedButton.modulate = Color.WHITE
-		Engine.time_scale = 2.0
-	else:
-		%DoubleSpeedButton.modulate = Color(1, 1, 1, 0.5)
-		Engine.time_scale = 1.0
-
 func _on_visibility_changed():
 	# Ensure that we restore time scale if hidden.
 	Engine.time_scale = 1.0
-	if visible and %DoubleSpeedButton.button_pressed:
-		Engine.time_scale = 2.0
+	if visible:
+		Engine.time_scale = speeds[current_speed]
+
+func _on_speed_button_pressed():
+	current_speed = (current_speed + 1) % speeds.size()
+	Engine.time_scale = speeds[current_speed]
+	%SpeedButton/Label.text = _speed_string(speeds[current_speed])
+
+func _speed_string(speed: float) -> String:
+	if speed >= 1:
+		return "%1.0fx" % speed
+	else:
+		return ("%.1fx" % speed).lstrip("0")
