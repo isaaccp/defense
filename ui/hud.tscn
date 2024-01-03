@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqmsmsumhossr"]
+[gd_scene load_steps=6 format=3 uid="uid://cqmsmsumhossr"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_veies"]
 [ext_resource type="PackedScene" uid="uid://dqb2biimjiq37" path="res://ui/hud_tower_view.tscn" id="2_7mw8q"]
 [ext_resource type="PackedScene" uid="uid://do57hfqasnkkh" path="res://ui/hud_character_view.tscn" id="2_ok2lg"]
 [ext_resource type="PackedScene" uid="uid://cdotafm655xbv" path="res://ui/hud_victory_loss.tscn" id="2_q37k0"]
+[ext_resource type="PackedScene" uid="uid://br8aaytuluka5" path="res://ui/play_controls.tscn" id="4_qisxk"]
 
 [node name="HUD" type="Control" node_paths=PackedStringArray("peer", "main_message", "bottom_message")]
 layout_mode = 3
@@ -100,14 +101,19 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VictoryLoss" parent="." instance=ExtResource("2_q37k0")]
-unique_name_in_owner = true
+[node name="TopRightControls" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -103.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 35.0
+offset_left = -40.0
+offset_bottom = 40.0
 grow_horizontal = 0
+
+[node name="PlayControls" parent="TopRightControls" instance=ExtResource("4_qisxk")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VictoryLoss" parent="TopRightControls" instance=ExtResource("2_q37k0")]
+unique_name_in_owner = true
+layout_mode = 2

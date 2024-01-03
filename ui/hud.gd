@@ -68,17 +68,20 @@ func set_towers(towers: Node) -> void:
 	view.initialize(tower)
 	%TowerHud.add_child(view)
 
+func show_play_controls(show: bool = true):
+	%PlayControls.visible = show
+
 func set_victory_loss(victory_loss: VictoryLossConditionComponent):
 	%VictoryLoss.initialize(victory_loss)
 	show_victory_loss_text()
 
-func show_victory_loss(visible: bool = true):
-	%VictoryLoss.visible = visible
+func show_victory_loss(show: bool = true):
+	%VictoryLoss.visible = show
 
-func show_victory_loss_text(visible: bool = true):
-	if visible:
+func show_victory_loss_text(show: bool = true):
+	if show:
 		show_victory_loss(true)
-	%VictoryLoss.show_text(visible)
+	%VictoryLoss.show_text(show)
 
 func start_behavior_setup(all_ready_callback: Callable):
 	start_character_setup("Configure Behavior", _on_configure_behavior_pressed, all_ready_callback)

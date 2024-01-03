@@ -2,3 +2,4 @@
 .godot/
 # Editor backups
 *.tmp
+webrtc/lib/~lib*

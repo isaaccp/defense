@@ -9,7 +9,7 @@ func initialize(victory_loss_condition_compoment: VictoryLossConditionComponent)
 	victory_loss.level_finished.connect(_on_level_finished)
 	victory_loss.level_failed.connect(_on_level_failed)
 	_initialize_text()
-	
+
 func _initialize_text(
 		victory_type: VictoryLossConditionComponent.VictoryType = VictoryLossConditionComponent.VictoryType.UNSPECIFIED,
 		loss_type: VictoryLossConditionComponent.LossType = VictoryLossConditionComponent.LossType.UNSPECIFIED):
@@ -41,7 +41,7 @@ func _initialize_text(
 		text += loss_text
 	text += "[/ul]\n"
 	conditions_text.text = text
-	
+
 func show_text(visible: bool = true):
 	%PanelContainer.visible = visible
 
@@ -50,6 +50,6 @@ func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType)
 
 func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
 	_initialize_text(VictoryLossConditionComponent.VictoryType.UNSPECIFIED, loss_type)
-	
+
 func _on_button_pressed():
 	%PanelContainer.visible = not %PanelContainer.visible

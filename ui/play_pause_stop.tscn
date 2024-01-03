@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4vo6cib5axfi"]
+
+[ext_resource type="Texture2D" uid="uid://bnk26hbnbge1h" path="res://assets/button-ui/play_orange.tres" id="1_ahowp"]
+[ext_resource type="Script" path="res://ui/play_controls.gd" id="1_hxawd"]
+[ext_resource type="Texture2D" uid="uid://dujdw4v2tlx7o" path="res://assets/button-ui/stop_orange.tres" id="2_85pbq"]
+
+[node name="PlayControls" type="PanelContainer"]
+script = ExtResource("1_hxawd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PlayPauseButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("1_ahowp")
+stretch_mode = 4
+
+[node name="RestartButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("2_85pbq")
+stretch_mode = 4
+
+[connection signal="toggled" from="MarginContainer/HBoxContainer/PlayPauseButton" to="." method="_on_play_pause_button_toggled"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/RestartButton" to="." method="_on_stop_button_pressed"]

@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/hud_victory_loss.gd" id="1_lh70i"]
 
-[node name="HudVictoryLoss" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="HudVictoryLoss" type="PanelContainer"]
 offset_top = 39.0
 offset_right = 103.0
 offset_bottom = 39.0
@@ -13,8 +11,6 @@ script = ExtResource("1_lh70i")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
-offset_right = 103.0
-offset_bottom = 31.0
 text = "Victory/Loss"
 
 [node name="PanelContainer" type="PanelContainer" parent="Button"]
