@@ -51,7 +51,7 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	var adjusted_damage = round(float(damage) * action_scene.attributes_component.damage_multiplier)
-	hurtbox.handle_collision(adjusted_damage)
+	hurtbox.handle_collision(get_parent().name, adjusted_damage)
 	if hits > 0:
 		hits_left -= 1
 		if hits_left == 0:
