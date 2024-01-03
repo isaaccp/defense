@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=20 format=3 uid="uid://bmvux5rjsxklv"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=22 format=3 uid="uid://bmvux5rjsxklv"]
 
 [ext_resource type="PackedScene" uid="uid://bl8mdgqo1xlv0" path="res://levels/test/test_one_vs_two_level.tscn" id="1_61jmt"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_rbq5t"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_dmu74"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="2_eqjg6"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="2_sudk3"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="3_ajx3i"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_apwm0"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_gxqp6"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_loqg3"]
@@ -15,11 +16,17 @@
 script = ExtResource("1_rbq5t")
 id = 5
 
+[sub_resource type="Resource" id="Resource_rn4lk"]
+script = ExtResource("3_ajx3i")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_viwve"]
 script = ExtResource("3_gxqp6")
 id = 1
 condition_script = ExtResource("2_sudk3")
 type = 1
+params = SubResource("Resource_rn4lk")
 abstract = false
 
 [sub_resource type="Resource" id="Resource_4835u"]

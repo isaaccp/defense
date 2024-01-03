@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://dt5j8naupi576" path="res://levels/tutorial/tutorial_levels.tres" id="2_lxxxu"]
 [ext_resource type="Script" path="res://game_mode.gd" id="3_kbg0v"]
 [ext_resource type="Resource" uid="uid://d1ix5kyitpnfk" path="res://levels/main/main_levels.tres" id="4_xkub8"]
-[ext_resource type="Resource" uid="uid://bmvux5rjsxklv" path="res://levels/test/test_one_vs_two_warriors.tres" id="5_clvmx"]
+[ext_resource type="Resource" uid="uid://bcc8y2omvq0ou" path="res://levels/test/test_instant_win_upgrade.tres" id="5_2vxo6"]
 
 [sub_resource type="Resource" id="Resource_xuhfk"]
 script = ExtResource("3_kbg0v")
@@ -24,7 +24,7 @@ level_provider = ExtResource("4_xkub8")
 [sub_resource type="Resource" id="Resource_7ewkx"]
 script = ExtResource("3_kbg0v")
 online = 0
-level_provider = ExtResource("5_clvmx")
+level_provider = ExtResource("5_2vxo6")
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3

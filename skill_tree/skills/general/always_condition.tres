@@ -1,14 +1,21 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=5 format=3 uid="uid://oi7u5elqkl67"]
+[gd_resource type="Resource" script_class="Skill" load_steps=7 format=3 uid="uid://oi7u5elqkl67"]
 
 [ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="1_754pk"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="1_1630n"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="2_ddlej"]
 [ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_r88t6"]
+
+[sub_resource type="Resource" id="Resource_freyw"]
+script = ExtResource("2_ddlej")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_viwve"]
 script = ExtResource("1_1630n")
 id = 1
 condition_script = ExtResource("1_754pk")
 type = 1
+params = SubResource("Resource_freyw")
 abstract = true
 
 [resource]

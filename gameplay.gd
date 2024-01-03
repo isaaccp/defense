@@ -15,6 +15,7 @@ class_name Gameplay
 # Not constants so tests can speed them up.
 var ready_to_fight_wait = 1.0
 var level_end_wait = 3.0
+var level_failed_wait = 1.0
 
 var level_scene: PackedScene
 var level: Level
@@ -77,16 +78,13 @@ func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType)
 	_on_level_end(true)
 
 func _on_level_end(success: bool):
-	var message: String
-	if success:
-		message = "Level finished!"
-	else:
-		message = "Level failed!"
 	ui_layer.hud.show_victory_loss_text(true)
 	# TODO: Maybe later have a way to inspect level, e.g. see
 	# health of enemies, inspect logs, etc before moving on.
-	ui_layer.hud.show_main_message(message, level_end_wait)
-	await get_tree().create_timer(level_end_wait).timeout
+	if success:
+		await ui_layer.hud.show_main_message("Victory!", level_end_wait)
+	else:
+		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
 	ui_layer.hud.show_victory_loss(false)
 	level.queue_free()
 	if not success:

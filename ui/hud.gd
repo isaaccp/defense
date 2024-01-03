@@ -143,12 +143,16 @@ func set_time(time_secs: int) -> void:
 	time.text = "%02d:%02d" % [minutes, seconds]
 
 func show_main_message(message: String, timeout: float = 5.0) -> void:
+	# Call separately instead of with "call_local" as otherwise it can't await.
 	_show_message.rpc(message, MessageType.MAIN, timeout)
+	await _show_message(message, MessageType.MAIN, timeout)
 
 func show_bottom_message(message: String, timeout: float = 5.0) -> void:
+	# Call separately instead of with "call_local" as otherwise it can't await.
 	_show_message.rpc(message, MessageType.BOTTOM, timeout)
+	await _show_message(message, MessageType.BOTTOM, timeout)
 
-@rpc("call_local")
+@rpc
 func _show_message(message: String, message_type: MessageType, timeout: float = 5.0) -> void:
 	var label = message_label[message_type]
 	label.text = message

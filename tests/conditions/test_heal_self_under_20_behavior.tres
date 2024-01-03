@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="Behavior" load_steps=15 format=3 uid="uid://xvk7de3pnrwf"]
+
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_b34mx"]
+[ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="3_dvhob"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_vx3aa"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="5_hjytx"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="6_allpt"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="7_f4m1p"]
+
+[sub_resource type="Resource" id="Resource_q62gh"]
+script = ExtResource("1_b34mx")
+id = 6
+
+[sub_resource type="GDScript" id="GDScript_pay4j"]
+script/source = "extends IntTargetNodeConditionEvaluator
+
+func get_value(node: Node2D) -> int:
+	var health = Component.get_health_component_or_null(node)
+	if not health:
+		get_value_failed = true
+		return 0
+	return health.health
+"
+
+[sub_resource type="Resource" id="Resource_72x0b"]
+script = ExtResource("2_btuym")
+defined = true
+value = 20
+
+[sub_resource type="Resource" id="Resource_mo8ay"]
+script = ExtResource("3_dvhob")
+editor_string = "health {cmp} {int_value}"
+cmp = 1
+int_value = SubResource("Resource_72x0b")
+
+[sub_resource type="Resource" id="Resource_j4go4"]
+script = ExtResource("4_vx3aa")
+id = 2
+condition_script = SubResource("GDScript_pay4j")
+type = 2
+params = SubResource("Resource_mo8ay")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_61ih4"]
+script = ExtResource("6_allpt")
+id = 3
+
+[sub_resource type="Resource" id="Resource_3okq3"]
+script = ExtResource("5_hjytx")
+target_selection = SubResource("Resource_61ih4")
+action = SubResource("Resource_q62gh")
+condition = SubResource("Resource_j4go4")
+
+[resource]
+script = ExtResource("7_f4m1p")
+rules = Array[ExtResource("5_hjytx")]([SubResource("Resource_3okq3")])
