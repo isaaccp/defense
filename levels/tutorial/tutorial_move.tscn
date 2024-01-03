@@ -1,9 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://404r5ooscyrr"]
+[gd_scene load_steps=6 format=3 uid="uid://404r5ooscyrr"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_wqmgd"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="2_7ckkc"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_dw0nd"]
+[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="3_elcw1"]
+
+[sub_resource type="Resource" id="Resource_gkh1c"]
+script = ExtResource("2_dw0nd")
+skill_tree_collection = ExtResource("3_elcw1")
+acquired_actions = Array[int]([1])
+acquired_target_selections = Array[int]([2])
+acquired_conditions = Array[int]([1])
+unlocked_actions = Array[int]([1, 2])
+unlocked_target_selections = Array[int]([2, 1])
+unlocked_conditions = Array[int]([1])
+full_acquired = false
+full_unlocked = false
 
 [node name="TutorialMove" instance=ExtResource("1_wqmgd")]
+skill_tree_state_override = SubResource("Resource_gkh1c")
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(85, 204)

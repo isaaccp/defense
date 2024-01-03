@@ -1,24 +1,9 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://dt5j8naupi576"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=3 format=3 uid="uid://dt5j8naupi576"]
 
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="1_mhg3q"]
 [ext_resource type="PackedScene" uid="uid://404r5ooscyrr" path="res://levels/tutorial/tutorial_move.tscn" id="1_u2h2n"]
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_myko7"]
-[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_ci42g"]
-
-[sub_resource type="Resource" id="Resource_fqohg"]
-script = ExtResource("3_myko7")
-skill_tree_collection = ExtResource("4_ci42g")
-acquired_actions = Array[int]([1])
-acquired_target_selections = Array[int]([2])
-acquired_conditions = Array[int]([1])
-unlocked_actions = Array[int]([1])
-unlocked_target_selections = Array[int]([2])
-unlocked_conditions = Array[int]([])
-full_acquired = false
-full_unlocked = false
 
 [resource]
 script = ExtResource("1_mhg3q")
 players = 1
 levels = Array[PackedScene]([ExtResource("1_u2h2n")])
-skill_tree_state = SubResource("Resource_fqohg")

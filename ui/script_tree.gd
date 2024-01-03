@@ -111,7 +111,7 @@ func _drop_data(at_position: Vector2, data):
 	item.set_button_disabled(Column.DELETE_ICON, 0, false)
 	item.set_text(col, data.text)
 	item.set_metadata(col, _metadata(data.id, data.params))
-	if data.params:
+	if data.params and data.params.placeholders.size() > 0:
 		item.add_button(col, edit_icon, 0, false, "Configure")
 	elif item.get_button_count(col) > 0:
 		item.erase_button(col, 0)

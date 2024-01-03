@@ -35,7 +35,7 @@ class_name SkillTreeState
 			return TargetSelectionManager.all_target_selections()
 		return unlocked_target_selections
 
-@export var unlocked_conditions: Array[ConditionDef.Id]:
+@export var unlocked_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
 	get:
 		if full_unlocked:
 			return ConditionManager.all_conditions()

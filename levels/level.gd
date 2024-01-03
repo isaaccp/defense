@@ -6,11 +6,16 @@ class_name Level
 @export var enemies: Node2D
 @export var towers: Node2D
 @export var starting_positions: Node
+# To be used for e.g. tutorial levels in which we may
+# want a particular set of skills acquired/unlocked.
+@export var skill_tree_state_override: SkillTreeState
 
 var is_frozen: bool = false
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
+		if skill_tree_state_override:
+			gameplay_characters[i].skill_tree_state = skill_tree_state_override
 		var character = CharacterManager.make_character(gameplay_characters[i])
 		character.idx = i
 		character.peer_id = gameplay_characters[i].peer_id
