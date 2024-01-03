@@ -42,6 +42,7 @@ signal restart_requested
 func _ready():
 	for label in message_label.values():
 		label.hide()
+	%PlayControls.initialize(self)
 
 func set_characters(character_node: Node) -> void:
 	characters.clear()
@@ -150,6 +151,9 @@ func show_main_message(message: String, timeout: float = 5.0) -> void:
 	# Call separately instead of with "call_local" as otherwise it can't await.
 	_show_message.rpc(message, MessageType.MAIN, timeout)
 	await _show_message(message, MessageType.MAIN, timeout)
+
+func hide_main_message() -> void:
+	show_main_message("", 0.0)
 
 func show_bottom_message(message: String, timeout: float = 5.0) -> void:
 	# Call separately instead of with "call_local" as otherwise it can't await.
