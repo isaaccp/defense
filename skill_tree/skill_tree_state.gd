@@ -96,8 +96,10 @@ func _add_skill_to(skill: Skill, state_type: StateType):
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
 			_actions(state_type).append(skill.action_def.id)
-		Skill.SkillType.ACTION:
+		Skill.SkillType.TARGET:
 			_target_selections(state_type).append(skill.target_selection_def.id)
+		Skill.SkillType.CONDITION:
+			_conditions(state_type).append(skill.condition_def.id)
 
 static func make_full() -> SkillTreeState:
 	var skill_tree_state = SkillTreeState.new()

@@ -97,7 +97,7 @@ func _on_level_end(success: bool):
 		_grant_xp(level)
 		if not level.skip_upgrade:
 			ui_layer.show_screen(ui_layer.upgrade_screen)
-			ui_layer.upgrade_screen.set_characters(characters)
+			ui_layer.upgrade_screen.setup(characters, level.force_acquire_all_upgrades)
 			ui_layer.hud.start_character_setup(
 				"Acquire Skills",
 				ui_layer.upgrade_screen.on_acquired_skills_pressed,

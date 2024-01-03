@@ -12,6 +12,9 @@ class_name Level
 # Same as above, but it only adds to existing tree, so
 # it's less work if you don't need to remove skills.
 @export var skill_tree_state_add: SkillTreeState
+# If set, the next upgrade screen after this level
+# will force you to buy all the upgrades.
+@export var force_acquire_all_upgrades = false
 
 @export_group("Testing")
 # For testing long level flows, instantly wins level.

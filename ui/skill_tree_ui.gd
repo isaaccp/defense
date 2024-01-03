@@ -14,20 +14,24 @@ signal ok_pressed
 
 # const skill_node_scene = preload("res://ui/skill_node.tscn")
 
+
 # Do something better later.
 var purchase_cost = 50
+var available_upgrades: int
+var force_acquire_all_upgrades: bool
 
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
 		if test_character:
-			initialize(test_character)
+			initialize(test_character, false)
 	_setup_tree()
 
-func initialize(gameplay_character: GameplayCharacter):
+func initialize(gameplay_character: GameplayCharacter, force_acquire_all: bool):
 	character = gameplay_character
 	skill_tree_state = character.skill_tree_state
+	force_acquire_all_upgrades = force_acquire_all
 
 func _setup_tree():
 	%Title.text = "%s: Skill Tree" % character.name
@@ -106,7 +110,17 @@ func _on_node_selected(n: Node):
 	%Info.text = "Name: %s\nType: %s\n..." % [selected_skill.name(), selected_skill.type_name()]
 
 func _on_ok_pressed():
-	ok_pressed.emit()
+	if force_acquire_all_upgrades and available_upgrades > 0:
+		var dialog = AcceptDialog.new()
+		dialog.title = "Not so fast!"
+		dialog.dialog_text = "In this level, you must purchase all available upgrades before proceeding"
+		dialog.always_on_top = true
+		dialog.show()
+		dialog.popup_exclusive_centered(self)
+		await dialog.confirmed
+		dialog.queue_free()
+	else:
+		ok_pressed.emit()
 
 func _on_buy_button_pressed():
 	assert(character.has_xp(purchase_cost), "should not happen")
@@ -118,6 +132,7 @@ func _on_buy_button_pressed():
 	_update_can_purchase_counts()
 
 func _update_can_purchase_counts():
+	var total_count = 0
 	var tabs = %Trees as TabContainer
 	for i in range(skill_tree_state.skill_tree_collection.skill_trees.size()):
 		var t = skill_tree_state.skill_tree_collection.skill_trees[i]
@@ -130,3 +145,5 @@ func _update_can_purchase_counts():
 		if can_purchase_count > 0:
 			graph_name += " (%d)" % can_purchase_count
 		tabs.get_child(i).name = graph_name
+		total_count += can_purchase_count
+	available_upgrades = total_count
