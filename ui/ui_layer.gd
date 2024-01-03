@@ -10,7 +10,7 @@ class_name UILayer
 
 var overlay_generation = 0
 
-signal title_screen_game_mode_selected(game_mode: GameMode, fallback: bool)
+signal title_screen_game_mode_selected(game_mode: GameMode)
 
 signal ready_screen_ready_pressed
 
@@ -26,8 +26,8 @@ func show_message(message: String) -> void:
 func hide_message() -> void:
 	overlay_message.hide()
 
-func _on_title_screen_game_mode_selected(game_mode: GameMode, fallback: bool):
-	title_screen_game_mode_selected.emit(game_mode, fallback)
+func _on_title_screen_game_mode_selected(game_mode: GameMode):
+	title_screen_game_mode_selected.emit(game_mode)
 
 func _on_ready_screen_ready_pressed():
 	ready_screen_ready_pressed.emit()

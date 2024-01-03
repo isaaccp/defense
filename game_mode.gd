@@ -9,6 +9,7 @@ enum OnlineType {
 
 @export var online: OnlineType
 @export var level_provider: LevelProvider
+@export var fallback_local_nakama = false
 
 func is_local():
 	return online == OnlineType.LOCAL

@@ -7,9 +7,9 @@ class_name Rule
 @export var condition: ConditionDef
 
 func _to_string() -> String:
-	return "Target Selection: %s Action: %s Condition: %s" % [
-		target_selection,
+	return "%s -> %s (%s)" % [
 		action,
+		target_selection,
 		condition,
 	]
 

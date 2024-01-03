@@ -20,6 +20,7 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 # If set, behavior is obtained through there.
 @export var persistent_game_state_component: PersistentGameStateComponent
 @export var health_component: HealthComponent
+@export var logging_component: LoggingComponent
 @export var behavior: Behavior:
 	get:
 		if persistent_game_state_component:
@@ -69,7 +70,7 @@ func _physics_process(delta: float):
 		if not result.is_empty():
 			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule
-				print("[%0.2f] %s: Switched to rule: %s" % [elapsed_time, get_parent().name, rule])
+				_log("Switched to rule: %s" % rule)
 				target = result.target
 				if action:
 					action.action_finished()
@@ -107,3 +108,8 @@ func _post_action():
 		animation_player.play("run")
 	if not is_zero_approx(body.velocity.x):
 		sprite.flip_h = body.velocity.x < 0
+
+func _log(message: String):
+	if not logging_component:
+		return
+	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, message)

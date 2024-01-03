@@ -16,12 +16,12 @@ func _ready():
 	# _on_title_screen_connect_selected.call_deferred()
 	pass
 
-func _on_title_screen_game_mode_selected(mode: GameMode, fallback: bool):
+func _on_title_screen_game_mode_selected(mode: GameMode):
 	game_mode = mode
 	if mode.is_local():
 		start_gameplay()
 	else:
-		ui_layer.show_screen(ui_layer.match_screen, {'fallback': fallback})
+		ui_layer.show_screen(ui_layer.match_screen, {'fallback': game_mode.fallback_local_nakama})
 
 func _on_ready_screen_ready_pressed():
 	player_ready.rpc(OnlineMatch.get_my_session_id())

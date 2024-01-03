@@ -1,30 +1,65 @@
-[gd_scene load_steps=10 format=3 uid="uid://cys516tfuqeh3"]
+[gd_scene load_steps=16 format=3 uid="uid://cys516tfuqeh3"]
 
 [ext_resource type="Script" path="res://ui/title_screen.gd" id="1_rjeij"]
 [ext_resource type="Resource" uid="uid://dt5j8naupi576" path="res://levels/tutorial/tutorial_levels.tres" id="2_lxxxu"]
 [ext_resource type="Script" path="res://game_mode.gd" id="3_kbg0v"]
 [ext_resource type="Resource" uid="uid://d1ix5kyitpnfk" path="res://levels/main/main_levels.tres" id="4_xkub8"]
 [ext_resource type="Resource" uid="uid://bcc8y2omvq0ou" path="res://levels/test/test_instant_win_upgrade.tres" id="5_2vxo6"]
+[ext_resource type="Script" path="res://ui/game_mode_button.gd" id="6_0ch8u"]
 
 [sub_resource type="Resource" id="Resource_xuhfk"]
 script = ExtResource("3_kbg0v")
 online = 0
 level_provider = ExtResource("2_lxxxu")
+fallback_local_nakama = false
 
 [sub_resource type="Resource" id="Resource_xdj1d"]
 script = ExtResource("3_kbg0v")
 online = 0
 level_provider = ExtResource("4_xkub8")
+fallback_local_nakama = false
 
 [sub_resource type="Resource" id="Resource_3yys3"]
 script = ExtResource("3_kbg0v")
 online = 1
 level_provider = ExtResource("4_xkub8")
+fallback_local_nakama = false
 
 [sub_resource type="Resource" id="Resource_7ewkx"]
 script = ExtResource("3_kbg0v")
 online = 0
 level_provider = ExtResource("5_2vxo6")
+fallback_local_nakama = false
+
+[sub_resource type="Resource" id="Resource_5yr05"]
+script = ExtResource("3_kbg0v")
+online = 0
+level_provider = ExtResource("2_lxxxu")
+fallback_local_nakama = false
+
+[sub_resource type="Resource" id="Resource_tyjew"]
+script = ExtResource("3_kbg0v")
+online = 0
+level_provider = ExtResource("4_xkub8")
+fallback_local_nakama = false
+
+[sub_resource type="Resource" id="Resource_ct1c6"]
+script = ExtResource("3_kbg0v")
+online = 1
+level_provider = ExtResource("4_xkub8")
+fallback_local_nakama = false
+
+[sub_resource type="Resource" id="Resource_fbjae"]
+script = ExtResource("3_kbg0v")
+online = 1
+level_provider = ExtResource("4_xkub8")
+fallback_local_nakama = true
+
+[sub_resource type="Resource" id="Resource_bdhkv"]
+script = ExtResource("3_kbg0v")
+online = 0
+level_provider = ExtResource("5_2vxo6")
+fallback_local_nakama = false
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -39,7 +74,8 @@ local_game_mode = SubResource("Resource_xdj1d")
 multiplayer_game_mode = SubResource("Resource_3yys3")
 test_game_mode = SubResource("Resource_7ewkx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="GameModeButtons" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,28 +89,32 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TutorialButton" type="Button" parent="VBoxContainer"]
+[node name="TutorialButton" type="Button" parent="GameModeButtons"]
 layout_mode = 2
 text = "Play Tutorial"
+script = ExtResource("6_0ch8u")
+game_mode = SubResource("Resource_5yr05")
 
-[node name="LocalGameButton" type="Button" parent="VBoxContainer"]
+[node name="LocalGameButton" type="Button" parent="GameModeButtons"]
 layout_mode = 2
 text = "Play Local"
+script = ExtResource("6_0ch8u")
+game_mode = SubResource("Resource_tyjew")
 
-[node name="MultiplayerGameButton" type="Button" parent="VBoxContainer"]
+[node name="MultiplayerGameButton" type="Button" parent="GameModeButtons"]
 layout_mode = 2
 text = "Play Multiplayer	"
+script = ExtResource("6_0ch8u")
+game_mode = SubResource("Resource_ct1c6")
 
-[node name="FallbackMultiplayerGameButton" type="Button" parent="VBoxContainer"]
+[node name="FallbackMultiplayerGameButton" type="Button" parent="GameModeButtons"]
 layout_mode = 2
 text = "<Local Nakama>"
+script = ExtResource("6_0ch8u")
+game_mode = SubResource("Resource_fbjae")
 
-[node name="TestButton" type="Button" parent="VBoxContainer"]
+[node name="TestInstantVictoryButton" type="Button" parent="GameModeButtons"]
 layout_mode = 2
-text = "Play Test Level (dev)"
-
-[connection signal="pressed" from="VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/LocalGameButton" to="." method="_on_local_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MultiplayerGameButton" to="." method="_on_multiplayer_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/FallbackMultiplayerGameButton" to="." method="_on_fallback_multiplayer_game_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TestButton" to="." method="_on_test_button_pressed"]
+text = "Play Test Level (Instant Victory)"
+script = ExtResource("6_0ch8u")
+game_mode = SubResource("Resource_bdhkv")

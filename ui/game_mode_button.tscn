@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7k36j4s86uh0"]
+
+[ext_resource type="Script" path="res://ui/game_mode_button.gd" id="1_n3qq5"]
+
+[node name="GameModeButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_n3qq5")

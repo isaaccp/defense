@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=14 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_1mnbb"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="4_r4r2v"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dqq1u1lvtpoqe" path="res://components/persistent_game_state_component.tscn" id="9_ql6uj"]
 [ext_resource type="PackedScene" uid="uid://dse5haatr2bua" path="res://components/skill_manager_component.tscn" id="10_2p7l7"]
 [ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="10_lydou"]
+[ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="11_0ewa0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
 
@@ -61,7 +62,7 @@ animation_player = NodePath("../Sprite2D/AnimationPlayer")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component") instance=ExtResource("7_01gwr")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -71,6 +72,7 @@ attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 health_component = NodePath("../HealthComponent")
+logging_component = NodePath("../LoggingComponent")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("8_mrif0")]
 side_component = NodePath("../SideComponent")
@@ -89,3 +91,5 @@ health_component = NodePath("../HealthComponent")
 
 [node name="SkillManagerComponent" parent="." node_paths=PackedStringArray("persistent_game_state_component") instance=ExtResource("10_2p7l7")]
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
+
+[node name="LoggingComponent" parent="." instance=ExtResource("11_0ewa0")]

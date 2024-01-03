@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chbu3m21rtq58"]
+
+[ext_resource type="Script" path="res://components/logging_component.gd" id="1_cw3co"]
+
+[node name="LoggingComponent" type="Node"]
+script = ExtResource("1_cw3co")
