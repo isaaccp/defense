@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8t68dpweqvr3"
-path="res://.godot/imported/Remove.svg-9673e211c2273f4b1ff1be9c7bf49964.ctex"
+uid="uid://chph7m0cdsxdg"
+path="res://.godot/imported/Unlock.svg-6a65e241413f62cf47927a91c7d483c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/Remove.svg"
-dest_files=["res://.godot/imported/Remove.svg-9673e211c2273f4b1ff1be9c7bf49964.ctex"]
+source_file="res://ui/icons/Unlock.svg"
+dest_files=["res://.godot/imported/Unlock.svg-6a65e241413f62cf47927a91c7d483c1.ctex"]
 
 [params]
 

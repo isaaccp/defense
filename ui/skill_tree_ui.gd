@@ -73,6 +73,7 @@ func _setup_tree():
 			skill.self_modulate = _tint(s)
 			skill.draggable = false
 			skill.title = s.name()
+			skill.get_titlebar_hbox().add_child(_avail_icon(s))
 
 			var icon = TextureRect.new()
 			# FIXME: Just a placeholder. GraphNode wants some content to associate connection ports with.
@@ -118,6 +119,36 @@ func _skill_state(skill: Skill) -> String:
 	if not character.has_xp(purchase_cost):
 		return "Need XP"
 	return "Available"
+
+func _avail_icon(skill: Skill) -> TextureRect:
+	var out = TextureRect.new()
+	# TODO: enum
+	match _skill_state(skill):
+		# TODO: Move these to exports when nodes become their own scene.
+		"Owned":
+			out.texture = preload("res://ui/icons/CheckBox.svg")
+			# Mute a bit so it's less attention grabbing than available.
+			out.self_modulate = Color.DARK_GRAY
+		"Locked":
+			out.texture = preload("res://ui/icons/Lock.svg")
+			out.self_modulate = Color.DARK_GRAY
+		"Need Parent":
+			out.texture = preload("res://ui/icons/Unlinked.svg")
+			out.self_modulate = Color.LIGHT_GREEN
+		"Need XP":
+			out.texture = preload("res://ui/icons/Unlock.svg")
+			out.self_modulate = Color.DARK_SLATE_GRAY
+		"Available":
+			out.texture = preload("res://ui/icons/Unlock.svg")
+			out.self_modulate = Color.LIGHT_GREEN
+		_:
+			assert(false, "unrecognized skill state")
+
+	out.size = Vector2(16, 16)
+	out.stretch_mode = TextureRect.STRETCH_KEEP
+	out.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	out.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	return out
 
 func _on_node_entered(node: GraphNode, skill: Skill):
 	node.self_modulate = Color.WHITE
