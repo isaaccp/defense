@@ -1,0 +1,88 @@
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=23 format=3 uid="uid://dko6s3kgrapkm"]
+
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_78mwp"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="2_8xb8v"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_ihmyt"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="4_a36is"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="5_pvkds"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="6_omcam"]
+[ext_resource type="Script" path="res://levels/level_provider.gd" id="7_4xswo"]
+[ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
+
+[sub_resource type="Resource" id="Resource_a6787"]
+script = ExtResource("1_78mwp")
+id = 4
+
+[sub_resource type="Resource" id="Resource_m0v0g"]
+script = ExtResource("2_8xb8v")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_ahrac"]
+script = ExtResource("3_ihmyt")
+id = 1
+type = 1
+params = SubResource("Resource_m0v0g")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_38hdu"]
+script = ExtResource("5_pvkds")
+id = 1
+
+[sub_resource type="Resource" id="Resource_64y0d"]
+script = ExtResource("4_a36is")
+target_selection = SubResource("Resource_38hdu")
+action = SubResource("Resource_a6787")
+condition = SubResource("Resource_ahrac")
+
+[sub_resource type="Resource" id="Resource_ruqyf"]
+script = ExtResource("1_78mwp")
+id = 2
+
+[sub_resource type="Resource" id="Resource_r24mu"]
+script = ExtResource("3_ihmyt")
+id = 1
+type = 1
+params = SubResource("Resource_m0v0g")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_vxyls"]
+script = ExtResource("5_pvkds")
+id = 1
+
+[sub_resource type="Resource" id="Resource_40x4d"]
+script = ExtResource("4_a36is")
+target_selection = SubResource("Resource_vxyls")
+action = SubResource("Resource_ruqyf")
+condition = SubResource("Resource_r24mu")
+
+[sub_resource type="Resource" id="Resource_tk45c"]
+script = ExtResource("1_78mwp")
+id = 1
+
+[sub_resource type="Resource" id="Resource_xg2gg"]
+script = ExtResource("3_ihmyt")
+id = 1
+type = 1
+params = SubResource("Resource_m0v0g")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_pimqg"]
+script = ExtResource("5_pvkds")
+id = 1
+
+[sub_resource type="Resource" id="Resource_wcju5"]
+script = ExtResource("4_a36is")
+target_selection = SubResource("Resource_pimqg")
+action = SubResource("Resource_tk45c")
+condition = SubResource("Resource_xg2gg")
+
+[sub_resource type="Resource" id="Resource_ytoa5"]
+script = ExtResource("6_omcam")
+rules = Array[ExtResource("4_a36is")]([SubResource("Resource_64y0d"), SubResource("Resource_40x4d"), SubResource("Resource_wcju5")])
+
+[resource]
+script = ExtResource("7_4xswo")
+players = 1
+levels = Array[PackedScene]([ExtResource("7_cb8qh")])
+behavior = SubResource("Resource_ytoa5")
