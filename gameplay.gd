@@ -23,6 +23,11 @@ var characters_ready = {}
 
 signal level_started
 
+func _ready():
+	# TODO: Encapsulate all the hud business better.
+	ui_layer.hud.hide()
+	ui_layer.hud.show_play_controls(false)
+
 func start(game_mode: GameMode):
 	level_provider = game_mode.level_provider
 	if game_mode.is_multiplayer():
@@ -81,6 +86,7 @@ func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType)
 
 func _on_level_end(success: bool):
 	ui_layer.hud.show_victory_loss_text(true)
+	ui_layer.hud.show_play_controls(false)
 	# TODO: Maybe later have a way to inspect level, e.g. see
 	# health of enemies, inspect logs, etc before moving on.
 	if success:
@@ -140,5 +146,11 @@ func _start_level():
 	ui_layer.hud.show_victory_loss_text(false)
 	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
 	await get_tree().create_timer(ready_to_fight_wait).timeout
+	ui_layer.hud.show_play_controls()
 	level.start()
 	level_started.emit()
+
+func _on_restart_requested():
+	# TODO: Maybe find a way to merge with _on_end_level.
+	level.queue_free()
+	_play_level(false)

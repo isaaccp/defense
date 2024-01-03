@@ -37,6 +37,7 @@ const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
 signal all_ready
 signal behavior_modified(character_idx: int, behavior: Behavior)
+signal restart_requested
 
 func _ready():
 	for label in message_label.values():
@@ -201,3 +202,6 @@ func character_view_count() -> int:
 
 func character_view(i: int) -> HudCharacterView:
 	return %CharacterViews.get_child(i)
+
+func _on_play_controls_restart_pressed():
+	restart_requested.emit()

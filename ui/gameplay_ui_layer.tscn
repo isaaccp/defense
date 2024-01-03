@@ -45,3 +45,4 @@ mouse_filter = 2
 
 [connection signal="selection_ready" from="Screens/CharacterSelectionScreen" to="." method="_on_character_selection_screen_selection_ready"]
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
+[connection signal="restart_requested" from="Overlay/HUD" to="." method="_on_hud_restart_requested"]

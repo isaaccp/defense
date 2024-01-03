@@ -117,3 +117,5 @@ layout_mode = 2
 [node name="VictoryLoss" parent="TopRightControls" instance=ExtResource("2_q37k0")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[connection signal="restart_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_restart_pressed"]
