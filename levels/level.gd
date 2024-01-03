@@ -3,7 +3,7 @@ extends Node2D
 class_name Level
 
 @export var xp: int = 100
-
+@export var skip_upgrade = false
 @export_group("Tutorial")
 # To be used for e.g. tutorial levels in which we may
 # want a particular set of skills acquired/unlocked.

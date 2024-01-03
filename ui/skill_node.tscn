@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://flkuk3466twy"]
+
+[ext_resource type="Texture2D" uid="uid://dukw54ycynfjc" path="res://assets/kyrises_rpg_icon_pack/icons/16x16/armor_01d.png" id="1_ytjxg"]
+
+[sub_resource type="Theme" id="Theme_4rv3q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mp7r7"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="SkillNode" type="GraphNode"]
+offset_right = 9.0
+offset_bottom = 55.0
+theme = SubResource("Theme_4rv3q")
+theme_override_styles/titlebar = SubResource("StyleBoxFlat_mp7r7")
+draggable = false
+title = "Foo"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_ytjxg")
+expand_mode = 4
+stretch_mode = 4

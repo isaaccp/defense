@@ -14,12 +14,12 @@ MarginContainer/constants/margin_top = 4
 [sub_resource type="Resource" id="Resource_mqxpj"]
 script = ExtResource("3_gr3l3")
 skill_tree_collection = ExtResource("4_dxnj7")
-acquired_actions = Array[int]([])
+acquired_actions = Array[int]([2])
 acquired_target_selections = Array[int]([])
 acquired_conditions = Array[int]([1])
-unlocked_actions = Array[int]([])
+unlocked_actions = Array[int]([2, 4, 3])
 unlocked_target_selections = Array[int]([])
-unlocked_conditions = Array[int]([])
+unlocked_conditions = Array[int]([1])
 full_acquired = false
 full_unlocked = false
 
@@ -94,7 +94,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Info about selected node..."
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer"]
+[node name="BuyButton" type="Button" parent="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Buy"
 
@@ -107,4 +107,5 @@ alignment = 2
 layout_mode = 2
 text = "OK"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/OK" to="." method="_on_ok_pressed"]

@@ -95,12 +95,15 @@ func _on_level_end(success: bool):
 			return
 		# TODO: Calculate XP, etc, show stats.
 		_grant_xp(level)
-		ui_layer.show_screen(ui_layer.upgrade_screen)
-		ui_layer.upgrade_screen.set_characters(characters)
-		ui_layer.hud.start_character_setup(
-			"Acquire Skills",
-			ui_layer.upgrade_screen.on_acquired_skills_pressed,
-			_on_upgrade_done)
+		if not level.skip_upgrade:
+			ui_layer.show_screen(ui_layer.upgrade_screen)
+			ui_layer.upgrade_screen.set_characters(characters)
+			ui_layer.hud.start_character_setup(
+				"Acquire Skills",
+				ui_layer.upgrade_screen.on_acquired_skills_pressed,
+				_on_upgrade_done)
+		else:
+			_on_upgrade_done()
 
 func _on_upgrade_done():
 	_play_level(true)
