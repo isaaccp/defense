@@ -64,7 +64,14 @@ func _is_empty(item: TreeItem) -> bool:
 		var meta = item.get_metadata(c)
 		# _add_empty leaves the delete button null but 0s the rest,
 		# but either is empty enough for our purposes.
-		if meta != null && meta.id != 0:
+		if meta != null and meta.id != 0:
+			return false
+	return true
+
+func _is_valid(item: TreeItem) -> bool:
+	for c in range(1, columns): # Skip delete
+		var meta = item.get_metadata(c)
+		if meta == null or meta.id == 0:
 			return false
 	return true
 
@@ -134,7 +141,8 @@ func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 func get_behavior() -> Behavior:
 	var behavior = Behavior.new()
 	for child in _root.get_children():
-		if _is_empty(child):
+		# TODO: Actually show something to user if there are invalid rows.
+		if not _is_valid(child):
 			continue
 		var target_id = child.get_metadata(Column.TARGET).id as TargetSelectionDef.Id
 		var action_id = child.get_metadata(Column.ACTION).id as ActionDef.Id
