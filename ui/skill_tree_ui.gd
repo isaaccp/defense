@@ -6,7 +6,7 @@ var skill_tree_state: SkillTreeState
 # TODO: Move (to Skill?) to use elsewhere
 var _skill_colors = {
 	Skill.SkillType.ACTION: Color.DARK_RED,
-	Skill.SkillType.CONDITION: Color.DARK_KHAKI,
+	Skill.SkillType.CONDITION: Color.BLUE_VIOLET,
 	Skill.SkillType.TARGET: Color.GREEN_YELLOW,
 }
 
@@ -16,11 +16,8 @@ signal ok_pressed
 @export var test_character: GameplayCharacter
 
 @export_group("Debug")
-@export var selected_node: Node
+@export var selected_node: GraphNode
 @export var selected_skill: Skill
-
-# const skill_node_scene = preload("res://ui/skill_node.tscn")
-
 
 # Do something better later.
 var purchase_cost = 50
@@ -40,10 +37,23 @@ func initialize(gameplay_character: GameplayCharacter, force_acquire_all: bool):
 	skill_tree_state = character.skill_tree_state
 	force_acquire_all_upgrades = force_acquire_all
 
+func _tint(s: Skill) -> Color:
+	var type_mod = Color.WHITE
+	if s.skill_type in _skill_colors:
+		type_mod = _skill_colors[s.skill_type]
+	if not skill_tree_state.acquired(s):
+		if _can_purchase(s): # Interesting to buy
+			return type_mod.lightened(0.5)
+		elif skill_tree_state.unlocked(s): # Save up for
+			return type_mod.lightened(0.25)
+		else: # Future
+			return type_mod * Color.DARK_GRAY
+	# Owned
+	return type_mod.darkened(0.25)
+
 func _setup_tree():
 	%Title.text = "%s: Skill Tree" % character.name
-	%Status.text = "XP: %d" % character.xp
-	# FIXME: Mark acquired skills from state.
+
 	var tabs = %Trees as TabContainer
 	for t in skill_tree_state.skill_tree_collection.skill_trees:
 		var seen: Dictionary
@@ -56,23 +66,13 @@ func _setup_tree():
 		graph.name = SkillTree.TreeType.keys()[t.tree_type]
 		tabs.add_child(graph)
 		for s in t.skills:
-			# TODO: May need different modes, showing locked or not.
-			if not skill_tree_state.unlocked(s):
-				continue
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
-			if not skill_tree_state.acquired(s):
-				if _can_purchase(s):
-					skill.modulate = Color(1, 1, 1, 0.7)
-				else:
-					skill.modulate = Color(1, 1, 1, 0.25)
-			skill.set_meta("modulate", skill.modulate)
-			skill.set_meta("modulate", skill.modulate)
+			skill.set_meta("skill", s)
+			skill.self_modulate = _tint(s)
 			skill.draggable = false
 			skill.title = s.name()
 
-			if s.skill_type in _skill_colors:
-				skill.self_modulate = _skill_colors[s.skill_type]
 			var icon = TextureRect.new()
 			# FIXME: Just a placeholder. GraphNode wants some content to associate connection ports with.
 			icon.texture = preload("res://assets/kyrises_rpg_icon_pack/icons/48x48/book_02a.png")
@@ -82,7 +82,7 @@ func _setup_tree():
 			skill.mouse_exited.connect(_on_node_exited.bind(skill, s))
 			graph.add_child(skill)
 			seen[s] = skill
-			skill.set_meta("skill", s)
+
 		for s in seen:
 			# Have to do this in a second pass because we don't necessarily
 			# see children after their parents.
@@ -107,20 +107,36 @@ func _can_purchase(skill: Skill) -> bool:
 		return false
 	return true
 
+func _skill_state(skill: Skill) -> String:
+	if skill_tree_state.acquired(skill):
+		return "Owned"
+	if not skill_tree_state.unlocked(skill):
+		return "Locked"
+	if skill.parent and not skill_tree_state.acquired(skill.parent):
+		return "Need Parent"
+	if not character.has_xp(purchase_cost):
+		return "Need XP"
+	return "Available"
+
 func _on_node_entered(node: GraphNode, skill: Skill):
-	node.modulate = Color.WHITE
+	node.self_modulate = Color.WHITE
 
 func _on_node_exited(node: GraphNode, skill: Skill):
-	node.modulate = node.get_meta("modulate")
+	node.self_modulate = _tint(skill)
 
 func _on_node_selected(n: Node):
 	selected_node = n
 	selected_skill = n.get_meta("skill")
-	%BuyButton.disabled = not _can_purchase(selected_skill)
-	%Info.text = "Name: %s\nType: %s\n..." % [selected_skill.name(), selected_skill.type_name()]
+	_update_info_panel(selected_skill)
+
+func _update_info_panel(skill: Skill):
+	%BuyButton.disabled = not _can_purchase(skill)
+	%Info.text = "Name: %s\nType: %s\nState: %s\n..." % [
+		skill.name(), skill.type_name(), _skill_state(skill)]
 
 func _on_ok_pressed():
 	if force_acquire_all_upgrades and available_upgrades > 0:
+		# TODO: The UI seems like a weird place for this check.
 		var dialog = AcceptDialog.new()
 		dialog.title = "Not so fast!"
 		dialog.dialog_text = "In this level, you must purchase all available upgrades before proceeding"
@@ -136,12 +152,13 @@ func _on_buy_button_pressed():
 	assert(character.has_xp(purchase_cost), "should not happen")
 	character.use_xp(purchase_cost)
 	skill_tree_state.acquire(selected_skill)
-	selected_node.modulate = Color(1, 1, 1, 1)
-	selected_node.set_meta("modulate", Color(1, 1, 1, 1))
-	%BuyButton.disabled = true
+	selected_node.self_modulate = _tint(selected_skill)
+	_update_info_panel(selected_skill)
 	_update_can_purchase_counts()
 
 func _update_can_purchase_counts():
+	%Status.text = "XP: %d" % character.xp
+
 	var total_count = 0
 	var tabs = %Trees as TabContainer
 	for i in range(skill_tree_state.skill_tree_collection.skill_trees.size()):
