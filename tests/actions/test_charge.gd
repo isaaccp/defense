@@ -3,6 +3,7 @@ extends GutTest
 # Level has 1 enemy.
 const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
 const sword_attack_scene = SwordAttackAction.sword_attack_scene
+const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
 
 var level: Level
 var character: Node2D
@@ -67,7 +68,7 @@ func test_charge_short_distance():
 	assert_eq(health_update.prev_health - health_update.health, sword_damage)
 
 func test_charge_long_distance():
-	# Due to short distance, strength surge should trigger shortly after
+	# Due to distance, strength surge should trigger shortly after
 	# swiftness stop.
 	TestUtils.set_character_behavior(character, make_charge_behavior())
 
@@ -91,3 +92,26 @@ func test_charge_long_distance():
 	# which is the case right now but could change.
 	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
 	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
+
+func test_charge_cooldown():
+	var extra_enemy = enemy_scene.instantiate()
+	level.enemies.add_child(extra_enemy)
+
+	TestUtils.set_character_behavior(character, make_charge_behavior())
+
+	# Put the enemy close to the character, less than charge threshold distance.
+	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
+	# Second enemy a bit farther away.
+	extra_enemy.position = enemy.position + Vector2.RIGHT * 300
+	await wait_for_signal(character_behavior.behavior_updated, 0.1, "Wait for charge")
+	TestUtils.assert_last_action(self, character_behavior, ActionDef.Id.CHARGE)
+
+	await wait_for_signal(character_behavior.behavior_updated, 1.0, "Wait for next action")
+	TestUtils.assert_last_action_not(self, character_behavior, ActionDef.Id.CHARGE)
+
+	# Wait right until cooldown expires and verify we only triggered charge once.
+	await wait_seconds(ChargeAction.new().cooldown - 0.1, "Waiting for cooldown to almost expire")
+	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 1)
+	await wait_seconds(0.2, "Waiting for cooldown to expire")
+	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 2)
+	TestUtils.dump_all_emits(self, character_behavior, "behavior_updated")

@@ -69,7 +69,7 @@ func _physics_process(delta: float):
 		if not result.is_empty():
 			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule
-				print("%s: Switched to rule: %s" % [get_parent().name, rule])
+				print("[%0.2f] %s: Switched to rule: %s" % [elapsed_time, get_parent().name, rule])
 				target = result.target
 				if action:
 					action.action_finished()
