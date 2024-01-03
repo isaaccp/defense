@@ -5,9 +5,9 @@ var skill_tree_state: SkillTreeState
 
 # TODO: Move (to Skill?) to use elsewhere
 var _skill_colors = {
-	Skill.SkillType.ACTION: Color.RED,
-	Skill.SkillType.CONDITION: Color.BLUE,
-	Skill.SkillType.TARGET: Color.GREEN,
+	Skill.SkillType.ACTION: Color.DARK_RED,
+	Skill.SkillType.CONDITION: Color.DARK_KHAKI,
+	Skill.SkillType.TARGET: Color.GREEN_YELLOW,
 }
 
 signal ok_pressed
@@ -61,16 +61,18 @@ func _setup_tree():
 				continue
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
-			assert(s.skill_type in _skill_colors)
-			skill.self_modulate = _skill_colors[s.skill_type]
 			if not skill_tree_state.acquired(s):
 				if _can_purchase(s):
 					skill.modulate = Color(1, 1, 1, 0.7)
 				else:
 					skill.modulate = Color(1, 1, 1, 0.25)
 			skill.set_meta("modulate", skill.modulate)
+			skill.set_meta("modulate", skill.modulate)
 			skill.draggable = false
 			skill.title = s.name()
+
+			if s.skill_type in _skill_colors:
+				skill.self_modulate = _skill_colors[s.skill_type]
 			var icon = TextureRect.new()
 			# FIXME: Just a placeholder. GraphNode wants some content to associate connection ports with.
 			icon.texture = preload("res://assets/kyrises_rpg_icon_pack/icons/48x48/book_02a.png")
@@ -137,8 +139,6 @@ func _on_buy_button_pressed():
 	selected_node.modulate = Color(1, 1, 1, 1)
 	selected_node.set_meta("modulate", Color(1, 1, 1, 1))
 	%BuyButton.disabled = true
-	# TODO: Do this with some signal from character instead.
-	%Status.text = "XP: %d" % character.xp
 	_update_can_purchase_counts()
 
 func _update_can_purchase_counts():
