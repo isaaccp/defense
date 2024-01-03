@@ -7,7 +7,7 @@ const charge_threshold = 100.0
 var original_position: Vector2
 
 func _init():
-	cooldown = 1.0
+	cooldown = 2.0
 
 func post_initialize():
 	original_position = body.global_position
