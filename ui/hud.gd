@@ -39,10 +39,15 @@ signal all_ready
 signal behavior_modified(character_idx: int, behavior: Behavior)
 signal restart_requested
 
+var ui_layer: GameplayUILayer
+
 func _ready():
 	for label in message_label.values():
 		label.hide()
 	%PlayControls.initialize(self)
+
+func initialize(ui_layer_: GameplayUILayer):
+	ui_layer = ui_layer_
 
 func set_characters(character_node: Node) -> void:
 	characters.clear()
@@ -57,6 +62,7 @@ func set_characters(character_node: Node) -> void:
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
 		view.initialize(characters[i])
 		view.readiness_updated.connect(_on_readiness_updated.bind(i))
+		view.view_log_requested.connect(_on_view_log_requested)
 		%CharacterViews.add_child(view)
 
 func set_towers(towers: Node) -> void:
@@ -209,3 +215,6 @@ func character_view(i: int) -> HudCharacterView:
 
 func _on_play_controls_restart_pressed():
 	restart_requested.emit()
+
+func _on_view_log_requested(logging_component: LoggingComponent):
+	ui_layer.show_log_viewer(logging_component)

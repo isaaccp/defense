@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://5ity5n7jy3b8"]
+[gd_scene load_steps=6 format=3 uid="uid://5ity5n7jy3b8"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui_layer.gd" id="1_2vged"]
 [ext_resource type="PackedScene" uid="uid://bp627of2jpvl8" path="res://ui/character_selection_screen.tscn" id="2_rk245"]
 [ext_resource type="PackedScene" uid="uid://hfs5nhuapxra" path="res://ui/upgrade_screen.tscn" id="3_p6rmb"]
+[ext_resource type="PackedScene" uid="uid://bfketgt7bwsh2" path="res://ui/log_viewer.tscn" id="5_0qbeh"]
 [ext_resource type="PackedScene" uid="uid://cqmsmsumhossr" path="res://ui/hud.tscn" id="5_uol5s"]
 
 [node name="GameplayUILayer" type="CanvasLayer" node_paths=PackedStringArray("character_selection_screen", "upgrade_screen", "hud", "screens")]
@@ -42,6 +43,12 @@ mouse_filter = 2
 [node name="HUD" parent="Overlay" instance=ExtResource("5_uol5s")]
 layout_mode = 1
 mouse_filter = 2
+
+[node name="Windows" type="Node" parent="."]
+
+[node name="LogViewer" parent="Windows" instance=ExtResource("5_0qbeh")]
+unique_name_in_owner = true
+visible = false
 
 [connection signal="selection_ready" from="Screens/CharacterSelectionScreen" to="." method="_on_character_selection_screen_selection_ready"]
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]

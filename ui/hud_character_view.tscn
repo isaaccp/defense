@@ -66,10 +66,18 @@ text = "10/20"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ActionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ActionLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Idle"
+
+[node name="ViewLogButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Log"
 
 [node name="ConfigContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -103,5 +111,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ViewLogButton" to="." method="_on_view_log_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButton" to="." method="_on_config_button_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ConfigContainer/ReadyButton" to="." method="_on_ready_button_toggled"]

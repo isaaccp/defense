@@ -7,7 +7,8 @@ class_name Behavior
 # TODO: Return BehaviorResult or such.
 func choose(body: CharacterBody2D, side_component: SideComponent,
 			action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
-	for rule in rules:
+	for i in rules.size():
+		var rule = rules[i]
 		# Check cooldowns.
 		if action_cooldowns.has(rule.action.id):
 			var can_run_after = action_cooldowns[rule.action.id]
@@ -32,7 +33,7 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 		var action = ActionManager.make_action(rule.action)
 		var target = TargetSelectionManager.select_target(rule.target_selection, target_node_evaluator, action, body, side_component)
 		if target.valid():
-			return {"rule": rule, "target": target, "action": action}
+			return {"id": i, "rule": rule, "target": target, "action": action}
 	return {}
 
 func serialize() -> PackedByteArray:

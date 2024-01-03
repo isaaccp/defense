@@ -6,6 +6,7 @@ var character: Character
 
 signal config_button_pressed
 signal readiness_updated(ready: bool)
+signal view_log_requested(logging_component: LoggingComponent)
 
 @onready var hud_status_display: HudStatusDisplay = %HudStatusDisplay
 
@@ -74,3 +75,6 @@ func _on_peer_ready_button_toggled(toggled_on: bool):
 
 func _ready_button_toggled(toggled_on: bool):
 	readiness_updated.emit(toggled_on)
+
+func _on_view_log_button_pressed():
+	view_log_requested.emit(Component.get_logging_component_or_die(character))
