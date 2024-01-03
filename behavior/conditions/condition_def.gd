@@ -25,7 +25,6 @@ enum Type {
 }
 
 @export var id: Id
-@export var condition_script: GDScript
 @export var type: Type
 @export var params: ConditionParams = ConditionParams.new()
 

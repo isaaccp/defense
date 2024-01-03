@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=15 format=3 uid="uid://xvk7de3pnrwf"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=14 format=3 uid="uid://xvk7de3pnrwf"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_b34mx"]
 [ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
@@ -11,17 +11,6 @@
 [sub_resource type="Resource" id="Resource_q62gh"]
 script = ExtResource("1_b34mx")
 id = 6
-
-[sub_resource type="GDScript" id="GDScript_pay4j"]
-script/source = "extends IntTargetNodeConditionEvaluator
-
-func get_value(node: Node2D) -> int:
-	var health = Component.get_health_component_or_null(node)
-	if not health:
-		get_value_failed = true
-		return 0
-	return health.health
-"
 
 [sub_resource type="Resource" id="Resource_72x0b"]
 script = ExtResource("2_btuym")
@@ -37,7 +26,6 @@ int_value = SubResource("Resource_72x0b")
 [sub_resource type="Resource" id="Resource_j4go4"]
 script = ExtResource("4_vx3aa")
 id = 2
-condition_script = SubResource("GDScript_pay4j")
 type = 2
 params = SubResource("Resource_mo8ay")
 abstract = false
