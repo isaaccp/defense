@@ -100,7 +100,7 @@ alignment = 2
 
 [node name="OK" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Done"
+text = "OK"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/OK" to="." method="_on_ok_pressed"]

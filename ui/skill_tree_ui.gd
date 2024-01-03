@@ -16,6 +16,7 @@ signal ok_pressed
 
 @export_group("Testing")
 @export var test_character: GameplayCharacter
+@export var test_show_all: bool
 
 @export_group("Debug")
 @export var selected_node: GraphNode
@@ -32,7 +33,7 @@ func _ready():
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
 		if test_character:
-			initialize(test_character, false, true)
+			initialize(test_character, false, test_show_all)
 	_setup_tree()
 
 func initialize(gameplay_character: GameplayCharacter, force_acquire_all: bool, show_all: bool):
