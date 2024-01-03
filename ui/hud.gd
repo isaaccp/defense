@@ -61,8 +61,10 @@ func set_characters(character_node: Node) -> void:
 	for i in characters.size():
 		var view = hud_character_view_scene.instantiate() as HudCharacterView
 		view.initialize(characters[i])
+		view.config_button_pressed.connect(_on_configure_behavior_pressed.bind(i))
 		view.readiness_updated.connect(_on_readiness_updated.bind(i))
 		view.view_log_requested.connect(_on_view_log_requested)
+		view.upgrade_window_requested.connect(_on_upgrade_window_requested)
 		%CharacterViews.add_child(view)
 
 func set_towers(towers: Node) -> void:
@@ -91,24 +93,15 @@ func show_victory_loss_text(show: bool = true):
 		show_victory_loss(true)
 	%VictoryLoss.show_text(show)
 
-func start_behavior_setup(all_ready_callback: Callable):
-	start_character_setup("Configure Behavior", _on_configure_behavior_pressed, all_ready_callback)
-
-func start_character_setup(text: String, buton_pressed_callback: Callable, all_ready_callback: Callable):
+func start_character_setup(all_ready_callback: Callable):
 	all_ready.connect(all_ready_callback, CONNECT_ONE_SHOT)
-	show_character_button(true, text)
+	show_character_buttons(true)
 	for i in %CharacterViews.get_child_count():
 		var view = %CharacterViews.get_child(i) as HudCharacterView
-		view.config_button_pressed.connect(buton_pressed_callback.bind(i))
 
 func _reset_character_setup():
 	# Clear for next time.
 	characters_ready.clear()
-	for i in %CharacterViews.get_child_count():
-		var view = %CharacterViews.get_child(i) as HudCharacterView
-		var connections = view.config_button_pressed.get_connections()
-		for c in connections:
-			view.config_button_pressed.disconnect(c.callable)
 
 func _on_readiness_updated(ready: bool, character_idx: int):
 	if ready:
@@ -129,7 +122,7 @@ func _on_configure_behavior_pressed(character_idx: int):
 	programming_ui.initialize(character)
 	programming_ui.saved.connect(_save_and_close.bind(character_idx))
 	programming_ui.canceled.connect(_close)
-	show_character_button(false)
+	show_character_buttons(false)
 
 func _save_and_close(behavior: Behavior, character_idx: int):
 	behavior_modified.emit(character_idx, behavior)
@@ -139,11 +132,11 @@ func _close():
 	for child in %ProgrammingUIParent.get_children():
 			child.queue_free()
 	%ProgrammingUIParent.hide()
-	show_character_button(true)
+	show_character_buttons(true)
 
-func show_character_button(show: bool, text: String = ""):
+func show_character_buttons(show: bool, text: String = ""):
 	for view in %CharacterViews.get_children():
-		view.show_button(show, text)
+		view.show_buttons(show, text)
 
 func set_peer(peer_id: int) -> void:
 	peer.text = "Peer: %d" % peer_id
@@ -218,3 +211,6 @@ func _on_play_controls_restart_pressed():
 
 func _on_view_log_requested(logging_component: LoggingComponent):
 	ui_layer.show_log_viewer(logging_component)
+
+func _on_upgrade_window_requested(character: Character):
+	ui_layer.show_upgrade_window(character)

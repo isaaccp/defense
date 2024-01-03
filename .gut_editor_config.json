@@ -34,12 +34,12 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "test_",
- "selected": "test_charge.gd",
+ "selected": "test_basic_gameplay.gd",
  "should_exit": false,
  "should_exit_on_success": false,
  "should_maximize": false,
  "show_help": false,
  "suffix": ".gd",
  "tests": [],
- "unit_test_name": "test_charge_cooldown"
+ "unit_test_name": "test_end_to_end"
 }

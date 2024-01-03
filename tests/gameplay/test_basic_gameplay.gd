@@ -67,12 +67,7 @@ func test_end_to_end():
 	gut.p("Level has finished")
 	await wait_seconds(gameplay.level_end_wait + 0.1, "Waiting for level end wait to be over")
 
-	gut.p("Upgrade Screen")
-	assert_true(ui_layer.upgrade_screen.visible)
-	mark_characters_ready(hud)
-
 	gut.p("Loading next level")
-	await wait_frames(1, "Waiting for level load")
 	assert_call_count(game_mode.level_provider, "next_level", 2)
 
 	# TODO: Test failure condition.

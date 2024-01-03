@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=23 format=3 uid="uid://dko6s3kgrapkm"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=26 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_78mwp"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="2_8xb8v"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="6_omcam"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="7_4xswo"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_peqn1"]
+[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="10_po8hj"]
 
 [sub_resource type="Resource" id="Resource_a6787"]
 script = ExtResource("1_78mwp")
@@ -81,8 +83,21 @@ condition = SubResource("Resource_xg2gg")
 script = ExtResource("6_omcam")
 rules = Array[ExtResource("4_a36is")]([SubResource("Resource_64y0d"), SubResource("Resource_40x4d"), SubResource("Resource_wcju5")])
 
+[sub_resource type="Resource" id="Resource_x5gu8"]
+script = ExtResource("9_peqn1")
+skill_tree_collection = ExtResource("10_po8hj")
+acquired_actions = Array[int]([])
+acquired_target_selections = Array[int]([])
+acquired_conditions = Array[int]([1])
+unlocked_actions = Array[int]([])
+unlocked_target_selections = Array[int]([])
+unlocked_conditions = Array[int]([1])
+full_acquired = false
+full_unlocked = false
+
 [resource]
 script = ExtResource("7_4xswo")
 players = 1
 levels = Array[PackedScene]([ExtResource("7_cb8qh")])
+skill_tree_state = SubResource("Resource_x5gu8")
 behavior = SubResource("Resource_ytoa5")

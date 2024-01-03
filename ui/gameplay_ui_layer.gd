@@ -7,7 +7,6 @@ class_name GameplayUILayer
 # instead of having to proxy them through here.
 @export_group("Internal")
 @export var character_selection_screen: CharacterSelectionScreen
-@export var upgrade_screen: Screen
 @export var hud: Hud
 
 signal character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId])
@@ -16,6 +15,7 @@ signal behavior_modified(character_idx: int, behavior: Behavior)
 signal restart_requested
 
 func _ready():
+	super()
 	hud.initialize(self)
 
 func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
@@ -32,3 +32,8 @@ func _on_hud_restart_requested():
 
 func show_log_viewer(logging_component: LoggingComponent):
 	%LogViewer.show_log(logging_component)
+
+func show_upgrade_window(character: Character):
+	show_screen(%UpgradeCharacterScreen)
+	%UpgradeCharacterScreen.show_upgrades(character)
+	hud.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://do57hfqasnkkh"]
+[gd_scene load_steps=5 format=3 uid="uid://bsabhsq53warn"]
 
 [ext_resource type="Script" path="res://ui/hud_character_view.gd" id="1_xuorh"]
 [ext_resource type="PackedScene" uid="uid://djdh7mp64thdi" path="res://ui/hud_status_display.tscn" id="2_aw5xw"]
@@ -83,11 +83,20 @@ text = "Log"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ConfigButton" type="Button" parent="MarginContainer/VBoxContainer/ConfigContainer"]
+[node name="ConfigButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ConfigContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
-text = "Configure Behavior"
+
+[node name="ConfigButton" type="Button" parent="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Set Behavior"
+
+[node name="UpgradeButton" type="Button" parent="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upgrade"
 
 [node name="ReadyButton" type="CheckButton" parent="MarginContainer/VBoxContainer/ConfigContainer"]
 unique_name_in_owner = true
@@ -112,5 +121,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ViewLogButton" to="." method="_on_view_log_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButton" to="." method="_on_config_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons/ConfigButton" to="." method="_on_config_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ConfigContainer/ReadyButton" to="." method="_on_ready_button_toggled"]

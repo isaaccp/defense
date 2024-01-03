@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_veies"]
 [ext_resource type="PackedScene" uid="uid://dqb2biimjiq37" path="res://ui/hud_tower_view.tscn" id="2_7mw8q"]
-[ext_resource type="PackedScene" uid="uid://do57hfqasnkkh" path="res://ui/hud_character_view.tscn" id="2_ok2lg"]
+[ext_resource type="PackedScene" uid="uid://bsabhsq53warn" path="res://ui/hud_character_view.tscn" id="2_ok2lg"]
 [ext_resource type="PackedScene" uid="uid://cdotafm655xbv" path="res://ui/hud_victory_loss.tscn" id="2_q37k0"]
 [ext_resource type="PackedScene" uid="uid://br8aaytuluka5" path="res://ui/play_controls.tscn" id="4_qisxk"]
 
@@ -26,6 +26,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Peer" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MainMessage" type="Label" parent="."]

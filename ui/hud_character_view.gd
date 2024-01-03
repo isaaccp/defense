@@ -7,6 +7,7 @@ var character: Character
 signal config_button_pressed
 signal readiness_updated(ready: bool)
 signal view_log_requested(logging_component: LoggingComponent)
+signal upgrade_window_requested(character: Character)
 
 @onready var hud_status_display: HudStatusDisplay = %HudStatusDisplay
 
@@ -30,14 +31,14 @@ func is_local() -> bool:
 	var multiplayer_id = multiplayer.get_unique_id()
 	return multiplayer_id == character.peer_id
 
-func show_button(show: bool, text: String) -> void:
+func show_buttons(show: bool, text: String) -> void:
 	if show:
 		if not text.is_empty():
 			%ConfigButton.text = text
 		%ConfigContainer.show()
 		%ReadyButton.set_pressed_no_signal(false)
 		if is_local():
-			%ConfigButton.show()
+			%ConfigButtons.show()
 		else:
 			%ReadyButton.disabled = true
 	else:
@@ -78,3 +79,6 @@ func _ready_button_toggled(toggled_on: bool):
 
 func _on_view_log_button_pressed():
 	view_log_requested.emit(Component.get_logging_component_or_die(character))
+
+func _on_upgrade_button_pressed():
+	upgrade_window_requested.emit(character)

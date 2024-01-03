@@ -74,7 +74,7 @@ func _play_level(advance: bool = true):
 	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
-	ui_layer.hud.start_behavior_setup(_on_all_behaviors_ready)
+	ui_layer.hud.start_character_setup(_on_all_ready)
 	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
 
@@ -94,6 +94,7 @@ func _on_level_end(success: bool):
 	else:
 		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
 	ui_layer.hud.show_victory_loss(false)
+	# TODO: Show some dialog here.
 	level.queue_free()
 	if not success:
 		_play_level(false)
@@ -103,18 +104,7 @@ func _on_level_end(success: bool):
 			return
 		# TODO: Calculate XP, etc, show stats.
 		_grant_xp(level)
-		if not level.skip_upgrade:
-			ui_layer.show_screen(ui_layer.upgrade_screen)
-			ui_layer.upgrade_screen.setup(characters, level.force_acquire_all_upgrades)
-			ui_layer.hud.start_character_setup(
-				"Acquire Skills",
-				ui_layer.upgrade_screen.on_acquired_skills_pressed,
-				_on_upgrade_done)
-		else:
-			_on_upgrade_done()
-
-func _on_upgrade_done():
-	_play_level(true)
+		_play_level(true)
 
 func _grant_xp(level: Level):
 	# Level will be freed up on next frame, so this can't do
@@ -138,11 +128,11 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 func _update_behavior(character_idx: int, behavior: Behavior):
 	characters[character_idx].behavior = behavior
 
-func _on_all_behaviors_ready():
+func _on_all_ready():
 	_start_level()
 
 func _start_level():
-	ui_layer.hud.show_character_button(false)
+	ui_layer.hud.show_character_buttons(false)
 	ui_layer.hud.show_victory_loss_text(false)
 	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
 	await get_tree().create_timer(ready_to_fight_wait).timeout

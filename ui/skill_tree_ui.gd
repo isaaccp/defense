@@ -16,7 +16,6 @@ signal ok_pressed
 
 @export_group("Testing")
 @export var test_character: GameplayCharacter
-@export var test_force_acquire_all: bool
 @export var test_show_all: bool
 
 @export_group("Debug")
@@ -26,7 +25,6 @@ signal ok_pressed
 # Do something better later.
 var purchase_cost = 50
 var available_upgrades: int
-var force_acquire_all_upgrades: bool
 var hide_locked_skills: bool
 
 func _ready():
@@ -34,13 +32,12 @@ func _ready():
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
 		if test_character:
-			initialize(test_character, test_force_acquire_all, test_show_all)
+			initialize(test_character, test_show_all)
 	_setup_tree()
 
-func initialize(gameplay_character: GameplayCharacter, force_acquire_all: bool, show_all: bool):
+func initialize(gameplay_character: GameplayCharacter, show_all: bool):
 	character = gameplay_character
 	skill_tree_state = character.skill_tree_state
-	force_acquire_all_upgrades = force_acquire_all
 	hide_locked_skills = not show_all
 
 func _tint(s: Skill) -> Color:
@@ -181,18 +178,7 @@ func _update_info_panel(skill: Skill):
 		skill.name(), skill.type_name(), _skill_state(skill)]
 
 func _on_ok_pressed():
-	if force_acquire_all_upgrades and available_upgrades > 0:
-		# TODO: The UI seems like a weird place for this check.
-		var dialog = AcceptDialog.new()
-		dialog.title = "Not so fast!"
-		dialog.dialog_text = "In this level, you must purchase all available upgrades before proceeding"
-		dialog.always_on_top = true
-		dialog.show()
-		dialog.popup_exclusive_centered(self)
-		await dialog.confirmed
-		dialog.queue_free()
-	else:
-		ok_pressed.emit()
+	ok_pressed.emit()
 
 func _on_buy_button_pressed():
 	assert(character.has_xp(purchase_cost), "should not happen")

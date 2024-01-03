@@ -12,7 +12,7 @@ class HealthUpdate extends RefCounted:
 	var prev_health: int
 	var max_health: int
 	var is_heal: bool
-	
+
 @export_group("Required")
 @export var attributes_component: AttributesComponent
 
@@ -44,7 +44,7 @@ func _initialize():
 
 func heal_full():
 	health = max_health
-	
+
 func heal(dmg: int):
 	damage(-dmg)
 

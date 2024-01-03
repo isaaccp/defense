@@ -2,16 +2,15 @@
 
 [ext_resource type="Script" path="res://ui/gameplay_ui_layer.gd" id="1_2vged"]
 [ext_resource type="PackedScene" uid="uid://bp627of2jpvl8" path="res://ui/character_selection_screen.tscn" id="2_rk245"]
-[ext_resource type="PackedScene" uid="uid://hfs5nhuapxra" path="res://ui/upgrade_screen.tscn" id="3_p6rmb"]
+[ext_resource type="PackedScene" uid="uid://brpcb8r5ubqip" path="res://ui/upgrade_character_screen.tscn" id="3_x1mfn"]
 [ext_resource type="PackedScene" uid="uid://bfketgt7bwsh2" path="res://ui/log_viewer.tscn" id="5_0qbeh"]
 [ext_resource type="PackedScene" uid="uid://cqmsmsumhossr" path="res://ui/hud.tscn" id="5_uol5s"]
 
-[node name="GameplayUILayer" type="CanvasLayer" node_paths=PackedStringArray("character_selection_screen", "upgrade_screen", "hud", "screens")]
+[node name="GameplayUILayer" type="CanvasLayer" node_paths=PackedStringArray("character_selection_screen", "hud", "screens")]
 process_mode = 3
 visible = false
 script = ExtResource("1_2vged")
 character_selection_screen = NodePath("Screens/CharacterSelectionScreen")
-upgrade_screen = NodePath("Screens/UpgradeScreen")
 hud = NodePath("Overlay/HUD")
 screens = NodePath("Screens")
 
@@ -27,7 +26,8 @@ grow_vertical = 2
 visible = false
 layout_mode = 1
 
-[node name="UpgradeScreen" parent="Screens" instance=ExtResource("3_p6rmb")]
+[node name="UpgradeCharacterScreen" parent="Screens" instance=ExtResource("3_x1mfn")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
