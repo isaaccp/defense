@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqmsmsumhossr"]
+[gd_scene load_steps=5 format=3 uid="uid://cqmsmsumhossr"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_veies"]
+[ext_resource type="PackedScene" uid="uid://dqb2biimjiq37" path="res://ui/hud_tower_view.tscn" id="2_7mw8q"]
+[ext_resource type="PackedScene" uid="uid://do57hfqasnkkh" path="res://ui/hud_character_view.tscn" id="2_ok2lg"]
 [ext_resource type="PackedScene" uid="uid://cdotafm655xbv" path="res://ui/hud_victory_loss.tscn" id="2_q37k0"]
 
 [node name="HUD" type="Control" node_paths=PackedStringArray("peer", "main_message", "bottom_message")]
@@ -69,11 +71,17 @@ grow_horizontal = 2
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="HudTowerView" parent="TopHud/TowerHud" instance=ExtResource("2_7mw8q")]
+layout_mode = 2
+
 [node name="CharacterViews" type="HBoxContainer" parent="TopHud"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
+
+[node name="HudCharacterView" parent="TopHud/CharacterViews" instance=ExtResource("2_ok2lg")]
+layout_mode = 2
 
 [node name="ProgrammingUIParent" type="Control" parent="."]
 unique_name_in_owner = true
@@ -94,7 +102,6 @@ grow_vertical = 2
 
 [node name="VictoryLoss" parent="." instance=ExtResource("2_q37k0")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

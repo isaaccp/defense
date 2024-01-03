@@ -28,12 +28,14 @@ func start(game_mode: GameMode):
 	if game_mode.is_multiplayer():
 		assert(level_provider.players == 2)
 	ui_layer.show()
+	ui_layer.hud.hide()
 	ui_layer.hud.set_peer(multiplayer.get_unique_id())
 	ui_layer.character_selection_screen.set_characters(level_provider.players)
 	ui_layer.show_screen(ui_layer.character_selection_screen)
 
 func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
 	ui_layer.hide_screen()
+	ui_layer.hud.show()
 	var players = OnlineMatch.get_sorted_players()
 	for selection in range(character_selections.size()):
 		var character_id = character_selections[selection]
