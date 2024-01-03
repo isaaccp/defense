@@ -152,5 +152,6 @@ func _start_level():
 
 func _on_restart_requested():
 	# TODO: Maybe find a way to merge with _on_end_level.
+	ui_layer.hud.show_play_controls(false)
 	level.queue_free()
 	_play_level(false)

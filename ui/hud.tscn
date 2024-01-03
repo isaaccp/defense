@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://br8aaytuluka5" path="res://ui/play_controls.tscn" id="4_qisxk"]
 
 [node name="HUD" type="Control" node_paths=PackedStringArray("peer", "main_message", "bottom_message")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
