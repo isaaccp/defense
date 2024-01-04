@@ -1,5 +1,5 @@
 @tool
-extends Skill
+extends ParamSkill
 
 class_name TargetSelectionDef
 

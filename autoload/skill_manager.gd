@@ -95,6 +95,15 @@ func all_conditions() -> Array[ConditionDef.Id]:
 	return all
 
 # Target
+
+func lookup_target(id: TargetSelectionDef.Id) -> TargetSelectionDef:
+	return target_by_id[id]
+
+func make_target_instance(id: TargetSelectionDef.Id) -> TargetSelectionDef:
+	var target = lookup_target(id).duplicate(true)
+	target.abstract = false
+	return target
+
 func select_target(target_selection_def: TargetSelectionDef, evaluator: TargetNodeConditionEvaluator, action: Action, body: CharacterBody2D, side_component: SideComponent) -> Target:
 	var target_selection = target_scripts[target_selection_def.id]
 	return target_selection.select_target(target_selection_def, evaluator, action, body, side_component)
