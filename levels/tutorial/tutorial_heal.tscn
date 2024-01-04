@@ -1,0 +1,132 @@
+[gd_scene load_steps=30 format=3 uid="uid://d4hqegyynx7qn"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_xt3gw"]
+[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_1nceu"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_jwyes"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="3_4a8g8"]
+[ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="3_4w3np"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_cdnge"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="4_ec0qd"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="5_ik0fr"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="6_p7k6u"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="7_l6p6k"]
+
+[sub_resource type="Resource" id="Resource_sxeba"]
+script = ExtResource("2_jwyes")
+id = 2
+
+[sub_resource type="Resource" id="Resource_7t6qj"]
+script = ExtResource("3_4a8g8")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_fwmbc"]
+script = ExtResource("4_cdnge")
+id = 1
+type = 1
+params = SubResource("Resource_7t6qj")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_i04f3"]
+script = ExtResource("6_p7k6u")
+id = 1
+
+[sub_resource type="Resource" id="Resource_l3wqv"]
+script = ExtResource("5_ik0fr")
+target_selection = SubResource("Resource_i04f3")
+action = SubResource("Resource_sxeba")
+condition = SubResource("Resource_fwmbc")
+
+[sub_resource type="Resource" id="Resource_7g62m"]
+script = ExtResource("2_jwyes")
+id = 4
+
+[sub_resource type="Resource" id="Resource_udehr"]
+script = ExtResource("4_cdnge")
+id = 1
+type = 1
+params = SubResource("Resource_7t6qj")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_45488"]
+script = ExtResource("6_p7k6u")
+id = 1
+
+[sub_resource type="Resource" id="Resource_gc5n8"]
+script = ExtResource("5_ik0fr")
+target_selection = SubResource("Resource_45488")
+action = SubResource("Resource_7g62m")
+condition = SubResource("Resource_udehr")
+
+[sub_resource type="Resource" id="Resource_wx7d5"]
+script = ExtResource("2_jwyes")
+id = 6
+
+[sub_resource type="Resource" id="Resource_s2yk1"]
+script = ExtResource("3_4a8g8")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_g1aba"]
+script = ExtResource("4_cdnge")
+id = 1
+type = 1
+params = SubResource("Resource_s2yk1")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_rt6fe"]
+script = ExtResource("6_p7k6u")
+id = 3
+
+[sub_resource type="Resource" id="Resource_vhv3y"]
+script = ExtResource("5_ik0fr")
+target_selection = SubResource("Resource_rt6fe")
+action = SubResource("Resource_wx7d5")
+condition = SubResource("Resource_g1aba")
+
+[sub_resource type="Resource" id="Resource_lfbb4"]
+script = ExtResource("2_jwyes")
+id = 1
+
+[sub_resource type="Resource" id="Resource_nyqg4"]
+script = ExtResource("4_cdnge")
+id = 1
+type = 1
+params = SubResource("Resource_7t6qj")
+abstract = false
+
+[sub_resource type="Resource" id="Resource_qigqo"]
+script = ExtResource("6_p7k6u")
+id = 1
+
+[sub_resource type="Resource" id="Resource_ixxgn"]
+script = ExtResource("5_ik0fr")
+target_selection = SubResource("Resource_qigqo")
+action = SubResource("Resource_lfbb4")
+condition = SubResource("Resource_nyqg4")
+
+[sub_resource type="Resource" id="Resource_4tnj1"]
+script = ExtResource("7_l6p6k")
+rules = Array[ExtResource("5_ik0fr")]([SubResource("Resource_l3wqv"), SubResource("Resource_gc5n8"), SubResource("Resource_vhv3y"), SubResource("Resource_ixxgn")])
+
+[node name="Level" instance=ExtResource("1_xt3gw")]
+players = 1
+test_behavior = SubResource("Resource_4tnj1")
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(447, 319)
+
+[node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_1nceu")]
+position = Vector2(276, 320)
+
+[node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_1nceu")]
+position = Vector2(59, 320)
+
+[node name="OrcArcher" parent="YSorted/Enemies" index="2" instance=ExtResource("3_4w3np")]
+position = Vector2(209, 258)
+
+[node name="OrcArcher2" parent="YSorted/Enemies" index="3" instance=ExtResource("3_4w3np")]
+position = Vector2(212, 354)
+
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_ec0qd")]
+position = Vector2(555, 323)
