@@ -125,6 +125,7 @@ func _emit(success: bool, victory_type: VictoryType, loss_type: LossType):
 	# Do not emit more than once.
 	if done:
 		return
+	done = true
 	if success:
 		level_finished.emit(victory_type)
 	else:
