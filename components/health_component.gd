@@ -30,17 +30,17 @@ class HealthUpdate extends RefCounted:
 	set(value):
 		var prev_health = health
 		health = clampi(value, 0, max_health)
-		# Do not emit/log on initial heal.
-		if initial_heal:
-			initial_heal = false
-			return
 		var update = HealthUpdate.new()
 		update.health = health
 		update.prev_health = prev_health
 		update.is_heal = health > prev_health
 		update.max_health = max_health
-		_log("Health: %d -> %d" % [update.prev_health, update.health])
 		health_updated.emit(update)
+		# Do not log on initial heal.
+		if initial_heal:
+			initial_heal = false
+		else:
+			_log("Health: %d -> %d" % [update.prev_health, update.health])
 @export var is_dead: bool = false
 
 # To avoid
