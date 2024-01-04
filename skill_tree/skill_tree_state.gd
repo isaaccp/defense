@@ -2,8 +2,6 @@ extends Resource
 
 class_name SkillTreeState
 
-# TODO: Replace back all instances of "Resource" with "Skill".
-
 # Unclear if we actually need this here yet.
 @export var skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
 
@@ -48,13 +46,13 @@ class_name SkillTreeState
 @export var full_unlocked = false
 
 # TODO: Make dictionaries so it's faster to check unlocked, etc.
-func unlocked(skill: Resource) -> bool:
+func unlocked(skill: Skill) -> bool:
 	return _skill_in(skill, StateType.UNLOCKED)
 
-func acquired(skill: Resource) -> bool:
+func acquired(skill: Skill) -> bool:
 	return _skill_in(skill, StateType.ACQUIRED)
 
-func can_acquire(skill: Resource) -> bool:
+func can_acquire(skill: Skill) -> bool:
 	if acquired(skill):
 		return false
 	if not unlocked(skill):
@@ -63,24 +61,24 @@ func can_acquire(skill: Resource) -> bool:
 		return false
 	return true
 
-func can_unlock(skill: Resource) -> bool:
+func can_unlock(skill: Skill) -> bool:
 	if unlocked(skill):
 		return false
 	if skill.parent and not unlocked(skill.parent):
 		return false
 	return true
 
-func acquire(skill: Resource):
+func acquire(skill: Skill):
 	assert(not acquired(skill), "Skill already acquired!")
 	assert(unlocked(skill), "Skill not unlocked yet!")
 	_add_skill_to(skill, StateType.ACQUIRED)
 
-func unlock(skill: Resource):
+func unlock(skill: Skill):
 	# TODO: Add prerequisites for unlocking.
 	assert(not unlocked(skill), "Skill already unlocked!")
 	_add_skill_to(skill, StateType.UNLOCKED)
 
-func _skill_in(skill: Resource, state_type: StateType):
+func _skill_in(skill: Skill, state_type: StateType):
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	if _full(state_type):
 		return true
@@ -93,7 +91,7 @@ func _skill_in(skill: Resource, state_type: StateType):
 			return skill.get_id() in _conditions(state_type)
 	return false
 
-func _add_skill_to(skill: Resource, state_type: StateType):
+func _add_skill_to(skill: Skill, state_type: StateType):
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
