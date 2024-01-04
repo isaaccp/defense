@@ -15,6 +15,12 @@ class_name Level
 @export_group("Testing")
 # For testing long level flows, instantly wins level.
 @export var instant_win = false
+# Only used when running through F6. By default we
+# create as many players as starting positions in the
+# level, but that's at least 2 as the base level has 2
+# and it'd be a pain to change that, so override it here
+# as needed.
+@export var players = -1
 
 @export_group("Internal")
 @export var characters: Node2D
@@ -29,7 +35,8 @@ func _ready():
 		var gameplay = load("res://gameplay.tscn").instantiate()
 		gameplay.level = self
 		var gc: Array[GameplayCharacter] = []
-		for i in range(starting_positions.get_child_count()):
+		var num_players = players if players != -1 else starting_positions.get_child_count()
+		for i in range(num_players):
 			gc.append(GameplayCharacter.make(Enum.CharacterId.KNIGHT))
 		initialize(gc)
 		add_child(gameplay)

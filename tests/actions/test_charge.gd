@@ -86,11 +86,12 @@ func test_charge_long_distance():
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.STRENGTH_SURGE]], 2)
 	assert_signal_emit_count(character_status, "statuses_changed", 3)
 
-	# Check that first hit (second update after "full_heal" on load) did more than 'sword damage' * 2.
+	# Check that first hit did more than 'sword damage' * 2.
 	# The '2' is hardcoded in StatusComponent as of now.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
-	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
+	TestUtils.dump_all_emits(self, enemy_health, "health_updated")
+	var health_update = get_signal_parameters(enemy_health, "health_updated", 0)[0] as HealthComponent.HealthUpdate
 	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
 
 func test_charge_cooldown():

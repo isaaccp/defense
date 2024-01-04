@@ -19,6 +19,7 @@ full_unlocked = false
 
 [node name="TutorialMove" instance=ExtResource("1_wqmgd")]
 skill_tree_state_override = SubResource("Resource_gkh1c")
+players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(196, 299)
