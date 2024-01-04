@@ -18,3 +18,7 @@ enum SkillType {
 
 func type_name() -> String:
 	return SkillType.keys()[skill_type]
+
+# TODO: Temporary for compatibility with Skill.
+func get_id() -> int:
+	return 0

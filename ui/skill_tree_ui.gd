@@ -3,6 +3,7 @@ extends Control
 var character: GameplayCharacter
 var skill_tree_state: SkillTreeState
 
+# TODO: Replace back all uses of Resource with Skill.
 @onready var _tabs = %Trees as TabContainer
 
 # TODO: Move (to Skill?) to use elsewhere
@@ -20,7 +21,7 @@ signal ok_pressed
 
 @export_group("Debug")
 @export var selected_node: GraphNode
-@export var selected_skill: Skill
+@export var selected_skill: Resource
 
 # Do something better later.
 var purchase_cost = 50
@@ -40,7 +41,7 @@ func initialize(gameplay_character: GameplayCharacter, show_all: bool):
 	skill_tree_state = character.skill_tree_state
 	hide_locked_skills = not show_all
 
-func _tint(s: Skill) -> Color:
+func _tint(s: Resource) -> Color:
 	var type_mod = Color.WHITE
 	if s.skill_type in _skill_colors:
 		type_mod = _skill_colors[s.skill_type]
@@ -103,7 +104,7 @@ func _setup_tree():
 		graph.node_selected.connect(_on_node_selected)
 	_update_purchase_state()
 
-func _can_purchase(skill: Skill) -> bool:
+func _can_purchase(skill: Resource) -> bool:
 	if skill_tree_state.acquired(skill):
 		return false
 	if not skill_tree_state.unlocked(skill):
@@ -114,7 +115,7 @@ func _can_purchase(skill: Skill) -> bool:
 		return false
 	return true
 
-func _skill_state(skill: Skill) -> String:
+func _skill_state(skill: Resource) -> String:
 	if skill_tree_state.acquired(skill):
 		return "Owned"
 	if not skill_tree_state.unlocked(skill):
@@ -125,7 +126,7 @@ func _skill_state(skill: Skill) -> String:
 		return "Need XP"
 	return "Available"
 
-func _avail_icon(skill: Skill) -> TextureRect:
+func _avail_icon(skill: Resource) -> TextureRect:
 	var out = TextureRect.new()
 	# TODO: enum
 	match _skill_state(skill):
@@ -155,10 +156,10 @@ func _avail_icon(skill: Skill) -> TextureRect:
 	out.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	return out
 
-func _on_node_entered(node: GraphNode, skill: Skill):
+func _on_node_entered(node: GraphNode, skill: Resource):
 	node.self_modulate = Color.WHITE
 
-func _on_node_exited(node: GraphNode, skill: Skill):
+func _on_node_exited(node: GraphNode, skill: Resource):
 	node.self_modulate = _tint(skill)
 
 func _on_node_selected(n: Node):
@@ -168,7 +169,7 @@ func _on_node_selected(n: Node):
 	selected_skill = n.get_meta("skill")
 	_update_info_panel(selected_skill)
 
-func _update_info_panel(skill: Skill):
+func _update_info_panel(skill: Resource):
 	if not skill:
 		%BuyButton.disabled = true
 		%Info.text = "Select a skill..."
@@ -209,7 +210,7 @@ func _update_purchase_state():
 		total_count += can_purchase_count
 	available_upgrades = total_count
 
-func _update_node_icon(node: GraphNode, skill: Skill):
+func _update_node_icon(node: GraphNode, skill: Resource):
 	var titlebar = node.get_titlebar_hbox()
 	var old = titlebar.get_child(1)
 	old.replace_by(_avail_icon(skill))

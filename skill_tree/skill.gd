@@ -31,3 +31,13 @@ func name() -> String:
 
 func type_name() -> String:
 	return SkillType.keys()[skill_type]
+
+func get_id() -> int:
+	match skill_type:
+		SkillType.ACTION:
+			return action_def.id
+		SkillType.TARGET:
+			return target_selection_def.id
+		SkillType.CONDITION:
+			return condition_def.id
+	return 0
