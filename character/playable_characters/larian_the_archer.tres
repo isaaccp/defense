@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://btxbesb7qp4a4"]
+
+[ext_resource type="Script" path="res://gameplay_character.gd" id="1_e15xr"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_icq27"]
+[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="3_5x51k"]
+
+[sub_resource type="Resource" id="Resource_8wsra"]
+script = ExtResource("2_icq27")
+skill_tree_collection = ExtResource("3_5x51k")
+acquired_actions = Array[int]([3])
+acquired_target_selections = Array[int]([1])
+acquired_conditions = Array[int]([1])
+unlocked_actions = Array[int]([])
+unlocked_target_selections = Array[int]([])
+unlocked_conditions = Array[int]([1])
+full_acquired = false
+full_unlocked = true
+
+[resource]
+script = ExtResource("1_e15xr")
+name = "Larian"
+character_id = 1
+starting_kit = "Archer"
+description = "A forest elf on a secret mission"
+skill_tree_state = SubResource("Resource_8wsra")
+peer_id = 0
+xp = 0
+total_xp = 0

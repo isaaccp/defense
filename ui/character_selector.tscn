@@ -11,6 +11,5 @@ options = NodePath("Options")
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Options" type="GridContainer" parent="."]
+[node name="Options" type="HBoxContainer" parent="."]
 layout_mode = 2
-columns = 2
