@@ -31,8 +31,7 @@ func load_skill_dir(skill_tree: SkillTree, dir_path: String, tree_type: SkillTre
 		while filename != "":
 			print("  Loading %s" % filename)
 			var skill = load(dir_path + "/" + filename) as Skill
-			if skill.skill_type != Skill.SkillType.ACTION:
-				skill_tree.add(skill)
+			skill_tree.add(skill)
 			filename = dir.get_next()
 
 # TODO: Do some checking for skill type.
