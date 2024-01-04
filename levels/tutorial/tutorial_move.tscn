@@ -23,9 +23,6 @@ skill_tree_state_override = SubResource("Resource_gkh1c")
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(196, 299)
 
-[node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(85, 362)
-
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("2_7ckkc")]
 position = Vector2(554, 304)
 

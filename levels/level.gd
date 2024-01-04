@@ -23,6 +23,16 @@ class_name Level
 @export var starting_positions: Node
 var is_frozen: bool = false
 
+func _ready():
+	# Only when launched with F6.
+	if get_parent() == get_tree().root:
+		var gc: Array[GameplayCharacter] = []
+		for i in range(starting_positions.get_child_count()):
+			gc.append(GameplayCharacter.make(Enum.CharacterId.KNIGHT))
+		initialize(gc)
+		var hud = load("res://ui/hud.tscn").instantiate()
+		add_child(hud)
+
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
 		if skill_tree_state_add:

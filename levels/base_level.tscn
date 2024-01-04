@@ -27,9 +27,6 @@ layer_0/tile_data = PackedInt32Array(2752585, 393216, 8, 2687049, 393216, 8, 262
 [node name="First" type="Node2D" parent="StartingPositions"]
 position = Vector2(55, 53)
 
-[node name="Second" type="Node2D" parent="StartingPositions"]
-position = Vector2(66, 125)
-
 [node name="YSorted" type="Node2D" parent="."]
 y_sort_enabled = true
 
