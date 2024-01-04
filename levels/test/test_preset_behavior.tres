@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelProvider" load_steps=26 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_78mwp"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="2_8xb8v"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_8xb8v"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_ihmyt"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="4_a36is"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="5_pvkds"]

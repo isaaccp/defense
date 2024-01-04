@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_b34mx"]
 [ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="3_dvhob"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_dvhob"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_vx3aa"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="5_hjytx"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="6_allpt"]
