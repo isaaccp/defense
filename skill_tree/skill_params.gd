@@ -1,7 +1,7 @@
 @tool
 extends Resource
 
-class_name ConditionParams
+class_name SkillParams
 
 enum CmpOp {
 	UNSPECIFIED,
@@ -149,15 +149,15 @@ static func placeholder_name(id: PlaceholderId) -> String:
 
 static func cmp_op_text(op: CmpOp) -> String:
 	match op:
-		ConditionParams.CmpOp.LT:
+		SkillParams.CmpOp.LT:
 			return "<"
-		ConditionParams.CmpOp.LE:
+		SkillParams.CmpOp.LE:
 			return "<="
-		ConditionParams.CmpOp.EQ:
+		SkillParams.CmpOp.EQ:
 			return "="
-		ConditionParams.CmpOp.GE:
+		SkillParams.CmpOp.GE:
 			return ">="
-		ConditionParams.CmpOp.GT:
+		SkillParams.CmpOp.GT:
 			return ">"
 	assert(false, "unreachable")
 	return "<bug>"

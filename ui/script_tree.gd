@@ -134,7 +134,7 @@ func _on_button_clicked(item, column, button_id, _mouse_button_index):
 		%ConfigPane.setup(item, column)
 
 func _on_config_pane_config_confirmed(item: TreeItem, col, result):
-	var params = result as ConditionParams
+	var params = result as SkillParams
 	var text = params.interpolated_text()
 	item.set_text(col, text)
 
@@ -149,7 +149,7 @@ func get_behavior() -> Behavior:
 		var condition_id = child.get_metadata(Column.CONDITION).id as ConditionDef.Id
 		var action = SkillManager.make_action_instance(action_id)
 		var condition = SkillManager.make_condition_instance(condition_id)
-		condition.params = child.get_metadata(Column.CONDITION).data as ConditionParams
+		condition.params = child.get_metadata(Column.CONDITION).data as SkillParams
 		var rule = Rule.make(
 			TargetSelectionDef.make(target_id),
 			action,

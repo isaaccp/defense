@@ -48,7 +48,7 @@ func target_metadata(column: int, id: TargetSelectionDef.Id) -> Dictionary:
 func action_metadata(column: int, id: ActionDef.Id) -> Dictionary:
 	return {"column": column, "id": id}
 
-func condition_metadata(column: int, id: ConditionDef.Id, params: ConditionParams) -> Dictionary:
+func condition_metadata(column: int, id: ConditionDef.Id, params: SkillParams) -> Dictionary:
 	return {"column": column, "id": id, "params": params}
 
 func _get_drag_data(at_position: Vector2):

@@ -14,15 +14,15 @@ func _comparison(value: int) -> bool:
 	if get_value_failed:
 		return false
 	match def.params.cmp:
-		ConditionParams.CmpOp.LT:
+		SkillParams.CmpOp.LT:
 			return value < def.params.int_value.value
-		ConditionParams.CmpOp.LE:
+		SkillParams.CmpOp.LE:
 			return value <= def.params.int_value.value
-		ConditionParams.CmpOp.EQ:
+		SkillParams.CmpOp.EQ:
 			return value == def.params.int_value.value
-		ConditionParams.CmpOp.GE:
+		SkillParams.CmpOp.GE:
 			return value >= def.params.int_value.value
-		ConditionParams.CmpOp.GT:
+		SkillParams.CmpOp.GT:
 			return value > def.params.int_value.value
 		_:
 			assert(false, "Unexpected CmpOp")

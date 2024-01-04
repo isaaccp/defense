@@ -2,7 +2,7 @@ extends Skill
 
 class_name ParamSkill
 
-@export var params: ConditionParams = ConditionParams.new()
+@export var params: SkillParams = SkillParams.new()
 # If true, it means it hasn't been parameterized through editor. Can't
 # be used in a rule, etc.
 @export var abstract = true
