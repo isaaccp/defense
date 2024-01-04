@@ -39,8 +39,6 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 var abortable_action_check_period = 0.1
 var next_abortable_action_check_time: float
 
-# Need to skip first physics_frame for navigation.
-var first = true
 var running = false
 
 func run():
@@ -49,9 +47,6 @@ func run():
 
 func _physics_process(delta: float):
 	if not running:
-		return
-	if first:
-		first = false
 		return
 
 	if health_component and health_component.is_dead:

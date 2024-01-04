@@ -29,8 +29,11 @@ static func get_behavior_component_or_die(node: Node) -> BehaviorComponent:
 		assert(false)
 	return component
 
+static func get_logging_component_or_null(node: Node) -> LoggingComponent:
+	return get_or_null(node, LoggingComponent.component) as LoggingComponent
+
 static func get_logging_component_or_die(node: Node) -> LoggingComponent:
-	var component = get_or_die(node, LoggingComponent.component) as LoggingComponent
+	var component = get_logging_component_or_null(node)
 	if not component:
 		assert(false)
 	return component

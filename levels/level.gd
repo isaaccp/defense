@@ -81,7 +81,11 @@ func _enable_behaviors():
 	_enable_nodes_behavior(towers.get_children())
 
 func _enable_nodes_behavior(nodes: Array):
+	# Probably this stuff can go in a common base class for character/enemy/etc.
 	for node in nodes:
 		var behavior = Component.get_behavior_component_or_null(node)
 		if behavior:
 			behavior.run()
+		var logging = Component.get_logging_component_or_null(node)
+		if logging:
+			logging.run()

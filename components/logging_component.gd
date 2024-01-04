@@ -35,9 +35,15 @@ class LogEntry extends RefCounted:
 
 # TODO: Implement some max limit and rollover.
 var entries: Array[LogEntry]
+var running = false
 var elapsed_time = 0.0
 
+func run():
+	running = true
+
 func _process(delta: float):
+	if not running:
+		return
 	elapsed_time += delta
 
 static func log_type_name(type: LogType):
