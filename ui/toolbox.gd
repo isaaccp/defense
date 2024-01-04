@@ -30,7 +30,7 @@ func initialize(
 	triggers.set_selectable(0, false)
 	for condition_type in condition_types:
 		var trigger = tree.create_item(triggers)
-		var condition = ConditionManager.make_instance(condition_type)
+		var condition = SkillManager.make_condition_instance(condition_type)
 		trigger.set_text(0, condition.name())
 		trigger.set_metadata(0, condition_metadata(1, condition_type, condition.params))
 

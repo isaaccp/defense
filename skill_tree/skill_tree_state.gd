@@ -20,7 +20,7 @@ class_name SkillTreeState
 @export var acquired_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
 	get:
 		if full_acquired:
-			return ConditionManager.all_conditions()
+			return SkillManager.all_conditions()
 		return acquired_conditions
 
 @export var unlocked_actions: Array[ActionDef.Id]:
@@ -38,7 +38,7 @@ class_name SkillTreeState
 @export var unlocked_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
 	get:
 		if full_unlocked:
-			return ConditionManager.all_conditions()
+			return SkillManager.all_conditions()
 		return unlocked_conditions
 
 # If set, all actions/targets are available.

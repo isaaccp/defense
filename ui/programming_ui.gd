@@ -32,7 +32,7 @@ func editor_initialize(b: Behavior):
 	%Toolbox.initialize(
 		TargetSelectionManager.all_target_selections(),
 		SkillManager.all_actions(),
-		ConditionManager.all_conditions(),
+		SkillManager.all_conditions(),
 	)
 	%Title.text = "Editing %s" % b.resource_path
 	script_tree.load_behavior(b)

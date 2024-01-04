@@ -18,18 +18,18 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 		var target_node_evaluator: TargetNodeConditionEvaluator = null
 		match rule.condition.type:
 			ConditionDef.Type.ANY:
-				var evaluator = ConditionManager.make_any_condition_evaluator(rule.condition)
+				var evaluator = SkillManager.make_any_condition_evaluator(rule.condition)
 				if not evaluator.evaluate():
 					continue
 			ConditionDef.Type.SELF:
-				var evaluator = ConditionManager.make_self_condition_evaluator(rule.condition, body)
+				var evaluator = SkillManager.make_self_condition_evaluator(rule.condition, body)
 				if not evaluator.evaluate():
 					continue
 			ConditionDef.Type.GLOBAL:
 				# TODO: Implement.
 				pass
 			ConditionDef.Type.TARGET_NODE:
-				target_node_evaluator = ConditionManager.make_target_node_condition_evaluator(rule.condition)
+				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition)
 		var action = SkillManager.make_action(rule.action)
 		var target = TargetSelectionManager.select_target(rule.target_selection, target_node_evaluator, action, body, side_component)
 		if target.valid():
