@@ -56,7 +56,3 @@ func _to_string() -> String:
 		return condition_name(id)
 	else:
 		return params.interpolated_text()
-
-# TODO: Temporary for compatibility with Skill.
-func get_id() -> int:
-	return id

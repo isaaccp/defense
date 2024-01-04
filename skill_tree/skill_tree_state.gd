@@ -84,22 +84,22 @@ func _skill_in(skill: Skill, state_type: StateType):
 		return true
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
-			return skill.get_id() in _actions(state_type)
+			return skill.id in _actions(state_type)
 		Skill.SkillType.TARGET:
-			return skill.get_id() in _target_selections(state_type)
+			return skill.id in _target_selections(state_type)
 		Skill.SkillType.CONDITION:
-			return skill.get_id() in _conditions(state_type)
+			return skill.id in _conditions(state_type)
 	return false
 
 func _add_skill_to(skill: Skill, state_type: StateType):
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	match skill.skill_type:
 		Skill.SkillType.ACTION:
-			_actions(state_type).append(skill.get_id())
+			_actions(state_type).append(skill.id)
 		Skill.SkillType.TARGET:
-			_target_selections(state_type).append(skill.get_id())
+			_target_selections(state_type).append(skill.id)
 		Skill.SkillType.CONDITION:
-			_conditions(state_type).append(skill.get_id())
+			_conditions(state_type).append(skill.id)
 
 static func make_full() -> SkillTreeState:
 	var skill_tree_state = SkillTreeState.new()

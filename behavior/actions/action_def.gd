@@ -31,7 +31,3 @@ func name() -> String:
 
 func _to_string() -> String:
 	return action_name(id)
-
-# TODO: Temporary for compatibility with Skill.
-func get_id() -> int:
-	return id
