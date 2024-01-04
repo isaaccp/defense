@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=3 format=3 uid="uid://eabogtefjj05"]
+
+[ext_resource type="Resource" uid="uid://b0cx6ra6s8077" path="res://skill_tree/actions/bow_attack.tres" id="1_3qq6h"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_x5d6n"]
+
+[resource]
+script = ExtResource("1_x5d6n")
+id = 5
+skill_name = &"Multi Shot"
+skill_type = 1
+parent = ExtResource("1_3qq6h")
+tree_type = 3

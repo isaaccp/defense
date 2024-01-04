@@ -7,6 +7,9 @@
 [sub_resource type="Resource" id="Resource_vrk4f"]
 script = ExtResource("1_v2prt")
 id = 5
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [resource]
 script = ExtResource("3_0x8q3")

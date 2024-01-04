@@ -1,5 +1,5 @@
 @tool
-extends Resource
+extends SkillBase
 
 class_name ActionDef
 
@@ -14,6 +14,9 @@ enum Id {
 }
 
 @export var id: Id
+
+func _init():
+	skill_type = SkillType.ACTION
 
 static func action_name(action_id: Id) -> String:
 	return Id.keys()[action_id].capitalize()

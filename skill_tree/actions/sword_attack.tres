@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=2 format=3 uid="uid://cv6d4t5ga1m38"]
+
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_fdht4"]
+
+[resource]
+script = ExtResource("1_fdht4")
+id = 2
+skill_name = &"Sword Attack"
+skill_type = 1
+tree_type = 2

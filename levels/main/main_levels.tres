@@ -11,14 +11,14 @@ skill_tree_collection = ExtResource("4_02m5g")
 acquired_actions = Array[int]([1, 2])
 acquired_target_selections = Array[int]([1])
 acquired_conditions = Array[int]([1])
-unlocked_actions = Array[int]([1, 2, 4])
-unlocked_target_selections = Array[int]([1, 1])
+unlocked_actions = Array[int]([])
+unlocked_target_selections = Array[int]([])
 unlocked_conditions = Array[int]([1])
 full_acquired = false
-full_unlocked = false
+full_unlocked = true
 
 [resource]
 script = ExtResource("2_3n011")
-players = 1
+players = 2
 levels = Array[PackedScene]([ExtResource("1_sf8nm")])
 skill_tree_state = SubResource("Resource_bkluy")

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://2oo81t37blhq" path="res://levels/test/instant_win.tscn" id="1_iqt4n"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_glaws"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_0nk7q"]
-[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_wxsdk"]
+[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_wxsdk"]
 
 [sub_resource type="Resource" id="Resource_l0uy0"]
 script = ExtResource("3_0nk7q")

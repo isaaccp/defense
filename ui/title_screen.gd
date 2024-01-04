@@ -1,6 +1,5 @@
 extends Screen
 
-
 signal game_mode_selected(game_mode: GameMode)
 
 @export var tutorial_game_mode: GameMode

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=2 format=3 uid="uid://b0cx6ra6s8077"]
+
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_sym6i"]
+
+[resource]
+script = ExtResource("1_sym6i")
+id = 3
+skill_name = &"Bow Attack"
+skill_type = 1
+tree_type = 3

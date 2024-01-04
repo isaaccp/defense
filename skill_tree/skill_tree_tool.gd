@@ -1,8 +1,12 @@
 @tool
 extends EditorScript
 
+var skill_tree_base_path = "res://skill_tree"
 var skill_base_path = "res://skill_tree/skills"
 var trees_base_path = "res://skill_tree/trees"
+var skill_types = [
+	SkillBase.SkillType.ACTION,
+]
 var tree_types = [
 	SkillTree.TreeType.GENERAL,
 	SkillTree.TreeType.WARRIOR,
@@ -13,8 +17,7 @@ var tree_types = [
 func _run():
 	create_skill_trees()
 
-func load_skill_dir(dir_path: String, tree_type: SkillTree.TreeType) -> SkillTree:
-	var skill_tree = SkillTree.new()
+func load_skill_dir(skill_tree: SkillTree, dir_path: String, tree_type: SkillTree.TreeType):
 	var dir = DirAccess.open(dir_path)
 	if dir:
 		dir.list_dir_begin()
@@ -22,20 +25,39 @@ func load_skill_dir(dir_path: String, tree_type: SkillTree.TreeType) -> SkillTre
 		while filename != "":
 			print("  Loading %s" % filename)
 			var skill = load(dir_path + "/" + filename) as Skill
+			if skill.skill_type != Skill.SkillType.ACTION:
+				skill_tree.add(skill)
+			filename = dir.get_next()
+
+func load_skill_type_dir(trees: Dictionary, dir_path: String):
+	var dir = DirAccess.open(dir_path)
+	if dir:
+		dir.list_dir_begin()
+		var filename = dir.get_next()
+		while filename != "":
+			print("  Loading %s" % filename)
+			var skill = load(dir_path + "/" + filename) as SkillBase
+			var skill_tree = trees[skill.tree_type]
 			skill_tree.add(skill)
 			filename = dir.get_next()
-	return skill_tree
 
 func create_skill_trees():
 	var num_skills = 0
 	var skill_tree_collection = SkillTreeCollection.new()
+	var trees = {}
 	for tree_type in tree_types:
+		var skill_tree = SkillTree.new()
+		skill_tree.tree_type = tree_type
+		trees[tree_type] = skill_tree
+
+	print("Loading actions")
+	load_skill_type_dir(trees, skill_tree_base_path + "/actions")
+	for tree_type in tree_types:
+		var skill_tree = trees[tree_type]
 		var tree_name = SkillTree.tree_type_filesystem_string(tree_type)
 		print("%s: Finding skills" % tree_name)
 		var dir_path = skill_base_path + "/" + tree_name
-		var skill_tree = load_skill_dir(dir_path, tree_type)
-		skill_tree.tree_type = tree_type
-		skill_tree.validate()
+		load_skill_dir(skill_tree, dir_path, tree_type)
 		print("%s: Writing skill tree with %d skills" % [tree_name, skill_tree.size()])
 		var tree_dir_path = trees_base_path + "/" + tree_name
 		DirAccess.make_dir_absolute(tree_dir_path)

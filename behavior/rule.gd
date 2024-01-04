@@ -8,9 +8,9 @@ class_name Rule
 
 func _to_string() -> String:
 	return "%s -> %s (%s)" % [
-		action,
-		target_selection,
-		condition,
+		action.name(),
+		target_selection.name(),
+		condition.name(),
 	]
 
 static func make(target_selection: TargetSelectionDef, action: ActionDef, condition: ConditionDef = ConditionManager.make_instance(ConditionDef.Id.ALWAYS)) -> Rule:

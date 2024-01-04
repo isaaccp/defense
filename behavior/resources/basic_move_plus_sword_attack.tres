@@ -10,6 +10,9 @@
 [sub_resource type="Resource" id="Resource_jlf3i"]
 script = ExtResource("1_31vv2")
 id = 2
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_0t8g6"]
 script = ExtResource("3_okvei")
@@ -36,6 +39,9 @@ condition = SubResource("Resource_viwve")
 [sub_resource type="Resource" id="Resource_81htf"]
 script = ExtResource("1_31vv2")
 id = 1
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_54mfd"]
 script = ExtResource("3_wwn20")

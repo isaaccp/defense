@@ -12,9 +12,11 @@ enum TreeType {
 }
 
 @export var tree_type: TreeType
-@export var skills: Array[Skill]
+# Set back to Skill.
+@export var skills: Array[Resource]
 
-func add(skill: Skill):
+# TODO: Switch back to Skill once we no longer have Skill vs SkillBase.
+func add(skill: Resource):
 	skills.append(skill)
 
 func size():

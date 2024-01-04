@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=2 format=3 uid="uid://cb3mi3783pack"]
+
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_7nxwc"]
+
+[resource]
+script = ExtResource("1_7nxwc")
+id = 1
+skill_name = &"Move To"
+skill_type = 1
+tree_type = 2

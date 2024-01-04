@@ -267,6 +267,9 @@ _data = {
 [sub_resource type="Resource" id="Resource_apcir"]
 script = ExtResource("5_kue6n")
 id = 3
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_7tu24"]
 script = ExtResource("6_2kkh2")
@@ -293,6 +296,9 @@ condition = SubResource("Resource_viwve")
 [sub_resource type="Resource" id="Resource_tes1g"]
 script = ExtResource("5_kue6n")
 id = 1
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_lrqp8"]
 script = ExtResource("9_apbeu")
@@ -333,8 +339,6 @@ libraries = {
 
 [node name="BehaviorComponent" parent="." index="6"]
 behavior = SubResource("Resource_7dfw4")
-action_cooldowns = null
-elapsed_time = null
 
 [node name="AttributesComponent" parent="." index="9"]
 speed = 30.0

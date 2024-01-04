@@ -14,6 +14,9 @@
 [sub_resource type="Resource" id="Resource_sxeba"]
 script = ExtResource("2_jwyes")
 id = 2
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_7t6qj"]
 script = ExtResource("3_4a8g8")
@@ -40,6 +43,9 @@ condition = SubResource("Resource_fwmbc")
 [sub_resource type="Resource" id="Resource_7g62m"]
 script = ExtResource("2_jwyes")
 id = 4
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_udehr"]
 script = ExtResource("4_cdnge")
@@ -61,6 +67,9 @@ condition = SubResource("Resource_udehr")
 [sub_resource type="Resource" id="Resource_wx7d5"]
 script = ExtResource("2_jwyes")
 id = 6
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_s2yk1"]
 script = ExtResource("3_4a8g8")
@@ -87,6 +96,9 @@ condition = SubResource("Resource_g1aba")
 [sub_resource type="Resource" id="Resource_lfbb4"]
 script = ExtResource("2_jwyes")
 id = 1
+skill_name = &""
+skill_type = 1
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_nyqg4"]
 script = ExtResource("4_cdnge")

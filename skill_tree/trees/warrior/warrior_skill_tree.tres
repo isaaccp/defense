@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=4 format=3 uid="uid://c5x86diqf1da4"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=5 format=3 uid="uid://cqeainxeyjmyr"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_61adr"]
-[ext_resource type="Resource" uid="uid://sexr888fkv0c" path="res://skill_tree/skills/warrior/charge_action.tres" id="2_v3016"]
-[ext_resource type="Resource" uid="uid://c2g37ki4ajw5e" path="res://skill_tree/skills/warrior/sword_attack_action.tres" id="3_a7c7g"]
+[ext_resource type="Resource" uid="uid://cb3mi3783pack" path="res://skill_tree/actions/move_to.tres" id="2_r1faf"]
+[ext_resource type="Resource" uid="uid://celgigrf5o7sb" path="res://skill_tree/actions/charge.tres" id="2_ymc84"]
+[ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="3_qxuso"]
 
 [resource]
 script = ExtResource("1_61adr")
 tree_type = 2
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_v3016"), ExtResource("3_a7c7g")])
+skills = Array[Resource]([ExtResource("2_ymc84"), ExtResource("2_r1faf"), ExtResource("3_qxuso")])
