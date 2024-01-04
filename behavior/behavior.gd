@@ -30,7 +30,7 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 				pass
 			ConditionDef.Type.TARGET_NODE:
 				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition)
-		var action = SkillManager.make_action(rule.action)
+		var action = SkillManager.make_runnable_action(rule.action)
 		var target = SkillManager.select_target(rule.target_selection, target_node_evaluator, action, body, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}
@@ -52,7 +52,7 @@ static func deserialize(serialized_behavior: PackedByteArray) -> Behavior:
 	for serialized_rule in data:
 		var rule = Rule.make(
 			TargetSelectionDef.make(serialized_rule.target),
-			ActionDef.make(serialized_rule.action)
+			SkillManager.make_action_instance(serialized_rule.action)
 		)
 		behavior.rules.append(rule)
 	return behavior

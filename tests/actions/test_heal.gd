@@ -15,7 +15,7 @@ func make_heal_behavior() -> Behavior:
 	behavior.rules.append(
 		Rule.make(
 			TargetSelectionDef.make(TargetSelectionDef.Id.SELF),
-			ActionDef.make(ActionDef.Id.HEAL),
+			SkillManager.make_action_instance(ActionDef.Id.HEAL),
 		)
 	)
 	return behavior

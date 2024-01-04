@@ -41,8 +41,15 @@ func _ready():
 		target_by_id[target.id] = target
 
 # Action
-# TODO: Update to the same way as condition.
-func make_action(action_def: ActionDef) -> Action:
+func lookup_action(id: ActionDef.Id) -> ActionDef:
+	return action_by_id[id]
+
+func make_action_instance(id: ActionDef.Id) -> ActionDef:
+	var action = lookup_action(id).duplicate(true)
+	# action.abstract = false
+	return action
+
+func make_runnable_action(action_def: ActionDef) -> Action:
 	var action = action_scripts[action_def.id].new() as Action
 	action.def = action_def
 	return action

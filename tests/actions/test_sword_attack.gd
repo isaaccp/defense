@@ -14,14 +14,14 @@ func make_sword_behavior(move: bool = false) -> Behavior:
 	behavior.rules.append(
 		Rule.make(
 			TargetSelectionDef.make(TargetSelectionDef.Id.CLOSEST_ENEMY),
-			ActionDef.make(ActionDef.Id.SWORD_ATTACK),
+			SkillManager.make_action_instance(ActionDef.Id.SWORD_ATTACK),
 		)
 	)
 	if move:
 		behavior.rules.append(
 			Rule.make(
 				TargetSelectionDef.make(TargetSelectionDef.Id.CLOSEST_ENEMY),
-				ActionDef.make(ActionDef.Id.MOVE_TO),
+				SkillManager.make_action_instance(ActionDef.Id.MOVE_TO),
 			)
 		)
 	return behavior

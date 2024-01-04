@@ -53,7 +53,7 @@ class TestPositionReachedConditions extends LevelTest:
 		behavior.rules.append(
 			Rule.make(
 				TargetSelectionDef.make(TargetSelectionDef.Id.TOWER),
-				ActionDef.make(ActionDef.Id.MOVE_TO),
+				SkillManager.make_action_instance(ActionDef.Id.MOVE_TO),
 			)
 		)
 		return behavior

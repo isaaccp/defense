@@ -75,7 +75,7 @@ func _physics_process(delta: float):
 				if action:
 					action.action_finished()
 					_on_action_finished(action)
-				action = SkillManager.make_action(rule.action)
+				action = SkillManager.make_runnable_action(rule.action)
 				action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component)
 		if action and action.abortable:
 			next_abortable_action_check_time = elapsed_time + abortable_action_check_period

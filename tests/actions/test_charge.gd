@@ -18,13 +18,13 @@ func make_charge_behavior() -> Behavior:
 	behavior.rules.append(
 		Rule.make(
 			TargetSelectionDef.make(TargetSelectionDef.Id.CLOSEST_ENEMY),
-			ActionDef.make(ActionDef.Id.SWORD_ATTACK),
+			SkillManager.make_action_instance(ActionDef.Id.SWORD_ATTACK),
 		)
 	)
 	behavior.rules.append(
 		Rule.make(
 			TargetSelectionDef.make(TargetSelectionDef.Id.CLOSEST_ENEMY),
-			ActionDef.make(ActionDef.Id.CHARGE),
+			SkillManager.make_action_instance(ActionDef.Id.CHARGE),
 		)
 	)
 	return behavior
