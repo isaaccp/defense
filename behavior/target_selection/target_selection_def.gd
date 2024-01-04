@@ -8,6 +8,8 @@ enum Id {
 	CLOSEST_ENEMY,
 	TOWER,
 	SELF,
+	SELF_OR_ALLY,
+	ALLY,
 }
 
 @export var id: Id

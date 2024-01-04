@@ -1,6 +1,6 @@
 extends GutTest
 
-const body_scene = preload("res://enemies/base_enemy.tscn")
+const body_scene = preload("res://character/character.tscn")
 
 var body: CharacterBody2D
 var behavior_component: BehaviorComponent
@@ -22,6 +22,7 @@ func make_behavior(condition_id: ConditionDef.Id) -> Behavior:
 func before_each():
 	body = body_scene.instantiate()
 	behavior_component = Component.get_behavior_component_or_die(body)
+	behavior_component.persistent_game_state_component = null
 	add_child_autoqfree(body)
 
 func test_basic_behavior():

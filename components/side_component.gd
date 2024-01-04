@@ -6,13 +6,16 @@ class_name SideComponent
 @export var side: Groups.GroupType
 
 @export_group("Debug")
+var ally_groups: Array[String]
 var enemy_groups: Array[String]
 
 func _ready():
 	assert(side != Groups.GroupType.UNSPECIFIED)
 	if side == Groups.GroupType.CHARACTERS:
+		ally_groups = [Groups.CHARACTERS, Groups.TOWERS]
 		enemy_groups = [Groups.ENEMIES]
 	else:
+		ally_groups = [Groups.ENEMIES]
 		enemy_groups = [Groups.CHARACTERS, Groups.TOWERS]
 
 func is_enemy_node(node: Node2D) -> bool:
@@ -32,6 +35,12 @@ func is_enemy(other: SideComponent) -> bool:
 		return other.side == Groups.GroupType.ENEMIES
 	else:
 		return other.side == Groups.GroupType.CHARACTERS or other.side == Groups.GroupType.TOWERS
+
+func allies() -> Array:
+	var nodes = []
+	for group in ally_groups:
+		nodes.append_array(get_tree().get_nodes_in_group(group))
+	return nodes
 
 func enemies() -> Array:
 	var nodes = []

@@ -41,5 +41,5 @@
  "show_help": false,
  "suffix": ".gd",
  "tests": [],
- "unit_test_name": "test_persistent_condition_instance"
+ "unit_test_name": null
 }
