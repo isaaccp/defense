@@ -67,6 +67,10 @@ func test_end_to_end():
 	gut.p("Level has finished")
 	await wait_seconds(gameplay.level_end_wait + 0.1, "Waiting for level end wait to be over")
 
+	hud.end_level_confirmed.emit()
+
+	await wait_frames(5)
+
 	gut.p("Loading next level")
 	assert_call_count(game_mode.level_provider, "next_level", 2)
 
