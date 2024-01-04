@@ -1,7 +1,6 @@
 @tool
 extends Resource
 
-# TODO: Rename Skill when finished.
 class_name Skill
 
 enum SkillType {

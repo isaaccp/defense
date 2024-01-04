@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=4 format=3 uid="uid://b4vmqt403v6hl"]
 
-[ext_resource type="Script" path="res://skill_type_collection.gd" id="1_kjr51"]
-[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="2_q85y0"]
-[ext_resource type="Resource" uid="uid://c283o3w8nuam8" path="res://skill_tree/conditions/target_health.tres" id="3_j3sg7"]
+[ext_resource type="Script" path="res://skill_type_collection.gd" id="1_hdnwx"]
+[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="2_jli6q"]
+[ext_resource type="Resource" uid="uid://c283o3w8nuam8" path="res://skill_tree/conditions/target_health.tres" id="3_qoy4s"]
 
 [resource]
-script = ExtResource("1_kjr51")
-skills = Array[Resource("res://skill_tree/skill_base.gd")]([ExtResource("2_q85y0"), ExtResource("3_j3sg7")])
+script = ExtResource("1_hdnwx")
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_jli6q"), ExtResource("3_qoy4s")])
