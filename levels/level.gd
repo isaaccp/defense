@@ -35,6 +35,8 @@ var is_frozen: bool = false
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
+		if not test_behavior:
+			test_behavior = Behavior.new()
 		var gameplay = load("res://gameplay.tscn").instantiate()
 		gameplay.level = self
 		var gcs: Array[GameplayCharacter] = []

@@ -13,6 +13,7 @@ const action_scripts = {
 	ActionDef.Id.CHARGE: preload("res://behavior/actions/charge_action.gd"),
 	ActionDef.Id.MULTI_SHOT: preload("res://behavior/actions/multi_shot_action.gd"),
 	ActionDef.Id.HEAL: preload("res://behavior/actions/heal_action.gd"),
+	ActionDef.Id.HOLD_PERSON: preload("res://behavior/actions/hold_person_action.gd"),
 }
 
 const condition_scripts = {
@@ -34,6 +35,12 @@ var condition_by_id: Dictionary
 var target_by_id: Dictionary
 
 func _ready():
+	refresh()
+
+func refresh():
+	action_by_id.clear()
+	condition_by_id.clear()
+	target_by_id.clear()
 	for action in actions.skills:
 		action_by_id[action.id] = action
 	for condition in conditions.skills:

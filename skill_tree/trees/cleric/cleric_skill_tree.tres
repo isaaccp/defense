@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=3 format=3 uid="uid://cfcoskuxunyjf"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=4 format=3 uid="uid://cfcoskuxunyjf"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_50w7a"]
 [ext_resource type="Resource" uid="uid://buewl5eydlx7c" path="res://skill_tree/actions/heal.tres" id="2_feqbp"]
+[ext_resource type="Resource" uid="uid://b01kxudyjuv78" path="res://skill_tree/actions/hold_person.tres" id="3_pfjuw"]
 
 [resource]
 script = ExtResource("1_50w7a")
 tree_type = 4
-skills = Array[Resource]([ExtResource("2_feqbp")])
+skills = Array[Resource]([ExtResource("2_feqbp"), ExtResource("3_pfjuw")])

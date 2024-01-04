@@ -3,4 +3,5 @@
 extends EditorScript
 
 func _run():
-	print(Color.DARK_RED)
+	var strings = ["a", "b", "", "c"]
+	print(Utils.filter_and_join_strings(strings))

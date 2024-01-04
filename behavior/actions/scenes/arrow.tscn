@@ -1,10 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://ds8tatkvscrat"]
+[gd_scene load_steps=9 format=3 uid="uid://ds8tatkvscrat"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_kb4ja"]
 [ext_resource type="Texture2D" uid="uid://byax400l32s7t" path="res://assets/kyrises_rpg_icon_pack/icons/16x16/arrow_01a.png" id="2_5jobf"]
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="2_qnqde"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="3_x2rxh"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="4_0qlfr"]
 [ext_resource type="PackedScene" uid="uid://7n8lpv1d2bgf" path="res://behavior/actions/scenes/components/straight_move_component.tscn" id="5_kn6qc"]
+
+[sub_resource type="Resource" id="Resource_aci18"]
+script = ExtResource("4_0qlfr")
+damage = 3
+status = 0
+status_duration = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
 radius = 5.0
@@ -18,7 +25,7 @@ texture = ExtResource("2_5jobf")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("2_qnqde")]
 action_scene = NodePath("..")
-damage = 3
+hit_effect = SubResource("Resource_aci18")
 hits = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

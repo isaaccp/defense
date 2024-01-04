@@ -11,6 +11,7 @@ enum Id {
 	CHARGE,
 	MULTI_SHOT,
 	HEAL,
+	HOLD_PERSON,
 }
 
 @export var id: Id

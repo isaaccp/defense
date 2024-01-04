@@ -8,6 +8,7 @@ enum Id {
 	UNSPECIFIED,
 	SWIFTNESS,
 	STRENGTH_SURGE,
+	PARALYZED,
 }
 
 @export var id: Id

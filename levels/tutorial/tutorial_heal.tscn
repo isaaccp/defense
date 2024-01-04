@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d4hqegyynx7qn"]
+[gd_scene load_steps=38 format=3 uid="uid://d4hqegyynx7qn"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_xt3gw"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_1nceu"]
@@ -11,9 +11,16 @@
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="6_p7k6u"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="7_l6p6k"]
 
+[sub_resource type="Resource" id="Resource_wido4"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_sxeba"]
 script = ExtResource("2_jwyes")
 id = 2
+params = SubResource("Resource_wido4")
+abstract = true
 skill_name = &""
 skill_type = 1
 tree_type = 0
@@ -33,9 +40,17 @@ skill_name = &""
 skill_type = 0
 tree_type = 0
 
+[sub_resource type="Resource" id="Resource_ljaxj"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_i04f3"]
 script = ExtResource("6_p7k6u")
 id = 1
+type = 0
+params = SubResource("Resource_ljaxj")
+abstract = true
 skill_name = &""
 skill_type = 0
 tree_type = 0
@@ -46,9 +61,16 @@ target_selection = SubResource("Resource_i04f3")
 action = SubResource("Resource_sxeba")
 condition = SubResource("Resource_fwmbc")
 
+[sub_resource type="Resource" id="Resource_4bgkl"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_7g62m"]
 script = ExtResource("2_jwyes")
 id = 4
+params = SubResource("Resource_4bgkl")
+abstract = true
 skill_name = &""
 skill_type = 1
 tree_type = 0
@@ -63,9 +85,17 @@ skill_name = &""
 skill_type = 0
 tree_type = 0
 
+[sub_resource type="Resource" id="Resource_fmg21"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_45488"]
 script = ExtResource("6_p7k6u")
 id = 1
+type = 0
+params = SubResource("Resource_fmg21")
+abstract = true
 skill_name = &""
 skill_type = 0
 tree_type = 0
@@ -76,9 +106,16 @@ target_selection = SubResource("Resource_45488")
 action = SubResource("Resource_7g62m")
 condition = SubResource("Resource_udehr")
 
+[sub_resource type="Resource" id="Resource_jso3m"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_wx7d5"]
 script = ExtResource("2_jwyes")
 id = 6
+params = SubResource("Resource_jso3m")
+abstract = true
 skill_name = &""
 skill_type = 1
 tree_type = 0
@@ -98,9 +135,17 @@ skill_name = &""
 skill_type = 0
 tree_type = 0
 
+[sub_resource type="Resource" id="Resource_6qs31"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_rt6fe"]
 script = ExtResource("6_p7k6u")
 id = 3
+type = 0
+params = SubResource("Resource_6qs31")
+abstract = true
 skill_name = &""
 skill_type = 0
 tree_type = 0
@@ -111,9 +156,16 @@ target_selection = SubResource("Resource_rt6fe")
 action = SubResource("Resource_wx7d5")
 condition = SubResource("Resource_g1aba")
 
+[sub_resource type="Resource" id="Resource_1savn"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_lfbb4"]
 script = ExtResource("2_jwyes")
 id = 1
+params = SubResource("Resource_1savn")
+abstract = true
 skill_name = &""
 skill_type = 1
 tree_type = 0
@@ -128,9 +180,17 @@ skill_name = &""
 skill_type = 0
 tree_type = 0
 
+[sub_resource type="Resource" id="Resource_27qqj"]
+script = ExtResource("3_2aicc")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_qigqo"]
 script = ExtResource("6_p7k6u")
 id = 1
+type = 0
+params = SubResource("Resource_27qqj")
+abstract = true
 skill_name = &""
 skill_type = 0
 tree_type = 0

@@ -20,6 +20,7 @@ func _handles(o: Object) -> bool:
 	return o is Behavior
 
 func _edit(o: Object):
+	SkillManager.refresh()
 	_in_obj = o as Behavior
 	if not o:
 		_make_visible(false)

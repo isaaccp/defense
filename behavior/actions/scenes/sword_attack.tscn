@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://23jvuhba7v7d"]
+[gd_scene load_steps=16 format=3 uid="uid://23jvuhba7v7d"]
 
 [ext_resource type="Texture2D" uid="uid://crn0raslm5ryy" path="res://assets/white_slash_wide/File1.png" id="1_h20pf"]
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_sepy6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b8wycalvfaypv" path="res://assets/white_slash_wide/File6.png" id="6_hyvcc"]
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="8_kcqxb"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="9_2r54y"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="9_g2oh2"]
 
 [sub_resource type="Animation" id="Animation_4x5cj"]
 length = 0.001
@@ -47,6 +48,12 @@ _data = {
 "auto": SubResource("Animation_4cdsn")
 }
 
+[sub_resource type="Resource" id="Resource_ucm66"]
+script = ExtResource("9_g2oh2")
+damage = 5
+status = 0
+status_duration = 0.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khm1e"]
 radius = 8.0
 
@@ -65,7 +72,7 @@ autoplay = "auto"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("8_kcqxb")]
 action_scene = NodePath("..")
-damage = 5
+hit_effect = SubResource("Resource_ucm66")
 hits = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
