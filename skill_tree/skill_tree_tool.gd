@@ -11,9 +11,9 @@ var skill_type_collections_path = "res://skill_tree/skill_type_collections"
 
 # Could just do all except unspecified for simplicity.
 var skill_types = [
-	SkillBase.SkillType.ACTION,
-	SkillBase.SkillType.TARGET,
-	SkillBase.SkillType.CONDITION,
+	Skill.SkillType.ACTION,
+	Skill.SkillType.TARGET,
+	Skill.SkillType.CONDITION,
 ]
 var tree_types = [
 	SkillTree.TreeType.GENERAL,
@@ -26,9 +26,9 @@ func _run():
 	create_skill_trees()
 
 # TODO: Do some checking for skill type.
-func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: SkillBase.SkillType):
+func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: Skill.SkillType):
 	var collection = SkillTypeCollection.new()
-	var skill_fs_string = SkillBase.skill_type_filesystem_string(skill_type)
+	var skill_fs_string = Skill.skill_type_filesystem_string(skill_type)
 	var dir_path = base_path + "/" + skill_fs_string + "s"
 	print(dir_path)
 	var dir = DirAccess.open(dir_path)
@@ -37,7 +37,7 @@ func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: Skill
 		var filename = dir.get_next()
 		while filename != "":
 			print("  Loading %s" % filename)
-			var skill = load(dir_path + "/" + filename) as SkillBase
+			var skill = load(dir_path + "/" + filename) as Skill
 			assert(skill.skill_type == skill_type)
 			collection.add(skill)
 			var skill_tree = trees[skill.tree_type]
@@ -58,7 +58,7 @@ func create_skill_trees():
 		trees[tree_type] = skill_tree
 
 	for skill_type in skill_types:
-		print("%s: Finding skills" % SkillBase.skill_type_filesystem_string(skill_type))
+		print("%s: Finding skills" % Skill.skill_type_filesystem_string(skill_type))
 		load_skill_type_dir(trees, skill_tree_base_path, skill_type)
 
 	for tree_type in tree_types:

@@ -1,5 +1,5 @@
 @tool
-extends SkillBase
+extends Skill
 
 class_name ActionDef
 

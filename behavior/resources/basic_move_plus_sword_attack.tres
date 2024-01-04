@@ -25,10 +25,16 @@ id = 1
 type = 1
 params = SubResource("Resource_0t8g6")
 abstract = false
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_1sjih"]
 script = ExtResource("3_wwn20")
 id = 1
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_36xgi"]
 script = ExtResource("2_jsr0t")
@@ -46,6 +52,9 @@ tree_type = 0
 [sub_resource type="Resource" id="Resource_54mfd"]
 script = ExtResource("3_wwn20")
 id = 1
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_hagxt"]
 script = ExtResource("2_jsr0t")

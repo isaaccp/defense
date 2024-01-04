@@ -1,6 +1,7 @@
 @tool
 extends Resource
 
+# TODO: Rename Skill when finished.
 class_name Skill
 
 enum SkillType {
@@ -10,34 +11,18 @@ enum SkillType {
 	CONDITION,
 }
 
+@export var skill_name: StringName
 @export var skill_type: SkillType
-@export var action_def: ActionDef
-@export var target_selection_def: TargetSelectionDef
-@export var condition_def: ConditionDef
 @export var parent: Skill
-# Not saved but set when loading tree.
-var tree_type: SkillTree.TreeType
-
-func name() -> String:
-	match skill_type:
-		SkillType.ACTION:
-			return action_def.name()
-		SkillType.TARGET:
-			return target_selection_def.name()
-		SkillType.CONDITION:
-			return condition_def.name()
-	assert(false, "Unsupported skill type")
-	return "<bug>"
+@export var tree_type: SkillTree.TreeType
 
 func type_name() -> String:
 	return SkillType.keys()[skill_type]
 
+# TODO: Temporary for compatibility with Skill.
 func get_id() -> int:
-	match skill_type:
-		SkillType.ACTION:
-			return action_def.id
-		SkillType.TARGET:
-			return target_selection_def.id
-		SkillType.CONDITION:
-			return condition_def.id
 	return 0
+
+static func skill_type_filesystem_string(skill_type: SkillType) -> String:
+	assert(skill_type != SkillType.UNSPECIFIED)
+	return SkillType.keys()[skill_type].to_lower()

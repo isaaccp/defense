@@ -282,16 +282,16 @@ id = 1
 type = 1
 params = SubResource("Resource_7tu24")
 abstract = false
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_4alqh"]
 script = ExtResource("9_apbeu")
 id = 1
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_7bga8"]
 script = ExtResource("8_pcifi")
@@ -309,9 +309,9 @@ tree_type = 0
 [sub_resource type="Resource" id="Resource_lrqp8"]
 script = ExtResource("9_apbeu")
 id = 1
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_qis0j"]
 script = ExtResource("8_pcifi")

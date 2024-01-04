@@ -29,16 +29,16 @@ id = 1
 type = 1
 params = SubResource("Resource_7t6qj")
 abstract = false
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_i04f3"]
 script = ExtResource("6_p7k6u")
 id = 1
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_l3wqv"]
 script = ExtResource("5_ik0fr")
@@ -59,16 +59,16 @@ id = 1
 type = 1
 params = SubResource("Resource_7t6qj")
 abstract = false
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_45488"]
 script = ExtResource("6_p7k6u")
 id = 1
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_gc5n8"]
 script = ExtResource("5_ik0fr")
@@ -94,16 +94,16 @@ id = 1
 type = 1
 params = SubResource("Resource_s2yk1")
 abstract = false
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_rt6fe"]
 script = ExtResource("6_p7k6u")
 id = 3
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_vhv3y"]
 script = ExtResource("5_ik0fr")
@@ -124,16 +124,16 @@ id = 1
 type = 1
 params = SubResource("Resource_7t6qj")
 abstract = false
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_qigqo"]
 script = ExtResource("6_p7k6u")
 id = 1
-skill_name = null
-skill_type = null
-tree_type = null
+skill_name = &""
+skill_type = 0
+tree_type = 0
 
 [sub_resource type="Resource" id="Resource_ixxgn"]
 script = ExtResource("5_ik0fr")

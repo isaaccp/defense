@@ -14,7 +14,7 @@ static var scripts = {
 }
 
 static func lookup(id: ConditionDef.Id) -> ConditionDef:
-	return conditions[id].condition_def
+	return conditions[id]
 
 static func make_instance(id: ConditionDef.Id) -> ConditionDef:
 	var condition = lookup(id).duplicate(true)
