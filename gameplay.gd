@@ -103,18 +103,23 @@ func _on_level_end(success: bool):
 	else:
 		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
 	ui_layer.hud.show_victory_loss(false)
-	# TODO: Show some dialog here.
+	# TODO: Set something up that calls _wrapup_level when done.
+	ui_layer.hud.show_end_level_confirmation(true)
+	await ui_layer.hud.end_level_confirmed
 	level.queue_free()
 	ui_layer.hide_log_viewer()
+	# Call play_next_level deferred as otherwise
+	# we load the new level before we free the
+	# current one.
 	if not success:
-		play_next_level(false)
+		play_next_level.call_deferred(false)
 	else:
 		if level_provider.last_level():
 			_credits()
 			return
 		# TODO: Calculate XP, etc, show stats.
 		_grant_xp(level)
-		play_next_level(true)
+		play_next_level.call_deferred(true)
 
 func _grant_xp(level: Level):
 	# Level will be freed up on next frame, so this can't do

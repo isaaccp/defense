@@ -38,6 +38,7 @@ const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 signal all_ready
 signal behavior_modified(character_idx: int, behavior: Behavior)
 signal restart_requested
+signal end_level_confirmed
 
 var ui_layer: GameplayUILayer
 
@@ -206,6 +207,9 @@ func character_view_count() -> int:
 func character_view(i: int) -> HudCharacterView:
 	return %CharacterViews.get_child(i)
 
+func show_end_level_confirmation(show: bool = true):
+	%EndLevelConfirmation.visible = show
+
 func _on_play_controls_restart_pressed():
 	restart_requested.emit()
 
@@ -214,3 +218,8 @@ func _on_view_log_requested(logging_component: LoggingComponent):
 
 func _on_upgrade_window_requested(character: Character):
 	ui_layer.show_upgrade_window(character)
+
+
+func _on_end_level_confirmation_pressed():
+	show_end_level_confirmation(false)
+	end_level_confirmed.emit()
