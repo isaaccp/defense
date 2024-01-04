@@ -15,5 +15,5 @@ type = 1
 params = SubResource("Resource_opf8v")
 abstract = true
 skill_name = &"Once"
-skill_type = 2
+skill_type = 3
 tree_type = 1

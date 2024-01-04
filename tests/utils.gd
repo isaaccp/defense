@@ -19,6 +19,11 @@ static func assert_last_action(test: GutTest, behavior: BehaviorComponent, expec
 	var count = test.get_signal_emit_count(behavior, "behavior_updated")
 	test.assert_ne(count, 0, "No actions emitted")
 	var params = test.get_signal_parameters(behavior, "behavior_updated")
+	test.assert_not_null(params)
+	if not params:
+		print("Unexpected lack of emit")
+		dump_all_emits(test, behavior, "behavior_updated")
+		return
 	var got = params[0]
 	test.assert_eq(got, expected, "Last action was %s instead of %s" % [ActionDef.action_name(got), ActionDef.action_name(expected)])
 
@@ -27,6 +32,11 @@ static func assert_last_action_not(test: GutTest, behavior: BehaviorComponent, e
 	test.assert_ne(count, 0, "No actions emitted")
 	var params = test.get_signal_parameters(behavior, "behavior_updated")
 	var got = params[0]
+	test.assert_not_null(params)
+	if not params:
+		print("Unexpected lack of emit")
+		dump_all_emits(test, behavior, "behavior_updated")
+		return
 	test.assert_ne(got, expected, "Last action was %s, but we expected it not to be" % [ActionDef.action_name(expected)])
 
 static func dump_all_emits(test: GutTest, object: Object, signal_name: String):

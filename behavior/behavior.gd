@@ -3,14 +3,44 @@ extends Resource
 class_name Behavior
 
 @export var rules: Array[Rule]
+var body: CharacterBody2D
+var side_component: SideComponent
 
-func prepare():
-	# Set up rules for runtime.
-	pass
+# TODO: Consider also preparing action if needed.
+# It would allow to do things like "every time you use this action, it
+# does extra damage", which is neat, with the caveat that likely for
+# actions we would like to share across rules, unlike for the other ones,
+# i.e., instead of an Array a Dictionary by action.id.
+var target_selectors: Array[TargetSelector] = []
+var condition_evaluators: Array[ConditionEvaluator] = []
+
+func prepare(body_: CharacterBody2D, side_component_: SideComponent):
+	body = body_
+	side_component = side_component_
+	for rule in rules:
+		var evaluator: ConditionEvaluator = null
+		var target_node_evaluator: TargetNodeConditionEvaluator = null
+		var target_selector: TargetSelector = null
+		match rule.condition.type:
+			ConditionDef.Type.ANY:
+				evaluator = SkillManager.make_any_condition_evaluator(rule.condition)
+			ConditionDef.Type.SELF:
+				evaluator = SkillManager.make_self_condition_evaluator(rule.condition, body)
+			ConditionDef.Type.GLOBAL:
+				# TODO: Implement.
+				pass
+			ConditionDef.Type.TARGET_NODE:
+				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition)
+		match rule.target_selection.type:
+			Target.Type.NODE:
+				target_selector = SkillManager.make_node_target_selector(rule.target_selection, target_node_evaluator)
+		target_selectors.append(target_selector)
+		condition_evaluators.append(evaluator)
+	assert(rules.size() == target_selectors.size())
+	assert(rules.size() == condition_evaluators.size())
 
 # TODO: Return BehaviorResult or such.
-func choose(body: CharacterBody2D, side_component: SideComponent,
-			action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
+func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 	for i in rules.size():
 		var rule = rules[i]
 		# Check cooldowns.
@@ -18,27 +48,11 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 			var can_run_after = action_cooldowns[rule.action.id]
 			if elapsed_time < can_run_after:
 				continue
-		var target_node_evaluator: TargetNodeConditionEvaluator = null
-		match rule.condition.type:
-			ConditionDef.Type.ANY:
-				var evaluator = SkillManager.make_any_condition_evaluator(rule.condition)
-				if not evaluator.evaluate():
-					continue
-			ConditionDef.Type.SELF:
-				var evaluator = SkillManager.make_self_condition_evaluator(rule.condition, body)
-				if not evaluator.evaluate():
-					continue
-			ConditionDef.Type.GLOBAL:
-				# TODO: Implement.
-				pass
-			ConditionDef.Type.TARGET_NODE:
-				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition)
+		if condition_evaluators[i]:
+			if not condition_evaluators[i].evaluate():
+				continue
 		var action = SkillManager.make_runnable_action(rule.action)
-		var target = Target.make_invalid()
-		match rule.target_selection.type:
-			Target.Type.NODE:
-				var target_selector = SkillManager.make_node_target_selector(rule.target_selection, target_node_evaluator)
-				target = target_selector.select_target(action, body, side_component)
+		var target = target_selectors[i].select_target(action, body, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}
 	return {}

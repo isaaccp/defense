@@ -44,8 +44,8 @@ var first = true
 var running = false
 
 func run():
+	behavior.prepare(body, side_component)
 	running = true
-	behavior.prepare()
 
 func _physics_process(delta: float):
 	if not running:
@@ -73,7 +73,7 @@ func _physics_process(delta: float):
 		target = null
 	# After this point, if action is still set, we can assume is not finished.
 	if not rule or (action.abortable and next_abortable_action_check_time < elapsed_time):
-		var result = behavior.choose(body, side_component, action_cooldowns, elapsed_time)
+		var result = behavior.choose(action_cooldowns, elapsed_time)
 		if not result.is_empty():
 			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule

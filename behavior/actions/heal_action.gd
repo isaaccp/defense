@@ -1,5 +1,7 @@
 extends SpawnAtTargetNodePositionAction
 
+class_name HealAction
+
 const heal_effect_scene = preload("res://behavior/actions/scenes/heal.tscn")
 
 # TODO: Look into turning stuff like this into a resource.

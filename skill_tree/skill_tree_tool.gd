@@ -30,7 +30,6 @@ func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: Skill
 	var collection = SkillTypeCollection.new()
 	var skill_fs_string = Skill.skill_type_filesystem_string(skill_type)
 	var dir_path = base_path + "/" + skill_fs_string + "s"
-	print(dir_path)
 	var dir = DirAccess.open(dir_path)
 	if dir:
 		dir.list_dir_begin()
@@ -38,7 +37,7 @@ func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: Skill
 		while filename != "":
 			print("  Loading %s" % filename)
 			var skill = load(dir_path + "/" + filename) as Skill
-			assert(skill.skill_type == skill_type)
+			assert(skill.skill_type == skill_type, "wrong skill type")
 			collection.add(skill)
 			var skill_tree = trees[skill.tree_type]
 			skill_tree.add(skill)
