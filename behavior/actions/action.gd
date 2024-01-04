@@ -32,11 +32,13 @@ var navigation_agent: NavigationAgent2D
 var side_component: SideComponent
 var attributes_component: AttributesComponent
 var status_component: StatusComponent
+var logging_component: LoggingComponent
 
 func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
 				action_sprites_: Node2D, side_component_: SideComponent,
 				attributes_component_: AttributesComponent,
-				status_component_: StatusComponent) -> void:
+				status_component_: StatusComponent,
+				logging_component_: LoggingComponent) -> void:
 	target = target_
 	assert(target.type == target_type_supported, "Unsupported target type: %s" % target.type)
 	body = body_
@@ -45,6 +47,7 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 	side_component = side_component_
 	attributes_component = attributes_component_
 	status_component = status_component_
+	logging_component = logging_component_
 	post_initialize()
 
 # Called before the first invocation of physics_process.
@@ -63,3 +66,9 @@ func action_finished():
 
 func _initialize_action_scene(action_scene: ActionScene) -> void:
 	action_scene.initialize(body.name, def, attributes_component, side_component)
+
+func action_log(message: String):
+	if not logging_component:
+		return
+	var full_message = "%s: %s" % [def.name(), message]
+	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, full_message)

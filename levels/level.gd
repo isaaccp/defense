@@ -21,6 +21,9 @@ class_name Level
 # and it'd be a pain to change that, so override it here
 # as needed.
 @export var players = -1
+# Used when plaing the scene directly.
+@export var test_behavior: Behavior
+
 
 @export_group("Internal")
 @export var characters: Node2D
@@ -34,11 +37,19 @@ func _ready():
 	if get_parent() == get_tree().root:
 		var gameplay = load("res://gameplay.tscn").instantiate()
 		gameplay.level = self
-		var gc: Array[GameplayCharacter] = []
+		var gcs: Array[GameplayCharacter] = []
 		var num_players = players if players != -1 else starting_positions.get_child_count()
 		for i in range(num_players):
-			gc.append(GameplayCharacter.make(Enum.CharacterId.KNIGHT))
-		initialize(gc)
+			var gc = GameplayCharacter.make(Enum.CharacterId.KNIGHT)
+			gc.behavior = test_behavior
+			gcs.append(gc)
+		gameplay.characters = gcs
+		# If not overriden, unlock all skills when playing stand-alone.
+		if not skill_tree_state_override:
+			skill_tree_state_override = SkillTreeState.new()
+			skill_tree_state_override.full_acquired = true
+			skill_tree_state_override.full_acquired = true
+		initialize(gcs)
 		add_child(gameplay)
 		gameplay.ui_layer.show()
 		gameplay.ui_layer.hud.show()

@@ -74,6 +74,8 @@ status_component = NodePath("../StatusComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
+action_cooldowns = null
+elapsed_time = null
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component") instance=ExtResource("8_mrif0")]
 side_component = NodePath("../SideComponent")

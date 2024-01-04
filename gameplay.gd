@@ -85,7 +85,6 @@ func play_level():
 	ui_layer.hud.set_towers(level.towers)
 	ui_layer.hud.start_character_setup(_on_all_ready)
 	ui_layer.hud.show_main_message("Prepare", 2.0)
-	ui_layer.hide_log_viewer()
 	# Everything is set up, wait until all players are ready.
 
 func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
@@ -106,6 +105,7 @@ func _on_level_end(success: bool):
 	ui_layer.hud.show_victory_loss(false)
 	# TODO: Show some dialog here.
 	level.queue_free()
+	ui_layer.hide_log_viewer()
 	if not success:
 		play_next_level(false)
 	else:

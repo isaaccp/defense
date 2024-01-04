@@ -16,5 +16,9 @@ func post_initialize():
 func action_finished():
 	super()
 	status_component.remove_status(def.id, StatusDef.Id.SWIFTNESS)
-	if original_position.distance_squared_to(body.global_position) > charge_threshold * charge_threshold:
+	var distance = original_position.distance_to(body.global_position)
+	if distance >= charge_threshold:
+		action_log("%0.1f (>= %0.1f), triggering surge" % [distance, charge_threshold])
 		status_component.set_status(def.id, StatusDef.Id.STRENGTH_SURGE, 2.0)
+	else:
+		action_log("%0.1f (< %0.1f), not triggering surge" % [distance, charge_threshold])

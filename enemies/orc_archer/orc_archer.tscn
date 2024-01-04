@@ -333,6 +333,8 @@ libraries = {
 
 [node name="BehaviorComponent" parent="." index="6"]
 behavior = SubResource("Resource_7dfw4")
+action_cooldowns = null
+elapsed_time = null
 
 [node name="AttributesComponent" parent="." index="9"]
 speed = 30.0
