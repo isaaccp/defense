@@ -65,10 +65,10 @@ func action_finished():
 	finished = true
 
 func _initialize_action_scene(action_scene: ActionScene) -> void:
-	action_scene.initialize(body.name, def, attributes_component, side_component)
+	action_scene.initialize(body.name, def, attributes_component, side_component, logging_component)
 
 func action_log(message: String):
 	if not logging_component:
 		return
 	var full_message = "%s: %s" % [def.name(), message]
-	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, full_message)
+	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message)
