@@ -2,37 +2,43 @@ extends Container
 
 class_name CharacterSelector
 
-@export var label: Label
 @export var options: Container
 
 const rich_button_scene = preload("res://ui/rich_button.tscn")
 
-signal character_selected(character_id: Enum.CharacterId)
+signal character_selected(character_idx: int)
 
 var player_id: int
+var available_characters: Array[GameplayCharacter]
 
-func initialize(_player_id: int):
-	player_id = _player_id
+func initialize(player_id_: int, available_characters_: Array[GameplayCharacter]):
+	player_id = player_id_
+	available_characters = available_characters_
 
 func _ready():
-	label.text = "Player %d" % player_id
-	for character_id in CharacterManager.available_characters():
-		var character_name = CharacterManager.character_name(character_id)
-		var description = CharacterManager.description(character_id)
+	%Label.text = "Player %d" % player_id
+	for i in range(available_characters.size()):
+		var character = available_characters[i]
+		var description = _description(character)
 		var button = rich_button_scene.instantiate()
-		button.set_meta("character_id", character_id)
-		button.label_text = "[b][center]%s[/center][/b]\n%s" % [
-			character_name, description]
-		button.pressed.connect(_character_selected.bind(button, character_id))
+		button.set_meta("character_idx", i)
+		button.label_text = description
+		button.pressed.connect(_character_selected.bind(button, i))
 		options.add_child(button)
 
-func _character_selected(button: Button, character_id: Enum.CharacterId):
-	character_selected.emit(character_id)
+func _description(character: GameplayCharacter) -> String:
+	var description = ""
+	description += "[b][center]%s[/center][/b]\n" % character.name
+	description += "Starting kit: %s\n" % CharacterManager.character_name(character.character_id)
+	return description
 
-func disable_and_show_selection(character_id: Enum.CharacterId):
+func _character_selected(button: Button, character_idx: int):
+	character_selected.emit(character_idx)
+
+func disable_and_show_selection(character_idx: int):
 	for child in options.get_children():
 		child.disabled = true
-		if child.get_meta("character_id") == character_id:
+		if child.get_meta("character_idx") == character_idx:
 			child.modulate = Color(1, 1, 1, 0.9)
 		else:
 			child.modulate = Color(1, 1, 1, 0.1)

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://ui/character_selector.gd" id="1_0fkjh"]
 
-[node name="CharacterSelector" type="VBoxContainer" node_paths=PackedStringArray("label", "options")]
+[node name="CharacterSelector" type="VBoxContainer" node_paths=PackedStringArray("options")]
 offset_bottom = 648.0
 script = ExtResource("1_0fkjh")
-label = NodePath("Label")
 options = NodePath("Options")
 
 [node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Options" type="GridContainer" parent="."]

@@ -35,25 +35,24 @@ func start(game_mode: GameMode):
 	ui_layer.show()
 	ui_layer.hud.hide()
 	ui_layer.hud.set_peer(multiplayer.get_unique_id())
-	ui_layer.character_selection_screen.set_characters(level_provider.players)
+	ui_layer.character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
 	ui_layer.show_screen(ui_layer.character_selection_screen)
 
-func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
+func _on_character_selection_screen_selection_ready(character_selections: Array):
 	ui_layer.hide_screen()
 	ui_layer.hud.show()
 	var players = OnlineMatch.get_sorted_players()
 	for selection in range(character_selections.size()):
-		var character_id = character_selections[selection]
+		var idx = character_selections[selection]
 		# TODO: Remove the number when we don't allow two of
 		# the same character.
-		var character_name = "%s (%d)" % [Enum.character_id_string(character_id), selection]
-		var gameplay_character = GameplayCharacter.make(
-			character_id,
-			character_name,
-			players[selection % players.size()].peer_id,
-			level_provider.behavior,
-			level_provider.skill_tree_state,
-		)
+		var gameplay_character = level_provider.available_characters[idx].duplicate(true) as GameplayCharacter
+		gameplay_character.name = "%s (%d)" % [gameplay_character.name, selection]
+		gameplay_character.peer_id = players[selection % players.size()].peer_id
+		if level_provider.behavior:
+			gameplay_character.behavior = level_provider.behavior
+		if level_provider.skill_tree_state:
+			gameplay_character.skill_tree_state = level_provider.skill_tree_state
 		characters.append(gameplay_character)
 	play_next_level.call_deferred()
 

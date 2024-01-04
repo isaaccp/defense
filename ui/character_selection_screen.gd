@@ -6,14 +6,18 @@ class_name CharacterSelectionScreen
 
 const character_selector_scene = preload("res://ui/character_selector.tscn")
 
-signal selection_ready(character_selections: Array[Enum.CharacterId])
+# Array contains a list of indexes over the available_characters array.
+# Not returning objects or similar so it's easier on multiplayer.
+signal selection_ready(character_selections: Array[int])
 
 var sorted_players: Array
 var selections = {}
 var selections_wanted: int
+var available_characters: Array[GameplayCharacter]
 
-func set_characters(num_characters: int) -> void:
+func set_characters(num_characters: int, available_characters_: Array[GameplayCharacter]) -> void:
 	selections_wanted = num_characters
+	available_characters = available_characters_
 
 func _on_show(info: Dictionary = {}) -> void:
 	sorted_players = OnlineMatch.get_sorted_players()
@@ -30,27 +34,27 @@ func clear_characters() -> void:
 func add_character(character_idx: int, session_id: String) -> void:
 	var character_selector = character_selector_scene.instantiate()
 	character_selector.name = session_id
-	character_selector.initialize(character_idx)
+	character_selector.initialize(character_idx, available_characters)
 	characters_container.add_child(character_selector)
 	if session_id == "local" or session_id == OnlineMatch.get_my_session_id():
 		character_selector.character_selected.connect(_on_character_selected.bind(character_idx))
 	else:
 		character_selector.enable(false)
 
-func _on_character_selected(character_id: Enum.CharacterId, character_idx: int):
-	_notify_selection.rpc(character_idx, character_id)
+func _on_character_selected(gameplay_character_idx: int, character_idx: int):
+	_notify_selection.rpc(character_idx, gameplay_character_idx)
 
 @rpc("any_peer", "call_local")
-func _notify_selection(character_idx: int, character_id: Enum.CharacterId):
-	selections[character_idx] = character_id
+func _notify_selection(character_idx: int, gameplay_character_idx: int):
+	selections[character_idx] = gameplay_character_idx
 	if sorted_players.is_empty() or selections.size() == selections_wanted:
-		var selection_array: Array[Enum.CharacterId] = []
+		var selection_array: Array[int] = []
 		for i in range(selections.size()):
-			selection_array.append(selections[i] as Enum.CharacterId)
+			selection_array.append(selections[i])
 		selection_ready.emit(selection_array)
 	else:
 		var character_container = characters_container.get_child(character_idx)
-		character_container.disable_and_show_selection(character_id)
+		character_container.disable_and_show_selection(character_idx)
 
 # For testing.
 func character_selector_count() -> int:

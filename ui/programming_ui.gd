@@ -20,8 +20,9 @@ func initialize(character_: Character):
 	)
 	if is_instance_valid(character):
 		%Title.text = "Configuring behavior for %s" % character.short_name()
-		if character.behavior:
-			script_tree.load_behavior(character.behavior)
+		var behavior_component = Component.get_behavior_component_or_die(character)
+		if behavior_component.behavior:
+			script_tree.load_behavior(behavior_component.behavior)
 
 func editor_initialize(b: Behavior):
 	assert(is_inside_tree(), "Needs to be called inside tree")

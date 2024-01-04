@@ -27,8 +27,8 @@ full_unlocked = true
 script = ExtResource("2_5stfg")
 name = "Bob"
 character_id = 1
-peer_id = 1
 skill_tree_state = SubResource("Resource_mqxpj")
+peer_id = 1
 xp = 100
 total_xp = 0
 

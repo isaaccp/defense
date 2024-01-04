@@ -17,13 +17,14 @@ func _ready():
 
 func initialize(character_: Character) -> void:
 	character = character_
-	var health = Component.get_or_die(character, HealthComponent.component) as HealthComponent
+	var health = Component.get_health_component_or_die(character)
 	health.health_updated.connect(_on_health_updated)
-	var status = Component.get_or_die(character, StatusComponent.component) as StatusComponent
+	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
-	var behavior = Component.get_or_die(character, BehaviorComponent.component) as BehaviorComponent
+	var behavior = Component.get_behavior_component_or_die(character)
 	behavior.behavior_updated.connect(_on_behavior_updated)
-	%Title.text = character.short_name()
+	var state = Component.get_persistent_game_state_component_or_die(character).state
+	%Title.text = state.name
 
 func is_local() -> bool:
 	if OnlineMatch.match_mode == OnlineMatch.MatchMode.NONE:

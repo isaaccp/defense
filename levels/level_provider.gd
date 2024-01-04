@@ -4,10 +4,14 @@ class_name LevelProvider
 
 @export var players: int
 @export var levels: Array[PackedScene]
+@export var available_characters: Array[GameplayCharacter]
 
+
+@export_group("Testing")
+# The following two override the settings in the character loaded, leave
+# empty except for debugging/testing.
 # Unlocked skills on start.
 @export var skill_tree_state: SkillTreeState
-
 # Initial behavior for characters.
 @export var behavior: Behavior = Behavior.new()
 

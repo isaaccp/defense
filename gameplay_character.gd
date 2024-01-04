@@ -2,12 +2,13 @@ extends Resource
 
 class_name GameplayCharacter
 
-@export_group("Debug")
 @export var name: String
 @export var character_id: Enum.CharacterId
-@export var peer_id: int
 @export var behavior: Behavior
 @export var skill_tree_state: SkillTreeState
+
+@export_group("Debug")
+@export var peer_id: int
 @export var xp: int
 # Total accummulated XP, for fun.
 @export var total_xp: int

@@ -17,6 +17,8 @@ var condition_evaluators: Array[ConditionEvaluator] = []
 func prepare(body_: CharacterBody2D, side_component_: SideComponent):
 	body = body_
 	side_component = side_component_
+	target_selectors.clear()
+	condition_evaluators.clear()
 	for rule in rules:
 		var evaluator: ConditionEvaluator = null
 		var target_node_evaluator: TargetNodeConditionEvaluator = null
@@ -41,6 +43,9 @@ func prepare(body_: CharacterBody2D, side_component_: SideComponent):
 
 # TODO: Return BehaviorResult or such.
 func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
+	#I am actually not sure how this can happen, but it happens :)
+	if not is_instance_valid(body):
+		return {}
 	for i in rules.size():
 		var rule = rules[i]
 		# Check cooldowns.

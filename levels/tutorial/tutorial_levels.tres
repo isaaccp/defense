@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://dt5j8naupi576"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://dt5j8naupi576"]
 
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="1_mhg3q"]
+[ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_t4dnx"]
 [ext_resource type="PackedScene" uid="uid://404r5ooscyrr" path="res://levels/tutorial/tutorial_move.tscn" id="1_u2h2n"]
 [ext_resource type="PackedScene" uid="uid://bbo0hd6gduxbc" path="res://levels/tutorial/tutorial_attack.tscn" id="2_tnyg3"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="3_jixjt"]
@@ -10,3 +11,4 @@
 script = ExtResource("1_mhg3q")
 players = 1
 levels = Array[PackedScene]([ExtResource("1_u2h2n"), ExtResource("2_tnyg3"), ExtResource("3_jixjt"), ExtResource("4_omot4")])
+available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_t4dnx")])

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=34 format=3 uid="uid://dko6s3kgrapkm"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=35 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_78mwp"]
+[ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_dv7bi"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_8xb8v"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_ihmyt"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="4_a36is"]
@@ -186,5 +187,6 @@ full_unlocked = false
 script = ExtResource("7_4xswo")
 players = 1
 levels = Array[PackedScene]([ExtResource("7_cb8qh")])
+available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_dv7bi")])
 skill_tree_state = SubResource("Resource_x5gu8")
 behavior = SubResource("Resource_ytoa5")
