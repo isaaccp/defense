@@ -99,8 +99,11 @@ static func _action_id(action: Action) -> ActionDef.Id:
 	return ActionDef.Id.UNSPECIFIED
 
 func _emit_updated_if_changed(prev_action_id: ActionDef.Id, prev_target: Target):
+	# Log here if we become idle as it's the easiest way.
 	var action_id = _action_id(action)
 	if prev_action_id != action_id or prev_target != target:
+		if rule == null:
+			_log("Idle: Could not find any eligible rules")
 		behavior_updated.emit(action_id, target)
 
 func _post_action():

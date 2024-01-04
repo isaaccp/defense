@@ -19,9 +19,9 @@ signal hurtbox_hit
 func can_handle_collision():
 	return (not health_component) or health_component.health > 0
 
-func handle_collision(hitbox_name: String, damage: int):
+func handle_collision(owner_name: String, hitbox_name: String, damage: int):
 	hurtbox_hit.emit()
-	_log("Hit by %s for %d damage" % [hitbox_name, damage])
+	_log("Hit by %s's %s for %d damage" % [owner_name, hitbox_name, damage])
 	if health_component:
 		health_component.damage(damage)
 
