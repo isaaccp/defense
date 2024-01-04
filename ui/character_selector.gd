@@ -29,7 +29,8 @@ func _ready():
 func _description(character: GameplayCharacter) -> String:
 	var description = ""
 	description += "[b][center]%s[/center][/b]\n" % character.name
-	description += "Starting kit: %s\n" % CharacterManager.character_name(character.character_id)
+	description += "Starting kit: %s\n" % character.starting_kit
+	description += "%s\n" % character.description
 	return description
 
 func _character_selected(button: Button, character_idx: int):

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://bix5m3wtgncj4"]
+
+[ext_resource type="Script" path="res://gameplay_character.gd" id="1_g060r"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_60gha"]
+[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="3_6mrhu"]
+
+[sub_resource type="Resource" id="Resource_j2d1u"]
+script = ExtResource("2_60gha")
+skill_tree_collection = ExtResource("3_6mrhu")
+acquired_actions = Array[int]([1, 2])
+acquired_target_selections = Array[int]([1])
+acquired_conditions = Array[int]([1])
+unlocked_actions = Array[int]([1, 2])
+unlocked_target_selections = Array[int]([1])
+unlocked_conditions = Array[int]([1])
+full_acquired = false
+full_unlocked = true
+
+[resource]
+script = ExtResource("1_g060r")
+name = "Godrick"
+character_id = 1
+starting_kit = "Warrior"
+description = "A young knight who had to flee the city guard after a sad misunderstanding"
+skill_tree_state = SubResource("Resource_j2d1u")
+peer_id = 0
+xp = 0
+total_xp = 0

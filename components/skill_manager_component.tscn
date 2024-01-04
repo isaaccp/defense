@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dse5haatr2bua"]
 
 [ext_resource type="Script" path="res://components/skill_manager_component.gd" id="1_0whut"]
-[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="2_ioe0t"]
+[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="2_ioe0t"]
 
 [node name="SkillManagerComponent" type="Node"]
 script = ExtResource("1_0whut")

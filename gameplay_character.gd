@@ -4,6 +4,8 @@ class_name GameplayCharacter
 
 @export var name: String
 @export var character_id: Enum.CharacterId
+@export var starting_kit: String
+@export_multiline var description: String
 @export var behavior: Behavior
 @export var skill_tree_state: SkillTreeState
 

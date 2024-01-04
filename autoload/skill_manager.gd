@@ -25,8 +25,8 @@ const target_scripts = {
 	TargetSelectionDef.Id.CLOSEST_ENEMY: preload("res://behavior/target_selection/closest_enemy_target_selector.gd"),
 	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/tower_target_selector.gd"),
 	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/self_target_selector.gd"),
-	TargetSelectionDef.Id.SELF_OR_ALLY: preload("res://skill_tree/targets/self_or_ally.tres"),
-	TargetSelectionDef.Id.ALLY: preload("res://skill_tree/targets/self.tres"),
+	TargetSelectionDef.Id.SELF_OR_ALLY: preload("res://behavior/target_selection/self_or_ally_target_selector.gd"),
+	TargetSelectionDef.Id.ALLY: preload("res://skill_tree/targets/ally.tres"),
 }
 
 var action_by_id: Dictionary
