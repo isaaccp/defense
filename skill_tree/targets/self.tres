@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_mjmbq")
 id = 3
+type = 1
 skill_name = &"Self"
 skill_type = 2
 tree_type = 1

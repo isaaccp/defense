@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_awb10")
 id = 2
+type = 1
 skill_name = &"Tower"
 skill_type = 2
 tree_type = 1

@@ -11,6 +11,7 @@ enum Id {
 }
 
 @export var id: Id
+@export var type: Target.Type
 
 static func target_selection_name(target_selection_id: Id) -> String:
 	return Id.keys()[target_selection_id].capitalize()

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_fi4lx")
 id = 1
+type = 1
 skill_name = &"Closest Enemy"
 skill_type = 2
 tree_type = 1
