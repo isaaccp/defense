@@ -52,7 +52,7 @@ class TestPositionReachedConditions extends LevelTest:
 		var behavior = Behavior.new()
 		behavior.rules.append(
 			Rule.make(
-				TargetSelectionDef.make(TargetSelectionDef.Id.TOWER),
+				SkillManager.make_target_selection_instance(TargetSelectionDef.Id.TOWER),
 				SkillManager.make_action_instance(ActionDef.Id.MOVE_TO),
 			)
 		)

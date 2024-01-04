@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=30 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
@@ -264,64 +264,104 @@ _data = {
 "run": SubResource("Animation_1ki3q")
 }
 
-[sub_resource type="Resource" id="Resource_apcir"]
-script = ExtResource("5_kue6n")
-id = 3
-skill_name = &""
-skill_type = 1
-tree_type = 0
-
-[sub_resource type="Resource" id="Resource_7tu24"]
+[sub_resource type="Resource" id="Resource_sjfmi"]
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_viwve"]
+[sub_resource type="Resource" id="Resource_7utxn"]
+script = ExtResource("5_kue6n")
+id = 3
+params = SubResource("Resource_sjfmi")
+abstract = true
+skill_name = &"Bow Attack"
+skill_type = 1
+tree_type = 3
+
+[sub_resource type="Resource" id="Resource_kqbs0"]
+script = ExtResource("6_2kkh2")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_33jd3"]
 script = ExtResource("7_yhyp2")
 id = 1
 type = 1
-params = SubResource("Resource_7tu24")
+params = SubResource("Resource_kqbs0")
 abstract = false
-skill_name = &""
-skill_type = 0
-tree_type = 0
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_4alqh"]
+[sub_resource type="Resource" id="Resource_mfimp"]
+script = ExtResource("6_2kkh2")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_74cuu"]
 script = ExtResource("9_apbeu")
 id = 1
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_mfimp")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_7bga8"]
+[sub_resource type="Resource" id="Resource_pyxby"]
 script = ExtResource("8_pcifi")
-target_selection = SubResource("Resource_4alqh")
-action = SubResource("Resource_apcir")
-condition = SubResource("Resource_viwve")
+target_selection = SubResource("Resource_74cuu")
+action = SubResource("Resource_7utxn")
+condition = SubResource("Resource_33jd3")
 
-[sub_resource type="Resource" id="Resource_tes1g"]
+[sub_resource type="Resource" id="Resource_6qux0"]
+script = ExtResource("6_2kkh2")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_pj5t5"]
 script = ExtResource("5_kue6n")
 id = 1
-skill_name = &""
+params = SubResource("Resource_6qux0")
+abstract = true
+skill_name = &"Move To"
 skill_type = 1
-tree_type = 0
+tree_type = 2
 
-[sub_resource type="Resource" id="Resource_lrqp8"]
+[sub_resource type="Resource" id="Resource_w5hdw"]
+script = ExtResource("7_yhyp2")
+id = 1
+type = 1
+params = SubResource("Resource_kqbs0")
+abstract = false
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_egltp"]
+script = ExtResource("6_2kkh2")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_nqqmt"]
 script = ExtResource("9_apbeu")
 id = 1
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_egltp")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_qis0j"]
+[sub_resource type="Resource" id="Resource_6dy2c"]
 script = ExtResource("8_pcifi")
-target_selection = SubResource("Resource_lrqp8")
-action = SubResource("Resource_tes1g")
-condition = SubResource("Resource_viwve")
+target_selection = SubResource("Resource_nqqmt")
+action = SubResource("Resource_pj5t5")
+condition = SubResource("Resource_w5hdw")
 
 [sub_resource type="Resource" id="Resource_7dfw4"]
 script = ExtResource("8_kcejl")
-rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_7bga8"), SubResource("Resource_qis0j")])
+rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_pyxby"), SubResource("Resource_6dy2c")])
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=14 format=3 uid="uid://xvk7de3pnrwf"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=16 format=3 uid="uid://xvk7de3pnrwf"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_b34mx"]
 [ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
@@ -8,12 +8,19 @@
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="6_allpt"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="7_f4m1p"]
 
+[sub_resource type="Resource" id="Resource_2bgav"]
+script = ExtResource("3_dvhob")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_q62gh"]
 script = ExtResource("1_b34mx")
 id = 6
-skill_name = &""
+params = SubResource("Resource_2bgav")
+abstract = false
+skill_name = &"Heal"
 skill_type = 1
-tree_type = 0
+tree_type = 4
 
 [sub_resource type="Resource" id="Resource_72x0b"]
 script = ExtResource("2_btuym")
@@ -36,12 +43,20 @@ skill_name = &""
 skill_type = 0
 tree_type = 0
 
+[sub_resource type="Resource" id="Resource_iex1q"]
+script = ExtResource("3_dvhob")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_61ih4"]
 script = ExtResource("6_allpt")
 id = 3
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_iex1q")
+abstract = false
+skill_name = &"Self"
+skill_type = 2
+tree_type = 1
 
 [sub_resource type="Resource" id="Resource_3okq3"]
 script = ExtResource("5_hjytx")

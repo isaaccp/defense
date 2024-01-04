@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=19 format=3 uid="uid://c4v0m5wsagpid"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=20 format=3 uid="uid://c4v0m5wsagpid"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_31vv2"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_12fml"]
@@ -7,91 +7,101 @@
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_wwn20"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
 
-[sub_resource type="Resource" id="Resource_yrbnm"]
+[sub_resource type="Resource" id="Resource_2dxcr"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_jlf3i"]
+[sub_resource type="Resource" id="Resource_ybpe0"]
 script = ExtResource("1_31vv2")
 id = 2
-params = SubResource("Resource_yrbnm")
+params = SubResource("Resource_2dxcr")
 abstract = true
-skill_name = &""
+skill_name = &"Sword Attack"
 skill_type = 1
-tree_type = 0
+tree_type = 2
 
-[sub_resource type="Resource" id="Resource_ubbxt"]
+[sub_resource type="Resource" id="Resource_rf64w"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_viwve"]
+[sub_resource type="Resource" id="Resource_sq2eq"]
 script = ExtResource("2_12fml")
 id = 1
 type = 1
-params = SubResource("Resource_ubbxt")
+params = SubResource("Resource_rf64w")
 abstract = false
-skill_name = &""
-skill_type = 0
-tree_type = 0
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_0hihh"]
+[sub_resource type="Resource" id="Resource_jrt1d"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_1sjih"]
+[sub_resource type="Resource" id="Resource_fujj8"]
 script = ExtResource("3_wwn20")
 id = 1
-type = 0
-params = SubResource("Resource_0hihh")
-abstract = true
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_jrt1d")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_36xgi"]
+[sub_resource type="Resource" id="Resource_6wsu5"]
 script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_1sjih")
-action = SubResource("Resource_jlf3i")
-condition = SubResource("Resource_viwve")
+target_selection = SubResource("Resource_fujj8")
+action = SubResource("Resource_ybpe0")
+condition = SubResource("Resource_sq2eq")
 
-[sub_resource type="Resource" id="Resource_2y0gx"]
+[sub_resource type="Resource" id="Resource_mjxv8"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_81htf"]
+[sub_resource type="Resource" id="Resource_erlsg"]
 script = ExtResource("1_31vv2")
 id = 1
-params = SubResource("Resource_2y0gx")
+params = SubResource("Resource_mjxv8")
 abstract = true
-skill_name = &""
+skill_name = &"Move To"
 skill_type = 1
-tree_type = 0
+tree_type = 2
 
-[sub_resource type="Resource" id="Resource_7lbt1"]
+[sub_resource type="Resource" id="Resource_3s2oy"]
+script = ExtResource("2_12fml")
+id = 1
+type = 1
+params = SubResource("Resource_rf64w")
+abstract = false
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_475l2"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_54mfd"]
+[sub_resource type="Resource" id="Resource_p51e0"]
 script = ExtResource("3_wwn20")
 id = 1
-type = 0
-params = SubResource("Resource_7lbt1")
-abstract = true
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_475l2")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_hagxt"]
+[sub_resource type="Resource" id="Resource_huig1"]
 script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_54mfd")
-action = SubResource("Resource_81htf")
-condition = SubResource("Resource_viwve")
+target_selection = SubResource("Resource_p51e0")
+action = SubResource("Resource_erlsg")
+condition = SubResource("Resource_3s2oy")
 
 [resource]
 script = ExtResource("4_vgf0t")
-rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_36xgi"), SubResource("Resource_hagxt")])
+rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_6wsu5"), SubResource("Resource_huig1")])

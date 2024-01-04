@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=32 format=3 uid="uid://dko6s3kgrapkm"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=34 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_78mwp"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_8xb8v"]
@@ -11,149 +11,164 @@
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_peqn1"]
 [ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="10_po8hj"]
 
-[sub_resource type="Resource" id="Resource_nf570"]
+[sub_resource type="Resource" id="Resource_fegqf"]
 script = ExtResource("2_8xb8v")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_a6787"]
-script = ExtResource("1_78mwp")
-id = 4
-params = SubResource("Resource_nf570")
-abstract = true
-skill_name = &""
-skill_type = 1
-tree_type = 0
-
-[sub_resource type="Resource" id="Resource_m0v0g"]
+[sub_resource type="Resource" id="Resource_tp5p4"]
 script = ExtResource("2_8xb8v")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_ahrac"]
-script = ExtResource("3_ihmyt")
-id = 1
-type = 1
-params = SubResource("Resource_m0v0g")
-abstract = false
-skill_name = &""
-skill_type = 0
-tree_type = 0
-
-[sub_resource type="Resource" id="Resource_a0ass"]
-script = ExtResource("2_8xb8v")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_38hdu"]
-script = ExtResource("5_pvkds")
-id = 1
-type = 0
-params = SubResource("Resource_a0ass")
-abstract = true
-skill_name = &""
-skill_type = 0
-tree_type = 0
-
-[sub_resource type="Resource" id="Resource_64y0d"]
-script = ExtResource("4_a36is")
-target_selection = SubResource("Resource_38hdu")
-action = SubResource("Resource_a6787")
-condition = SubResource("Resource_ahrac")
-
-[sub_resource type="Resource" id="Resource_hcma0"]
-script = ExtResource("2_8xb8v")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_ruqyf"]
+[sub_resource type="Resource" id="Resource_xaoty"]
 script = ExtResource("1_78mwp")
 id = 2
-params = SubResource("Resource_hcma0")
+params = SubResource("Resource_tp5p4")
 abstract = true
-skill_name = &""
+skill_name = &"Sword Attack"
 skill_type = 1
-tree_type = 0
+tree_type = 2
 
-[sub_resource type="Resource" id="Resource_r24mu"]
+[sub_resource type="Resource" id="Resource_6bl0j"]
+script = ExtResource("1_78mwp")
+id = 4
+params = SubResource("Resource_fegqf")
+abstract = true
+skill_name = &"Charge"
+skill_type = 1
+parent = SubResource("Resource_xaoty")
+tree_type = 2
+
+[sub_resource type="Resource" id="Resource_b4wyr"]
+script = ExtResource("2_8xb8v")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_keeqa"]
 script = ExtResource("3_ihmyt")
 id = 1
 type = 1
-params = SubResource("Resource_m0v0g")
+params = SubResource("Resource_b4wyr")
 abstract = false
-skill_name = &""
-skill_type = 0
-tree_type = 0
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_ebkm8"]
+[sub_resource type="Resource" id="Resource_tkuwh"]
 script = ExtResource("2_8xb8v")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_vxyls"]
+[sub_resource type="Resource" id="Resource_on784"]
 script = ExtResource("5_pvkds")
 id = 1
-type = 0
-params = SubResource("Resource_ebkm8")
-abstract = true
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_tkuwh")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_40x4d"]
+[sub_resource type="Resource" id="Resource_liyve"]
 script = ExtResource("4_a36is")
-target_selection = SubResource("Resource_vxyls")
-action = SubResource("Resource_ruqyf")
-condition = SubResource("Resource_r24mu")
+target_selection = SubResource("Resource_on784")
+action = SubResource("Resource_6bl0j")
+condition = SubResource("Resource_keeqa")
 
-[sub_resource type="Resource" id="Resource_rhksb"]
+[sub_resource type="Resource" id="Resource_6netq"]
 script = ExtResource("2_8xb8v")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_tk45c"]
+[sub_resource type="Resource" id="Resource_8rhoo"]
+script = ExtResource("1_78mwp")
+id = 2
+params = SubResource("Resource_6netq")
+abstract = true
+skill_name = &"Sword Attack"
+skill_type = 1
+tree_type = 2
+
+[sub_resource type="Resource" id="Resource_a7xly"]
+script = ExtResource("3_ihmyt")
+id = 1
+type = 1
+params = SubResource("Resource_b4wyr")
+abstract = false
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_sbgly"]
+script = ExtResource("2_8xb8v")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_so7qs"]
+script = ExtResource("5_pvkds")
+id = 1
+type = 1
+params = SubResource("Resource_sbgly")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_liw5f"]
+script = ExtResource("4_a36is")
+target_selection = SubResource("Resource_so7qs")
+action = SubResource("Resource_8rhoo")
+condition = SubResource("Resource_a7xly")
+
+[sub_resource type="Resource" id="Resource_06skd"]
+script = ExtResource("2_8xb8v")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_26fbd"]
 script = ExtResource("1_78mwp")
 id = 1
-params = SubResource("Resource_rhksb")
+params = SubResource("Resource_06skd")
 abstract = true
-skill_name = &""
+skill_name = &"Move To"
 skill_type = 1
-tree_type = 0
+tree_type = 2
 
-[sub_resource type="Resource" id="Resource_xg2gg"]
+[sub_resource type="Resource" id="Resource_vooqm"]
 script = ExtResource("3_ihmyt")
 id = 1
 type = 1
-params = SubResource("Resource_m0v0g")
+params = SubResource("Resource_b4wyr")
 abstract = false
-skill_name = &""
-skill_type = 0
-tree_type = 0
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_bdbs5"]
+[sub_resource type="Resource" id="Resource_okx7j"]
 script = ExtResource("2_8xb8v")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_pimqg"]
+[sub_resource type="Resource" id="Resource_nvqqn"]
 script = ExtResource("5_pvkds")
 id = 1
-type = 0
-params = SubResource("Resource_bdbs5")
-abstract = true
-skill_name = &""
-skill_type = 0
-tree_type = 0
+type = 1
+params = SubResource("Resource_okx7j")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
 
-[sub_resource type="Resource" id="Resource_wcju5"]
+[sub_resource type="Resource" id="Resource_e1ma0"]
 script = ExtResource("4_a36is")
-target_selection = SubResource("Resource_pimqg")
-action = SubResource("Resource_tk45c")
-condition = SubResource("Resource_xg2gg")
+target_selection = SubResource("Resource_nvqqn")
+action = SubResource("Resource_26fbd")
+condition = SubResource("Resource_vooqm")
 
 [sub_resource type="Resource" id="Resource_ytoa5"]
 script = ExtResource("6_omcam")
-rules = Array[ExtResource("4_a36is")]([SubResource("Resource_64y0d"), SubResource("Resource_40x4d"), SubResource("Resource_wcju5")])
+rules = Array[ExtResource("4_a36is")]([SubResource("Resource_liyve"), SubResource("Resource_liw5f"), SubResource("Resource_e1ma0")])
 
 [sub_resource type="Resource" id="Resource_x5gu8"]
 script = ExtResource("9_peqn1")

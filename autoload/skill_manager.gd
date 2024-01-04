@@ -21,11 +21,9 @@ const condition_scripts = {
 }
 
 const target_scripts = {
-	# TODO: Refactor all those so they return a list of nodes to
-	# filter through condition instead of having to do it in each.
-	TargetSelectionDef.Id.CLOSEST_ENEMY: preload("res://behavior/target_selection/target_selection_closest_enemy.gd"),
-	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/target_selection_tower.gd"),
-	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/target_selection_self.gd"),
+	TargetSelectionDef.Id.CLOSEST_ENEMY: preload("res://behavior/target_selection/closest_enemy_target_selector.gd"),
+	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/tower_target_selector.gd"),
+	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/self_target_selector.gd"),
 }
 
 var action_by_id: Dictionary
@@ -99,14 +97,17 @@ func all_conditions() -> Array[ConditionDef.Id]:
 func lookup_target(id: TargetSelectionDef.Id) -> TargetSelectionDef:
 	return target_by_id[id]
 
-func make_target_instance(id: TargetSelectionDef.Id) -> TargetSelectionDef:
+func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectionDef:
 	var target = lookup_target(id).duplicate(true)
 	target.abstract = false
 	return target
 
-func select_target(target_selection_def: TargetSelectionDef, evaluator: TargetNodeConditionEvaluator, action: Action, body: CharacterBody2D, side_component: SideComponent) -> Target:
-	var target_selection = target_scripts[target_selection_def.id]
-	return target_selection.select_target(target_selection_def, evaluator, action, body, side_component)
+func make_node_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetNodeConditionEvaluator) -> NodeTargetSelector:
+	assert(not target.abstract)
+	var selector = target_scripts[target.id].new() as NodeTargetSelector
+	selector.def = target
+	selector.condition_evaluator = target_node_evaluator
+	return selector
 
 func all_target_selections() -> Array[TargetSelectionDef.Id]:
 	var all: Array[TargetSelectionDef.Id] = []

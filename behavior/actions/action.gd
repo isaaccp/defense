@@ -17,7 +17,8 @@ class_name Action
 # How far can this action be taken.
 @export var max_distance = 10_000_000
 # How close can this action be taken.
-@export var min_distance = -1
+# Don't make this negative as it may be squared to calculate distance.
+@export var min_distance = 0.0
 # How long until this action can be triggered again.
 # Ignored if negative.
 @export var cooldown = -1.0
