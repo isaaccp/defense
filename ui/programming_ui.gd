@@ -30,7 +30,7 @@ func editor_initialize(b: Behavior):
 		%SaveButton.disabled = true
 		return
 	%Toolbox.initialize(
-		TargetSelectionManager.all_target_selections(),
+		SkillManager.all_target_selections(),
 		SkillManager.all_actions(),
 		SkillManager.all_conditions(),
 	)

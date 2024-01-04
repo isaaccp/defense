@@ -3,6 +3,7 @@ extends Node
 
 const actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
 const conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
+const targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
 
 # TODO: Try moving this to the Resource at some point again.
 const action_scripts = {
@@ -19,15 +20,25 @@ const condition_scripts = {
 	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_node_condition_evaluator.gd"),
 }
 
+const target_scripts = {
+	# TODO: Refactor all those so they return a list of nodes to
+	# filter through condition instead of having to do it in each.
+	TargetSelectionDef.Id.CLOSEST_ENEMY: preload("res://behavior/target_selection/target_selection_closest_enemy.gd"),
+	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/target_selection_tower.gd"),
+	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/target_selection_self.gd"),
+}
+
 var action_by_id: Dictionary
 var condition_by_id: Dictionary
-var target_selection_by_id: Dictionary
+var target_by_id: Dictionary
 
 func _ready():
 	for action in actions.skills:
 		action_by_id[action.id] = action
 	for condition in conditions.skills:
 		condition_by_id[condition.id] = condition
+	for target in targets.skills:
+		target_by_id[target.id] = target
 
 # Action
 # TODO: Update to the same way as condition.
@@ -74,4 +85,15 @@ func all_conditions() -> Array[ConditionDef.Id]:
 	var all: Array[ConditionDef.Id] = []
 	for id in condition_by_id.keys():
 		all.append(id as ConditionDef.Id)
+	return all
+
+# Target
+func select_target(target_selection_def: TargetSelectionDef, evaluator: TargetNodeConditionEvaluator, action: Action, body: CharacterBody2D, side_component: SideComponent) -> Target:
+	var target_selection = target_scripts[target_selection_def.id]
+	return target_selection.select_target(target_selection_def, evaluator, action, body, side_component)
+
+func all_target_selections() -> Array[TargetSelectionDef.Id]:
+	var all: Array[TargetSelectionDef.Id] = []
+	for id in target_by_id.keys():
+		all.append(id as TargetSelectionDef.Id)
 	return all
