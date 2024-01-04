@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=2 format=3 uid="uid://c01f1glojulow"]
+
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="1_fi4lx"]
+
+[resource]
+script = ExtResource("1_fi4lx")
+id = 1
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1

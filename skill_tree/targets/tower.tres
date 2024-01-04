@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=2 format=3 uid="uid://cgvf7q7jgtwjg"]
+
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="1_awb10"]
+
+[resource]
+script = ExtResource("1_awb10")
+id = 2
+skill_name = &"Tower"
+skill_type = 2
+tree_type = 1
