@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_iar03"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_k61ht"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="3_40aq8"]
-[ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="3_v7d2o"]
+[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="3_v7d2o"]
 
 [sub_resource type="Resource" id="Resource_ewa5g"]
 script = ExtResource("2_k61ht")
