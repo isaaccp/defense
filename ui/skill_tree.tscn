@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6b6ijc8m8kca"]
+[gd_scene load_steps=9 format=3 uid="uid://b6b6ijc8m8kca"]
 
 [ext_resource type="Script" path="res://ui/skill_tree_ui.gd" id="1_44fad"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="2_5stfg"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_gr3l3"]
 [ext_resource type="Resource" uid="uid://lafdl6rsk6yi" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_dxnj7"]
+
+[sub_resource type="Theme" id="Theme_un8q3"]
+MarginContainer/constants/margin_bottom = 4
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4
+MarginContainer/constants/margin_top = 4
 
 [sub_resource type="Resource" id="Resource_mqxpj"]
 script = ExtResource("3_gr3l3")
@@ -36,6 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_un8q3")
 script = ExtResource("1_44fad")
 test_character = SubResource("Resource_bwe5d")
 
