@@ -1,6 +1,8 @@
 @tool
 extends Node
 
+const actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
+
 # Try moving this to the Resource at some point again, and then
 # just load the action collection here.
 const action_scripts = {

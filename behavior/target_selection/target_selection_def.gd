@@ -1,5 +1,5 @@
 @tool
-extends Resource
+extends SkillBase
 
 class_name TargetSelectionDef
 
@@ -25,3 +25,7 @@ func name() -> String:
 
 func _to_string() -> String:
 	return target_selection_name(id)
+
+# TODO: Temporary for compatibility with Skill.
+func get_id() -> int:
+	return id
