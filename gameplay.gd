@@ -55,17 +55,26 @@ func _on_character_selection_screen_selection_ready(character_selections: Array[
 			level_provider.skill_tree_state,
 		)
 		characters.append(gameplay_character)
-	_play_level.call_deferred()
+	play_next_level.call_deferred()
 
-func _play_level(advance: bool = true):
+func _initialize_level(advance: bool = true):
+	level = null
 	if advance:
 		level_scene = level_provider.next_level()
 		# Should only happen if there are no levels.
 		if level_scene == null:
-			_credits()
 			return
 	level = level_scene.instantiate() as Level
 	level.initialize(characters)
+
+func play_next_level(advance: bool = true):
+	_initialize_level(advance)
+	if level == null:
+		_credits()
+		return
+	play_level()
+
+func play_level():
 	var victory = Component.get_victory_loss_condition_component_or_die(level)
 	victory.level_failed.connect(_on_level_failed)
 	victory.level_finished.connect(_on_level_finished)
@@ -98,14 +107,14 @@ func _on_level_end(success: bool):
 	# TODO: Show some dialog here.
 	level.queue_free()
 	if not success:
-		_play_level(false)
+		play_next_level(false)
 	else:
 		if level_provider.last_level():
 			_credits()
 			return
 		# TODO: Calculate XP, etc, show stats.
 		_grant_xp(level)
-		_play_level(true)
+		play_next_level(true)
 
 func _grant_xp(level: Level):
 	# Level will be freed up on next frame, so this can't do
@@ -145,4 +154,4 @@ func _on_restart_requested():
 	# TODO: Maybe find a way to merge with _on_end_level.
 	ui_layer.hud.show_play_controls(false)
 	level.queue_free()
-	_play_level(false)
+	play_next_level(false)

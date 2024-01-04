@@ -26,12 +26,16 @@ var is_frozen: bool = false
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
+		var gameplay = load("res://gameplay.tscn").instantiate()
+		gameplay.level = self
 		var gc: Array[GameplayCharacter] = []
 		for i in range(starting_positions.get_child_count()):
 			gc.append(GameplayCharacter.make(Enum.CharacterId.KNIGHT))
 		initialize(gc)
-		var hud = load("res://ui/hud.tscn").instantiate()
-		add_child(hud)
+		add_child(gameplay)
+		gameplay.ui_layer.show()
+		gameplay.ui_layer.hud.show()
+		gameplay.play_level()
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
