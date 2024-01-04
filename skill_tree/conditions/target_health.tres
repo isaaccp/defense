@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ConditionDef" load_steps=5 format=3 uid="uid://c283o3w8nuam8"]
+
+[ext_resource type="Script" path="res://behavior/conditions/condition_params.gd" id="1_csc2j"]
+[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="2_5slir"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_8blmi"]
+
+[sub_resource type="Resource" id="Resource_e7tbt"]
+script = ExtResource("1_csc2j")
+editor_string = "health {cmp} {int_value}"
+cmp = 0
+
+[resource]
+script = ExtResource("2_8blmi")
+id = 2
+type = 2
+params = SubResource("Resource_e7tbt")
+abstract = true
+skill_name = &"Target Health"
+skill_type = 3
+parent = ExtResource("2_5slir")
+tree_type = 1
