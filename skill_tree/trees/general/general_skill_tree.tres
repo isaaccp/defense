@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_sstov"]
 [ext_resource type="Resource" uid="uid://oi7u5elqkl67" path="res://skill_tree/skills/general/always_condition.tres" id="2_dcoc3"]
-[ext_resource type="Resource" uid="uid://bpfckr2evihqa" path="res://skill_tree/skills/general/closest_enemy_target.tres" id="2_ysiki"]
-[ext_resource type="Resource" uid="uid://bd5sxds610d28" path="res://skill_tree/skills/general/tower_target.tres" id="4_jyhan"]
-[ext_resource type="Resource" uid="uid://c4rmgksytb2os" path="res://skill_tree/skills/general/self_target.tres" id="4_mv154"]
+[ext_resource type="Resource" uid="uid://c01f1glojulow" path="res://skill_tree/targets/closest_enemy.tres" id="2_hb0o3"]
+[ext_resource type="Resource" uid="uid://c2lpsyebwog7q" path="res://skill_tree/targets/self.tres" id="3_oj4av"]
+[ext_resource type="Resource" uid="uid://cgvf7q7jgtwjg" path="res://skill_tree/targets/tower.tres" id="4_efvur"]
 [ext_resource type="Resource" uid="uid://bs245ql4s67t4" path="res://skill_tree/skills/general/target_health_condition.tres" id="6_2dqeo"]
 
 [resource]
 script = ExtResource("1_sstov")
 tree_type = 1
-skills = Array[Resource]([ExtResource("2_dcoc3"), ExtResource("2_ysiki"), ExtResource("4_mv154"), ExtResource("6_2dqeo"), ExtResource("4_jyhan")])
+skills = Array[Resource]([ExtResource("2_hb0o3"), ExtResource("3_oj4av"), ExtResource("4_efvur"), ExtResource("2_dcoc3"), ExtResource("6_2dqeo")])

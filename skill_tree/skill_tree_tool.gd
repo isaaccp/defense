@@ -12,6 +12,7 @@ var skill_type_collections_path = "res://skill_tree/skill_type_collections"
 
 var skill_types = [
 	SkillBase.SkillType.ACTION,
+	SkillBase.SkillType.TARGET,
 ]
 var tree_types = [
 	SkillTree.TreeType.GENERAL,
@@ -66,8 +67,10 @@ func create_skill_trees():
 		skill_tree.tree_type = tree_type
 		trees[tree_type] = skill_tree
 
-	print("Loading actions")
-	load_skill_type_dir(trees, skill_tree_base_path, SkillBase.SkillType.ACTION)
+	for skill_type in skill_types:
+		print("%s: Finding skills" % SkillBase.skill_type_filesystem_string(skill_type))
+		load_skill_type_dir(trees, skill_tree_base_path, skill_type)
+
 	for tree_type in tree_types:
 		var skill_tree = trees[tree_type]
 		var tree_name = SkillTree.tree_type_filesystem_string(tree_type)

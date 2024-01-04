@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=5 format=3 uid="uid://cq8l4dgmqs4id"]
+
+[ext_resource type="Script" path="res://skill_type_collection.gd" id="1_8mk7f"]
+[ext_resource type="Resource" uid="uid://c01f1glojulow" path="res://skill_tree/targets/closest_enemy.tres" id="2_kuq3d"]
+[ext_resource type="Resource" uid="uid://c2lpsyebwog7q" path="res://skill_tree/targets/self.tres" id="3_1dmkf"]
+[ext_resource type="Resource" uid="uid://cgvf7q7jgtwjg" path="res://skill_tree/targets/tower.tres" id="4_33we4"]
+
+[resource]
+script = ExtResource("1_8mk7f")
+skills = Array[Resource("res://skill_tree/skill_base.gd")]([ExtResource("2_kuq3d"), ExtResource("3_1dmkf"), ExtResource("4_33we4")])
