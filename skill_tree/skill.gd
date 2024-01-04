@@ -21,3 +21,6 @@ func type_name() -> String:
 static func skill_type_filesystem_string(skill_type: SkillType) -> String:
 	assert(skill_type != SkillType.UNSPECIFIED)
 	return SkillType.keys()[skill_type].to_lower()
+
+func _to_string() -> String:
+	return skill_name
