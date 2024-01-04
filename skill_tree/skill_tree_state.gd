@@ -10,7 +10,7 @@ class_name SkillTreeState
 @export var acquired_actions: Array[ActionDef.Id]:
 	get:
 		if full_acquired:
-			return ActionManager.all_actions()
+			return SkillManager.all_actions()
 		return acquired_actions
 
 @export var acquired_target_selections: Array[TargetSelectionDef.Id]:
@@ -28,7 +28,7 @@ class_name SkillTreeState
 @export var unlocked_actions: Array[ActionDef.Id]:
 	get:
 		if full_unlocked:
-			return ActionManager.all_actions()
+			return SkillManager.all_actions()
 		return unlocked_actions
 
 @export var unlocked_target_selections: Array[TargetSelectionDef.Id]:

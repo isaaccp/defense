@@ -30,7 +30,7 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 				pass
 			ConditionDef.Type.TARGET_NODE:
 				target_node_evaluator = ConditionManager.make_target_node_condition_evaluator(rule.condition)
-		var action = ActionManager.make_action(rule.action)
+		var action = SkillManager.make_action(rule.action)
 		var target = TargetSelectionManager.select_target(rule.target_selection, target_node_evaluator, action, body, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}

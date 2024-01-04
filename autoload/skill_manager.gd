@@ -1,9 +1,9 @@
 @tool
-extends Object
+extends Node
 
-class_name ActionManager
-
-static var actions = {
+# Try moving this to the Resource at some point again, and then
+# just load the action collection here.
+const action_scripts = {
 	ActionDef.Id.MOVE_TO: preload("res://behavior/actions/move_to_action.gd"),
 	ActionDef.Id.SWORD_ATTACK: preload("res://behavior/actions/sword_attack_action.gd"),
 	ActionDef.Id.BOW_ATTACK: preload("res://behavior/actions/bow_attack_action.gd"),
@@ -12,13 +12,13 @@ static var actions = {
 	ActionDef.Id.HEAL: preload("res://behavior/actions/heal_action.gd"),
 }
 
-static func make_action(action_def: ActionDef) -> Action:
-	var action = actions[action_def.id].new() as Action
+func make_action(action_def: ActionDef) -> Action:
+	var action = action_scripts[action_def.id].new() as Action
 	action.def = action_def
 	return action
 
-static func all_actions() -> Array[ActionDef.Id]:
+func all_actions() -> Array[ActionDef.Id]:
 	var all: Array[ActionDef.Id] = []
-	for id in actions.keys():
+	for id in action_scripts.keys():
 		all.append(id as ActionDef.Id)
 	return all

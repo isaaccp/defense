@@ -21,6 +21,7 @@ Global="*res://autoload/global.gd"
 OnlineMatch="*res://autoload/online_match.gd"
 Online="*res://autoload/online.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
+SkillManager="*res://autoload/skill_manager.gd"
 
 [display]
 

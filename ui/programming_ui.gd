@@ -31,7 +31,7 @@ func editor_initialize(b: Behavior):
 		return
 	%Toolbox.initialize(
 		TargetSelectionManager.all_target_selections(),
-		ActionManager.all_actions(),
+		SkillManager.all_actions(),
 		ConditionManager.all_conditions(),
 	)
 	%Title.text = "Editing %s" % b.resource_path

@@ -66,8 +66,6 @@ attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
-action_cooldowns = null
-elapsed_time = null
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("8_567i8")]
 health_component = NodePath("../HealthComponent")
