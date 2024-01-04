@@ -29,6 +29,9 @@ id = 1
 type = 1
 params = SubResource("Resource_7t6qj")
 abstract = false
+skill_name = null
+skill_type = null
+tree_type = null
 
 [sub_resource type="Resource" id="Resource_i04f3"]
 script = ExtResource("6_p7k6u")
@@ -56,6 +59,9 @@ id = 1
 type = 1
 params = SubResource("Resource_7t6qj")
 abstract = false
+skill_name = null
+skill_type = null
+tree_type = null
 
 [sub_resource type="Resource" id="Resource_45488"]
 script = ExtResource("6_p7k6u")
@@ -88,6 +94,9 @@ id = 1
 type = 1
 params = SubResource("Resource_s2yk1")
 abstract = false
+skill_name = null
+skill_type = null
+tree_type = null
 
 [sub_resource type="Resource" id="Resource_rt6fe"]
 script = ExtResource("6_p7k6u")
@@ -115,6 +124,9 @@ id = 1
 type = 1
 params = SubResource("Resource_7t6qj")
 abstract = false
+skill_name = null
+skill_type = null
+tree_type = null
 
 [sub_resource type="Resource" id="Resource_qigqo"]
 script = ExtResource("6_p7k6u")

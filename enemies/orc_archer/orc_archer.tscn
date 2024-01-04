@@ -282,6 +282,9 @@ id = 1
 type = 1
 params = SubResource("Resource_7tu24")
 abstract = false
+skill_name = null
+skill_type = null
+tree_type = null
 
 [sub_resource type="Resource" id="Resource_4alqh"]
 script = ExtResource("9_apbeu")

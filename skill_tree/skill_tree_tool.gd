@@ -3,10 +3,9 @@ extends EditorScript
 
 var skill_tree_base_path = "res://skill_tree"
 
-#Input for skills, to be removed.
-var skill_base_path = "res://skill_tree/skills"
 # Output for trees.
 var trees_base_path = "res://skill_tree/trees"
+
 # Output for e.g. set of actions, etc.
 var skill_type_collections_path = "res://skill_tree/skill_type_collections"
 
