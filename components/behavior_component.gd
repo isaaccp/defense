@@ -32,7 +32,7 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 @export var target: Target
 @export var action: Action
 @export var action_cooldowns: Dictionary
-# Keep track of time so we can do pause/freeze-aware stuff.
+# Keep track of time so we can do pause-aware stuff.
 @export var elapsed_time: float = 0.0
 # How often to check whether a higher-priority action should
 # stop an abortable action.
@@ -41,8 +41,15 @@ var next_abortable_action_check_time: float
 
 # Need to skip first physics_frame for navigation.
 var first = true
+var running = false
+
+func run():
+	running = true
+	behavior.prepare()
 
 func _physics_process(delta: float):
+	if not running:
+		return
 	if first:
 		first = false
 		return

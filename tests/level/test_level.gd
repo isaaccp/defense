@@ -37,6 +37,8 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 		tower_health = Component.get_health_component_or_die(tower)
 
 	func test_tower_destruction_fails_level():
+		level.start()
+
 		await wait_for_signal(victory.level_failed, 3, "Waiting for level to fail")
 		assert_signal_emitted(victory, "level_failed")
 
@@ -44,6 +46,7 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 		# Drop enemies on top of characters so they are easily dispatched.
 		level.enemies.get_child(0).position = level.characters.get_child(0).position + Vector2.RIGHT * 50
 		level.enemies.get_child(1).position = level.characters.get_child(1).position + Vector2.RIGHT * 50
+		level.start()
 		await wait_for_signal(victory.level_finished, 5, "Waiting for level to finish")
 		assert_signal_emitted(victory, "level_finished")
 
@@ -69,7 +72,11 @@ class TestPositionReachedConditions extends LevelTest:
 	func test_one_reach_position_victory():
 		set_victory_type(VictoryLossConditionComponent.VictoryType.ONE_REACH_POSITION)
 		add_child_autoqfree(level)
+
 		set_character_behaviors(Behavior.new(), make_move_behavior())
+
+		level.start()
+
 		await wait_for_signal(victory.level_finished, 3, "Waiting for level to finish")
 		assert_signal_emitted(victory, "level_finished")
 
@@ -77,6 +84,7 @@ class TestPositionReachedConditions extends LevelTest:
 		set_victory_type(VictoryLossConditionComponent.VictoryType.ALL_REACH_POSITION)
 		add_child_autoqfree(level)
 		set_character_behaviors(Behavior.new(), make_move_behavior())
+		level.start()
 		await wait_for_signal(victory.level_finished, 3, "Waiting for level to NOT finish")
 		assert_signal_not_emitted(victory, "level_finished")
 
@@ -84,6 +92,7 @@ class TestPositionReachedConditions extends LevelTest:
 		set_victory_type(VictoryLossConditionComponent.VictoryType.ALL_REACH_POSITION)
 		add_child_autoqfree(level)
 		set_character_behaviors(make_move_behavior(), make_move_behavior())
+		level.start()
 		await wait_for_signal(victory.level_finished, 3, "Waiting for level to NOT finish")
 		assert_signal_emitted(victory, "level_finished")
 
@@ -111,7 +120,6 @@ class TestTimeConditions extends LevelTest:
 		victory.loss = loss_types
 		victory.time = 1.0
 		add_child_autoqfree(level)
-		# Needed to start victory timers.
 		level.start()
 		set_character_behaviors(Behavior.new(), Behavior.new())
 		await wait_for_signal(victory.level_failed, 2, "Waiting for loss")

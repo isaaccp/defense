@@ -68,29 +68,20 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 		characters.add_child(character)
 
 func start():
-	freeze(false)
 	var victory_loss = Component.get_victory_loss_condition_component_or_die(self)
 	if instant_win:
 		victory_loss.victory.append(VictoryLossConditionComponent.VictoryType.TIME)
 		victory_loss.time = 0.1
-	# TODO: Maybe instead make a component that handles freeze/unfreeze
-	# and can then be passed to VictoryLoss.
 	victory_loss.level_started()
+	_enable_behaviors()
 
-func freeze(frozen: bool):
-	is_frozen = frozen
-	_freeze_tree(characters, frozen)
-	_freeze_tree(enemies, frozen)
+func _enable_behaviors():
+	_enable_nodes_behavior(characters.get_children())
+	_enable_nodes_behavior(enemies.get_children())
+	_enable_nodes_behavior(towers.get_children())
 
-func _freeze_node(node: Node, frozen: bool):
-	node.set_process(!frozen)
-	node.set_physics_process(!frozen)
-	node.set_process_input(!frozen)
-	node.set_process_internal(!frozen)
-	node.set_process_unhandled_input(!frozen)
-	node.set_process_unhandled_key_input(!frozen)
-
-func _freeze_tree(node: Node, frozen: bool):
-	_freeze_node(node, frozen)
-	for c in node.get_children():
-		_freeze_tree(c, frozen)
+func _enable_nodes_behavior(nodes: Array):
+	for node in nodes:
+		var behavior = Component.get_behavior_component_or_null(node)
+		if behavior:
+			behavior.run()

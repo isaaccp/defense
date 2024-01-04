@@ -4,6 +4,10 @@ class_name Behavior
 
 @export var rules: Array[Rule]
 
+func prepare():
+	# Set up rules for runtime.
+	pass
+
 # TODO: Return BehaviorResult or such.
 func choose(body: CharacterBody2D, side_component: SideComponent,
 			action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
@@ -14,7 +18,6 @@ func choose(body: CharacterBody2D, side_component: SideComponent,
 			var can_run_after = action_cooldowns[rule.action.id]
 			if elapsed_time < can_run_after:
 				continue
-		# TODO: Construct actions only once when added to the behavior.
 		var target_node_evaluator: TargetNodeConditionEvaluator = null
 		match rule.condition.type:
 			ConditionDef.Type.ANY:

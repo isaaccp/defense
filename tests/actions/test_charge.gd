@@ -35,7 +35,7 @@ func before_all():
 	sword_attack.free()
 
 func before_each():
-	level = basic_test_level_scene.instantiate()
+	level = basic_test_level_scene.instantiate() as Level
 	level.initialize([GameplayCharacter.make(Enum.CharacterId.KNIGHT)])
 	add_child_autoqfree(level)
 	# Set up character.
@@ -53,6 +53,8 @@ func test_charge_short_distance():
 
 	# Put the enemy close to the character, less than charge threshold distance.
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
+
+	level.start()
 
 	watch_signals(character_behavior)
 	watch_signals(character_status)
@@ -74,6 +76,8 @@ func test_charge_long_distance():
 
 	# Put the enemy close to the character, less than charge threshold distance.
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold * 1.5
+
+	level.start()
 
 	watch_signals(character_behavior)
 	watch_signals(character_status)
@@ -104,6 +108,9 @@ func test_charge_cooldown():
 	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
 	# Second enemy a bit farther away.
 	extra_enemy.position = enemy.position + Vector2.RIGHT * 300
+
+	level.start()
+
 	await wait_for_signal(character_behavior.behavior_updated, 0.1, "Wait for charge")
 	TestUtils.assert_last_action(self, character_behavior, ActionDef.Id.CHARGE)
 

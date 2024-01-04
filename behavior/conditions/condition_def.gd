@@ -7,6 +7,7 @@ enum Id {
 	UNSPECIFIED,
 	ALWAYS,
 	TARGET_HEALTH,
+	ONCE,
 }
 
 # Type of condition.

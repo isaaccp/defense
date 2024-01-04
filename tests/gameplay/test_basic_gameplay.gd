@@ -49,7 +49,6 @@ func test_end_to_end():
 		selection_screen.character_selector(i).character_selected.emit(Enum.CharacterId.KNIGHT)
 	await wait_frames(1, "Waiting for level load")
 	assert_not_null(gameplay.level)
-	assert_true(gameplay.level.is_frozen)
 	assert_eq(hud.character_view_count(), expected_characters)
 	assert_call_count(game_mode.level_provider, "next_level", 1)
 
@@ -57,7 +56,6 @@ func test_end_to_end():
 	mark_characters_ready(hud)
 	await wait_for_signal(gameplay.level_started, gameplay.ready_to_fight_wait + 0.5, "Waiting for level to start")
 	assert_signal_emitted(gameplay, "level_started")
-	assert_false(gameplay.level.is_frozen)
 
 	gut.p("Level has started")
 	var victory = Component.get_victory_loss_condition_component_or_die(gameplay.level)

@@ -80,7 +80,6 @@ func play_level():
 	victory.level_finished.connect(_on_level_finished)
 	ui_layer.hud.set_victory_loss(victory)
 	level_parent.add_child(level, true)
-	level.freeze(true)
 	ui_layer.hud.set_characters(level.characters)
 	ui_layer.hud.set_towers(level.towers)
 	ui_layer.hud.start_character_setup(_on_all_ready)

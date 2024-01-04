@@ -36,10 +36,11 @@ func before_each():
 
 func test_heal_works():
 	TestUtils.set_character_behavior(character, make_heal_behavior())
-	level.freeze(true)
+
 	await wait_frames(1)
 	character_health.health = 5
-	level.freeze(false)
+
+	level.start()
 	watch_signals(character_behavior)
 	watch_signals(character_health)
 	await wait_seconds(0.5, "Waiting for heal")

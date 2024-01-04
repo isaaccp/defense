@@ -19,22 +19,20 @@ func before_each():
 
 func test_no_heal_if_over_20():
 	TestUtils.set_character_behavior(character, behavior)
-	level.freeze(true)
 	await wait_frames(1)
 	character_health.max_health = 40
 	character_health.health = 30
-	level.freeze(false)
+	level.start()
 	watch_signals(character_behavior)
 	await wait_seconds(0.25, "Waiting to make sure no heal")
 	assert_signal_not_emitted(character_behavior, "behavior_updated")
 
 func test_heal_if_under_20():
 	TestUtils.set_character_behavior(character, behavior)
-	level.freeze(true)
 	await wait_frames(1)
 	character_health.max_health = 40
 	character_health.health = 15
-	level.freeze(false)
+	level.start()
 	watch_signals(character_behavior)
 	await wait_for_signal(character_behavior.behavior_updated, 0.25, "Waiting for heal")
 	assert_signal_emitted(character_behavior, "behavior_updated")

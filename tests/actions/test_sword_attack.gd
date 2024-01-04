@@ -45,6 +45,8 @@ func test_sword_works_within_distance():
 	# Put the enemy close to the character.
 	enemy.position = character.position + Vector2.RIGHT * 30
 
+	level.start()
+
 	watch_signals(character_behavior)
 	await wait_for_signal(enemy_health.died, 2, "Waiting for enemy to die")
 	assert_signal_emitted(character_behavior, "behavior_updated")
@@ -56,6 +58,8 @@ func test_sword_doesnt_work_out_of_distance():
 
 	# Put the enemy far from the character.
 	enemy.position = character.position + Vector2.RIGHT * 100
+
+	level.start()
 
 	watch_signals(character_behavior)
 	watch_signals(enemy_health)
@@ -69,6 +73,8 @@ func test_move_and_sword_works_out_of_distance():
 
 	# Put the enemy far from the character.
 	enemy.position = character.position + Vector2.RIGHT * 100
+
+	level.start()
 
 	watch_signals(character_behavior)
 	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")

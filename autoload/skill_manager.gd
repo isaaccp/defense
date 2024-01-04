@@ -18,6 +18,7 @@ const action_scripts = {
 const condition_scripts = {
 	ConditionDef.Id.ALWAYS: preload("res://behavior/conditions/condition_always.gd"),
 	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_node_condition_evaluator.gd"),
+	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
 }
 
 const target_scripts = {
