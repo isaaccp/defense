@@ -2,8 +2,14 @@
 extends EditorScript
 
 var skill_tree_base_path = "res://skill_tree"
+
+#Input for skills, to be removed.
 var skill_base_path = "res://skill_tree/skills"
+# Output for trees.
 var trees_base_path = "res://skill_tree/trees"
+# Output for e.g. set of actions, etc.
+var skill_type_collections_path = "res://skill_tree/skill_type_collections"
+
 var skill_types = [
 	SkillBase.SkillType.ACTION,
 ]
@@ -29,7 +35,12 @@ func load_skill_dir(skill_tree: SkillTree, dir_path: String, tree_type: SkillTre
 				skill_tree.add(skill)
 			filename = dir.get_next()
 
-func load_skill_type_dir(trees: Dictionary, dir_path: String):
+# TODO: Do some checking for skill type.
+func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: SkillBase.SkillType):
+	var collection = SkillTypeCollection.new()
+	var skill_fs_string = SkillBase.skill_type_filesystem_string(skill_type)
+	var dir_path = base_path + "/" + skill_fs_string + "s"
+	print(dir_path)
 	var dir = DirAccess.open(dir_path)
 	if dir:
 		dir.list_dir_begin()
@@ -37,9 +48,15 @@ func load_skill_type_dir(trees: Dictionary, dir_path: String):
 		while filename != "":
 			print("  Loading %s" % filename)
 			var skill = load(dir_path + "/" + filename) as SkillBase
+			assert(skill.skill_type == skill_type)
+			collection.add(skill)
 			var skill_tree = trees[skill.tree_type]
 			skill_tree.add(skill)
 			filename = dir.get_next()
+	print("%s: Writing skill type collection with %d skills" % [skill_fs_string, collection.size()])
+	var collection_path = "%s/%s_collection.tres" % [skill_type_collections_path, skill_fs_string]
+	print("%s: %s" % [skill_fs_string, collection_path])
+	ResourceSaver.save(collection, collection_path)
 
 func create_skill_trees():
 	var num_skills = 0
@@ -51,7 +68,7 @@ func create_skill_trees():
 		trees[tree_type] = skill_tree
 
 	print("Loading actions")
-	load_skill_type_dir(trees, skill_tree_base_path + "/actions")
+	load_skill_type_dir(trees, skill_tree_base_path, SkillBase.SkillType.ACTION)
 	for tree_type in tree_types:
 		var skill_tree = trees[tree_type]
 		var tree_name = SkillTree.tree_type_filesystem_string(tree_type)
