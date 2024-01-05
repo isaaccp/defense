@@ -1,15 +1,18 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=10 format=3 uid="uid://d33nhlf0klhr6"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=13 format=3 uid="uid://d33nhlf0klhr6"]
 
 [ext_resource type="Script" path="res://skill_type_collection.gd" id="1_d2onc"]
 [ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_3eeij"]
 [ext_resource type="Resource" uid="uid://b0cx6ra6s8077" path="res://skill_tree/actions/bow_attack.tres" id="2_3gemq"]
+[ext_resource type="Resource" uid="uid://bdsw02ntoq6v2" path="res://skill_tree/actions/blink_to.tres" id="3_3py5b"]
 [ext_resource type="Resource" uid="uid://celgigrf5o7sb" path="res://skill_tree/actions/charge.tres" id="3_38kwv"]
 [ext_resource type="Resource" uid="uid://buewl5eydlx7c" path="res://skill_tree/actions/heal.tres" id="4_lxlyn"]
 [ext_resource type="Resource" uid="uid://b01kxudyjuv78" path="res://skill_tree/actions/hold_person.tres" id="5_dcl3j"]
 [ext_resource type="Resource" uid="uid://cb3mi3783pack" path="res://skill_tree/actions/move_to.tres" id="5_vteby"]
 [ext_resource type="Resource" uid="uid://eabogtefjj05" path="res://skill_tree/actions/multi_shot.tres" id="6_cjodw"]
 [ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="7_ytxd6"]
+[ext_resource type="Resource" uid="uid://sbnms0qspna1" path="res://skill_tree/actions/teleport_away.tres" id="11_lktpk"]
+[ext_resource type="Resource" uid="uid://wi55i11ogew5" path="res://skill_tree/actions/teleport_to.tres" id="12_tpax8"]
 
 [resource]
 script = ExtResource("1_d2onc")
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_3eeij"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("7_ytxd6")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8")])

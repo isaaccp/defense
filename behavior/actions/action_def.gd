@@ -13,6 +13,9 @@ enum Id {
 	HEAL,
 	HOLD_PERSON,
 	BLINK_AWAY,
+	BLINK_TO,
+	TELEPORT_AWAY,
+	TELEPORT_TO,
 }
 
 @export var id: Id

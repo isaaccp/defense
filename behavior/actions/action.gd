@@ -75,14 +75,17 @@ func _initialize_action_scene(action_scene: ActionScene) -> void:
 
 # Can call this after awaiting to:
 #  * check if action is finished
-#  * check if target is invalid (in which case it'll finish action for you)
+#  * optionally check if target is invalid (in which case it'll finish action for you)
 #  * if it returns false, you should return immediately
-func _after_await_check() -> bool:
+func _after_await_check(check_target: bool) -> bool:
 	if finished:
 		# Nothing to clean up, as clean up should already have
 		# happened when action_finished() was called.
 		return false
-	if not target.valid():
+	if not is_instance_valid(body):
+		action_finished()
+		return false
+	if check_target and not target.valid():
 		action_finished()
 		return false
 	return true

@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=3 format=3 uid="uid://bubctjjwg0rlo"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=6 format=3 uid="uid://bubctjjwg0rlo"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_iburd"]
 [ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_lb484"]
+[ext_resource type="Resource" uid="uid://bdsw02ntoq6v2" path="res://skill_tree/actions/blink_to.tres" id="3_2k5qp"]
+[ext_resource type="Resource" uid="uid://sbnms0qspna1" path="res://skill_tree/actions/teleport_away.tres" id="4_r4mcr"]
+[ext_resource type="Resource" uid="uid://wi55i11ogew5" path="res://skill_tree/actions/teleport_to.tres" id="5_jom8x"]
 
 [resource]
 script = ExtResource("1_iburd")
 tree_type = 5
-skills = Array[Resource]([ExtResource("2_lb484")])
+skills = Array[Resource]([ExtResource("2_lb484"), ExtResource("3_2k5qp"), ExtResource("4_r4mcr"), ExtResource("5_jom8x")])

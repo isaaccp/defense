@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://wi55i11ogew5"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_4w1n5"]
+[ext_resource type="Resource" uid="uid://bdsw02ntoq6v2" path="res://skill_tree/actions/blink_to.tres" id="2_shvsq"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_88nxm"]
+
+[sub_resource type="Resource" id="Resource_cxw7u"]
+script = ExtResource("1_4w1n5")
+editor_string = ""
+cmp = 0
+
+[resource]
+script = ExtResource("3_88nxm")
+id = 11
+params = SubResource("Resource_cxw7u")
+abstract = true
+skill_name = &"Teleport To"
+skill_type = 1
+parent = ExtResource("2_shvsq")
+tree_type = 5

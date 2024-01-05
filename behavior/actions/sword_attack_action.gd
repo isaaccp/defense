@@ -15,7 +15,7 @@ func post_initialize():
 func _swing_sword():
 	# Wait a bit for the hit.
 	await Global.get_tree().create_timer(0.2, false).timeout
-	if not _after_await_check():
+	if not _after_await_check(true):
 		return
 	var dir = (target.node.position - body.position).normalized()
 	sword_attack = sword_attack_scene.instantiate() as ActionScene

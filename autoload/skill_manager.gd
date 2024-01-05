@@ -15,6 +15,9 @@ const action_scripts = {
 	ActionDef.Id.HEAL: preload("res://behavior/actions/heal_action.gd"),
 	ActionDef.Id.HOLD_PERSON: preload("res://behavior/actions/hold_person_action.gd"),
 	ActionDef.Id.BLINK_AWAY: preload("res://behavior/actions/blink_away_action.gd"),
+	ActionDef.Id.BLINK_TO: preload("res://behavior/actions/blink_to_action.gd"),
+	ActionDef.Id.TELEPORT_AWAY: preload("res://behavior/actions/teleport_away_action.gd"),
+	ActionDef.Id.TELEPORT_TO: preload("res://behavior/actions/teleport_to_action.gd"),
 }
 
 const condition_scripts = {

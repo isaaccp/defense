@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://bdsw02ntoq6v2"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_utxyv"]
+[ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_yu2jp"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_lasih"]
+
+[sub_resource type="Resource" id="Resource_cxw7u"]
+script = ExtResource("1_utxyv")
+editor_string = ""
+cmp = 0
+
+[resource]
+script = ExtResource("3_lasih")
+id = 9
+params = SubResource("Resource_cxw7u")
+abstract = true
+skill_name = &"Blink To"
+skill_type = 1
+parent = ExtResource("2_yu2jp")
+tree_type = 5
