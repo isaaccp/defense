@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cyel12tbefur0"]
+
+[ext_resource type="Texture2D" uid="uid://dvldyi637e3tm" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Trees.png" id="1_ddjds"]
+
+[resource]
+atlas = ExtResource("1_ddjds")
+region = Rect2(0, 0, 48, 96)

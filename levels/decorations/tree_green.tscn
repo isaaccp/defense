@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://beiqqepnyv85l"]
+
+[ext_resource type="Texture2D" uid="uid://r4ghor8lodv5" path="res://levels/decorations/tree_green.tres" id="1_lrdp0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_amjxe"]
+radius = 12.0
+
+[node name="TreeGreen" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lrdp0")
+offset = Vector2(0, -58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_amjxe")

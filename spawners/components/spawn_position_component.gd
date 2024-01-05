@@ -7,6 +7,7 @@ const component = &"SpawnPositionComponent"
 
 @export var config: SpawnPositionConfig
 
+
 func new_spawn_position() -> Vector2:
 	assert(config.pattern != SpawnPositionConfig.SpawnPattern.UNSPECIFIED)
 	match config.pattern:

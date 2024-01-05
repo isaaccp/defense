@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhj4bxcrw0i0h"]
+
+[ext_resource type="PackedScene" uid="uid://i0ffjyhoyu76" path="res://spawners/spawner.tscn" id="1_45wlo"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="2_l8a5y"]
+[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="3_wfy1g"]
+
+[sub_resource type="Resource" id="Resource_rttpn"]
+script = ExtResource("2_l8a5y")
+spawn = ExtResource("3_wfy1g")
+
+[node name="OrcWarriorSpawner" instance=ExtResource("1_45wlo")]
+
+[node name="SpawnProviderComponent" parent="." index="0"]
+config = SubResource("Resource_rttpn")

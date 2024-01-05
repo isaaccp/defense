@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbwkusaho0syg"]
+
+[ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_arrck"]
+[ext_resource type="PackedScene" uid="uid://dhj4bxcrw0i0h" path="res://spawners/orc_warrior_spawner.tscn" id="2_2iuas"]
+[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="3_mh0gh"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="4_3l5xj"]
+
+[sub_resource type="Resource" id="Resource_mk3ib"]
+script = ExtResource("4_3l5xj")
+placement_amount = 8
+placement_interval = 1.0
+
+[node name="Level" instance=ExtResource("1_arrck")]
+
+[node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_2iuas")]
+position = Vector2(702, 324)
+placement_node = NodePath("../../Enemies")
+
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="3" instance=ExtResource("3_mh0gh")]
+spawn_placer_config = SubResource("Resource_mk3ib")

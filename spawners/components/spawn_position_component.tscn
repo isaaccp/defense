@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2uq63nmhpit5"]
+[gd_scene load_steps=4 format=3 uid="uid://d2uq63nmhpit5"]
 
 [ext_resource type="Script" path="res://spawners/components/spawn_position_component.gd" id="1_a482r"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_position_config.gd" id="2_xe6v8"]
+
+[sub_resource type="Resource" id="Resource_a4w11"]
+script = ExtResource("2_xe6v8")
+pattern = 1
+offset = Vector2(0, 0)
 
 [node name="SpawnPositionComponent" type="Node"]
 script = ExtResource("1_a482r")
+config = SubResource("Resource_a4w11")

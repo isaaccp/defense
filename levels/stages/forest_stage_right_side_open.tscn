@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://deakioxfpy3dy"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_etbkj"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="2_y1b2d"]
+[ext_resource type="PackedScene" uid="uid://bpb88hbwflw3h" path="res://levels/decorations/big_tree_green.tscn" id="3_new6j"]
+[ext_resource type="PackedScene" uid="uid://beiqqepnyv85l" path="res://levels/decorations/tree_green.tscn" id="4_urrag"]
+
+[node name="Level" instance=ExtResource("1_etbkj")]
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(414, 224)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(414, 424)
+
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("2_y1b2d")]
+position = Vector2(294, 324)
+
+[node name="BigTreeGreen" parent="YSorted/Decoration" index="0" instance=ExtResource("3_new6j")]
+position = Vector2(244, 113)
+
+[node name="BigTreeGreen2" parent="YSorted/Decoration" index="1" instance=ExtResource("3_new6j")]
+position = Vector2(187, 149)
+
+[node name="BigTreeGreen3" parent="YSorted/Decoration" index="2" instance=ExtResource("3_new6j")]
+position = Vector2(131, 112)
+
+[node name="BigTreeGreen4" parent="YSorted/Decoration" index="3" instance=ExtResource("3_new6j")]
+position = Vector2(75, 156)
+
+[node name="BigTreeGreen5" parent="YSorted/Decoration" index="4" instance=ExtResource("3_new6j")]
+position = Vector2(69, 214)
+
+[node name="BigTreeGreen6" parent="YSorted/Decoration" index="5" instance=ExtResource("3_new6j")]
+position = Vector2(58, 275)
+
+[node name="BigTreeGreen7" parent="YSorted/Decoration" index="6" instance=ExtResource("3_new6j")]
+position = Vector2(109, 324)
+
+[node name="BigTreeGreen8" parent="YSorted/Decoration" index="7" instance=ExtResource("3_new6j")]
+position = Vector2(61, 411)
+
+[node name="BigTreeGreen9" parent="YSorted/Decoration" index="8" instance=ExtResource("3_new6j")]
+position = Vector2(125, 448)
+
+[node name="BigTreeGreen10" parent="YSorted/Decoration" index="9" instance=ExtResource("3_new6j")]
+position = Vector2(175, 523)
+
+[node name="BigTreeGreen11" parent="YSorted/Decoration" index="10" instance=ExtResource("3_new6j")]
+position = Vector2(111, 563)
+
+[node name="BigTreeGreen12" parent="YSorted/Decoration" index="11" instance=ExtResource("3_new6j")]
+position = Vector2(48, 603)
+
+[node name="TreeGreen" parent="YSorted/Decoration" index="12" instance=ExtResource("4_urrag")]
+position = Vector2(233, 186)
+
+[node name="TreeGreen2" parent="YSorted/Decoration" index="13" instance=ExtResource("4_urrag")]
+position = Vector2(144, 233)
+
+[node name="TreeGreen3" parent="YSorted/Decoration" index="14" instance=ExtResource("4_urrag")]
+position = Vector2(191, 357)
+
+[node name="TreeGreen4" parent="YSorted/Decoration" index="15" instance=ExtResource("4_urrag")]
+position = Vector2(245, 594)
+
+[node name="TreeGreen5" parent="YSorted/Decoration" index="16" instance=ExtResource("4_urrag")]
+position = Vector2(303, 632)
+
+[node name="TreeGreen6" parent="YSorted/Decoration" index="17" instance=ExtResource("4_urrag")]
+position = Vector2(309, 179)
+
+[node name="NavigationRegion2D" parent="." index="3"]
+visible = false

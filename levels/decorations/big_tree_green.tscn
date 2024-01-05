@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpb88hbwflw3h"]
+
+[ext_resource type="Texture2D" uid="uid://dvldyi637e3tm" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Trees.png" id="1_5ulmv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahayt"]
+atlas = ExtResource("1_5ulmv")
+region = Rect2(128, 0, 112, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_amjxe"]
+radius = 20.0
+
+[node name="BigTreeGreen" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_ahayt")
+offset = Vector2(0, -45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_amjxe")
