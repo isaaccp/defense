@@ -28,6 +28,7 @@ const target_scripts = {
 	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/self_target_selector.gd"),
 	TargetSelectionDef.Id.SELF_OR_ALLY: preload("res://behavior/target_selection/self_or_ally_target_selector.gd"),
 	TargetSelectionDef.Id.ALLY: preload("res://behavior/target_selection/ally_target_selector.gd"),
+	TargetSelectionDef.Id.FARTHEST_ENEMY: preload("res://behavior/target_selection/farthest_enemy_target_selector.gd"),
 }
 
 var action_by_id: Dictionary

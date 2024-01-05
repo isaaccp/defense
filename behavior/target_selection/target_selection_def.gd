@@ -10,6 +10,7 @@ enum Id {
 	SELF,
 	SELF_OR_ALLY,
 	ALLY,
+	FARTHEST_ENEMY,
 }
 
 @export var id: Id
