@@ -3,5 +3,6 @@ extends Resource
 
 class_name SpawnPlacerConfig
 
-@export var placement_amount: int
-@export var placement_interval: float
+@export var amount: int
+@export var interval: float
+@export var initial_delay: float = 0.0

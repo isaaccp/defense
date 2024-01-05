@@ -7,7 +7,31 @@ class_name Spawner
 @export var placement_node: Node2D
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	var placer = SpawnPlacerComponent.get_or_die(self)
+	if get_parent() == get_tree().root:
+		var bait = Node2D.new()
+		bait.name = "Bait"
+		add_child(bait)
+		var gc = load("res://character/playable_characters/godric_the_knight.tres")
+		var character = CharacterManager.make_character(gc)
+		bait.add_child(character)
+		character.global_position = Vector2(100, 100)
+		var spawns = Node2D.new()
+		spawns.name = "Spawns"
+		add_child(spawns)
+		placement_node = spawns
+		if not placer.config:
+			placer.config = SpawnPlacerConfig.new()
+			placer.config.amount = 100
+			placer.config.interval = 3
+			placer.config.initial_delay = 1
+		position = get_viewport_rect().size / 2.0
+		placer.placement_node = placement_node
+		placer.run()
+		return
+	assert(placement_node, "placement_node not set")
 	placer.placement_node = placement_node
 
 func _get_configuration_warnings():

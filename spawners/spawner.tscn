@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://i0ffjyhoyu76"]
+[gd_scene load_steps=7 format=3 uid="uid://i0ffjyhoyu76"]
 
 [ext_resource type="Script" path="res://spawners/spawner.gd" id="1_n8mv7"]
 [ext_resource type="PackedScene" uid="uid://ceuhersiei42x" path="res://spawners/components/spawn_provider_component.tscn" id="2_40ulp"]
 [ext_resource type="PackedScene" uid="uid://d2uq63nmhpit5" path="res://spawners/components/spawn_position_component.tscn" id="3_en58x"]
 [ext_resource type="PackedScene" uid="uid://bydej65035478" path="res://spawners/components/spawn_placer_component.tscn" id="4_wdsse"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="5_3q8ix"]
+[ext_resource type="PackedScene" uid="uid://bchx4dupmrbyu" path="res://spawners/components/spawn_animation_controller_component.tscn" id="6_6x3oj"]
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_n8mv7")
@@ -13,6 +15,12 @@ actor_name = "Base Spawner"
 
 [node name="SpawnPositionComponent" parent="." instance=ExtResource("3_en58x")]
 
-[node name="SpawnPlacerComponent" parent="." node_paths=PackedStringArray("spawn_provider_component", "spawn_position_component") instance=ExtResource("4_wdsse")]
+[node name="SpawnPlacerComponent" parent="." node_paths=PackedStringArray("spawn_provider_component", "spawn_position_component", "spawn_animation_component") instance=ExtResource("4_wdsse")]
 spawn_provider_component = NodePath("../SpawnProviderComponent")
 spawn_position_component = NodePath("../SpawnPositionComponent")
+spawn_animation_component = NodePath("../SpawnAnimationControllerComponent")
+
+[node name="AnimationComponent" parent="." instance=ExtResource("5_3q8ix")]
+
+[node name="SpawnAnimationControllerComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("6_6x3oj")]
+animation_component = NodePath("../AnimationComponent")

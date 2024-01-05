@@ -20,6 +20,6 @@ static func get_or_null(node: Node) -> SpawnPositionComponent:
 	return Component.get_or_null(node, component) as SpawnPositionComponent
 
 static func get_or_die(node: Node) -> SpawnPositionComponent:
-	var component = get_or_null(node)
-	assert(component)
-	return component
+	var c = get_or_null(node)
+	assert(c)
+	return c

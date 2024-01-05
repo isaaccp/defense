@@ -11,12 +11,13 @@ const component = &"SpawnProviderComponent"
 @export var config: SpawnProviderConfig
 
 func new_spawn() -> Node2D:
-	return config.spawn.instantiate() as Node2D
+	var spawn = config.spawn.instantiate() as Node2D
+	return spawn
 
 static func get_or_null(node: Node) -> SpawnProviderComponent:
 	return Component.get_or_null(node, component) as SpawnProviderComponent
 
 static func get_or_die(node: Node) -> SpawnProviderComponent:
-	var component = get_or_null(node)
-	assert(component)
-	return component
+	var c = get_or_null(node)
+	assert(c)
+	return c

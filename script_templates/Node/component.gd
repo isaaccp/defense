@@ -6,10 +6,10 @@ class_name NewComponent
 const component = &"NewComponent"
 
 @export_group("Required")
-# Required fields.
+# TODO: Required fields.
 
 @export_group("Optional")
-# Optional fields.
+# TODO: Optional fields.
 
 
 func run():
@@ -19,7 +19,14 @@ static func get_or_null(node: Node) -> NewComponent:
 	return Component.get_or_null(node, component) as NewComponent
 
 static func get_or_die(node: Node) -> NewComponent:
-	var component = get_or_null(node)
-	assert(component)
-	return component
+	var c = get_or_null(node)
+	assert(c)
+	return c
+
+func _get_configuration_warnings():
+	var warnings = PackedStringArray()
+	if not get_parent() is Node2D:
+		return warnings
+	# TODO
+	return warnings
 

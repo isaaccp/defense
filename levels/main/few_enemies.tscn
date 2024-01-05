@@ -15,8 +15,9 @@ spawn = ExtResource("2_i4rgi")
 
 [sub_resource type="Resource" id="Resource_5ca0e"]
 script = ExtResource("8_0hxf0")
-placement_amount = 5
-placement_interval = 1.0
+amount = 0
+interval = 0.0
+initial_delay = 0.0
 
 [sub_resource type="Resource" id="Resource_jg4wc"]
 script = ExtResource("9_xa6hl")

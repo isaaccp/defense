@@ -247,8 +247,9 @@ rules = Array[ExtResource("7_w0ex0")]([SubResource("Resource_3umoe"), SubResourc
 
 [sub_resource type="Resource" id="Resource_mk3ib"]
 script = ExtResource("4_3l5xj")
-placement_amount = 8
-placement_interval = 2.0
+amount = 8
+interval = 2.0
+initial_delay = 0.0
 
 [node name="Level" instance=ExtResource("1_arrck")]
 players = 2

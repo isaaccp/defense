@@ -76,7 +76,7 @@ func _open_script_in_editor(path, line_number):
 	if(_interface == null):
 		print('Too soon, wait a bit and try again.')
 		return
-	
+
 	var r = load(path)
 	if(line_number != null and line_number != -1):
 		_interface.edit_script(r, line_number)
