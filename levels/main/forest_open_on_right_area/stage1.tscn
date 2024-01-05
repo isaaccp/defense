@@ -248,8 +248,8 @@ rules = Array[ExtResource("7_w0ex0")]([SubResource("Resource_3umoe"), SubResourc
 [sub_resource type="Resource" id="Resource_mk3ib"]
 script = ExtResource("4_3l5xj")
 amount = 5
-interval = 3.0
-initial_delay = 0.0
+interval = 2.5
+initial_delay = 0.5
 
 [node name="Level" instance=ExtResource("1_arrck")]
 players = 2
