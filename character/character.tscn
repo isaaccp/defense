@@ -271,12 +271,10 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4y0tt"]
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "behavior_component") groups=["characters"]]
+[node name="Character" type="CharacterBody2D" groups=["characters"]]
 y_sort_enabled = true
 collision_mask = 8
 script = ExtResource("1_0mtgw")
-health_component = NodePath("HealthComponent")
-behavior_component = NodePath("BehaviorComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -336,13 +334,12 @@ status_component = NodePath("../StatusComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
-action_cooldowns = null
-elapsed_time = null
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component") instance=ExtResource("7_p2f2o")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component") instance=ExtResource("7_p2f2o")]
 side_component = NodePath("../SideComponent")
 logging_component = NodePath("../LoggingComponent")
 health_component = NodePath("../HealthComponent")
+status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CapsuleShape2D_4y0tt")

@@ -40,10 +40,23 @@ var abortable_action_check_period = 0.1
 var next_abortable_action_check_time: float
 
 var running = false
+var able_to_act = true
 
+func _ready():
+	status_component.able_to_act_changed.connect(_on_able_to_act_changed)
 func run():
 	behavior.prepare(body, side_component)
 	running = true
+
+func _on_able_to_act_changed(can_act: bool):
+	able_to_act = can_act
+	if not can_act:
+		_interrupt()
+
+func _interrupt():
+	if action:
+		_log("interrupted %s" % action.def.name())
+		action.action_finished()
 
 func _physics_process(delta: float):
 	if not running:
@@ -55,6 +68,9 @@ func _physics_process(delta: float):
 	elapsed_time += delta
 
 	assert(behavior, "Missing behavior")
+
+	if not able_to_act:
+		return
 
 	# For change detection.
 	var prev_action_id = _action_id(action)
@@ -75,6 +91,7 @@ func _physics_process(delta: float):
 				_log("Rule #%d: %s" % [result.id, rule])
 				target = result.target
 				if action:
+					_log("preempted %s" % action.def.name())
 					action.action_finished()
 					_on_action_finished(action)
 				action = SkillManager.make_runnable_action(rule.action)
@@ -83,9 +100,9 @@ func _physics_process(delta: float):
 			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 	_emit_updated_if_changed(prev_action_id, prev_target)
 	# No rule implies no action.
-	if not rule:
-		return
-	action.physics_process(delta)
+	if rule:
+		action.physics_process(delta)
+	# Always run this to update animation, etc.
 	_post_action()
 
 func _on_action_finished(action: Action):

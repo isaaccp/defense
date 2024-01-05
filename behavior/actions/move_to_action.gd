@@ -25,5 +25,5 @@ func _start_target_position_refresh(target: Target):
 		await Global.get_tree().create_timer(0.25, false).timeout
 
 func action_finished():
-	body.velocity = Vector2.ZERO
 	super()
+	body.velocity = Vector2.ZERO

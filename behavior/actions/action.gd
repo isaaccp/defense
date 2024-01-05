@@ -53,6 +53,8 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 
 # Called before the first invocation of physics_process.
 # 'target' is as initially returned when choosing an action.
+# If you schedule work with await, make sure to check for
+# "finished" after awaiting and exiting.
 func post_initialize():
 	pass
 
@@ -62,7 +64,10 @@ func post_initialize():
 func physics_process(delta: float):
 	pass
 
+# It is important that it's only called once.
 func action_finished():
+	if finished:
+		return
 	finished = true
 
 func _initialize_action_scene(action_scene: ActionScene) -> void:

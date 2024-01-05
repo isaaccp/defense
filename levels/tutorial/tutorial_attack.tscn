@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbo0hd6gduxbc"]
+[gd_scene load_steps=28 format=3 uid="uid://bbo0hd6gduxbc"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_jlllq"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_iar03"]
@@ -24,26 +24,26 @@ unlocked_conditions = Array[int]([1])
 full_acquired = false
 full_unlocked = false
 
-[sub_resource type="Resource" id="Resource_ih1k1"]
+[sub_resource type="Resource" id="Resource_vul4y"]
 script = ExtResource("4_mb2tp")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_lbwd1"]
+[sub_resource type="Resource" id="Resource_we0ii"]
 script = ExtResource("5_wbi34")
-id = 7
-params = SubResource("Resource_ih1k1")
+id = 2
+params = SubResource("Resource_vul4y")
 abstract = true
-skill_name = &"Hold Person"
+skill_name = &"Sword Attack"
 skill_type = 1
-tree_type = 4
+tree_type = 2
 
 [sub_resource type="Resource" id="Resource_x246h"]
 script = ExtResource("4_mb2tp")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_h7sny"]
+[sub_resource type="Resource" id="Resource_t25o4"]
 script = ExtResource("6_o25eq")
 id = 1
 type = 1
@@ -53,30 +53,80 @@ skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_lejbn"]
+[sub_resource type="Resource" id="Resource_3u2x8"]
 script = ExtResource("4_mb2tp")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_mi6rg"]
+[sub_resource type="Resource" id="Resource_jqiyu"]
 script = ExtResource("8_jvwvh")
 id = 1
 type = 1
-params = SubResource("Resource_lejbn")
+params = SubResource("Resource_3u2x8")
 abstract = false
 skill_name = &"Closest Enemy"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_qdm7c"]
+[sub_resource type="Resource" id="Resource_coqxu"]
 script = ExtResource("7_qfvin")
-target_selection = SubResource("Resource_mi6rg")
-action = SubResource("Resource_lbwd1")
-condition = SubResource("Resource_h7sny")
+target_selection = SubResource("Resource_jqiyu")
+action = SubResource("Resource_we0ii")
+condition = SubResource("Resource_t25o4")
+
+[sub_resource type="Resource" id="Resource_yufmo"]
+script = ExtResource("4_mb2tp")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_xwfn8"]
+script = ExtResource("5_wbi34")
+id = 7
+params = SubResource("Resource_yufmo")
+abstract = true
+skill_name = &"Hold Person"
+skill_type = 1
+tree_type = 4
+
+[sub_resource type="Resource" id="Resource_y62v1"]
+script = ExtResource("4_mb2tp")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_h5i6i"]
+script = ExtResource("6_o25eq")
+id = 1
+type = 1
+params = SubResource("Resource_y62v1")
+abstract = false
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_nqqa6"]
+script = ExtResource("4_mb2tp")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_huyue"]
+script = ExtResource("8_jvwvh")
+id = 1
+type = 1
+params = SubResource("Resource_nqqa6")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_ifils"]
+script = ExtResource("7_qfvin")
+target_selection = SubResource("Resource_huyue")
+action = SubResource("Resource_xwfn8")
+condition = SubResource("Resource_h5i6i")
 
 [sub_resource type="Resource" id="Resource_oomvi"]
 script = ExtResource("4_sgpel")
-rules = Array[ExtResource("7_qfvin")]([SubResource("Resource_qdm7c")])
+rules = Array[ExtResource("7_qfvin")]([SubResource("Resource_coqxu"), SubResource("Resource_ifils")])
 
 [node name="Level" instance=ExtResource("1_jlllq")]
 skill_tree_state_add = SubResource("Resource_ewa5g")

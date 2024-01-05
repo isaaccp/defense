@@ -262,8 +262,9 @@ _data = {
 [node name="OrcWarrior" instance=ExtResource("1_u12oj")]
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("1_8026q")
+texture = ExtResource("1_ngnr6")
 offset = Vector2(0, -24)
+hframes = 2
 
 [node name="AnimationPlayer" parent="Sprite2D" index="0"]
 libraries = {

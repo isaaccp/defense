@@ -5,7 +5,7 @@ class_name HudStatusDisplay
 @export var status_library: StatusLibrary
 
 var hud_status_icon_scene = preload("res://ui/hud_status_icon.tscn")
-	
+
 func clear():
 	for child in get_children():
 		child.queue_free()

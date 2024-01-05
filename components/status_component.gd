@@ -21,6 +21,7 @@ const component: StringName = &"StatusComponent"
 @export var elapsed_time: float = 0.0
 
 signal statuses_changed(statuses: Array)
+signal able_to_act_changed(able_to_act: bool)
 
 class StatusState extends RefCounted:
 	# Remains until explicitly removed.
@@ -61,6 +62,7 @@ func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
 	current_statuses[status_id][action_id] = true
 	if changed:
 		_log("%s status added" % StatusDef.name(status_id))
+		_emit_status_added_signals(status_id)
 		statuses_changed.emit(get_statuses())
 
 func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id, expired = false):
@@ -76,6 +78,7 @@ func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id, expired = f
 		if status_data.is_empty():
 			current_statuses.erase(status_id)
 			_log("%s status removed" % StatusDef.name(status_id))
+			_emit_status_removed_signals(status_id)
 			statuses_changed.emit(get_statuses())
 
 # TODO: If Godot gets better at Dictionary typing, make return type Array[StatusDef.Id]
@@ -103,6 +106,14 @@ func adjusted_damage_multiplier(base_damage_multiplier: float) -> float:
 		if status == StatusDef.Id.STRENGTH_SURGE:
 			damage_multiplier *= 2.0
 	return damage_multiplier
+
+func _emit_status_added_signals(status_id: StatusDef.Id):
+	if status_id == StatusDef.Id.PARALYZED:
+		able_to_act_changed.emit(false)
+
+func _emit_status_removed_signals(status_id: StatusDef.Id):
+	if status_id == StatusDef.Id.PARALYZED:
+		able_to_act_changed.emit(true)
 
 func _log(message: String):
 	if not logging_component:

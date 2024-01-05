@@ -73,10 +73,11 @@ persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component") instance=ExtResource("8_mrif0")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component") instance=ExtResource("8_mrif0")]
 side_component = NodePath("../SideComponent")
 logging_component = NodePath("../LoggingComponent")
 health_component = NodePath("../HealthComponent")
+status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CapsuleShape2D_4y0tt")
