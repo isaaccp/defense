@@ -260,6 +260,7 @@ _data = {
 }
 
 [node name="OrcWarrior" instance=ExtResource("1_u12oj")]
+actor_name = "Orc Warrior"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_ngnr6")

@@ -27,9 +27,11 @@ position = Vector2(412, 306)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_iar03")]
 position = Vector2(196, 267)
+actor_name = ""
 
 [node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_iar03")]
 position = Vector2(193, 364)
+actor_name = ""
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_40aq8")]
 position = Vector2(555, 323)

@@ -76,6 +76,8 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 		if skill_tree_state_override:
 			gameplay_characters[i].skill_tree_state = skill_tree_state_override
 		var character = CharacterManager.make_character(gameplay_characters[i])
+		character.actor_name = gameplay_characters[i].name
+		character.name = character.actor_name
 		character.idx = i
 		character.peer_id = gameplay_characters[i].peer_id
 		character.position = starting_positions.get_child(i).position

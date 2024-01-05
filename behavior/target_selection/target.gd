@@ -28,6 +28,11 @@ func equals(other: Target) -> bool:
 			return node == other.node
 	return false
 
+func _to_string():
+	match type:
+		Type.NODE:
+			return node.actor_name
+
 static func make_invalid() -> Target:
 	return Target.new()
 

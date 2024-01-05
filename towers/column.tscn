@@ -62,6 +62,7 @@ radius = 15.0
 [node name="Column" type="StaticBody2D" groups=["towers"]]
 collision_layer = 8
 script = ExtResource("1_3tt8j")
+actor_name = "Column"
 
 [node name="Column" type="Sprite2D" parent="."]
 position = Vector2(0, -20)

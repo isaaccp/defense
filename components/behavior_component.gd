@@ -86,13 +86,14 @@ func _physics_process(delta: float):
 		action = null
 		target = null
 	# After this point, if action is still set, we can assume is not finished.
-	if not rule or (action.abortable and next_abortable_action_check_time < elapsed_time):
+	var abortable_check_needed = action and action.abortable and next_abortable_action_check_time < elapsed_time
+	if not rule or abortable_check_needed:
 		var result = behavior.choose(action_cooldowns, elapsed_time)
 		if not result.is_empty():
 			if result.rule != rule or not result.target.equals(target) or action.finished:
 				rule = result.rule
-				_log("Rule #%d: %s" % [result.id, rule])
 				target = result.target
+				_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
 				if action:
 					_log("preempted %s" % action.def.name())
 					action.action_finished()

@@ -19,7 +19,7 @@ func initialize(character_: Character):
 		skill_manager.conditions(),
 	)
 	if is_instance_valid(character):
-		%Title.text = "Configuring behavior for %s" % character.short_name()
+		%Title.text = "Configuring behavior for %s" % character.actor_name
 		var behavior_component = Component.get_behavior_component_or_die(character)
 		if behavior_component.behavior:
 			script_tree.load_behavior(behavior_component.behavior)

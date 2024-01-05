@@ -9,6 +9,7 @@ script = ExtResource("2_l8a5y")
 spawn = ExtResource("3_wfy1g")
 
 [node name="OrcWarriorSpawner" instance=ExtResource("1_45wlo")]
+actor_name = "Orc Warrior Spawner"
 
 [node name="SpawnProviderComponent" parent="." index="0"]
 config = SubResource("Resource_rttpn")

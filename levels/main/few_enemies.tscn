@@ -37,6 +37,7 @@ position = Vector2(203, 159)
 [node name="Spawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_nppvu")]
 position = Vector2(772, 332)
 placement_node = NodePath("../../Enemies")
+actor_name = ""
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/Spawner" index="3" instance=ExtResource("6_35424")]
 spawn_provider_config = SubResource("Resource_l0jc1")

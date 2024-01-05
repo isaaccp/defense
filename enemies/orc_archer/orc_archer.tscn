@@ -365,6 +365,7 @@ script = ExtResource("8_kcejl")
 rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_pyxby"), SubResource("Resource_6dy2c")])
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
+actor_name = "Orc Archer"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_qlkp2")
