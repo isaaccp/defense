@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_8wsra"]
 script = ExtResource("2_icq27")
 skill_tree_collection = ExtResource("3_5x51k")
-acquired_actions = Array[int]([3])
+acquired_actions = Array[int]([3, 1])
 acquired_target_selections = Array[int]([1])
 acquired_conditions = Array[int]([1])
 unlocked_actions = Array[int]([])

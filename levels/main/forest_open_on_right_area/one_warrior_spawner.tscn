@@ -1,27 +1,25 @@
-[gd_scene load_steps=49 format=3 uid="uid://dier8uhq0tn0o"]
+[gd_scene load_steps=46 format=3 uid="uid://c8il5cl6p05m7"]
 
-[ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_kp3uo"]
-[ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_5atth"]
-[ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="3_baoxn"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_jubd1"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="5_ywr8l"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="6_cyo0f"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="7_y6gmd"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="8_msqmx"]
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="9_4jwbg"]
-[ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="10_35u28"]
-[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="11_4w38g"]
-[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="12_jbuco"]
-[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="12_ow1nu"]
-[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="13_lreet"]
+[ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_2u4nr"]
+[ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_k5qbp"]
+[ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="3_hmgfa"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_a0o6t"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="5_pi8kg"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="6_s27h6"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="7_fgils"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="8_wcaug"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="9_ktyw4"]
+[ext_resource type="PackedScene" uid="uid://dhj4bxcrw0i0h" path="res://spawners/orc_warrior_spawner.tscn" id="10_g8p3r"]
+[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="11_gl8do"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="12_o1pyq"]
 
 [sub_resource type="Resource" id="Resource_3chx1"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_fmqbl"]
-script = ExtResource("5_ywr8l")
+script = ExtResource("5_pi8kg")
 id = 2
 params = SubResource("Resource_3chx1")
 abstract = true
@@ -30,12 +28,12 @@ skill_type = 1
 tree_type = 2
 
 [sub_resource type="Resource" id="Resource_ocylu"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_kfc08"]
-script = ExtResource("6_cyo0f")
+script = ExtResource("6_s27h6")
 id = 1
 type = 1
 params = SubResource("Resource_ocylu")
@@ -45,12 +43,12 @@ skill_type = 3
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_iwep0"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_y77dp"]
-script = ExtResource("8_msqmx")
+script = ExtResource("8_wcaug")
 id = 1
 type = 1
 params = SubResource("Resource_iwep0")
@@ -60,18 +58,18 @@ skill_type = 2
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_6eni5"]
-script = ExtResource("7_y6gmd")
+script = ExtResource("7_fgils")
 target_selection = SubResource("Resource_y77dp")
 action = SubResource("Resource_fmqbl")
 condition = SubResource("Resource_kfc08")
 
 [sub_resource type="Resource" id="Resource_8fnw4"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_e80sy"]
-script = ExtResource("5_ywr8l")
+script = ExtResource("5_pi8kg")
 id = 1
 params = SubResource("Resource_8fnw4")
 abstract = true
@@ -80,7 +78,7 @@ skill_type = 1
 tree_type = 2
 
 [sub_resource type="Resource" id="Resource_0qmql"]
-script = ExtResource("6_cyo0f")
+script = ExtResource("6_s27h6")
 id = 1
 type = 1
 params = SubResource("Resource_ocylu")
@@ -90,12 +88,12 @@ skill_type = 3
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_eg6c8"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_sv7t2"]
-script = ExtResource("8_msqmx")
+script = ExtResource("8_wcaug")
 id = 1
 type = 1
 params = SubResource("Resource_eg6c8")
@@ -105,23 +103,23 @@ skill_type = 2
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_gwtyx"]
-script = ExtResource("7_y6gmd")
+script = ExtResource("7_fgils")
 target_selection = SubResource("Resource_sv7t2")
 action = SubResource("Resource_e80sy")
 condition = SubResource("Resource_0qmql")
 
 [sub_resource type="Resource" id="Resource_538f1"]
 resource_local_to_scene = true
-script = ExtResource("9_4jwbg")
-rules = Array[ExtResource("7_y6gmd")]([SubResource("Resource_6eni5"), SubResource("Resource_gwtyx")])
+script = ExtResource("9_ktyw4")
+rules = Array[ExtResource("7_fgils")]([SubResource("Resource_6eni5"), SubResource("Resource_gwtyx")])
 
 [sub_resource type="Resource" id="Resource_1qj77"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_dhvhg"]
-script = ExtResource("5_ywr8l")
+script = ExtResource("5_pi8kg")
 id = 6
 params = SubResource("Resource_1qj77")
 abstract = true
@@ -130,12 +128,12 @@ skill_type = 1
 tree_type = 4
 
 [sub_resource type="Resource" id="Resource_370hd"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_7h82d"]
-script = ExtResource("6_cyo0f")
+script = ExtResource("6_s27h6")
 id = 1
 type = 1
 params = SubResource("Resource_370hd")
@@ -145,17 +143,17 @@ skill_type = 3
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_rnh6r"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_t0yhk"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_tggx5"]
-script = ExtResource("8_msqmx")
+script = ExtResource("8_wcaug")
 id = 3
 type = 1
 params = SubResource("Resource_t0yhk")
@@ -165,7 +163,7 @@ skill_type = 2
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_bkxd4"]
-script = ExtResource("8_msqmx")
+script = ExtResource("8_wcaug")
 id = 5
 type = 1
 params = SubResource("Resource_rnh6r")
@@ -176,18 +174,18 @@ parent = SubResource("Resource_tggx5")
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_3umoe"]
-script = ExtResource("7_y6gmd")
+script = ExtResource("7_fgils")
 target_selection = SubResource("Resource_bkxd4")
 action = SubResource("Resource_dhvhg")
 condition = SubResource("Resource_7h82d")
 
 [sub_resource type="Resource" id="Resource_es4da"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_56p04"]
-script = ExtResource("5_ywr8l")
+script = ExtResource("5_pi8kg")
 id = 1
 params = SubResource("Resource_es4da")
 abstract = true
@@ -196,7 +194,7 @@ skill_type = 1
 tree_type = 2
 
 [sub_resource type="Resource" id="Resource_ux6j4"]
-script = ExtResource("6_cyo0f")
+script = ExtResource("6_s27h6")
 id = 1
 type = 1
 params = SubResource("Resource_370hd")
@@ -206,17 +204,17 @@ skill_type = 3
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_eehjr"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_fdrqx"]
-script = ExtResource("4_jubd1")
+script = ExtResource("4_a0o6t")
 editor_string = ""
 cmp = 0
 
 [sub_resource type="Resource" id="Resource_xnxej"]
-script = ExtResource("8_msqmx")
+script = ExtResource("8_wcaug")
 id = 3
 type = 1
 params = SubResource("Resource_fdrqx")
@@ -226,7 +224,7 @@ skill_type = 2
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_qynac"]
-script = ExtResource("8_msqmx")
+script = ExtResource("8_wcaug")
 id = 5
 type = 1
 params = SubResource("Resource_eehjr")
@@ -237,43 +235,30 @@ parent = SubResource("Resource_xnxej")
 tree_type = 1
 
 [sub_resource type="Resource" id="Resource_tnuun"]
-script = ExtResource("7_y6gmd")
+script = ExtResource("7_fgils")
 target_selection = SubResource("Resource_qynac")
 action = SubResource("Resource_56p04")
 condition = SubResource("Resource_ux6j4")
 
 [sub_resource type="Resource" id="Resource_q6pxc"]
 resource_local_to_scene = true
-script = ExtResource("9_4jwbg")
-rules = Array[ExtResource("7_y6gmd")]([SubResource("Resource_3umoe"), SubResource("Resource_tnuun")])
+script = ExtResource("9_ktyw4")
+rules = Array[ExtResource("7_fgils")]([SubResource("Resource_3umoe"), SubResource("Resource_tnuun")])
 
-[sub_resource type="Resource" id="Resource_p55gh"]
-script = ExtResource("12_ow1nu")
-spawn = ExtResource("13_lreet")
+[sub_resource type="Resource" id="Resource_mk3ib"]
+script = ExtResource("12_o1pyq")
+amount = 8
+interval = 2.0
+initial_delay = 0.5
 
-[sub_resource type="Resource" id="Resource_qq1dk"]
-script = ExtResource("12_jbuco")
-amount = 3
-interval = 4.0
-initial_delay = 1.0
-
-[node name="Level" instance=ExtResource("1_kp3uo")]
+[node name="Level" instance=ExtResource("1_2u4nr")]
 players = 2
-test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("2_5atth"), ExtResource("3_baoxn")])
-test_behaviors = Array[ExtResource("9_4jwbg")]([SubResource("Resource_538f1"), SubResource("Resource_q6pxc")])
+test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("2_k5qbp"), ExtResource("3_hmgfa")])
+test_behaviors = Array[ExtResource("9_ktyw4")]([SubResource("Resource_538f1"), SubResource("Resource_q6pxc")])
 
-[node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_35u28")]
-position = Vector2(680, 224)
+[node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_g8p3r")]
+position = Vector2(702, 324)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_4w38g")]
-spawn_provider_config = SubResource("Resource_p55gh")
-spawn_placer_config = SubResource("Resource_qq1dk")
-
-[node name="OrcWarriorSpawner2" parent="YSorted/Spawners" index="1" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_35u28")]
-position = Vector2(680, 424)
-placement_node = NodePath("../../Enemies")
-
-[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("11_4w38g")]
-spawn_provider_config = SubResource("Resource_p55gh")
-spawn_placer_config = SubResource("Resource_qq1dk")
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="3" instance=ExtResource("11_gl8do")]
+spawn_placer_config = SubResource("Resource_mk3ib")

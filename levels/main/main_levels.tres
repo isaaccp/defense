@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_3n011"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="2_84oyx"]
 [ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="3_w6bpn"]
-[ext_resource type="PackedScene" uid="uid://dbwkusaho0syg" path="res://levels/main/forest_open_on_right_area/stage1.tscn" id="4_q7bb4"]
-[ext_resource type="PackedScene" uid="uid://dier8uhq0tn0o" path="res://levels/main/forest_open_on_right_area/stage2.tscn" id="5_4acre"]
+[ext_resource type="PackedScene" uid="uid://c8il5cl6p05m7" path="res://levels/main/forest_open_on_right_area/one_warrior_spawner.tscn" id="4_rmm38"]
+[ext_resource type="PackedScene" uid="uid://d2smyr2b4hedx" path="res://levels/main/forest_open_on_right_area/two_warrior_spawners.tscn" id="5_uogry"]
 
 [resource]
 script = ExtResource("2_3n011")
 players = 2
-levels = Array[PackedScene]([ExtResource("4_q7bb4"), ExtResource("5_4acre")])
+levels = Array[PackedScene]([ExtResource("4_rmm38"), ExtResource("5_uogry")])
 available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_w6bpn")])
