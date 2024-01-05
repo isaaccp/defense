@@ -25,7 +25,8 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 	get:
 		if persistent_game_state_component:
 			return persistent_game_state_component.state.behavior
-		if behavior:
+		# If loaded from a resource, must be local to scene.
+		if behavior and not behavior.resource_path.is_empty():
 			assert(behavior.resource_local_to_scene, "Resource must be local to scene")
 		return behavior
 
@@ -38,11 +39,11 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 @export var elapsed_time: float = 0.0
 # How often to check whether a higher-priority action should
 # stop an abortable action.
-var abortable_action_check_period = 0.1
-var next_abortable_action_check_time: float
+@export var abortable_action_check_period = 0.1
+@export var next_abortable_action_check_time: float
 
-var running = false
-var able_to_act = true
+@export var running = false
+@export var able_to_act = true
 
 func _ready():
 	status_component.able_to_act_changed.connect(_on_able_to_act_changed)

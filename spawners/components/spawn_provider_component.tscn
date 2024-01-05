@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceuhersiei42x"]
+
+[ext_resource type="Script" path="res://spawners/components/spawn_provider_component.gd" id="1_wdogl"]
+
+[node name="SpawnProviderComponent" type="Node"]
+script = ExtResource("1_wdogl")

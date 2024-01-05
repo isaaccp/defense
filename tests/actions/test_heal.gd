@@ -22,7 +22,7 @@ func make_heal_behavior() -> Behavior:
 
 func before_all():
 	var heal = heal_scene.instantiate()
-	heal_amount = -Component.get_or_die(heal, HitboxComponent.component).damage
+	heal_amount = -Component.get_or_die(heal, HitboxComponent.component).hit_effect.damage
 	heal.free()
 
 func before_each():

@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=14 format=3 uid="uid://dkxmuee84wtoj"]
 
+[ext_resource type="Script" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="4_he7s5"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_ur2ni"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="5_s5sa1"]
@@ -14,7 +15,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgtdu"]
 
-[sub_resource type="Resource" id="Resource_ih357"]
+[sub_resource type="Resource" id="Resource_yf1fl"]
 resource_local_to_scene = true
 script = ExtResource("4_ur2ni")
 rules = Array[Resource("res://behavior/rule.gd")]([])
@@ -22,6 +23,7 @@ rules = Array[Resource("res://behavior/rule.gd")]([])
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
 collision_mask = 8
+script = ExtResource("1_1ol1r")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -74,7 +76,7 @@ attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
-behavior = SubResource("Resource_ih357")
+behavior = SubResource("Resource_yf1fl")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("8_567i8")]
 health_component = NodePath("../HealthComponent")

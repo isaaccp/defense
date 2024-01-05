@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dndkag2tc2ltn"]
+
+[ext_resource type="Script" path="res://spawners/components/spawn_config_component.gd" id="1_2wam6"]
+
+[node name="SpawnConfigComponent" type="Node"]
+script = ExtResource("1_2wam6")

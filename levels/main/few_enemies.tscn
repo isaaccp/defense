@@ -1,9 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://dddksx04cyoa4"]
+[gd_scene load_steps=12 format=3 uid="uid://dddksx04cyoa4"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_1wtxp"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_i4rgi"]
-[ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="3_hgw50"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="4_7r67v"]
+[ext_resource type="PackedScene" uid="uid://i0ffjyhoyu76" path="res://spawners/spawner.tscn" id="5_nppvu"]
+[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="6_35424"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="7_3vnfd"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="8_0hxf0"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_position_config.gd" id="9_xa6hl"]
+
+[sub_resource type="Resource" id="Resource_l0jc1"]
+script = ExtResource("7_3vnfd")
+spawn = ExtResource("2_i4rgi")
+
+[sub_resource type="Resource" id="Resource_5ca0e"]
+script = ExtResource("8_0hxf0")
+placement_amount = 5
+placement_interval = 1.0
+
+[sub_resource type="Resource" id="Resource_jg4wc"]
+script = ExtResource("9_xa6hl")
+pattern = 1
+offset = Vector2(0, 0)
 
 [node name="Level" instance=ExtResource("1_1wtxp")]
 
@@ -13,17 +31,14 @@ position = Vector2(63, 53)
 [node name="Second" parent="StartingPositions" index="1"]
 position = Vector2(86, 159)
 
-[node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_i4rgi")]
-position = Vector2(394, 338)
-
-[node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_i4rgi")]
-position = Vector2(438, 248)
-
-[node name="OrcArcher2" parent="YSorted/Enemies" index="2" instance=ExtResource("3_hgw50")]
-position = Vector2(459, 419)
-
-[node name="OrcArcher3" parent="YSorted/Enemies" index="3" instance=ExtResource("3_hgw50")]
-position = Vector2(559, 277)
-
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_7r67v")]
 position = Vector2(203, 159)
+
+[node name="Spawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_nppvu")]
+position = Vector2(772, 332)
+placement_node = NodePath("../../Enemies")
+
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/Spawner" index="3" instance=ExtResource("6_35424")]
+spawn_provider_config = SubResource("Resource_l0jc1")
+spawn_placer_config = SubResource("Resource_5ca0e")
+spawn_position_config = SubResource("Resource_jg4wc")

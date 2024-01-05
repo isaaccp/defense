@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://camb4jx7y3ygt"]
+[gd_scene load_steps=14 format=3 uid="uid://camb4jx7y3ygt"]
 
+[ext_resource type="Script" path="res://actor/tower.gd" id="1_3tt8j"]
 [ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="2_narhj"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="3_enchd"]
@@ -60,6 +61,7 @@ radius = 15.0
 
 [node name="Column" type="StaticBody2D" groups=["towers"]]
 collision_layer = 8
+script = ExtResource("1_3tt8j")
 
 [node name="Column" type="Sprite2D" parent="."]
 position = Vector2(0, -20)

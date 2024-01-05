@@ -13,6 +13,9 @@ class HealthUpdate extends RefCounted:
 	var max_health: int
 	var is_heal: bool
 
+	func _to_string():
+		return "[health: %d -> %d (max: %d) is_heal: %s]" % [prev_health, health, max_health, is_heal]
+
 @export_group("Required")
 @export var attributes_component: AttributesComponent
 

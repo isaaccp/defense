@@ -29,6 +29,7 @@ class_name Level
 @export var characters: Node2D
 @export var enemies: Node2D
 @export var towers: Node2D
+@export var spawners: Node2D
 @export var starting_positions: Node
 var is_frozen: bool = false
 
@@ -43,7 +44,7 @@ func _ready():
 		var num_players = players if players != -1 else starting_positions.get_child_count()
 		for i in range(num_players):
 			var gc = GameplayCharacter.make(Enum.CharacterId.KNIGHT)
-			gc.behavior = test_behavior
+			gc.behavior = test_behavior.duplicate(true)
 			gcs.append(gc)
 		gameplay.characters = gcs
 		# If not overriden, unlock all skills when playing stand-alone.
@@ -75,19 +76,14 @@ func start():
 		victory_loss.victory.append(VictoryLossConditionComponent.VictoryType.TIME)
 		victory_loss.time = 0.1
 	victory_loss.level_started()
-	_enable_behaviors()
+	_run()
 
-func _enable_behaviors():
-	_enable_nodes_behavior(characters.get_children())
-	_enable_nodes_behavior(enemies.get_children())
-	_enable_nodes_behavior(towers.get_children())
+func _run():
+	_run_nodes(characters.get_children())
+	_run_nodes(enemies.get_children())
+	_run_nodes(towers.get_children())
+	_run_nodes(spawners.get_children())
 
-func _enable_nodes_behavior(nodes: Array):
-	# Probably this stuff can go in a common base class for character/enemy/etc.
+func _run_nodes(nodes: Array):
 	for node in nodes:
-		var behavior = Component.get_behavior_component_or_null(node)
-		if behavior:
-			behavior.run()
-		var logging = Component.get_logging_component_or_null(node)
-		if logging:
-			logging.run()
+		node.run()

@@ -21,18 +21,19 @@ full_unlocked = false
 
 [node name="Level" instance=ExtResource("1_43dw4")]
 skill_tree_state_add = SubResource("Resource_vbiop")
+players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(414, 317)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_yovo1")]
-position = Vector2(225, 319)
+position = Vector2(254, 311)
 
 [node name="OrcArcher" parent="YSorted/Enemies" index="1" instance=ExtResource("3_gmahj")]
-position = Vector2(164, 264)
+position = Vector2(183, 244)
 
 [node name="OrcArcher2" parent="YSorted/Enemies" index="2" instance=ExtResource("3_gmahj")]
-position = Vector2(162, 347)
+position = Vector2(183, 367)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_tnd1e")]
 position = Vector2(555, 323)

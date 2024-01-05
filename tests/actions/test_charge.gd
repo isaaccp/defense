@@ -31,7 +31,7 @@ func make_charge_behavior() -> Behavior:
 
 func before_all():
 	var sword_attack = sword_attack_scene.instantiate()
-	sword_damage = Component.get_or_die(sword_attack, HitboxComponent.component).damage
+	sword_damage = Component.get_or_die(sword_attack, HitboxComponent.component).hit_effect.damage
 	sword_attack.free()
 
 func before_each():
@@ -94,7 +94,6 @@ func test_charge_long_distance():
 	# The '2' is hardcoded in StatusComponent as of now.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
-	TestUtils.dump_all_emits(self, enemy_health, "health_updated")
 	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
 	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
 
@@ -122,4 +121,3 @@ func test_charge_cooldown():
 	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 1)
 	await wait_seconds(0.2, "Waiting for cooldown to expire")
 	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 2)
-	TestUtils.dump_all_emits(self, character_behavior, "behavior_updated")

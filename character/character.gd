@@ -1,4 +1,4 @@
-extends Node2D
+extends Actor
 
 class_name Character
 
