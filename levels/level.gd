@@ -21,9 +21,12 @@ class_name Level
 # and it'd be a pain to change that, so override it here
 # as needed.
 @export var players = -1
-# Used when plaing the scene directly.
-@export var test_behavior: Behavior
-
+# Used when playing the scene directly.
+@export var test_gameplay_characters: Array[GameplayCharacter]
+# Provide those separately so you can e.g. load the default
+# characters but provide modified behaviors without altering
+# their scenes.
+@export var test_behaviors: Array[Behavior]
 
 @export_group("Internal")
 @export var characters: Node2D
@@ -36,23 +39,31 @@ var is_frozen: bool = false
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
-		if not test_behavior:
-			test_behavior = Behavior.new()
+		var num_players = players if players != -1 else starting_positions.get_child_count()
+		# If setting test characters, must set them all.
+		assert(test_gameplay_characters.size() in [0, num_players])
+		# Same for behaviors (independently from above).
+		assert(test_behaviors.size() in [0, num_players])
+
 		var gameplay = load("res://gameplay.tscn").instantiate()
 		gameplay.level = self
-		var gcs: Array[GameplayCharacter] = []
-		var num_players = players if players != -1 else starting_positions.get_child_count()
-		for i in range(num_players):
-			var gc = GameplayCharacter.make(Enum.CharacterId.KNIGHT)
-			gc.behavior = test_behavior.duplicate(true)
-			gcs.append(gc)
-		gameplay.characters = gcs
+		if not test_gameplay_characters:
+			var gcs: Array[GameplayCharacter] = []
+			for i in range(num_players):
+				var gc = GameplayCharacter.make(Enum.CharacterId.KNIGHT)
+				gcs.append(gc)
+			test_gameplay_characters = gcs
+		if test_behaviors:
+			for i in range(test_gameplay_characters.size()):
+				test_gameplay_characters[i].behavior = test_behaviors[i]
+		gameplay.characters = test_gameplay_characters
+		# TODO: Unclear how this override should interact with testing.
 		# If not overriden, unlock all skills when playing stand-alone.
 		if not skill_tree_state_override:
 			skill_tree_state_override = SkillTreeState.new()
 			skill_tree_state_override.full_acquired = true
 			skill_tree_state_override.full_acquired = true
-		initialize(gcs)
+		initialize(test_gameplay_characters)
 		add_child(gameplay)
 		gameplay.ui_layer.show()
 		gameplay.ui_layer.hud.show()
