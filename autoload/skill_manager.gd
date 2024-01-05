@@ -20,6 +20,7 @@ const condition_scripts = {
 	ConditionDef.Id.ALWAYS: preload("res://behavior/conditions/condition_always.gd"),
 	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_node_condition_evaluator.gd"),
 	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
+	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_target_node_condition_evaluator.gd"),
 }
 
 const target_scripts = {
@@ -91,10 +92,11 @@ func make_self_condition_evaluator(condition: ConditionDef, body: Node2D) -> Sel
 	evaluator.body = body
 	return evaluator
 
-func make_target_node_condition_evaluator(condition: ConditionDef) -> TargetNodeConditionEvaluator:
+func make_target_node_condition_evaluator(condition: ConditionDef, body: Node2D) -> TargetNodeConditionEvaluator:
 	assert(not condition.abstract)
 	var evaluator = condition_scripts[condition.id].new() as TargetNodeConditionEvaluator
 	evaluator.def = condition
+	evaluator.body = body
 	return evaluator
 
 func all_conditions() -> Array[ConditionDef.Id]:

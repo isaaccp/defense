@@ -57,6 +57,16 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 				spin_box.set_value(_params.get_placeholder_value(SkillParams.PlaceholderId.INT_VALUE))
 			spin_box.value_changed.connect(_on_int_value_updated.bind(placeholder_id, spin_box))
 			input.add_child(spin_box)
+		SkillParams.PlaceholderId.FLOAT_VALUE:
+			var spin_box = SpinBox.new()
+			spin_box.max_value = 999
+			spin_box.step = 0.1
+			spin_box.set_update_on_text_changed(true)
+			spin_box.set_select_all_on_focus(true)
+			if _params.placeholder_set(SkillParams.PlaceholderId.FLOAT_VALUE):
+				spin_box.set_value(_params.get_placeholder_value(SkillParams.PlaceholderId.FLOAT_VALUE))
+			spin_box.value_changed.connect(_on_float_value_updated.bind(placeholder_id, spin_box))
+			input.add_child(spin_box)
 
 func _populate():
 	for part in _params.parts:
@@ -75,8 +85,13 @@ func _on_opt_selected(selection: int, placeholder: SkillParams.PlaceholderId):
 
 func _on_int_value_updated(value: float, placeholder: SkillParams.PlaceholderId, spin_box: SpinBox):
 	var int_value = int(value)
+	# Make sure we keep the spinbox int.
 	spin_box.set_value_no_signal(int_value)
 	_params.set_placeholder_value(placeholder, int_value)
+	_check_ok()
+
+func _on_float_value_updated(value: float, placeholder: SkillParams.PlaceholderId, spin_box: SpinBox):
+	_params.set_placeholder_value(placeholder, value)
 	_check_ok()
 
 func results() -> SkillParams:

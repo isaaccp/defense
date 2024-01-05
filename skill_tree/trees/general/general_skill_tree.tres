@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=11 format=3 uid="uid://4qkxww5nsquv"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=12 format=3 uid="uid://4qkxww5nsquv"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_sstov"]
 [ext_resource type="Resource" uid="uid://c01f1glojulow" path="res://skill_tree/targets/closest_enemy.tres" id="2_hb0o3"]
@@ -10,8 +10,9 @@
 [ext_resource type="Resource" uid="uid://c2kdoahns8b57" path="res://skill_tree/targets/self_or_ally.tres" id="5_jcphg"]
 [ext_resource type="Resource" uid="uid://c283o3w8nuam8" path="res://skill_tree/conditions/target_health.tres" id="6_g73vn"]
 [ext_resource type="Resource" uid="uid://bp783ayeoq184" path="res://skill_tree/conditions/once.tres" id="6_ya2sl"]
+[ext_resource type="Resource" uid="uid://dn1xlxn35k6ub" path="res://skill_tree/conditions/target_distance.tres" id="10_jp7jp"]
 
 [resource]
 script = ExtResource("1_sstov")
 tree_type = 1
-skills = Array[Resource]([ExtResource("2_vu0ia"), ExtResource("2_hb0o3"), ExtResource("4_fa0w0"), ExtResource("3_oj4av"), ExtResource("5_jcphg"), ExtResource("4_efvur"), ExtResource("5_axcoh"), ExtResource("6_ya2sl"), ExtResource("6_g73vn")])
+skills = Array[Resource]([ExtResource("2_vu0ia"), ExtResource("2_hb0o3"), ExtResource("4_fa0w0"), ExtResource("3_oj4av"), ExtResource("5_jcphg"), ExtResource("4_efvur"), ExtResource("5_axcoh"), ExtResource("6_ya2sl"), ExtResource("10_jp7jp"), ExtResource("6_g73vn")])

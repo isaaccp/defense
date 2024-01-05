@@ -16,6 +16,7 @@ enum PlaceholderId {
 	UNSPECIFIED,
 	CMP,
 	INT_VALUE,
+	FLOAT_VALUE,
 }
 
 # Probably build this later from some definition if it gets too complex.
@@ -29,6 +30,7 @@ enum PlaceholderId {
 @export_group("Values")
 @export var cmp: CmpOp
 @export var int_value: IntValue
+@export var float_value: FloatValue
 
 # Exporting those makes the duplicate(true) end up in a weird situation.
 # If we want them back, we could always just trigger parse manually afterwards.
@@ -48,6 +50,9 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 		PlaceholderId.INT_VALUE:
 			assert(typeof(value) == TYPE_INT)
 			int_value = IntValue.make(value)
+		PlaceholderId.FLOAT_VALUE:
+			assert(typeof(value) == TYPE_FLOAT)
+			float_value = FloatValue.make(value)
 
 func get_placeholder_string(placeholder: PlaceholderId) -> String:
 	match placeholder:
@@ -55,6 +60,8 @@ func get_placeholder_string(placeholder: PlaceholderId) -> String:
 			return cmp_op_text(cmp)
 		PlaceholderId.INT_VALUE:
 			return str(int_value.value)
+		PlaceholderId.FLOAT_VALUE:
+			return "%0.1f" % float_value.value
 	assert(false, "Unreachable")
 	return "<bug>"
 
@@ -65,6 +72,8 @@ func get_placeholder_value(placeholder: PlaceholderId) -> Variant:
 			return cmp
 		PlaceholderId.INT_VALUE:
 			return int_value.value
+		PlaceholderId.FLOAT_VALUE:
+			return float_value.value
 	assert(false, "Unreachable")
 	return null
 
@@ -100,6 +109,8 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 			return cmp != CmpOp.UNSPECIFIED
 		PlaceholderId.INT_VALUE:
 			return int_value and int_value.defined
+		PlaceholderId.FLOAT_VALUE:
+			return float_value and float_value.defined
 	assert(false, "unreachable")
 	return false
 

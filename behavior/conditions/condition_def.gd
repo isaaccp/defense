@@ -8,6 +8,7 @@ enum Id {
 	ALWAYS,
 	TARGET_HEALTH,
 	ONCE,
+	TARGET_DISTANCE,
 }
 
 # Type of condition.
