@@ -30,5 +30,6 @@ func last_level():
 func set_from(other: LevelProvider):
 	players = other.players
 	levels = other.levels
+	available_characters = other.available_characters
 	skill_tree_state = other.skill_tree_state
 	behavior = other.behavior

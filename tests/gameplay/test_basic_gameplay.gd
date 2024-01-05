@@ -46,7 +46,7 @@ func test_end_to_end():
 
 	gut.p("Character Selection Screen")
 	for i in range(expected_characters):
-		selection_screen.character_selector(i).character_selected.emit(Enum.CharacterId.KNIGHT)
+		selection_screen.character_selector(i).character_selected.emit(0)
 	await wait_frames(1, "Waiting for level load")
 	assert_not_null(gameplay.level)
 	assert_eq(hud.character_view_count(), expected_characters)
