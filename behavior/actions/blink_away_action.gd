@@ -19,28 +19,20 @@ func _start_blink():
 	blink_out = blink_away_fade_out_scene.instantiate() as ActionScene
 	_initialize_action_scene(blink_out)
 	action_sprites.add_child(blink_out)
-	print(blink_out.animation_player.current_animation_length)
 	# TODO: Do something fancier here, possibly some
 	# AnimationComponent that can handle this (e.g.
 	# get_animation_component().fade_out()
 	# and that could use custom animations per character.
 	var tween = body.create_tween()
-	tween.tween_property(sprite, "modulate:a", 0, blink_out.animation_player.current_animation_length)
+	tween.tween_property(sprite, "modulate:a", 0, 0.3)
 	await tween.finished
-	# After awaiting, check if we were aborted.
-	if finished:
-		# Nothing to clean up, as clean up should already have
-		# happened when action_finished() was called.
-		return
-	# Blink away from enemy.
-	if not target.valid():
-		action_finished()
+	if not _after_await_check():
 		return
 	var away_from = target.node.global_position
 	var dir = away_from.direction_to(body.global_position)
 	body.global_position += dir * blink_distance
 	tween = body.create_tween()
-	tween.tween_property(sprite, "modulate:a", 1, 0.4)
+	tween.tween_property(sprite, "modulate:a", 1, 0.7)
 	await tween.finished
 	action_finished()
 

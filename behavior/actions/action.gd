@@ -73,6 +73,20 @@ func action_finished():
 func _initialize_action_scene(action_scene: ActionScene) -> void:
 	action_scene.initialize(body.name, def, attributes_component, side_component, logging_component)
 
+# Can call this after awaiting to:
+#  * check if action is finished
+#  * check if target is invalid (in which case it'll finish action for you)
+#  * if it returns false, you should return immediately
+func _after_await_check() -> bool:
+	if finished:
+		# Nothing to clean up, as clean up should already have
+		# happened when action_finished() was called.
+		return false
+	if not target.valid():
+		action_finished()
+		return false
+	return true
+
 func action_log(message: String):
 	if not logging_component:
 		return

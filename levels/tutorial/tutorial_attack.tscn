@@ -25,81 +25,81 @@ unlocked_conditions = Array[int]([1])
 full_acquired = false
 full_unlocked = false
 
-[sub_resource type="Resource" id="Resource_hxtqs"]
+[sub_resource type="Resource" id="Resource_6m1lx"]
 script = ExtResource("4_mb2tp")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_5oxqs"]
+[sub_resource type="Resource" id="Resource_k3ygj"]
 script = ExtResource("5_wbi34")
 id = 8
-params = SubResource("Resource_hxtqs")
+params = SubResource("Resource_6m1lx")
 abstract = true
 skill_name = &"Blink Away"
 skill_type = 1
 tree_type = 5
 
-[sub_resource type="Resource" id="Resource_wtm8x"]
+[sub_resource type="Resource" id="Resource_br4u0"]
 script = ExtResource("6_pgqu4")
 defined = true
-value = 50.0
+value = 45.0
 
-[sub_resource type="Resource" id="Resource_fqb6h"]
+[sub_resource type="Resource" id="Resource_spnho"]
 script = ExtResource("4_mb2tp")
 editor_string = "distance {cmp} {float_value}"
 cmp = 1
-float_value = SubResource("Resource_wtm8x")
+float_value = SubResource("Resource_br4u0")
 
-[sub_resource type="Resource" id="Resource_gbn0j"]
+[sub_resource type="Resource" id="Resource_fxupc"]
 script = ExtResource("4_mb2tp")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_ya2m6"]
+[sub_resource type="Resource" id="Resource_yb3px"]
 script = ExtResource("6_o25eq")
 id = 1
 type = 1
-params = SubResource("Resource_gbn0j")
+params = SubResource("Resource_fxupc")
 abstract = true
 skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_3fldp"]
+[sub_resource type="Resource" id="Resource_o0272"]
 script = ExtResource("6_o25eq")
 id = 4
 type = 2
-params = SubResource("Resource_fqb6h")
+params = SubResource("Resource_spnho")
 abstract = false
 skill_name = &"Target Distance"
 skill_type = 3
-parent = SubResource("Resource_ya2m6")
+parent = SubResource("Resource_yb3px")
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_x5cd2"]
+[sub_resource type="Resource" id="Resource_hchnr"]
 script = ExtResource("4_mb2tp")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_1ljbq"]
+[sub_resource type="Resource" id="Resource_1eu0a"]
 script = ExtResource("8_jvwvh")
 id = 1
 type = 1
-params = SubResource("Resource_x5cd2")
+params = SubResource("Resource_hchnr")
 abstract = false
 skill_name = &"Closest Enemy"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_bfyj2"]
+[sub_resource type="Resource" id="Resource_nbq34"]
 script = ExtResource("7_qfvin")
-target_selection = SubResource("Resource_1ljbq")
-action = SubResource("Resource_5oxqs")
-condition = SubResource("Resource_3fldp")
+target_selection = SubResource("Resource_1eu0a")
+action = SubResource("Resource_k3ygj")
+condition = SubResource("Resource_o0272")
 
 [sub_resource type="Resource" id="Resource_oomvi"]
 script = ExtResource("4_sgpel")
-rules = Array[ExtResource("7_qfvin")]([SubResource("Resource_bfyj2")])
+rules = Array[ExtResource("7_qfvin")]([SubResource("Resource_nbq34")])
 
 [node name="Level" instance=ExtResource("1_jlllq")]
 skill_tree_state_add = SubResource("Resource_ewa5g")
