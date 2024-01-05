@@ -1,19 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpvryr0tdcnfy"]
+[gd_scene load_steps=4 format=3 uid="uid://cpvryr0tdcnfy"]
 
 [ext_resource type="Script" path="res://gameplay.gd" id="1_2toda"]
 [ext_resource type="PackedScene" uid="uid://5ity5n7jy3b8" path="res://ui/gameplay_ui_layer.tscn" id="1_3xnco"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_3kqhi"]
+viewport_path = NodePath("SubViewport")
+
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("ui_layer", "level_parent")]
 script = ExtResource("1_2toda")
 ui_layer = NodePath("GameplayUILayer")
-level_parent = NodePath("LevelParent")
+level_parent = NodePath("SubViewport/LevelParent")
 
 [node name="GameplayUILayer" parent="." instance=ExtResource("1_3xnco")]
 
-[node name="LevelParent" type="Node2D" parent="."]
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../LevelParent")
+spawn_path = NodePath("../SubViewport/LevelParent")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1152, 648)
+
+[node name="LevelParent" type="Node2D" parent="SubViewport"]
+
+[node name="LevelLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="TextureRect" type="TextureRect" parent="LevelLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_3kqhi")
+expand_mode = 2
+stretch_mode = 4
 
 [connection signal="behavior_modified" from="GameplayUILayer" to="." method="_on_behavior_modified"]
 [connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]

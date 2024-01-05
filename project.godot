@@ -25,7 +25,8 @@ SkillManager="*res://autoload/skill_manager.gd"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/size/window_width_override=1728
+window/size/window_height_override=972
 
 [editor_plugins]
 
