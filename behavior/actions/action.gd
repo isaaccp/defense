@@ -5,6 +5,8 @@ class_name Action
 @export_group("Debug")
 @export var def: ActionDef
 
+const MaxDistance = 10_000_000
+
 # Whether this action can be aborted.
 # If that's the case, we'll check if higher priority actions can be
 # executed periodically during execution.
@@ -15,10 +17,21 @@ class_name Action
 # are acceptable for a given action.
 @export var target_type_supported = Target.Type.NODE
 # How far can this action be taken.
-@export var max_distance = 10_000_000
+@export var max_distance = MaxDistance
 # How close can this action be taken.
 # Don't make this negative as it may be squared to calculate distance.
 @export var min_distance = 0.0
+# Behavior to use when using a node_target_selector.
+# If filter_with_distance is set to true, each eligible node
+# will be filtered by distance, then first one will be returned.
+# This ensures a node will be returned if any are eligible.
+# If filter_with_distance is set to false, then the target selector
+# will first choose one node, then it'll apply the distance check to it
+# and return invalid target if it failed.
+# This latter behavior makes sense for e.g. "move to" action where you want
+# to stop triggering it if you are too close to the closest enemy, but not
+# switch to the "second closest" enemy.
+@export var filter_with_distance = true
 # How long until this action can be triggered again.
 # Ignored if negative.
 @export var cooldown = -1.0

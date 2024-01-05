@@ -8,6 +8,7 @@ var original_position: Vector2
 
 func _init():
 	cooldown = 4.0
+	min_distance = 50
 
 func post_initialize():
 	original_position = body.global_position

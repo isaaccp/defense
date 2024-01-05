@@ -11,17 +11,26 @@ func select_target(action: Action, body: CharacterBody2D, side_component: SideCo
 		if condition_evaluator and not condition_evaluator.evaluate(target):
 			continue
 		# Verify in range.
-		var distance = target.position.distance_to(body.position)
-		if not (action.min_distance <= distance and distance <= action.max_distance):
-			continue
+		if action.filter_with_distance:
+			if not _check_distance(body, target, action):
+				continue
 		# Skip if dead (we may want to allow later through a setting if e.g. we
 		# want to be able to resurrect).
 		var health_component = Component.get_or_null(target, HealthComponent.component)
 		if health_component and health_component.is_dead:
 			continue
+		# If we didn't check distance earlier, check it on the node
+		# that we would return.
+		if not action.filter_with_distance:
+			if not _check_distance(body, target, action):
+				return Target.make_invalid()
 		return Target.make_node_target(target)
 	# If we didn't find a target, return invalid.
 	return Target.make_invalid()
+
+func _check_distance(body: Node2D, target: Node2D, action: Action) -> bool:
+	var distance = target.position.distance_to(body.position)
+	return action.min_distance <= distance and distance <= action.max_distance
 
 # Note that we'll select the *first* target that is valid, so order matters.
 # Must return an array of Node2D but hard to actually make Godot enforce that

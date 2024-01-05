@@ -5,9 +5,12 @@ class_name MoveToAction
 func _init():
 	abortable = true
 	min_distance = 25
+	# See explanation in action.gd
+	filter_with_distance = false
 
 # Runs the appropriate physics process for entity.
 func physics_process(delta: float):
+	# I don't think this should happen?
 	if not target.node:
 		action_finished()
 		return
