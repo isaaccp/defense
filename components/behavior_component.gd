@@ -25,6 +25,8 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 	get:
 		if persistent_game_state_component:
 			return persistent_game_state_component.state.behavior
+		if behavior:
+			assert(behavior.resource_local_to_scene, "Resource must be local to scene")
 		return behavior
 
 @export_group("Debug")
