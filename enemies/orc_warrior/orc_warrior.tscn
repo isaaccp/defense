@@ -277,3 +277,6 @@ behavior = ExtResource("5_by41d")
 [node name="AttributesComponent" parent="." index="9"]
 speed = 30.0
 health = 10
+
+[node name="LoggingComponent" parent="." index="11"]
+print_logtypes = Array[int]([1, 4, 5])

@@ -21,6 +21,6 @@ func _swing_sword():
 	sword_attack = sword_attack_scene.instantiate() as ActionScene
 	_initialize_action_scene(sword_attack)
 	sword_attack.look_at(sword_attack.position + dir)
-	sword_attack.position += dir * 35
+	sword_attack.position += dir * 15
 	action_sprites.add_child(sword_attack)
 	Global.get_tree().create_timer(0.8, false).timeout.connect(action_finished)
