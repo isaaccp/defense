@@ -42,6 +42,8 @@ func _place_loop():
 		else:
 			print("Unrunnable spawn: %s", spawn.name)
 		spawned += 1
+		if spawned == config.amount:
+			break
 		await get_tree().create_timer(config.interval-0.5, false).timeout
 
 	if spawn_animation_component:

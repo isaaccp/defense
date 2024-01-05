@@ -6,6 +6,7 @@ class_name Actor
 
 @export var actor_name: String
 
+# Called when level is starting.
 func run():
 	for child in get_children():
 		if child.get("component") != null:

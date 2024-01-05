@@ -36,6 +36,9 @@ class_name Level
 @export var starting_positions: Node
 var is_frozen: bool = false
 
+# Only for F6.
+var gameplay: Node
+
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
@@ -45,7 +48,7 @@ func _ready():
 		# Same for behaviors (independently from above).
 		assert(test_behaviors.size() in [0, num_players])
 
-		var gameplay = load("res://gameplay.tscn").instantiate()
+		gameplay = load("res://gameplay.tscn").instantiate()
 		gameplay.level = self
 		if not test_gameplay_characters:
 			var gcs: Array[GameplayCharacter] = []
@@ -62,12 +65,18 @@ func _ready():
 		if not skill_tree_state_override:
 			skill_tree_state_override = SkillTreeState.new()
 			skill_tree_state_override.full_acquired = true
-			skill_tree_state_override.full_acquired = true
+			skill_tree_state_override.full_unlocked = true
 		initialize(test_gameplay_characters)
-		add_child(gameplay)
-		gameplay.ui_layer.show()
-		gameplay.ui_layer.hud.show()
-		gameplay.play_level()
+		get_parent().add_child.call_deferred(gameplay)
+		_finish_setup.call_deferred()
+
+# For F6.
+func _finish_setup():
+	await get_tree().create_timer(0.1).timeout
+	gameplay.ui_layer.show()
+	gameplay.ui_layer.hud.show()
+	get_parent().remove_child(self)
+	gameplay.play_level()
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():

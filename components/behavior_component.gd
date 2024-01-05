@@ -47,6 +47,7 @@ signal behavior_updated(action: ActionDef.Id, target: Target)
 
 func _ready():
 	status_component.able_to_act_changed.connect(_on_able_to_act_changed)
+
 func run():
 	behavior.prepare(body, side_component)
 	running = true
