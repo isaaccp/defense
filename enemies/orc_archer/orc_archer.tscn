@@ -360,6 +360,7 @@ action = SubResource("Resource_pj5t5")
 condition = SubResource("Resource_w5hdw")
 
 [sub_resource type="Resource" id="Resource_7dfw4"]
+resource_local_to_scene = true
 script = ExtResource("8_kcejl")
 rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_pyxby"), SubResource("Resource_6dy2c")])
 

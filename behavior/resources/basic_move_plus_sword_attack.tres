@@ -103,5 +103,6 @@ action = SubResource("Resource_erlsg")
 condition = SubResource("Resource_3s2oy")
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("4_vgf0t")
 rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_6wsu5"), SubResource("Resource_huig1")])

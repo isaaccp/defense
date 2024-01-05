@@ -11,10 +11,8 @@ func select_target(action: Action, body: CharacterBody2D, side_component: SideCo
 		if condition_evaluator and not condition_evaluator.evaluate(target):
 			continue
 		# Verify in range.
-		var max_distance_squared = action.max_distance * action.max_distance
-		var min_distance_squared = action.min_distance * action.min_distance
-		var distance_squared = target.position.distance_squared_to(body.position)
-		if not (min_distance_squared <= distance_squared and distance_squared <= max_distance_squared):
+		var distance = target.position.distance_to(body.position)
+		if not (action.min_distance <= distance and distance <= action.max_distance):
 			continue
 		# Skip if dead (we may want to allow later through a setting if e.g. we
 		# want to be able to resurrect).

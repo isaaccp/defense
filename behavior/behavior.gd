@@ -43,8 +43,10 @@ func prepare(body_: CharacterBody2D, side_component_: SideComponent):
 
 # TODO: Return BehaviorResult or such.
 func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
-	#I am actually not sure how this can happen, but it happens :)
+	# This happened once becaues a single behavior resource was being
+	# shared across scene instances. Leaving here just in case.
 	if not is_instance_valid(body):
+		assert(false, "Should not happen")
 		return {}
 	for i in rules.size():
 		var rule = rules[i]
