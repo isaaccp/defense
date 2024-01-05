@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://d1ix5kyitpnfk"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://d1ix5kyitpnfk"]
 
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_ug4xc"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_3n011"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="2_84oyx"]
 [ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="3_w6bpn"]
 [ext_resource type="PackedScene" uid="uid://dbwkusaho0syg" path="res://levels/main/forest_open_on_right_area/stage1.tscn" id="4_q7bb4"]
+[ext_resource type="PackedScene" uid="uid://dier8uhq0tn0o" path="res://levels/main/forest_open_on_right_area/stage2.tscn" id="5_4acre"]
 
 [resource]
 script = ExtResource("2_3n011")
 players = 2
-levels = Array[PackedScene]([ExtResource("4_q7bb4")])
+levels = Array[PackedScene]([ExtResource("4_q7bb4"), ExtResource("5_4acre")])
 available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_w6bpn")])
