@@ -14,6 +14,7 @@ const action_scripts = {
 	ActionDef.Id.MULTI_SHOT: preload("res://behavior/actions/multi_shot_action.gd"),
 	ActionDef.Id.HEAL: preload("res://behavior/actions/heal_action.gd"),
 	ActionDef.Id.HOLD_PERSON: preload("res://behavior/actions/hold_person_action.gd"),
+	ActionDef.Id.BLINK_AWAY: preload("res://behavior/actions/blink_away_action.gd"),
 }
 
 const condition_scripts = {

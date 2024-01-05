@@ -11,6 +11,8 @@ class_name AutoFreeComponent
 @export var hitbox_component: HitboxComponent
 # TODO: Implement "free if it goes out of screen"
 
+signal freed
+
 func _ready():
 	if animation_player:
 		animation_player.animation_finished.connect(
@@ -26,4 +28,5 @@ static func _free_parent(node: Node) -> void:
 	if is_instance_valid(node):
 		var parent = node.get_parent()
 		if is_instance_valid(parent):
+			node.freed.emit()
 			parent.queue_free()

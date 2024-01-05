@@ -20,6 +20,7 @@ var tree_types = [
 	SkillTree.TreeType.WARRIOR,
 	SkillTree.TreeType.ROGUE,
 	SkillTree.TreeType.CLERIC,
+	SkillTree.TreeType.WIZARD,
 ]
 
 func _run():

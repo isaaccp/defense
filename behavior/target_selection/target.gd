@@ -19,7 +19,7 @@ func valid() -> bool:
 	if type == Type.UNSPECIFIED:
 		return false
 	if type == Type.NODE:
-		return node != null
+		return node != null and is_instance_valid(node)
 	return false
 
 func equals(other: Target) -> bool:

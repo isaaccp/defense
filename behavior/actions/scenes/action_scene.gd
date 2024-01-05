@@ -2,6 +2,11 @@ extends Node2D
 
 class_name ActionScene
 
+# Set this to internal animation player in the scene
+# if you want access in the action (e.g. to get the duration).
+# Can later do something fancier like some AnimationComponent.
+@export var animation_player: AnimationPlayer
+
 var action_def: ActionDef
 
 var owner_name: String

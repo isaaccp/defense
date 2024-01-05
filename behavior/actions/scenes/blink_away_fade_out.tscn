@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cijtqs10m4lpv"]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_ep8dm"]
+[ext_resource type="Texture2D" uid="uid://dwxn6iingnvfv" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 C.png" id="2_qjk37"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="5_t7f30"]
+
+[sub_resource type="Animation" id="Animation_dscwg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 19)]
+}
+
+[sub_resource type="Animation" id="Animation_jw0ls"]
+resource_name = "auto"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 19), Vector2i(1, 19), Vector2i(2, 19), Vector2i(3, 19), Vector2i(4, 19), Vector2i(5, 19)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2uok"]
+_data = {
+"RESET": SubResource("Animation_dscwg"),
+"auto": SubResource("Animation_jw0ls")
+}
+
+[node name="BlinkAwayFadeOut" type="Node2D" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("1_ep8dm")
+animation_player = NodePath("Sprite2D/AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_qjk37")
+hframes = 6
+vframes = 30
+frame = 114
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_y2uok")
+}
+autoplay = "auto"
+
+[node name="AutoFreeComponent" parent="." instance=ExtResource("5_t7f30")]

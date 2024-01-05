@@ -12,6 +12,7 @@ enum Id {
 	MULTI_SHOT,
 	HEAL,
 	HOLD_PERSON,
+	BLINK_AWAY,
 }
 
 @export var id: Id

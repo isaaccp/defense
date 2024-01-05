@@ -9,6 +9,7 @@ enum TreeType {
 	WARRIOR,
 	ROGUE,
 	CLERIC,
+	WIZARD,
 }
 
 @export var tree_type: TreeType
