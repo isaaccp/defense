@@ -4,39 +4,90 @@ class_name Target
 
 enum Type {
 	UNSPECIFIED,
+	# Returns one Actor.
 	ACTOR,
+	# Returns an Array of Actor.
+	ACTORS,
+	# Returns one Vector2.
+	POSITION,
 }
 
 var type: Type
-var actor: Node2D:
+var actor: Actor:
 	get:
 		assert(type == Type.ACTOR)
 		if not is_instance_valid(actor):
 			actor = null
 		return actor
+var actors: Array[Actor]:
+	get:
+		assert(type == Type.ACTORS)
+		# Never return invalid stuff.
+		var new_actors: Array[Actor] = []
+		for actor in actors:
+			if is_instance_valid(actor):
+				new_actors.append(actor)
+		actors = new_actors
+		return actors
+var pos: Vector2:
+	get:
+		assert(type == Type.POSITION)
+		return pos
+
+# Helper so we don't have to set up ACTORS in additions to
+# ACTOR in sorters, as they are the same from the point of
+# view of sorters.
+func sorter_type() -> Type:
+	if type == Type.ACTORS:
+		return Type.ACTOR
+	return type
 
 func valid() -> bool:
 	if type == Type.UNSPECIFIED:
 		return false
 	if type == Type.ACTOR:
 		return actor != null and is_instance_valid(actor)
+	if type == Type.ACTORS:
+		return not actors.is_empty()
+	if type == Type.POSITION:
+		return true
 	return false
 
 func equals(other: Target) -> bool:
 	if type == other.type:
-		if type == Type.ACTOR:
-			return actor == other.actor
+		match type:
+			Type.ACTOR:
+				return actor == other.actor
+			Type.ACTORS:
+				# To not trigger getter repeatedly.
+				var these_actors = actors
+				var other_actors = other.actors
+				if these_actors.size() != other_actors.size():
+					return false
+				for i in range(these_actors.size()):
+					if these_actors[i] != other_actors[i]:
+						return false
+				return true
+			Type.POSITION:
+				return pos.is_equal_approx(other.pos)
 	return false
 
 func _to_string():
 	match type:
 		Type.ACTOR:
 			return actor.actor_name
+		Type.ACTORS:
+			var actor_names = actors.map(func(a): a.actor_name)
+			return "[%s]" % ",".join(actor_names)
+		Type.POSITION:
+			return "(%0.1f,%0.1f)"
 
 func position() -> Vector2:
 	match type:
 		Type.ACTOR:
 			return actor.position
+		Type.POSITION:
+			return pos
 		_:
 			assert(false, "Unexpected call to position()")
 	return Vector2.ZERO
@@ -44,8 +95,20 @@ func position() -> Vector2:
 static func make_invalid() -> Target:
 	return Target.new()
 
-static func make_actor_target(actor_: Node2D) -> Target:
+static func make_actor_target(actor_: Actor) -> Target:
 	var target = Target.new()
 	target.type = Type.ACTOR
 	target.actor = actor_
+	return target
+
+static func make_actors_target(actors_: Array[Actor]) -> Target:
+	var target = Target.new()
+	target.type = Type.ACTORS
+	target.actors = actors_
+	return target
+
+static func make_position_target(pos_: Vector2) -> Target:
+	var target = Target.new()
+	target.type = Type.POSITION
+	target.pos = pos_
 	return target

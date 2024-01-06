@@ -11,11 +11,16 @@ enum Id {
 # Type of sort.
 enum Type {
 	UNSPECIFIED,
+	# For sorts that allow sorting an Array of actors, can only
+	# be invoked by targets of type Target.ACTOR or Target.ACTORS.
+	ACTOR,
+	# For sorts that allow sorting an Array of Vector2, can only
+	# be invoked by targets of type Target.POSITION.
+	POSITION,
 }
 
 @export var id: Id
-# Likely needed later when we have target types.
-#@export var type: Type
+@export var types: Array[Type]
 
 func name() -> String:
 	return Id.keys()[id].capitalize()

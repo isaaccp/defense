@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_fy5qd")
 id = 1
+types = Array[int]([1, 2])
 skill_name = &"Closest First"
 skill_type = 4
 tree_type = 1
