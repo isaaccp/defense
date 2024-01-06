@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=30 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
@@ -265,9 +265,15 @@ _data = {
 "run": SubResource("Animation_1ki3q")
 }
 
+[sub_resource type="Resource" id="Resource_aaka8"]
+script = ExtResource("6_2kkh2")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_qkf4q"]
 script = ExtResource("5_kue6n")
 id = 3
+params = SubResource("Resource_aaka8")
 abstract = false
 skill_name = &"Bow Attack"
 skill_type = 1
@@ -311,9 +317,15 @@ target_selection = SubResource("Resource_5lqhc")
 action = SubResource("Resource_qkf4q")
 condition = SubResource("Resource_d13am")
 
+[sub_resource type="Resource" id="Resource_5sm2p"]
+script = ExtResource("6_2kkh2")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_577i5"]
 script = ExtResource("5_kue6n")
 id = 1
+params = SubResource("Resource_5sm2p")
 abstract = false
 skill_name = &"Move To"
 skill_type = 1

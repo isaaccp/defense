@@ -3,7 +3,7 @@ extends Resource
 class_name Behavior
 
 @export var rules: Array[Rule]
-var body: CharacterBody2D
+var actor: Actor
 var side_component: SideComponent
 
 # TODO: Consider also preparing action if needed.
@@ -14,8 +14,8 @@ var side_component: SideComponent
 var target_selectors: Array[TargetSelector] = []
 var condition_evaluators: Array[ConditionEvaluator] = []
 
-func prepare(body_: CharacterBody2D, side_component_: SideComponent):
-	body = body_
+func prepare(actor_: Actor, side_component_: SideComponent):
+	actor = actor_
 	side_component = side_component_
 	target_selectors.clear()
 	condition_evaluators.clear()
@@ -27,12 +27,12 @@ func prepare(body_: CharacterBody2D, side_component_: SideComponent):
 			ConditionDef.Type.ANY:
 				evaluator = SkillManager.make_any_condition_evaluator(rule.condition)
 			ConditionDef.Type.SELF:
-				evaluator = SkillManager.make_self_condition_evaluator(rule.condition, body)
+				evaluator = SkillManager.make_self_condition_evaluator(rule.condition, actor)
 			ConditionDef.Type.GLOBAL:
 				# TODO: Implement.
 				pass
 			ConditionDef.Type.TARGET_NODE:
-				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition, body)
+				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition, actor)
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
 				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_node_evaluator)
@@ -45,7 +45,7 @@ func prepare(body_: CharacterBody2D, side_component_: SideComponent):
 func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 	# This happened once becaues a single behavior resource was being
 	# shared across scene instances. Leaving here just in case.
-	if not is_instance_valid(body):
+	if not is_instance_valid(actor):
 		assert(false, "Should not happen")
 		return {}
 	for i in rules.size():
@@ -59,7 +59,7 @@ func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 			if not condition_evaluators[i].evaluate():
 				continue
 		var action = SkillManager.make_runnable_action(rule.action)
-		var target = target_selectors[i].select_target(action, body, side_component)
+		var target = target_selectors[i].select_target(action, actor, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}
 	return {}

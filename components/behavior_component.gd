@@ -7,6 +7,7 @@ const component: StringName = &"BehaviorComponent"
 signal behavior_updated(action: ActionDef.Id, target: Target)
 
 @export_group("Required")
+# TODO: Change to Actor.
 @export var body: CharacterBody2D
 @export var navigation_agent: NavigationAgent2D
 @export var action_sprites: Node2D
@@ -49,7 +50,8 @@ func _ready():
 	status_component.able_to_act_changed.connect(_on_able_to_act_changed)
 
 func run():
-	behavior.prepare(body, side_component)
+	var actor = (body as Node2D) as Actor
+	behavior.prepare(actor, side_component)
 	running = true
 
 func _on_able_to_act_changed(can_act: bool):

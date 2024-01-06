@@ -23,9 +23,9 @@ var action_scripts = {
 
 var condition_scripts = {
 	ConditionDef.Id.ALWAYS: preload("res://behavior/conditions/condition_always.gd"),
-	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_node_condition_evaluator.gd"),
+	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_actor_condition_evaluator.gd"),
 	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
-	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_target_node_condition_evaluator.gd"),
+	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_target_actor_condition_evaluator.gd"),
 	ConditionDef.Id.TIMES: preload("res://behavior/conditions/condition_times.gd"),
 }
 
@@ -131,11 +131,11 @@ func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectio
 		target.params.set_placeholder_value(SkillParams.PlaceholderId.SORT, target.default_sort)
 	return target
 
-func make_actor_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
+func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
 	assert(not target.abstract)
 	var selector = target_scripts[target.id].new() as NodeTargetSelector
 	selector.def = target
-	selector.condition_evaluator = target_node_evaluator
+	selector.condition_evaluator = target_actor_evaluator
 	return selector
 
 func all_target_selections() -> Array[TargetSelectionDef.Id]:
