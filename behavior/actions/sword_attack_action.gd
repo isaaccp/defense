@@ -24,3 +24,6 @@ func _swing_sword():
 	sword_attack.position += dir * 15
 	action_sprites.add_child(sword_attack)
 	Global.get_tree().create_timer(0.8, false).timeout.connect(action_finished)
+
+func description():
+	return "Performs a sword attack (TODO: damage)"

@@ -38,9 +38,12 @@ func initialize(
 	actions.set_text(0, "Actions")
 	actions.set_selectable(0, false)
 	for action_type in action_types:
-		var action = tree.create_item(actions)
-		action.set_text(0, ActionDef.action_name(action_type))
-		action.set_metadata(0, action_metadata(2, action_type))
+		var action_item = tree.create_item(actions)
+		var action_def = SkillManager.make_action_instance(action_type)
+		var action = SkillManager.make_runnable_action(action_def)
+		action_item.set_text(0, ActionDef.action_name(action_type))
+		action_item.set_tooltip_text(0, action.full_description())
+		action_item.set_metadata(0, action_metadata(2, action_type))
 
 func target_metadata(column: int, id: TargetSelectionDef.Id) -> Dictionary:
 	return {"column": column, "id": id}

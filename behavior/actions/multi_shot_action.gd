@@ -3,6 +3,7 @@ extends BowAttackAction
 var shots = 3
 
 func _init():
+	super()
 	cooldown = 2.0
 
 func post_initialize():

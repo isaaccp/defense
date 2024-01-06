@@ -108,3 +108,22 @@ func action_log(message: String):
 		return
 	var full_message = "%s: %s" % [def.name(), message]
 	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message)
+
+func full_description() -> String:
+	return "%s\n%s" % [description(), attributes()]
+
+func description() -> String:
+	return "<missing description for %s>" % def.name()
+
+func _range_str() -> String:
+	var max_str = "inf" if max_distance == MaxDistance else "%0.1f" % max_distance
+	return "Range: (%0.1f,%s)" % [min_distance, max_str]
+
+func attributes():
+	var attrs = ""
+	attrs += _range_str() + "\n"
+	if cooldown > 0:
+		attrs += "Cooldown: %0.1f\n" % cooldown
+	if abortable:
+		attrs += "Can be preempted"
+	return attrs
