@@ -167,17 +167,21 @@ func _check_compatibility(item: TreeItem, column: int, data) -> bool:
 	match column:
 		Column.TARGET:
 			target = _target_from_meta(data)
-			if not action.compatible_with_target(target.type):
+			if action and not action.compatible_with_target(target.type):
 				return false
-			if not condition.compatible_with_target(target.type):
+			if condition and not condition.compatible_with_target(target.type):
 				return false
 			return true
 		Column.CONDITION:
 			condition = _condition_from_meta(data)
-			return condition.compatible_with_target(target.type)
+			if target:
+				return condition.compatible_with_target(target.type)
+			return true
 		Column.ACTION:
 			action = _action_from_meta(data)
-			return action.compatible_with_target(target.type)
+			if target:
+				return action.compatible_with_target(target.type)
+			return true
 	return false
 
 func _drop_data(at_position: Vector2, data):
@@ -209,8 +213,7 @@ func _drop_data(at_position: Vector2, data):
 
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.MOVE, false)
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.DELETE, false)
-	item.set_text(col, data.text)
-	item.set_metadata(col, _metadata(data.id, data.params))
+	_set_column(item, col, data.text,  _metadata(data.id, data.params))
 	if not _add_button_if_params(item, col, data.params):
 		if item.get_button_count(col) > 0:
 			item.erase_button(col, 0)
