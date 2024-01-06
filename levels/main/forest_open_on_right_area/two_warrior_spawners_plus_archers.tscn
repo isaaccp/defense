@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://beiehc7ykxgc0"]
+[gd_scene load_steps=64 format=3 uid="uid://beiehc7ykxgc0"]
 
 [ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_3372d"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_sm8ai"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://behavior/rule.gd" id="7_drc46"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="8_6clfc"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="9_e6owf"]
+[ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="10_1tmeq"]
 [ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="10_b40o5"]
 [ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="11_yxj6g"]
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="12_pv66h"]
@@ -116,137 +117,214 @@ resource_local_to_scene = true
 script = ExtResource("9_e6owf")
 rules = Array[ExtResource("7_drc46")]([SubResource("Resource_6eni5"), SubResource("Resource_gwtyx")])
 
-[sub_resource type="Resource" id="Resource_1qj77"]
+[sub_resource type="Resource" id="Resource_nlmkc"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_dhvhg"]
+[sub_resource type="Resource" id="Resource_nx8nq"]
 script = ExtResource("5_6r0oe")
 id = 6
-params = SubResource("Resource_1qj77")
+params = SubResource("Resource_nlmkc")
 abstract = true
 skill_name = &"Heal"
 skill_type = 1
 tree_type = 4
 
-[sub_resource type="Resource" id="Resource_370hd"]
+[sub_resource type="Resource" id="Resource_tuf58"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_7h82d"]
+[sub_resource type="Resource" id="Resource_f67sl"]
 script = ExtResource("6_bb1qe")
 id = 1
 type = 1
-params = SubResource("Resource_370hd")
+params = SubResource("Resource_tuf58")
 abstract = false
 skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_rnh6r"]
+[sub_resource type="Resource" id="Resource_ik3g5"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_t0yhk"]
+[sub_resource type="Resource" id="Resource_4m6q7"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_tggx5"]
+[sub_resource type="Resource" id="Resource_5g7yp"]
 script = ExtResource("8_6clfc")
 id = 3
 type = 1
-params = SubResource("Resource_t0yhk")
+params = SubResource("Resource_4m6q7")
 abstract = true
 skill_name = &"Self"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_bkxd4"]
+[sub_resource type="Resource" id="Resource_ye4he"]
 script = ExtResource("8_6clfc")
 id = 5
 type = 1
-params = SubResource("Resource_rnh6r")
+params = SubResource("Resource_ik3g5")
 abstract = false
 skill_name = &"Ally"
 skill_type = 2
-parent = SubResource("Resource_tggx5")
+parent = SubResource("Resource_5g7yp")
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_3umoe"]
+[sub_resource type="Resource" id="Resource_8vjpe"]
 script = ExtResource("7_drc46")
-target_selection = SubResource("Resource_bkxd4")
-action = SubResource("Resource_dhvhg")
-condition = SubResource("Resource_7h82d")
+target_selection = SubResource("Resource_ye4he")
+action = SubResource("Resource_nx8nq")
+condition = SubResource("Resource_f67sl")
 
-[sub_resource type="Resource" id="Resource_es4da"]
+[sub_resource type="Resource" id="Resource_p8156"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_56p04"]
+[sub_resource type="Resource" id="Resource_e45lr"]
 script = ExtResource("5_6r0oe")
 id = 1
-params = SubResource("Resource_es4da")
+params = SubResource("Resource_p8156")
 abstract = true
 skill_name = &"Move To"
 skill_type = 1
 tree_type = 2
 
-[sub_resource type="Resource" id="Resource_ux6j4"]
+[sub_resource type="Resource" id="Resource_lap2g"]
+script = ExtResource("10_1tmeq")
+defined = true
+value = 180.0
+
+[sub_resource type="Resource" id="Resource_rtkmh"]
+script = ExtResource("4_3al50")
+editor_string = "distance {cmp} {float_value}"
+cmp = 5
+float_value = SubResource("Resource_lap2g")
+
+[sub_resource type="Resource" id="Resource_icxy2"]
+script = ExtResource("4_3al50")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_pj1n8"]
 script = ExtResource("6_bb1qe")
 id = 1
 type = 1
-params = SubResource("Resource_370hd")
-abstract = false
+params = SubResource("Resource_icxy2")
+abstract = true
 skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_eehjr"]
+[sub_resource type="Resource" id="Resource_m2fon"]
+script = ExtResource("6_bb1qe")
+id = 4
+type = 2
+params = SubResource("Resource_rtkmh")
+abstract = false
+skill_name = &"Target Distance"
+skill_type = 3
+parent = SubResource("Resource_pj1n8")
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_gokw8"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_fdrqx"]
+[sub_resource type="Resource" id="Resource_ickkk"]
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_xnxej"]
+[sub_resource type="Resource" id="Resource_y5tlb"]
 script = ExtResource("8_6clfc")
 id = 3
 type = 1
-params = SubResource("Resource_fdrqx")
+params = SubResource("Resource_ickkk")
 abstract = true
 skill_name = &"Self"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_qynac"]
+[sub_resource type="Resource" id="Resource_vmuq7"]
 script = ExtResource("8_6clfc")
 id = 5
 type = 1
-params = SubResource("Resource_eehjr")
+params = SubResource("Resource_gokw8")
 abstract = false
 skill_name = &"Ally"
 skill_type = 2
-parent = SubResource("Resource_xnxej")
+parent = SubResource("Resource_y5tlb")
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_tnuun"]
+[sub_resource type="Resource" id="Resource_3idwj"]
 script = ExtResource("7_drc46")
-target_selection = SubResource("Resource_qynac")
-action = SubResource("Resource_56p04")
-condition = SubResource("Resource_ux6j4")
+target_selection = SubResource("Resource_vmuq7")
+action = SubResource("Resource_e45lr")
+condition = SubResource("Resource_m2fon")
+
+[sub_resource type="Resource" id="Resource_il0co"]
+script = ExtResource("4_3al50")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_43e71"]
+script = ExtResource("5_6r0oe")
+id = 3
+params = SubResource("Resource_il0co")
+abstract = true
+skill_name = &"Bow Attack"
+skill_type = 1
+tree_type = 3
+
+[sub_resource type="Resource" id="Resource_8tuft"]
+script = ExtResource("4_3al50")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_5f58d"]
+script = ExtResource("6_bb1qe")
+id = 1
+type = 1
+params = SubResource("Resource_8tuft")
+abstract = false
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_qdary"]
+script = ExtResource("4_3al50")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_82nua"]
+script = ExtResource("8_6clfc")
+id = 1
+type = 1
+params = SubResource("Resource_qdary")
+abstract = false
+skill_name = &"Closest Enemy"
+skill_type = 2
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_fud86"]
+script = ExtResource("7_drc46")
+target_selection = SubResource("Resource_82nua")
+action = SubResource("Resource_43e71")
+condition = SubResource("Resource_5f58d")
 
 [sub_resource type="Resource" id="Resource_q6pxc"]
 resource_local_to_scene = true
 script = ExtResource("9_e6owf")
-rules = Array[ExtResource("7_drc46")]([SubResource("Resource_3umoe"), SubResource("Resource_tnuun")])
+rules = Array[ExtResource("7_drc46")]([SubResource("Resource_8vjpe"), SubResource("Resource_3idwj"), SubResource("Resource_fud86")])
 
 [sub_resource type="Resource" id="Resource_p55gh"]
 script = ExtResource("12_pv66h")
@@ -255,7 +333,7 @@ spawn = ExtResource("13_t0iv3")
 [sub_resource type="Resource" id="Resource_qq1dk"]
 script = ExtResource("14_3habc")
 amount = 3
-interval = 4.0
+interval = 4.5
 initial_delay = 1.0
 
 [sub_resource type="Resource" id="Resource_5u5nr"]
@@ -264,8 +342,8 @@ spawn = ExtResource("15_kirkn")
 
 [sub_resource type="Resource" id="Resource_r6bo1"]
 script = ExtResource("14_3habc")
-amount = 3
-interval = 3.0
+amount = 2
+interval = 5.0
 initial_delay = 3.0
 
 [node name="Level" instance=ExtResource("1_3372d")]
