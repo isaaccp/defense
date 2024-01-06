@@ -11,6 +11,7 @@ cmp = 0
 [resource]
 script = ExtResource("2_r27qf")
 id = 8
+supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_sl318")
 abstract = true
 skill_name = &"Blink Away"

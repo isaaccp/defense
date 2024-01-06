@@ -12,6 +12,7 @@ cmp = 0
 [resource]
 script = ExtResource("3_88nxm")
 id = 11
+supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_cxw7u")
 abstract = true
 skill_name = &"Teleport To"

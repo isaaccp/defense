@@ -11,6 +11,7 @@ cmp = 0
 [resource]
 script = ExtResource("2_suqtg")
 id = 7
+supported_target_types = Array[int]([1])
 params = SubResource("Resource_f4mky")
 abstract = true
 skill_name = &"Hold Person"
