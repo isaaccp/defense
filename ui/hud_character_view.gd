@@ -20,8 +20,11 @@ func initialize(character_: Character) -> void:
 	var health = Component.get_health_component_or_die(character)
 	health.health_updated.connect(_on_health_updated)
 	# Set health to current value (in case we missed the signal setting initial health,
-	# which happens when we play a level through F6).
-	_set_health(health.health, health.max_health)
+	# which happens when we play a level through F6). We only can do it if
+	# we missed the signal, otherwise both updates happen in the same frame
+	# and the progress bar seems confused.
+	if health.health > 0:
+		_set_health(health.health, health.max_health)
 	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = Component.get_behavior_component_or_die(character)
