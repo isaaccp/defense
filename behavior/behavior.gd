@@ -32,7 +32,7 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 				# TODO: Implement.
 				pass
 			ConditionDef.Type.TARGET_NODE:
-				target_node_evaluator = SkillManager.make_target_node_condition_evaluator(rule.condition, actor)
+				target_node_evaluator = SkillManager.make_target_actor_condition_evaluator(rule.condition, actor)
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
 				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_node_evaluator)
