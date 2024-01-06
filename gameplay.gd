@@ -102,7 +102,7 @@ func _on_level_end(success: bool):
 		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
 	ui_layer.hud.show_victory_loss(false)
 	# TODO: Set something up that calls _wrapup_level when done.
-	ui_layer.hud.show_end_level_confirmation(true)
+	ui_layer.hud.show_end_level_confirmation(true, success)
 	await ui_layer.hud.end_level_confirmed
 	level.queue_free()
 	ui_layer.hide_log_viewer()

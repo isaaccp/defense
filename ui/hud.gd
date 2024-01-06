@@ -207,8 +207,13 @@ func character_view_count() -> int:
 func character_view(i: int) -> HudCharacterView:
 	return %CharacterViews.get_child(i)
 
-func show_end_level_confirmation(show: bool = true):
+func show_end_level_confirmation(show: bool = true, success: bool = true):
 	%EndLevelConfirmation.visible = show
+	if show:
+		if success:
+			%EndLevelConfirmation.text = "Play next!"
+		else:
+			%EndLevelConfirmation.text = "Try again"
 
 func _on_play_controls_restart_pressed():
 	restart_requested.emit()

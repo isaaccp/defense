@@ -245,10 +245,10 @@ resource_local_to_scene = true
 script = ExtResource("9_ktyw4")
 rules = Array[ExtResource("7_fgils")]([SubResource("Resource_3umoe"), SubResource("Resource_tnuun")])
 
-[sub_resource type="Resource" id="Resource_mk3ib"]
+[sub_resource type="Resource" id="Resource_c5rpu"]
 script = ExtResource("12_o1pyq")
-amount = 8
-interval = 2.0
+amount = 5
+interval = 3.0
 initial_delay = 0.5
 
 [node name="Level" instance=ExtResource("1_2u4nr")]
@@ -260,5 +260,5 @@ test_behaviors = Array[ExtResource("9_ktyw4")]([SubResource("Resource_538f1"), S
 position = Vector2(702, 324)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="3" instance=ExtResource("11_gl8do")]
-spawn_placer_config = SubResource("Resource_mk3ib")
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_gl8do")]
+spawn_placer_config = SubResource("Resource_c5rpu")
