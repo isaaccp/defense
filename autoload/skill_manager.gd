@@ -4,6 +4,7 @@ extends Node
 var actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
 var conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
 var targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
+var target_sorts = preload("res://skill_tree/skill_type_collections/target_sort_collection.tres")
 
 # TODO: Try moving this to the Resource at some point again.
 var action_scripts = {
@@ -37,9 +38,14 @@ var target_scripts = {
 	TargetSelectionDef.Id.FARTHEST_ENEMY: preload("res://behavior/target_selection/farthest_enemy_target_selector.gd"),
 }
 
+var target_sort_scripts = {
+	TargetSort.Id.CLOSEST_FIRST: null,
+}
+
 var action_by_id: Dictionary
 var condition_by_id: Dictionary
 var target_by_id: Dictionary
+var target_sort_by_id: Dictionary
 
 func _ready():
 	refresh()
@@ -48,12 +54,15 @@ func refresh():
 	action_by_id.clear()
 	condition_by_id.clear()
 	target_by_id.clear()
+	target_sort_by_id.clear()
 	for action in actions.skills:
 		action_by_id[action.id] = action
 	for condition in conditions.skills:
 		condition_by_id[condition.id] = condition
 	for target in targets.skills:
 		target_by_id[target.id] = target
+	for target_sort in target_sorts.skills:
+		target_sort_by_id[target_sort.id] = target_sort
 
 # Action
 func lookup_action(id: ActionDef.Id) -> ActionDef:
@@ -131,4 +140,15 @@ func all_target_selections() -> Array[TargetSelectionDef.Id]:
 	var all: Array[TargetSelectionDef.Id] = []
 	for id in target_by_id.keys():
 		all.append(id as TargetSelectionDef.Id)
+	return all
+
+# TargetSort.
+# Stateless and not parameterizable, so no need to make instances.
+func lookup_target_sort(id: TargetSort.Id) -> TargetSort:
+	return target_sort_by_id[id]
+
+func all_target_sorts() -> Array[TargetSort.Id]:
+	var all: Array[TargetSort.Id] = []
+	for id in target_sort_by_id.keys():
+		all.append(id as TargetSort.Id)
 	return all
