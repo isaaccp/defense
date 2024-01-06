@@ -1,9 +1,9 @@
 @tool
 extends Node
 
-const actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
-const conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
-const targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
+var actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
+var conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
+var targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
 
 # TODO: Try moving this to the Resource at some point again.
 const action_scripts = {
