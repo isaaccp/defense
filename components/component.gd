@@ -44,12 +44,6 @@ static func get_status_component_or_die(node: Node) -> StatusComponent:
 		assert(false)
 	return component
 
-static func get_skill_manager_component_or_die(node: Node) -> SkillManagerComponent:
-	var component = get_or_die(node, SkillManagerComponent.component) as SkillManagerComponent
-	if not component:
-		assert(false)
-	return component
-
 static func get_persistent_game_state_component_or_die(node: Node) -> PersistentGameStateComponent:
 	var component = get_or_die(node, PersistentGameStateComponent.component) as PersistentGameStateComponent
 	if not component:

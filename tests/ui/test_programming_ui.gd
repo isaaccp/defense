@@ -12,7 +12,7 @@ func test_last_empty():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
 	add_child_autoqfree(ui)
 	# TODO: Fix ordering requirement
-	ui.initialize(autoqfree(ui.test_character.make_character_body()))
+	ui.initialize(ui.test_character)
 
 	var script_tree = ui.get_node("%Script") as ScriptTree
 	var last_rule = _last_rule_line(script_tree)
@@ -21,7 +21,7 @@ func test_last_empty():
 func test_empty_after_new_drop():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
 	add_child_autoqfree(ui)
-	ui.initialize(autoqfree(ui.test_character.make_character_body()))
+	ui.initialize(ui.test_character)
 	ui.show()
 	await wait_frames(1)
 
@@ -51,7 +51,7 @@ func test_noop_always_drop():
 	# FIXME: Deal with orphans
 	var ui = _ui_scene.instantiate() as ProgrammingUI
 	add_child_autoqfree(ui)
-	ui.initialize(autoqfree(ui.test_character.make_character_body()))
+	ui.initialize(ui.test_character)
 	ui.show()
 	await wait_frames(1)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=13 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_1mnbb"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="4_r4r2v"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="8_mrif0"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_4wyt1"]
 [ext_resource type="PackedScene" uid="uid://dqq1u1lvtpoqe" path="res://components/persistent_game_state_component.tscn" id="9_ql6uj"]
-[ext_resource type="PackedScene" uid="uid://dse5haatr2bua" path="res://components/skill_manager_component.tscn" id="10_2p7l7"]
 [ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="10_lydou"]
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="11_0ewa0"]
 
@@ -90,8 +89,5 @@ health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
 
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("9_ql6uj")]
-
-[node name="SkillManagerComponent" parent="." node_paths=PackedStringArray("persistent_game_state_component") instance=ExtResource("10_2p7l7")]
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
 [node name="LoggingComponent" parent="." instance=ExtResource("11_0ewa0")]

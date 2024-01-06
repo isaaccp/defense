@@ -6,7 +6,7 @@ class_name ProgrammingUI
 ## Used for F6 debug runs.
 @export var test_character: GameplayCharacter
 
-var character: Character
+var character: GameplayCharacter
 @onready var script_tree: ScriptTree = %Script
 
 signal canceled
@@ -17,23 +17,20 @@ func _ready():
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
 		if test_character:
-			initialize(test_character.make_character_body())
+			initialize(test_character)
 		canceled.connect(get_tree().quit)
 
-func initialize(character_: Character):
+func initialize(character_: GameplayCharacter):
 	assert(is_inside_tree(), "Needs to be called inside tree")
 	character = character_
-	var skill_manager = Component.get_skill_manager_component_or_die(character)
 	%Toolbox.initialize(
-		skill_manager.target_types(),
-		skill_manager.actions(),
-		skill_manager.conditions(),
+		character.skill_tree_state.acquired_target_selections,
+		character.skill_tree_state.acquired_actions,
+		character.skill_tree_state.acquired_conditions,
 	)
 	if is_instance_valid(character):
-		%Title.text = "Configuring behavior for %s" % character.actor_name
-		var behavior_component = Component.get_behavior_component_or_die(character)
-		if behavior_component.behavior:
-			script_tree.load_behavior(behavior_component.behavior)
+		%Title.text = "Configuring behavior for %s" % character.name
+		script_tree.load_behavior(character.behavior)
 
 func editor_initialize(b: Behavior):
 	assert(is_inside_tree(), "Needs to be called inside tree")

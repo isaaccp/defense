@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dme6lif4cwji3"]
+[gd_scene load_steps=20 format=3 uid="uid://dme6lif4cwji3"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_0mtgw"]
 [ext_resource type="Texture2D" uid="uid://ennk52fhox3v" path="res://character/knight/Run.png" id="2_rxykb"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_5f6fu"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_i8ose"]
 [ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="11_8mhrp"]
-[ext_resource type="PackedScene" uid="uid://dse5haatr2bua" path="res://components/skill_manager_component.tscn" id="11_wqx4k"]
 [ext_resource type="PackedScene" uid="uid://dqq1u1lvtpoqe" path="res://components/persistent_game_state_component.tscn" id="12_abtbt"]
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="13_p8iyf"]
 
@@ -350,9 +349,6 @@ side = 1
 [node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component", "logging_component") instance=ExtResource("11_8mhrp")]
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
-
-[node name="SkillManagerComponent" parent="." node_paths=PackedStringArray("persistent_game_state_component") instance=ExtResource("11_wqx4k")]
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("12_abtbt")]
 
