@@ -66,8 +66,12 @@ func _is_empty(item: TreeItem) -> bool:
 		var meta = item.get_metadata(c)
 		# _add_row leaves the button column null but 0s the rest,
 		# but either is empty enough for our purposes.
-		if meta != null and meta.id != 0:
-			return false
+		if c == Column.CONDITION:
+			if meta.id != ConditionDef.Id.ALWAYS:
+				return false
+		else:
+			if meta != null and meta.id != 0:
+				return false
 	return true
 
 func _is_valid(item: TreeItem) -> bool:
