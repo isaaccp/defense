@@ -61,7 +61,7 @@ func lookup_action(id: ActionDef.Id) -> ActionDef:
 
 func make_action_instance(id: ActionDef.Id) -> ActionDef:
 	var action = lookup_action(id).duplicate(true)
-	# action.abstract = false
+	action.abstract = false
 	return action
 
 func make_runnable_action(action_def: ActionDef) -> Action:

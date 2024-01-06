@@ -21,9 +21,10 @@ func initialize(
 	targets.set_text(0, "Target Selection Types")
 	targets.set_selectable(0, false)
 	for target_type in target_types:
-		var target = tree.create_item(targets)
-		target.set_text(0, TargetSelectionDef.target_selection_name(target_type))
-		target.set_metadata(0, target_metadata(0, target_type))
+		var target_item = tree.create_item(targets)
+		var target = SkillManager.make_target_selection_instance(target_type)
+		target_item.set_text(0, TargetSelectionDef.target_selection_name(target_type))
+		target_item.set_metadata(0, metadata(0, target_type, target.params))
 
 	var triggers = tree.create_item(_root)
 	triggers.set_text(0, "Conditions")
@@ -32,7 +33,7 @@ func initialize(
 		var trigger = tree.create_item(triggers)
 		var condition = SkillManager.make_condition_instance(condition_type)
 		trigger.set_text(0, condition.name())
-		trigger.set_metadata(0, condition_metadata(1, condition_type, condition.params))
+		trigger.set_metadata(0, metadata(1, condition_type, condition.params))
 
 	var actions = tree.create_item(_root)
 	actions.set_text(0, "Actions")
@@ -43,15 +44,9 @@ func initialize(
 		var action = SkillManager.make_runnable_action(action_def)
 		action_item.set_text(0, ActionDef.action_name(action_type))
 		action_item.set_tooltip_text(0, action.full_description())
-		action_item.set_metadata(0, action_metadata(2, action_type))
+		action_item.set_metadata(0, metadata(2, action_type, action_def.params))
 
-func target_metadata(column: int, id: TargetSelectionDef.Id) -> Dictionary:
-	return {"column": column, "id": id}
-
-func action_metadata(column: int, id: ActionDef.Id) -> Dictionary:
-	return {"column": column, "id": id}
-
-func condition_metadata(column: int, id: ConditionDef.Id, params: SkillParams) -> Dictionary:
+func metadata(column: int, id: int, params: SkillParams) -> Dictionary:
 	return {"column": column, "id": id, "params": params}
 
 func _get_drag_data(at_position: Vector2):

@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_fdht4")
 id = 2
+abstract = true
 skill_name = &"Sword Attack"
 skill_type = 1
 tree_type = 2

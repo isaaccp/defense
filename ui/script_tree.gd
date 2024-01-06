@@ -183,11 +183,14 @@ func get_behavior() -> Behavior:
 		var target_id = child.get_metadata(Column.TARGET).id as TargetSelectionDef.Id
 		var action_id = child.get_metadata(Column.ACTION).id as ActionDef.Id
 		var condition_id = child.get_metadata(Column.CONDITION).id as ConditionDef.Id
+		var target = SkillManager.make_target_selection_instance(target_id)
+		target.params = child.get_metadata(Column.TARGET).data as SkillParams
 		var action = SkillManager.make_action_instance(action_id)
+		action.params = child.get_metadata(Column.ACTION).data as SkillParams
 		var condition = SkillManager.make_condition_instance(condition_id)
 		condition.params = child.get_metadata(Column.CONDITION).data as SkillParams
 		var rule = Rule.make(
-			SkillManager.make_target_selection_instance(target_id),
+			target,
 			action,
 			condition
 		)
