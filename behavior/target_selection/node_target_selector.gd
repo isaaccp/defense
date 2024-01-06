@@ -7,7 +7,8 @@ var condition_evaluator: TargetNodeConditionEvaluator
 # TODO: Change actor to Actor.
 func select_target(action: Action, actor: Actor, side_component: SideComponent) -> Target:
 	var targets = select_targets(action, actor, side_component)
-	if def.params.placeholder_set(SkillParams.PlaceholderId.SORT):
+	if def.sortable:
+		assert(def.params.placeholder_set(SkillParams.PlaceholderId.SORT))
 		var target_sort = def.params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
 		var sorter = SkillManager.make_actor_target_sorter(target_sort)
 		sorter.sort(actor, targets)
