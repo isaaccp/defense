@@ -44,7 +44,7 @@ func _process(delta: float):
 	elapsed_time += delta
 
 func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
-	var time_str = "%0.1fs" % time if time > 0 else "indefinite"
+	var time_str = "%0.1fs" % time if time > 0 else "during action"
 	_log("%s provided by %s (%s)" % [StatusDef.name(status_id), ActionDef.action_name(action_id), time_str])
 	var changed = false
 	# Update status state.
