@@ -48,14 +48,23 @@ func _add_row(rule: Rule = null) -> TreeItem:
 	row.add_button(Column.BUTTONS, delete_icon, ButtonIdx.DELETE, rule == null, "Delete")
 	row.set_selectable(Column.BUTTONS, false)
 	if rule:
-		_set_column(row, Column.TARGET, str(rule.target_selection), _metadata(rule.target_selection.id))
+		_set_column(row, Column.TARGET, str(rule.target_selection), _metadata(rule.target_selection.id, rule.target_selection.params))
+		_add_button_if_params(row, Column.TARGET, rule.target_selection.params)
 		_set_column(row, Column.CONDITION, str(rule.condition), _metadata(rule.condition.id, rule.condition.params))
-		_set_column(row, Column.ACTION, str(rule.action), _metadata(rule.action.id))
+		_add_button_if_params(row, Column.CONDITION, rule.condition.params)
+		_set_column(row, Column.ACTION, str(rule.action), _metadata(rule.action.id, rule.action.params))
+		_add_button_if_params(row, Column.ACTION, rule.action.params)
 	else:
 		_set_column(row, Column.TARGET, "[Target]", _metadata(0))
 		_set_column(row, Column.CONDITION, str(always), _metadata(always.id, always.params))
 		_set_column(row, Column.ACTION, "[Action]", _metadata(0))
 	return row
+
+func _add_button_if_params(row: TreeItem, column: int, params: SkillParams) -> bool:
+	if params and params.placeholders.size() > 0:
+		row.add_button(column, edit_icon, 0, false, "Configure")
+		return true
+	return false
 
 func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
 	row.set_text(idx, name)
@@ -150,10 +159,9 @@ func _drop_data(at_position: Vector2, data):
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.DELETE, false)
 	item.set_text(col, data.text)
 	item.set_metadata(col, _metadata(data.id, data.params))
-	if data.params and data.params.placeholders.size() > 0:
-		item.add_button(col, edit_icon, 0, false, "Configure")
-	elif item.get_button_count(col) > 0:
-		item.erase_button(col, 0)
+	if not _add_button_if_params(item, col, data.params):
+		if item.get_button_count(col) > 0:
+			item.erase_button(col, 0)
 
 	if was_empty and not _is_empty(item):
 		# Replace the blank item we just filled in

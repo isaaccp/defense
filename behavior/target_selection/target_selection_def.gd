@@ -30,6 +30,3 @@ func validate():
 
 func name() -> String:
 	return target_selection_name(id)
-
-func _to_string() -> String:
-	return target_selection_name(id)

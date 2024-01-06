@@ -7,8 +7,12 @@ class_name ParamSkill
 # be used in a rule, etc.
 @export var abstract = true
 
+func name() -> String:
+	assert(false, "Must be implemented by subclasses")
+	return "<name>"
+
 func _to_string() -> String:
 	if not params or params.placeholders.size() == 0:
-		return super()
+		return name()
 	else:
 		return params.interpolated_text()

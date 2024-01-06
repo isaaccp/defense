@@ -28,6 +28,3 @@ static func action_name(action_id: Id) -> String:
 
 func name() -> String:
 	return Id.keys()[id].capitalize()
-
-func _to_string() -> String:
-	return name()
