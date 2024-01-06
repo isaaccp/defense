@@ -46,7 +46,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.CMP))
 			else:
 				opt.select(0)
-			opt.item_selected.connect(_on_opt_selected.bind(placeholder_id))
+			opt.item_selected.connect(_on_cmp_op_selected.bind(placeholder_id))
 			input.add_child(opt)
 		SkillParams.PlaceholderId.INT_VALUE:
 			var spin_box = SpinBox.new()
@@ -67,6 +67,21 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 				spin_box.set_value(_params.get_placeholder_value(SkillParams.PlaceholderId.FLOAT_VALUE))
 			spin_box.value_changed.connect(_on_float_value_updated.bind(placeholder_id, spin_box))
 			input.add_child(spin_box)
+		SkillParams.PlaceholderId.SORT:
+			var opt = OptionButton.new()
+			opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+			opt.set_item_disabled(0, true)
+			opt.fit_to_longest_item = false
+			# TODO: Make it so you only have sorts acquired.
+			for sort_id in SkillManager.all_target_sorts():
+				var sort = SkillManager.lookup_target_sort(sort_id)
+				opt.add_item(str(sort), sort.id)
+			if _params.placeholder_set(SkillParams.PlaceholderId.SORT):
+				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT))
+			else:
+				opt.select(0)
+			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id))
+			input.add_child(opt)
 
 func _populate():
 	for part in _params.parts:
@@ -79,7 +94,7 @@ func _check_ok():
 	if _params.all_set():
 		%OK.disabled = false
 
-func _on_opt_selected(selection: int, placeholder: SkillParams.PlaceholderId):
+func _on_cmp_op_selected(selection: int, placeholder: SkillParams.PlaceholderId):
 	_params.set_placeholder_value(placeholder, selection)
 	_check_ok()
 
@@ -92,6 +107,12 @@ func _on_int_value_updated(value: float, placeholder: SkillParams.PlaceholderId,
 
 func _on_float_value_updated(value: float, placeholder: SkillParams.PlaceholderId, spin_box: SpinBox):
 	_params.set_placeholder_value(placeholder, value)
+	_check_ok()
+
+func _on_sort_selected(value: int, placeholder: SkillParams.PlaceholderId):
+	var sort = SkillManager.lookup_target_sort(value)
+	assert(sort)
+	_params.set_placeholder_value(placeholder, sort)
 	_check_ok()
 
 func results() -> SkillParams:

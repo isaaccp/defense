@@ -60,6 +60,7 @@ func refresh():
 	for condition in conditions.skills:
 		condition_by_id[condition.id] = condition
 	for target in targets.skills:
+		target.validate()
 		target_by_id[target.id] = target
 	for target_sort in target_sorts.skills:
 		target_sort_by_id[target_sort.id] = target_sort

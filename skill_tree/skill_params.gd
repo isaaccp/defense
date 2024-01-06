@@ -32,6 +32,7 @@ enum CmpOp {
 @export var cmp: CmpOp
 @export var int_value: IntValue
 @export var float_value: FloatValue
+@export var sort: TargetSort
 
 # Exporting those makes the duplicate(true) end up in a weird situation.
 # If we want them back, we could always just trigger parse manually afterwards.
@@ -54,6 +55,9 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 		PlaceholderId.FLOAT_VALUE:
 			assert(typeof(value) == TYPE_FLOAT)
 			float_value = FloatValue.make(value)
+		PlaceholderId.SORT:
+			assert(value is TargetSort)
+			sort = value as TargetSort
 
 func get_placeholder_string(placeholder: PlaceholderId) -> String:
 	match placeholder:
@@ -63,6 +67,9 @@ func get_placeholder_string(placeholder: PlaceholderId) -> String:
 			return str(int_value.value)
 		PlaceholderId.FLOAT_VALUE:
 			return "%0.1f" % float_value.value
+		PlaceholderId.SORT:
+			return str(sort)
+
 	assert(false, "Unreachable")
 	return "<bug>"
 
@@ -75,6 +82,8 @@ func get_placeholder_value(placeholder: PlaceholderId) -> Variant:
 			return int_value.value
 		PlaceholderId.FLOAT_VALUE:
 			return float_value.value
+		PlaceholderId.SORT:
+			return sort
 	assert(false, "Unreachable")
 	return null
 
@@ -112,6 +121,8 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 			return int_value and int_value.defined
 		PlaceholderId.FLOAT_VALUE:
 			return float_value and float_value.defined
+		PlaceholderId.SORT:
+			return sort and sort.id != TargetSort.Id.UNSPECIFIED
 	assert(false, "unreachable")
 	return false
 

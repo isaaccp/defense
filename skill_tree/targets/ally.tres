@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_simwv"]
 script = ExtResource("1_eob2b")
-editor_string = ""
+editor_string = "Ally ({sort})"
 cmp = 0
 
 [resource]
