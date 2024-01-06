@@ -39,7 +39,7 @@ var target_scripts = {
 }
 
 var target_sort_scripts = {
-	TargetSort.Id.CLOSEST_FIRST: null,
+	TargetSort.Id.CLOSEST_FIRST: preload("res://behavior/target_sort/closest_first_actor_target_sorter.gd"),
 }
 
 var action_by_id: Dictionary
@@ -149,6 +149,11 @@ func all_target_selections() -> Array[TargetSelectionDef.Id]:
 # Stateless and not parameterizable, so no need to make instances.
 func lookup_target_sort(id: TargetSort.Id) -> TargetSort:
 	return target_sort_by_id[id]
+
+func make_actor_target_sorter(target_sort: TargetSort) -> ActorTargetSorter:
+	var sorter = target_sort_scripts[target_sort.id].new() as ActorTargetSorter
+	sorter.def = target_sort
+	return sorter
 
 func all_target_sorts() -> Array[TargetSort.Id]:
 	var all: Array[TargetSort.Id] = []
