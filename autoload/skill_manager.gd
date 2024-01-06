@@ -128,6 +128,8 @@ func lookup_target(id: TargetSelectionDef.Id) -> TargetSelectionDef:
 func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectionDef:
 	var target = lookup_target(id).duplicate(true)
 	target.abstract = false
+	if target.sortable:
+		target.params.set_placeholder_value(SkillParams.PlaceholderId.SORT, target.default_sort)
 	return target
 
 func make_actor_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetNodeConditionEvaluator) -> NodeTargetSelector:

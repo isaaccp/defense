@@ -77,7 +77,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 				var sort = SkillManager.lookup_target_sort(sort_id)
 				opt.add_item(str(sort), sort.id)
 			if _params.placeholder_set(SkillParams.PlaceholderId.SORT):
-				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT))
+				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT).id)
 			else:
 				opt.select(0)
 			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id))

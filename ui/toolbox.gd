@@ -59,6 +59,6 @@ func _get_drag_data(at_position: Vector2):
 	set_drag_preview(preview)
 	var metadata = item.get_metadata(0)
 	if metadata.has("params") and not metadata.params.placeholders.is_empty():
-		preview.text = metadata.params.editor_string
+		preview.text = metadata.params.interpolated_text()
 
 	return {"type": metadata.column, "text": preview.text, "id": metadata.id, "params": metadata.get("params")}
