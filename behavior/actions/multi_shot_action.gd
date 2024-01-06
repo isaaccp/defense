@@ -13,4 +13,8 @@ func post_initialize():
 		# Stop firing arrows if we are aborted.
 		if finished:
 			return
+	await Global.get_tree().create_timer(0.33, false).timeout
 	action_finished()
+
+func description():
+	return "Fires 3 arrows in 1 second"

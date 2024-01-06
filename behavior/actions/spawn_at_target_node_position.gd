@@ -5,6 +5,7 @@ class_name SpawnAtTargetNodePositionAction
 # Must be set on _init().
 var spawn_scene: PackedScene
 var duration: float = -1.0
+# TODO: Provide a way to spawn with a delay, to reflect slow casting.
 
 # Can be used in post_spawn.
 var spawned: ActionScene

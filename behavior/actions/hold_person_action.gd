@@ -9,3 +9,6 @@ func _init():
 	duration = 1.0
 	cooldown = 5.0
 	max_distance = 200
+
+func description():
+	return "Paralyzes a target enemy"

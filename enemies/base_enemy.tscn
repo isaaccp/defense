@@ -15,7 +15,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dgtdu"]
 
-[sub_resource type="Resource" id="Resource_l3xtq"]
+[sub_resource type="Resource" id="Resource_xk6rc"]
 resource_local_to_scene = true
 script = ExtResource("4_ur2ni")
 rules = Array[Resource("res://behavior/rule.gd")]([])
@@ -77,7 +77,7 @@ attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
-behavior = SubResource("Resource_l3xtq")
+behavior = SubResource("Resource_xk6rc")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("8_567i8")]
 health_component = NodePath("../HealthComponent")
