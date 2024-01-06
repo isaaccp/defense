@@ -199,6 +199,7 @@ var _last_event = null
 var _pressed_keys = {}
 var _pressed_actions = {}
 var _pressed_mouse_buttons = {}
+var _mouse_button_mask = 0
 
 var _auto_flush_input = false
 var _tree_items_parent = null
@@ -318,6 +319,7 @@ func _new_defaulted_mouse_button_event(position, global_position):
 
 func _new_defaulted_mouse_motion_event(position, global_position):
 	var event = InputEventMouseMotion.new()
+	event.button_mask = _mouse_button_mask
 	_apply_last_position_and_set_last_position(event, position, global_position)
 	return event
 
@@ -395,6 +397,7 @@ func clear():
 	_pressed_actions.clear()
 	_pressed_mouse_buttons.clear()
 	_last_mouse_position = _default_mouse_position.duplicate()
+	_mouse_button_mask = 0
 
 
 # ------------------------------
@@ -436,6 +439,7 @@ func mouse_left_button_down(position=null, global_position=null):
 	var event = _new_defaulted_mouse_button_event(position, global_position)
 	event.pressed = true
 	event.button_index = MOUSE_BUTTON_LEFT
+	_mouse_button_mask |= MOUSE_BUTTON_MASK_LEFT
 	_send_or_record_event(event)
 	return self
 
@@ -444,6 +448,7 @@ func mouse_left_button_up(position=null, global_position=null):
 	var event = _new_defaulted_mouse_button_event(position, global_position)
 	event.pressed = false
 	event.button_index = MOUSE_BUTTON_LEFT
+	_mouse_button_mask &= ~MOUSE_BUTTON_MASK_LEFT
 	_send_or_record_event(event)
 	return self
 
@@ -459,6 +464,7 @@ func mouse_right_button_down(position=null, global_position=null):
 	var event = _new_defaulted_mouse_button_event(position, global_position)
 	event.pressed = true
 	event.button_index = MOUSE_BUTTON_RIGHT
+	_mouse_button_mask |= MOUSE_BUTTON_MASK_RIGHT
 	_send_or_record_event(event)
 	return self
 
@@ -467,6 +473,7 @@ func mouse_right_button_up(position=null, global_position=null):
 	var event = _new_defaulted_mouse_button_event(position, global_position)
 	event.pressed = false
 	event.button_index = MOUSE_BUTTON_RIGHT
+	_mouse_button_mask &= ~MOUSE_BUTTON_MASK_RIGHT
 	_send_or_record_event(event)
 	return self
 

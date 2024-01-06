@@ -92,7 +92,6 @@ func _get_drag_data(at_position):
 		return null
 	if _is_empty(item):
 		return null
-	# TODO: delete the old one?
 	return item
 
 func _can_drop_data(at_position: Vector2, data) -> bool:
