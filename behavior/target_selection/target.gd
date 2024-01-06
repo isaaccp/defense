@@ -3,12 +3,13 @@ extends Resource
 class_name Target
 
 enum Type {
+	## Should never be set.
 	UNSPECIFIED,
-	# Returns one Actor.
+	## Returns one Actor.
 	ACTOR,
-	# Returns an Array of Actor.
+	## Returns an Array of Actor.
 	ACTORS,
-	# Returns one Vector2.
+	## Returns a Vector2.
 	POSITION,
 }
 

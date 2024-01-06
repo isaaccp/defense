@@ -20,6 +20,9 @@ enum Type {
 }
 
 @export var id: Id
+## Types of sort supported. Determines which types of
+## target selectors can use this sort and makes UI prevent
+## bad combinations.
 @export var types: Array[Type]
 
 func name() -> String:

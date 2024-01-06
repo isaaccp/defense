@@ -13,7 +13,10 @@ enum Id {
 }
 
 @export var id: Id
+## Type of Target that this selector returns.
 @export var type: Target.Type
+## Whether the target is sortable. If it is, it must provide
+## the {sort} placeholder in params.editor_string.
 @export var sortable = true
 var default_sort = preload("res://skill_tree/target_sorts/closest_first.tres")
 # TODO: Allow for target selections to have different default
