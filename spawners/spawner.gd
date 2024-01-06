@@ -42,12 +42,9 @@ func finished():
 	return placer.finished
 
 func _on_ready_editor():
-	var spawners_node = get_parent()
-	if spawners_node:
-		var ysorted_node = spawners_node.get_parent()
-		if ysorted_node:
-			if ysorted_node.has_node("Enemies"):
-				placement_node = ysorted_node.get_node("Enemies")
+	var enemies_path = "../../Enemies"
+	if has_node(enemies_path):
+		placement_node = get_node(enemies_path)
 	if _get_configuration_warnings().size() != 0:
 		var config_component = load("res://spawners/components/spawn_config_component.tscn").instantiate()
 		add_child(config_component)
