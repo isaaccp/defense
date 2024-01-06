@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7bsv7cscwbmr"]
+[gd_scene load_steps=10 format=3 uid="uid://c7bsv7cscwbmr"]
 
 [ext_resource type="Script" path="res://ui/programming_ui.gd" id="1_xf4ix"]
 [ext_resource type="Script" path="res://ui/script_tree.gd" id="2_dh7cw"]
 [ext_resource type="Script" path="res://ui/toolbox.gd" id="2_pkup4"]
-[ext_resource type="Texture2D" uid="uid://c8t68dpweqvr3" path="res://ui/icons/Remove.svg" id="3_hr8bn"]
-[ext_resource type="Texture2D" uid="uid://b0vdhdrhn6cj1" path="res://ui/icons/Edit.svg" id="4_2vxkb"]
+[ext_resource type="Resource" uid="uid://dgs55tgbrgkhv" path="res://character/playable_characters/test/programming_ui_char.tres" id="2_wilel"]
 [ext_resource type="PackedScene" uid="uid://c3oy80g32pyjn" path="res://ui/config_pane.tscn" id="4_5vsiq"]
+[ext_resource type="Texture2D" uid="uid://c8t68dpweqvr3" path="res://ui/icons/Remove.svg" id="5_1pqdw"]
+[ext_resource type="Texture2D" uid="uid://b0vdhdrhn6cj1" path="res://ui/icons/Edit.svg" id="6_jvltx"]
+[ext_resource type="Texture2D" uid="uid://dm2ewt4q25wsb" path="res://ui/icons/TripleBar.svg" id="12_5n6c8"]
 
 [sub_resource type="Theme" id="Theme_8i0e7"]
 MarginContainer/constants/margin_bottom = 4
@@ -21,6 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xf4ix")
+test_character = ExtResource("2_wilel")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -78,8 +81,9 @@ column_titles_visible = true
 hide_root = true
 select_mode = 1
 script = ExtResource("2_dh7cw")
-delete_icon = ExtResource("3_hr8bn")
-edit_icon = ExtResource("4_2vxkb")
+delete_icon = ExtResource("5_1pqdw")
+edit_icon = ExtResource("6_jvltx")
+drag_icon = ExtResource("12_5n6c8")
 
 [node name="ConfigPane" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" instance=ExtResource("4_5vsiq")]
 unique_name_in_owner = true

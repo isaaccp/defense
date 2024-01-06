@@ -1,0 +1,123 @@
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=24 format=3 uid="uid://dgs55tgbrgkhv"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_jvgfs"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_da8bg"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_nh70o"]
+[ext_resource type="Script" path="res://behavior/rule.gd" id="4_aom4g"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="5_dkbnv"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="6_ddbsa"]
+[ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="7_vy3e2"]
+[ext_resource type="Script" path="res://gameplay_character.gd" id="8_c4bmv"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_tx848"]
+[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="10_ekaww"]
+
+[sub_resource type="Resource" id="Resource_6difb"]
+script = ExtResource("1_jvgfs")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_0wfof"]
+script = ExtResource("2_da8bg")
+id = 7
+params = SubResource("Resource_6difb")
+abstract = true
+skill_name = &"Hold Person"
+skill_type = 1
+tree_type = 4
+
+[sub_resource type="Resource" id="Resource_kn045"]
+script = ExtResource("1_jvgfs")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_vtflf"]
+script = ExtResource("1_jvgfs")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_y5184"]
+script = ExtResource("3_nh70o")
+id = 1
+type = 1
+params = SubResource("Resource_vtflf")
+abstract = true
+skill_name = &"Always"
+skill_type = 3
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_on7sb"]
+script = ExtResource("3_nh70o")
+id = 3
+type = 1
+params = SubResource("Resource_kn045")
+abstract = false
+skill_name = &"Once"
+skill_type = 3
+parent = SubResource("Resource_y5184")
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_31sko"]
+script = ExtResource("1_jvgfs")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_0iuwh"]
+script = ExtResource("1_jvgfs")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_hy0j8"]
+script = ExtResource("5_dkbnv")
+id = 3
+type = 1
+params = SubResource("Resource_0iuwh")
+abstract = true
+skill_name = &"Self"
+skill_type = 2
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_7d7kk"]
+script = ExtResource("5_dkbnv")
+id = 4
+type = 1
+params = SubResource("Resource_31sko")
+abstract = false
+skill_name = &"Self Or Ally"
+skill_type = 2
+parent = SubResource("Resource_hy0j8")
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_qgdgm"]
+script = ExtResource("4_aom4g")
+target_selection = SubResource("Resource_7d7kk")
+action = SubResource("Resource_0wfof")
+condition = SubResource("Resource_on7sb")
+
+[sub_resource type="Resource" id="Resource_a06is"]
+script = ExtResource("6_ddbsa")
+rules = Array[ExtResource("4_aom4g")]([SubResource("Resource_qgdgm")])
+
+[sub_resource type="Resource" id="Resource_n4lvi"]
+script = ExtResource("9_tx848")
+skill_tree_collection = ExtResource("10_ekaww")
+acquired_actions = Array[int]([])
+acquired_target_selections = Array[int]([])
+acquired_conditions = Array[int]([1])
+unlocked_actions = Array[int]([])
+unlocked_target_selections = Array[int]([])
+unlocked_conditions = Array[int]([1])
+full_acquired = true
+full_unlocked = true
+
+[resource]
+script = ExtResource("8_c4bmv")
+name = "TestGuy"
+character_id = 1
+starting_kit = ""
+scene = ExtResource("7_vy3e2")
+description = ""
+behavior = SubResource("Resource_a06is")
+skill_tree_state = SubResource("Resource_n4lvi")
+peer_id = 0
+xp = 0
+total_xp = 0

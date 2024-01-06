@@ -1,20 +1,25 @@
 @tool
 extends Tree
-
 class_name ScriptTree
 
 @export var delete_icon: Texture2D
 @export var edit_icon: Texture2D
+@export var drag_icon: Texture2D
 
 const always = preload("res://skill_tree/conditions/always.tres")
 
 var _root: TreeItem
 
 enum Column {
-	DELETE_ICON = 0,
+	BUTTONS = 0,
 	TARGET = 1,
 	CONDITION = 2,
 	ACTION = 3,
+}
+
+enum ButtonIdx {
+	MOVE = 0,
+	DELETE = 1,
 }
 
 func _ready():
@@ -24,7 +29,7 @@ func _ready():
 	_root = tree.create_item()
 	tree.hide_root = true
 
-	tree.set_column_expand(Column.DELETE_ICON, false)
+	tree.set_column_expand(Column.BUTTONS, false)
 	tree.set_column_title(Column.TARGET, "Target")
 	tree.set_column_title(Column.CONDITION, "Condition")
 	tree.set_column_title(Column.ACTION, "Action")
@@ -34,44 +39,39 @@ func load_behavior(behavior: Behavior) -> void:
 	for c in _root.get_children():
 		_root.remove_child(c)
 	for rule in behavior.rules:
-		_add_prefilled(rule)
-	_add_empty()
+		_add_row(rule)
+	_add_row()
 
-func _add_empty() -> TreeItem:
+func _add_row(rule: Rule = null) -> TreeItem:
 	var row = self.create_item(_root)
-	row.add_button(0, delete_icon, 0, true, "Delete")
-	row.set_selectable(0, false)
-	row.set_text(Column.TARGET, "[Target]")
-	row.set_metadata(Column.TARGET, _metadata(0))
-	row.set_text(Column.CONDITION, str(always))
-	row.set_metadata(Column.CONDITION, _metadata(always.id, always.params))
-	row.set_text(Column.ACTION, "[Action]")
-	row.set_metadata(Column.ACTION, _metadata(0))
+	row.add_button(Column.BUTTONS, drag_icon, ButtonIdx.MOVE, rule == null, "Drag")
+	row.add_button(Column.BUTTONS, delete_icon, ButtonIdx.DELETE, rule == null, "Delete")
+	row.set_selectable(Column.BUTTONS, false)
+	if rule:
+		_set_column(row, Column.TARGET, str(rule.target_selection), _metadata(rule.target_selection.id))
+		_set_column(row, Column.CONDITION, str(rule.condition), _metadata(rule.condition.id, rule.condition.params))
+		_set_column(row, Column.ACTION, str(rule.action), _metadata(rule.action.id))
+	else:
+		_set_column(row, Column.TARGET, "[Target]", _metadata(0))
+		_set_column(row, Column.CONDITION, str(always), _metadata(always.id, always.params))
+		_set_column(row, Column.ACTION, "[Action]", _metadata(0))
 	return row
 
-func _add_prefilled(rule: Rule) -> TreeItem:
-	var row = self.create_item(_root)
-	row.add_button(Column.DELETE_ICON, delete_icon, 0, false, "Delete")
-	row.set_selectable(Column.DELETE_ICON, false)
-	row.set_text(Column.TARGET, str(rule.target_selection))
-	row.set_metadata(Column.TARGET, _metadata(rule.target_selection.id))
-	row.set_text(Column.CONDITION, str(rule.condition))
-	row.set_metadata(Column.CONDITION, _metadata(rule.condition.id, rule.condition.params))
-	row.set_text(Column.ACTION, str(rule.action))
-	row.set_metadata(Column.ACTION, _metadata(rule.action.id))
-	return row
+func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
+	row.set_text(idx, name)
+	row.set_metadata(idx, meta)
 
 func _is_empty(item: TreeItem) -> bool:
-	for c in range(1, columns): # Skip delete
+	for c in range(Column.BUTTONS+1, columns): # Skip buttons
 		var meta = item.get_metadata(c)
-		# _add_empty leaves the delete button null but 0s the rest,
+		# _add_row leaves the button column null but 0s the rest,
 		# but either is empty enough for our purposes.
 		if meta != null and meta.id != 0:
 			return false
 	return true
 
 func _is_valid(item: TreeItem) -> bool:
-	for c in range(1, columns): # Skip delete
+	for c in range(Column.BUTTONS+1, columns): # Skip buttons
 		var meta = item.get_metadata(c)
 		if meta == null or meta.id == 0:
 			return false
@@ -80,11 +80,28 @@ func _is_valid(item: TreeItem) -> bool:
 func _metadata(id: int, data: Variant = null) -> Dictionary:
 	return {"id": id, "data": data}
 
+func _get_drag_data(at_position):
+	var item = get_item_at_position(at_position)
+	var col = get_column_at_position(at_position)
+	var but = get_button_id_at_position(at_position)
+	if item == null || col != Column.BUTTONS || but != ButtonIdx.MOVE:
+		return null
+	if _is_empty(item):
+		return null
+	# TODO: delete the old one?
+	return item
+
 func _can_drop_data(at_position: Vector2, data) -> bool:
 	var item = get_item_at_position(at_position)
 	if not item:
 		return false
-	if _is_empty(item):
+	if data is TreeItem:
+		if _is_empty(item):
+			set_drop_mode_flags(Tree.DROP_MODE_DISABLED)
+			return false
+		else:
+			set_drop_mode_flags(Tree.DROP_MODE_INBETWEEN)
+	elif _is_empty(item):
 		set_drop_mode_flags(Tree.DROP_MODE_ON_ITEM)
 	else:
 		set_drop_mode_flags(Tree.DROP_MODE_INBETWEEN | Tree.DROP_MODE_ON_ITEM)
@@ -93,7 +110,9 @@ func _can_drop_data(at_position: Vector2, data) -> bool:
 	if section == -100:
 		# TODO: append?
 		return false
-	if col == data.type+1:
+	if data is TreeItem:
+		return true
+	elif col == data.type+1:
 		return true
 	return false
 
@@ -102,13 +121,20 @@ func _drop_data(at_position: Vector2, data):
 	var item = get_item_at_position(at_position)
 	var col = get_column_at_position(at_position)
 
+	if data is TreeItem:
+		if offset < 0:
+			data.move_before(item)
+		else:
+			data.move_after(item)
+		return
+
 	var was_empty: bool
 	if offset < 0:
-		var new = _add_empty()
+		var new = _add_row()
 		new.move_before(item)
 		item = new
 	elif offset > 0:
-		var new = _add_empty()
+		var new = _add_row()
 		new.move_after(item)
 		item = new
 	elif _is_empty(item):
@@ -117,7 +143,8 @@ func _drop_data(at_position: Vector2, data):
 		# So check again after setting.
 		was_empty = true
 
-	item.set_button_disabled(Column.DELETE_ICON, 0, false)
+	item.set_button_disabled(Column.BUTTONS, ButtonIdx.MOVE, false)
+	item.set_button_disabled(Column.BUTTONS, ButtonIdx.DELETE, false)
 	item.set_text(col, data.text)
 	item.set_metadata(col, _metadata(data.id, data.params))
 	if data.params and data.params.placeholders.size() > 0:
@@ -127,12 +154,15 @@ func _drop_data(at_position: Vector2, data):
 
 	if was_empty and not _is_empty(item):
 		# Replace the blank item we just filled in
-		_add_empty()
+		_add_row()
 
 func _on_button_clicked(item, column, button_id, _mouse_button_index):
-	if column == Column.DELETE_ICON and button_id == 0: # delete
-		item.free()
-	if column != Column.DELETE_ICON and button_id == 0: # config
+	if column == Column.BUTTONS:
+		if button_id == ButtonIdx.DELETE: # delete
+			item.free()
+		elif button_id == ButtonIdx.MOVE:
+			print("TODO: Make clicking on MOVE do something")
+	elif column != Column.BUTTONS and button_id == 0: # config
 		%ConfigPane.setup(item, column)
 
 func _on_config_pane_config_confirmed(item: TreeItem, col, result):

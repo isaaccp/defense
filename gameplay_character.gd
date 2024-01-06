@@ -30,6 +30,7 @@ func grant_xp(amount: int) -> void:
 func make_character_body() -> Character:
 	var character = scene.instantiate() as Character
 	character.id = character_id
+	character.actor_name = name
 	var persistent_game_state = Component.get_persistent_game_state_component_or_die(character)
 	persistent_game_state.state = self
 	return character

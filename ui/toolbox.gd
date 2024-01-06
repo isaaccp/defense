@@ -12,7 +12,7 @@ func initialize(
 		target_types: Array[TargetSelectionDef.Id],
 		action_types: Array[ActionDef.Id],
 		condition_types: Array[ConditionDef.Id],
-	):
+):
 	var tree = self
 	for c in _root.get_children():
 		_root.remove_child(c)
@@ -56,12 +56,14 @@ func condition_metadata(column: int, id: ConditionDef.Id, params: SkillParams) -
 
 func _get_drag_data(at_position: Vector2):
 	var item = get_item_at_position(at_position)
-	if item.get_child_count() > 0: # header
+	if item.get_parent() == _root: # header
 		return null
+
 	var preview = Label.new()
 	preview.text = item.get_text(0)
 	set_drag_preview(preview)
 	var metadata = item.get_metadata(0)
 	if metadata.has("params") and not metadata.params.placeholders.is_empty():
 		preview.text = metadata.params.editor_string
+
 	return {"type": metadata.column, "text": preview.text, "id": metadata.id, "params": metadata.get("params")}
