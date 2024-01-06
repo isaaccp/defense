@@ -94,8 +94,8 @@ _data = {
 "spawn": SubResource("Animation_5pulm")
 }
 
-[node name="OrcWarriorSpawner" instance=ExtResource("1_a7635")]
-actor_name = "Orc Warrior Spawner"
+[node name="PortalSpawner" instance=ExtResource("1_a7635")]
+actor_name = "Portal Spawner"
 
 [node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")

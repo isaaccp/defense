@@ -8,6 +8,7 @@ class_name Spawner
 
 func _ready():
 	if Engine.is_editor_hint():
+		_on_ready_editor()
 		return
 	var placer = SpawnPlacerComponent.get_or_die(self)
 	if get_parent() == get_tree().root:
@@ -31,8 +32,19 @@ func _ready():
 		placer.placement_node = placement_node
 		placer.run()
 		return
+
 	assert(placement_node, "placement_node not set")
 	placer.placement_node = placement_node
+
+func _on_ready_editor():
+	var spawners_node = get_parent()
+	var ysorted_node = spawners_node.get_parent()
+	var enemies_node = ysorted_node.get_node("Enemies")
+	placement_node = enemies_node
+	if _get_configuration_warnings().size() != 0:
+		var config_component = load("res://spawners/components/spawn_config_component.tscn").instantiate()
+		add_child(config_component)
+		config_component.owner = get_tree().edited_scene_root
 
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
