@@ -35,6 +35,7 @@ var target_scripts = {
 	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/self_target_selector.gd"),
 	TargetSelectionDef.Id.SELF_OR_ALLY: preload("res://behavior/target_selection/self_or_ally_target_selector.gd"),
 	TargetSelectionDef.Id.ALLY: preload("res://behavior/target_selection/ally_target_selector.gd"),
+	TargetSelectionDef.Id.CENTER: preload("res://behavior/target_selection/center_position_target_selector.gd"),
 }
 
 var target_sort_scripts = {

@@ -16,6 +16,8 @@ class_name GameplayCharacter
 # Total accummulated XP, for fun.
 @export var total_xp: int
 
+var actor: Character
+
 func use_xp(amount: int) -> void:
 	assert(xp >= amount, "Tried to use more XP than possible")
 	xp -= amount
@@ -28,9 +30,10 @@ func grant_xp(amount: int) -> void:
 	total_xp += amount
 
 func make_character_body() -> Character:
-	var character = scene.instantiate() as Character
-	character.id = character_id
-	character.actor_name = name
-	var persistent_game_state = Component.get_persistent_game_state_component_or_die(character)
+	assert(not actor, "Tried to instantiate an actor twice from same GameplayCharacter")
+	actor = scene.instantiate() as Character
+	actor.id = character_id
+	actor.actor_name = name
+	var persistent_game_state = Component.get_persistent_game_state_component_or_die(actor)
 	persistent_game_state.state = self
-	return character
+	return actor

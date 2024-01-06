@@ -176,6 +176,7 @@ func _check_compatibility(item: TreeItem, column: int, data) -> bool:
 			condition = _condition_from_meta(data)
 			return condition.compatible_with_target(target.type)
 		Column.ACTION:
+			action = _action_from_meta(data)
 			return action.compatible_with_target(target.type)
 	return false
 

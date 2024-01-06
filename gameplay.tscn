@@ -10,7 +10,6 @@ viewport_path = NodePath("SubViewport")
 script = ExtResource("1_2toda")
 ui_layer = NodePath("GameplayUILayer")
 level_parent = NodePath("SubViewport/LevelParent")
-characters = null
 
 [node name="GameplayUILayer" parent="." instance=ExtResource("1_3xnco")]
 
