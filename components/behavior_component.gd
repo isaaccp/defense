@@ -7,7 +7,7 @@ const component: StringName = &"BehaviorComponent"
 signal behavior_updated(action: ActionDef.Id, target: Target)
 
 @export_group("Required")
-# TODO: Change to Actor.
+# TODO: Change to Actor once we have a way to get the body through a component.
 @export var body: CharacterBody2D
 @export var navigation_agent: NavigationAgent2D
 @export var action_sprites: Node2D
