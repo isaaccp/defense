@@ -6,7 +6,7 @@ var conditions = preload("res://skill_tree/skill_type_collections/condition_coll
 var targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
 
 # TODO: Try moving this to the Resource at some point again.
-const action_scripts = {
+var action_scripts = {
 	ActionDef.Id.MOVE_TO: preload("res://behavior/actions/move_to_action.gd"),
 	ActionDef.Id.SWORD_ATTACK: preload("res://behavior/actions/sword_attack_action.gd"),
 	ActionDef.Id.BOW_ATTACK: preload("res://behavior/actions/bow_attack_action.gd"),
@@ -20,14 +20,14 @@ const action_scripts = {
 	ActionDef.Id.TELEPORT_TO: preload("res://behavior/actions/teleport_to_action.gd"),
 }
 
-const condition_scripts = {
+var condition_scripts = {
 	ConditionDef.Id.ALWAYS: preload("res://behavior/conditions/condition_always.gd"),
 	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_node_condition_evaluator.gd"),
 	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
 	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_target_node_condition_evaluator.gd"),
 }
 
-const target_scripts = {
+var target_scripts = {
 	TargetSelectionDef.Id.CLOSEST_ENEMY: preload("res://behavior/target_selection/closest_enemy_target_selector.gd"),
 	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/tower_target_selector.gd"),
 	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/self_target_selector.gd"),
