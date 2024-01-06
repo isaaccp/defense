@@ -34,6 +34,7 @@ signal level_failed(loss_type: LossType)
 @export var towers: Node
 # Required if type is KILL_ALL_ENEMIES.
 @export var enemies: Node
+@export var spawners: Node
 # Required if type requires it.
 @export var position: Node2D
 # Distance from position for considering it reached.
@@ -102,6 +103,9 @@ func _on_removing_enemy(node: Node):
 	# If this is the last enemy and it's dead, declare victory.
 	if enemies.get_child_count() == 1:
 		if Component.get_health_component_or_die(node).is_dead:
+			for spawner in spawners.get_children():
+				if not spawner.finished():
+					return
 			_emit_victory(VictoryType.KILL_ALL_ENEMIES)
 
 func _on_character_died():

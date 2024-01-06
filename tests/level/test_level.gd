@@ -2,8 +2,8 @@ extends GutTest
 
 const basic_tower_test_level_scene = preload("res://tests/level/basic_tower_test_level.tscn")
 const reach_position_scene = preload("res://tests/level/reach_position_test_level.tscn")
-
 const move_sword_behavior = preload("res://behavior/resources/basic_move_plus_sword_attack.tres")
+const test_character = preload("res://character/playable_characters/test_character.tres")
 
 class LevelTest extends GutTest:
 	var level: Level
@@ -13,8 +13,8 @@ class LevelTest extends GutTest:
 	func before_each():
 		level = scene.instantiate()
 		level.initialize([
-			GameplayCharacter.make(Enum.CharacterId.KNIGHT),
-			GameplayCharacter.make(Enum.CharacterId.KNIGHT),
+			test_character.duplicate(true),
+			test_character.duplicate(true),
 		])
 		victory = Component.get_or_die(level, VictoryLossConditionComponent.component) as VictoryLossConditionComponent
 
@@ -107,11 +107,8 @@ class TestTimeConditions extends LevelTest:
 		victory.victory = victory_types
 		victory.time = 1.0
 		add_child_autoqfree(level)
-		# TODO: Maybe those tests should happen using gameplay
-		# so we test end-to-end.
-		# Needed to start victory timers.
-		level.start()
 		set_character_behaviors(Behavior.new(), Behavior.new())
+		level.start()
 		await wait_for_signal(victory.level_finished, 2, "Waiting for victory")
 		assert_signal_emitted(victory, "level_finished")
 
@@ -120,7 +117,7 @@ class TestTimeConditions extends LevelTest:
 		victory.loss = loss_types
 		victory.time = 1.0
 		add_child_autoqfree(level)
-		level.start()
 		set_character_behaviors(Behavior.new(), Behavior.new())
+		level.start()
 		await wait_for_signal(victory.level_failed, 2, "Waiting for loss")
 		assert_signal_emitted(victory, "level_failed")

@@ -3,6 +3,7 @@ extends GutTest
 # Level has 1 enemy.
 const empty_level_scene = preload("res://tests/actions/empty_level.tscn")
 const heal_scene = preload("res://behavior/actions/scenes/heal.tscn")
+const test_character = preload("res://character/playable_characters/test_character.tres")
 
 var level: Level
 var character: Node2D
@@ -27,7 +28,7 @@ func before_all():
 
 func before_each():
 	level = empty_level_scene.instantiate()
-	level.initialize([GameplayCharacter.make(Enum.CharacterId.KNIGHT)])
+	level.initialize([test_character])
 	add_child_autoqfree(level)
 	# Set up character.
 	character = level.characters.get_child(0)

@@ -5,6 +5,8 @@ const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tsc
 const sword_attack_scene = SwordAttackAction.sword_attack_scene
 const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
 
+const test_character = preload("res://character/playable_characters/test_character.tres")
+
 var level: Level
 var character: Node2D
 var character_behavior: BehaviorComponent
@@ -36,7 +38,7 @@ func before_all():
 
 func before_each():
 	level = basic_test_level_scene.instantiate() as Level
-	level.initialize([GameplayCharacter.make(Enum.CharacterId.KNIGHT)])
+	level.initialize([test_character])
 	add_child_autoqfree(level)
 	# Set up character.
 	character = level.characters.get_child(0)

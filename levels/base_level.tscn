@@ -51,7 +51,8 @@ y_sort_enabled = true
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ga831")
 
-[node name="VictoryLossConditionComponent" parent="." node_paths=PackedStringArray("characters", "towers", "enemies") instance=ExtResource("3_4hhq1")]
+[node name="VictoryLossConditionComponent" parent="." node_paths=PackedStringArray("characters", "towers", "enemies", "spawners") instance=ExtResource("3_4hhq1")]
 characters = NodePath("../YSorted/Characters")
 towers = NodePath("../YSorted/Towers")
 enemies = NodePath("../YSorted/Enemies")
+spawners = NodePath("../YSorted/Spawners")

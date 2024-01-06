@@ -46,6 +46,7 @@ func _place_loop():
 			break
 		await get_tree().create_timer(config.interval-0.5, false).timeout
 
+	finished = true
 	if spawn_animation_component:
 		await spawn_animation_component.on_spawning_end()
 

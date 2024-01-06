@@ -53,7 +53,7 @@ func _ready():
 		if not test_gameplay_characters:
 			var gcs: Array[GameplayCharacter] = []
 			for i in range(num_players):
-				var gc = GameplayCharacter.make(Enum.CharacterId.KNIGHT)
+				var gc = load("res://character/playable_characters/godric_the_knight.tres")
 				gcs.append(gc)
 			test_gameplay_characters = gcs
 		if test_behaviors:

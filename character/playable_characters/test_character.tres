@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=3 format=3 uid="uid://cjo6iflmp2pvs"]
+
+[ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="1_8sm4d"]
+[ext_resource type="Script" path="res://gameplay_character.gd" id="2_tghnv"]
+
+[resource]
+script = ExtResource("2_tghnv")
+name = "Test Character"
+character_id = 1
+starting_kit = "Test"
+scene = ExtResource("1_8sm4d")
+description = "Test"
+peer_id = 0
+xp = 0
+total_xp = 0

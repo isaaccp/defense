@@ -6,11 +6,13 @@ class_name Spawner
 
 @export var placement_node: Node2D
 
+var placer: SpawnPlacerComponent
+
 func _ready():
 	if Engine.is_editor_hint():
 		_on_ready_editor()
 		return
-	var placer = SpawnPlacerComponent.get_or_die(self)
+	placer = SpawnPlacerComponent.get_or_die(self)
 	if get_parent() == get_tree().root:
 		var bait = Node2D.new()
 		bait.name = "Bait"
@@ -35,6 +37,9 @@ func _ready():
 
 	assert(placement_node, "placement_node not set")
 	placer.placement_node = placement_node
+
+func finished():
+	return placer.finished
 
 func _on_ready_editor():
 	var spawners_node = get_parent()
