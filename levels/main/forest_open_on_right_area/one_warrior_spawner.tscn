@@ -21,6 +21,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_fmqbl"]
 script = ExtResource("5_pi8kg")
 id = 2
+supported_target_types = null
 params = SubResource("Resource_3chx1")
 abstract = true
 skill_name = &"Sword Attack"
@@ -72,6 +73,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_e80sy"]
 script = ExtResource("5_pi8kg")
 id = 1
+supported_target_types = null
 params = SubResource("Resource_8fnw4")
 abstract = true
 skill_name = &"Move To"
@@ -123,6 +125,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_dhvhg"]
 script = ExtResource("5_pi8kg")
 id = 6
+supported_target_types = null
 params = SubResource("Resource_1qj77")
 abstract = true
 skill_name = &"Heal"
@@ -191,6 +194,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_56p04"]
 script = ExtResource("5_pi8kg")
 id = 1
+supported_target_types = null
 params = SubResource("Resource_es4da")
 abstract = true
 skill_name = &"Move To"

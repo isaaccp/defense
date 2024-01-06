@@ -125,7 +125,43 @@ func _can_drop_data(at_position: Vector2, data) -> bool:
 	if data is TreeItem:
 		return true
 	elif col == data.type+1:
+		return _check_compatibility(item, col, data)
+	return false
+
+func _target_from_meta(meta) -> TargetSelectionDef:
+	if not meta or meta.id == 0:
+		return null
+	return SkillManager.make_target_selection_instance(meta.id)
+
+func _condition_from_meta(meta) -> ConditionDef:
+	if not meta or meta.id == 0:
+		return null
+	return SkillManager.make_condition_instance(meta.id) if meta else null
+
+func _action_from_meta(meta) -> ActionDef:
+	if not meta or meta.id == 0:
+		return null
+	return SkillManager.make_action_instance(meta.id) if meta else null
+
+func _check_compatibility(item: TreeItem, column: int, data) -> bool:
+	if _is_empty(item):
 		return true
+	var target = _target_from_meta(item.get_metadata(Column.TARGET))
+	var condition = _condition_from_meta(item.get_metadata(Column.CONDITION))
+	var action = _action_from_meta(item.get_metadata(Column.ACTION))
+	match column:
+		Column.TARGET:
+			target = _target_from_meta(data)
+			if not action.compatible_with_target(target.type):
+				return false
+			if not condition.compatible_with_target(target.type):
+				return false
+			return true
+		Column.CONDITION:
+			condition = _condition_from_meta(data)
+			return condition.compatible_with_target(target.type)
+		Column.ACTION:
+			return action.compatible_with_target(target.type)
 	return false
 
 func _drop_data(at_position: Vector2, data):
