@@ -24,7 +24,7 @@ func select_target(action: Action, body: CharacterBody2D, side_component: SideCo
 		if not action.filter_with_distance:
 			if not _check_distance(body, target, action):
 				return Target.make_invalid()
-		return Target.make_node_target(target)
+		return Target.make_actor_target(target)
 	# If we didn't find a target, return invalid.
 	return Target.make_invalid()
 

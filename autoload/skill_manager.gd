@@ -120,7 +120,7 @@ func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectio
 	target.abstract = false
 	return target
 
-func make_node_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetNodeConditionEvaluator) -> NodeTargetSelector:
+func make_actor_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetNodeConditionEvaluator) -> NodeTargetSelector:
 	assert(not target.abstract)
 	var selector = target_scripts[target.id].new() as NodeTargetSelector
 	selector.def = target

@@ -11,7 +11,8 @@ func _init():
 # Runs the appropriate physics process for entity.
 func physics_process(delta: float):
 	# I don't think this should happen?
-	if not target.node:
+	if not target.valid():
+		print("This happened, remove comment above or figure out why. If you don't see this comment in a way, remove this check")
 		action_finished()
 		return
 	_start_target_position_refresh(target)
@@ -23,8 +24,8 @@ func physics_process(delta: float):
 	body.move_and_slide()
 
 func _start_target_position_refresh(target: Target):
-	while target.node and not finished:
-		navigation_agent.target_position = target.node.position
+	while target.valid() and not finished:
+		navigation_agent.target_position = target.position()
 		await Global.get_tree().create_timer(0.25, false).timeout
 
 func action_finished():

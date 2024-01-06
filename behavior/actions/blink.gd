@@ -22,7 +22,7 @@ var blink_out: ActionScene
 func post_initialize():
 	assert(blink_distance > 0)
 	assert(cooldown > 0)
-	initial_target_pos = target.node.global_position
+	initial_target_pos = target.position()
 	sprite = body.get_node("Sprite2D")
 	prev_modulate = sprite.modulate
 	_start_blink.call_deferred()

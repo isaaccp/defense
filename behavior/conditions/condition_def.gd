@@ -17,7 +17,7 @@ enum Type {
 	UNSPECIFIED,
 	# Can be applied regardless of target.
 	ANY,
-	# Can be applied to targets of Target.Type.NODE as a filter.
+	# Can be applied to targets of Target.Type.ACTOR as a filter.
 	TARGET_NODE,
 	# Condition applies to self (e.g. my health > X).
 	SELF,

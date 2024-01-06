@@ -17,7 +17,7 @@ func _swing_sword():
 	await Global.get_tree().create_timer(0.2, false).timeout
 	if not _after_await_check(true):
 		return
-	var dir = (target.node.position - body.position).normalized()
+	var dir = (target.position() - body.position).normalized()
 	sword_attack = sword_attack_scene.instantiate() as ActionScene
 	_initialize_action_scene(sword_attack)
 	sword_attack.look_at(sword_attack.position + dir)

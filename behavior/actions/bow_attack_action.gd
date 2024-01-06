@@ -15,7 +15,7 @@ func spawn_arrow():
 	# So in multi-arrow subclasses it keeps firing at last position
 	# rather than stopping.
 	if target.valid():
-		last_target_pos = target.node.position
+		last_target_pos = target.position()
 	var dir = (last_target_pos - body.position).normalized()
 	arrow = arrow_scene.instantiate() as ActionScene
 	_initialize_action_scene(arrow)

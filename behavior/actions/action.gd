@@ -15,7 +15,7 @@ const MaxDistance = 10_000_000
 # by now with a default value. If later we have moer, we'll have to move
 # it to the ActionDef so e.g. the script editor can know which target types
 # are acceptable for a given action.
-@export var target_type_supported = Target.Type.NODE
+@export var target_type_supported = Target.Type.ACTOR
 # How far can this action be taken.
 @export var max_distance = MaxDistance
 # How close can this action be taken.

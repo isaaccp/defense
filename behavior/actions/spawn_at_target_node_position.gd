@@ -14,7 +14,7 @@ func spawn():
 	spawned = spawn_scene.instantiate() as ActionScene
 	_initialize_action_scene(spawned)
 	action_sprites.add_child(spawned)
-	spawned.global_position = target.node.global_position
+	spawned.global_position = target.position()
 	post_spawn()
 
 func post_spawn():
