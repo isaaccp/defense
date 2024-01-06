@@ -26,11 +26,6 @@ func _init():
 static func action_name(action_id: Id) -> String:
 	return Id.keys()[action_id].capitalize()
 
-static func make(action_id: Id) -> ActionDef:
-	var action = ActionDef.new()
-	action.id = action_id
-	return action
-
 func name() -> String:
 	return action_name(id)
 
