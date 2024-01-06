@@ -14,7 +14,9 @@ var skill_types = [
 	Skill.SkillType.ACTION,
 	Skill.SkillType.TARGET,
 	Skill.SkillType.CONDITION,
+	Skill.SkillType.TARGET_SORT,
 ]
+
 var tree_types = [
 	SkillTree.TreeType.GENERAL,
 	SkillTree.TreeType.WARRIOR,

@@ -52,6 +52,7 @@ cmp = 0
 script = ExtResource("6_allpt")
 id = 3
 type = 1
+sortable = true
 params = SubResource("Resource_iex1q")
 abstract = false
 skill_name = &"Self"

@@ -3,6 +3,14 @@ extends Resource
 
 class_name SkillParams
 
+enum PlaceholderId {
+	UNSPECIFIED,
+	CMP,
+	INT_VALUE,
+	FLOAT_VALUE,
+	SORT,
+}
+
 enum CmpOp {
 	UNSPECIFIED,
 	LT,
@@ -10,13 +18,6 @@ enum CmpOp {
 	EQ,
 	GE,
 	GT,
-}
-
-enum PlaceholderId {
-	UNSPECIFIED,
-	CMP,
-	INT_VALUE,
-	FLOAT_VALUE,
 }
 
 # Probably build this later from some definition if it gets too complex.

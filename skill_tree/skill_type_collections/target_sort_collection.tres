@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=3 format=3 uid="uid://c676jgjqj8td3"]
+
+[ext_resource type="Script" path="res://skill_type_collection.gd" id="1_1afph"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="2_mckfa"]
+
+[resource]
+script = ExtResource("1_1afph")
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_mckfa")])

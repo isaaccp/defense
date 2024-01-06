@@ -8,6 +8,7 @@ enum SkillType {
 	ACTION,
 	TARGET,
 	CONDITION,
+	TARGET_SORT,
 }
 
 @export var skill_name: StringName
