@@ -12,6 +12,7 @@ cmp = 0
 script = ExtResource("1_mjmbq")
 id = 3
 type = 1
+description = "Targets oneself"
 sortable = false
 params = SubResource("Resource_7ir3x")
 abstract = true

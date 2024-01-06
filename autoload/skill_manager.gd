@@ -25,7 +25,7 @@ var condition_scripts = {
 	ConditionDef.Id.ALWAYS: preload("res://behavior/conditions/condition_always.gd"),
 	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_actor_condition_evaluator.gd"),
 	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
-	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_target_actor_condition_evaluator.gd"),
+	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_position_condition_evaluator.gd"),
 	ConditionDef.Id.TIMES: preload("res://behavior/conditions/condition_times.gd"),
 }
 
@@ -38,7 +38,7 @@ var target_scripts = {
 }
 
 var target_sort_scripts = {
-	TargetSort.Id.CLOSEST_FIRST: preload("res://behavior/target_sort/closest_first_actor_target_sorter.gd"),
+	TargetSort.Id.CLOSEST_FIRST: preload("res://behavior/target_sort/closest_first_position_target_sorter.gd"),
 }
 
 var action_by_id: Dictionary
@@ -150,7 +150,20 @@ func lookup_target_sort(id: TargetSort.Id) -> TargetSort:
 	return target_sort_by_id[id]
 
 func make_actor_target_sorter(target_sort: TargetSort) -> ActorTargetSorter:
-	var sorter = target_sort_scripts[target_sort.id].new() as ActorTargetSorter
+	assert(target_sort.type in [TargetSort.Type.ACTOR, TargetSort.Type.POSITION])
+	var sorter: ActorTargetSorter
+	if target_sort.type == TargetSort.Type.ACTOR:
+		sorter = target_sort_scripts[target_sort.id].new() as ActorTargetSorter
+
+	else:
+		var position_sorter = make_position_target_sorter(target_sort)
+		sorter = PositionToActorTargetSorterAdapter.new(position_sorter)
+	sorter.def = target_sort
+	return sorter
+
+func make_position_target_sorter(target_sort: TargetSort) -> PositionTargetSorter:
+	assert(target_sort.type in [TargetSort.Type.POSITION])
+	var sorter = target_sort_scripts[target_sort.id].new() as PositionTargetSorter
 	sorter.def = target_sort
 	return sorter
 

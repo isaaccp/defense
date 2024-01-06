@@ -13,6 +13,7 @@ cmp = 0
 script = ExtResource("3_mefl5")
 id = 5
 type = 1
+description = "Targets actors of the same side (but not oneself or the tower)"
 sortable = true
 params = SubResource("Resource_simwv")
 abstract = true

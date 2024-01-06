@@ -13,6 +13,7 @@ cmp = 0
 script = ExtResource("2_lh6h8")
 id = 4
 type = 1
+description = "Targets actors of the same side (including oneself, but not the tower)"
 sortable = true
 params = SubResource("Resource_simwv")
 abstract = true

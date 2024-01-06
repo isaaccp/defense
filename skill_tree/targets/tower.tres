@@ -12,6 +12,7 @@ cmp = 0
 script = ExtResource("1_awb10")
 id = 2
 type = 1
+description = "Targets the tower"
 sortable = false
 params = SubResource("Resource_oit4y")
 abstract = true

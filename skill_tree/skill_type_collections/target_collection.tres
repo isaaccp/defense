@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=7 format=3 uid="uid://cq8l4dgmqs4id"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=8 format=3 uid="uid://cq8l4dgmqs4id"]
 
 [ext_resource type="Script" path="res://skill_type_collection.gd" id="1_rp2v3"]
 [ext_resource type="Resource" uid="uid://dvs6g4m5siut3" path="res://skill_tree/targets/ally.tres" id="2_d31sg"]
 [ext_resource type="Resource" uid="uid://c2lpsyebwog7q" path="res://skill_tree/targets/self.tres" id="3_jhs4y"]
+[ext_resource type="Resource" uid="uid://dnt0l5kgxcoq1" path="res://skill_tree/targets/center.tres" id="3_l1xfh"]
 [ext_resource type="Resource" uid="uid://cd07rgpgh7lss" path="res://skill_tree/targets/enemy.tres" id="3_qwkiq"]
 [ext_resource type="Resource" uid="uid://cgvf7q7jgtwjg" path="res://skill_tree/targets/tower.tres" id="4_v7bjb"]
 [ext_resource type="Resource" uid="uid://c2kdoahns8b57" path="res://skill_tree/targets/self_or_ally.tres" id="5_h77kv"]
 
 [resource]
 script = ExtResource("1_rp2v3")
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_d31sg"), ExtResource("3_qwkiq"), ExtResource("3_jhs4y"), ExtResource("5_h77kv"), ExtResource("4_v7bjb")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_d31sg"), ExtResource("3_l1xfh"), ExtResource("3_qwkiq"), ExtResource("3_jhs4y"), ExtResource("5_h77kv"), ExtResource("4_v7bjb")])

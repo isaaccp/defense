@@ -10,11 +10,14 @@ enum Id {
 	SELF,
 	SELF_OR_ALLY,
 	ALLY,
+	CENTER,
 }
 
 @export var id: Id
 ## Type of Target that this selector returns.
 @export var type: Target.Type
+## Description for target.
+@export_multiline var description: String
 ## Whether the target is sortable. If it is, it must provide
 ## the {sort} placeholder in params.editor_string.
 @export var sortable = true
@@ -35,4 +38,4 @@ func name() -> String:
 	return target_selection_name(id)
 
 func full_description():
-	return "%s\nTarget Type: %s" % [name(), Target.target_type_str(type)]
+	return "%s\n%s\nTarget Type: %s" % [name(), description, Target.target_type_str(type)]

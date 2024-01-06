@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=5 format=3 uid="uid://dnt0l5kgxcoq1"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_neeaj"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_lpwjs"]
+[ext_resource type="Resource" uid="uid://cgvf7q7jgtwjg" path="res://skill_tree/targets/tower.tres" id="2_yj22p"]
+
+[sub_resource type="Resource" id="Resource_oit4y"]
+script = ExtResource("1_neeaj")
+editor_string = ""
+cmp = 0
+
+[resource]
+script = ExtResource("2_lpwjs")
+id = 6
+type = 3
+description = "Targets the center of the level"
+sortable = false
+params = SubResource("Resource_oit4y")
+abstract = true
+skill_name = &"Center"
+skill_type = 2
+parent = ExtResource("2_yj22p")
+tree_type = 1

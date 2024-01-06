@@ -12,6 +12,7 @@ cmp = 0
 script = ExtResource("2_2oq6d")
 id = 1
 type = 1
+description = "Targets actors of the opposing side"
 sortable = true
 params = SubResource("Resource_xm5n1")
 abstract = true
