@@ -6,6 +6,8 @@ class_name ScriptTree
 @export var delete_icon: Texture2D
 @export var edit_icon: Texture2D
 
+const always = preload("res://skill_tree/conditions/always.tres")
+
 var _root: TreeItem
 
 enum Column {
@@ -41,8 +43,8 @@ func _add_empty() -> TreeItem:
 	row.set_selectable(0, false)
 	row.set_text(Column.TARGET, "[Target]")
 	row.set_metadata(Column.TARGET, _metadata(0))
-	row.set_text(Column.CONDITION, "[Condition]")
-	row.set_metadata(Column.CONDITION, _metadata(0))
+	row.set_text(Column.CONDITION, str(always))
+	row.set_metadata(Column.CONDITION, _metadata(always.id, always.params))
 	row.set_text(Column.ACTION, "[Action]")
 	row.set_metadata(Column.ACTION, _metadata(0))
 	return row
