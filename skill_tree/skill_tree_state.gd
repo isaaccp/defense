@@ -5,6 +5,8 @@ class_name SkillTreeState
 # Unclear if we actually need this here yet.
 @export var skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
 
+# Refactor this so we don't have to repeat everything 4 times?
+# OTOH I don't think we are adding more skill types?
 @export var acquired_actions: Array[ActionDef.Id]:
 	get:
 		if full_acquired:
@@ -16,6 +18,12 @@ class_name SkillTreeState
 		if full_acquired:
 			return SkillManager.all_target_selections()
 		return acquired_target_selections
+
+@export var acquired_target_sorts: Array[TargetSort.Id]:
+	get:
+		if full_acquired:
+			return SkillManager.all_target_sorts()
+		return acquired_target_sorts
 
 @export var acquired_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
 	get:
@@ -34,6 +42,12 @@ class_name SkillTreeState
 		if full_unlocked:
 			return SkillManager.all_target_selections()
 		return unlocked_target_selections
+
+@export var unlocked_target_sorts: Array[TargetSort.Id]:
+	get:
+		if full_unlocked:
+			return SkillManager.all_target_sorts()
+		return unlocked_target_sorts
 
 @export var unlocked_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
 	get:
@@ -89,6 +103,8 @@ func _skill_in(skill: Skill, state_type: StateType):
 			return skill.id in _target_selections(state_type)
 		Skill.SkillType.CONDITION:
 			return skill.id in _conditions(state_type)
+		Skill.SkillType.TARGET_SORT:
+			return skill.id in _target_sorts(state_type)
 	return false
 
 func _add_skill_to(skill: Skill, state_type: StateType):
@@ -100,6 +116,8 @@ func _add_skill_to(skill: Skill, state_type: StateType):
 			_target_selections(state_type).append(skill.id)
 		Skill.SkillType.CONDITION:
 			_conditions(state_type).append(skill.id)
+		Skill.SkillType.TARGET_SORT:
+			_target_sorts(state_type).append(skill.id)
 
 static func make_full() -> SkillTreeState:
 	var skill_tree_state = SkillTreeState.new()
@@ -124,6 +142,12 @@ func _target_selections(state_type: StateType) -> Array[TargetSelectionDef.Id]:
 	else:
 		return unlocked_target_selections
 
+func _target_sorts(state_type: StateType) -> Array[TargetSort.Id]:
+	if state_type == StateType.ACQUIRED:
+		return acquired_target_sorts
+	else:
+		return unlocked_target_sorts
+
 func _conditions(state_type: StateType) -> Array[ConditionDef.Id]:
 	if state_type == StateType.ACQUIRED:
 		return acquired_conditions
@@ -141,7 +165,9 @@ func _full(state_type: StateType) -> bool:
 func add(other: SkillTreeState):
 	unlocked_actions += other.unlocked_actions
 	unlocked_target_selections += other.unlocked_target_selections
+	unlocked_target_sorts += other.unlocked_target_sorts
 	unlocked_conditions += other.unlocked_target_selections
 	acquired_actions += other.acquired_actions
 	acquired_target_selections += other.acquired_target_selections
+	acquired_target_sorts += other.acquired_target_sorts
 	acquired_conditions += other.acquired_target_selections
