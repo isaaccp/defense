@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ConditionDef" load_steps=5 format=3 uid="uid://xun2hm81rhd1"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_8m636"]
+[ext_resource type="Resource" uid="uid://bp783ayeoq184" path="res://skill_tree/conditions/once.tres" id="2_wy280"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_aj6lq"]
+
+[sub_resource type="Resource" id="Resource_l5ow1"]
+script = ExtResource("1_8m636")
+editor_string = "{int_value} times"
+cmp = 0
+
+[resource]
+script = ExtResource("3_aj6lq")
+id = 5
+type = 1
+params = SubResource("Resource_l5ow1")
+abstract = true
+skill_name = &"Times"
+skill_type = 3
+parent = ExtResource("2_wy280")
+tree_type = 1

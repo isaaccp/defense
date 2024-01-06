@@ -25,6 +25,7 @@ var condition_scripts = {
 	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_node_condition_evaluator.gd"),
 	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
 	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_target_node_condition_evaluator.gd"),
+	ConditionDef.Id.TIMES: preload("res://behavior/conditions/condition_times.gd"),
 }
 
 var target_scripts = {

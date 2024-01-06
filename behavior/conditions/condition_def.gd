@@ -9,6 +9,7 @@ enum Id {
 	TARGET_HEALTH,
 	ONCE,
 	TARGET_DISTANCE,
+	TIMES,
 }
 
 # Type of condition.
@@ -28,20 +29,5 @@ enum Type {
 @export var id: Id
 @export var type: Type
 
-static func condition_name(condition_id: Id) -> String:
-	return Id.keys()[condition_id].capitalize()
-
-# TODO: More constructors for different stuff, parameters, etc.
-static func make(id: Id, type: Type) -> ConditionDef:
-	var condition = ConditionDef.new()
-	condition.id = id
-	condition.type = type
-	return condition
-
-static func make_instance(id: Id, type: Type) -> ConditionDef:
-	var condition = make(id, type)
-	condition.abstract = false
-	return condition
-
 func name() -> String:
-	return condition_name(id)
+	return Id.keys()[id].capitalize()
