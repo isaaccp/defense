@@ -2,7 +2,7 @@ extends TargetSelector
 
 class_name NodeTargetSelector
 
-var condition_evaluator: TargetNodeConditionEvaluator
+var condition_evaluator: TargetActorConditionEvaluator
 
 # TODO: Change actor to Actor.
 func select_target(action: Action, actor: Actor, side_component: SideComponent) -> Target:

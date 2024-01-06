@@ -1,9 +1,9 @@
 extends ConditionEvaluator
 
-class_name TargetNodeConditionEvaluator
+class_name TargetActorConditionEvaluator
 
-var body: Node2D
+var actor: Actor
 
-func evaluate(node: Node2D) -> bool:
+func evaluate(target: Actor) -> bool:
 	assert(false, "Must be implemented")
 	return false

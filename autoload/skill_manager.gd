@@ -99,18 +99,18 @@ func make_any_condition_evaluator(condition: ConditionDef) -> AnyConditionEvalua
 	evaluator.def = condition
 	return evaluator
 
-func make_self_condition_evaluator(condition: ConditionDef, body: Node2D) -> SelfConditionEvaluator:
+func make_self_condition_evaluator(condition: ConditionDef, actor: Actor) -> SelfConditionEvaluator:
 	assert(not condition.abstract)
 	var evaluator = condition_scripts[condition.id].new() as SelfConditionEvaluator
 	evaluator.def = condition
-	evaluator.body = body
+	evaluator.actor = actor
 	return evaluator
 
-func make_target_node_condition_evaluator(condition: ConditionDef, body: Node2D) -> TargetNodeConditionEvaluator:
+func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor) -> TargetActorConditionEvaluator:
 	assert(not condition.abstract)
-	var evaluator = condition_scripts[condition.id].new() as TargetNodeConditionEvaluator
+	var evaluator = condition_scripts[condition.id].new() as TargetActorConditionEvaluator
 	evaluator.def = condition
-	evaluator.body = body
+	evaluator.actor = actor
 	return evaluator
 
 func all_conditions() -> Array[ConditionDef.Id]:
@@ -131,7 +131,7 @@ func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectio
 		target.params.set_placeholder_value(SkillParams.PlaceholderId.SORT, target.default_sort)
 	return target
 
-func make_actor_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetNodeConditionEvaluator) -> NodeTargetSelector:
+func make_actor_target_selector(target: TargetSelectionDef, target_node_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
 	assert(not target.abstract)
 	var selector = target_scripts[target.id].new() as NodeTargetSelector
 	selector.def = target

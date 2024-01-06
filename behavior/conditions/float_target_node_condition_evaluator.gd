@@ -1,12 +1,12 @@
-extends TargetNodeConditionEvaluator
+extends TargetActorConditionEvaluator
 
-class_name FloatTargetNodeConditionEvaluator
+class_name FloatTargetActorConditionEvaluator
 
 # Set to true if get_value fails. Evaluator will
 # then return false.
 var get_value_failed = false
 
-func get_value(node: Node2D) -> float:
+func get_value(target: Actor) -> float:
 	assert(false, "Must be implemented")
 	return 0
 
@@ -29,6 +29,6 @@ func _comparison(value: float) -> bool:
 	assert(false, "Unreachable")
 	return false
 
-func evaluate(node: Node2D) -> bool:
-	var value = get_value(node)
+func evaluate(target: Actor) -> bool:
+	var value = get_value(target)
 	return _comparison(value)

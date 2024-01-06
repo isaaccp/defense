@@ -2,7 +2,7 @@ extends ConditionEvaluator
 
 class_name SelfConditionEvaluator
 
-var body: Node2D
+var actor: Actor
 
 func evaluate() -> bool:
 	assert(false, "Must be implemented")

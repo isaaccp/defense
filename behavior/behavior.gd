@@ -21,7 +21,7 @@ func prepare(body_: CharacterBody2D, side_component_: SideComponent):
 	condition_evaluators.clear()
 	for rule in rules:
 		var evaluator: ConditionEvaluator = null
-		var target_node_evaluator: TargetNodeConditionEvaluator = null
+		var target_node_evaluator: TargetActorConditionEvaluator = null
 		var target_selector: TargetSelector = null
 		match rule.condition.type:
 			ConditionDef.Type.ANY:

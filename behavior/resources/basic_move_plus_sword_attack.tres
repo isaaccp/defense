@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://c4v0m5wsagpid"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=20 format=3 uid="uid://c4v0m5wsagpid"]
 
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_31vv2"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_12fml"]
@@ -8,9 +8,15 @@
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="5_4vnt8"]
 
+[sub_resource type="Resource" id="Resource_xyxf2"]
+script = ExtResource("2_cmwyq")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_uaw18"]
 script = ExtResource("1_31vv2")
 id = 2
+params = SubResource("Resource_xyxf2")
 abstract = false
 skill_name = &"Sword Attack"
 skill_type = 1
@@ -54,9 +60,15 @@ target_selection = SubResource("Resource_b2xu2")
 action = SubResource("Resource_uaw18")
 condition = SubResource("Resource_m1ygx")
 
+[sub_resource type="Resource" id="Resource_abeke"]
+script = ExtResource("2_cmwyq")
+editor_string = ""
+cmp = 0
+
 [sub_resource type="Resource" id="Resource_fjboq"]
 script = ExtResource("1_31vv2")
 id = 1
+params = SubResource("Resource_abeke")
 abstract = false
 skill_name = &"Move To"
 skill_type = 1
