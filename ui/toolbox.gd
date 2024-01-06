@@ -51,7 +51,7 @@ func metadata(column: int, id: int, params: SkillParams) -> Dictionary:
 
 func _get_drag_data(at_position: Vector2):
 	var item = get_item_at_position(at_position)
-	if item.get_parent() == _root: # header
+	if not item or item.get_parent() == _root: # header
 		return null
 
 	var preview = Label.new()

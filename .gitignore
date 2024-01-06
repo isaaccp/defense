@@ -3,3 +3,5 @@
 # Editor backups
 *.tmp
 webrtc/lib/~lib*
+# Local preferences
+.gut_editor_shortcuts.cfg
