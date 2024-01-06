@@ -2,4 +2,4 @@
 
 [ext_resource type="PackedScene" uid="uid://bmpg7h70fd2ji" path="res://character/base_character.tscn" id="1_vws3n"]
 
-[node name="BaseCharacter" instance=ExtResource("1_vws3n")]
+[node name="Cleric" instance=ExtResource("1_vws3n")]

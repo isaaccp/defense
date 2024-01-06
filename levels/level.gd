@@ -84,7 +84,7 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 			gameplay_characters[i].skill_tree_state.add(skill_tree_state_add)
 		if skill_tree_state_override:
 			gameplay_characters[i].skill_tree_state = skill_tree_state_override
-		var character = CharacterManager.make_character(gameplay_characters[i])
+		var character = gameplay_characters[i].make_character_body()
 		character.actor_name = gameplay_characters[i].name
 		character.name = character.actor_name
 		character.idx = i

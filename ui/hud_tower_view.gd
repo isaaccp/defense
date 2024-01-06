@@ -6,7 +6,6 @@ var tower: Node2D
 
 # Refactor this with HudCharacterView.
 func initialize(tower_: Node2D) -> void:
-	print("tower hud initialize")
 	tower = tower_
 	var health = Component.get_health_component_or_die(tower)
 	health.health_updated.connect(_on_health_updated)
