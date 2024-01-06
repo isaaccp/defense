@@ -15,14 +15,23 @@ enum Id {
 # Type of condition.
 enum Type {
 	UNSPECIFIED,
-	# Can be applied regardless of target.
+	## Condition that can be applied regardless of target.
+	## E.g., Always, Once, Every 5 seconds.
 	ANY,
-	# Can be applied to targets of Target.Type.ACTOR as a filter.
-	TARGET_NODE,
-	# Condition applies to self (e.g. my health > X).
+	# Note that this condition makes sense for ACTORS too, but needs an extra bit
+	# for whether you want All, Any, None to comply with the condition.
+	# That doesn't exist yet.
+	## Condition that can be applied to targets of Target.Type.ACTOR as a filter.
+	## E.g., "target health < X".
+	TARGET_ACTOR,
+	## Condition that can be applied to the actor running the check.
+	## In general the same conditions as for Target.ACTOR make sense, it's just
+	## the check subject which changes (target vs self). Some may not make sense
+	## e.g. "distance to self" and they'll be provided by different Skills
+	## possibly using the same code.
 	SELF,
-	# Some global condition that doesn't apply to targets, e.g.
-	# number of characters/enemies left.
+	## Condition that can be evaluated globally, but unlike "ANY", requires
+	## world knowledge. E.g. number of characters/enemies left.
 	GLOBAL,
 }
 
@@ -31,3 +40,10 @@ enum Type {
 
 func name() -> String:
 	return Id.keys()[id].capitalize()
+
+func compatible_with_target(target_type: Target.Type) -> bool:
+	if type in [Type.ANY, Type.GLOBAL, Type.SELF]:
+		return true
+	if type == Type.TARGET_ACTOR:
+		return target_type == Target.Type.ACTOR
+	return false

@@ -31,7 +31,7 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 			ConditionDef.Type.GLOBAL:
 				# TODO: Implement.
 				pass
-			ConditionDef.Type.TARGET_NODE:
+			ConditionDef.Type.TARGET_ACTOR:
 				target_node_evaluator = SkillManager.make_target_actor_condition_evaluator(rule.condition, actor)
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
