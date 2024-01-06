@@ -5,12 +5,11 @@ class_name TargetSelectionDef
 
 enum Id {
 	UNSPECIFIED,
-	CLOSEST_ENEMY,
+	ENEMY,
 	TOWER,
 	SELF,
 	SELF_OR_ALLY,
 	ALLY,
-	FARTHEST_ENEMY,
 }
 
 @export var id: Id

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=28 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="8_kcejl"]
 [ext_resource type="Script" path="res://behavior/rule.gd" id="8_pcifi"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="9_apbeu"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="9_cb06e"]
 
 [sub_resource type="Animation" id="Animation_sy2pk"]
 length = 0.001
@@ -264,16 +265,10 @@ _data = {
 "run": SubResource("Animation_1ki3q")
 }
 
-[sub_resource type="Resource" id="Resource_sjfmi"]
-script = ExtResource("6_2kkh2")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_7utxn"]
+[sub_resource type="Resource" id="Resource_qkf4q"]
 script = ExtResource("5_kue6n")
 id = 3
-params = SubResource("Resource_sjfmi")
-abstract = true
+abstract = false
 skill_name = &"Bow Attack"
 skill_type = 1
 tree_type = 3
@@ -283,7 +278,7 @@ script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_33jd3"]
+[sub_resource type="Resource" id="Resource_d13am"]
 script = ExtResource("7_yhyp2")
 id = 1
 type = 1
@@ -293,43 +288,38 @@ skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_mfimp"]
+[sub_resource type="Resource" id="Resource_f8y3y"]
 script = ExtResource("6_2kkh2")
-editor_string = ""
+editor_string = "Enemy ({sort})"
 cmp = 0
+sort = ExtResource("9_cb06e")
 
-[sub_resource type="Resource" id="Resource_74cuu"]
+[sub_resource type="Resource" id="Resource_5lqhc"]
 script = ExtResource("9_apbeu")
 id = 1
 type = 1
 sortable = true
-params = SubResource("Resource_mfimp")
+params = SubResource("Resource_f8y3y")
 abstract = false
-skill_name = &"Closest Enemy"
+skill_name = &"Enemy"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_pyxby"]
+[sub_resource type="Resource" id="Resource_o5so0"]
 script = ExtResource("8_pcifi")
-target_selection = SubResource("Resource_74cuu")
-action = SubResource("Resource_7utxn")
-condition = SubResource("Resource_33jd3")
+target_selection = SubResource("Resource_5lqhc")
+action = SubResource("Resource_qkf4q")
+condition = SubResource("Resource_d13am")
 
-[sub_resource type="Resource" id="Resource_6qux0"]
-script = ExtResource("6_2kkh2")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_pj5t5"]
+[sub_resource type="Resource" id="Resource_577i5"]
 script = ExtResource("5_kue6n")
 id = 1
-params = SubResource("Resource_6qux0")
-abstract = true
+abstract = false
 skill_name = &"Move To"
 skill_type = 1
 tree_type = 2
 
-[sub_resource type="Resource" id="Resource_w5hdw"]
+[sub_resource type="Resource" id="Resource_4pvjm"]
 script = ExtResource("7_yhyp2")
 id = 1
 type = 1
@@ -339,32 +329,27 @@ skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_egltp"]
-script = ExtResource("6_2kkh2")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_nqqmt"]
+[sub_resource type="Resource" id="Resource_f47dt"]
 script = ExtResource("9_apbeu")
 id = 1
 type = 1
 sortable = true
-params = SubResource("Resource_egltp")
+params = SubResource("Resource_f8y3y")
 abstract = false
-skill_name = &"Closest Enemy"
+skill_name = &"Enemy"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_6dy2c"]
+[sub_resource type="Resource" id="Resource_e4jug"]
 script = ExtResource("8_pcifi")
-target_selection = SubResource("Resource_nqqmt")
-action = SubResource("Resource_pj5t5")
-condition = SubResource("Resource_w5hdw")
+target_selection = SubResource("Resource_f47dt")
+action = SubResource("Resource_577i5")
+condition = SubResource("Resource_4pvjm")
 
 [sub_resource type="Resource" id="Resource_7dfw4"]
 resource_local_to_scene = true
 script = ExtResource("8_kcejl")
-rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_pyxby"), SubResource("Resource_6dy2c")])
+rules = Array[ExtResource("8_pcifi")]([SubResource("Resource_o5so0"), SubResource("Resource_e4jug")])
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
 actor_name = "Orc Archer"
