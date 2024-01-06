@@ -126,4 +126,5 @@ func attributes():
 		attrs += "Cooldown: %0.1f\n" % cooldown
 	if abortable:
 		attrs += "Can be preempted"
+	attrs += "Supported Target Types: %s" % def.supported_target_types_str()
 	return attrs

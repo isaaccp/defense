@@ -273,7 +273,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_qkf4q"]
 script = ExtResource("5_kue6n")
 id = 3
-supported_target_types = null
+supported_target_types = Array[int]([])
 params = SubResource("Resource_aaka8")
 abstract = false
 skill_name = &"Bow Attack"
@@ -326,7 +326,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_577i5"]
 script = ExtResource("5_kue6n")
 id = 1
-supported_target_types = null
+supported_target_types = Array[int]([])
 params = SubResource("Resource_5sm2p")
 abstract = false
 skill_name = &"Move To"

@@ -25,6 +25,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_xaoty"]
 script = ExtResource("1_78mwp")
 id = 2
+supported_target_types = Array[int]([])
 params = SubResource("Resource_tp5p4")
 abstract = true
 skill_name = &"Sword Attack"
@@ -34,6 +35,7 @@ tree_type = 2
 [sub_resource type="Resource" id="Resource_6bl0j"]
 script = ExtResource("1_78mwp")
 id = 4
+supported_target_types = Array[int]([])
 params = SubResource("Resource_fegqf")
 abstract = true
 skill_name = &"Charge"
@@ -86,6 +88,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_8rhoo"]
 script = ExtResource("1_78mwp")
 id = 2
+supported_target_types = Array[int]([])
 params = SubResource("Resource_6netq")
 abstract = true
 skill_name = &"Sword Attack"
@@ -132,6 +135,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_26fbd"]
 script = ExtResource("1_78mwp")
 id = 1
+supported_target_types = Array[int]([])
 params = SubResource("Resource_06skd")
 abstract = true
 skill_name = &"Move To"

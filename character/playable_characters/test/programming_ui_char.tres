@@ -20,6 +20,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_vujyv"]
 script = ExtResource("2_da8bg")
 id = 7
+supported_target_types = Array[int]([])
 params = SubResource("Resource_6difb")
 abstract = false
 skill_name = &"Hold Person"

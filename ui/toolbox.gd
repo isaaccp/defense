@@ -24,16 +24,18 @@ func initialize(
 		var target_item = tree.create_item(targets)
 		var target = SkillManager.make_target_selection_instance(target_type)
 		target_item.set_text(0, TargetSelectionDef.target_selection_name(target_type))
+		target_item.set_tooltip_text(0, target.full_description())
 		target_item.set_metadata(0, metadata(0, target_type, target.params))
 
 	var triggers = tree.create_item(_root)
 	triggers.set_text(0, "Conditions")
 	triggers.set_selectable(0, false)
 	for condition_type in condition_types:
-		var trigger = tree.create_item(triggers)
+		var condition_item = tree.create_item(triggers)
 		var condition = SkillManager.make_condition_instance(condition_type)
-		trigger.set_text(0, condition.name())
-		trigger.set_metadata(0, metadata(1, condition_type, condition.params))
+		condition_item.set_text(0, condition.name())
+		condition_item.set_tooltip_text(0, condition.full_description())
+		condition_item.set_metadata(0, metadata(1, condition_type, condition.params))
 
 	var actions = tree.create_item(_root)
 	actions.set_text(0, "Actions")

@@ -47,3 +47,13 @@ func compatible_with_target(target_type: Target.Type) -> bool:
 	if type == Type.TARGET_ACTOR:
 		return target_type == Target.Type.ACTOR
 	return false
+
+func supported_target_types_str() -> String:
+	if type in [Type.ANY, Type.GLOBAL, Type.SELF]:
+		return "All"
+	if type == Type.TARGET_ACTOR:
+		return "Actor"
+	return "<fix me>"
+
+func full_description():
+	return "%s\nSupported Target Types: %s" % [name(), supported_target_types_str()]

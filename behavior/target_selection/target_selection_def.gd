@@ -33,3 +33,6 @@ func validate():
 
 func name() -> String:
 	return target_selection_name(id)
+
+func full_description():
+	return "%s\nTarget Type: %s" % [name(), Target.target_type_str(type)]

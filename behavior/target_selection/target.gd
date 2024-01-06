@@ -1,3 +1,4 @@
+@tool
 extends Resource
 
 class_name Target
@@ -113,3 +114,6 @@ static func make_position_target(pos_: Vector2) -> Target:
 	target.type = Type.POSITION
 	target.pos = pos_
 	return target
+
+static func target_type_str(target_type: Target.Type) -> String:
+	return Type.keys()[target_type]

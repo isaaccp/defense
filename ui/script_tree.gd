@@ -38,8 +38,9 @@ func load_behavior(behavior: Behavior) -> void:
 	assert(is_inside_tree(), "Needs to be called inside tree")
 	for c in _root.get_children():
 		_root.remove_child(c)
-	for rule in behavior.rules:
-		_add_row(rule)
+	if behavior.rules:
+		for rule in behavior.rules:
+			_add_row(rule)
 	_add_row()
 
 func _add_row(rule: Rule = null) -> TreeItem:
@@ -68,6 +69,20 @@ func _add_button_if_params(row: TreeItem, column: int, params: SkillParams) -> b
 
 func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
 	row.set_text(idx, name)
+	match idx:
+		Column.TARGET:
+			var target = _target_from_meta(meta)
+			if target:
+				row.set_tooltip_text(idx, target.full_description())
+		Column.CONDITION:
+			var condition = _condition_from_meta(meta)
+			if condition:
+				row.set_tooltip_text(idx, condition.full_description())
+		Column.ACTION:
+			var action_def = _action_from_meta(meta)
+			if action_def:
+				var action = SkillManager.make_runnable_action(action_def)
+				row.set_tooltip_text(idx, action.full_description())
 	row.set_metadata(idx, meta)
 
 func _is_empty(item: TreeItem) -> bool:

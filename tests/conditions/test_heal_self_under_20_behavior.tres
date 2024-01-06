@@ -16,6 +16,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_fqjy0"]
 script = ExtResource("1_b34mx")
 id = 6
+supported_target_types = Array[int]([])
 params = SubResource("Resource_2bgav")
 abstract = false
 skill_name = &"Heal"

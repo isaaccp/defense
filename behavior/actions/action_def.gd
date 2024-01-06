@@ -35,3 +35,7 @@ func name() -> String:
 
 func compatible_with_target(target_type: Target.Type) -> bool:
 	return target_type in supported_target_types
+
+func supported_target_types_str() -> String:
+	var supported_targets = supported_target_types.map(func(t): return Target.target_type_str(t))
+	return ",".join(supported_targets)
