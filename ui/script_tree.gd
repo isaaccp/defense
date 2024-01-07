@@ -38,7 +38,7 @@ func load_behavior(behavior: Behavior) -> void:
 	assert(is_inside_tree(), "Needs to be called inside tree")
 	for c in _root.get_children():
 		_root.remove_child(c)
-	if behavior.rules:
+	if behavior:
 		for rule in behavior.rules:
 			_add_row(rule)
 	_add_row()
