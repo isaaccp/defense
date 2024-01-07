@@ -12,17 +12,17 @@ var enemy_health: HealthComponent
 
 func make_sword_behavior(move: bool = false) -> Behavior:
 	var behavior = Behavior.new()
-	behavior.rules.append(
-		Rule.make(
-			SkillManager.make_target_selection_instance(TargetSelectionDef.Id.ENEMY),
-			SkillManager.make_action_instance(ActionDef.Id.SWORD_ATTACK),
+	behavior.saved_rules.append(
+		RuleDef.make(
+			RuleSkillDef.make_target(TargetSelectionDef.Id.ENEMY),
+			RuleSkillDef.make_action(ActionDef.Id.SWORD_ATTACK),
 		)
 	)
 	if move:
-		behavior.rules.append(
-			Rule.make(
-				SkillManager.make_target_selection_instance(TargetSelectionDef.Id.ENEMY),
-				SkillManager.make_action_instance(ActionDef.Id.MOVE_TO),
+		behavior.saved_rules.append(
+			RuleDef.make(
+				RuleSkillDef.make_target(TargetSelectionDef.Id.ENEMY),
+				RuleSkillDef.make_action(ActionDef.Id.MOVE_TO),
 			)
 		)
 	return behavior

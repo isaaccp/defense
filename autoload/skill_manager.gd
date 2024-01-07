@@ -94,7 +94,11 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 		_:
 			assert(false, "Unexpected skill type to restore")
 	assert(skill, "Failed to restore new skill instance")
-	skill.params = saved_skill.params
+	# This if not needed for real play, but it makes it easier for tests
+	# as they can get the default sorter for target selections without
+	# setting it.
+	if saved_skill.params:
+		skill.params = saved_skill.params
 	return skill
 
 func make_runnable_action(action_def: ActionDef) -> Action:
