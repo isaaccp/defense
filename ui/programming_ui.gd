@@ -6,49 +6,58 @@ class_name ProgrammingUI
 ## Used for F6 debug runs.
 @export var test_character: GameplayCharacter
 
-var character: GameplayCharacter
-@onready var script_tree: ScriptTree = %Script
+var _title_text: String
+var _behavior: Behavior
+var _skills: SkillTreeState
+var _save_disabled: bool
+
+@onready var _script_tree = %Script as ScriptTree
+@onready var _toolbox = %Toolbox as Toolbox
 
 signal canceled
 signal saved(behavior: Behavior)
+
+func initialize(char: GameplayCharacter):
+	assert(is_instance_valid(char)) # TODO: Handle gracefully if needed.
+	_title_text = "Configuring behavior for %s" % char.name
+	_behavior = char.behavior
+	_skills = char.skill_tree_state
+	_save_disabled = false
+
+func editor_initialize(b: Behavior):
+	_skills = SkillTreeState.new()
+	_skills.full_acquired = true
+	_skills.full_unlocked = true
+
+	_behavior = b
+	if b:
+		_title_text = "Editing %s" % b.resource_path
+		_save_disabled = false
+	else:
+		_title_text = "Inspect a behavior resource to edit..."
+		_save_disabled = true
+
+	# Support re-init
+	if is_inside_tree():
+		_setup_tree()
 
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
-		if test_character:
-			initialize(test_character)
+		initialize(test_character)
+		_save_disabled = true
 		canceled.connect(get_tree().quit)
+	_setup_tree()
 
-func initialize(character_: GameplayCharacter):
-	assert(is_inside_tree(), "Needs to be called inside tree")
-	character = character_
-	%Toolbox.initialize(
-		character.skill_tree_state.acquired_target_selections,
-		character.skill_tree_state.acquired_actions,
-		character.skill_tree_state.acquired_conditions,
-	)
-	if is_instance_valid(character):
-		%Title.text = "Configuring behavior for %s" % character.name
-		script_tree.load_behavior(character.behavior)
-
-func editor_initialize(b: Behavior):
-	assert(is_inside_tree(), "Needs to be called inside tree")
-	if not b:
-		%Title.text = "Inspect a behavior resource to edit..."
-		%SaveButton.disabled = true
-		return
-	%Toolbox.initialize(
-		SkillManager.all_target_selections(),
-		SkillManager.all_actions(),
-		SkillManager.all_conditions(),
-	)
-	%Title.text = "Editing %s" % b.resource_path
-	script_tree.load_behavior(b)
-	%SaveButton.disabled = false
+func _setup_tree():
+	%Title.text = _title_text
+	%SaveButton.disabled = _save_disabled
+	_script_tree.load_behavior(_behavior)
+	_toolbox.load_skills(_skills)
 
 func _on_save_button_pressed():
-	saved.emit(script_tree.get_behavior())
+	saved.emit(_script_tree.get_behavior())
 
 func _on_cancel_button_pressed():
 	canceled.emit()
