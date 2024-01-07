@@ -8,11 +8,11 @@
 script = ExtResource("3_ro8tn")
 acquired_actions = Array[int]([6, 1])
 acquired_target_selections = Array[int]([3, 5])
-acquired_target_sorts = Array[int]([1])
+acquired_target_sorts = Array[StringName]([&"Closest First"])
 acquired_conditions = Array[int]([1])
 unlocked_actions = Array[int]([])
 unlocked_target_selections = Array[int]([])
-unlocked_target_sorts = Array[int]([])
+unlocked_target_sorts = Array[StringName]([])
 unlocked_conditions = Array[int]([1])
 full_acquired = false
 full_unlocked = true

@@ -9,11 +9,11 @@
 script = ExtResource("4_w5bw1")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
-acquired_target_sorts = Array[int]([])
+acquired_target_sorts = Array[StringName]([])
 acquired_conditions = Array[int]([1])
 unlocked_actions = Array[int]([])
 unlocked_target_selections = Array[int]([])
-unlocked_target_sorts = Array[int]([])
+unlocked_target_sorts = Array[StringName]([])
 unlocked_conditions = Array[int]([1])
 full_acquired = true
 full_unlocked = true

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=19 format=3 uid="uid://dgs55tgbrgkhv"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=18 format=3 uid="uid://dgs55tgbrgkhv"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_jvgfs"]
 [ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_80euh"]
@@ -57,11 +57,11 @@ saved_rules = Array[ExtResource("3_d86ld")]([SubResource("Resource_mqhco")])
 script = ExtResource("9_tx848")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
-acquired_target_sorts = Array[int]([])
+acquired_target_sorts = Array[StringName]([])
 acquired_conditions = Array[int]([1])
 unlocked_actions = Array[int]([])
 unlocked_target_selections = Array[int]([])
-unlocked_target_sorts = Array[int]([])
+unlocked_target_sorts = Array[StringName]([])
 unlocked_conditions = Array[int]([1])
 full_acquired = true
 full_unlocked = true

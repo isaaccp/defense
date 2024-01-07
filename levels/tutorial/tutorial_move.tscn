@@ -8,11 +8,11 @@
 script = ExtResource("2_dw0nd")
 acquired_actions = Array[int]([1])
 acquired_target_selections = Array[int]([2])
-acquired_target_sorts = Array[int]([])
+acquired_target_sorts = Array[StringName]([])
 acquired_conditions = Array[int]([1])
 unlocked_actions = Array[int]([1, 2])
 unlocked_target_selections = Array[int]([2, 1])
-unlocked_target_sorts = Array[int]([])
+unlocked_target_sorts = Array[StringName]([])
 unlocked_conditions = Array[int]([1])
 full_acquired = false
 full_unlocked = false
