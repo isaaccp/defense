@@ -27,6 +27,7 @@ func _ready():
 	# TODO: Encapsulate all the hud business better.
 	ui_layer.hud.hide()
 	ui_layer.hud.show_play_controls(false)
+	Global.subviewport = %SubViewport
 
 func start(game_mode: GameMode):
 	level_provider = game_mode.level_provider

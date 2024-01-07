@@ -82,7 +82,7 @@ func _to_string():
 			var actor_names = actors.map(func(a): a.actor_name)
 			return "[%s]" % ",".join(actor_names)
 		Type.POSITION:
-			return "(%0.1f,%0.1f)"
+			return "(%0.1f,%0.1f)" % [pos.x, pos.y]
 
 func position() -> Vector2:
 	match type:
