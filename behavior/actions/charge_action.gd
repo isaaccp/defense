@@ -1,6 +1,4 @@
-extends MoveToAction
-
-class_name ChargeAction
+extends MoveActionBase
 
 # If we moved more than this, trigger strengthened at the end.
 const charge_threshold = 100.0

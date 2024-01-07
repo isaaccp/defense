@@ -1,14 +1,18 @@
-extends BowAttackAction
+extends ProjectileAttackActionBase
 
 var shots = 3
 
 func _init():
 	super()
-	cooldown = 2.0
+	# TODO: Enable this when archers have a way to get away from enemies.
+	# min_distance = 100
+	max_distance = 300
+	projectile_scene = preload("res://behavior/actions/scenes/arrow.tscn")
+	cooldown = 3.0
 
 func post_initialize():
 	for i in range(shots):
-		spawn_arrow()
+		spawn_projectile()
 		await Global.get_tree().create_timer(0.33, false).timeout
 		# Stop firing arrows if we are aborted.
 		if finished:

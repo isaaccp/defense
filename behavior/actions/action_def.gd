@@ -19,6 +19,8 @@ enum Id {
 }
 
 @export var id: Id
+## Script implementing this action.
+@export var action_script: GDScript
 ## Types of target that this action supports. The action script must be able
 ## to handle all the target types declared here. It is used by the UI to
 ## prevent invalid configurations.

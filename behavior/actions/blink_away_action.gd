@@ -1,11 +1,10 @@
-extends BlinkAction
+extends TeleportActionBase
 
-class_name BlinkAwayAction
+const teleport_distance = 100
 
 func _init():
 	cooldown = 3.0
-	blink_distance = 100
 
 func update_position():
 	var dir = initial_target_pos.direction_to(body.global_position)
-	body.global_position += dir * blink_distance
+	body.global_position += dir * teleport_distance

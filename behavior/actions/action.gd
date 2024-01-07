@@ -43,6 +43,9 @@ var attributes_component: AttributesComponent
 var status_component: StatusComponent
 var logging_component: LoggingComponent
 
+func _init():
+	pass
+
 func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
 				action_sprites_: Node2D, side_component_: SideComponent,
 				attributes_component_: AttributesComponent,
