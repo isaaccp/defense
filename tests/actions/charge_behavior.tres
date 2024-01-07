@@ -78,4 +78,3 @@ condition = SubResource("Resource_fajao")
 [resource]
 script = ExtResource("5_uvcj2")
 saved_rules = Array[ExtResource("3_erdfh")]([SubResource("Resource_bcpq4"), SubResource("Resource_87fde")])
-rules = Array[Resource("res://behavior/rule.gd")]([])

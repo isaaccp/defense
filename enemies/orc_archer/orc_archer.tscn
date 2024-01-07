@@ -336,7 +336,6 @@ condition = SubResource("Resource_f3pq8")
 resource_local_to_scene = true
 script = ExtResource("8_kcejl")
 saved_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_lucc8"), SubResource("Resource_uktw8")])
-rules = Array[Resource("res://behavior/rule.gd")]([])
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
 actor_name = "Orc Archer"
