@@ -4,7 +4,7 @@ class_name BehaviorComponent
 
 const component: StringName = &"BehaviorComponent"
 
-signal behavior_updated(action: ActionDef.Id, target: Target)
+signal behavior_updated(action_name: StringName, target: Target)
 
 @export_group("Required")
 # TODO: Change to Actor once we have a way to get the body through a component.
@@ -79,7 +79,7 @@ func _physics_process(delta: float):
 		return
 
 	# For change detection.
-	var prev_action_id = _action_id(action)
+	var prev_action_name = _action_name(action)
 	var prev_target = target
 
 	# If action is finished, clear everything so we re-evaluate.
@@ -105,7 +105,7 @@ func _physics_process(delta: float):
 				action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component)
 		if action and action.abortable:
 			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
-	_emit_updated_if_changed(prev_action_id, prev_target)
+	_emit_updated_if_changed(prev_action_name, prev_target)
 	# No rule implies no action.
 	if rule:
 		action.physics_process(delta)
@@ -116,21 +116,21 @@ func _on_action_finished(action: Action):
 	assert(action.finished)
 	if action.cooldown > 0:
 		var eligible_at = elapsed_time + action.cooldown
-		action_cooldowns[action.def.id] = eligible_at
+		action_cooldowns[action.def.skill_name] = eligible_at
 		_log("%s: %0.1f cooldown, eligible at %0.2f" % [ action.def.name(), action.cooldown, eligible_at])
 
-static func _action_id(action: Action) -> ActionDef.Id:
+static func _action_name(action: Action) -> StringName:
 	if action:
-		return action.def.id
-	return ActionDef.Id.UNSPECIFIED
+		return action.def.skill_name
+	return ActionDef.NoAction
 
-func _emit_updated_if_changed(prev_action_id: ActionDef.Id, prev_target: Target):
+func _emit_updated_if_changed(prev_action_name: StringName, prev_target: Target):
 	# Log here if we become idle as it's the easiest way.
-	var action_id = _action_id(action)
-	if prev_action_id != action_id or prev_target != target:
+	var action_name = _action_name(action)
+	if prev_action_name != action_name or prev_target != target:
 		if rule == null:
 			_log("Idle: Could not find any eligible rules")
-		behavior_updated.emit(action_id, target)
+		behavior_updated.emit(action_name, target)
 
 func _post_action():
 	if body.velocity.length() < 0.1:

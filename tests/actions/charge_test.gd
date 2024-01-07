@@ -104,13 +104,13 @@ func test_charge_cooldown():
 	level.start()
 
 	await wait_for_signal(character_behavior.behavior_updated, 0.1, "Wait for charge")
-	TestUtils.assert_last_action(self, character_behavior, ActionDef.Id.CHARGE)
+	TestUtils.assert_last_action(self, character_behavior, charge_action.skill_name)
 
 	await wait_for_signal(character_behavior.behavior_updated, 1.0, "Wait for next action")
-	TestUtils.assert_last_action_not(self, character_behavior, ActionDef.Id.CHARGE)
+	TestUtils.assert_last_action_not(self, character_behavior, charge_action.skill_name)
 
 	# Wait right until cooldown expires and verify we only triggered charge once.
 	await wait_seconds(runnable_charge_action.cooldown - 0.1, "Waiting for cooldown to almost expire")
-	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 1)
+	assert_eq(TestUtils.count_action_triggered(self, character_behavior, charge_action.skill_name), 1)
 	await wait_seconds(0.2, "Waiting for cooldown to expire")
-	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 2)
+	assert_eq(TestUtils.count_action_triggered(self, character_behavior, charge_action.skill_name), 2)

@@ -35,7 +35,7 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 	if status_component:
 		if hit_effect.status != StatusDef.Id.UNSPECIFIED:
 			# TODO: Check for protection and what not.
-			status_component.set_status(hit_effect.action, hit_effect.status, hit_effect.status_duration)
+			status_component.set_status(hit_effect.action_name, hit_effect.status, hit_effect.status_duration)
 
 func _log(message: String):
 	if not logging_component:

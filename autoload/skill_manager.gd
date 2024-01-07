@@ -6,35 +6,35 @@ var conditions = preload("res://skill_tree/skill_type_collections/condition_coll
 var targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
 var target_sorts = preload("res://skill_tree/skill_type_collections/target_sort_collection.tres")
 
-var action_by_id: Dictionary
-var condition_by_id: Dictionary
-var target_by_id: Dictionary
+var action_by_name: Dictionary
+var condition_by_name: Dictionary
+var target_by_name: Dictionary
 var target_sort_by_name: Dictionary
 
 func _ready():
 	refresh()
 
 func refresh():
-	action_by_id.clear()
-	condition_by_id.clear()
-	target_by_id.clear()
+	action_by_name.clear()
+	condition_by_name.clear()
+	target_by_name.clear()
 	target_sort_by_name.clear()
 	for action in actions.skills:
-		action_by_id[action.id] = action
+		action_by_name[action.skill_name] = action
 	for condition in conditions.skills:
-		condition_by_id[condition.id] = condition
+		condition_by_name[condition.skill_name] = condition
 	for target in targets.skills:
 		target.validate()
-		target_by_id[target.id] = target
+		target_by_name[target.skill_name] = target
 	for target_sort in target_sorts.skills:
 		target_sort_by_name[target_sort.skill_name] = target_sort
 
 # Action
-func lookup_action(id: ActionDef.Id) -> ActionDef:
-	return action_by_id[id]
+func lookup_action(name: StringName) -> ActionDef:
+	return action_by_name[name]
 
-func make_action_instance(id: ActionDef.Id) -> ActionDef:
-	var action = lookup_action(id).duplicate(true)
+func make_action_instance(name: StringName) -> ActionDef:
+	var action = lookup_action(name).duplicate(true)
 	action.abstract = false
 	return action
 
@@ -49,21 +49,15 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 	var skill: ParamSkill
 	match saved_skill.skill_type:
 		Skill.SkillType.ACTION:
-			skill = make_action_instance(saved_skill.id)
+			skill = make_action_instance(saved_skill.name)
 		Skill.SkillType.TARGET:
-			skill = make_target_selection_instance(saved_skill.id)
+			skill = make_target_selection_instance(saved_skill.name)
 		Skill.SkillType.CONDITION:
-			skill = make_condition_instance(saved_skill.id)
+			skill = make_condition_instance(saved_skill.name)
 		_:
 			assert(false, "Unexpected skill type to restore")
 	assert(skill, "Failed to restore new skill instance")
-	# This if not needed for real play, but it makes it easier for tests
-	# as they can get the default sorter for target selections without
-	# setting it.
-	# The second part is just for old behaviors that haven't been updated
-	# properly and can be eventually removed.
-	if saved_skill.params and not saved_skill.params.placeholders.is_empty():
-		skill.params = saved_skill.params
+	skill.params = saved_skill.params
 	return skill
 
 func make_runnable_action(action_def: ActionDef) -> Action:
@@ -71,18 +65,18 @@ func make_runnable_action(action_def: ActionDef) -> Action:
 	action.def = action_def
 	return action
 
-func all_actions() -> Array[ActionDef.Id]:
-	var all: Array[ActionDef.Id] = []
-	for id in action_by_id.keys():
-		all.append(id as ActionDef.Id)
+func all_actions() -> Array[StringName]:
+	var all: Array[StringName] = []
+	for name in action_by_name.keys():
+		all.append(name)
 	return all
 
 # Condition
-func lookup_condition(id: ConditionDef.Id) -> ConditionDef:
-	return condition_by_id[id]
+func lookup_condition(name: StringName) -> ConditionDef:
+	return condition_by_name[name]
 
-func make_condition_instance(id: ConditionDef.Id) -> ConditionDef:
-	var condition = lookup_condition(id).duplicate(true)
+func make_condition_instance(name: StringName) -> ConditionDef:
+	var condition = lookup_condition(name).duplicate(true)
 	condition.abstract = false
 	return condition
 
@@ -120,22 +114,20 @@ func make_position_condition_evaluator(condition: ConditionDef, actor: Actor) ->
 	evaluator.actor = actor
 	return evaluator
 
-func all_conditions() -> Array[ConditionDef.Id]:
-	var all: Array[ConditionDef.Id] = []
-	for id in condition_by_id.keys():
-		all.append(id as ConditionDef.Id)
+func all_conditions() -> Array[StringName]:
+	var all: Array[StringName] = []
+	for name in condition_by_name.keys():
+		all.append(name)
 	return all
 
 # Target
 
-func lookup_target(id: TargetSelectionDef.Id) -> TargetSelectionDef:
-	return target_by_id[id]
+func lookup_target(name: StringName) -> TargetSelectionDef:
+	return target_by_name[name]
 
-func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectionDef:
-	var target = lookup_target(id).duplicate(true)
+func make_target_selection_instance(name: StringName) -> TargetSelectionDef:
+	var target = lookup_target(name).duplicate(true)
 	target.abstract = false
-	if target.sortable:
-		target.params.set_placeholder_value(SkillParams.PlaceholderId.SORT, target.default_sort)
 	return target
 
 func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
@@ -154,10 +146,10 @@ func make_position_target_selector(target: TargetSelectionDef, target_position_e
 	selector.condition_evaluator = target_position_evaluator
 	return selector
 
-func all_target_selections() -> Array[TargetSelectionDef.Id]:
-	var all: Array[TargetSelectionDef.Id] = []
-	for id in target_by_id.keys():
-		all.append(id as TargetSelectionDef.Id)
+func all_target_selections() -> Array[StringName]:
+	var all: Array[StringName] = []
+	for name in target_by_name.keys():
+		all.append(name)
 	return all
 
 # TargetSort.

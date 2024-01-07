@@ -4,6 +4,8 @@ extends GutTest
 const empty_level_scene = preload("res://tests/actions/empty_level.tscn")
 const heal_scene = preload("res://behavior/actions/scenes/heal.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
+const heal = preload("res://skill_tree/actions/heal.tres")
+const self_target = preload("res://skill_tree/targets/self.tres")
 
 var level: Level
 var character: Node2D
@@ -15,8 +17,8 @@ func make_heal_behavior() -> Behavior:
 	var behavior = Behavior.new()
 	behavior.saved_rules.append(
 		RuleDef.make(
-			RuleSkillDef.make_target(TargetSelectionDef.Id.SELF),
-			RuleSkillDef.make_action(ActionDef.Id.HEAL),
+			self_target.rule_skill_def(),
+			heal.rule_skill_def(),
 		)
 	)
 	return behavior

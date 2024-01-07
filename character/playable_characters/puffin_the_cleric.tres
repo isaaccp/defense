@@ -6,14 +6,14 @@
 
 [sub_resource type="Resource" id="Resource_v3psc"]
 script = ExtResource("3_ro8tn")
-acquired_actions = Array[int]([6, 1])
-acquired_target_selections = Array[int]([3, 5])
+acquired_actions = Array[StringName]([])
+acquired_target_selections = Array[StringName]([])
 acquired_target_sorts = Array[StringName]([&"Closest First"])
-acquired_conditions = Array[int]([1])
-unlocked_actions = Array[int]([])
-unlocked_target_selections = Array[int]([])
+acquired_conditions = Array[StringName]([])
+unlocked_actions = Array[StringName]([])
+unlocked_target_selections = Array[StringName]([])
 unlocked_target_sorts = Array[StringName]([])
-unlocked_conditions = Array[int]([1])
+unlocked_conditions = Array[StringName]([])
 full_acquired = false
 full_unlocked = true
 

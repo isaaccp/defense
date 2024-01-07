@@ -77,7 +77,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			for sort_name in options:
 				opt.add_item(sort_name)
 			if _params.placeholder_set(SkillParams.PlaceholderId.SORT):
-				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT).id)
+				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT).name)
 			else:
 				opt.select(0)
 			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))

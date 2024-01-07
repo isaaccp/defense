@@ -64,13 +64,10 @@ func _on_statuses_changed(statuses: Array):
 	for status_id in statuses:
 		hud_status_display.add_status(status_id)
 
-func _on_behavior_updated(action_id: ActionDef.Id, target: Target):
+func _on_behavior_updated(action_name: StringName, target: Target):
 	# TODO: Do something with target, e.g. hovering could highlight the
-	# target in the level.
-	var text = "Idle"
-	if action_id != ActionDef.Id.UNSPECIFIED:
-		text = "%s" % ActionDef.action_name(action_id)
-	%ActionLabel.text = text
+	# target in the level. Or at least add target description.
+	%ActionLabel.text = action_name if action_name else "Idle"
 
 func _on_config_button_pressed():
 	config_button_pressed.emit()

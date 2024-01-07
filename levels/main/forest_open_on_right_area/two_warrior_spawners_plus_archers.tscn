@@ -19,6 +19,9 @@
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_mqwce"]
 script = ExtResource("9_7udxm")
@@ -31,6 +34,9 @@ params = SubResource("Resource_3chx1")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_r88ha"]
 script = ExtResource("9_7udxm")
@@ -43,6 +49,9 @@ params = SubResource("Resource_ocylu")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_378pq"]
 script = ExtResource("9_7udxm")
@@ -61,6 +70,9 @@ condition = SubResource("Resource_r88ha")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_tnutr"]
 script = ExtResource("9_7udxm")
@@ -80,6 +92,9 @@ params = SubResource("Resource_ocylu")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_nu22p"]
 script = ExtResource("9_7udxm")
@@ -103,6 +118,9 @@ saved_rules = Array[ExtResource("10_yh583")]([SubResource("Resource_u0je8"), Sub
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_i3gb6"]
 script = ExtResource("9_7udxm")
@@ -115,6 +133,9 @@ params = SubResource("Resource_nlmkc")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_hnkia"]
 script = ExtResource("9_7udxm")
@@ -127,6 +148,9 @@ params = SubResource("Resource_tuf58")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_uy4vt"]
 script = ExtResource("9_7udxm")
@@ -145,6 +169,9 @@ condition = SubResource("Resource_hnkia")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_vvv2k"]
 script = ExtResource("9_7udxm")
@@ -163,6 +190,9 @@ script = ExtResource("4_3al50")
 editor_string = "distance {cmp} {float_value}"
 cmp = 5
 float_value = SubResource("Resource_lap2g")
+valid = true
+placeholders = Array[int]([1, 3])
+parts = ["distance ", 1, " ", 3]
 
 [sub_resource type="Resource" id="Resource_632ku"]
 script = ExtResource("9_7udxm")
@@ -175,6 +205,9 @@ params = SubResource("Resource_rtkmh")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_8fkb7"]
 script = ExtResource("9_7udxm")
@@ -193,6 +226,9 @@ condition = SubResource("Resource_632ku")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_evjk4"]
 script = ExtResource("9_7udxm")
@@ -205,6 +241,9 @@ params = SubResource("Resource_il0co")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_e435u"]
 script = ExtResource("9_7udxm")
@@ -217,6 +256,9 @@ params = SubResource("Resource_8tuft")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_uksj4"]
 script = ExtResource("9_7udxm")

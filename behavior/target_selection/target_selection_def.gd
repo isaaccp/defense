@@ -28,8 +28,16 @@ var default_sort = preload("res://skill_tree/target_sorts/closest_first.tres")
 # sorts if we have a check on the tree building to validate that
 # the player must have unlocked that one first.
 
+const NoTarget = &"__no_target__"
+
 func _init():
 	skill_type = SkillType.TARGET
+	# Needs to be called deferred so values from resource are set.
+	_set_default.call_deferred()
+
+func _set_default():
+	if sortable:
+		params.set_placeholder_value(SkillParams.PlaceholderId.SORT, default_sort)
 
 static func target_selection_name(target_selection_id: Id) -> String:
 	return Id.keys()[target_selection_id].capitalize()

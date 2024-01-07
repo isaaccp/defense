@@ -4,6 +4,8 @@ const basic_tower_test_level_scene = preload("res://tests/level/basic_tower_test
 const reach_position_scene = preload("res://tests/level/reach_position_test_level.tscn")
 const move_sword_behavior = preload("res://behavior/resources/basic_move_plus_sword_attack.tres")
 const test_character = preload("res://character/playable_characters/test_character.tres")
+const move_to = preload("res://skill_tree/actions/move_to.tres")
+const tower_target = preload("res://skill_tree/targets/tower.tres")
 
 class LevelTest extends GutTest:
 	var level: Level
@@ -55,8 +57,8 @@ class TestPositionReachedConditions extends LevelTest:
 		var behavior = Behavior.new()
 		behavior.saved_rules.append(
 			RuleDef.make(
-				RuleSkillDef.make_target(TargetSelectionDef.Id.TOWER),
-				RuleSkillDef.make_action(ActionDef.Id.MOVE_TO),
+				tower_target.rule_skill_def(),
+				move_to.rule_skill_def(),
 			)
 		)
 		return behavior

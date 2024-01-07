@@ -3,6 +3,9 @@ extends GutTest
 # Level has 1 enemy.
 const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
+const sword_attack = preload("res://skill_tree/actions/sword_attack.tres")
+const move_to = preload("res://skill_tree/actions/move_to.tres")
+const enemy_target = preload("res://skill_tree/targets/enemy.tres")
 
 var level: Level
 var character: Node2D
@@ -11,18 +14,22 @@ var enemy: Node2D
 var enemy_health: HealthComponent
 
 func make_sword_behavior(move: bool = false) -> Behavior:
+	print("on make_sword_behavior")
+	var foo = enemy_target
+	print(enemy_target.params)
+	print(enemy_target.params.all_set())
 	var behavior = Behavior.new()
 	behavior.saved_rules.append(
 		RuleDef.make(
-			RuleSkillDef.make_target(TargetSelectionDef.Id.ENEMY),
-			RuleSkillDef.make_action(ActionDef.Id.SWORD_ATTACK),
+			enemy_target.rule_skill_def(),
+			sword_attack.rule_skill_def(),
 		)
 	)
 	if move:
 		behavior.saved_rules.append(
 			RuleDef.make(
-				RuleSkillDef.make_target(TargetSelectionDef.Id.ENEMY),
-				RuleSkillDef.make_action(ActionDef.Id.MOVE_TO),
+				enemy_target.rule_skill_def(),
+				move_to.rule_skill_def(),
 			)
 		)
 	return behavior

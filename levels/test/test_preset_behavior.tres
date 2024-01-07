@@ -123,14 +123,14 @@ saved_rules = Array[ExtResource("4_7kixr")]([SubResource("Resource_ioph1"), SubR
 
 [sub_resource type="Resource" id="Resource_x5gu8"]
 script = ExtResource("9_peqn1")
-acquired_actions = Array[int]([])
-acquired_target_selections = Array[int]([])
+acquired_actions = Array[StringName]([])
+acquired_target_selections = Array[StringName]([])
 acquired_target_sorts = Array[StringName]([])
-acquired_conditions = Array[int]([1])
-unlocked_actions = Array[int]([])
-unlocked_target_selections = Array[int]([])
+acquired_conditions = Array[StringName]([])
+unlocked_actions = Array[StringName]([])
+unlocked_target_selections = Array[StringName]([])
 unlocked_target_sorts = Array[StringName]([])
-unlocked_conditions = Array[int]([1])
+unlocked_conditions = Array[StringName]([])
 full_acquired = false
 full_unlocked = false
 

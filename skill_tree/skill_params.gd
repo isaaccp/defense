@@ -37,12 +37,13 @@ enum CmpOp {
 # Exporting those makes the duplicate(true) end up in a weird situation.
 # If we want them back, we could always just trigger parse manually afterwards.
 # @export_group("Debug")
-var valid: bool = true
-var placeholders: Array[PlaceholderId]
-var parts: Array[Variant]
+@export var valid: bool = true
+@export var placeholders: Array[PlaceholderId]
+@export var parts: Array[Variant]
 
 func _init():
-	_parse()
+	# Needs to be called deferred so values from resource are set.
+	_parse.call_deferred()
 
 func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 	match placeholder:

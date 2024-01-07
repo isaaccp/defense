@@ -267,6 +267,9 @@ _data = {
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_dsm5v"]
 script = ExtResource("6_ae2gu")
@@ -279,6 +282,9 @@ params = SubResource("Resource_3rcka")
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_dgtvf"]
 script = ExtResource("6_ae2gu")
@@ -292,6 +298,9 @@ script = ExtResource("6_2kkh2")
 editor_string = "Enemy ({sort})"
 cmp = 0
 sort = ExtResource("9_cb06e")
+valid = true
+placeholders = Array[int]([4])
+parts = ["Enemy (", 4, ")"]
 
 [sub_resource type="Resource" id="Resource_v8kku"]
 script = ExtResource("6_ae2gu")
@@ -310,6 +319,9 @@ condition = SubResource("Resource_dgtvf")
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
+valid = true
+placeholders = Array[int]([])
+parts = []
 
 [sub_resource type="Resource" id="Resource_ekwdb"]
 script = ExtResource("6_ae2gu")

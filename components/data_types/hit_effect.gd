@@ -9,7 +9,7 @@ class_name HitEffect
 @export var status_duration: float
 
 # Set by hitbox on hit.
-var action: ActionDef.Id
+var action_name: StringName
 var damage_multiplier: float = 1.0
 
 func adjusted_damage():

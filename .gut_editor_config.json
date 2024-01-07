@@ -34,7 +34,7 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "",
- "selected": null,
+ "selected": "condition_params_test.gd",
  "should_exit": false,
  "should_exit_on_success": false,
  "should_maximize": false,

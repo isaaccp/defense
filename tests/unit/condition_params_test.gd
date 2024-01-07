@@ -1,5 +1,7 @@
 extends GutTest
 
+# TODO: Add tests that verify loading straight from resource correctly sets
+# things up as it has bitten us in the past.
 func test_default_valid():
 	var params = SkillParams.new()
 	assert_true(params.valid)
@@ -9,6 +11,7 @@ func test_default_valid():
 func test_parse_editor_string_no_params():
 	var params = SkillParams.new()
 	params.editor_string = ""
+	params._parse()
 	assert_true(params.valid)
 	assert_eq(params.placeholders, [])
 	assert_eq(params.parts, [])

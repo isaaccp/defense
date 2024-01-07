@@ -2,15 +2,17 @@ extends Resource
 
 class_name SkillTreeState
 
+const always = preload("res://skill_tree/conditions/always.tres")
+
 # Refactor this so we don't have to repeat everything 4 times?
 # OTOH I don't think we are adding more skill types?
-@export var acquired_actions: Array[ActionDef.Id]:
+@export var acquired_actions: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_actions()
 		return acquired_actions
 
-@export var acquired_target_selections: Array[TargetSelectionDef.Id]:
+@export var acquired_target_selections: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_target_selections()
@@ -22,19 +24,19 @@ class_name SkillTreeState
 			return SkillManager.all_target_sorts()
 		return acquired_target_sorts
 
-@export var acquired_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
+@export var acquired_conditions: Array[StringName] = [always.skill_name]:
 	get:
 		if full_acquired:
 			return SkillManager.all_conditions()
 		return acquired_conditions
 
-@export var unlocked_actions: Array[ActionDef.Id]:
+@export var unlocked_actions: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_actions()
 		return unlocked_actions
 
-@export var unlocked_target_selections: Array[TargetSelectionDef.Id]:
+@export var unlocked_target_selections: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_target_selections()
@@ -46,7 +48,7 @@ class_name SkillTreeState
 			return SkillManager.all_target_sorts()
 		return unlocked_target_sorts
 
-@export var unlocked_conditions: Array[ConditionDef.Id] = [ConditionDef.Id.ALWAYS]:
+@export var unlocked_conditions: Array[StringName] = [always.skill_name]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_conditions()
@@ -127,13 +129,13 @@ enum StateType {
 	ACQUIRED,
 }
 
-func _actions(state_type: StateType) -> Array[ActionDef.Id]:
+func _actions(state_type: StateType) -> Array[StringName]:
 	if state_type == StateType.ACQUIRED:
 		return acquired_actions
 	else:
 		return unlocked_actions
 
-func _target_selections(state_type: StateType) -> Array[TargetSelectionDef.Id]:
+func _target_selections(state_type: StateType) -> Array[StringName]:
 	if state_type == StateType.ACQUIRED:
 		return acquired_target_selections
 	else:
@@ -145,7 +147,7 @@ func _target_sorts(state_type: StateType) -> Array[StringName]:
 	else:
 		return unlocked_target_sorts
 
-func _conditions(state_type: StateType) -> Array[ConditionDef.Id]:
+func _conditions(state_type: StateType) -> Array[StringName]:
 	if state_type == StateType.ACQUIRED:
 		return acquired_conditions
 	else:

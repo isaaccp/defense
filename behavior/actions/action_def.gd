@@ -18,6 +18,11 @@ enum Id {
 	TELEPORT_TO,
 }
 
+# Used when something needs to explicitly mean no action.
+# Making it not empty so it's unique to action, it's obvious what went
+# wrong if it shows up, etc.
+const NoAction = &"__no_action__"
+
 @export var id: Id
 ## Script implementing this action.
 @export var action_script: GDScript

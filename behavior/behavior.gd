@@ -68,8 +68,8 @@ func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 	for i in rules.size():
 		var rule = rules[i]
 		# Check cooldowns.
-		if action_cooldowns.has(rule.action.id):
-			var can_run_after = action_cooldowns[rule.action.id]
+		if action_cooldowns.has(rule.action.skill_name):
+			var can_run_after = action_cooldowns[rule.action.skill_name]
 			if elapsed_time < can_run_after:
 				continue
 		if condition_evaluators[i]:
@@ -85,8 +85,8 @@ func serialize() -> PackedByteArray:
 	var data = []
 	for rule in rules:
 		var rule_dict = {
-			"target": rule.target_selection.id,
-			"action": rule.action.id,
+			"target": rule.target_selection.skill_name,
+			"action": rule.action.skill_name,
 		}
 		data.append(rule_dict)
 	return var_to_bytes(data)
@@ -94,12 +94,13 @@ func serialize() -> PackedByteArray:
 static func deserialize(serialized_behavior: PackedByteArray) -> Behavior:
 	var behavior = Behavior.new()
 	var data = bytes_to_var(serialized_behavior)
-	for serialized_rule in data:
-		var rule = Rule.make(
-			SkillManager.make_target_selection_instance(serialized_rule.target),
-			SkillManager.make_action_instance(serialized_rule.action)
-		)
-		behavior.rules.append(rule)
+	# TODO: Fix and uncomment when we network again.
+	#for serialized_rule in data:
+		#var rule = Rule.make(
+			#SkillManager.make_target_selection_instance(serialized_rule.target),
+			#SkillManager.make_action_instance(serialized_rule.action)
+		#)
+		#behavior.rules.append(rule)
 	return behavior
 
 func _to_string() -> String:

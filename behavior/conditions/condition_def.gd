@@ -45,6 +45,8 @@ enum Type {
 @export var type: Type
 @export var evaluator_script: GDScript
 
+const NoCondition = &"__no_condition__"
+
 func _init():
 	skill_type = SkillType.CONDITION
 

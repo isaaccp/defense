@@ -29,7 +29,7 @@ signal all_hits_used
 
 func _ready():
 	assert(hit_effect.damage < 0 == is_heal)
-	hit_effect.action = action_scene.action_def.id
+	hit_effect.action_name = action_scene.action_def.skill_name
 	hits_left = hits
 
 func _on_area_entered(area):

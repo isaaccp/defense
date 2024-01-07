@@ -36,19 +36,19 @@ class StatusState extends RefCounted:
 	func is_expired(elapsed_time: float):
 		return not permanent and expiration_time < elapsed_time
 
-static func _key(action_id: ActionDef.Id, status_id: StatusDef.Id) -> Dictionary:
-	return {&"action": action_id, &"status": status_id}
+static func _key(action_name: StringName, status_id: StatusDef.Id) -> Dictionary:
+	return {&"action": action_name, &"status": status_id}
 
 func _process(delta: float):
 	_expire_statuses()
 	elapsed_time += delta
 
-func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
+func set_status(action_name: StringName, status_id: StatusDef.Id, time: float):
 	var time_str = "%0.1fs" % time if time > 0 else "during action"
-	_log("%s provided by %s (%s)" % [StatusDef.name(status_id), ActionDef.action_name(action_id), time_str])
+	_log("%s provided by %s (%s)" % [StatusDef.name(status_id), action_name, time_str])
 	var changed = false
 	# Update status state.
-	var key = _key(action_id, status_id)
+	var key = _key(action_name, status_id)
 	var new_status_state: StatusState
 	if time < 0:
 		new_status_state = StatusState.new(true, -1)
@@ -59,22 +59,22 @@ func set_status(action_id: ActionDef.Id, status_id: StatusDef.Id, time: float):
 	if not current_statuses.has(status_id):
 		current_statuses[status_id] = {}
 		changed = true
-	current_statuses[status_id][action_id] = true
+	current_statuses[status_id][action_name] = true
 	if changed:
 		_log("%s status added" % StatusDef.name(status_id))
 		_emit_status_added_signals(status_id)
 		statuses_changed.emit(get_statuses())
 
-func remove_status(action_id: ActionDef.Id, status_id: StatusDef.Id, expired = false):
+func remove_status(action_name: StringName, status_id: StatusDef.Id, expired = false):
 	var reason = "expired" if expired else "removed"
-	_log("%s (from %s) %s" % [StatusDef.name(status_id), ActionDef.action_name(action_id), reason])
+	_log("%s (from %s) %s" % [StatusDef.name(status_id), action_name, reason])
 	# Delete status state.
-	var key = _key(action_id, status_id)
+	var key = _key(action_name, status_id)
 	status_metadata.erase(key)
 	# If this was the last action providing a status, remove status.
 	if current_statuses.has(status_id):
 		var status_data = current_statuses[status_id]
-		status_data.erase(action_id)
+		status_data.erase(action_name)
 		if status_data.is_empty():
 			current_statuses.erase(status_id)
 			_log("%s status removed" % StatusDef.name(status_id))
