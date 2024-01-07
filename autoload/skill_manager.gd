@@ -109,7 +109,21 @@ func make_self_condition_evaluator(condition: ConditionDef, actor: Actor) -> Sel
 
 func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor) -> TargetActorConditionEvaluator:
 	assert(not condition.abstract)
-	var evaluator = condition_scripts[condition.id].new() as TargetActorConditionEvaluator
+	assert(condition.type in [ConditionDef.Type.TARGET_ACTOR, ConditionDef.Type.TARGET_POSITION])
+	var evaluator: TargetActorConditionEvaluator
+	if condition.type == ConditionDef.Type.TARGET_ACTOR:
+		evaluator = condition_scripts[condition.id].new() as TargetActorConditionEvaluator
+	else:
+		var position_evaluator = make_position_condition_evaluator(condition, actor)
+		evaluator = PositionToActorConditionEvaluatorAdapter.new(position_evaluator)
+	evaluator.def = condition
+	evaluator.actor = actor
+	return evaluator
+
+func make_position_condition_evaluator(condition: ConditionDef, actor: Actor) -> PositionConditionEvaluator:
+	assert(not condition.abstract)
+	assert(condition.type in [ConditionDef.Type.TARGET_POSITION])
+	var evaluator = condition_scripts[condition.id].new() as PositionConditionEvaluator
 	evaluator.def = condition
 	evaluator.actor = actor
 	return evaluator
@@ -134,9 +148,18 @@ func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectio
 
 func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
 	assert(not target.abstract)
+	assert(target.type == Target.Type.ACTOR)
 	var selector = target_scripts[target.id].new() as NodeTargetSelector
 	selector.def = target
 	selector.condition_evaluator = target_actor_evaluator
+	return selector
+
+func make_position_target_selector(target: TargetSelectionDef, target_position_evaluator: PositionConditionEvaluator) -> PositionTargetSelector:
+	assert(not target.abstract)
+	assert(target.type == Target.Type.POSITION)
+	var selector = target_scripts[target.id].new() as PositionTargetSelector
+	selector.def = target
+	selector.condition_evaluator = target_position_evaluator
 	return selector
 
 func all_target_selections() -> Array[TargetSelectionDef.Id]:
@@ -155,7 +178,6 @@ func make_actor_target_sorter(target_sort: TargetSort) -> ActorTargetSorter:
 	var sorter: ActorTargetSorter
 	if target_sort.type == TargetSort.Type.ACTOR:
 		sorter = target_sort_scripts[target_sort.id].new() as ActorTargetSorter
-
 	else:
 		var position_sorter = make_position_target_sorter(target_sort)
 		sorter = PositionToActorTargetSorterAdapter.new(position_sorter)

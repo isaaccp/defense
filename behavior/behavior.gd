@@ -22,6 +22,7 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 	for rule in rules:
 		var evaluator: ConditionEvaluator = null
 		var target_node_evaluator: TargetActorConditionEvaluator = null
+		var position_evaluator: PositionConditionEvaluator = null
 		var target_selector: TargetSelector = null
 		match rule.condition.type:
 			ConditionDef.Type.ANY:
@@ -33,9 +34,13 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 				pass
 			ConditionDef.Type.TARGET_ACTOR:
 				target_node_evaluator = SkillManager.make_target_actor_condition_evaluator(rule.condition, actor)
+			ConditionDef.Type.TARGET_POSITION:
+				position_evaluator = SkillManager.make_position_condition_evaluator(rule.condition, actor)
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
 				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_node_evaluator)
+			Target.Type.POSITION:
+				target_selector = SkillManager.make_position_target_selector(rule.target_selection, position_evaluator)
 		target_selectors.append(target_selector)
 		condition_evaluators.append(evaluator)
 	assert(rules.size() == target_selectors.size())

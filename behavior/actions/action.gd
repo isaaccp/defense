@@ -11,11 +11,6 @@ const MaxDistance = 10_000_000
 # If that's the case, we'll check if higher priority actions can be
 # executed periodically during execution.
 @export var abortable = false
-# Target type supported by this action. As we only have one, put it here
-# by now with a default value. If later we have moer, we'll have to move
-# it to the ActionDef so e.g. the script editor can know which target types
-# are acceptable for a given action.
-@export var target_type_supported = Target.Type.ACTOR
 # How far can this action be taken.
 @export var max_distance = MaxDistance
 # How close can this action be taken.
@@ -54,7 +49,7 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 				status_component_: StatusComponent,
 				logging_component_: LoggingComponent) -> void:
 	target = target_
-	assert(target.type == target_type_supported, "Unsupported target type: %s" % target.type)
+	assert(def.compatible_with_target(target.type), "Unsupported target type: %s" % target.type)
 	body = body_
 	navigation_agent = navigation_agent_
 	action_sprites = action_sprites_

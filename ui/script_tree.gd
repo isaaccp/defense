@@ -174,14 +174,10 @@ func _check_compatibility(item: TreeItem, column: int, data) -> bool:
 			return true
 		Column.CONDITION:
 			condition = _condition_from_meta(data)
-			if target:
-				return condition.compatible_with_target(target.type)
-			return true
+			return not target or condition.compatible_with_target(target.type)
 		Column.ACTION:
 			action = _action_from_meta(data)
-			if target:
-				return action.compatible_with_target(target.type)
-			return true
+			return not target or action.compatible_with_target(target.type)
 	return false
 
 func _drop_data(at_position: Vector2, data):

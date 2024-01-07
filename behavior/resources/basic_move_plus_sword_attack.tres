@@ -8,104 +8,104 @@
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="5_4vnt8"]
 
-[sub_resource type="Resource" id="Resource_xyxf2"]
+[sub_resource type="Resource" id="Resource_pue1k"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_uaw18"]
+[sub_resource type="Resource" id="Resource_jfncy"]
 script = ExtResource("1_31vv2")
 id = 2
-supported_target_types = Array[int]([])
-params = SubResource("Resource_xyxf2")
+supported_target_types = Array[int]([1])
+params = SubResource("Resource_pue1k")
 abstract = false
 skill_name = &"Sword Attack"
 skill_type = 1
 tree_type = 2
 
-[sub_resource type="Resource" id="Resource_rf64w"]
+[sub_resource type="Resource" id="Resource_6xp6w"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_m1ygx"]
+[sub_resource type="Resource" id="Resource_b722s"]
 script = ExtResource("2_12fml")
 id = 1
 type = 1
-params = SubResource("Resource_rf64w")
+params = SubResource("Resource_6xp6w")
 abstract = false
 skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_h74dr"]
+[sub_resource type="Resource" id="Resource_gjsmm"]
 script = ExtResource("2_cmwyq")
 editor_string = "Enemy ({sort})"
 cmp = 0
 sort = ExtResource("5_4vnt8")
 
-[sub_resource type="Resource" id="Resource_b2xu2"]
+[sub_resource type="Resource" id="Resource_uyctr"]
 script = ExtResource("3_wwn20")
 id = 1
 type = 1
-description = ""
+description = "Targets actors of the opposing side"
 sortable = true
-params = SubResource("Resource_h74dr")
+params = SubResource("Resource_gjsmm")
 abstract = false
 skill_name = &"Enemy"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_j1nfa"]
+[sub_resource type="Resource" id="Resource_kcxfo"]
 script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_b2xu2")
-action = SubResource("Resource_uaw18")
-condition = SubResource("Resource_m1ygx")
+target_selection = SubResource("Resource_uyctr")
+action = SubResource("Resource_jfncy")
+condition = SubResource("Resource_b722s")
 
-[sub_resource type="Resource" id="Resource_abeke"]
+[sub_resource type="Resource" id="Resource_i7jp6"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_fjboq"]
+[sub_resource type="Resource" id="Resource_7iba1"]
 script = ExtResource("1_31vv2")
 id = 1
-supported_target_types = Array[int]([])
-params = SubResource("Resource_abeke")
+supported_target_types = Array[int]([1, 3])
+params = SubResource("Resource_i7jp6")
 abstract = false
 skill_name = &"Move To"
 skill_type = 1
 tree_type = 2
 
-[sub_resource type="Resource" id="Resource_i4qhw"]
+[sub_resource type="Resource" id="Resource_gdjxo"]
 script = ExtResource("2_12fml")
 id = 1
 type = 1
-params = SubResource("Resource_rf64w")
+params = SubResource("Resource_6xp6w")
 abstract = false
 skill_name = &"Always"
 skill_type = 3
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_1wo1o"]
+[sub_resource type="Resource" id="Resource_sdfqc"]
 script = ExtResource("3_wwn20")
 id = 1
 type = 1
-description = ""
+description = "Targets actors of the opposing side"
 sortable = true
-params = SubResource("Resource_h74dr")
+params = SubResource("Resource_gjsmm")
 abstract = false
 skill_name = &"Enemy"
 skill_type = 2
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_iqlmj"]
+[sub_resource type="Resource" id="Resource_on55m"]
 script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_1wo1o")
-action = SubResource("Resource_fjboq")
-condition = SubResource("Resource_i4qhw")
+target_selection = SubResource("Resource_sdfqc")
+action = SubResource("Resource_7iba1")
+condition = SubResource("Resource_gdjxo")
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_vgf0t")
-rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_j1nfa"), SubResource("Resource_iqlmj")])
+rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_kcxfo"), SubResource("Resource_on55m")])
