@@ -84,7 +84,9 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 	# This if not needed for real play, but it makes it easier for tests
 	# as they can get the default sorter for target selections without
 	# setting it.
-	if saved_skill.params:
+	# The second part is just for old behaviors that haven't been updated
+	# properly and can be eventually removed.
+	if saved_skill.params and not saved_skill.params.placeholders.is_empty():
 		skill.params = saved_skill.params
 	return skill
 
