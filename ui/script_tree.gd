@@ -40,7 +40,7 @@ func load_behavior(behavior: Behavior) -> void:
 	for c in _root.get_children():
 		_root.remove_child(c)
 	if behavior:
-		# behavior.restore()
+		behavior.restore()
 		for rule in behavior.rules:
 			_add_row(rule)
 	_add_row()

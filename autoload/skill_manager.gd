@@ -86,11 +86,11 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 	var skill: ParamSkill
 	match saved_skill.skill_type:
 		Skill.SkillType.ACTION:
-			skill = make_action_instance(skill.id)
+			skill = make_action_instance(saved_skill.id)
 		Skill.SkillType.TARGET:
-			skill = make_target_selection_instance(skill.id)
+			skill = make_target_selection_instance(saved_skill.id)
 		Skill.SkillType.CONDITION:
-			skill = make_condition_instance(skill.id)
+			skill = make_condition_instance(saved_skill.id)
 		_:
 			assert(false, "Unexpected skill type to restore")
 	assert(skill, "Failed to restore new skill instance")
