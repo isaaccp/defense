@@ -61,11 +61,14 @@ func _add_row(rule: Rule = null) -> TreeItem:
 		_set_column(row, Column.ACTION, "[Action]", _metadata(0))
 	return row
 
-func _add_button_if_params(row: TreeItem, column: int, params: SkillParams) -> bool:
+func _add_button_if_params(row: TreeItem, column: int, params: SkillParams):
 	if params and params.placeholders.size() > 0:
-		row.add_button(column, edit_icon, 0, false, "Configure")
-		return true
-	return false
+		if row.get_button_count(column) == 0:
+			row.add_button(column, edit_icon, 0, false, "Configure")
+	else:
+		if row.get_button_count(column) > 0:
+			row.erase_button(column, 0)
+
 
 func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
 	row.set_text(idx, name)
@@ -210,9 +213,7 @@ func _drop_data(at_position: Vector2, data):
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.MOVE, false)
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.DELETE, false)
 	_set_column(item, col, data.text,  _metadata(data.id, data.params))
-	if not _add_button_if_params(item, col, data.params):
-		if item.get_button_count(col) > 0:
-			item.erase_button(col, 0)
+	_add_button_if_params(item, col, data.params)
 
 	if was_empty and not _is_empty(item):
 		# Replace the blank item we just filled in
