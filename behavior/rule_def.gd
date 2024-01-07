@@ -6,19 +6,13 @@ class_name RuleDef
 @export var action: RuleSkillDef
 @export var condition: RuleSkillDef
 
-func string_with_target(target: Target) -> String:
-	return "%s -> %s [%s] (%s)" % [
-		action.name(),
-		target_selection.name(),
-		target,
-		condition.name(),
-	]
-func _to_string() -> String:
-	return "%s -> %s (%s)" % [
-		action.name(),
-		target_selection.name(),
-		condition.name(),
-	]
+#
+#func _to_string() -> String:
+	#return "%s -> %s (%s)" % [
+		#action.name(),
+		#target_selection.name(),
+		#condition.name(),
+	#]
 
 static func make(target_selection: RuleSkillDef, action: RuleSkillDef, condition: RuleSkillDef) -> RuleDef:
 	var rule = RuleDef.new()

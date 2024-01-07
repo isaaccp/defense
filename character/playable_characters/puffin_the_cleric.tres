@@ -1,15 +1,9 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=8 format=3 uid="uid://dyrr5aucf70fk"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=6 format=3 uid="uid://dyrr5aucf70fk"]
 
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="1_67tfy"]
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="2_bfn1c"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="2_wv48f"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_ro8tn"]
 [ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="4_xjlpg"]
-
-[sub_resource type="Resource" id="Resource_dupx1"]
-script = ExtResource("1_67tfy")
-saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
-rules = Array[Resource("res://behavior/rule.gd")]([])
 
 [sub_resource type="Resource" id="Resource_v3psc"]
 script = ExtResource("3_ro8tn")
@@ -32,7 +26,6 @@ character_id = 1
 starting_kit = "Healer"
 scene = ExtResource("2_bfn1c")
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
-behavior = SubResource("Resource_dupx1")
 skill_tree_state = SubResource("Resource_v3psc")
 peer_id = 0
 xp = 0

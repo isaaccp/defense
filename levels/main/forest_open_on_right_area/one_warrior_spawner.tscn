@@ -117,6 +117,7 @@ condition = SubResource("Resource_0qmql")
 [sub_resource type="Resource" id="Resource_538f1"]
 resource_local_to_scene = true
 script = ExtResource("9_ktyw4")
+saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
 rules = Array[ExtResource("7_fgils")]([SubResource("Resource_6eni5"), SubResource("Resource_gwtyx")])
 
 [sub_resource type="Resource" id="Resource_1qj77"]
@@ -259,6 +260,7 @@ condition = SubResource("Resource_ux6j4")
 [sub_resource type="Resource" id="Resource_q6pxc"]
 resource_local_to_scene = true
 script = ExtResource("9_ktyw4")
+saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
 rules = Array[ExtResource("7_fgils")]([SubResource("Resource_3umoe"), SubResource("Resource_tnuun")])
 
 [sub_resource type="Resource" id="Resource_c5rpu"]

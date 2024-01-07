@@ -20,7 +20,6 @@ func _handles(o: Object) -> bool:
 	return o is Behavior
 
 func _edit(o: Object):
-	SkillManager.refresh()
 	_in_obj = o as Behavior
 	if not o:
 		_make_visible(false)
@@ -32,7 +31,7 @@ func _on_save(b: Behavior):
 	# Just overwriting the input makes the change appear in the inspector.
 	# Note: This changes the resource IDs of the rules,
 	# which can be a bit ugly in diffs.
-	_in_obj.rules = b.rules
+	_in_obj.saved_rules = b.saved_rules
 	# But it makes sense to write it to disk too,
 	# so you don't have to remember to save the enclosing scene.
 	if _in_obj.resource_path:

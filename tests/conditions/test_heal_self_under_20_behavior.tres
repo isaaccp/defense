@@ -1,27 +1,21 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://xvk7de3pnrwf"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=14 format=3 uid="uid://xvk7de3pnrwf"]
 
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_b34mx"]
 [ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_dvhob"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_vx3aa"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="5_hjytx"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="6_allpt"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="7_f4m1p"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_uipkv"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_nxbma"]
 
 [sub_resource type="Resource" id="Resource_2bgav"]
 script = ExtResource("3_dvhob")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_fqjy0"]
-script = ExtResource("1_b34mx")
+[sub_resource type="Resource" id="Resource_q0wdo"]
+script = ExtResource("7_uipkv")
 id = 6
-supported_target_types = Array[int]([])
-params = SubResource("Resource_2bgav")
-abstract = false
-skill_name = &"Heal"
 skill_type = 1
-tree_type = 4
+params = SubResource("Resource_2bgav")
 
 [sub_resource type="Resource" id="Resource_72x0b"]
 script = ExtResource("2_btuym")
@@ -34,56 +28,30 @@ editor_string = "health {cmp} {int_value}"
 cmp = 1
 int_value = SubResource("Resource_72x0b")
 
-[sub_resource type="Resource" id="Resource_cwj2y"]
-script = ExtResource("3_dvhob")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_vl77h"]
-script = ExtResource("4_vx3aa")
-id = 1
-type = 1
-params = SubResource("Resource_cwj2y")
-abstract = true
-skill_name = &"Always"
-skill_type = 3
-tree_type = 1
-
-[sub_resource type="Resource" id="Resource_cwfii"]
-script = ExtResource("4_vx3aa")
+[sub_resource type="Resource" id="Resource_xm75i"]
+script = ExtResource("7_uipkv")
 id = 2
-type = 2
-params = SubResource("Resource_mo8ay")
-abstract = false
-skill_name = &"Target Health"
 skill_type = 3
-parent = SubResource("Resource_vl77h")
-tree_type = 1
+params = SubResource("Resource_mo8ay")
 
 [sub_resource type="Resource" id="Resource_w0ery"]
 script = ExtResource("3_dvhob")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_xvbsv"]
-script = ExtResource("6_allpt")
+[sub_resource type="Resource" id="Resource_88041"]
+script = ExtResource("7_uipkv")
 id = 3
-type = 1
-description = ""
-sortable = false
-params = SubResource("Resource_w0ery")
-abstract = false
-skill_name = &"Self"
 skill_type = 2
-tree_type = 1
+params = SubResource("Resource_w0ery")
 
-[sub_resource type="Resource" id="Resource_ma0py"]
-script = ExtResource("5_hjytx")
-target_selection = SubResource("Resource_xvbsv")
-action = SubResource("Resource_fqjy0")
-condition = SubResource("Resource_cwfii")
+[sub_resource type="Resource" id="Resource_8assv"]
+script = ExtResource("8_nxbma")
+target_selection = SubResource("Resource_88041")
+action = SubResource("Resource_q0wdo")
+condition = SubResource("Resource_xm75i")
 
 [resource]
 script = ExtResource("7_f4m1p")
-saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
-rules = Array[ExtResource("5_hjytx")]([SubResource("Resource_ma0py")])
+saved_rules = Array[ExtResource("8_nxbma")]([SubResource("Resource_8assv")])
+rules = Array[Resource("res://behavior/rule.gd")]([])

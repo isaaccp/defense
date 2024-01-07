@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=25 format=3 uid="uid://dgs55tgbrgkhv"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=19 format=3 uid="uid://dgs55tgbrgkhv"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_jvgfs"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_da8bg"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_nh70o"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="4_aom4g"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="5_dkbnv"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_80euh"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_d86ld"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="5_ksnts"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="6_ddbsa"]
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="7_vy3e2"]
@@ -17,46 +15,22 @@ script = ExtResource("1_jvgfs")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_vujyv"]
-script = ExtResource("2_da8bg")
+[sub_resource type="Resource" id="Resource_m2uo6"]
+script = ExtResource("2_80euh")
 id = 7
-supported_target_types = Array[int]([])
-params = SubResource("Resource_6difb")
-abstract = false
-skill_name = &"Hold Person"
 skill_type = 1
-tree_type = 4
+params = SubResource("Resource_6difb")
 
 [sub_resource type="Resource" id="Resource_kn045"]
 script = ExtResource("1_jvgfs")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_cvr5x"]
-script = ExtResource("1_jvgfs")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_k51wc"]
-script = ExtResource("3_nh70o")
-id = 1
-type = 1
-params = SubResource("Resource_cvr5x")
-abstract = true
-skill_name = &"Always"
-skill_type = 3
-tree_type = 1
-
-[sub_resource type="Resource" id="Resource_stmxr"]
-script = ExtResource("3_nh70o")
+[sub_resource type="Resource" id="Resource_yw7k2"]
+script = ExtResource("2_80euh")
 id = 3
-type = 1
-params = SubResource("Resource_kn045")
-abstract = false
-skill_name = &"Once"
 skill_type = 3
-parent = SubResource("Resource_k51wc")
-tree_type = 1
+params = SubResource("Resource_kn045")
 
 [sub_resource type="Resource" id="Resource_ijy6r"]
 script = ExtResource("1_jvgfs")
@@ -64,46 +38,22 @@ editor_string = "Self or Ally ({sort})"
 cmp = 0
 sort = ExtResource("5_ksnts")
 
-[sub_resource type="Resource" id="Resource_0a3qu"]
-script = ExtResource("1_jvgfs")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_1grmx"]
-script = ExtResource("5_dkbnv")
-id = 3
-type = 1
-description = ""
-sortable = false
-params = SubResource("Resource_0a3qu")
-abstract = true
-skill_name = &"Self"
-skill_type = 2
-tree_type = 1
-
-[sub_resource type="Resource" id="Resource_nks2x"]
-script = ExtResource("5_dkbnv")
+[sub_resource type="Resource" id="Resource_voexd"]
+script = ExtResource("2_80euh")
 id = 4
-type = 1
-description = ""
-sortable = true
-params = SubResource("Resource_ijy6r")
-abstract = false
-skill_name = &"Self Or Ally"
 skill_type = 2
-parent = SubResource("Resource_1grmx")
-tree_type = 1
+params = SubResource("Resource_ijy6r")
 
-[sub_resource type="Resource" id="Resource_pdhae"]
-script = ExtResource("4_aom4g")
-target_selection = SubResource("Resource_nks2x")
-action = SubResource("Resource_vujyv")
-condition = SubResource("Resource_stmxr")
+[sub_resource type="Resource" id="Resource_mqhco"]
+script = ExtResource("3_d86ld")
+target_selection = SubResource("Resource_voexd")
+action = SubResource("Resource_m2uo6")
+condition = SubResource("Resource_yw7k2")
 
 [sub_resource type="Resource" id="Resource_a06is"]
 script = ExtResource("6_ddbsa")
-saved_rules = Array[Resource("res://behavior/rule_skill_def.gd")]([])
-rules = [SubResource("Resource_pdhae")]
+saved_rules = Array[ExtResource("3_d86ld")]([SubResource("Resource_mqhco")])
+rules = Array[Resource("res://behavior/rule.gd")]([])
 
 [sub_resource type="Resource" id="Resource_n4lvi"]
 script = ExtResource("9_tx848")

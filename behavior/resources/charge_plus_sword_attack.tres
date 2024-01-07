@@ -1,47 +1,84 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=14 format=3 uid="uid://bqup0xqgl0kxe"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://bqup0xqgl0kxe"]
 
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_hjg7n"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="2_7xnd2"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_n25oo"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="2_w6j35"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_5u5kq"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_at6fq"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_cdd0h"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_dv0do"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_6didq"]
 
-[sub_resource type="Resource" id="Resource_sx7hg"]
-script = ExtResource("1_hjg7n")
+[sub_resource type="Resource" id="Resource_q5tle"]
+script = ExtResource("1_at6fq")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_0j4v1"]
+script = ExtResource("2_cdd0h")
 id = 2
+skill_type = 1
+params = SubResource("Resource_q5tle")
 
-[sub_resource type="Resource" id="Resource_viwve"]
-script = ExtResource("2_n25oo")
+[sub_resource type="Resource" id="Resource_k8o7n"]
+script = ExtResource("1_at6fq")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_yxkbo"]
+script = ExtResource("2_cdd0h")
 id = 1
-condition_script = ExtResource("2_w6j35")
-type = 1
-abstract = false
+skill_type = 3
+params = SubResource("Resource_k8o7n")
 
-[sub_resource type="Resource" id="Resource_n2vkk"]
-script = ExtResource("3_5u5kq")
+[sub_resource type="Resource" id="Resource_5g6va"]
+script = ExtResource("1_at6fq")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_mxexs"]
+script = ExtResource("2_cdd0h")
 id = 1
+skill_type = 2
+params = SubResource("Resource_5g6va")
 
-[sub_resource type="Resource" id="Resource_v23r6"]
-script = ExtResource("2_7xnd2")
-target_selection = SubResource("Resource_n2vkk")
-action = SubResource("Resource_sx7hg")
-condition = SubResource("Resource_viwve")
+[sub_resource type="Resource" id="Resource_bp0s4"]
+script = ExtResource("3_dv0do")
+target_selection = SubResource("Resource_mxexs")
+action = SubResource("Resource_0j4v1")
+condition = SubResource("Resource_yxkbo")
 
-[sub_resource type="Resource" id="Resource_ddh0v"]
-script = ExtResource("1_hjg7n")
+[sub_resource type="Resource" id="Resource_oglpv"]
+script = ExtResource("1_at6fq")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_a200u"]
+script = ExtResource("2_cdd0h")
 id = 4
+skill_type = 1
+params = SubResource("Resource_oglpv")
 
-[sub_resource type="Resource" id="Resource_30pk8"]
-script = ExtResource("3_5u5kq")
+[sub_resource type="Resource" id="Resource_wmhod"]
+script = ExtResource("2_cdd0h")
 id = 1
+skill_type = 3
+params = SubResource("Resource_k8o7n")
 
-[sub_resource type="Resource" id="Resource_wey8f"]
-script = ExtResource("2_7xnd2")
-target_selection = SubResource("Resource_30pk8")
-action = SubResource("Resource_ddh0v")
-condition = SubResource("Resource_viwve")
+[sub_resource type="Resource" id="Resource_dmh4s"]
+script = ExtResource("1_at6fq")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_0i5t1"]
+script = ExtResource("2_cdd0h")
+id = 1
+skill_type = 2
+params = SubResource("Resource_dmh4s")
+
+[sub_resource type="Resource" id="Resource_b0uqi"]
+script = ExtResource("3_dv0do")
+target_selection = SubResource("Resource_0i5t1")
+action = SubResource("Resource_a200u")
+condition = SubResource("Resource_wmhod")
 
 [resource]
 script = ExtResource("4_6didq")
-rules = Array[ExtResource("2_7xnd2")]([SubResource("Resource_v23r6"), SubResource("Resource_wey8f")])
+saved_rules = Array[ExtResource("3_dv0do")]([SubResource("Resource_bp0s4"), SubResource("Resource_b0uqi")])
+rules = Array[Resource("res://behavior/rule.gd")]([])

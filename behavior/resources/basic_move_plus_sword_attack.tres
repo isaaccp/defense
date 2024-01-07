@@ -1,42 +1,32 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=20 format=3 uid="uid://c4v0m5wsagpid"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://c4v0m5wsagpid"]
 
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_31vv2"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_12fml"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_cmwyq"]
-[ext_resource type="Script" path="res://behavior/rule.gd" id="2_jsr0t"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_wwn20"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="5_4vnt8"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_wxl0u"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_8hrko"]
 
 [sub_resource type="Resource" id="Resource_pue1k"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_jfncy"]
-script = ExtResource("1_31vv2")
+[sub_resource type="Resource" id="Resource_y8elg"]
+script = ExtResource("7_wxl0u")
 id = 2
-supported_target_types = Array[int]([1])
-params = SubResource("Resource_pue1k")
-abstract = false
-skill_name = &"Sword Attack"
 skill_type = 1
-tree_type = 2
+params = SubResource("Resource_pue1k")
 
 [sub_resource type="Resource" id="Resource_6xp6w"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_b722s"]
-script = ExtResource("2_12fml")
+[sub_resource type="Resource" id="Resource_m7k20"]
+script = ExtResource("7_wxl0u")
 id = 1
-type = 1
-params = SubResource("Resource_6xp6w")
-abstract = false
-skill_name = &"Always"
 skill_type = 3
-tree_type = 1
+params = SubResource("Resource_6xp6w")
 
 [sub_resource type="Resource" id="Resource_gjsmm"]
 script = ExtResource("2_cmwyq")
@@ -44,69 +34,49 @@ editor_string = "Enemy ({sort})"
 cmp = 0
 sort = ExtResource("5_4vnt8")
 
-[sub_resource type="Resource" id="Resource_uyctr"]
-script = ExtResource("3_wwn20")
+[sub_resource type="Resource" id="Resource_kp10a"]
+script = ExtResource("7_wxl0u")
 id = 1
-type = 1
-description = "Targets actors of the opposing side"
-sortable = true
-params = SubResource("Resource_gjsmm")
-abstract = false
-skill_name = &"Enemy"
 skill_type = 2
-tree_type = 1
+params = SubResource("Resource_gjsmm")
 
-[sub_resource type="Resource" id="Resource_kcxfo"]
-script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_uyctr")
-action = SubResource("Resource_jfncy")
-condition = SubResource("Resource_b722s")
+[sub_resource type="Resource" id="Resource_3bdmw"]
+script = ExtResource("8_8hrko")
+target_selection = SubResource("Resource_kp10a")
+action = SubResource("Resource_y8elg")
+condition = SubResource("Resource_m7k20")
 
 [sub_resource type="Resource" id="Resource_i7jp6"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_7iba1"]
-script = ExtResource("1_31vv2")
+[sub_resource type="Resource" id="Resource_5euwx"]
+script = ExtResource("7_wxl0u")
 id = 1
-supported_target_types = Array[int]([1, 3])
-params = SubResource("Resource_i7jp6")
-abstract = false
-skill_name = &"Move To"
 skill_type = 1
-tree_type = 2
+params = SubResource("Resource_i7jp6")
 
-[sub_resource type="Resource" id="Resource_gdjxo"]
-script = ExtResource("2_12fml")
+[sub_resource type="Resource" id="Resource_it4l6"]
+script = ExtResource("7_wxl0u")
 id = 1
-type = 1
-params = SubResource("Resource_6xp6w")
-abstract = false
-skill_name = &"Always"
 skill_type = 3
-tree_type = 1
+params = SubResource("Resource_6xp6w")
 
-[sub_resource type="Resource" id="Resource_sdfqc"]
-script = ExtResource("3_wwn20")
+[sub_resource type="Resource" id="Resource_lycjt"]
+script = ExtResource("7_wxl0u")
 id = 1
-type = 1
-description = "Targets actors of the opposing side"
-sortable = true
-params = SubResource("Resource_gjsmm")
-abstract = false
-skill_name = &"Enemy"
 skill_type = 2
-tree_type = 1
+params = SubResource("Resource_gjsmm")
 
-[sub_resource type="Resource" id="Resource_on55m"]
-script = ExtResource("2_jsr0t")
-target_selection = SubResource("Resource_sdfqc")
-action = SubResource("Resource_7iba1")
-condition = SubResource("Resource_gdjxo")
+[sub_resource type="Resource" id="Resource_x7skp"]
+script = ExtResource("8_8hrko")
+target_selection = SubResource("Resource_lycjt")
+action = SubResource("Resource_5euwx")
+condition = SubResource("Resource_it4l6")
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_vgf0t")
-saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
-rules = [SubResource("Resource_kcxfo"), SubResource("Resource_on55m")]
+saved_rules = Array[ExtResource("8_8hrko")]([SubResource("Resource_3bdmw"), SubResource("Resource_x7skp")])
+rules = Array[Resource("res://behavior/rule.gd")]([])
