@@ -26,6 +26,9 @@ var default_sort = preload("res://skill_tree/target_sorts/closest_first.tres")
 # sorts if we have a check on the tree building to validate that
 # the player must have unlocked that one first.
 
+func _init():
+	skill_type = SkillType.TARGET
+
 static func target_selection_name(target_selection_id: Id) -> String:
 	return Id.keys()[target_selection_id].capitalize()
 

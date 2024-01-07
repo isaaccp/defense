@@ -12,7 +12,6 @@ gameplay = NodePath("Gameplay")
 [node name="UILayer" parent="." instance=ExtResource("2_81ey6")]
 
 [node name="Gameplay" parent="." instance=ExtResource("3_7l8ug")]
-characters = Array[Resource("res://gameplay_character.gd")]([])
 
 [connection signal="ready_screen_ready_pressed" from="UILayer" to="." method="_on_ready_screen_ready_pressed"]
 [connection signal="title_screen_game_mode_selected" from="UILayer" to="." method="_on_title_screen_game_mode_selected"]

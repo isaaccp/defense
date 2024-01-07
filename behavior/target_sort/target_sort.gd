@@ -6,6 +6,7 @@ class_name TargetSort
 enum Id {
 	UNSPECIFIED,
 	CLOSEST_FIRST,
+	FARTHEST_FIRST,
 }
 
 # Type of sort.
@@ -26,6 +27,9 @@ enum Type {
 ## target selectors can use this sort and makes UI prevent
 ## bad combinations.
 @export var type: Type
+
+func _init():
+	skill_type = SkillType.TARGET_SORT
 
 func compatible_with_target(target_type: Target.Type) -> bool:
 	return target_type in supported_target_types()

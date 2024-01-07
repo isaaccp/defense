@@ -40,6 +40,7 @@ var target_scripts = {
 
 var target_sort_scripts = {
 	TargetSort.Id.CLOSEST_FIRST: preload("res://behavior/target_sort/closest_first_position_target_sorter.gd"),
+	TargetSort.Id.FARTHEST_FIRST: preload("res://behavior/target_sort/farthest_first_position_target_sorter.gd"),
 }
 
 var action_by_id: Dictionary

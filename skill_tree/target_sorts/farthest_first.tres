@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TargetSort" load_steps=3 format=3 uid="uid://bh04aym60yde5"]
+
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="1_pa4xv"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="2_56w3l"]
+
+[resource]
+script = ExtResource("2_56w3l")
+id = 2
+type = 2
+skill_name = &"Farthest First"
+skill_type = 4
+parent = ExtResource("1_pa4xv")
+tree_type = 1

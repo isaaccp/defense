@@ -44,6 +44,9 @@ enum Type {
 @export var id: Id
 @export var type: Type
 
+func _init():
+	skill_type = SkillType.CONDITION
+
 func name() -> String:
 	return Id.keys()[id].capitalize()
 
