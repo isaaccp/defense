@@ -1,0 +1,81 @@
+[gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://b4r2ifufvnikc"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_7delc"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_modbu"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_erdfh"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="4_2ommy"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="5_uvcj2"]
+
+[sub_resource type="Resource" id="Resource_dv4pv"]
+script = ExtResource("1_7delc")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_qa7lc"]
+script = ExtResource("2_modbu")
+id = 2
+skill_type = 1
+params = SubResource("Resource_dv4pv")
+
+[sub_resource type="Resource" id="Resource_8lwyn"]
+script = ExtResource("1_7delc")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_ysxcg"]
+script = ExtResource("2_modbu")
+id = 1
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_xi025"]
+script = ExtResource("1_7delc")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = ExtResource("4_2ommy")
+
+[sub_resource type="Resource" id="Resource_71cmt"]
+script = ExtResource("2_modbu")
+id = 1
+skill_type = 2
+params = SubResource("Resource_xi025")
+
+[sub_resource type="Resource" id="Resource_bcpq4"]
+script = ExtResource("3_erdfh")
+target_selection = SubResource("Resource_71cmt")
+action = SubResource("Resource_qa7lc")
+condition = SubResource("Resource_ysxcg")
+
+[sub_resource type="Resource" id="Resource_dey8g"]
+script = ExtResource("1_7delc")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_80laq"]
+script = ExtResource("2_modbu")
+id = 4
+skill_type = 1
+params = SubResource("Resource_dey8g")
+
+[sub_resource type="Resource" id="Resource_fajao"]
+script = ExtResource("2_modbu")
+id = 1
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_hxeuv"]
+script = ExtResource("2_modbu")
+id = 1
+skill_type = 2
+params = SubResource("Resource_xi025")
+
+[sub_resource type="Resource" id="Resource_87fde"]
+script = ExtResource("3_erdfh")
+target_selection = SubResource("Resource_hxeuv")
+action = SubResource("Resource_80laq")
+condition = SubResource("Resource_fajao")
+
+[resource]
+script = ExtResource("5_uvcj2")
+saved_rules = Array[ExtResource("3_erdfh")]([SubResource("Resource_bcpq4"), SubResource("Resource_87fde")])
+rules = Array[Resource("res://behavior/rule.gd")]([])

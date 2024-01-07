@@ -4,7 +4,7 @@ extends GutTest
 const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
 const sword_attack_scene = SwordAttackAction.sword_attack_scene
 const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
-
+const charge_behavior = preload("res://tests/actions/charge_behavior.tres")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 
 var level: Level
@@ -16,20 +16,7 @@ var enemy_health: HealthComponent
 var sword_damage: int
 
 func make_charge_behavior() -> Behavior:
-	var behavior = Behavior.new()
-	behavior.rules.append(
-		Rule.make(
-			SkillManager.make_target_selection_instance(TargetSelectionDef.Id.ENEMY),
-			SkillManager.make_action_instance(ActionDef.Id.SWORD_ATTACK),
-		)
-	)
-	behavior.rules.append(
-		Rule.make(
-			SkillManager.make_target_selection_instance(TargetSelectionDef.Id.ENEMY),
-			SkillManager.make_action_instance(ActionDef.Id.CHARGE),
-		)
-	)
-	return behavior
+	return charge_behavior.duplicate()
 
 func before_all():
 	var sword_attack = sword_attack_scene.instantiate()
