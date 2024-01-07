@@ -34,12 +34,11 @@ enum CmpOp {
 @export var float_value: FloatValue
 @export var sort: TargetSort
 
-# Exporting those makes the duplicate(true) end up in a weird situation.
-# If we want them back, we could always just trigger parse manually afterwards.
+# Don't want those to end up saved in resources.
 # @export_group("Debug")
-@export var valid: bool = true
-@export var placeholders: Array[PlaceholderId]
-@export var parts: Array[Variant]
+var valid: bool = true
+var placeholders: Array[PlaceholderId]
+var parts: Array[Variant]
 
 func _init():
 	# Needs to be called deferred so values from resource are set.

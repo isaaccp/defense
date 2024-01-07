@@ -21,9 +21,6 @@ func type_name() -> String:
 
 func rule_skill_def() -> RuleSkillDef:
 	var rule_skill = RuleSkillDef.new()
-	# All subclasses provide id but they are different enums so can't
-	# declare it here.
-	rule_skill.id = get("id")
 	rule_skill.name = skill_name
 	rule_skill.skill_type = skill_type
 	return rule_skill

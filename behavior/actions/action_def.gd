@@ -23,7 +23,6 @@ enum Id {
 # wrong if it shows up, etc.
 const NoAction = &"__no_action__"
 
-@export var id: Id
 ## Script implementing this action.
 @export var action_script: GDScript
 ## Types of target that this action supports. The action script must be able
@@ -34,11 +33,8 @@ const NoAction = &"__no_action__"
 func _init():
 	skill_type = SkillType.ACTION
 
-static func action_name(action_id: Id) -> String:
-	return Id.keys()[action_id].capitalize()
-
 func name() -> String:
-	return Id.keys()[id].capitalize()
+	return skill_name
 
 func compatible_with_target(target_type: Target.Type) -> bool:
 	return target_type in supported_target_types

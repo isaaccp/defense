@@ -17,13 +17,9 @@
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_l1w4o"]
 script = ExtResource("9_q18a6")
-id = 2
 name = &"Sword Attack"
 skill_type = 1
 params = SubResource("Resource_3chx1")
@@ -32,13 +28,9 @@ params = SubResource("Resource_3chx1")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_l5qeq"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_ocylu")
@@ -47,13 +39,9 @@ params = SubResource("Resource_ocylu")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_x0vq8"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_iwep0")
@@ -68,20 +56,15 @@ condition = SubResource("Resource_l5qeq")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_sstb7"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_8fnw4")
 
 [sub_resource type="Resource" id="Resource_ji5f6"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_ocylu")
@@ -90,13 +73,9 @@ params = SubResource("Resource_ocylu")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_ys4nw"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_eg6c8")
@@ -116,13 +95,9 @@ saved_rules = Array[ExtResource("10_ioijj")]([SubResource("Resource_r71dr"), Sub
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_i8ukx"]
 script = ExtResource("9_q18a6")
-id = 6
 name = &"Heal"
 skill_type = 1
 params = SubResource("Resource_1qj77")
@@ -131,13 +106,9 @@ params = SubResource("Resource_1qj77")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_uvtt5"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_370hd")
@@ -146,13 +117,9 @@ params = SubResource("Resource_370hd")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_rlu6j"]
 script = ExtResource("9_q18a6")
-id = 5
 name = &"Ally"
 skill_type = 2
 params = SubResource("Resource_rnh6r")
@@ -167,20 +134,15 @@ condition = SubResource("Resource_uvtt5")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_wtnil"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_es4da")
 
 [sub_resource type="Resource" id="Resource_nct7c"]
 script = ExtResource("9_q18a6")
-id = 1
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_370hd")
@@ -189,13 +151,9 @@ params = SubResource("Resource_370hd")
 script = ExtResource("4_ga0tb")
 editor_string = ""
 cmp = 0
-valid = true
-placeholders = Array[int]([])
-parts = []
 
 [sub_resource type="Resource" id="Resource_b51v2"]
 script = ExtResource("9_q18a6")
-id = 5
 name = &"Ally"
 skill_type = 2
 params = SubResource("Resource_eehjr")

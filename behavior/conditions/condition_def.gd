@@ -41,7 +41,6 @@ enum Type {
 	GLOBAL,
 }
 
-@export var id: Id
 @export var type: Type
 @export var evaluator_script: GDScript
 
@@ -51,7 +50,7 @@ func _init():
 	skill_type = SkillType.CONDITION
 
 func name() -> String:
-	return Id.keys()[id].capitalize()
+	return skill_name
 
 func compatible_with_target(target_type: Target.Type) -> bool:
 	if type in [Type.ANY, Type.GLOBAL, Type.SELF]:

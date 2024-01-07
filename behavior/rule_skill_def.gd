@@ -5,8 +5,6 @@ extends Resource
 ## restore it.
 class_name RuleSkillDef
 
-## DEPRECATED. See name. Skill identifier, can be ActionDef.Id, TargetSelectionDef.Id, etc.
-@export var id: int
 ## Skill name. Identifier for the skill.
 @export var name: StringName
 ## The namespace are not disjoint, so need to know the type to restore.
