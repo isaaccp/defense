@@ -14,7 +14,20 @@ var side_component: SideComponent
 var target_selectors: Array[TargetSelector] = []
 var condition_evaluators: Array[ConditionEvaluator] = []
 
+# When behavior is set through editor/etc, we don't write (well, we do for now,
+# but we want to change it) the full skill definition, but just id and params.
+# From there we can create a new instance using the SkillManager and then set
+# the params as neeed. This operation is idempotent.
+# TODO: Actually stop writing what's not needed when writing Behavior in script
+# tree.
+func _inflate():
+	for rule in rules:
+		rule.target_selection = SkillManager.inflate_with_params(rule.target_selection) as TargetSelectionDef
+		rule.condition = SkillManager.inflate_with_params(rule.condition) as ConditionDef
+		rule.action = SkillManager.inflate_with_params(rule.action) as ActionDef
+
 func prepare(actor_: Actor, side_component_: SideComponent):
+	_inflate()
 	actor = actor_
 	side_component = side_component_
 	target_selectors.clear()

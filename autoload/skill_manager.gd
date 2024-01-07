@@ -75,6 +75,21 @@ func make_action_instance(id: ActionDef.Id) -> ActionDef:
 	action.abstract = false
 	return action
 
+func inflate_with_params(skill: ParamSkill) -> ParamSkill:
+	var inflated: ParamSkill
+	match skill.skill_type:
+		Skill.SkillType.ACTION:
+			inflated = make_action_instance(skill.id)
+		Skill.SkillType.TARGET:
+			inflated = make_target_selection_instance(skill.id)
+		Skill.SkillType.CONDITION:
+			inflated = make_condition_instance(skill.id)
+		_:
+			assert(false, "Unexpected skill type to inflate")
+	assert(inflated, "Failed to create new skill instance")
+	inflated.params = skill.params
+	return inflated
+
 func make_runnable_action(action_def: ActionDef) -> Action:
 	var action = action_scripts[action_def.id].new() as Action
 	action.def = action_def
