@@ -53,10 +53,10 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 class TestPositionReachedConditions extends LevelTest:
 	func make_move_behavior() -> Behavior:
 		var behavior = Behavior.new()
-		behavior.rules.append(
-			Rule.make(
-				SkillManager.make_target_selection_instance(TargetSelectionDef.Id.TOWER),
-				SkillManager.make_action_instance(ActionDef.Id.MOVE_TO),
+		behavior.saved_rules.append(
+			RuleDef.make(
+				RuleSkillDef.make_target(TargetSelectionDef.Id.TOWER),
+				RuleSkillDef.make_action(ActionDef.Id.MOVE_TO),
 			)
 		)
 		return behavior
