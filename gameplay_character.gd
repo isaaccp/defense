@@ -30,7 +30,6 @@ func grant_xp(amount: int) -> void:
 	total_xp += amount
 
 func make_character_body() -> Character:
-	assert(not actor, "Tried to instantiate an actor twice from same GameplayCharacter")
 	actor = scene.instantiate() as Character
 	actor.id = character_id
 	actor.actor_name = name
