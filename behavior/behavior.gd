@@ -2,6 +2,9 @@ extends Resource
 
 class_name Behavior
 
+@export var saved_rules: Array[RuleSkillDef]
+# TODO: Unexport once we have migrated all saved behaviors to use saved_rules
+# instead.
 @export var rules: Array[Rule]
 var actor: Actor
 var side_component: SideComponent
