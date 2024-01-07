@@ -1,5 +1,7 @@
 extends Control
 
+const skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
+
 var character: GameplayCharacter
 var skill_tree_state: SkillTreeState
 
@@ -58,7 +60,7 @@ func _setup_tree():
 	%Title.text = "%s: Skill Tree" % character.name
 
 	_tabs.tab_changed.connect(_on_tab_changed)
-	for t in skill_tree_state.skill_tree_collection.skill_trees:
+	for t in skill_tree_collection.skill_trees:
 		var seen := {}
 		# TODO: The graph should be an instanced scene, probably
 		var graph = GraphEdit.new()

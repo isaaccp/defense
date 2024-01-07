@@ -2,9 +2,6 @@ extends Resource
 
 class_name SkillTreeState
 
-# Unclear if we actually need this here yet.
-@export var skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
-
 # Refactor this so we don't have to repeat everything 4 times?
 # OTOH I don't think we are adding more skill types?
 @export var acquired_actions: Array[ActionDef.Id]:
