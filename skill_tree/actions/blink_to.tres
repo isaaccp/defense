@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://bdsw02ntoq6v2"]
+[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://bdsw02ntoq6v2"]
 
+[ext_resource type="Script" path="res://behavior/actions/blink_to_action.gd" id="1_sbvu5"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_utxyv"]
 [ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_yu2jp"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_lasih"]
@@ -12,6 +13,7 @@ cmp = 0
 [resource]
 script = ExtResource("3_lasih")
 id = 9
+action_script = ExtResource("1_sbvu5")
 supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_cxw7u")
 abstract = true

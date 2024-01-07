@@ -2,7 +2,8 @@ extends GutTest
 
 # Level has 1 enemy.
 const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
-const sword_attack_scene = SwordAttackAction.sword_attack_scene
+const sword_attack_action = preload("res://skill_tree/actions/sword_attack.tres")
+const charge_action = preload("res://skill_tree/actions/charge.tres")
 const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
 const charge_behavior = preload("res://tests/actions/charge_behavior.tres")
 const test_character = preload("res://character/playable_characters/test_character.tres")
@@ -14,11 +15,14 @@ var character_status: StatusComponent
 var enemy: Node2D
 var enemy_health: HealthComponent
 var sword_damage: int
+var runnable_charge_action: Action
 
 func make_charge_behavior() -> Behavior:
 	return charge_behavior.duplicate()
 
 func before_all():
+	runnable_charge_action = SkillManager.make_runnable_action(charge_action)
+	var sword_attack_scene = SkillManager.make_runnable_action(sword_attack_action).sword_attack_scene
 	var sword_attack = sword_attack_scene.instantiate()
 	sword_damage = Component.get_or_die(sword_attack, HitboxComponent.component).hit_effect.damage
 	sword_attack.free()
@@ -41,7 +45,7 @@ func test_charge_short_distance():
 	TestUtils.set_character_behavior(character, make_charge_behavior())
 
 	# Put the enemy close to the character, less than charge threshold distance.
-	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
+	enemy.position = character.position + Vector2.RIGHT * runnable_charge_action.charge_threshold / 2.0
 
 	level.start()
 
@@ -64,7 +68,7 @@ func test_charge_long_distance():
 	TestUtils.set_character_behavior(character, make_charge_behavior())
 
 	# Put the enemy close to the character, less than charge threshold distance.
-	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold * 1.5
+	enemy.position = character.position + Vector2.RIGHT * runnable_charge_action.charge_threshold * 1.5
 
 	level.start()
 
@@ -93,7 +97,7 @@ func test_charge_cooldown():
 	TestUtils.set_character_behavior(character, make_charge_behavior())
 
 	# Put the enemy close to the character, less than charge threshold distance.
-	enemy.position = character.position + Vector2.RIGHT * ChargeAction.charge_threshold / 2.0
+	enemy.position = character.position + Vector2.RIGHT * runnable_charge_action.charge_threshold / 2.0
 	# Second enemy a bit farther away.
 	extra_enemy.position = enemy.position + Vector2.RIGHT * 300
 
@@ -106,7 +110,7 @@ func test_charge_cooldown():
 	TestUtils.assert_last_action_not(self, character_behavior, ActionDef.Id.CHARGE)
 
 	# Wait right until cooldown expires and verify we only triggered charge once.
-	await wait_seconds(ChargeAction.new().cooldown - 0.1, "Waiting for cooldown to almost expire")
+	await wait_seconds(runnable_charge_action.cooldown - 0.1, "Waiting for cooldown to almost expire")
 	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 1)
 	await wait_seconds(0.2, "Waiting for cooldown to expire")
 	assert_eq(TestUtils.count_action_triggered(self, character_behavior, ActionDef.Id.CHARGE), 2)

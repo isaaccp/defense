@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://celgigrf5o7sb"]
+[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://celgigrf5o7sb"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_1mjwe"]
+[ext_resource type="Script" path="res://behavior/actions/charge_action.gd" id="1_7n25x"]
 [ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="1_vi6uy"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_t0f4g"]
 
@@ -12,6 +13,7 @@ cmp = 0
 [resource]
 script = ExtResource("2_t0f4g")
 id = 4
+action_script = ExtResource("1_7n25x")
 supported_target_types = Array[int]([1])
 params = SubResource("Resource_lot10")
 abstract = true

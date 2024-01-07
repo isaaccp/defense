@@ -6,21 +6,6 @@ var conditions = preload("res://skill_tree/skill_type_collections/condition_coll
 var targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
 var target_sorts = preload("res://skill_tree/skill_type_collections/target_sort_collection.tres")
 
-# TODO: Try moving this to the Resource at some point again.
-var action_scripts = {
-	ActionDef.Id.MOVE_TO: preload("res://behavior/actions/move_to_action.gd"),
-	ActionDef.Id.SWORD_ATTACK: preload("res://behavior/actions/sword_attack_action.gd"),
-	ActionDef.Id.BOW_ATTACK: preload("res://behavior/actions/bow_attack_action.gd"),
-	ActionDef.Id.CHARGE: preload("res://behavior/actions/charge_action.gd"),
-	ActionDef.Id.MULTI_SHOT: preload("res://behavior/actions/multi_shot_action.gd"),
-	ActionDef.Id.HEAL: preload("res://behavior/actions/heal_action.gd"),
-	ActionDef.Id.HOLD_PERSON: preload("res://behavior/actions/hold_person_action.gd"),
-	ActionDef.Id.BLINK_AWAY: preload("res://behavior/actions/blink_away_action.gd"),
-	ActionDef.Id.BLINK_TO: preload("res://behavior/actions/blink_to_action.gd"),
-	ActionDef.Id.TELEPORT_AWAY: preload("res://behavior/actions/teleport_away_action.gd"),
-	ActionDef.Id.TELEPORT_TO: preload("res://behavior/actions/teleport_to_action.gd"),
-}
-
 var action_by_id: Dictionary
 var condition_by_id: Dictionary
 var target_by_id: Dictionary
@@ -82,7 +67,7 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 	return skill
 
 func make_runnable_action(action_def: ActionDef) -> Action:
-	var action = action_scripts[action_def.id].new() as Action
+	var action = action_def.action_script.new() as Action
 	action.def = action_def
 	return action
 

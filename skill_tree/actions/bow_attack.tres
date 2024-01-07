@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=4 format=3 uid="uid://b0cx6ra6s8077"]
+[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://b0cx6ra6s8077"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_nx00x"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_sym6i"]
+[ext_resource type="Script" path="res://behavior/actions/bow_attack_action.gd" id="1_wtnby"]
 
 [sub_resource type="Resource" id="Resource_w8cog"]
 script = ExtResource("1_nx00x")
@@ -11,6 +12,7 @@ cmp = 0
 [resource]
 script = ExtResource("1_sym6i")
 id = 3
+action_script = ExtResource("1_wtnby")
 supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_w8cog")
 abstract = true

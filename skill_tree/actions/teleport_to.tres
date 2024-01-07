@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://wi55i11ogew5"]
+[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://wi55i11ogew5"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_4w1n5"]
+[ext_resource type="Script" path="res://behavior/actions/teleport_to_action.gd" id="1_52f08"]
 [ext_resource type="Resource" uid="uid://bdsw02ntoq6v2" path="res://skill_tree/actions/blink_to.tres" id="2_shvsq"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_88nxm"]
 
@@ -12,6 +13,7 @@ cmp = 0
 [resource]
 script = ExtResource("3_88nxm")
 id = 11
+action_script = ExtResource("1_52f08")
 supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_cxw7u")
 abstract = true
