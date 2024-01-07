@@ -3,15 +3,6 @@ extends ParamSkill
 
 class_name ConditionDef
 
-enum Id {
-	UNSPECIFIED,
-	ALWAYS,
-	TARGET_HEALTH,
-	ONCE,
-	TARGET_DISTANCE,
-	TIMES,
-}
-
 # Type of condition.
 enum Type {
 	UNSPECIFIED,

@@ -3,16 +3,6 @@ extends ParamSkill
 
 class_name TargetSelectionDef
 
-enum Id {
-	UNSPECIFIED,
-	ENEMY,
-	TOWER,
-	SELF,
-	SELF_OR_ALLY,
-	ALLY,
-	CENTER,
-}
-
 ## Type of Target that this selector returns.
 @export var type: Target.Type
 ## Description for target.

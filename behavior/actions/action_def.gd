@@ -3,21 +3,6 @@ extends ParamSkill
 
 class_name ActionDef
 
-enum Id {
-	UNSPECIFIED,
-	MOVE_TO,
-	SWORD_ATTACK,
-	BOW_ATTACK,
-	CHARGE,
-	MULTI_SHOT,
-	HEAL,
-	HOLD_PERSON,
-	BLINK_AWAY,
-	BLINK_TO,
-	TELEPORT_AWAY,
-	TELEPORT_TO,
-}
-
 # Used when something needs to explicitly mean no action.
 # Making it not empty so it's unique to action, it's obvious what went
 # wrong if it shows up, etc.
