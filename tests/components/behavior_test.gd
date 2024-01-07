@@ -10,11 +10,11 @@ var behavior_component: BehaviorComponent
 # Using heal self as it can trigger without any other setup.
 func make_behavior(condition_id: ConditionDef.Id) -> Behavior:
 	var behavior = Behavior.new()
-	behavior.rules.append(
-		Rule.make(
-			SkillManager.make_target_selection_instance(TargetSelectionDef.Id.SELF),
-			SkillManager.make_action_instance(ActionDef.Id.HEAL),
-			SkillManager.make_condition_instance(condition_id),
+	behavior.saved_rules.append(
+		RuleDef.make(
+			RuleSkillDef.make_target(TargetSelectionDef.Id.SELF),
+			RuleSkillDef.make_action(ActionDef.Id.HEAL),
+			RuleSkillDef.make_condition(condition_id),
 		)
 	)
 	return behavior
