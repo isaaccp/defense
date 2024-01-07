@@ -20,12 +20,12 @@
   "paint_after": 0.1,
   "post_run_script": "",
   "pre_run_script": "",
-  "prefix": "test_",
+  "prefix": "",
   "selected": "",
   "should_exit": false,
   "should_exit_on_success": true,
   "should_maximize": false,
-  "suffix": ".gd",
+  "suffix": "_test.gd",
   "tests": [],
   "unit_test_name": ""
 }
