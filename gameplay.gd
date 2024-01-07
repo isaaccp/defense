@@ -57,7 +57,7 @@ func _on_character_selection_screen_selection_ready(character_selections: Array)
 		characters.append(gameplay_character)
 	play_next_level.call_deferred()
 
-func _initialize_level(advance: bool = true):
+func _load_next_level(advance: bool = true):
 	level = null
 	if advance:
 		level_scene = level_provider.next_level()
@@ -65,16 +65,16 @@ func _initialize_level(advance: bool = true):
 		if level_scene == null:
 			return
 	level = level_scene.instantiate() as Level
-	level.initialize(characters)
 
 func play_next_level(advance: bool = true):
-	_initialize_level(advance)
+	_load_next_level(advance)
 	if level == null:
 		_credits()
 		return
 	play_level()
 
 func play_level():
+	level.initialize(characters)
 	var victory = Component.get_victory_loss_condition_component_or_die(level)
 	victory.level_failed.connect(_on_level_failed)
 	victory.level_finished.connect(_on_level_finished)

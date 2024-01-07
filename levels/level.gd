@@ -42,41 +42,37 @@ var gameplay: Node
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
-		var num_players = players if players != -1 else starting_positions.get_child_count()
-		# If setting test characters, must set them all.
-		assert(test_gameplay_characters.size() in [0, num_players])
-		# Same for behaviors (independently from above).
-		assert(test_behaviors.size() in [0, num_players])
+		_standalone_ready.call_deferred()
 
-		gameplay = load("res://gameplay.tscn").instantiate()
-		gameplay.level = self
-		if not test_gameplay_characters:
-			var gcs: Array[GameplayCharacter] = []
-			for i in range(num_players):
-				var gc = load("res://character/playable_characters/godric_the_knight.tres")
-				gcs.append(gc)
-			test_gameplay_characters = gcs
-		if test_behaviors:
-			for i in range(test_gameplay_characters.size()):
-				test_gameplay_characters[i].behavior = test_behaviors[i]
-		gameplay.characters = test_gameplay_characters
-		# TODO: Unclear how this override should interact with testing.
-		# If not overriden, unlock all skills when playing stand-alone.
-		if not skill_tree_state_override:
-			skill_tree_state_override = SkillTreeState.new()
-			skill_tree_state_override.full_acquired = true
-			skill_tree_state_override.full_unlocked = true
-		initialize(test_gameplay_characters)
-		get_parent().add_child.call_deferred(gameplay)
-		_finish_setup.call_deferred()
+func _standalone_ready():
+	# Immediately remove self, we'll test with a copy. Keep parent ref.
+	var parent = get_parent()
+	get_parent().remove_child(self)
 
-# For F6.
-func _finish_setup():
-	await get_tree().create_timer(0.1).timeout
+	var level_provider = LevelProvider.new()
+	level_provider.levels.append(load(scene_file_path))
+
+	var num_players = players if players != -1 else starting_positions.get_child_count()
+	# If setting test characters, must set them all.
+	assert(test_gameplay_characters.size() in [0, num_players])
+	# Same for behaviors (independently from above).
+	assert(test_behaviors.size() in [0, num_players])
+	gameplay = load("res://gameplay.tscn").instantiate()
+	if not test_gameplay_characters:
+		var gcs: Array[GameplayCharacter] = []
+		for i in range(num_players):
+			var gc = load("res://character/playable_characters/godric_the_knight.tres")
+			gcs.append(gc)
+		test_gameplay_characters = gcs
+	if test_behaviors:
+		for i in range(test_gameplay_characters.size()):
+			test_gameplay_characters[i].behavior = test_behaviors[i]
+	parent.add_child(gameplay)
+	gameplay.characters = test_gameplay_characters
+	gameplay.level_provider = level_provider
 	gameplay.ui_layer.show()
 	gameplay.ui_layer.hud.show()
-	get_parent().remove_child(self)
-	gameplay.play_level()
+	gameplay.play_next_level()
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
