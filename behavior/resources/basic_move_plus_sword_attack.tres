@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://c4v0m5wsagpid"]
+[gd_resource type="Resource" script_class="Behavior" load_steps=19 format=3 uid="uid://c4v0m5wsagpid"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_cmwyq"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_vgf0t"]
@@ -6,27 +6,29 @@
 [ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_wxl0u"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_8hrko"]
 
-[sub_resource type="Resource" id="Resource_pue1k"]
+[sub_resource type="Resource" id="Resource_amsqs"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_y8elg"]
+[sub_resource type="Resource" id="Resource_lwiee"]
 script = ExtResource("7_wxl0u")
 id = 2
+name = &"Sword Attack"
 skill_type = 1
-params = SubResource("Resource_pue1k")
+params = SubResource("Resource_amsqs")
 
-[sub_resource type="Resource" id="Resource_6xp6w"]
+[sub_resource type="Resource" id="Resource_1dg5q"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_m7k20"]
+[sub_resource type="Resource" id="Resource_02iyw"]
 script = ExtResource("7_wxl0u")
 id = 1
+name = &"Always"
 skill_type = 3
-params = SubResource("Resource_6xp6w")
+params = SubResource("Resource_1dg5q")
 
 [sub_resource type="Resource" id="Resource_gjsmm"]
 script = ExtResource("2_cmwyq")
@@ -34,48 +36,57 @@ editor_string = "Enemy ({sort})"
 cmp = 0
 sort = ExtResource("5_4vnt8")
 
-[sub_resource type="Resource" id="Resource_kp10a"]
+[sub_resource type="Resource" id="Resource_54iky"]
 script = ExtResource("7_wxl0u")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_gjsmm")
 
-[sub_resource type="Resource" id="Resource_3bdmw"]
+[sub_resource type="Resource" id="Resource_vo56g"]
 script = ExtResource("8_8hrko")
-target_selection = SubResource("Resource_kp10a")
-action = SubResource("Resource_y8elg")
-condition = SubResource("Resource_m7k20")
+target_selection = SubResource("Resource_54iky")
+action = SubResource("Resource_lwiee")
+condition = SubResource("Resource_02iyw")
 
-[sub_resource type="Resource" id="Resource_i7jp6"]
+[sub_resource type="Resource" id="Resource_au4l7"]
 script = ExtResource("2_cmwyq")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_5euwx"]
+[sub_resource type="Resource" id="Resource_7862j"]
 script = ExtResource("7_wxl0u")
 id = 1
+name = &"Move To"
 skill_type = 1
-params = SubResource("Resource_i7jp6")
+params = SubResource("Resource_au4l7")
 
-[sub_resource type="Resource" id="Resource_it4l6"]
+[sub_resource type="Resource" id="Resource_ku6cc"]
+script = ExtResource("2_cmwyq")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_aaa8l"]
 script = ExtResource("7_wxl0u")
 id = 1
+name = &"Always"
 skill_type = 3
-params = SubResource("Resource_6xp6w")
+params = SubResource("Resource_ku6cc")
 
-[sub_resource type="Resource" id="Resource_lycjt"]
+[sub_resource type="Resource" id="Resource_0m5mf"]
 script = ExtResource("7_wxl0u")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_gjsmm")
 
-[sub_resource type="Resource" id="Resource_x7skp"]
+[sub_resource type="Resource" id="Resource_pqh8l"]
 script = ExtResource("8_8hrko")
-target_selection = SubResource("Resource_lycjt")
-action = SubResource("Resource_5euwx")
-condition = SubResource("Resource_it4l6")
+target_selection = SubResource("Resource_0m5mf")
+action = SubResource("Resource_7862j")
+condition = SubResource("Resource_aaa8l")
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_vgf0t")
-saved_rules = Array[ExtResource("8_8hrko")]([SubResource("Resource_3bdmw"), SubResource("Resource_x7skp")])
+saved_rules = Array[ExtResource("8_8hrko")]([SubResource("Resource_vo56g"), SubResource("Resource_pqh8l")])

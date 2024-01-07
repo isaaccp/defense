@@ -17,6 +17,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_m2uo6"]
 script = ExtResource("2_80euh")
 id = 7
+name = &"Hold Person"
 skill_type = 1
 params = SubResource("Resource_6difb")
 
@@ -28,6 +29,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_yw7k2"]
 script = ExtResource("2_80euh")
 id = 3
+name = &"Once"
 skill_type = 3
 params = SubResource("Resource_kn045")
 
@@ -40,6 +42,7 @@ sort = ExtResource("5_ksnts")
 [sub_resource type="Resource" id="Resource_voexd"]
 script = ExtResource("2_80euh")
 id = 4
+name = &"Self Or Ally"
 skill_type = 2
 params = SubResource("Resource_ijy6r")
 

@@ -23,6 +23,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_mqwce"]
 script = ExtResource("9_7udxm")
 id = 2
+name = &"Sword Attack"
 skill_type = 1
 params = SubResource("Resource_3chx1")
 
@@ -34,6 +35,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_r88ha"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_ocylu")
 
@@ -45,6 +47,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_378pq"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_iwep0")
 
@@ -62,12 +65,14 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_tnutr"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_8fnw4")
 
 [sub_resource type="Resource" id="Resource_6j0ns"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_ocylu")
 
@@ -79,6 +84,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_nu22p"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_eg6c8")
 
@@ -101,6 +107,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_i3gb6"]
 script = ExtResource("9_7udxm")
 id = 6
+name = &"Heal"
 skill_type = 1
 params = SubResource("Resource_nlmkc")
 
@@ -112,6 +119,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_hnkia"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_tuf58")
 
@@ -123,6 +131,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_uy4vt"]
 script = ExtResource("9_7udxm")
 id = 5
+name = &"Ally"
 skill_type = 2
 params = SubResource("Resource_ik3g5")
 
@@ -140,6 +149,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_vvv2k"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_p8156")
 
@@ -157,6 +167,7 @@ float_value = SubResource("Resource_lap2g")
 [sub_resource type="Resource" id="Resource_632ku"]
 script = ExtResource("9_7udxm")
 id = 4
+name = &"Target Distance"
 skill_type = 3
 params = SubResource("Resource_rtkmh")
 
@@ -168,6 +179,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_8fkb7"]
 script = ExtResource("9_7udxm")
 id = 5
+name = &"Ally"
 skill_type = 2
 params = SubResource("Resource_gokw8")
 
@@ -185,6 +197,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_evjk4"]
 script = ExtResource("9_7udxm")
 id = 3
+name = &"Bow Attack"
 skill_type = 1
 params = SubResource("Resource_il0co")
 
@@ -196,6 +209,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_e435u"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_8tuft")
 
@@ -207,6 +221,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_uksj4"]
 script = ExtResource("9_7udxm")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_qdary")
 

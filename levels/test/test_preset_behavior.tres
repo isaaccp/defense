@@ -18,6 +18,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_pb32d"]
 script = ExtResource("3_dxdkf")
 id = 4
+name = &"Charge"
 skill_type = 1
 params = SubResource("Resource_qdkf6")
 
@@ -29,6 +30,7 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_yavb3"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_i8c2l")
 
@@ -41,6 +43,7 @@ sort = ExtResource("6_ojcmx")
 [sub_resource type="Resource" id="Resource_eqyh5"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_7x7k0")
 
@@ -58,18 +61,21 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_kqah0"]
 script = ExtResource("3_dxdkf")
 id = 2
+name = &"Sword Attack"
 skill_type = 1
 params = SubResource("Resource_nakmv")
 
 [sub_resource type="Resource" id="Resource_noe3w"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_i8c2l")
 
 [sub_resource type="Resource" id="Resource_gxxum"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_7x7k0")
 
@@ -87,18 +93,21 @@ cmp = 0
 [sub_resource type="Resource" id="Resource_xrqse"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_p0jui")
 
 [sub_resource type="Resource" id="Resource_6flu3"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Always"
 skill_type = 3
 params = SubResource("Resource_i8c2l")
 
 [sub_resource type="Resource" id="Resource_rpf4k"]
 script = ExtResource("3_dxdkf")
 id = 1
+name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_7x7k0")
 
