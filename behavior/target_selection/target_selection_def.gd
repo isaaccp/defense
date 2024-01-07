@@ -18,6 +18,8 @@ enum Id {
 @export var type: Target.Type
 ## Description for target.
 @export_multiline var description: String
+## Selector script.
+@export var selector_script: GDScript
 ## Whether the target is sortable. If it is, it must provide
 ## the {sort} placeholder in params.editor_string.
 @export var sortable = true

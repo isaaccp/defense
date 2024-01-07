@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=4 format=3 uid="uid://c2lpsyebwog7q"]
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=5 format=3 uid="uid://c2lpsyebwog7q"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_m2uhp"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="1_mjmbq"]
+[ext_resource type="Script" path="res://behavior/target_selection/self_target_selector.gd" id="3_8tp1d"]
 
 [sub_resource type="Resource" id="Resource_7ir3x"]
 script = ExtResource("1_m2uhp")
@@ -13,6 +14,7 @@ script = ExtResource("1_mjmbq")
 id = 3
 type = 1
 description = "Targets oneself"
+selector_script = ExtResource("3_8tp1d")
 sortable = false
 params = SubResource("Resource_7ir3x")
 abstract = true

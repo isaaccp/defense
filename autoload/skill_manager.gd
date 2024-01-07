@@ -21,15 +21,6 @@ var action_scripts = {
 	ActionDef.Id.TELEPORT_TO: preload("res://behavior/actions/teleport_to_action.gd"),
 }
 
-var target_scripts = {
-	TargetSelectionDef.Id.ENEMY: preload("res://behavior/target_selection/enemy_target_selector.gd"),
-	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/tower_target_selector.gd"),
-	TargetSelectionDef.Id.SELF: preload("res://behavior/target_selection/self_target_selector.gd"),
-	TargetSelectionDef.Id.SELF_OR_ALLY: preload("res://behavior/target_selection/self_or_ally_target_selector.gd"),
-	TargetSelectionDef.Id.ALLY: preload("res://behavior/target_selection/ally_target_selector.gd"),
-	TargetSelectionDef.Id.CENTER: preload("res://behavior/target_selection/center_position_target_selector.gd"),
-}
-
 var action_by_id: Dictionary
 var condition_by_id: Dictionary
 var target_by_id: Dictionary
@@ -165,7 +156,7 @@ func make_target_selection_instance(id: TargetSelectionDef.Id) -> TargetSelectio
 func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
 	assert(not target.abstract)
 	assert(target.type == Target.Type.ACTOR)
-	var selector = target_scripts[target.id].new() as NodeTargetSelector
+	var selector = target.selector_script.new() as NodeTargetSelector
 	selector.def = target
 	selector.condition_evaluator = target_actor_evaluator
 	return selector
@@ -173,7 +164,7 @@ func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluat
 func make_position_target_selector(target: TargetSelectionDef, target_position_evaluator: PositionConditionEvaluator) -> PositionTargetSelector:
 	assert(not target.abstract)
 	assert(target.type == Target.Type.POSITION)
-	var selector = target_scripts[target.id].new() as PositionTargetSelector
+	var selector = target.selector_script.new() as PositionTargetSelector
 	selector.def = target
 	selector.condition_evaluator = target_position_evaluator
 	return selector
