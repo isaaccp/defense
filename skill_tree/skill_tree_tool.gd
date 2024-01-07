@@ -25,6 +25,15 @@ var tree_types = [
 	SkillTree.TreeType.WIZARD,
 ]
 
+# To ensure there is no duplicate names.
+var skill_names = {}
+
+func _show_error(error: String):
+	var dialog = AcceptDialog.new()
+	dialog.title = "Error in skill tree tool"
+	dialog.dialog_text = error
+	EditorInterface.popup_dialog_centered(dialog)
+
 func _run():
 	create_skill_trees()
 
@@ -40,6 +49,10 @@ func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: Skill
 		while filename != "":
 			print("  Loading %s" % filename)
 			var skill = load(dir_path + "/" + filename) as Skill
+			if skill.skill_name in skill_names:
+				_show_error("Duplicate skill name: %s (processing: %s, found before in: %s)" % [skill.skill_name, skill.resource_path, skill_names[skill.skill_name]])
+				return
+			skill_names[skill.skill_name] = skill.resource_path
 			assert(skill.skill_type == skill_type, "wrong skill type")
 			collection.add(skill)
 			var skill_tree = trees[skill.tree_type]
