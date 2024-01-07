@@ -13,10 +13,10 @@ var heal_amount: int
 
 func make_heal_behavior() -> Behavior:
 	var behavior = Behavior.new()
-	behavior.rules.append(
-		Rule.make(
-			SkillManager.make_target_selection_instance(TargetSelectionDef.Id.SELF),
-			SkillManager.make_action_instance(ActionDef.Id.HEAL),
+	behavior.saved_rules.append(
+		RuleDef.make(
+			RuleSkillDef.make_target(TargetSelectionDef.Id.SELF),
+			RuleSkillDef.make_action(ActionDef.Id.HEAL),
 		)
 	)
 	return behavior
