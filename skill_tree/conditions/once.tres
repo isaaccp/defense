@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ConditionDef" load_steps=5 format=3 uid="uid://bp783ayeoq184"]
+[gd_resource type="Resource" script_class="ConditionDef" load_steps=6 format=3 uid="uid://bp783ayeoq184"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_14i36"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_once.gd" id="1_nkc6u"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_hcgbt"]
 [ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="2_vmrnn"]
 
@@ -13,6 +14,7 @@ cmp = 0
 script = ExtResource("2_hcgbt")
 id = 3
 type = 1
+evaluator_script = ExtResource("1_nkc6u")
 params = SubResource("Resource_opf8v")
 abstract = true
 skill_name = &"Once"

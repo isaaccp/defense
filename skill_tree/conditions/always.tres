@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ConditionDef" load_steps=4 format=3 uid="uid://b65olkildkp1d"]
+[gd_resource type="Resource" script_class="ConditionDef" load_steps=5 format=3 uid="uid://b65olkildkp1d"]
 
+[ext_resource type="Script" path="res://behavior/conditions/condition_always.gd" id="1_utwvb"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_xe28x"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_7lr6o"]
 
@@ -12,6 +13,7 @@ cmp = 0
 script = ExtResource("2_7lr6o")
 id = 1
 type = 1
+evaluator_script = ExtResource("1_utwvb")
 params = SubResource("Resource_8lwyn")
 abstract = true
 skill_name = &"Always"

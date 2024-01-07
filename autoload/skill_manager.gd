@@ -38,11 +38,6 @@ var target_scripts = {
 	TargetSelectionDef.Id.CENTER: preload("res://behavior/target_selection/center_position_target_selector.gd"),
 }
 
-var target_sort_scripts = {
-	TargetSort.Id.CLOSEST_FIRST: preload("res://behavior/target_sort/closest_first_position_target_sorter.gd"),
-	TargetSort.Id.FARTHEST_FIRST: preload("res://behavior/target_sort/farthest_first_position_target_sorter.gd"),
-}
-
 var action_by_id: Dictionary
 var condition_by_id: Dictionary
 var target_by_id: Dictionary
@@ -123,13 +118,13 @@ func make_condition_instance(id: ConditionDef.Id) -> ConditionDef:
 
 func make_any_condition_evaluator(condition: ConditionDef) -> AnyConditionEvaluator:
 	assert(not condition.abstract)
-	var evaluator = condition_scripts[condition.id].new() as AnyConditionEvaluator
+	var evaluator = condition.evaluator_script.new() as AnyConditionEvaluator
 	evaluator.def = condition
 	return evaluator
 
 func make_self_condition_evaluator(condition: ConditionDef, actor: Actor) -> SelfConditionEvaluator:
 	assert(not condition.abstract)
-	var evaluator = condition_scripts[condition.id].new() as SelfConditionEvaluator
+	var evaluator = condition.evaluator_script.new() as SelfConditionEvaluator
 	evaluator.def = condition
 	evaluator.actor = actor
 	return evaluator
@@ -139,7 +134,7 @@ func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor
 	assert(condition.type in [ConditionDef.Type.TARGET_ACTOR, ConditionDef.Type.TARGET_POSITION])
 	var evaluator: TargetActorConditionEvaluator
 	if condition.type == ConditionDef.Type.TARGET_ACTOR:
-		evaluator = condition_scripts[condition.id].new() as TargetActorConditionEvaluator
+		evaluator = condition.evaluator_script.new() as TargetActorConditionEvaluator
 	else:
 		var position_evaluator = make_position_condition_evaluator(condition, actor)
 		evaluator = PositionToActorConditionEvaluatorAdapter.new(position_evaluator)
@@ -150,7 +145,7 @@ func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor
 func make_position_condition_evaluator(condition: ConditionDef, actor: Actor) -> PositionConditionEvaluator:
 	assert(not condition.abstract)
 	assert(condition.type in [ConditionDef.Type.TARGET_POSITION])
-	var evaluator = condition_scripts[condition.id].new() as PositionConditionEvaluator
+	var evaluator = condition.evaluator_script.new() as PositionConditionEvaluator
 	evaluator.def = condition
 	evaluator.actor = actor
 	return evaluator

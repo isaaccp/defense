@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ConditionDef" load_steps=5 format=3 uid="uid://xun2hm81rhd1"]
+[gd_resource type="Resource" script_class="ConditionDef" load_steps=6 format=3 uid="uid://xun2hm81rhd1"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_8m636"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_times.gd" id="1_bw8bs"]
 [ext_resource type="Resource" uid="uid://bp783ayeoq184" path="res://skill_tree/conditions/once.tres" id="2_wy280"]
 [ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_aj6lq"]
 
@@ -13,6 +14,7 @@ cmp = 0
 script = ExtResource("3_aj6lq")
 id = 5
 type = 1
+evaluator_script = ExtResource("1_bw8bs")
 params = SubResource("Resource_l5ow1")
 abstract = true
 skill_name = &"Times"

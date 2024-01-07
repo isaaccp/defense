@@ -43,6 +43,7 @@ enum Type {
 
 @export var id: Id
 @export var type: Type
+@export var evaluator_script: GDScript
 
 func _init():
 	skill_type = SkillType.CONDITION
