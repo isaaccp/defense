@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="TargetSort" load_steps=2 format=3 uid="uid://dqatlurvqnehm"]
+[gd_resource type="Resource" script_class="TargetSort" load_steps=3 format=3 uid="uid://dqatlurvqnehm"]
 
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="1_fy5qd"]
+[ext_resource type="Script" path="res://behavior/target_sort/closest_first_position_target_sorter.gd" id="2_ns2ml"]
 
 [resource]
 script = ExtResource("1_fy5qd")
 id = 1
 type = 2
+sorter_script = ExtResource("2_ns2ml")
 skill_name = &"Closest First"
 skill_type = 4
 tree_type = 1

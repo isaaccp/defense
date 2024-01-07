@@ -27,6 +27,7 @@ enum Type {
 ## target selectors can use this sort and makes UI prevent
 ## bad combinations.
 @export var type: Type
+@export var sorter_script: GDScript
 
 func _init():
 	skill_type = SkillType.TARGET_SORT
