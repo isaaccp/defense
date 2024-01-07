@@ -1,14 +1,12 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://j04etfa2ncij"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://j04etfa2ncij"]
 
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_x5jr5"]
 [ext_resource type="PackedScene" uid="uid://bbo0hd6gduxbc" path="res://levels/tutorial/tutorial_attack.tscn" id="2_4yctn"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="3_p28ke"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="4_w5bw1"]
-[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="5_rjc1d"]
 
 [sub_resource type="Resource" id="Resource_dobrv"]
 script = ExtResource("4_w5bw1")
-skill_tree_collection = ExtResource("5_rjc1d")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
 acquired_target_sorts = Array[int]([])

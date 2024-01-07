@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="7_vy3e2"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="8_c4bmv"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_tx848"]
-[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="10_ekaww"]
 
 [sub_resource type="Resource" id="Resource_6difb"]
 script = ExtResource("1_jvgfs")
@@ -56,7 +55,6 @@ saved_rules = Array[ExtResource("3_d86ld")]([SubResource("Resource_mqhco")])
 
 [sub_resource type="Resource" id="Resource_n4lvi"]
 script = ExtResource("9_tx848")
-skill_tree_collection = ExtResource("10_ekaww")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
 acquired_target_sorts = Array[int]([])

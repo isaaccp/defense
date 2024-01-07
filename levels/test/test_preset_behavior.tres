@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="7_4xswo"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_peqn1"]
-[ext_resource type="Resource" uid="uid://blodrfngevlxe" path="res://skill_tree/trees/skill_tree_collection.tres" id="10_po8hj"]
 
 [sub_resource type="Resource" id="Resource_qdkf6"]
 script = ExtResource("2_8xb8v")
@@ -115,7 +114,6 @@ saved_rules = Array[ExtResource("4_7kixr")]([SubResource("Resource_ioph1"), SubR
 
 [sub_resource type="Resource" id="Resource_x5gu8"]
 script = ExtResource("9_peqn1")
-skill_tree_collection = ExtResource("10_po8hj")
 acquired_actions = Array[int]([])
 acquired_target_selections = Array[int]([])
 acquired_target_sorts = Array[int]([])

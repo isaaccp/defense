@@ -21,14 +21,6 @@ var action_scripts = {
 	ActionDef.Id.TELEPORT_TO: preload("res://behavior/actions/teleport_to_action.gd"),
 }
 
-var condition_scripts = {
-	ConditionDef.Id.ALWAYS: preload("res://behavior/conditions/condition_always.gd"),
-	ConditionDef.Id.TARGET_HEALTH: preload("res://behavior/conditions/health_target_actor_condition_evaluator.gd"),
-	ConditionDef.Id.ONCE: preload("res://behavior/conditions/condition_once.gd"),
-	ConditionDef.Id.TARGET_DISTANCE: preload("res://behavior/conditions/distance_position_condition_evaluator.gd"),
-	ConditionDef.Id.TIMES: preload("res://behavior/conditions/condition_times.gd"),
-}
-
 var target_scripts = {
 	TargetSelectionDef.Id.ENEMY: preload("res://behavior/target_selection/enemy_target_selector.gd"),
 	TargetSelectionDef.Id.TOWER: preload("res://behavior/target_selection/tower_target_selector.gd"),
