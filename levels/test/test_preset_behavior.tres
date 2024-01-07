@@ -171,7 +171,8 @@ condition = SubResource("Resource_t7rru")
 
 [sub_resource type="Resource" id="Resource_ytoa5"]
 script = ExtResource("6_omcam")
-rules = Array[ExtResource("4_a36is")]([SubResource("Resource_u32sd"), SubResource("Resource_k2vo6"), SubResource("Resource_vvb3c")])
+saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
+rules = [SubResource("Resource_u32sd"), SubResource("Resource_k2vo6"), SubResource("Resource_vvb3c")]
 
 [sub_resource type="Resource" id="Resource_x5gu8"]
 script = ExtResource("9_peqn1")

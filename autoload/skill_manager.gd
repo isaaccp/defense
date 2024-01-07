@@ -75,20 +75,27 @@ func make_action_instance(id: ActionDef.Id) -> ActionDef:
 	action.abstract = false
 	return action
 
-func inflate_with_params(skill: ParamSkill) -> ParamSkill:
-	var inflated: ParamSkill
-	match skill.skill_type:
+func restore_rule(saved_rule: RuleDef) -> Rule:
+	var rule = Rule.new()
+	rule.target_selection = restore_skill(saved_rule.target_selection) as TargetSelectionDef
+	rule.condition = restore_skill(saved_rule.condition) as ConditionDef
+	rule.action = restore_skill(saved_rule.action) as ActionDef
+	return rule
+
+func restore_skill(saved_skill: RuleSkillDef) -> Skill:
+	var skill: ParamSkill
+	match saved_skill.skill_type:
 		Skill.SkillType.ACTION:
-			inflated = make_action_instance(skill.id)
+			skill = make_action_instance(skill.id)
 		Skill.SkillType.TARGET:
-			inflated = make_target_selection_instance(skill.id)
+			skill = make_target_selection_instance(skill.id)
 		Skill.SkillType.CONDITION:
-			inflated = make_condition_instance(skill.id)
+			skill = make_condition_instance(skill.id)
 		_:
-			assert(false, "Unexpected skill type to inflate")
-	assert(inflated, "Failed to create new skill instance")
-	inflated.params = skill.params
-	return inflated
+			assert(false, "Unexpected skill type to restore")
+	assert(skill, "Failed to restore new skill instance")
+	skill.params = saved_skill.params
+	return skill
 
 func make_runnable_action(action_def: ActionDef) -> Action:
 	var action = action_scripts[action_def.id].new() as Action

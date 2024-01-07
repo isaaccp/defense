@@ -40,6 +40,7 @@ func load_behavior(behavior: Behavior) -> void:
 	for c in _root.get_children():
 		_root.remove_child(c)
 	if behavior:
+		# behavior.restore()
 		for rule in behavior.rules:
 			_add_row(rule)
 	_add_row()
@@ -249,10 +250,10 @@ func get_behavior() -> Behavior:
 		action.params = child.get_metadata(Column.ACTION).data as SkillParams
 		var condition = SkillManager.make_condition_instance(condition_id)
 		condition.params = child.get_metadata(Column.CONDITION).data as SkillParams
-		var rule = Rule.make(
-			target,
-			action,
-			condition
+		var rule = RuleDef.make(
+			target.rule_skill_def(),
+			action.rule_skill_def(),
+			condition.rule_skill_def(),
 		)
-		behavior.rules.append(rule)
+		behavior.saved_rules.append(rule)
 	return behavior

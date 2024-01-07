@@ -108,4 +108,5 @@ condition = SubResource("Resource_gdjxo")
 [resource]
 resource_local_to_scene = true
 script = ExtResource("4_vgf0t")
-rules = Array[ExtResource("2_jsr0t")]([SubResource("Resource_kcxfo"), SubResource("Resource_on55m")])
+saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
+rules = [SubResource("Resource_kcxfo"), SubResource("Resource_on55m")]
