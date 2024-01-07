@@ -25,9 +25,8 @@ func _edit(o: Object):
 	if not o:
 		_make_visible(false)
 		return
-	# UI init assmes it's already in the tree, so make_visible first.
-	_make_visible(true)
 	ui.editor_initialize(o)
+	_make_visible(true)
 
 func _on_save(b: Behavior):
 	# Just overwriting the input makes the change appear in the inspector.

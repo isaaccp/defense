@@ -119,9 +119,9 @@ func _on_configure_behavior_pressed(character_idx: int):
 	for child in %ProgrammingUIParent.get_children():
 		child.queue_free()
 	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
-	%ProgrammingUIParent.add_child(programming_ui)
 	var gameplay_character = Component.get_persistent_game_state_component_or_die(character).state
 	programming_ui.initialize(gameplay_character)
+	%ProgrammingUIParent.add_child(programming_ui)
 	programming_ui.saved.connect(_save_and_close.bind(character_idx))
 	programming_ui.canceled.connect(_close)
 	show_character_buttons(false)

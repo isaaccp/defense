@@ -22,7 +22,7 @@ enum ButtonIdx {
 	DELETE = 1,
 }
 
-func _ready():
+func _init_tree():
 	# Note: This is currently only used as a list, not actually a tree.
 	# TODO: Do we need nested behaviors?
 	var tree = self
@@ -35,7 +35,8 @@ func _ready():
 	tree.set_column_title(Column.ACTION, "Action")
 
 func load_behavior(behavior: Behavior) -> void:
-	assert(is_inside_tree(), "Needs to be called inside tree")
+	if not _root:
+		_init_tree()
 	for c in _root.get_children():
 		_root.remove_child(c)
 	if behavior:
