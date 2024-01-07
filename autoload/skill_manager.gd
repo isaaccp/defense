@@ -33,7 +33,7 @@ var target_scripts = {
 var action_by_id: Dictionary
 var condition_by_id: Dictionary
 var target_by_id: Dictionary
-var target_sort_by_id: Dictionary
+var target_sort_by_name: Dictionary
 
 func _ready():
 	refresh()
@@ -42,7 +42,7 @@ func refresh():
 	action_by_id.clear()
 	condition_by_id.clear()
 	target_by_id.clear()
-	target_sort_by_id.clear()
+	target_sort_by_name.clear()
 	for action in actions.skills:
 		action_by_id[action.id] = action
 	for condition in conditions.skills:
@@ -51,7 +51,7 @@ func refresh():
 		target.validate()
 		target_by_id[target.id] = target
 	for target_sort in target_sorts.skills:
-		target_sort_by_id[target_sort.id] = target_sort
+		target_sort_by_name[target_sort.skill_name] = target_sort
 
 # Action
 func lookup_action(id: ActionDef.Id) -> ActionDef:
@@ -184,8 +184,8 @@ func all_target_selections() -> Array[TargetSelectionDef.Id]:
 
 # TargetSort.
 # Stateless and not parameterizable, so no need to make instances.
-func lookup_target_sort(id: TargetSort.Id) -> TargetSort:
-	return target_sort_by_id[id]
+func lookup_target_sort(name: StringName) -> TargetSort:
+	return target_sort_by_name[name]
 
 func make_actor_target_sorter(target_sort: TargetSort) -> ActorTargetSorter:
 	assert(target_sort.type in [TargetSort.Type.ACTOR, TargetSort.Type.POSITION])
@@ -204,8 +204,8 @@ func make_position_target_sorter(target_sort: TargetSort) -> PositionTargetSorte
 	sorter.def = target_sort
 	return sorter
 
-func all_target_sorts() -> Array[TargetSort.Id]:
-	var all: Array[TargetSort.Id] = []
-	for id in target_sort_by_id.keys():
-		all.append(id as TargetSort.Id)
+func all_target_sorts() -> Array[StringName]:
+	var all: Array[StringName] = []
+	for skill_name in target_sort_by_name.keys():
+		all.append(skill_name)
 	return all

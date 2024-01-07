@@ -16,7 +16,7 @@ class_name SkillTreeState
 			return SkillManager.all_target_selections()
 		return acquired_target_selections
 
-@export var acquired_target_sorts: Array[TargetSort.Id]:
+@export var acquired_target_sorts: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_target_sorts()
@@ -40,7 +40,7 @@ class_name SkillTreeState
 			return SkillManager.all_target_selections()
 		return unlocked_target_selections
 
-@export var unlocked_target_sorts: Array[TargetSort.Id]:
+@export var unlocked_target_sorts: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_target_sorts()
@@ -139,7 +139,7 @@ func _target_selections(state_type: StateType) -> Array[TargetSelectionDef.Id]:
 	else:
 		return unlocked_target_selections
 
-func _target_sorts(state_type: StateType) -> Array[TargetSort.Id]:
+func _target_sorts(state_type: StateType) -> Array[StringName]:
 	if state_type == StateType.ACQUIRED:
 		return acquired_target_sorts
 	else:

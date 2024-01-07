@@ -3,12 +3,6 @@ extends Skill
 
 class_name TargetSort
 
-enum Id {
-	UNSPECIFIED,
-	CLOSEST_FIRST,
-	FARTHEST_FIRST,
-}
-
 # Type of sort.
 enum Type {
 	UNSPECIFIED,
@@ -21,8 +15,6 @@ enum Type {
 	POSITION,
 }
 
-@export var id: Id
-# TODO: Still need to make the UI respect this.
 ## Type of sort supported. Determines which type of
 ## target selectors can use this sort and makes UI prevent
 ## bad combinations.
@@ -48,7 +40,8 @@ func supported_target_types_str() -> String:
 	var supported_targets = supported_target_types().map(func(t): return Target.target_type_str(t))
 	return ",".join(supported_targets)
 
+# TODO: Once all migrated, maybe rename skill_name as name and remove those.
 func name() -> String:
-	return Id.keys()[id].capitalize()
+	return skill_name
 
 # TODO: Add a description and show it somewhere in the UI.

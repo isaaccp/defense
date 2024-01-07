@@ -73,14 +73,14 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			opt.set_item_disabled(0, true)
 			opt.fit_to_longest_item = false
 			# TODO: Make it so you only have sorts acquired.
-			for sort_id in SkillManager.all_target_sorts():
-				var sort = SkillManager.lookup_target_sort(sort_id)
-				opt.add_item(str(sort), sort.id)
+			var options = SkillManager.all_target_sorts()
+			for sort_name in options:
+				opt.add_item(sort_name)
 			if _params.placeholder_set(SkillParams.PlaceholderId.SORT):
 				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT).id)
 			else:
 				opt.select(0)
-			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id))
+			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))
 			input.add_child(opt)
 
 func _populate():
@@ -109,8 +109,9 @@ func _on_float_value_updated(value: float, placeholder: SkillParams.PlaceholderI
 	_params.set_placeholder_value(placeholder, value)
 	_check_ok()
 
-func _on_sort_selected(value: int, placeholder: SkillParams.PlaceholderId):
-	var sort = SkillManager.lookup_target_sort(value)
+func _on_sort_selected(selection: int, placeholder: SkillParams.PlaceholderId, options: Array[StringName]):
+	var name = options[selection-1]
+	var sort = SkillManager.lookup_target_sort(name)
 	assert(sort)
 	_params.set_placeholder_value(placeholder, sort)
 	_check_ok()

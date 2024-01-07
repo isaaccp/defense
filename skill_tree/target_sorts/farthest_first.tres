@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("2_56w3l")
-id = 2
 type = 2
 sorter_script = ExtResource("3_677ug")
 skill_name = &"Farthest First"

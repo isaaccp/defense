@@ -122,7 +122,7 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 		PlaceholderId.FLOAT_VALUE:
 			return float_value and float_value.defined
 		PlaceholderId.SORT:
-			return sort and sort.id != TargetSort.Id.UNSPECIFIED
+			return sort != null
 	assert(false, "unreachable")
 	return false
 
