@@ -67,7 +67,7 @@ func _on_statuses_changed(statuses: Array):
 func _on_behavior_updated(action_name: StringName, _target: Target):
 	# TODO: Do something with target, e.g. hovering could highlight the
 	# target in the level. Or at least add target description.
-	%ActionLabel.text = str(action_name) if action_name else "Idle"
+	%ActionLabel.text = str(action_name) if action_name != ActionDef.NoAction else "Idle"
 
 func _on_config_button_pressed():
 	config_button_pressed.emit()
