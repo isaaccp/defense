@@ -33,7 +33,7 @@ func _description(character: GameplayCharacter) -> String:
 	description += "%s\n" % character.description
 	return description
 
-func _character_selected(button: Button, character_idx: int):
+func _character_selected(_button: Button, character_idx: int):
 	character_selected.emit(character_idx)
 
 func disable_and_show_selection(character_idx: int):

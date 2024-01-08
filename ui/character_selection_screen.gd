@@ -19,7 +19,7 @@ func set_characters(num_characters: int, available_characters_: Array[GameplayCh
 	selections_wanted = num_characters
 	available_characters = available_characters_
 
-func _on_show(info: Dictionary = {}) -> void:
+func _on_show(_info: Dictionary = {}) -> void:
 	sorted_players = OnlineMatch.get_sorted_players()
 	clear_characters()
 	# Character 0 controls (character_idx % num_players) == 0, and so on.

@@ -86,10 +86,10 @@ func play_level():
 	ui_layer.hud.show_main_message("Prepare", 2.0)
 	# Everything is set up, wait until all players are ready.
 
-func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
+func _on_level_failed(_loss_type: VictoryLossConditionComponent.LossType):
 	_on_level_end(false)
 
-func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType):
+func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType):
 	_on_level_end(true)
 
 func _on_level_end(success: bool):

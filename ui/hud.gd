@@ -97,8 +97,6 @@ func show_victory_loss_text(show: bool = true):
 func start_character_setup(all_ready_callback: Callable):
 	all_ready.connect(all_ready_callback, CONNECT_ONE_SHOT)
 	show_character_buttons(true)
-	for i in %CharacterViews.get_child_count():
-		var view = %CharacterViews.get_child(i) as HudCharacterView
 
 func _reset_character_setup():
 	# Clear for next time.
@@ -144,6 +142,7 @@ func set_peer(peer_id: int) -> void:
 	peer.text = "Peer: %d" % peer_id
 
 func set_time(time_secs: int) -> void:
+	@warning_ignore("integer_division")
 	var minutes = time_secs / 60
 	var seconds = time_secs % 60
 	time.text = "%02d:%02d" % [minutes, seconds]
@@ -193,10 +192,10 @@ func _show_message(message: String, message_type: MessageType, timeout: float = 
 			return
 	else:
 		time_left = timeout
-	var tween = create_tween()
-	tween.tween_property(label, "modulate:a", 0, time_left)
-	message_tween[message_type] = tween
-	await tween.finished
+	var fade_out_tween = create_tween()
+	fade_out_tween.tween_property(label, "modulate:a", 0, time_left)
+	message_tween[message_type] = fade_out_tween
+	await fade_out_tween.finished
 	if current_generation != message_generation[message_type]:
 		return
 	label.hide()

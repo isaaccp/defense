@@ -157,7 +157,7 @@ func _avail_icon(skill: Skill) -> TextureRect:
 	out.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	return out
 
-func _on_node_entered(node: GraphNode, skill: Skill):
+func _on_node_entered(node: GraphNode, _skill: Skill):
 	node.self_modulate = Color.WHITE
 
 func _on_node_exited(node: GraphNode, skill: Skill):
