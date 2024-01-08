@@ -14,6 +14,10 @@ comment_re = re.compile("#.*")
 regex = re.compile("[A-Z]+[a-z]*\\w+")
 
 ignore = ["Component", "TestUtils", "GutHookScript", "GutStringUtils", "RichButton"]
+# Simulates the effect of removing the dependency between X and Y if it exists.
+simulate_removals = {
+        "NodeTargetSelector": ["SkillManager"],
+}
 
 def get_deps(directory):
     process_dir(directory)
@@ -54,6 +58,8 @@ def process_dir(directory):
             if name in ignore:
                 continue
             results = sorted(set(results))
+            if name in simulate_removals:
+                results = [r for r in results if r not in simulate_removals[name]]
             deps[name] = results
 
 class CountCycles:

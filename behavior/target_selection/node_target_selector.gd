@@ -9,6 +9,8 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 	if def.sortable:
 		assert(def.params.placeholder_set(SkillParams.PlaceholderId.SORT))
 		var target_sort = def.params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
+		# TODO: This creates a cycle. It could be moved to Behavior or we could
+		# split out SkillManager on per-skill-type managers.
 		var sorter = SkillManager.make_actor_target_sorter(target_sort)
 		sorter.sort(actor, targets)
 	for target in targets:
