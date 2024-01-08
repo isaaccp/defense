@@ -13,6 +13,8 @@ quotes_re = re.compile("\"[^\"]*.\"")
 comment_re = re.compile("#.*")
 regex = re.compile("[A-Z]+[a-z]*\\w+")
 
+ignore = ["Component", "TestUtils", "GutHookScript", "GutStringUtils", "RichButton"]
+
 def get_deps(directory):
     process_dir(directory)
 
@@ -32,8 +34,14 @@ def process_dir(directory):
         f = open(full_path)
         name = ""
         results = []
-        if file == "stats_manager.gd":
-            name = "StatsManager"
+        if file == "skill_manager.gd":
+            name = "SkillManager"
+        elif file == "online_match.gd":
+            name = "OnlineMatch"
+        elif file == "global.gd":
+            name = "Global"
+        elif file == "online.gd":
+            name = "Online"
         for line in f.readlines():
             if line.startswith("class_name"):
                 name = line.split(' ')[1].strip()
@@ -43,6 +51,8 @@ def process_dir(directory):
                 line = re.sub(comment_re, "", line)
                 results.extend(re.findall(regex, line))
         if name:
+            if name in ignore:
+                continue
             results = sorted(set(results))
             deps[name] = results
 

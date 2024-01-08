@@ -268,9 +268,9 @@ func get_behavior() -> Behavior:
 		var condition = SkillManager.make_condition_instance(condition_name)
 		condition.params = child.get_metadata(Column.CONDITION).data as SkillParams
 		var rule = RuleDef.make(
-			target.rule_skill_def(),
-			action.rule_skill_def(),
-			condition.rule_skill_def(),
+			RuleSkillDef.from_skill(target),
+			RuleSkillDef.from_skill(action),
+			RuleSkillDef.from_skill(condition),
 		)
 		behavior.saved_rules.append(rule)
 	return behavior

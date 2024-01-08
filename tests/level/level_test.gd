@@ -57,8 +57,8 @@ class TestPositionReachedConditions extends LevelTest:
 		var behavior = Behavior.new()
 		behavior.saved_rules.append(
 			RuleDef.make(
-				tower_target.rule_skill_def(),
-				move_to.rule_skill_def(),
+				RuleSkillDef.from_skill(tower_target),
+				RuleSkillDef.from_skill(move_to),
 			)
 		)
 		return behavior

@@ -14,22 +14,18 @@ var enemy: Node2D
 var enemy_health: HealthComponent
 
 func make_sword_behavior(move: bool = false) -> Behavior:
-	print("on make_sword_behavior")
-	var foo = enemy_target
-	print(enemy_target.params)
-	print(enemy_target.params.all_set())
 	var behavior = Behavior.new()
 	behavior.saved_rules.append(
 		RuleDef.make(
-			enemy_target.rule_skill_def(),
-			sword_attack.rule_skill_def(),
+			RuleSkillDef.from_skill(enemy_target),
+			RuleSkillDef.from_skill(sword_attack),
 		)
 	)
 	if move:
 		behavior.saved_rules.append(
 			RuleDef.make(
-				enemy_target.rule_skill_def(),
-				move_to.rule_skill_def(),
+				RuleSkillDef.from_skill(enemy_target),
+				RuleSkillDef.from_skill(move_to),
 			)
 		)
 	return behavior

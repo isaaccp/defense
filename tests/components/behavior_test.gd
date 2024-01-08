@@ -1,7 +1,9 @@
 extends GutTest
 
 const body_scene = preload("res://character/character.tscn")
-const heal_name = preload("res://skill_tree/actions/heal.tres").skill_name
+const heal = preload("res://skill_tree/actions/heal.tres")
+const target_self = preload("res://skill_tree/targets/self.tres")
+
 var body: CharacterBody2D
 var behavior_component: BehaviorComponent
 
@@ -12,9 +14,9 @@ func make_behavior(condition: ConditionDef) -> Behavior:
 	var behavior = Behavior.new()
 	behavior.saved_rules.append(
 		RuleDef.make(
-			preload("res://skill_tree/targets/self.tres").rule_skill_def(),
-			preload("res://skill_tree/actions/heal.tres").rule_skill_def(),
-			condition.rule_skill_def(),
+			RuleSkillDef.from_skill(target_self),
+			RuleSkillDef.from_skill(heal),
+			RuleSkillDef.from_skill(condition),
 		)
 	)
 	return behavior
@@ -33,15 +35,15 @@ func test_basic_behavior():
 	behavior_component.run()
 	await wait_for_signal(behavior_component.behavior_updated, 0.1)
 	assert_signal_emitted(behavior_component, "behavior_updated")
-	TestUtils.assert_last_action(self, behavior_component, heal_name)
+	TestUtils.assert_last_action(self, behavior_component, heal.skill_name)
 
 	# Next update should be "no action" due to cooldown.
 	await wait_for_signal(behavior_component.behavior_updated, 2.0)
 	TestUtils.assert_last_action(self, behavior_component, ActionDef.NoAction)
 	# Next one should be HEAL again as we can trigger indefinitely.
 	await wait_for_signal(behavior_component.behavior_updated, 10.0)
-	TestUtils.assert_last_action(self, behavior_component, heal_name)
-	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal_name), 2)
+	TestUtils.assert_last_action(self, behavior_component, heal.skill_name)
+	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal.skill_name), 2)
 
 func test_persistent_condition_instance():
 	behavior_component.behavior = make_behavior(preload("res://skill_tree/conditions/once.tres"))
@@ -51,7 +53,7 @@ func test_persistent_condition_instance():
 	behavior_component.run()
 	await wait_for_signal(behavior_component.behavior_updated, 0.1)
 	assert_signal_emitted(behavior_component, "behavior_updated")
-	TestUtils.assert_last_action(self, behavior_component, heal_name)
+	TestUtils.assert_last_action(self, behavior_component, heal.skill_name)
 
 	# Next update should be "no action" due to cooldown.
 	await wait_for_signal(behavior_component.behavior_updated, 2.0)
@@ -61,4 +63,4 @@ func test_persistent_condition_instance():
 	# running again.
 	await wait_for_signal(behavior_component.behavior_updated, 10.0)
 	TestUtils.assert_last_action(self, behavior_component, ActionDef.NoAction)
-	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal_name), 1)
+	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal.skill_name), 1)

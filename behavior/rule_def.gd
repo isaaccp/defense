@@ -16,7 +16,7 @@ const always = preload("res://skill_tree/conditions/always.tres")
 		#condition.name(),
 	#]
 
-static func make(target_selection: RuleSkillDef, action: RuleSkillDef, condition: RuleSkillDef = always.rule_skill_def()) -> RuleDef:
+static func make(target_selection: RuleSkillDef, action: RuleSkillDef, condition: RuleSkillDef = RuleSkillDef.from_skill(always)) -> RuleDef:
 	var rule = RuleDef.new()
 	rule.target_selection = target_selection
 	rule.action = action

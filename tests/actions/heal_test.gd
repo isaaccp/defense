@@ -17,8 +17,8 @@ func make_heal_behavior() -> Behavior:
 	var behavior = Behavior.new()
 	behavior.saved_rules.append(
 		RuleDef.make(
-			self_target.rule_skill_def(),
-			heal.rule_skill_def(),
+			RuleSkillDef.from_skill(self_target),
+			RuleSkillDef.from_skill(heal),
 		)
 	)
 	return behavior

@@ -11,11 +11,6 @@ func name() -> String:
 	assert(false, "Must be implemented by subclasses")
 	return "<name>"
 
-func rule_skill_def() -> RuleSkillDef:
-	var rule_skill = super()
-	rule_skill.params = params
-	return rule_skill
-
 func _to_string() -> String:
 	if not params or params.placeholders.size() == 0:
 		return name()

@@ -37,6 +37,14 @@ static func make(skill_type: Skill.SkillType, name: StringName, params: SkillPar
 	rule_skill.params = params
 	return rule_skill
 
+static func from_skill(skill: Skill) -> RuleSkillDef:
+	var rule_skill = RuleSkillDef.new()
+	rule_skill.name = skill.skill_name
+	rule_skill.skill_type = skill.skill_type
+	if skill is ParamSkill:
+		rule_skill.params = skill.params
+	return rule_skill
+
 # TODO: Remove all those as we should be able to just do a lookup
 # in make() now that we have a single namespace.
 
