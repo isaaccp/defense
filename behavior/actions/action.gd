@@ -76,6 +76,7 @@ func physics_process(_delta: float):
 	pass
 
 # It is important that it's only called once.
+# TODO: Document why
 func action_finished():
 	if finished:
 		return
