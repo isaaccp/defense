@@ -81,9 +81,10 @@ func remove_status(action_name: StringName, status_id: StatusDef.Id, expired = f
 			_emit_status_removed_signals(status_id)
 			statuses_changed.emit(get_statuses())
 
-# TODO: If Godot gets better at Dictionary typing, make return type Array[StatusDef.Id]
-func get_statuses() -> Array:
-	return current_statuses.keys()
+func get_statuses() -> Array[StatusDef.Id]:
+	var statuses: Array[StatusDef.Id] = []
+	statuses.assign(current_statuses.keys())
+	return statuses
 
 func _expire_statuses():
 	for key in status_metadata.keys():

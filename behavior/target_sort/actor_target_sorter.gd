@@ -2,9 +2,7 @@ extends TargetSorter
 
 class_name ActorTargetSorter
 
-# Actors must be of type Array[Actor], but don't want to handle
-# casting everywhere else. Maybe do that later :)
-func sort(this_actor: Actor, actors: Array) -> void:
+func sort(this_actor: Actor, actors: Array[Actor]) -> void:
 	actors.sort_custom(compare.bind(this_actor))
 
 # Must be implemented by children.
