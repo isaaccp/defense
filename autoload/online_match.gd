@@ -97,7 +97,7 @@ class Player:
 			username = username,
 			peer_id = peer_id,
 		}
-	
+
 	func _to_string() -> String:
 		return "session_id: %s, peer_id: %d, username: %s" % [session_id, peer_id, username]
 
@@ -341,6 +341,7 @@ func _on_nakama_match_presence(data: NakamaRTAPI.MatchPresenceEvent) -> void:
 				player_status_changed.emit(new_player, PlayerStatus.CONNECTED)
 
 				# Tell this player (and the others) about all the players peer ids.
+				@warning_ignore("static_called_on_instance")
 				nakama_socket.send_match_state_async(match_id, MatchOpCode.JOIN_SUCCESS, JSON.stringify({
 					players = serialize_players(players),
 					client_version = client_version,
@@ -455,6 +456,7 @@ func _on_nakama_match_state(data: NakamaRTAPI.MatchData):
 			error.emit("Client version doesn't match host")
 			return
 
+		@warning_ignore("static_called_on_instance")
 		var content_players = unserialize_players(content['players'])
 		for session_id in content_players:
 			if not players.has(session_id):

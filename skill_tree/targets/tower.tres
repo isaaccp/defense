@@ -11,7 +11,6 @@ cmp = 0
 
 [resource]
 script = ExtResource("1_awb10")
-id = 2
 type = 1
 description = "Targets the tower"
 selector_script = ExtResource("3_ainap")

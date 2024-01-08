@@ -24,7 +24,7 @@ func size():
 	return skills.size()
 
 func validate():
-	assert(true)
+	pass
 
 static func tree_type_filesystem_string(tree_type: TreeType) -> String:
 	assert(tree_type != TreeType.UNSPECIFIED)

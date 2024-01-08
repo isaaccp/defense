@@ -11,7 +11,6 @@ cmp = 0
 
 [resource]
 script = ExtResource("1_70syy")
-id = 6
 action_script = ExtResource("1_1tnha")
 supported_target_types = Array[int]([1])
 params = SubResource("Resource_tabkk")

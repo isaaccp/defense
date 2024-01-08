@@ -11,7 +11,6 @@ cmp = 0
 
 [resource]
 script = ExtResource("2_7lr6o")
-id = 1
 type = 1
 evaluator_script = ExtResource("1_utwvb")
 params = SubResource("Resource_8lwyn")

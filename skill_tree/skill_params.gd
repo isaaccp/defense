@@ -62,7 +62,7 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 func get_placeholder_string(placeholder: PlaceholderId) -> String:
 	match placeholder:
 		PlaceholderId.CMP:
-			return cmp_op_text(cmp)
+			return SkillParams.cmp_op_text(cmp)
 		PlaceholderId.INT_VALUE:
 			return str(int_value.value)
 		PlaceholderId.FLOAT_VALUE:

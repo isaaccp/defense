@@ -13,7 +13,6 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_qa7lc"]
 script = ExtResource("2_modbu")
-id = 2
 name = &"Sword Attack"
 skill_type = 1
 params = SubResource("Resource_dv4pv")
@@ -25,7 +24,6 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_ysxcg"]
 script = ExtResource("2_modbu")
-id = 1
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_8lwyn")
@@ -38,7 +36,6 @@ sort = ExtResource("4_2ommy")
 
 [sub_resource type="Resource" id="Resource_71cmt"]
 script = ExtResource("2_modbu")
-id = 1
 name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_xi025")
@@ -56,21 +53,18 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_80laq"]
 script = ExtResource("2_modbu")
-id = 4
 name = &"Charge"
 skill_type = 1
 params = SubResource("Resource_dey8g")
 
 [sub_resource type="Resource" id="Resource_fajao"]
 script = ExtResource("2_modbu")
-id = 1
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_8lwyn")
 
 [sub_resource type="Resource" id="Resource_hxeuv"]
 script = ExtResource("2_modbu")
-id = 1
 name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_xi025")

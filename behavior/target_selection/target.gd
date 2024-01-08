@@ -79,7 +79,7 @@ func _to_string():
 		Type.ACTOR:
 			return actor.actor_name
 		Type.ACTORS:
-			var actor_names = actors.map(func(a): a.actor_name)
+			var actor_names = actors.map(func(a): return a.actor_name)
 			return "[%s]" % ",".join(actor_names)
 		Type.POSITION:
 			return "(%0.1f,%0.1f)" % [pos.x, pos.y]

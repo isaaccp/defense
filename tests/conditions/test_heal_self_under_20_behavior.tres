@@ -13,7 +13,6 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_we57n"]
 script = ExtResource("7_uipkv")
-id = 6
 name = &"Heal"
 skill_type = 1
 params = SubResource("Resource_chgv1")
@@ -31,7 +30,6 @@ int_value = SubResource("Resource_qnxgv")
 
 [sub_resource type="Resource" id="Resource_ohlym"]
 script = ExtResource("7_uipkv")
-id = 2
 name = &"Target Health"
 skill_type = 3
 params = SubResource("Resource_sbl2h")
@@ -43,7 +41,6 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_4chbi"]
 script = ExtResource("7_uipkv")
-id = 3
 name = &"Self"
 skill_type = 2
 params = SubResource("Resource_v0ovk")

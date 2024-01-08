@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=6 format=3 uid="uid://c2kdoahns8b57"]
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=7 format=3 uid="uid://c2kdoahns8b57"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_pwxcs"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="2_5ara0"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_lh6h8"]
 [ext_resource type="Resource" uid="uid://c2lpsyebwog7q" path="res://skill_tree/targets/self.tres" id="2_vbhg4"]
 [ext_resource type="Script" path="res://behavior/target_selection/self_or_ally_target_selector.gd" id="4_q8qsf"]
@@ -9,10 +10,10 @@
 script = ExtResource("1_pwxcs")
 editor_string = "Self or Ally ({sort})"
 cmp = 0
+sort = ExtResource("2_5ara0")
 
 [resource]
 script = ExtResource("2_lh6h8")
-id = 4
 type = 1
 description = "Targets actors of the same side (including oneself, but not the tower)"
 selector_script = ExtResource("4_q8qsf")

@@ -12,7 +12,6 @@ cmp = 0
 
 [resource]
 script = ExtResource("2_lpwjs")
-id = 6
 type = 3
 description = "Targets the center of the level"
 selector_script = ExtResource("4_w3i8k")

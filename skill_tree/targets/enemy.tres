@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=5 format=3 uid="uid://cd07rgpgh7lss"]
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=6 format=3 uid="uid://cd07rgpgh7lss"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_4ggyl"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_2oq6d"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="2_xt2u1"]
 [ext_resource type="Script" path="res://behavior/target_selection/enemy_target_selector.gd" id="3_46sih"]
 
 [sub_resource type="Resource" id="Resource_xm5n1"]
 script = ExtResource("1_4ggyl")
 editor_string = "Enemy ({sort})"
 cmp = 0
+sort = ExtResource("2_xt2u1")
 
 [resource]
 script = ExtResource("2_2oq6d")
