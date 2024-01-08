@@ -277,6 +277,7 @@ script = ExtResource("1_0mtgw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, -10)
 texture = ExtResource("2_rxykb")
 offset = Vector2(0, -16)
 hframes = 3
@@ -299,12 +300,14 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_7fvau")
 
 [node name="ActionSprites" type="Node2D" parent="."]
+position = Vector2(0, -10)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("10_i8ose")]
 speed = 50.0
@@ -312,7 +315,7 @@ health = 50
 status_component = NodePath("../StatusComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("2_snnn5")]
-position = Vector2(0, -18)
+position = Vector2(0, -28)
 attributes_component = NodePath("../AttributesComponent")
 show_health = 1
 logging_component = NodePath("../LoggingComponent")
@@ -343,6 +346,7 @@ health_component = NodePath("../HealthComponent")
 status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_4y0tt")
 
 [node name="SideComponent" parent="." instance=ExtResource("9_5f6fu")]
