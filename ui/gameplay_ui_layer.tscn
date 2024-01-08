@@ -53,3 +53,5 @@ visible = false
 [connection signal="selection_ready" from="Screens/CharacterSelectionScreen" to="." method="_on_character_selection_screen_selection_ready"]
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
 [connection signal="restart_requested" from="Overlay/HUD" to="." method="_on_hud_restart_requested"]
+[connection signal="upgrade_window_requested" from="Overlay/HUD" to="." method="_on_hud_upgrade_window_requested"]
+[connection signal="view_log_requested" from="Overlay/HUD" to="." method="_on_hud_view_log_requested"]

@@ -39,16 +39,13 @@ signal all_ready
 signal behavior_modified(character_idx: int, behavior: Behavior)
 signal restart_requested
 signal end_level_confirmed
-
-var ui_layer: GameplayUILayer
+signal view_log_requested(logging_component: LoggingComponent)
+signal upgrade_window_requested(character: Character)
 
 func _ready():
 	for label in message_label.values():
 		label.hide()
 	%PlayControls.initialize(self)
-
-func initialize(ui_layer_: GameplayUILayer):
-	ui_layer = ui_layer_
 
 func set_characters(character_node: Node) -> void:
 	characters.clear()
@@ -219,11 +216,10 @@ func _on_play_controls_restart_pressed():
 	restart_requested.emit()
 
 func _on_view_log_requested(logging_component: LoggingComponent):
-	ui_layer.show_log_viewer(logging_component)
+	view_log_requested.emit(logging_component)
 
 func _on_upgrade_window_requested(character: Character):
-	ui_layer.show_upgrade_window(character)
-
+	upgrade_window_requested.emit(character)
 
 func _on_end_level_confirmation_pressed():
 	show_end_level_confirmation(false)
