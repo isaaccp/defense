@@ -15,7 +15,7 @@ func _ready():
 	if is_instance_valid(initial_screen):
 		show_screen(initial_screen)
 
-func show_screen(screen: Screen, info: Dictionary = {}) -> void:
+func show_screen(screen: Control, info: Dictionary = {}) -> void:
 	hide_screen()
 	screen.show()
 	screen._on_show(info)
