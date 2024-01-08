@@ -70,14 +70,15 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
 			opt.set_item_disabled(0, true)
 			opt.fit_to_longest_item = false
+
+			var sort = _params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
 			# TODO: Make it so you only have sorts acquired.
 			var options = SkillManager.all_target_sorts()
-			for sort_name in options:
+			for idx in range(options.size()):
+				var sort_name = options[idx]
 				opt.add_item(sort_name)
-			if _params.placeholder_set(SkillParams.PlaceholderId.SORT):
-				opt.select(_params.get_placeholder_value(SkillParams.PlaceholderId.SORT).name)
-			else:
-				opt.select(0)
+				if sort and sort.name() == sort_name:
+					opt.select(idx)
 			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))
 			input.add_child(opt)
 
