@@ -30,6 +30,9 @@ const MaxDistance = 10_000_000
 # How long until this action can be triggered again.
 # Ignored if negative.
 @export var cooldown = -1.0
+# If true, the action will check periodically whether the target still
+# meets the initial condition, and stop the action if it no longer does.
+@export var finish_on_unmet_condition = false
 # Whether this action is considered finished.
 @export var finished = false
 
@@ -60,7 +63,15 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 	attributes_component = attributes_component_
 	status_component = status_component_
 	logging_component = logging_component_
+	if finish_on_unmet_condition:
+		_start_condition_checker.call_deferred()
 	post_initialize()
+
+func _start_condition_checker():
+	while not finished:
+		await Global.get_tree().create_timer(0.25).timeout
+		if not target.meets_condition():
+			action_finished()
 
 # Called before the first invocation of physics_process.
 # 'target' is as initially returned when choosing an action.
