@@ -96,7 +96,10 @@ func _setup_tree():
 			# Have to do this in a second pass because we don't necessarily
 			# see children after their parents.
 			if s.parent:
-				var parent = seen[s.parent] as GraphNode
+				var parent = seen.get(s.parent) as GraphNode
+				if not parent:
+					print("Skill %s parent %s not found in tree %s", s, s.parent, t.tree_type)
+					continue
 				var child = seen[s] as GraphNode
 				parent.set_slot_enabled_right(0, true)
 				child.set_slot_enabled_left(0, true)
