@@ -95,7 +95,8 @@ func make_self_condition_evaluator(condition: ConditionDef, actor: Actor) -> Sel
 
 func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor) -> TargetActorConditionEvaluator:
 	assert(not condition.abstract)
-	assert(condition.type in [ConditionDef.Type.TARGET_ACTOR, ConditionDef.Type.TARGET_POSITION])
+	if not condition.type in [ConditionDef.Type.TARGET_ACTOR, ConditionDef.Type.TARGET_POSITION]:
+		return null
 	var evaluator: TargetActorConditionEvaluator
 	if condition.type == ConditionDef.Type.TARGET_ACTOR:
 		evaluator = condition.evaluator_script.new() as TargetActorConditionEvaluator
@@ -108,7 +109,8 @@ func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor
 
 func make_position_condition_evaluator(condition: ConditionDef, actor: Actor) -> PositionConditionEvaluator:
 	assert(not condition.abstract)
-	assert(condition.type in [ConditionDef.Type.TARGET_POSITION])
+	if not condition.type in [ConditionDef.Type.TARGET_POSITION]:
+		return null
 	var evaluator = condition.evaluator_script.new() as PositionConditionEvaluator
 	evaluator.def = condition
 	evaluator.actor = actor

@@ -33,9 +33,8 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 	condition_evaluators.clear()
 	for rule in rules:
 		var evaluator: ConditionEvaluator = null
-		var target_node_evaluator: TargetActorConditionEvaluator = null
-		var position_evaluator: PositionConditionEvaluator = null
 		var target_selector: TargetSelector = null
+		# Create evaluators that are not target related.
 		match rule.condition.type:
 			ConditionDef.Type.ANY:
 				evaluator = SkillManager.make_any_condition_evaluator(rule.condition)
@@ -44,14 +43,12 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 			ConditionDef.Type.GLOBAL:
 				# TODO: Implement.
 				pass
-			ConditionDef.Type.TARGET_ACTOR:
-				target_node_evaluator = SkillManager.make_target_actor_condition_evaluator(rule.condition, actor)
-			ConditionDef.Type.TARGET_POSITION:
-				position_evaluator = SkillManager.make_position_condition_evaluator(rule.condition, actor)
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
-				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_node_evaluator)
+				var target_evaluator = SkillManager.make_target_actor_condition_evaluator(rule.condition, actor)
+				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_evaluator)
 			Target.Type.POSITION:
+				var position_evaluator =  SkillManager.make_position_condition_evaluator(rule.condition, actor)
 				target_selector = SkillManager.make_position_target_selector(rule.target_selection, position_evaluator)
 		target_selectors.append(target_selector)
 		condition_evaluators.append(evaluator)
