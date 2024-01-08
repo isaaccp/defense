@@ -129,6 +129,7 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 func _parse():
 	# TODO: Maybe check for mismatched { }.
 	placeholders.clear()
+	parts.clear()
 	var re = RegEx.new()
 	re.compile('(?<prefix>.*?){(?<placeholder>.+?)}')
 	var result = re.search_all(editor_string)
