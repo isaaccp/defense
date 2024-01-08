@@ -14,6 +14,7 @@ func post_initialize():
 
 # Runs the appropriate physics process for entity.
 func physics_process(_delta: float):
+	super(_delta)
 	# I don't think this should happen?
 	if not target.valid():
 		print("This happened, remove comment above or figure out why. If you don't see this comment in a way, remove this check")
