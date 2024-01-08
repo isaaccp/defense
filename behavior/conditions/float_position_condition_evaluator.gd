@@ -6,7 +6,7 @@ class_name FloatPositionConditionEvaluator
 # then return false.
 var get_value_failed = false
 
-func get_value(position: Vector2) -> float:
+func get_value(_position: Vector2) -> float:
 	assert(false, "Must be implemented")
 	return 0
 

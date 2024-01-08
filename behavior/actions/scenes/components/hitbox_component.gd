@@ -73,7 +73,6 @@ func _status_str() -> String:
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = action_scene.attributes_component.damage_multiplier
-	var adjusted_damage = hit_effect.adjusted_damage()
 	hurtbox.handle_collision(action_scene.owner_name, action_scene.name, hit_effect)
 
 	action_scene.action_scene_log("%s %s" % [hurtbox.get_parent().name, hit_effect.log_text()])

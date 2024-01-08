@@ -40,6 +40,6 @@ func _check_distance(actor: Node2D, target: Node2D, action: Action) -> bool:
 # Note that we'll select the *first* target that is valid, so order matters.
 # Must return an array of Node2D but hard to actually make Godot enforce that
 # without pain.
-func select_targets(action: Action, actor: Actor, side_component: SideComponent) -> Array[Actor]:
+func select_targets(_action: Action, _actor: Actor, _side_component: SideComponent) -> Array[Actor]:
 	assert(false, "Must be implemented by subclasses")
 	return []

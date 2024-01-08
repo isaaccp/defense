@@ -33,6 +33,6 @@ func _check_distance(actor: Node2D, target: Vector2, action: Action) -> bool:
 	return action.min_distance <= distance and distance <= action.max_distance
 
 # Note that we'll select the *first* target that is valid, so order matters.
-func select_targets(action: Action, actor: Actor, side_component: SideComponent) -> Array[Vector2]:
+func select_targets(_action: Action, _actor: Actor, _side_component: SideComponent) -> Array[Vector2]:
 	assert(false, "Must be implemented by subclasses")
 	return []

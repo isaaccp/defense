@@ -4,7 +4,6 @@ extends PopupPanel
 var _item: TreeItem
 var _col: int
 var _params: SkillParams
-var _set: Array[bool]
 
 @onready var input = %Input
 
@@ -17,7 +16,6 @@ func _ready():
 func setup(item: TreeItem, col: int) -> void:
 	_item = item
 	_col = col
-	var metadata = item.get_metadata(col)
 	_params = item.get_metadata(col).data as SkillParams
 
 	for c in input.get_children():
@@ -65,7 +63,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			spin_box.set_select_all_on_focus(true)
 			if _params.placeholder_set(SkillParams.PlaceholderId.FLOAT_VALUE):
 				spin_box.set_value(_params.get_placeholder_value(SkillParams.PlaceholderId.FLOAT_VALUE))
-			spin_box.value_changed.connect(_on_float_value_updated.bind(placeholder_id, spin_box))
+			spin_box.value_changed.connect(_on_float_value_updated.bind(placeholder_id))
 			input.add_child(spin_box)
 		SkillParams.PlaceholderId.SORT:
 			var opt = OptionButton.new()
@@ -105,7 +103,7 @@ func _on_int_value_updated(value: float, placeholder: SkillParams.PlaceholderId,
 	_params.set_placeholder_value(placeholder, int_value)
 	_check_ok()
 
-func _on_float_value_updated(value: float, placeholder: SkillParams.PlaceholderId, spin_box: SpinBox):
+func _on_float_value_updated(value: float, placeholder: SkillParams.PlaceholderId):
 	_params.set_placeholder_value(placeholder, value)
 	_check_ok()
 

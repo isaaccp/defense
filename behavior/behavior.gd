@@ -93,7 +93,7 @@ func serialize() -> PackedByteArray:
 
 static func deserialize(serialized_behavior: PackedByteArray) -> Behavior:
 	var behavior = Behavior.new()
-	var data = bytes_to_var(serialized_behavior)
+	var _data = bytes_to_var(serialized_behavior)
 	# TODO: Fix and uncomment when we network again.
 	#for serialized_rule in data:
 		#var rule = Rule.make(

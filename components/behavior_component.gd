@@ -119,7 +119,7 @@ func _on_action_finished(action: Action):
 		action_cooldowns[action.def.skill_name] = eligible_at
 		_log("%s: %0.1f cooldown, eligible at %0.2f" % [ action.def.name(), action.cooldown, eligible_at])
 
-static func _action_name(action: Action) -> StringName:
+func _action_name(action: Action) -> StringName:
 	if action:
 		return action.def.skill_name
 	return ActionDef.NoAction

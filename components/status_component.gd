@@ -36,7 +36,7 @@ class StatusState extends RefCounted:
 	func is_expired(elapsed_time: float):
 		return not permanent and expiration_time < elapsed_time
 
-static func _key(action_name: StringName, status_id: StatusDef.Id) -> Dictionary:
+func _key(action_name: StringName, status_id: StatusDef.Id) -> Dictionary:
 	return {&"action": action_name, &"status": status_id}
 
 func _process(delta: float):

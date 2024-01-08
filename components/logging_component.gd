@@ -60,4 +60,4 @@ func add_log_entry(type: LogType, message: String, time: float = -1.0):
 	entries.append(le)
 	log_entry_added.emit(le)
 	if type in print_logtypes:
-		print("[%0.2f] %s(%s): %s" % [time, get_parent().name, log_type_name(type), message])
+		print("[%0.2f] %s(%s): %s" % [time, get_parent().name, LoggingComponent.log_type_name(type), message])

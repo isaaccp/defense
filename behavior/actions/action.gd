@@ -72,7 +72,7 @@ func post_initialize():
 # Runs the appropriate physics process for entity.
 # 'target' may have decayed, e.g. a 'node' pointed to by 'target' may no
 # longer exist. Must check for it by hand.
-func physics_process(delta: float):
+func physics_process(_delta: float):
 	pass
 
 # It is important that it's only called once.

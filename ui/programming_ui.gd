@@ -17,11 +17,11 @@ var _save_disabled: bool
 signal canceled
 signal saved(behavior: Behavior)
 
-func initialize(char: GameplayCharacter):
-	assert(is_instance_valid(char)) # TODO: Handle gracefully if needed.
-	_title_text = "Configuring behavior for %s" % char.name
-	_behavior = char.behavior
-	_skills = char.skill_tree_state
+func initialize(character: GameplayCharacter):
+	assert(is_instance_valid(character)) # TODO: Handle gracefully if needed.
+	_title_text = "Configuring behavior for %s" % character.name
+	_behavior = character.behavior
+	_skills = character.skill_tree_state
 	_save_disabled = false
 
 func editor_initialize(b: Behavior):

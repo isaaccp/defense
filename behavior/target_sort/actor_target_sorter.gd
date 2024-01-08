@@ -8,6 +8,6 @@ func sort(this_actor: Actor, actors: Array) -> void:
 	actors.sort_custom(compare.bind(this_actor))
 
 # Must be implemented by children.
-func compare(actor_a: Actor, actor_b: Actor, this_actor: Actor) -> bool:
+func compare(_actor_a: Actor, _actor_b: Actor, _this_actor: Actor) -> bool:
 	assert(false, "Must be implemented")
 	return false

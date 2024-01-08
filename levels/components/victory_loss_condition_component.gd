@@ -72,11 +72,11 @@ func _ready():
 func level_started():
 	if VictoryType.TIME in victory or LossType.TIME in loss:
 		assert(not is_zero_approx(time))
-		var victory = VictoryType.TIME in victory
+		var win = VictoryType.TIME in victory
 		timer = get_tree().create_timer(time, false)
-		await timer.timeout.connect(
+		timer.timeout.connect(
 			func():
-				if victory:
+				if win:
 					_emit_victory(VictoryType.TIME)
 				else:
 					_emit_loss(LossType.TIME)

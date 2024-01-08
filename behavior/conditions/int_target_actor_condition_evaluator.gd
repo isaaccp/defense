@@ -6,7 +6,7 @@ class_name IntTargetActorConditionEvaluator
 # then return false.
 var get_value_failed = false
 
-func get_value(target: Actor) -> int:
+func get_value(_target: Actor) -> int:
 	assert(false, "Must be implemented")
 	return 0
 

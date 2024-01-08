@@ -23,6 +23,11 @@ Online="*res://autoload/online.gd"
 Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 SkillManager="*res://autoload/skill_manager.gd"
 
+[debug]
+
+gdscript/warnings/shadowed_variable=0
+gdscript/warnings/shadowed_variable_base_class=0
+
 [display]
 
 window/size/window_width_override=1728

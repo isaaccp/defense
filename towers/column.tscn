@@ -60,16 +60,19 @@ radius = 15.0
 radius = 15.0
 
 [node name="Column" type="StaticBody2D" groups=["towers"]]
+y_sort_enabled = true
 collision_layer = 8
 script = ExtResource("1_3tt8j")
 actor_name = "Column"
 
 [node name="Column" type="Sprite2D" parent="."]
+y_sort_enabled = true
 position = Vector2(0, -20)
 texture = SubResource("AtlasTexture_0l7o0")
 
 [node name="Glyphs" type="Sprite2D" parent="Column"]
 self_modulate = Color(1, 1, 1, 0)
+y_sort_enabled = true
 texture = SubResource("AtlasTexture_w54le")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Column/Glyphs"]
