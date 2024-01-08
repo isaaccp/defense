@@ -12,24 +12,6 @@ class_name RuleSkillDef
 ## Parameters configured for the skill.
 @export var params: SkillParams
 
-func _init():
-	# TODO: Remove.
-	# This was added for the migration from id -> name. No longer needed likely
-	# but checking it in in case I need to refert to this for other
-	# migrations.
-	# Once this bit is written, just need to reload the editor, click on
-	# Save All Scenes and all resources should get updated.
-	_populate_name.call_deferred()
-
-func _populate_name():
-	if name.is_empty():
-		var skill = SkillManager.restore_skill(self)
-		if skill:
-			name = skill.skill_name
-			emit_changed()
-		else:
-			print("failed to populate name")
-
 static func make(skill_type: Skill.SkillType, name: StringName, params: SkillParams) -> RuleSkillDef:
 	var rule_skill = RuleSkillDef.new()
 	rule_skill.name = name
