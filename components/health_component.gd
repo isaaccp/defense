@@ -16,8 +16,15 @@ class HealthUpdate extends RefCounted:
 	func _to_string():
 		return "[health: %d -> %d (max: %d) is_heal: %s]" % [prev_health, health, max_health, is_heal]
 
+enum ShowHealth {
+	NEVER,
+	WHEN_NOT_FULL,
+	ALWAYS,
+}
+
 @export_group("Required")
 @export var attributes_component: AttributesComponent
+@export var show_health: ShowHealth
 
 @export_group("Optional")
 @export var logging_component: LoggingComponent
@@ -50,6 +57,8 @@ class HealthUpdate extends RefCounted:
 var initial_heal = true
 
 func _ready():
+	if show_health in [ShowHealth.NEVER, ShowHealth.WHEN_NOT_FULL]:
+		%HealthBar.hide()
 	_initialize.call_deferred()
 
 func _initialize():
@@ -73,3 +82,14 @@ func _log(message: String):
 	if not logging_component:
 		return
 	logging_component.add_log_entry(LoggingComponent.LogType.HEALTH, message)
+
+func _on_health_updated(update: HealthUpdate):
+	if show_health == ShowHealth.NEVER:
+		return
+	if show_health == ShowHealth.WHEN_NOT_FULL:
+		%HealthBar.visible = not (update.health == update.max_health)
+	%HealthBar.max_value = update.max_health
+	%HealthBar.value = update.health
+
+func _on_died():
+	%HealthBar.visible = false

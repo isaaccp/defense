@@ -1,9 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://beiehc7ykxgc0"]
+[gd_scene load_steps=57 format=3 uid="uid://beiehc7ykxgc0"]
 
 [ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_3372d"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_sm8ai"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="3_jfey7"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_3al50"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="8_7aa57"]
 [ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="9_7udxm"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="9_e6owf"]
 [ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="10_1tmeq"]
@@ -119,6 +120,7 @@ params = SubResource("Resource_tuf58")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+sort = ExtResource("8_7aa57")
 
 [sub_resource type="Resource" id="Resource_uy4vt"]
 script = ExtResource("9_7udxm")
@@ -164,6 +166,7 @@ params = SubResource("Resource_rtkmh")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+sort = ExtResource("8_7aa57")
 
 [sub_resource type="Resource" id="Resource_8fkb7"]
 script = ExtResource("9_7udxm")
@@ -203,6 +206,7 @@ params = SubResource("Resource_8tuft")
 script = ExtResource("4_3al50")
 editor_string = ""
 cmp = 0
+sort = ExtResource("8_7aa57")
 
 [sub_resource type="Resource" id="Resource_uksj4"]
 script = ExtResource("9_7udxm")

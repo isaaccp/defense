@@ -271,6 +271,9 @@ libraries = {
 "": SubResource("AnimationLibrary_5x0w4")
 }
 
+[node name="HealthComponent" parent="." index="4"]
+position = Vector2(0, -20)
+
 [node name="BehaviorComponent" parent="." index="6"]
 behavior = ExtResource("5_by41d")
 

@@ -312,7 +312,9 @@ health = 50
 status_component = NodePath("../StatusComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("2_snnn5")]
+position = Vector2(0, -18)
 attributes_component = NodePath("../AttributesComponent")
+show_health = 1
 logging_component = NodePath("../LoggingComponent")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("3_15loy")]

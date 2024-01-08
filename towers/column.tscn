@@ -92,6 +92,7 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_h0vh8")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("3_enchd")]
+position = Vector2(1, -58)
 attributes_component = NodePath("../AttributesComponent")
 
 [node name="SideComponent" parent="." instance=ExtResource("4_asgae")]

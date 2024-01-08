@@ -49,6 +49,7 @@ shape = SubResource("CircleShape2D_k8ty6")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("4_he7s5")]
 attributes_component = NodePath("../AttributesComponent")
+show_health = 1
 logging_component = NodePath("../LoggingComponent")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component") instance=ExtResource("5_s5sa1")]
