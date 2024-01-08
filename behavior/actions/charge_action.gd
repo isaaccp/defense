@@ -10,6 +10,7 @@ func _init():
 	min_distance = 50
 
 func post_initialize():
+	super()
 	original_position = body.global_position
 	status_component.set_status(def.skill_name, StatusDef.Id.SWIFTNESS, -1)
 
