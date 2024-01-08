@@ -46,6 +46,8 @@ shape = SubResource("CircleShape2D_k8ty6")
 [node name="ActionSprites" type="Node2D" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("4_he7s5")]
 attributes_component = NodePath("../AttributesComponent")

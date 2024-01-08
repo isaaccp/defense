@@ -308,6 +308,7 @@ position = Vector2(0, -10)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
+avoidance_enabled = true
 
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("10_i8ose")]
 speed = 50.0

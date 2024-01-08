@@ -100,3 +100,6 @@ side = 1
 
 [node name="AttributesComponent" parent="." instance=ExtResource("5_5ko8r")]
 health = 80
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 20.0

@@ -88,6 +88,7 @@ func create_skill_trees():
 		var loaded_skill_tree = load(skill_tree_path) as SkillTree
 		skill_tree_collection.add(loaded_skill_tree)
 		num_skills += skill_tree.size()
+	# TODO: Do one last validation to make sure some invariants are respected.
 	print("Writing skill tree collection with %d trees, %d skills" % [skill_tree_collection.size(), num_skills])
 	var skill_tree_collection_path = trees_base_path + "/skill_tree_collection.tres"
 	ResourceSaver.save(skill_tree_collection, skill_tree_collection_path)

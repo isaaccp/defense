@@ -9,6 +9,7 @@ func _init():
 	filter_with_distance = false
 
 func post_initialize():
+	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	_start_target_position_refresh()
 
 # Runs the appropriate physics process for entity.
@@ -22,7 +23,14 @@ func physics_process(_delta: float):
 		action_finished()
 		return
 	var next = navigation_agent.get_next_path_position()
-	body.velocity = body.position.direction_to(next) * attributes_component.speed
+	var new_velocity: Vector2 = body.position.direction_to(next) * attributes_component.speed
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(new_velocity)
+	else:
+		_on_velocity_computed(new_velocity)
+
+func _on_velocity_computed(velocity: Vector2):
+	body.velocity = velocity
 	body.move_and_slide()
 
 # Called periodically to get nav agent target_position.
