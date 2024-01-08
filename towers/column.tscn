@@ -54,7 +54,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fatgc"]
-radius = 15.0
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h0vh8"]
 radius = 15.0
