@@ -26,6 +26,8 @@ static func assert_last_action(test: GutTest, behavior: BehaviorComponent, expec
 		return
 	var got = params[0]
 	test.assert_eq(got, expected, "Last action was %s instead of %s" % [got, expected])
+	if got != expected:
+		dump_all_emits(test, behavior, "behavior_updated")
 
 static func assert_last_action_not(test: GutTest, behavior: BehaviorComponent, expected: StringName):
 	var count = test.get_signal_emit_count(behavior, "behavior_updated")
@@ -38,8 +40,11 @@ static func assert_last_action_not(test: GutTest, behavior: BehaviorComponent, e
 		dump_all_emits(test, behavior, "behavior_updated")
 		return
 	test.assert_ne(got, expected, "Last action was %s, but we expected it not to be" % expected)
+	if got == expected:
+		dump_all_emits(test, behavior, "behavior_updated")
 
 static func dump_all_emits(test: GutTest, object: Object, signal_name: String):
+	print("Emits for %s" % signal_name)
 	for i in test.get_signal_emit_count(object, signal_name):
 		# TODO: Figure out how to gut.p.
 		print(test.get_signal_parameters(object, signal_name, i))
