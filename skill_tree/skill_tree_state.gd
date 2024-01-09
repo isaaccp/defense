@@ -18,49 +18,49 @@ var acquired_actions: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_actions()
-		return acquired_by_name[Skill.SkillType.ACTION].keys()
+		return _cast(acquired_by_name[Skill.SkillType.ACTION].keys())
 
 var acquired_target_selections: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_target_selections()
-		return acquired_by_name[Skill.SkillType.TARGET].keys()
+		return _cast(acquired_by_name[Skill.SkillType.TARGET].keys())
 
 var acquired_target_sorts: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_target_sorts()
-		return acquired_by_name[Skill.SkillType.TARGET_SORT].keys()
+		return _cast(acquired_by_name[Skill.SkillType.TARGET_SORT].keys())
 
 var acquired_conditions: Array[StringName]:
 	get:
 		if full_acquired:
 			return SkillManager.all_conditions()
-		return acquired_by_name[Skill.SkillType.CONDITION].keys()
+		return _cast(acquired_by_name[Skill.SkillType.CONDITION].keys())
 
 var unlocked_actions: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_actions()
-		return unlocked_by_name[Skill.SkillType.ACTION].keys()
+		return _cast(unlocked_by_name[Skill.SkillType.ACTION].keys())
 
 var unlocked_target_selections: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_target_selections()
-		return unlocked_by_name[Skill.SkillType.TARGET].keys()
+		return _cast(unlocked_by_name[Skill.SkillType.TARGET].keys())
 
 var unlocked_target_sorts: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_target_sorts()
-		return unlocked_by_name[Skill.SkillType.TARGET_SORT].keys()
+		return _cast(unlocked_by_name[Skill.SkillType.TARGET_SORT].keys())
 
 var unlocked_conditions: Array[StringName]:
 	get:
 		if full_unlocked:
 			return SkillManager.all_conditions()
-		return unlocked_by_name[Skill.SkillType.CONDITION].keys()
+		return _cast(unlocked_by_name[Skill.SkillType.CONDITION].keys())
 
 func _init():
 	for skill_type in Skill.SkillType.values():
@@ -153,3 +153,9 @@ func _full(state_type: StateType) -> bool:
 func add(other: SkillTreeState):
 	unlocked_skills += other.unlocked_skills
 	acquired_skills += other.acquired_skills
+
+# TODO: Remove if we ever have typed dictionaries.
+func _cast(skill_names: Array) -> Array[StringName]:
+	var names: Array[StringName] = []
+	names.assign(skill_names)
+	return names
