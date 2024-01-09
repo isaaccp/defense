@@ -35,7 +35,7 @@ window/size/window_height_override=972
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/behavior_editor/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/behavior_editor/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/skill_lookup/plugin.cfg")
 
 [layer_names]
 
