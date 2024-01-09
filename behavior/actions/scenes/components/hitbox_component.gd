@@ -29,7 +29,13 @@ signal all_hits_used
 
 func _ready():
 	assert(hit_effect.damage < 0 == is_heal)
-	hit_effect.action_name = action_scene.action_def.skill_name
+	# This should always be available in game, but need to make it so
+	# it doesn't immediately cause an error if running an action_scene
+	# with F6.
+	if action_scene:
+		hit_effect.action_name = action_scene.action_def.skill_name
+	else:
+		hit_effect.action_name = "<bug unless test>"
 	hits_left = hits
 
 func _on_area_entered(area):

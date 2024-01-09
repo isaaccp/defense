@@ -1,0 +1,86 @@
+[gd_scene load_steps=20 format=3 uid="uid://bbjbec8k4ykve"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ifite"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_y0hr6"]
+[ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="4_t2eys"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_hex2m"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_m8yb4"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_k3m0c"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="9_mybdo"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="11_th85g"]
+[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="12_dei00"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="13_lk16n"]
+
+[sub_resource type="Resource" id="Resource_ewa5g"]
+script = ExtResource("2_y0hr6")
+acquired_skills = Array[StringName]([&"Always"])
+unlocked_skills = Array[StringName]([&"Always"])
+full_acquired = false
+full_unlocked = false
+
+[sub_resource type="Resource" id="Resource_unrdm"]
+script = ExtResource("5_hex2m")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_i2yaj"]
+script = ExtResource("6_m8yb4")
+name = &"Bow Attack"
+skill_type = 1
+params = SubResource("Resource_unrdm")
+
+[sub_resource type="Resource" id="Resource_8lwyn"]
+script = ExtResource("5_hex2m")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_dh32c"]
+script = ExtResource("6_m8yb4")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_ufi61"]
+script = ExtResource("5_hex2m")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = ExtResource("11_th85g")
+
+[sub_resource type="Resource" id="Resource_0t2xs"]
+script = ExtResource("6_m8yb4")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_ufi61")
+
+[sub_resource type="Resource" id="Resource_ruh5s"]
+script = ExtResource("7_k3m0c")
+target_selection = SubResource("Resource_0t2xs")
+action = SubResource("Resource_i2yaj")
+condition = SubResource("Resource_dh32c")
+
+[sub_resource type="Resource" id="Resource_k3t3e"]
+script = ExtResource("9_mybdo")
+saved_rules = Array[ExtResource("7_k3m0c")]([SubResource("Resource_ruh5s")])
+
+[node name="Level" instance=ExtResource("1_ifite")]
+skill_tree_state_add = SubResource("Resource_ewa5g")
+players = 1
+test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("4_t2eys")])
+test_behaviors = Array[ExtResource("9_mybdo")]([SubResource("Resource_k3t3e")])
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(588, 154)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(297, 335)
+
+[node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("12_dei00")]
+position = Vector2(293, 269)
+actor_name = ""
+
+[node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("12_dei00")]
+position = Vector2(312, 365)
+actor_name = ""
+
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("13_lk16n")]
+position = Vector2(555, 323)
