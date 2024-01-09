@@ -6,14 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_8wsra"]
 script = ExtResource("2_icq27")
-acquired_actions = Array[StringName]([])
-acquired_target_selections = Array[StringName]([])
-acquired_target_sorts = Array[StringName]([&"Closest First"])
-acquired_conditions = Array[StringName]([])
-unlocked_actions = Array[StringName]([])
-unlocked_target_selections = Array[StringName]([])
-unlocked_target_sorts = Array[StringName]([])
-unlocked_conditions = Array[StringName]([])
+acquired_skills = Array[StringName]([&"Always"])
+unlocked_skills = Array[StringName]([&"Always"])
 full_acquired = false
 full_unlocked = true
 
