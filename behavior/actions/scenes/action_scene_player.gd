@@ -4,7 +4,6 @@ extends Node2D
 @export var action_scene: PackedScene
 @export var spawn_interval = 2.0
 
-
 # TODO: Add a panel that shows the scenes exported variables, so you can
 # easily change them around and see the effect without having to reload.
 # TODO: Make it so things look the same size as in the real game (as of now
@@ -34,6 +33,9 @@ func _start_spawning():
 		instance.initialize("test_owner", ActionDef.new(), %AttributesComponent, %SideComponent, null)
 		# TODO: Allow to configure some details like initial direction, etc
 		# when the action scene player is used through an action scene's F6.
+		# This is ~hard because right now initial positioning, etc is done in the
+		# action that spawns the projectile, maybe it should be moved to the
+		# action scene itself.
 		gameplay.level.add_child(instance)
 		instance.global_position = Global.subviewport.get_visible_rect().size / 2.0
 		await get_tree().create_timer(spawn_interval).timeout
