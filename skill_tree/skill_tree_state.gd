@@ -74,9 +74,10 @@ func _process():
 	_process_skills(acquired_skills, acquired_by_name)
 	_process_skills(unlocked_skills, unlocked_by_name)
 
-func _process_skills(skills: Array[StringName], by_name: Dictionary):
-	for skill in skills:
-		by_name[skill] = true
+func _process_skills(skill_names: Array[StringName], by_name: Dictionary):
+	for skill_name in skill_names:
+		var skill = SkillManager.lookup_skill(skill_name)
+		by_name[skill.skill_type][skill_name] = true
 
 func unlocked(skill: Skill) -> bool:
 	return _skill_in(skill, StateType.UNLOCKED)

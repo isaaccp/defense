@@ -11,11 +11,13 @@ var condition_by_name: Dictionary
 var target_by_name: Dictionary
 var target_sort_by_name: Dictionary
 
+var skill_by_name: Dictionary
 var all_skills: Array[StringName]
 
 func _ready():
 	refresh()
 
+# TODO: Refactor this ugly stuff.
 func refresh():
 	all_skills.clear()
 	action_by_name.clear()
@@ -25,16 +27,23 @@ func refresh():
 	for action in actions.skills:
 		action_by_name[action.skill_name] = action
 		all_skills.append(action.skill_name)
+		skill_by_name[action.skill_name] = action
 	for condition in conditions.skills:
 		condition_by_name[condition.skill_name] = condition
 		all_skills.append(condition.skill_name)
+		skill_by_name[condition.skill_name] = condition
 	for target in targets.skills:
 		target.validate()
 		target_by_name[target.skill_name] = target
 		all_skills.append(target.skill_name)
+		skill_by_name[target.skill_name] = target
 	for target_sort in target_sorts.skills:
 		target_sort_by_name[target_sort.skill_name] = target_sort
 		all_skills.append(target_sort.skill_name)
+		skill_by_name[target_sort.skill_name] = target_sort
+
+func lookup_skill(name: StringName) -> Skill:
+	return skill_by_name[name]
 
 # Action
 func lookup_action(name: StringName) -> ActionDef:
