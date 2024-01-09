@@ -92,6 +92,7 @@ func show_victory_loss_text(show: bool = true):
 	%VictoryLoss.show_text(show)
 
 func start_character_setup(all_ready_callback: Callable):
+	# TODO: Need to disconnect.
 	all_ready.connect(all_ready_callback, CONNECT_ONE_SHOT)
 	show_character_buttons(true)
 
