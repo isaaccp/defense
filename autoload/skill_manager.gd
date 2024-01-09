@@ -62,6 +62,7 @@ func restore_rule(saved_rule: RuleDef) -> Rule:
 	return rule
 
 func restore_skill(saved_skill: RuleSkillDef) -> Skill:
+	# As of now all skills are ParamSkill subclasses.
 	var skill: ParamSkill
 	match saved_skill.skill_type:
 		Skill.SkillType.ACTION:
