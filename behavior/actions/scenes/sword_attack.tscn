@@ -69,6 +69,7 @@ libraries = {
 "": SubResource("AnimationLibrary_3rrca")
 }
 autoplay = "auto"
+speed_scale = 2.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("8_kcqxb")]
 action_scene = NodePath("..")
