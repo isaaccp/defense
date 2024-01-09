@@ -44,7 +44,6 @@ static func assert_last_action_not(test: GutTest, behavior: BehaviorComponent, e
 		dump_all_emits(test, behavior, "behavior_updated")
 
 static func dump_all_emits(test: GutTest, object: Object, signal_name: String):
-	print("Emits for %s" % signal_name)
+	test.gut.p("Emits for %s" % signal_name)
 	for i in test.get_signal_emit_count(object, signal_name):
-		# TODO: Figure out how to gut.p.
-		print(test.get_signal_parameters(object, signal_name, i))
+		test.gut.p(test.get_signal_parameters(object, signal_name, i))
