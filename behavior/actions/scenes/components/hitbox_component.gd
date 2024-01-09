@@ -32,7 +32,7 @@ func _ready():
 	# This should always be available in game, but need to make it so
 	# it doesn't immediately cause an error if running an action_scene
 	# with F6.
-	if action_scene:
+	if action_scene.action_def:
 		hit_effect.action_name = action_scene.action_def.skill_name
 	else:
 		hit_effect.action_name = "<bug unless test>"

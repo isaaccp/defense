@@ -15,6 +15,19 @@ var attributes_component: AttributesComponent
 var side_component: SideComponent
 var logging_component: LoggingComponent
 
+func _ready():
+	# Only when launched with F6.
+	if get_parent() == get_tree().root:
+		_standalone_ready.call_deferred()
+
+func _standalone_ready():
+	var parent = get_parent()
+	parent.remove_child(self)
+	var scene = load("res://behavior/actions/scenes/action_scene_player.tscn")
+	var action_scene_player = scene.instantiate()
+	action_scene_player.action_scene = load(scene_file_path)
+	parent.add_child(action_scene_player)
+
 func initialize(owner_name_: String, action_def_: ActionDef, attributes_component_: AttributesComponent, side_component_: SideComponent, logging_component_: LoggingComponent):
 	owner_name = owner_name_
 	action_def = action_def_
