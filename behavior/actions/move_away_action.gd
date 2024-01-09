@@ -5,12 +5,8 @@ extends MoveActionBase
 @export var move_away_distance = 100.0
 
 func _init():
-	# With short enough distances this doesn't need to be abortable.
-	# It tends to make it oscilate between similarly distant targets.
-	abortable = false
 	# Unlike the base MoveTo, we may want to trigger MoveAway arbitrarily close.
 	min_distance = 0
-	filter_with_distance = true
 	finish_on_unmet_condition = true
 
 func post_initialize():
