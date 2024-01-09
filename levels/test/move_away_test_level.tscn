@@ -1,14 +1,16 @@
-[gd_scene load_steps=22 format=3 uid="uid://bwyaqvo64nl67"]
+[gd_scene load_steps=50 format=3 uid="uid://bwyaqvo64nl67"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_hnc38"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_i7sf1"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="3_ejxwv"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="3_m75fn"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_60r1h"]
+[ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="4_kj4lc"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="4_yshdq"]
 [ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="5_mm07s"]
 [ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="6_6kniy"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="6_btg8e"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="7_k3fxa"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="7_ypwre"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="8_46tcw"]
 
@@ -19,29 +21,119 @@ unlocked_skills = Array[StringName]([&"Always"])
 full_acquired = false
 full_unlocked = false
 
+[sub_resource type="Resource" id="Resource_qn50n"]
+script = ExtResource("4_60r1h")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_n5od6"]
+script = ExtResource("5_mm07s")
+name = &"Sword Attack"
+skill_type = 1
+params = SubResource("Resource_qn50n")
+
+[sub_resource type="Resource" id="Resource_8lwyn"]
+script = ExtResource("4_60r1h")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_ysoja"]
+script = ExtResource("5_mm07s")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="GDScript" id="GDScript_1v0cu"]
+script/source = "extends PositionTargetSorter
+
+func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
+	var distance_a = this_actor.position.distance_to(pos_a)
+	var distance_b = this_actor.position.distance_to(pos_b)
+	return distance_a < distance_b
+"
+
+[sub_resource type="Resource" id="Resource_mearl"]
+script = ExtResource("7_k3fxa")
+type = 2
+sorter_script = SubResource("GDScript_1v0cu")
+skill_name = &"Closest First"
+skill_type = 4
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_womxi"]
+script = ExtResource("4_60r1h")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = SubResource("Resource_mearl")
+
+[sub_resource type="Resource" id="Resource_gajmh"]
+script = ExtResource("5_mm07s")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_womxi")
+
+[sub_resource type="Resource" id="Resource_gviwp"]
+script = ExtResource("6_btg8e")
+target_selection = SubResource("Resource_gajmh")
+action = SubResource("Resource_n5od6")
+condition = SubResource("Resource_ysoja")
+
+[sub_resource type="Resource" id="Resource_a4nba"]
+script = ExtResource("4_60r1h")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_lsbvp"]
+script = ExtResource("5_mm07s")
+name = &"Move To"
+skill_type = 1
+params = SubResource("Resource_a4nba")
+
+[sub_resource type="Resource" id="Resource_vudwb"]
+script = ExtResource("5_mm07s")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_sexqg"]
+script = ExtResource("5_mm07s")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_womxi")
+
+[sub_resource type="Resource" id="Resource_71eyu"]
+script = ExtResource("6_btg8e")
+target_selection = SubResource("Resource_sexqg")
+action = SubResource("Resource_lsbvp")
+condition = SubResource("Resource_vudwb")
+
+[sub_resource type="Resource" id="Resource_g8jdi"]
+script = ExtResource("8_46tcw")
+saved_rules = Array[ExtResource("6_btg8e")]([SubResource("Resource_gviwp"), SubResource("Resource_71eyu")])
+
 [sub_resource type="Resource" id="Resource_yqaoi"]
 script = ExtResource("4_60r1h")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_1c0fj"]
+[sub_resource type="Resource" id="Resource_81m0i"]
 script = ExtResource("5_mm07s")
 name = &"Move Away"
 skill_type = 1
 params = SubResource("Resource_yqaoi")
 
-[sub_resource type="Resource" id="Resource_svuq4"]
+[sub_resource type="Resource" id="Resource_poi0c"]
 script = ExtResource("6_6kniy")
 defined = true
-value = 200.0
+value = 150.0
 
 [sub_resource type="Resource" id="Resource_q5xon"]
 script = ExtResource("4_60r1h")
 editor_string = "distance {cmp} {float_value}"
 cmp = 1
-float_value = SubResource("Resource_svuq4")
+float_value = SubResource("Resource_poi0c")
 
-[sub_resource type="Resource" id="Resource_ub4ih"]
+[sub_resource type="Resource" id="Resource_pp8vu"]
 script = ExtResource("5_mm07s")
 name = &"Target Distance"
 skill_type = 3
@@ -53,30 +145,97 @@ editor_string = "Enemy ({sort})"
 cmp = 0
 sort = ExtResource("7_ypwre")
 
-[sub_resource type="Resource" id="Resource_gkbvo"]
+[sub_resource type="Resource" id="Resource_c1khk"]
 script = ExtResource("5_mm07s")
 name = &"Enemy"
 skill_type = 2
 params = SubResource("Resource_v8nmp")
 
-[sub_resource type="Resource" id="Resource_t3b0r"]
+[sub_resource type="Resource" id="Resource_c8etu"]
 script = ExtResource("6_btg8e")
-target_selection = SubResource("Resource_gkbvo")
-action = SubResource("Resource_1c0fj")
-condition = SubResource("Resource_ub4ih")
+target_selection = SubResource("Resource_c1khk")
+action = SubResource("Resource_81m0i")
+condition = SubResource("Resource_pp8vu")
+
+[sub_resource type="Resource" id="Resource_unrdm"]
+script = ExtResource("4_60r1h")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_rwyxj"]
+script = ExtResource("5_mm07s")
+name = &"Bow Attack"
+skill_type = 1
+params = SubResource("Resource_unrdm")
+
+[sub_resource type="Resource" id="Resource_0chn0"]
+script = ExtResource("5_mm07s")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_ufi61"]
+script = ExtResource("4_60r1h")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = ExtResource("7_ypwre")
+
+[sub_resource type="Resource" id="Resource_peoiw"]
+script = ExtResource("5_mm07s")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_ufi61")
+
+[sub_resource type="Resource" id="Resource_wbfoi"]
+script = ExtResource("6_btg8e")
+target_selection = SubResource("Resource_peoiw")
+action = SubResource("Resource_rwyxj")
+condition = SubResource("Resource_0chn0")
+
+[sub_resource type="Resource" id="Resource_kedu6"]
+script = ExtResource("4_60r1h")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_yncsj"]
+script = ExtResource("5_mm07s")
+name = &"Move To"
+skill_type = 1
+params = SubResource("Resource_kedu6")
+
+[sub_resource type="Resource" id="Resource_a7kv2"]
+script = ExtResource("5_mm07s")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_pdmd1"]
+script = ExtResource("5_mm07s")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_ufi61")
+
+[sub_resource type="Resource" id="Resource_teswt"]
+script = ExtResource("6_btg8e")
+target_selection = SubResource("Resource_pdmd1")
+action = SubResource("Resource_yncsj")
+condition = SubResource("Resource_a7kv2")
 
 [sub_resource type="Resource" id="Resource_k3t3e"]
 script = ExtResource("8_46tcw")
-saved_rules = Array[ExtResource("6_btg8e")]([SubResource("Resource_t3b0r")])
+saved_rules = Array[ExtResource("6_btg8e")]([SubResource("Resource_c8etu"), SubResource("Resource_wbfoi"), SubResource("Resource_teswt")])
 
 [node name="Level" instance=ExtResource("1_hnc38")]
 skill_tree_state_add = SubResource("Resource_ewa5g")
-players = 1
-test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("3_m75fn")])
-test_behaviors = Array[ExtResource("8_46tcw")]([SubResource("Resource_k3t3e")])
+players = 2
+test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("3_m75fn"), ExtResource("4_kj4lc")])
+test_behaviors = Array[ExtResource("8_46tcw")]([SubResource("Resource_g8jdi"), SubResource("Resource_k3t3e")])
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(412, 306)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(297, 335)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("3_ejxwv")]
 position = Vector2(196, 267)
