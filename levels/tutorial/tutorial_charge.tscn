@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_vbiop"]
 script = ExtResource("2_gwcxc")
 acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
+unlocked_skills = Array[StringName]([&"Always", &"Heal", &"Self"])
 full_acquired = false
 full_unlocked = false
 

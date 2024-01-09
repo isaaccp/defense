@@ -7,14 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_ewa5g"]
 script = ExtResource("2_k61ht")
-acquired_actions = Array[StringName]([])
-acquired_target_selections = Array[StringName]([])
-acquired_target_sorts = Array[StringName]([])
-acquired_conditions = Array[StringName]([])
-unlocked_actions = Array[StringName]([])
-unlocked_target_selections = Array[StringName]([])
-unlocked_target_sorts = Array[StringName]([])
-unlocked_conditions = Array[StringName]([])
+acquired_skills = Array[StringName]([&"Always"])
+unlocked_skills = Array[StringName]([&"Charge", &"Target Distance"])
 full_acquired = false
 full_unlocked = false
 

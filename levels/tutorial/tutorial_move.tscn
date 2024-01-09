@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_gkh1c"]
 script = ExtResource("2_dw0nd")
 acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
+unlocked_skills = Array[StringName]([&"Always", &"Sword Attack", &"Enemy"])
 full_acquired = false
 full_unlocked = false
 

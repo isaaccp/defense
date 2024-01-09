@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_8wsra"]
 script = ExtResource("2_icq27")
-acquired_skills = Array[StringName]([&"Always"])
+acquired_skills = Array[StringName]([&"Always", &"Move To", &"Enemy", &"Closest First", &"Bow Attack"])
 unlocked_skills = Array[StringName]([&"Always"])
 full_acquired = false
 full_unlocked = true
