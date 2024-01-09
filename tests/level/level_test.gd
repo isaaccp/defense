@@ -40,6 +40,8 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 
 	func test_tower_destruction_fails_level():
 		level.start()
+		await wait_frames(1)
+		tower_health.health = 1
 
 		await wait_for_signal(victory.level_failed, 3, "Waiting for level to fail")
 		assert_signal_emitted(victory, "level_failed")

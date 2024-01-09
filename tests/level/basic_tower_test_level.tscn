@@ -13,10 +13,10 @@ position = Vector2(109, 62)
 position = Vector2(513, 314)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_2xijh")]
-position = Vector2(242, 144)
+position = Vector2(253, 159)
 
 [node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_2xijh")]
-position = Vector2(359, 227)
+position = Vector2(338, 222)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_psc1g")]
 position = Vector2(299, 199)

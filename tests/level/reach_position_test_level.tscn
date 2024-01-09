@@ -20,5 +20,6 @@ health = 20
 [node name="VictoryLossConditionComponent" parent="." index="4" node_paths=PackedStringArray("position")]
 victory = Array[int]([])
 position = NodePath("../YSorted/Towers/Column")
+distance = 50
 
 [editable path="YSorted/Towers/Column"]
