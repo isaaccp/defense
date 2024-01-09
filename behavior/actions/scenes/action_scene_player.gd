@@ -1,7 +1,9 @@
 extends Node2D
 
+@export var level_scene = preload("res://levels/test/action_player_test_level.tscn")
 @export var action_scene: PackedScene
 @export var spawn_interval = 2.0
+
 
 # TODO: Add a panel that shows the scenes exported variables, so you can
 # easily change them around and see the effect without having to reload.
@@ -12,8 +14,26 @@ func _ready():
 	_start_spawning.call_deferred()
 
 func _start_spawning():
+	var level = level_scene.instantiate()
+
+	var level_provider = LevelProvider.new()
+	level_provider.levels.append(level_scene)
+
+	level.prepare_test_gameplay_characters()
+	var gameplay = %Gameplay
+
+	gameplay.characters = level.test_gameplay_characters
+	gameplay.level_provider = level_provider
+	gameplay.ui_layer.show()
+	gameplay.ui_layer.hud.show()
+	gameplay.play_next_level()
+	gameplay._on_all_ready()
+
 	while true:
 		var instance = action_scene.instantiate() as ActionScene
-		instance.initialize("test_owner", ActionDef.new(), null, null, null)
-		%Center.add_child(instance)
+		instance.initialize("test_owner", ActionDef.new(), %AttributesComponent, %SideComponent, null)
+		# TODO: Allow to configure some details like initial direction, etc
+		# when the action scene player is used through an action scene's F6.
+		gameplay.level.add_child(instance)
+		instance.global_position = Global.subviewport.get_visible_rect().size / 2.0
 		await get_tree().create_timer(spawn_interval).timeout

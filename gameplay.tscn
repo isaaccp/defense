@@ -38,5 +38,4 @@ stretch_mode = 4
 
 [connection signal="behavior_modified" from="GameplayUILayer" to="." method="_on_behavior_modified"]
 [connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]
-[connection signal="readiness_updated" from="GameplayUILayer" to="." method="_on_readiness_updated"]
 [connection signal="restart_requested" from="GameplayUILayer" to="." method="_on_restart_requested"]

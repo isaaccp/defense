@@ -10,7 +10,6 @@ class_name GameplayUILayer
 @export var hud: Hud
 
 signal character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId])
-signal readiness_updated(character_idx: int, ready: bool)
 signal behavior_modified(character_idx: int, behavior: Behavior)
 signal restart_requested
 
@@ -19,9 +18,6 @@ func _ready():
 
 func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
 	character_selection_screen_selection_ready.emit(character_selections)
-
-func _on_readiness_updated(character_idx: int, ready: bool):
-	readiness_updated.emit(character_idx, ready)
 
 func _on_behavior_modified(character_idx: int, behavior: Behavior):
 	behavior_modified.emit(character_idx, behavior)

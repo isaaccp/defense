@@ -52,12 +52,22 @@ func _standalone_ready():
 	var level_provider = LevelProvider.new()
 	level_provider.levels.append(load(scene_file_path))
 
+	prepare_test_gameplay_characters()
+
+	gameplay = load("res://gameplay.tscn").instantiate()
+	parent.add_child(gameplay)
+	gameplay.characters = test_gameplay_characters
+	gameplay.level_provider = level_provider
+	gameplay.ui_layer.show()
+	gameplay.ui_layer.hud.show()
+	gameplay.play_next_level()
+
+func prepare_test_gameplay_characters():
 	var num_players = players if players != -1 else starting_positions.get_child_count()
 	# If setting test characters, must set them all.
 	assert(test_gameplay_characters.size() in [0, num_players])
 	# Same for behaviors (independently from above).
 	assert(test_behaviors.size() in [0, num_players])
-	gameplay = load("res://gameplay.tscn").instantiate()
 	if not test_gameplay_characters:
 		var gcs: Array[GameplayCharacter] = []
 		for i in range(num_players):
@@ -67,12 +77,9 @@ func _standalone_ready():
 	if test_behaviors:
 		for i in range(test_gameplay_characters.size()):
 			test_gameplay_characters[i].behavior = test_behaviors[i]
-	parent.add_child(gameplay)
-	gameplay.characters = test_gameplay_characters
-	gameplay.level_provider = level_provider
-	gameplay.ui_layer.show()
-	gameplay.ui_layer.hud.show()
-	gameplay.play_next_level()
+	else:
+		for i in range(test_gameplay_characters.size()):
+			test_gameplay_characters[i].behavior = Behavior.new()
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():
