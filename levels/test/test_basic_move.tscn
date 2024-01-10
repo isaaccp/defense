@@ -1,0 +1,83 @@
+[gd_scene load_steps=18 format=3 uid="uid://dgoodnejsafqo"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_n0ihp"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_7k77e"]
+[ext_resource type="PackedScene" uid="uid://cilbbmjxhyi8t" path="res://enemies/barrel/barrel.tscn" id="2_al4rm"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="3_f1wt6"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="4_tkvsd"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="5_t2s1p"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="6_nxkar"]
+
+[sub_resource type="Resource" id="Resource_wub3v"]
+script = ExtResource("2_7k77e")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_sa0vh"]
+script = ExtResource("3_f1wt6")
+name = &"Move To"
+skill_type = 1
+params = SubResource("Resource_wub3v")
+
+[sub_resource type="Resource" id="Resource_8lwyn"]
+script = ExtResource("2_7k77e")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_kha3w"]
+script = ExtResource("3_f1wt6")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="GDScript" id="GDScript_ql371"]
+script/source = "extends PositionTargetSorter
+
+func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
+	var distance_a = this_actor.position.distance_to(pos_a)
+	var distance_b = this_actor.position.distance_to(pos_b)
+	return distance_a < distance_b
+"
+
+[sub_resource type="Resource" id="Resource_hlw5o"]
+script = ExtResource("5_t2s1p")
+type = 2
+sorter_script = SubResource("GDScript_ql371")
+skill_name = &"Closest First"
+skill_type = 4
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_xc2xu"]
+script = ExtResource("2_7k77e")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = SubResource("Resource_hlw5o")
+
+[sub_resource type="Resource" id="Resource_p7mkl"]
+script = ExtResource("3_f1wt6")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_xc2xu")
+
+[sub_resource type="Resource" id="Resource_4045v"]
+script = ExtResource("4_tkvsd")
+target_selection = SubResource("Resource_p7mkl")
+action = SubResource("Resource_sa0vh")
+condition = SubResource("Resource_kha3w")
+
+[sub_resource type="Resource" id="Resource_xbjyc"]
+script = ExtResource("6_nxkar")
+saved_rules = Array[ExtResource("4_tkvsd")]([SubResource("Resource_4045v")])
+
+[node name="TestBasicMoveLevel" instance=ExtResource("1_n0ihp")]
+players = 1
+test_behaviors = Array[ExtResource("6_nxkar")]([SubResource("Resource_xbjyc")])
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(158, 420)
+
+[node name="Barrel" parent="YSorted/Enemies" index="0" instance=ExtResource("2_al4rm")]
+position = Vector2(333, 410)
+
+[node name="VictoryLossConditionComponent" parent="." index="4"]
+loss = Array[int]([2])

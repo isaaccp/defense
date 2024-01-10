@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://cilbbmjxhyi8t"]
+
+[ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_j240n"]
+[ext_resource type="Texture2D" uid="uid://kydsbc6g3737" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_full.tres" id="2_8we7e"]
+[ext_resource type="Texture2D" uid="uid://fbmqclmv36jp" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_half.tres" id="3_hhttp"]
+[ext_resource type="Script" path="res://behavior/behavior.gd" id="4_pny2n"]
+
+[sub_resource type="Animation" id="Animation_lyghw"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8we7e")]
+}
+
+[sub_resource type="Animation" id="Animation_6jr7e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8we7e")]
+}
+
+[sub_resource type="Animation" id="Animation_ummwa"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_hhttp")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fnpmp"]
+_data = {
+"RESET": SubResource("Animation_6jr7e"),
+"death": SubResource("Animation_ummwa"),
+"idle": SubResource("Animation_lyghw")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7io6"]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p245c"]
+radius = 8.0
+height = 22.0
+
+[sub_resource type="Resource" id="Resource_i74dm"]
+resource_local_to_scene = true
+script = ExtResource("4_pny2n")
+saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
+
+[node name="Barrel" instance=ExtResource("1_j240n")]
+actor_name = "Barrel"
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -12)
+texture = ExtResource("2_8we7e")
+
+[node name="AnimationPlayer" parent="Sprite2D" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_fnpmp")
+}
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_p7io6")
+
+[node name="HealthComponent" parent="." index="4"]
+position = Vector2(0, -23)
+
+[node name="HurtboxComponent" parent="." index="5"]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_p245c")
+
+[node name="BehaviorComponent" parent="." index="6"]
+behavior = SubResource("Resource_i74dm")

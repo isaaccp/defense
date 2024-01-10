@@ -22,7 +22,6 @@ initial_delay = 0.0
 [sub_resource type="Resource" id="Resource_jg4wc"]
 script = ExtResource("9_xa6hl")
 pattern = 1
-offset = Vector2(0, 0)
 
 [node name="Level" instance=ExtResource("1_1wtxp")]
 
