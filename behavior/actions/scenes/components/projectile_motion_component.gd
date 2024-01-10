@@ -8,16 +8,14 @@ const component = &"ProjectileMotionComponent"
 @export_group("Required")
 ## Initial projectile speed.
 @export var speed: float
-@export_group("Optional")
 ## Drag applied to projectile, as a fraction of current velocity.
-@export var drag: float = 0.0
+@export var drag: float
 ## Whether to seek target.
 @export var homing: bool
-## Provides target, required if homing is set.
-@export var target_component: TargetComponent
 ## Steering force. How much force to apply when 'homing'.
 @export var steering_force: float = 50.0
 
+var target: Target
 var velocity: Vector2
 var steering_acceleration = Vector2.ZERO
 
@@ -28,15 +26,14 @@ func run():
 		assert(false, "run() called twice on %s" % component)
 	running = true
 	if homing:
-		assert(target_component, "homing was set but target was not provided")
-		assert(target_component.target, "target_component didn't have a target")
-		assert(target_component.target.type == Target.Type.ACTOR)
+		assert(target, "homing was set but target was not provided")
+		assert(target.type == Target.Type.ACTOR)
 		# Target may become invalid later, but it must be valid on run.
-		assert(target_component.target.valid())
+		assert(target.valid())
 	velocity = global_transform.x * speed
 
 func steer_force() -> Vector2:
-	var desired = (target_component.target.position() - global_position).normalized() * speed
+	var desired = (target.position() - global_position).normalized() * speed
 	return (desired - velocity).normalized() * steering_force
 
 func _physics_process(delta: float):
@@ -46,7 +43,7 @@ func _physics_process(delta: float):
 	## If target is no longer valid, mark done and return.
 	## Should later signal for some animation.
 	if homing:
-		if not target_component.target.valid():
+		if not target.valid():
 			mark_done()
 			return
 		steer = steer_force()

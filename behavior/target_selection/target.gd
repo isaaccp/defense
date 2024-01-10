@@ -17,15 +17,13 @@ enum Type {
 var type: Type
 var actor: Actor:
 	get:
-		if type != Type.ACTOR:
-			print("unexpected actor get")
+		assert(type == Type.ACTOR)
 		if not is_instance_valid(actor):
 			actor = null
 		return actor
 var actors: Array[Actor]:
 	get:
-		if type != Type.ACTORS:
-			print("unexpected actors get")
+		assert(type == Type.ACTORS)
 		# Never return invalid stuff.
 		var new_actors: Array[Actor] = []
 		for actor in actors:
@@ -35,8 +33,7 @@ var actors: Array[Actor]:
 		return actors
 var pos: Vector2:
 	get:
-		if type != Type.POSITION:
-			print("unexpected pos get")
+		assert(type == Type.POSITION)
 		return pos
 
 # Populated by factory methods, needs to match target Type.

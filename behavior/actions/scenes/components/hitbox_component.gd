@@ -6,39 +6,31 @@ const component = &"HitboxComponent"
 
 @export_group("Required")
 @export var action_scene: ActionScene
-## Whether it's a heal.
-## It's just use to make sure that healing doesn't emit positive damage.
+# Whether it's a heal.
+# It's just use to make sure that healing doesn't emit positive damage.
 @export var is_heal = false
 @export var hit_effect: HitEffect
+## Status on hit.
+@export var status: StatusDef.Id
+## Status duration.
+@export var status_duration: float
 ## * If not is_heal, whether allies get hit.
 ## * If is_heal, whether enemies get hit.
 @export var friendly_fire = false
 ## If hits > 0, emit signal when out of hits.
 @export var hits: int
-@export_group("Optional")
+## TODO: Implement this.
 ## If set, this will only collide against desired target.
 @export var hit_only_target = false
-## Provides access to target, only used if "hit_only_target" is true.
-@export var target_component: TargetComponent
+## Target we want to collide against, only used if "hit_only_target" is true.
+@export var target: Actor
 
 @export_group("Debug")
 @export var hits_left: int
 
-var collision_shape: CollisionShape2D
-var running = false
-
 signal all_hits_used
 
-func _ready():
-	collision_shape = $CollisionShape2D
-	assert(collision_shape)
-	collision_shape.disabled = true
-
 func run():
-	if running:
-		assert(false, "run() call twice")
-	collision_shape.disabled = false
-	running = true
 	assert(hit_effect.damage < 0 == is_heal)
 	hit_effect.action_name = action_scene.action_def.skill_name
 	hits_left = hits
@@ -53,8 +45,7 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 	if hits > 0 and hits_left == 0:
 		return
 	if hit_only_target:
-		var actor = hurtbox.get_parent()
-		if actor != target_component.target.actor:
+		if hurtbox.get_parent() != target:
 			return
 	if friendly_fire:  # No checks needed.
 		if hurtbox.can_handle_collision():
@@ -82,9 +73,9 @@ func _damage_str(adjusted_damage: int) -> String:
 	return "%s for %s" % [hit_type, damage_str]
 
 func _status_str() -> String:
-	if hit_effect.status == StatusDef.Id.UNSPECIFIED:
+	if status == StatusDef.Id.UNSPECIFIED:
 		return ""
-	return "applied %s (%0.1fs)" % [StatusDef.name(hit_effect.status), hit_effect.status_duration]
+	return "applied %s (%0.1fs)" % [StatusDef.name(status), status_duration]
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = action_scene.attributes_component.damage_multiplier

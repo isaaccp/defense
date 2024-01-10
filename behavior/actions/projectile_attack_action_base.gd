@@ -22,6 +22,7 @@ func spawn_projectile():
 	projectile.look_at(projectile.position + dir)
 	projectile.position += dir * 35
 	action_sprites.add_child(projectile)
+	projectile.run()
 
 func description() -> String:
 	assert(false, "Must be implemented in subclass")

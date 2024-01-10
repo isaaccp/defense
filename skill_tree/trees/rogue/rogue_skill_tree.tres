@@ -8,4 +8,4 @@
 [resource]
 script = ExtResource("1_n1yi2")
 tree_type = 3
-skills = Array[Resource]([ExtResource("2_espps"), ExtResource("4_gp1do"), ExtResource("3_1305g")])
+skills = Array[Resource]([ExtResource("2_espps"), ExtResource("3_1305g"), ExtResource("4_gp1do")])
