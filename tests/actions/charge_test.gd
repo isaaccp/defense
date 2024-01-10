@@ -59,8 +59,11 @@ func test_charge_short_distance():
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emit_count(character_status, "statuses_changed", 2)
 	# Check that first hit (second update after first heal) did 'sword_damage'.
-	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.prev_health - health_update.health, sword_damage)
+	if get_signal_emit_count(enemy_health, "health_updated") < 2:
+		fail_test("expected two health_updated emits")
+	else:
+		var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
+		assert_eq(health_update.prev_health - health_update.health, sword_damage)
 
 func test_charge_long_distance():
 	# Due to distance, strength surge should trigger shortly after
@@ -87,8 +90,11 @@ func test_charge_long_distance():
 	# The '2' is hardcoded in StatusComponent as of now.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
-	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
+	if get_signal_emit_count(enemy_health, "health_updated") < 2:
+		fail_test("expected two health_updated emits")
+	else:
+		var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
+		assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
 
 func test_charge_cooldown():
 	var extra_enemy = enemy_scene.instantiate()

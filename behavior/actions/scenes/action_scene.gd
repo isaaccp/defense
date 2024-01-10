@@ -24,6 +24,7 @@ func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		_standalone_ready.call_deferred()
+	run.call_deferred()
 
 func _standalone_ready():
 	var parent = get_parent()
