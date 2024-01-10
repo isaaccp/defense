@@ -94,7 +94,7 @@ func action_finished():
 	finished = true
 
 func _initialize_action_scene(action_scene: ActionScene) -> void:
-	action_scene.initialize(body.name, def, attributes_component, side_component, logging_component)
+	action_scene.initialize(body.name, def, target, attributes_component, side_component, logging_component)
 
 # Can call this after awaiting to:
 #  * check if action is finished

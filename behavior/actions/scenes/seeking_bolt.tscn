@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://ds8tatkvscrat"]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_kb4ja"]
+[ext_resource type="Texture2D" uid="uid://da06nrwiukgv3" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 A.png" id="2_3npjy"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="2_qnqde"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_uo1ut"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="3_x2rxh"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="4_0qlfr"]
+[ext_resource type="PackedScene" uid="uid://b8cssn6uqugfw" path="res://behavior/actions/scenes/components/projectile_motion_component.tscn" id="7_f22s3"]
+[ext_resource type="PackedScene" uid="uid://cdlj1oerwesae" path="res://components/target_component.tscn" id="8_aeh0a"]
+
+[sub_resource type="Animation" id="Animation_f78vc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_1m342"]
+resource_name = "auto"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 8), Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8), Vector2i(4, 8), Vector2i(5, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2cvi"]
+_data = {
+"RESET": SubResource("Animation_f78vc"),
+"auto": SubResource("Animation_1m342")
+}
+
+[sub_resource type="Resource" id="Resource_aci18"]
+script = ExtResource("4_0qlfr")
+damage = 5
+status = 0
+status_duration = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
+radius = 5.0
+
+[node name="SeekingOrb" type="Node2D"]
+script = ExtResource("1_kb4ja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_3npjy")
+hframes = 9
+vframes = 30
+frame = 72
+
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_uo1ut")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+libraries = {
+"": SubResource("AnimationLibrary_s2cvi")
+}
+speed_scale = 1.5
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene", "target_component") instance=ExtResource("2_qnqde")]
+action_scene = NodePath("..")
+hit_effect = SubResource("Resource_aci18")
+hits = 1
+hit_only_target = true
+target_component = NodePath("../TargetComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(15, 0)
+shape = SubResource("CircleShape2D_rcqhs")
+
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("hitbox_component", "motion_component") instance=ExtResource("3_x2rxh")]
+hitbox_component = NodePath("../HitboxComponent")
+motion_component = NodePath("../ProjectileMotionComponent")
+
+[node name="ProjectileMotionComponent" parent="." node_paths=PackedStringArray("target_component", "action_scene") instance=ExtResource("7_f22s3")]
+speed = 300.0
+homing = true
+target_component = NodePath("../TargetComponent")
+action_scene = NodePath("..")
+
+[node name="TargetComponent" parent="." instance=ExtResource("8_aeh0a")]
