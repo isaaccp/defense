@@ -41,5 +41,5 @@
  "show_help": false,
  "suffix": "_test.gd",
  "tests": [],
- "unit_test_name": null
+ "unit_test_name": "test_charge_short_distance"
 }

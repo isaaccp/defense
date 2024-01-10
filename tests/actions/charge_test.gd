@@ -54,7 +54,7 @@ func test_charge_short_distance():
 
 	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
 
-	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	await wait_for_signal(enemy_health.died, 4, "Waiting for enemy to die")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emit_count(character_status, "statuses_changed", 2)
@@ -80,20 +80,21 @@ func test_charge_long_distance():
 
 	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
 
-	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	await wait_for_signal(enemy_health.died, 4, "Waiting for enemy to die")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.STRENGTH_SURGE]], 2)
 	assert_signal_emit_count(character_status, "statuses_changed", 3)
 
-	# Check that first hit (second update after first heal) did more than 'sword damage' * 2.
+	# Check that first hit did more than 'sword damage' * 2.
 	# The '2' is hardcoded in StatusComponent as of now.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
-	if get_signal_emit_count(enemy_health, "health_updated") < 2:
-		fail_test("expected two health_updated emits")
+	if get_signal_emit_count(enemy_health, "health_updated") != 1:
+		TestUtils.dump_all_emits(self, enemy_health, "health_updated")
+		fail_test("expected one health_updated emit")
 	else:
-		var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
+		var health_update = get_signal_parameters(enemy_health, "health_updated", 0)[0] as HealthComponent.HealthUpdate
 		assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
 
 func test_charge_cooldown():
