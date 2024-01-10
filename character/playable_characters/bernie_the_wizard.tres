@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://g1au3en4bc7j"]
+
+[ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="1_mq8lb"]
+[ext_resource type="Script" path="res://gameplay_character.gd" id="1_xl5p5"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_2bsii"]
+
+[sub_resource type="Resource" id="Resource_ov038"]
+script = ExtResource("2_2bsii")
+acquired_skills = Array[StringName]([&"Always", &"Move To", &"Enemy", &"Closest First", &"Seeking Bolt"])
+unlocked_skills = Array[StringName]([&"Always"])
+full_acquired = false
+full_unlocked = true
+
+[resource]
+script = ExtResource("1_xl5p5")
+name = "Bernie"
+character_id = 1
+starting_kit = "Wizard"
+scene = ExtResource("1_mq8lb")
+description = "An aspiring wizard on its way to the Wizard's College in the capital"
+skill_tree_state = SubResource("Resource_ov038")
+peer_id = 0
+xp = 0
+total_xp = 0

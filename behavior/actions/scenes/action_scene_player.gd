@@ -32,7 +32,6 @@ func _start_spawning():
 
 	while true:
 		var instance = action_scene.instantiate() as ActionScene
-		instance.initialize("test_owner", ActionDef.new(), %AttributesComponent, %SideComponent, null)
 		# TODO: Allow to configure some details like initial direction, etc
 		# when the action scene player is used through an action scene's F6.
 		# This is ~hard because right now initial positioning, etc is done in the
@@ -52,15 +51,12 @@ func _get_enemy() -> Actor:
 # Setup action scene for run. Return false if setup can't be done
 # and action won't be run.
 func _setup_action_scene(instance: ActionScene) -> bool:
-	var enemy = _get_enemy()
-	var motion = ProjectileMotionComponent.get_or_null(instance)
-	if motion and motion.homing:
-		if enemy == null:
+	var target = Target.make_invalid()
+	# If instance has a target component, must set target.
+	if TargetComponent.get_or_null(instance):
+		var enemy = _get_enemy()
+		if not enemy:
 			return false
-		motion.target = Target.make_actor_target(enemy, null)
-	var hitbox = HitboxComponent.get_or_null(instance)
-	if hitbox and hitbox.hit_only_target:
-		if enemy == null:
-			return false
-		hitbox.target = enemy
+		target = Target.make_actor_target(enemy, null)
+	instance.initialize("test_owner", ActionDef.new(), target, %AttributesComponent, %SideComponent, null)
 	return true

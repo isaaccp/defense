@@ -59,9 +59,8 @@ var initial_heal = true
 func _ready():
 	if show_health in [ShowHealth.NEVER, ShowHealth.WHEN_NOT_FULL]:
 		%HealthBar.hide()
-	_initialize.call_deferred()
 
-func _initialize():
+func run():
 	max_health = attributes_component.health
 	heal_full()
 

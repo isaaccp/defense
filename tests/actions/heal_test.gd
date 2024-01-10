@@ -41,12 +41,15 @@ func test_heal_works():
 	TestUtils.set_character_behavior(character, make_heal_behavior())
 
 	await wait_frames(1)
-	character_health.health = 5
 
-	level.start()
 	watch_signals(character_behavior)
 	watch_signals(character_health)
+
+	level.start()
+	character_health.health = 5
+
 	await wait_seconds(0.5, "Waiting for heal")
 	assert_signal_emitted(character_behavior, "behavior_updated")
-	var health_update = get_signal_parameters(character_health, "health_updated", 0)[0] as HealthComponent.HealthUpdate
+
+	var health_update = get_signal_parameters(character_health, "health_updated", -1)[0] as HealthComponent.HealthUpdate
 	assert_eq(health_update.health - health_update.prev_health, heal_amount)

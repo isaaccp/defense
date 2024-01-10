@@ -34,12 +34,12 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "",
- "selected": "charge_test.gd",
+ "selected": "heal_test.gd",
  "should_exit": false,
  "should_exit_on_success": false,
  "should_maximize": false,
  "show_help": false,
  "suffix": "_test.gd",
  "tests": [],
- "unit_test_name": "test_charge_cooldown"
+ "unit_test_name": "test_heal_works"
 }
