@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends Node2D
 
 class_name SpawnPositionComponent
 
@@ -12,7 +12,7 @@ func new_spawn_position() -> Vector2:
 	assert(config.pattern != SpawnPositionConfig.SpawnPattern.UNSPECIFIED)
 	match config.pattern:
 		SpawnPositionConfig.SpawnPattern.CONSTANT:
-			return config.offset
+			return position
 	assert(false, "Should not happen")
 	return Vector2.ZERO
 

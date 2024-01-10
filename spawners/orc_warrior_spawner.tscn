@@ -115,7 +115,6 @@ libraries = {
 }
 
 [node name="GlowPivot" type="Node2D" parent="AnimationComponent" index="1"]
-position = Vector2(0, 16)
 scale = Vector2(2, 1)
 
 [node name="Glow" type="Sprite2D" parent="AnimationComponent/GlowPivot" index="0"]

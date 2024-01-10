@@ -6,8 +6,7 @@
 [sub_resource type="Resource" id="Resource_a4w11"]
 script = ExtResource("2_xe6v8")
 pattern = 1
-offset = Vector2(0, 0)
 
-[node name="SpawnPositionComponent" type="Node"]
+[node name="SpawnPositionComponent" type="Node2D"]
 script = ExtResource("1_a482r")
 config = SubResource("Resource_a4w11")

@@ -9,4 +9,3 @@ enum SpawnPattern {
 }
 
 @export var pattern: SpawnPattern
-@export var offset = Vector2.ZERO
