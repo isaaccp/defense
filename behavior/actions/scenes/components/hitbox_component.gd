@@ -10,32 +10,29 @@ const component = &"HitboxComponent"
 # It's just use to make sure that healing doesn't emit positive damage.
 @export var is_heal = false
 @export var hit_effect: HitEffect
-# Damage on hit.
-@export var damage: int
-# Status on hit.
+## Status on hit.
 @export var status: StatusDef.Id
+## Status duration.
 @export var status_duration: float
-# TODO: Implement something like:
-# * If not is_heal, whether allies get hit.
-# * If is_heal, whether enemies get hit.
+## * If not is_heal, whether allies get hit.
+## * If is_heal, whether enemies get hit.
 @export var friendly_fire = false
-# If hits > 0, emit signal when out of hits.
+## If hits > 0, emit signal when out of hits.
 @export var hits: int
+## TODO: Implement this.
+## If set, this will only collide against desired target.
+@export var hit_only_target = false
+## Target we want to collide against, only used if "hit_only_target" is true.
+@export var target: Actor
 
 @export_group("Debug")
 @export var hits_left: int
 
 signal all_hits_used
 
-func _ready():
+func run():
 	assert(hit_effect.damage < 0 == is_heal)
-	# This should always be available in game, but need to make it so
-	# it doesn't immediately cause an error if running an action_scene
-	# with F6.
-	if action_scene.action_def:
-		hit_effect.action_name = action_scene.action_def.skill_name
-	else:
-		hit_effect.action_name = "<bug unless test>"
+	hit_effect.action_name = action_scene.action_def.skill_name
 	hits_left = hits
 
 func _on_area_entered(area):
@@ -61,10 +58,10 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 				_process_hurtbox_hit(hurtbox)
 
 func _damage_str(adjusted_damage: int) -> String:
-	if not damage:
+	if not hit_effect.damage:
 		return ""
 	var hit_type = "healed" if is_heal else "hit"
-	var abs_damage = abs(damage)
+	var abs_damage = abs(hit_effect.damage)
 	var abs_adjusted_damage = abs(adjusted_damage)
 	var damage_str = (
 		str(abs_adjusted_damage) if abs_adjusted_damage == abs_damage

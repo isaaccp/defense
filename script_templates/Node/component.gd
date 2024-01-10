@@ -11,9 +11,13 @@ const component = &"NewComponent"
 @export_group("Optional")
 # TODO: Optional fields.
 
+# TODO: Move to a single place if https://github.com/godotengine/godot-proposals/issues/6416 is implemented.
+var running = false
 
 func run():
-	pass
+	if running:
+		assert(false, "run() called twice on %s" % component)
+	running = true
 
 static func get_or_null(node: Node) -> NewComponent:
 	return Component.get_or_null(node, component) as NewComponent

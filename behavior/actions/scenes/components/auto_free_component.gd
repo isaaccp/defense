@@ -2,6 +2,8 @@ extends Node
 
 class_name AutoFreeComponent
 
+const component = &"AutoFreeComponent"
+
 @export_group("Optional")
 ## If > 0, free after this time.
 @export var free_after_secs: float = -1.0
@@ -15,7 +17,7 @@ class_name AutoFreeComponent
 
 signal freed
 
-func _ready():
+func run():
 	if animation_player:
 		animation_player.animation_finished.connect(
 			func(_anim): AutoFreeComponent._free_parent(self))

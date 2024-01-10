@@ -37,5 +37,18 @@ func _start_spawning():
 		# action that spawns the projectile, maybe it should be moved to the
 		# action scene itself.
 		gameplay.level.add_child(instance)
+		# Refactor this (i.e. have some "scene_setup()" that can set things for each
+		# scene appropriately.
+		var motion = ProjectileMotionComponent.get_or_null(instance)
+		if motion and motion.homing:
+			if gameplay.level.enemies.get_child_count() > 0:
+				var enemy = gameplay.level.enemies.get_child(0)
+				motion.target = Target.make_actor_target(enemy, null)
+				instance.run()
+			else:
+				pass
+		else:
+			instance.run()
+
 		instance.global_position = Global.subviewport.get_visible_rect().size / 2.0
 		await get_tree().create_timer(spawn_interval).timeout

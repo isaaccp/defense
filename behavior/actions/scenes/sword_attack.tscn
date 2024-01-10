@@ -59,6 +59,7 @@ radius = 8.0
 
 [node name="SwordAttack" type="Node2D"]
 script = ExtResource("1_sepy6")
+actor_name = "Sword Slash"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.075, 0.05)

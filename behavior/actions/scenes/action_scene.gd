@@ -1,20 +1,24 @@
-extends Node2D
+extends Actor
 
 class_name ActionScene
 
-# Set this to internal animation player in the scene
-# if you want access in the action (e.g. to get the duration).
-# Can later do something fancier like some AnimationComponent.
+## Set this to internal animation player in the scene
+## if you want access in the action (e.g. to get the duration).
+## Can later do something fancier like some AnimationComponent.
 @export var animation_player: AnimationPlayer
 
 var action_def: ActionDef
-
 var owner_name: String
+
 # From Body components.
 var attributes_component: AttributesComponent
 var side_component: SideComponent
 var logging_component: LoggingComponent
 
+# TODO: As of now animations on action scenes don't use the
+# AnimationComponent and instead run automatically as soon as
+# added. This is ~fine but wrong and they should be updated to
+# use the AnimationComponent.
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:

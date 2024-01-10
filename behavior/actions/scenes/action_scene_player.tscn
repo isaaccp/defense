@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtuqeitm4ktw2"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene_player.gd" id="1_adhur"]
-[ext_resource type="PackedScene" uid="uid://ds8tatkvscrat" path="res://behavior/actions/scenes/arrow.tscn" id="2_xlgcc"]
+[ext_resource type="PackedScene" uid="uid://ds8tatkvscrat" path="res://behavior/actions/scenes/seeking_orb.tscn" id="2_xlgcc"]
 [ext_resource type="PackedScene" uid="uid://cpvryr0tdcnfy" path="res://gameplay.tscn" id="3_kvhqb"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="4_j40sp"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="4_r07yt"]
