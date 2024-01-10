@@ -56,6 +56,8 @@ logging_component = NodePath("../LoggingComponent")
 health_component = NodePath("../HealthComponent")
 status_component = NodePath("../StatusComponent")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+
 [node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "status_component", "health_component", "logging_component") instance=ExtResource("6_v211g")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")

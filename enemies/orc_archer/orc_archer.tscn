@@ -263,7 +263,7 @@ _data = {
 "run": SubResource("Animation_1ki3q")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s0rhn"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxrkp"]
 
 [sub_resource type="Resource" id="Resource_3rcka"]
 script = ExtResource("6_2kkh2")
@@ -372,9 +372,9 @@ position = Vector2(0, -4)
 [node name="HealthComponent" parent="." index="4"]
 position = Vector2(1, -30)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -13)
-shape = SubResource("CapsuleShape2D_s0rhn")
+shape = SubResource("CapsuleShape2D_wxrkp")
 
 [node name="BehaviorComponent" parent="." index="6"]
 behavior = SubResource("Resource_7dfw4")
