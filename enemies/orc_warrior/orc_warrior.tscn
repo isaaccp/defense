@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://blkrwluj7242d"]
+[gd_scene load_steps=12 format=3 uid="uid://blkrwluj7242d"]
 
 [ext_resource type="Texture2D" uid="uid://00ml4d5si8a1" path="res://enemies/orc_warrior/Run.png" id="1_8026q"]
 [ext_resource type="Texture2D" uid="uid://c3wbffrkshs30" path="res://enemies/orc_warrior/Death.png" id="1_b0ldm"]
@@ -259,20 +259,36 @@ _data = {
 "run": SubResource("Animation_8plry")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0wvdd"]
+radius = 11.0
+height = 34.0
+
 [node name="OrcWarrior" instance=ExtResource("1_u12oj")]
 actor_name = "Orc Warrior"
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("1_ngnr6")
-hframes = 2
+position = Vector2(0, -16)
+texture = ExtResource("1_8026q")
+hframes = 3
+vframes = 2
+frame = 2
 
 [node name="AnimationPlayer" parent="Sprite2D" index="0"]
 libraries = {
 "": SubResource("AnimationLibrary_5x0w4")
 }
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -4)
+
 [node name="HealthComponent" parent="." index="4"]
-position = Vector2(0, -20)
+position = Vector2(0, -36)
+
+[node name="HurtboxComponent" parent="." index="5"]
+position = Vector2(0, -15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CapsuleShape2D_0wvdd")
 
 [node name="BehaviorComponent" parent="." index="6"]
 behavior = ExtResource("5_by41d")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=29 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
@@ -263,6 +263,8 @@ _data = {
 "run": SubResource("Animation_1ki3q")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s0rhn"]
+
 [sub_resource type="Resource" id="Resource_3rcka"]
 script = ExtResource("6_2kkh2")
 editor_string = ""
@@ -341,8 +343,11 @@ saved_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_lucc8"), SubR
 actor_name = "Orc Archer"
 
 [node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -16)
 texture = ExtResource("2_qlkp2")
 offset = Vector2(0, -16)
+hframes = 3
+vframes = 2
 metadata/_aseprite_wizard_config_ = {
 "i_mode": -1,
 "keep_anim_length": false,
@@ -361,8 +366,15 @@ libraries = {
 "": SubResource("AnimationLibrary_ia46g")
 }
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -4)
+
 [node name="HealthComponent" parent="." index="4"]
-position = Vector2(0, -15)
+position = Vector2(1, -30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_s0rhn")
 
 [node name="BehaviorComponent" parent="." index="6"]
 behavior = SubResource("Resource_7dfw4")
