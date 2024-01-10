@@ -4,12 +4,15 @@ extends Node2D
 @export var action_scene: PackedScene
 @export var spawn_interval = 2.0
 
+var gameplay: Gameplay
+
 # TODO: Add a panel that shows the scenes exported variables, so you can
 # easily change them around and see the effect without having to reload.
 # TODO: Make it so things look the same size as in the real game (as of now
 # they don't because of the viewport, maybe just load gameplay.tscn and a
 # dummy level).
 func _ready():
+	gameplay = %Gameplay
 	_start_spawning.call_deferred()
 
 func _start_spawning():
@@ -19,7 +22,6 @@ func _start_spawning():
 	level_provider.levels.append(level_scene)
 
 	level.prepare_test_gameplay_characters()
-	var gameplay = %Gameplay
 
 	gameplay.characters = level.test_gameplay_characters
 	gameplay.level_provider = level_provider
@@ -36,19 +38,29 @@ func _start_spawning():
 		# This is ~hard because right now initial positioning, etc is done in the
 		# action that spawns the projectile, maybe it should be moved to the
 		# action scene itself.
-		gameplay.level.add_child(instance)
-		# Refactor this (i.e. have some "scene_setup()" that can set things for each
-		# scene appropriately.
-		var motion = ProjectileMotionComponent.get_or_null(instance)
-		if motion and motion.homing:
-			if gameplay.level.enemies.get_child_count() > 0:
-				var enemy = gameplay.level.enemies.get_child(0)
-				motion.target = Target.make_actor_target(enemy, null)
-				instance.run()
-			else:
-				pass
-		else:
+		if _setup_action_scene(instance):
+			gameplay.level.add_child(instance)
 			instance.run()
-
-		instance.global_position = Global.subviewport.get_visible_rect().size / 2.0
+			instance.global_position = Global.subviewport.get_visible_rect().size / 2.0
 		await get_tree().create_timer(spawn_interval).timeout
+
+func _get_enemy() -> Actor:
+	if gameplay.level.enemies.get_child_count() > 0:
+		return gameplay.level.enemies.get_child(0)
+	return null
+
+# Setup action scene for run. Return false if setup can't be done
+# and action won't be run.
+func _setup_action_scene(instance: ActionScene) -> bool:
+	var enemy = _get_enemy()
+	var motion = ProjectileMotionComponent.get_or_null(instance)
+	if motion and motion.homing:
+		if enemy == null:
+			return false
+		motion.target = Target.make_actor_target(enemy, null)
+	var hitbox = HitboxComponent.get_or_null(instance)
+	if hitbox and hitbox.hit_only_target:
+		if enemy == null:
+			return false
+		hitbox.target = enemy
+	return true

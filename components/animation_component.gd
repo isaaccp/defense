@@ -4,12 +4,17 @@ extends Node
 class_name AnimationComponent
 
 const component = &"AnimationComponent"
+const default_auto_animation = "auto"
 
 @export_group("Required")
+## Animation player in the tree. Most likely a child.
 @export var animation_player: AnimationPlayer
 
 @export_group("Optional")
-# Optional fields.
+
+func run():
+	if animation_player.has_animation(default_auto_animation):
+		animation_player.play(default_auto_animation)
 
 func play_animation(animation: String, wait: bool = true) -> bool:
 	if animation_player.has_animation(animation):

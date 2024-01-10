@@ -44,6 +44,9 @@ func _on_area_entered(area):
 func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 	if hits > 0 and hits_left == 0:
 		return
+	if hit_only_target:
+		if hurtbox.get_parent() != target:
+			return
 	if friendly_fire:  # No checks needed.
 		if hurtbox.can_handle_collision():
 			_process_hurtbox_hit(hurtbox)
@@ -83,3 +86,11 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 		hits_left -= 1
 		if hits_left == 0:
 			all_hits_used.emit()
+
+static func get_or_null(node: Node) -> HitboxComponent:
+	return Component.get_or_null(node, component) as HitboxComponent
+
+static func get_or_die(node: Node) -> HitboxComponent:
+	var component = get_or_null(node)
+	assert(component)
+	return component

@@ -8,11 +8,8 @@ const component = &"ProjectileMotionComponent"
 @export_group("Required")
 ## Initial projectile speed.
 @export var speed: float
-## Drag applied to projectile.
+## Drag applied to projectile, as a fraction of current velocity.
 @export var drag: float
-## If current velocity vector length divided by speed is less than this,
-## consider move done.
-@export var min_speed_fraction: float
 ## Whether to seek target.
 @export var homing: bool
 ## Steering force. How much force to apply when 'homing'.
@@ -57,9 +54,6 @@ func _physics_process(delta: float):
 	velocity = velocity.limit_length(speed)
 	action_scene.global_rotation = velocity.angle()
 	action_scene.global_position += velocity * delta
-
-	if velocity.length()/speed < min_speed_fraction:
-		mark_done()
 
 static func get_or_null(node: Node) -> ProjectileMotionComponent:
 	return Component.get_or_null(node, component) as ProjectileMotionComponent

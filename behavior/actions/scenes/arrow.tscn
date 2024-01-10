@@ -34,11 +34,11 @@ position = Vector2(15, 0)
 shape = SubResource("CircleShape2D_rcqhs")
 
 [node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("hitbox_component", "motion_component") instance=ExtResource("3_x2rxh")]
+free_after_secs = 1.25
 hitbox_component = NodePath("../HitboxComponent")
 motion_component = NodePath("../ProjectileMotionComponent")
 
 [node name="ProjectileMotionComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("7_f22s3")]
 speed = 300.0
 drag = 0.3
-min_speed_fraction = 0.7
 action_scene = NodePath("..")
