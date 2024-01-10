@@ -39,7 +39,6 @@ func _start_spawning():
 		# action scene itself.
 		if _setup_action_scene(instance):
 			gameplay.level.add_child(instance)
-			instance.run()
 			instance.global_position = Global.subviewport.get_visible_rect().size / 2.0
 		await get_tree().create_timer(spawn_interval).timeout
 

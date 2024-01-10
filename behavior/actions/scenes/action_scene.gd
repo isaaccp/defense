@@ -24,11 +24,13 @@ func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		_standalone_ready.call_deferred()
-	# Action Scenes are instantiated during game an intended to be
-	# run right away.
+		# Action Scenes are instantiated during game an intended to be
+		# run right away.
+		return
 	run.call_deferred()
 
 func _standalone_ready():
+	action_def = ActionDef.new()
 	var parent = get_parent()
 	parent.remove_child(self)
 	var scene = load("res://behavior/actions/scenes/action_scene_player.tscn")
