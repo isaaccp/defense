@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=10 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="4_he7s5"]
@@ -9,8 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="8_567i8"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_hnhby"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_yatxq"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k8ty6"]
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
@@ -37,7 +35,6 @@ metadata/_aseprite_wizard_config_ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
-shape = SubResource("CircleShape2D_k8ty6")
 
 [node name="ActionSprites" type="Node2D" parent="."]
 

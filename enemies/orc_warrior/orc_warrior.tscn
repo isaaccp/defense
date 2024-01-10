@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blkrwluj7242d"]
+[gd_scene load_steps=13 format=3 uid="uid://blkrwluj7242d"]
 
 [ext_resource type="Texture2D" uid="uid://00ml4d5si8a1" path="res://enemies/orc_warrior/Run.png" id="1_8026q"]
 [ext_resource type="Texture2D" uid="uid://c3wbffrkshs30" path="res://enemies/orc_warrior/Death.png" id="1_b0ldm"]
@@ -259,6 +259,8 @@ _data = {
 "run": SubResource("Animation_8plry")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_oxahg"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_guxf3"]
 radius = 11.0
 height = 32.0
@@ -280,6 +282,7 @@ libraries = {
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_oxahg")
 
 [node name="HealthComponent" parent="." index="4"]
 position = Vector2(0, -36)
