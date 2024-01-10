@@ -5,21 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://fbmqclmv36jp" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_half.tres" id="3_hhttp"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_pny2n"]
 
-[sub_resource type="Animation" id="Animation_lyghw"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_8we7e")]
-}
-
 [sub_resource type="Animation" id="Animation_6jr7e"]
 length = 0.001
 tracks/0/type = "value"
@@ -48,6 +33,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("3_hhttp")]
+}
+
+[sub_resource type="Animation" id="Animation_lyghw"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8we7e")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fnpmp"]
