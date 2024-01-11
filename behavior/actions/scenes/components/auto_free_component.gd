@@ -10,8 +10,6 @@ const component = &"AutoFreeComponent"
 ## If animation_component is provided, will free after animation finishes.
 @export var animation_component: AnimationComponent
 # Remove animation_player once everyone has moved to animation_component.
-## If animation_player is provided, will free after animation finishes.
-@export var animation_player: AnimationPlayer
 ## If hitbox_component is provided, will free after all hits used.
 @export var hitbox_component: HitboxComponent
 # TODO: Implement "free if it goes out of screen"
@@ -21,9 +19,6 @@ const component = &"AutoFreeComponent"
 signal freed
 
 func run():
-	if animation_player:
-		animation_player.animation_finished.connect(
-			func(_anim): AutoFreeComponent._free_parent(self))
 	if animation_component:
 		animation_component.animation_finished.connect(
 			func(_anim): AutoFreeComponent._free_parent(self))
