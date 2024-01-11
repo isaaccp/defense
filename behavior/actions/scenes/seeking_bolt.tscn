@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds8tatkvscrat"]
+[gd_scene load_steps=15 format=3 uid="uid://ds8tatkvscrat"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_kb4ja"]
 [ext_resource type="Texture2D" uid="uid://da06nrwiukgv3" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 A.png" id="2_3npjy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_uo1ut"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="3_x2rxh"]
 [ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="4_0qlfr"]
+[ext_resource type="Resource" uid="uid://dmghnagotxd0y" path="res://game_logic/damage_types/arcane.tres" id="5_336ys"]
 [ext_resource type="PackedScene" uid="uid://b8cssn6uqugfw" path="res://behavior/actions/scenes/components/projectile_motion_component.tscn" id="7_f22s3"]
 [ext_resource type="PackedScene" uid="uid://cdlj1oerwesae" path="res://components/target_component.tscn" id="8_aeh0a"]
 
@@ -50,6 +51,7 @@ _data = {
 [sub_resource type="Resource" id="Resource_aci18"]
 script = ExtResource("4_0qlfr")
 damage = 5
+damage_type = ExtResource("5_336ys")
 status = 0
 status_duration = 0.0
 

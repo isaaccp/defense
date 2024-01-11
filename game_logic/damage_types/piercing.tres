@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DamageType" load_steps=2 format=3 uid="uid://c635s5x8n53gr"]
+
+[ext_resource type="Script" path="res://game_logic/damage_types/damage_type.gd" id="1_v7vxl"]
+
+[resource]
+script = ExtResource("1_v7vxl")
+name = &"Piercing"

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DamageType" load_steps=2 format=3 uid="uid://dmghnagotxd0y"]
+
+[ext_resource type="Script" path="res://game_logic/damage_types/damage_type.gd" id="1_0amv7"]
+
+[resource]
+script = ExtResource("1_0amv7")
+name = &"Arcane"

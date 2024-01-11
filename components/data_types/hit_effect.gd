@@ -4,6 +4,7 @@ class_name HitEffect
 
 # Damage on hit.
 @export var damage: int
+@export var damage_type: DamageType
 # Status on hit.
 @export var status: StatusDef.Id
 @export var status_duration: float
