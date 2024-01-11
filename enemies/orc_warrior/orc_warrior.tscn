@@ -369,27 +369,31 @@ offset = Vector2(0, -24)
 hframes = 2
 vframes = 2
 
-[node name="AnimationPlayer" parent="Sprite2D" index="0"]
+[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_5x0w4")
 }
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_oxahg")
 
-[node name="HealthComponent" parent="." index="4"]
+[node name="HealthComponent" parent="." index="5"]
 position = Vector2(0, -36)
 
-[node name="HurtboxComponent" parent="." index="5"]
+[node name="HurtboxComponent" parent="." index="6"]
 position = Vector2(0, -15)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 shape = SubResource("CapsuleShape2D_guxf3")
 
-[node name="BehaviorComponent" parent="." index="6"]
+[node name="BehaviorComponent" parent="." index="7"]
 stored_behavior = SubResource("Resource_u7uff")
 
-[node name="AttributesComponent" parent="." index="9"]
+[node name="AttributesComponent" parent="." index="10"]
 speed = 30.0
 health = 10

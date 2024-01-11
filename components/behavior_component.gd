@@ -11,8 +11,8 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var body: CharacterBody2D
 @export var navigation_agent: NavigationAgent2D
 @export var action_sprites: Node2D
-@export var animation_player: AnimationPlayer
 @export var sprite: Sprite2D
+@export var animation_component: AnimationComponent
 @export var side_component: SideComponent
 @export var attributes_component: AttributesComponent
 @export var status_component: StatusComponent
@@ -134,9 +134,9 @@ func _emit_updated_if_changed(prev_action_name: StringName, prev_target: Target)
 
 func _post_action():
 	if body.velocity.length() < 0.1:
-		animation_player.play("idle")
+		animation_component.play_animation("idle")
 	else:
-		animation_player.play("run")
+		animation_component.play_animation("run")
 	if not is_zero_approx(body.velocity.x):
 		sprite.flip_h = body.velocity.x < 0
 

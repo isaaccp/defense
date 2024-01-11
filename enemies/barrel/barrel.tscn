@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cilbbmjxhyi8t"]
+[gd_scene load_steps=10 format=3 uid="uid://cilbbmjxhyi8t"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_j240n"]
 [ext_resource type="Texture2D" uid="uid://kydsbc6g3737" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_full.tres" id="2_8we7e"]
 [ext_resource type="Texture2D" uid="uid://fbmqclmv36jp" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_half.tres" id="3_hhttp"]
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="4_pny2n"]
 
 [sub_resource type="Animation" id="Animation_6jr7e"]
 length = 0.001
@@ -66,11 +65,6 @@ radius = 8.0
 radius = 8.0
 height = 22.0
 
-[sub_resource type="Resource" id="Resource_i74dm"]
-resource_local_to_scene = true
-script = ExtResource("4_pny2n")
-saved_rules = Array[Resource("res://behavior/rule_def.gd")]([])
-
 [node name="Barrel" instance=ExtResource("1_j240n")]
 actor_name = "Barrel"
 
@@ -78,24 +72,25 @@ actor_name = "Barrel"
 position = Vector2(0, -12)
 texture = ExtResource("2_8we7e")
 
-[node name="AnimationPlayer" parent="Sprite2D" index="0"]
+[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_fnpmp")
 }
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="2"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_p7io6")
 
-[node name="HealthComponent" parent="." index="4"]
+[node name="HealthComponent" parent="." index="5"]
 position = Vector2(0, -23)
 
-[node name="HurtboxComponent" parent="." index="5"]
+[node name="HurtboxComponent" parent="." index="6"]
 position = Vector2(0, -8)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_p245c")
-
-[node name="BehaviorComponent" parent="." index="6"]
-behavior = SubResource("Resource_i74dm")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dme6lif4cwji3"]
+[gd_scene load_steps=21 format=3 uid="uid://dme6lif4cwji3"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_0mtgw"]
 [ext_resource type="Texture2D" uid="uid://ennk52fhox3v" path="res://character/knight/Run.png" id="2_rxykb"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="2_snnn5"]
 [ext_resource type="Texture2D" uid="uid://cvoj8nscg4q6p" path="res://character/knight/Death.png" id="3_4jfpj"]
 [ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="3_15loy"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_agko6"]
 [ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="6_p1m4u"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="7_p2f2o"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_5f6fu"]
@@ -294,7 +295,11 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Heroes/Knight/Run/Run.aseprite"
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_agko6")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_r543v")
 }
@@ -321,18 +326,18 @@ attributes_component = NodePath("../AttributesComponent")
 show_health = 1
 logging_component = NodePath("../LoggingComponent")
 
-[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("3_15loy")]
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("3_15loy")]
 health_component = NodePath("../HealthComponent")
-animation_player = NodePath("../Sprite2D/AnimationPlayer")
+animation_component = NodePath("../AnimationComponent")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "animation_player", "sprite", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("6_p1m4u")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("6_p1m4u")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
-animation_player = NodePath("../Sprite2D/AnimationPlayer")
 sprite = NodePath("../Sprite2D")
+animation_component = NodePath("../AnimationComponent")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")

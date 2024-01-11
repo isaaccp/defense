@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=14 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_1mnbb"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_oxhjf"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="4_r4r2v"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="5_xneld"]
 [ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="6_oxs12"]
@@ -37,7 +38,11 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Heroes/Knight/Run/Run.aseprite"
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("2_oxhjf")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -54,17 +59,18 @@ status_component = NodePath("../StatusComponent")
 attributes_component = NodePath("../AttributesComponent")
 logging_component = NodePath("../LoggingComponent")
 
-[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_player", "collision_shape") instance=ExtResource("6_oxs12")]
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
 health_component = NodePath("../HealthComponent")
-animation_player = NodePath("../Sprite2D/AnimationPlayer")
+animation_component = NodePath("../AnimationComponent")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
 sprite = NodePath("../Sprite2D")
+animation_component = NodePath("../AnimationComponent")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
