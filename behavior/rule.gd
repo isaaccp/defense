@@ -13,6 +13,7 @@ func string_with_target(target: Target) -> String:
 		target,
 		condition.name(),
 	]
+
 func _to_string() -> String:
 	return "%s -> %s (%s)" % [
 		action.name(),
