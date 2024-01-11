@@ -16,6 +16,8 @@ signal default_animation_finished
 signal animation_finished(anim: String)
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func run():
