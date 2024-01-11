@@ -130,7 +130,7 @@ func _credits():
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
 
-func _on_behavior_modified(character_idx: int, behavior: Behavior):
+func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 	_update_behavior(character_idx, behavior)
 	_on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
 
@@ -139,7 +139,7 @@ func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedB
 	var behavior = Behavior.deserialize(serialized_behavior)
 	_update_behavior(character_idx, behavior)
 
-func _update_behavior(character_idx: int, behavior: Behavior):
+func _update_behavior(character_idx: int, behavior: StoredBehavior):
 	characters[character_idx].behavior = behavior
 
 func _on_all_ready():

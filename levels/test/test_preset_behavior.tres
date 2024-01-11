@@ -1,116 +1,13 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=29 format=3 uid="uid://dko6s3kgrapkm"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=8 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_dv7bi"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_8xb8v"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="3_dxdkf"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="4_7kixr"]
-[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="6_ojcmx"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="6_omcam"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="7_4xswo"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_peqn1"]
 
-[sub_resource type="Resource" id="Resource_qdkf6"]
-script = ExtResource("2_8xb8v")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_pb32d"]
-script = ExtResource("3_dxdkf")
-name = &"Charge"
-skill_type = 1
-params = SubResource("Resource_qdkf6")
-
-[sub_resource type="Resource" id="Resource_i8c2l"]
-script = ExtResource("2_8xb8v")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_yavb3"]
-script = ExtResource("3_dxdkf")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_i8c2l")
-
-[sub_resource type="Resource" id="Resource_7x7k0"]
-script = ExtResource("2_8xb8v")
-editor_string = "Enemy ({sort})"
-cmp = 0
-sort = ExtResource("6_ojcmx")
-
-[sub_resource type="Resource" id="Resource_eqyh5"]
-script = ExtResource("3_dxdkf")
-name = &"Enemy"
-skill_type = 2
-params = SubResource("Resource_7x7k0")
-
-[sub_resource type="Resource" id="Resource_ioph1"]
-script = ExtResource("4_7kixr")
-target_selection = SubResource("Resource_eqyh5")
-action = SubResource("Resource_pb32d")
-condition = SubResource("Resource_yavb3")
-
-[sub_resource type="Resource" id="Resource_nakmv"]
-script = ExtResource("2_8xb8v")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_kqah0"]
-script = ExtResource("3_dxdkf")
-name = &"Sword Attack"
-skill_type = 1
-params = SubResource("Resource_nakmv")
-
-[sub_resource type="Resource" id="Resource_noe3w"]
-script = ExtResource("3_dxdkf")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_i8c2l")
-
-[sub_resource type="Resource" id="Resource_gxxum"]
-script = ExtResource("3_dxdkf")
-name = &"Enemy"
-skill_type = 2
-params = SubResource("Resource_7x7k0")
-
-[sub_resource type="Resource" id="Resource_h0sds"]
-script = ExtResource("4_7kixr")
-target_selection = SubResource("Resource_gxxum")
-action = SubResource("Resource_kqah0")
-condition = SubResource("Resource_noe3w")
-
-[sub_resource type="Resource" id="Resource_p0jui"]
-script = ExtResource("2_8xb8v")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_xrqse"]
-script = ExtResource("3_dxdkf")
-name = &"Move To"
-skill_type = 1
-params = SubResource("Resource_p0jui")
-
-[sub_resource type="Resource" id="Resource_6flu3"]
-script = ExtResource("3_dxdkf")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_i8c2l")
-
-[sub_resource type="Resource" id="Resource_rpf4k"]
-script = ExtResource("3_dxdkf")
-name = &"Enemy"
-skill_type = 2
-params = SubResource("Resource_7x7k0")
-
-[sub_resource type="Resource" id="Resource_lgv1j"]
-script = ExtResource("4_7kixr")
-target_selection = SubResource("Resource_rpf4k")
-action = SubResource("Resource_xrqse")
-condition = SubResource("Resource_6flu3")
-
 [sub_resource type="Resource" id="Resource_ytoa5"]
 script = ExtResource("6_omcam")
-saved_rules = Array[ExtResource("4_7kixr")]([SubResource("Resource_ioph1"), SubResource("Resource_h0sds"), SubResource("Resource_lgv1j")])
 
 [sub_resource type="Resource" id="Resource_x5gu8"]
 script = ExtResource("9_peqn1")

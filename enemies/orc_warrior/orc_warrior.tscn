@@ -1,10 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://blkrwluj7242d"]
+[gd_scene load_steps=32 format=3 uid="uid://blkrwluj7242d"]
 
 [ext_resource type="Texture2D" uid="uid://00ml4d5si8a1" path="res://enemies/orc_warrior/Run.png" id="1_8026q"]
 [ext_resource type="Texture2D" uid="uid://c3wbffrkshs30" path="res://enemies/orc_warrior/Death.png" id="1_b0ldm"]
 [ext_resource type="Texture2D" uid="uid://bcp7cxvu8wudt" path="res://enemies/orc_warrior/Idle.png" id="1_ngnr6"]
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_u12oj"]
-[ext_resource type="Resource" uid="uid://c4v0m5wsagpid" path="res://behavior/resources/basic_move_plus_sword_attack.tres" id="5_by41d"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="5_traho"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="6_cxhvn"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_2p23u"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_8kx3c"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="9_gxkya"]
 
 [sub_resource type="Animation" id="Animation_wt2ik"]
 length = 0.001
@@ -265,6 +269,96 @@ _data = {
 radius = 11.0
 height = 32.0
 
+[sub_resource type="Resource" id="Resource_aasvl"]
+script = ExtResource("6_cxhvn")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_gp6ok"]
+script = ExtResource("7_2p23u")
+name = &"Sword Attack"
+skill_type = 1
+params = SubResource("Resource_aasvl")
+
+[sub_resource type="Resource" id="Resource_8lwyn"]
+script = ExtResource("6_cxhvn")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_m25mv"]
+script = ExtResource("7_2p23u")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="GDScript" id="GDScript_q5m02"]
+script/source = "extends PositionTargetSorter
+
+func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
+	var distance_a = this_actor.position.distance_to(pos_a)
+	var distance_b = this_actor.position.distance_to(pos_b)
+	return distance_a < distance_b
+"
+
+[sub_resource type="Resource" id="Resource_lv37e"]
+script = ExtResource("9_gxkya")
+type = 2
+sorter_script = SubResource("GDScript_q5m02")
+skill_name = &"Closest First"
+skill_type = 4
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_xbuih"]
+script = ExtResource("6_cxhvn")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = SubResource("Resource_lv37e")
+
+[sub_resource type="Resource" id="Resource_8v627"]
+script = ExtResource("7_2p23u")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_xbuih")
+
+[sub_resource type="Resource" id="Resource_h3qi7"]
+script = ExtResource("8_8kx3c")
+target_selection = SubResource("Resource_8v627")
+action = SubResource("Resource_gp6ok")
+condition = SubResource("Resource_m25mv")
+
+[sub_resource type="Resource" id="Resource_h5gff"]
+script = ExtResource("6_cxhvn")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_venan"]
+script = ExtResource("7_2p23u")
+name = &"Move To"
+skill_type = 1
+params = SubResource("Resource_h5gff")
+
+[sub_resource type="Resource" id="Resource_nff02"]
+script = ExtResource("7_2p23u")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_yh5os"]
+script = ExtResource("7_2p23u")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_xbuih")
+
+[sub_resource type="Resource" id="Resource_8fbtf"]
+script = ExtResource("8_8kx3c")
+target_selection = SubResource("Resource_yh5os")
+action = SubResource("Resource_venan")
+condition = SubResource("Resource_nff02")
+
+[sub_resource type="Resource" id="Resource_u7uff"]
+script = ExtResource("5_traho")
+stored_rules = Array[ExtResource("8_8kx3c")]([SubResource("Resource_h3qi7"), SubResource("Resource_8fbtf")])
+
 [node name="OrcWarrior" instance=ExtResource("1_u12oj")]
 actor_name = "Orc Warrior"
 
@@ -294,7 +388,7 @@ position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_guxf3")
 
 [node name="BehaviorComponent" parent="." index="6"]
-behavior = ExtResource("5_by41d")
+stored_behavior = SubResource("Resource_u7uff")
 
 [node name="AttributesComponent" parent="." index="9"]
 speed = 30.0

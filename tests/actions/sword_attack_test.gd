@@ -13,16 +13,16 @@ var character_behavior: BehaviorComponent
 var enemy: Node2D
 var enemy_health: HealthComponent
 
-func make_sword_behavior(move: bool = false) -> Behavior:
-	var behavior = Behavior.new()
-	behavior.saved_rules.append(
+func make_sword_behavior(move: bool = false) -> StoredBehavior:
+	var behavior = StoredBehavior.new()
+	behavior.stored_rules.append(
 		RuleDef.make(
 			RuleSkillDef.from_skill(enemy_target),
 			RuleSkillDef.from_skill(sword_attack),
 		)
 	)
 	if move:
-		behavior.saved_rules.append(
+		behavior.stored_rules.append(
 			RuleDef.make(
 				RuleSkillDef.from_skill(enemy_target),
 				RuleSkillDef.from_skill(move_to),
@@ -39,7 +39,7 @@ func before_each():
 	character_behavior = Component.get_behavior_component_or_die(character)
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
-	Component.get_behavior_component_or_die(enemy).behavior = Behavior.new()
+	Component.get_behavior_component_or_die(enemy).stored_behavior = StoredBehavior.new()
 	enemy_health = Component.get_health_component_or_die(enemy)
 
 func test_sword_works_within_distance():

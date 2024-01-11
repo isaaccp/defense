@@ -26,7 +26,7 @@ class_name Level
 # Provide those separately so you can e.g. load the default
 # characters but provide modified behaviors without altering
 # their scenes.
-@export var test_behaviors: Array[Behavior]
+@export var test_behaviors: Array[StoredBehavior]
 
 @export_group("Internal")
 @export var characters: Node2D
@@ -79,7 +79,7 @@ func prepare_test_gameplay_characters():
 			test_gameplay_characters[i].behavior = test_behaviors[i]
 	else:
 		for i in range(test_gameplay_characters.size()):
-			test_gameplay_characters[i].behavior = Behavior.new()
+			test_gameplay_characters[i].behavior = StoredBehavior.new()
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
 	for i in gameplay_characters.size():

@@ -13,7 +13,7 @@ class_name LevelProvider
 # Unlocked skills on start.
 @export var skill_tree_state: SkillTreeState
 # Initial behavior for characters.
-@export var behavior: Behavior = Behavior.new()
+@export var behavior: StoredBehavior = StoredBehavior.new()
 
 var current_level = -1
 

@@ -17,7 +17,7 @@ var enemy_health: HealthComponent
 var sword_damage: int
 var runnable_charge_action: Action
 
-func make_charge_behavior() -> Behavior:
+func make_charge_behavior() -> StoredBehavior:
 	return charge_behavior.duplicate()
 
 func before_all():
@@ -37,7 +37,7 @@ func before_each():
 	character_status = Component.get_status_component_or_die(character)
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
-	Component.get_behavior_component_or_die(enemy).behavior = Behavior.new()
+	Component.get_behavior_component_or_die(enemy).stored_behavior = StoredBehavior.new()
 	enemy_health = Component.get_health_component_or_die(enemy)
 
 func test_charge_short_distance():

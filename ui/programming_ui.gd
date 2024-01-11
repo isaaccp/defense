@@ -7,7 +7,7 @@ class_name ProgrammingUI
 @export var test_character: GameplayCharacter
 
 var _title_text: String
-var _behavior: Behavior
+var _behavior: StoredBehavior
 var _skills: SkillTreeState
 var _save_disabled: bool
 
@@ -15,7 +15,7 @@ var _save_disabled: bool
 @onready var _toolbox = %Toolbox as Toolbox
 
 signal canceled
-signal saved(behavior: Behavior)
+signal saved(behavior: StoredBehavior)
 
 func initialize(character: GameplayCharacter):
 	assert(is_instance_valid(character)) # TODO: Handle gracefully if needed.
@@ -24,7 +24,7 @@ func initialize(character: GameplayCharacter):
 	_skills = character.skill_tree_state
 	_save_disabled = false
 
-func editor_initialize(b: Behavior):
+func editor_initialize(b: StoredBehavior):
 	_skills = SkillTreeState.new()
 	_skills.full_acquired = true
 	_skills.full_unlocked = true

@@ -1,14 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=32 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
 [ext_resource type="Texture2D" uid="uid://dcavx0naa8mgn" path="res://enemies/orc_archer/Death.png" id="2_qlkp2"]
 [ext_resource type="Texture2D" uid="uid://e61vy14vtwyo" path="res://enemies/orc_archer/Run.png" id="3_c2ix8"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="5_ppmrm"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="6_2kkh2"]
 [ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_ae2gu"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_174ti"]
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="8_kcejl"]
-[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="9_cb06e"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="9_ky3ae"]
 
 [sub_resource type="Animation" id="Animation_sy2pk"]
 length = 0.001
@@ -267,79 +267,95 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxrkp"]
 
-[sub_resource type="Resource" id="Resource_3rcka"]
+[sub_resource type="Resource" id="Resource_upbo7"]
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_dsm5v"]
+[sub_resource type="Resource" id="Resource_8o7ho"]
 script = ExtResource("6_ae2gu")
 name = &"Bow Attack"
 skill_type = 1
-params = SubResource("Resource_3rcka")
+params = SubResource("Resource_upbo7")
 
-[sub_resource type="Resource" id="Resource_p072w"]
+[sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_dgtvf"]
+[sub_resource type="Resource" id="Resource_dpvvr"]
 script = ExtResource("6_ae2gu")
 name = &"Always"
 skill_type = 3
-params = SubResource("Resource_p072w")
+params = SubResource("Resource_8lwyn")
 
-[sub_resource type="Resource" id="Resource_85w32"]
+[sub_resource type="GDScript" id="GDScript_i2la8"]
+script/source = "extends PositionTargetSorter
+
+func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
+	var distance_a = this_actor.position.distance_to(pos_a)
+	var distance_b = this_actor.position.distance_to(pos_b)
+	return distance_a < distance_b
+"
+
+[sub_resource type="Resource" id="Resource_ohuow"]
+script = ExtResource("9_ky3ae")
+type = 2
+sorter_script = SubResource("GDScript_i2la8")
+skill_name = &"Closest First"
+skill_type = 4
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_12xbf"]
 script = ExtResource("6_2kkh2")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = ExtResource("9_cb06e")
+sort = SubResource("Resource_ohuow")
 
-[sub_resource type="Resource" id="Resource_v8kku"]
+[sub_resource type="Resource" id="Resource_6terw"]
 script = ExtResource("6_ae2gu")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_85w32")
+params = SubResource("Resource_12xbf")
 
-[sub_resource type="Resource" id="Resource_lucc8"]
+[sub_resource type="Resource" id="Resource_7qt7s"]
 script = ExtResource("7_174ti")
-target_selection = SubResource("Resource_v8kku")
-action = SubResource("Resource_dsm5v")
-condition = SubResource("Resource_dgtvf")
+target_selection = SubResource("Resource_6terw")
+action = SubResource("Resource_8o7ho")
+condition = SubResource("Resource_dpvvr")
 
-[sub_resource type="Resource" id="Resource_irq5k"]
+[sub_resource type="Resource" id="Resource_78hjn"]
 script = ExtResource("6_2kkh2")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_ekwdb"]
+[sub_resource type="Resource" id="Resource_lh1km"]
 script = ExtResource("6_ae2gu")
 name = &"Move To"
 skill_type = 1
-params = SubResource("Resource_irq5k")
+params = SubResource("Resource_78hjn")
 
-[sub_resource type="Resource" id="Resource_f3pq8"]
+[sub_resource type="Resource" id="Resource_p62ct"]
 script = ExtResource("6_ae2gu")
 name = &"Always"
 skill_type = 3
-params = SubResource("Resource_p072w")
+params = SubResource("Resource_8lwyn")
 
-[sub_resource type="Resource" id="Resource_6hqqj"]
+[sub_resource type="Resource" id="Resource_ccl6j"]
 script = ExtResource("6_ae2gu")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_85w32")
+params = SubResource("Resource_12xbf")
 
-[sub_resource type="Resource" id="Resource_uktw8"]
+[sub_resource type="Resource" id="Resource_cnawq"]
 script = ExtResource("7_174ti")
-target_selection = SubResource("Resource_6hqqj")
-action = SubResource("Resource_ekwdb")
-condition = SubResource("Resource_f3pq8")
+target_selection = SubResource("Resource_ccl6j")
+action = SubResource("Resource_lh1km")
+condition = SubResource("Resource_p62ct")
 
-[sub_resource type="Resource" id="Resource_7dfw4"]
-resource_local_to_scene = true
-script = ExtResource("8_kcejl")
-saved_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_lucc8"), SubResource("Resource_uktw8")])
+[sub_resource type="Resource" id="Resource_g1623"]
+script = ExtResource("5_ppmrm")
+stored_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_7qt7s"), SubResource("Resource_cnawq")])
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
 actor_name = "Orc Archer"
@@ -380,7 +396,7 @@ position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_wxrkp")
 
 [node name="BehaviorComponent" parent="." index="6"]
-behavior = SubResource("Resource_7dfw4")
+stored_behavior = SubResource("Resource_g1623")
 
 [node name="AttributesComponent" parent="." index="9"]
 speed = 30.0

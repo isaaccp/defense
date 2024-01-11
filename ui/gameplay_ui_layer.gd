@@ -10,7 +10,7 @@ class_name GameplayUILayer
 @export var hud: Hud
 
 signal character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId])
-signal behavior_modified(character_idx: int, behavior: Behavior)
+signal behavior_modified(character_idx: int, behavior: StoredBehavior)
 signal restart_requested
 
 func _ready():
@@ -19,7 +19,7 @@ func _ready():
 func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
 	character_selection_screen_selection_ready.emit(character_selections)
 
-func _on_behavior_modified(character_idx: int, behavior: Behavior):
+func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 	behavior_modified.emit(character_idx, behavior)
 
 func _on_hud_restart_requested():

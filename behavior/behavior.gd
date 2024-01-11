@@ -3,7 +3,6 @@ extends Resource
 
 class_name Behavior
 
-@export var saved_rules: Array[RuleDef]
 var rules: Array[Rule]
 var actor: Actor
 var side_component: SideComponent
@@ -16,17 +15,7 @@ var side_component: SideComponent
 var target_selectors: Array[TargetSelector] = []
 var condition_evaluators: Array[ConditionEvaluator] = []
 
-# When behavior is set through editor/etc, we don't write (well, we do for now,
-# but we want to change it) the full skill definition, but just RuleSkillDefs.
-# From there we can create the full instance using the SkillManager.
-func restore():
-	rules.clear()
-	for saved_rule in saved_rules:
-		var rule = SkillManager.restore_rule(saved_rule)
-		rules.append(rule)
-
 func prepare(actor_: Actor, side_component_: SideComponent):
-	restore()
 	actor = actor_
 	side_component = side_component_
 	target_selectors.clear()

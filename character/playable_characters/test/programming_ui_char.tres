@@ -1,57 +1,12 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=18 format=3 uid="uid://dgs55tgbrgkhv"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=7 format=3 uid="uid://dgs55tgbrgkhv"]
 
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_jvgfs"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_80euh"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_d86ld"]
-[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="5_ksnts"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="6_ddbsa"]
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="7_vy3e2"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="8_c4bmv"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_tx848"]
 
-[sub_resource type="Resource" id="Resource_6difb"]
-script = ExtResource("1_jvgfs")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_m2uo6"]
-script = ExtResource("2_80euh")
-name = &"Hold Person"
-skill_type = 1
-params = SubResource("Resource_6difb")
-
-[sub_resource type="Resource" id="Resource_kn045"]
-script = ExtResource("1_jvgfs")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_yw7k2"]
-script = ExtResource("2_80euh")
-name = &"Once"
-skill_type = 3
-params = SubResource("Resource_kn045")
-
-[sub_resource type="Resource" id="Resource_ijy6r"]
-script = ExtResource("1_jvgfs")
-editor_string = "Self or Ally ({sort})"
-cmp = 0
-sort = ExtResource("5_ksnts")
-
-[sub_resource type="Resource" id="Resource_voexd"]
-script = ExtResource("2_80euh")
-name = &"Self Or Ally"
-skill_type = 2
-params = SubResource("Resource_ijy6r")
-
-[sub_resource type="Resource" id="Resource_mqhco"]
-script = ExtResource("3_d86ld")
-target_selection = SubResource("Resource_voexd")
-action = SubResource("Resource_m2uo6")
-condition = SubResource("Resource_yw7k2")
-
 [sub_resource type="Resource" id="Resource_a06is"]
 script = ExtResource("6_ddbsa")
-saved_rules = Array[ExtResource("3_d86ld")]([SubResource("Resource_mqhco")])
 
 [sub_resource type="Resource" id="Resource_n4lvi"]
 script = ExtResource("9_tx848")

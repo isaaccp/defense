@@ -34,14 +34,14 @@ func _init_tree():
 	tree.set_column_title(Column.CONDITION, "Condition")
 	tree.set_column_title(Column.ACTION, "Action")
 
-func load_behavior(behavior: Behavior) -> void:
+func load_behavior(behavior: StoredBehavior) -> void:
 	if not _root:
 		_init_tree()
 	for c in _root.get_children():
 		_root.remove_child(c)
 	if behavior:
-		behavior.restore()
-		for rule in behavior.rules:
+		var restored_behavior = behavior.restore()
+		for rule in restored_behavior.rules:
 			_add_row(rule)
 	_add_row()
 
@@ -251,8 +251,8 @@ func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 	var text = params.interpolated_text()
 	item.set_text(col, text)
 
-func get_behavior() -> Behavior:
-	var behavior = Behavior.new()
+func get_behavior() -> StoredBehavior:
+	var behavior = StoredBehavior.new()
 	for child in _root.get_children():
 		# TODO: Actually show something to user if there are invalid rows.
 		if not _is_valid(child):
@@ -271,5 +271,5 @@ func get_behavior() -> Behavior:
 			RuleSkillDef.from_skill(action),
 			RuleSkillDef.from_skill(condition),
 		)
-		behavior.saved_rules.append(rule)
+		behavior.stored_rules.append(rule)
 	return behavior

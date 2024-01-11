@@ -7,7 +7,7 @@ class_name GameplayCharacter
 @export var starting_kit: String
 @export var scene: PackedScene
 @export_multiline var description: String
-@export var behavior: Behavior
+@export var behavior: StoredBehavior
 @export var skill_tree_state: SkillTreeState
 
 @export_group("Debug")

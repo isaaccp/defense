@@ -36,7 +36,7 @@ const hud_tower_view_scene = preload("res://ui/hud_tower_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 
 signal all_ready
-signal behavior_modified(character_idx: int, behavior: Behavior)
+signal behavior_modified(character_idx: int, behavior: StoredBehavior)
 signal restart_requested
 signal end_level_confirmed
 signal view_log_requested(logging_component: LoggingComponent)
@@ -122,7 +122,7 @@ func _on_configure_behavior_pressed(character_idx: int):
 	programming_ui.canceled.connect(_close)
 	show_character_buttons(false)
 
-func _save_and_close(behavior: Behavior, character_idx: int):
+func _save_and_close(behavior: StoredBehavior, character_idx: int):
 	behavior_modified.emit(character_idx, behavior)
 	_close()
 

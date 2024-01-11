@@ -2,7 +2,7 @@
 extends EditorPlugin
 
 var ui: ProgrammingUI
-var _in_obj: Behavior
+var _in_obj: StoredBehavior
 var _visible = false
 
 func _enter_tree():
@@ -17,21 +17,21 @@ func _exit_tree():
 	ui.free()
 
 func _handles(o: Object) -> bool:
-	return o is Behavior
+	return o is StoredBehavior
 
 func _edit(o: Object):
-	_in_obj = o as Behavior
+	_in_obj = o as StoredBehavior
 	if not o:
 		_make_visible(false)
 		return
 	ui.editor_initialize(o)
 	_make_visible(true)
 
-func _on_save(b: Behavior):
+func _on_save(b: StoredBehavior):
 	# Just overwriting the input makes the change appear in the inspector.
 	# Note: This changes the resource IDs of the rules,
 	# which can be a bit ugly in diffs.
-	_in_obj.saved_rules = b.saved_rules
+	_in_obj.stored_rules = b.stored_rules
 	# But it makes sense to write it to disk too,
 	# so you don't have to remember to save the enclosing scene.
 	if _in_obj.resource_path:

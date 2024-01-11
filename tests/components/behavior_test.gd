@@ -11,9 +11,9 @@ var behavior_component: BehaviorComponent
 # TODO: Add some "do nothing" action and use it so it's faster
 # than using heal here which has a cooldown.
 # Using heal self as it can trigger without any other setup.
-func make_behavior(condition: ConditionDef) -> Behavior:
-	var behavior = Behavior.new()
-	behavior.saved_rules.append(
+func make_behavior(condition: ConditionDef) -> StoredBehavior:
+	var behavior = StoredBehavior.new()
+	behavior.stored_rules.append(
 		RuleDef.make(
 			RuleSkillDef.from_skill(target_self),
 			RuleSkillDef.from_skill(heal),
@@ -29,7 +29,7 @@ func before_each():
 	add_child_autoqfree(body)
 
 func test_basic_behavior():
-	behavior_component.behavior = make_behavior(always)
+	behavior_component.stored_behavior = make_behavior(always)
 	watch_signals(behavior_component)
 	await wait_seconds(0.1, "Waiting to ensure nothing happens before we do run()")
 	assert_signal_not_emitted(behavior_component, "behavior_updated")
@@ -47,7 +47,7 @@ func test_basic_behavior():
 	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal.skill_name), 2)
 
 func test_persistent_condition_instance():
-	behavior_component.behavior = make_behavior(preload("res://skill_tree/conditions/once.tres"))
+	behavior_component.stored_behavior = make_behavior(preload("res://skill_tree/conditions/once.tres"))
 	watch_signals(behavior_component)
 	await wait_seconds(0.1, "Waiting to ensure nothing happens before we do run()")
 	assert_signal_not_emitted(behavior_component, "behavior_updated")

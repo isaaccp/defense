@@ -22,14 +22,11 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var persistent_game_state_component: PersistentGameStateComponent
 @export var health_component: HealthComponent
 @export var logging_component: LoggingComponent
-@export var behavior: Behavior:
+@export var stored_behavior: StoredBehavior:
 	get:
 		if persistent_game_state_component:
 			return persistent_game_state_component.state.behavior
-		# If loaded from a resource, must be local to scene.
-		if behavior and not behavior.resource_path.is_empty():
-			assert(behavior.resource_local_to_scene, "Resource must be local to scene")
-		return behavior
+		return stored_behavior
 
 @export_group("Debug")
 @export var rule: Rule
@@ -46,11 +43,14 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var running = false
 @export var able_to_act = true
 
+var behavior: Behavior
+
 func _ready():
 	status_component.able_to_act_changed.connect(_on_able_to_act_changed)
 
 func run():
 	var actor = (body as Node2D) as Actor
+	behavior = stored_behavior.restore()
 	behavior.prepare(actor, side_component)
 	running = true
 

@@ -1,56 +1,56 @@
-[gd_resource type="Resource" script_class="Behavior" load_steps=14 format=3 uid="uid://xvk7de3pnrwf"]
+[gd_resource type="Resource" script_class="StoredBehavior" load_steps=14 format=3 uid="uid://xvk7de3pnrwf"]
 
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_2w86k"]
 [ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_dvhob"]
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="7_f4m1p"]
 [ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_uipkv"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_nxbma"]
 
-[sub_resource type="Resource" id="Resource_chgv1"]
+[sub_resource type="Resource" id="Resource_ueppd"]
 script = ExtResource("3_dvhob")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_we57n"]
+[sub_resource type="Resource" id="Resource_w7psa"]
 script = ExtResource("7_uipkv")
 name = &"Heal"
 skill_type = 1
-params = SubResource("Resource_chgv1")
+params = SubResource("Resource_ueppd")
 
-[sub_resource type="Resource" id="Resource_qnxgv"]
+[sub_resource type="Resource" id="Resource_jofjl"]
 script = ExtResource("2_btuym")
 defined = true
 value = 20
 
-[sub_resource type="Resource" id="Resource_sbl2h"]
+[sub_resource type="Resource" id="Resource_05s5o"]
 script = ExtResource("3_dvhob")
 editor_string = "health {cmp} {int_value}"
 cmp = 1
-int_value = SubResource("Resource_qnxgv")
+int_value = SubResource("Resource_jofjl")
 
-[sub_resource type="Resource" id="Resource_ohlym"]
+[sub_resource type="Resource" id="Resource_reb6y"]
 script = ExtResource("7_uipkv")
 name = &"Target Health"
 skill_type = 3
-params = SubResource("Resource_sbl2h")
+params = SubResource("Resource_05s5o")
 
-[sub_resource type="Resource" id="Resource_v0ovk"]
+[sub_resource type="Resource" id="Resource_mbwdw"]
 script = ExtResource("3_dvhob")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_4chbi"]
+[sub_resource type="Resource" id="Resource_c0bv5"]
 script = ExtResource("7_uipkv")
 name = &"Self"
 skill_type = 2
-params = SubResource("Resource_v0ovk")
+params = SubResource("Resource_mbwdw")
 
-[sub_resource type="Resource" id="Resource_s0frv"]
+[sub_resource type="Resource" id="Resource_ttugj"]
 script = ExtResource("8_nxbma")
-target_selection = SubResource("Resource_4chbi")
-action = SubResource("Resource_we57n")
-condition = SubResource("Resource_ohlym")
+target_selection = SubResource("Resource_c0bv5")
+action = SubResource("Resource_w7psa")
+condition = SubResource("Resource_reb6y")
 
 [resource]
-script = ExtResource("7_f4m1p")
-saved_rules = Array[ExtResource("8_nxbma")]([SubResource("Resource_s0frv")])
+script = ExtResource("1_2w86k")
+stored_rules = Array[ExtResource("8_nxbma")]([SubResource("Resource_ttugj")])
