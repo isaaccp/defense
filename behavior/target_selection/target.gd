@@ -39,9 +39,6 @@ var pos: Vector2:
 			print("unexpected pos get")
 		return pos
 
-# Populated by factory methods, needs to match target Type.
-var condition_evaluator: ConditionEvaluator
-
 # Helper so we don't have to set up ACTORS in additions to
 # ACTOR in sorters, as they are the same from the point of
 # view of sorters.
@@ -63,20 +60,7 @@ func valid() -> bool:
 
 ## Whether the target still meets the initial condition.
 func meets_condition() -> bool:
-	if not condition_evaluator:
-		return true
-	match type:
-		Type.ACTOR:
-			var actor_condition_evaluator = condition_evaluator as TargetActorConditionEvaluator
-			assert(actor_condition_evaluator, "Actor target unexpectedly got wrong evaluator type")
-			return actor_condition_evaluator.evaluate(actor)
-		Type.POSITION:
-			var position_condition_evaluator = condition_evaluator as PositionConditionEvaluator
-			assert(position_condition_evaluator, "Position target unexpectedly got wrong evaluator type")
-			return position_condition_evaluator.evaluate(pos)
-		Type.ACTORS:
-			assert(false, "Implement me when there are Actors targets")
-	return false
+	return true
 
 func equals(other: Target) -> bool:
 	if type == other.type:
@@ -119,27 +103,6 @@ func position() -> Vector2:
 
 static func make_invalid() -> Target:
 	return Target.new()
-
-static func make_actor_target(actor_: Actor, condition_evaluator: TargetActorConditionEvaluator) -> Target:
-	var target = Target.new()
-	target.type = Type.ACTOR
-	target.actor = actor_
-	target.condition_evaluator = condition_evaluator
-	return target
-
-static func make_actors_target(actors_: Array[Actor]) -> Target:
-	var target = Target.new()
-	target.type = Type.ACTORS
-	target.actors = actors_
-	# TODO: Receive and save evaluator.
-	return target
-
-static func make_position_target(pos_: Vector2, condition_evaluator: PositionConditionEvaluator) -> Target:
-	var target = Target.new()
-	target.type = Type.POSITION
-	target.pos = pos_
-	target.condition_evaluator = condition_evaluator
-	return target
 
 static func target_type_str(target_type: Target.Type) -> String:
 	return Type.keys()[target_type]

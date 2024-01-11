@@ -31,7 +31,7 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 		if not action.filter_with_distance:
 			if not _check_distance(actor, target, action):
 				return Target.make_invalid()
-		return Target.make_actor_target(target, condition_evaluator)
+		return ConditionalTarget.make_actor_conditional_target(target, condition_evaluator)
 	# If we didn't find a target, return invalid.
 	return Target.make_invalid()
 
