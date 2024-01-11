@@ -91,7 +91,7 @@ hitbox_component = NodePath("../HitboxComponent")
 motion_component = NodePath("../ProjectileMotionComponent")
 
 [node name="ProjectileMotionComponent" parent="." node_paths=PackedStringArray("target_component", "action_scene") instance=ExtResource("7_f22s3")]
-speed = 300.0
+speed = 200.0
 homing = true
 target_component = NodePath("../TargetComponent")
 action_scene = NodePath("..")
