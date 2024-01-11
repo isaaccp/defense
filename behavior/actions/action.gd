@@ -46,6 +46,11 @@ var attributes_component: AttributesComponent
 var status_component: StatusComponent
 var logging_component: LoggingComponent
 
+static func make_runnable_action(action_def: ActionDef) -> Action:
+	var action = action_def.action_script.new() as Action
+	action.def = action_def
+	return action
+
 func _init():
 	pass
 

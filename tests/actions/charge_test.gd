@@ -21,8 +21,8 @@ func make_charge_behavior() -> Behavior:
 	return charge_behavior.duplicate()
 
 func before_all():
-	runnable_charge_action = SkillManager.make_runnable_action(charge_action)
-	var sword_attack_scene = SkillManager.make_runnable_action(sword_attack_action).sword_attack_scene
+	runnable_charge_action = Action.make_runnable_action(charge_action)
+	var sword_attack_scene = Action.make_runnable_action(sword_attack_action).sword_attack_scene
 	var sword_attack = sword_attack_scene.instantiate()
 	sword_damage = Component.get_or_die(sword_attack, HitboxComponent.component).hit_effect.damage
 	sword_attack.free()

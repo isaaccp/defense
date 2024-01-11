@@ -3,6 +3,7 @@ extends GutTest
 const body_scene = preload("res://character/character.tscn")
 const heal = preload("res://skill_tree/actions/heal.tres")
 const target_self = preload("res://skill_tree/targets/self.tres")
+const always = preload("res://skill_tree/conditions/always.tres")
 
 var body: CharacterBody2D
 var behavior_component: BehaviorComponent
@@ -28,7 +29,7 @@ func before_each():
 	add_child_autoqfree(body)
 
 func test_basic_behavior():
-	behavior_component.behavior = make_behavior(preload("res://skill_tree/conditions/always.tres"))
+	behavior_component.behavior = make_behavior(always)
 	watch_signals(behavior_component)
 	await wait_seconds(0.1, "Waiting to ensure nothing happens before we do run()")
 	assert_signal_not_emitted(behavior_component, "behavior_updated")

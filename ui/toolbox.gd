@@ -55,7 +55,7 @@ func load_skills(skills: SkillTreeState):
 	for action_type in skills.acquired_actions:
 		var action_item = tree.create_item(_actions)
 		var action_def = SkillManager.make_action_instance(action_type)
-		var action = SkillManager.make_runnable_action(action_def)
+		var action = Action.make_runnable_action(action_def)
 		action_item.set_text(0, action_type)
 		action_item.set_tooltip_text(0, action.full_description())
 		action_item.set_metadata(0, metadata(2, action_type, action_def.params))

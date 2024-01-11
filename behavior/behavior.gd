@@ -72,7 +72,7 @@ func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 		if condition_evaluators[i]:
 			if not condition_evaluators[i].evaluate():
 				continue
-		var action = SkillManager.make_runnable_action(rule.action)
+		var action = Action.make_runnable_action(rule.action)
 		var target = target_selectors[i].select_target(action, actor, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}

@@ -77,11 +77,6 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 	skill.params = saved_skill.params
 	return skill
 
-func make_runnable_action(action_def: ActionDef) -> Action:
-	var action = action_def.action_script.new() as Action
-	action.def = action_def
-	return action
-
 func all_actions() -> Array[StringName]:
 	var all: Array[StringName] = []
 	for name in action_by_name.keys():

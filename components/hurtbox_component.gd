@@ -41,3 +41,11 @@ func _log(message: String):
 	if not logging_component:
 		return
 	logging_component.add_log_entry(LoggingComponent.LogType.HURT, message)
+
+static func get_or_null(node: Node) -> HurtboxComponent:
+	return Component.get_or_null(node, component) as HurtboxComponent
+
+static func get_or_die(node: Node) -> HurtboxComponent:
+	var component = get_or_null(node)
+	assert(component)
+	return component

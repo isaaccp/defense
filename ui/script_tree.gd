@@ -71,7 +71,6 @@ func _add_button_if_params(row: TreeItem, column: int, params: SkillParams):
 		if row.get_button_count(column) > 0:
 			row.erase_button(column, 0)
 
-
 func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
 	row.set_text(idx, name)
 	match idx:
@@ -86,7 +85,7 @@ func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
 		Column.ACTION:
 			var action_def = _action_from_meta(meta)
 			if action_def:
-				var action = SkillManager.make_runnable_action(action_def)
+				var action = Action.make_runnable_action(action_def)
 				row.set_tooltip_text(idx, action.full_description())
 	row.set_metadata(idx, meta)
 
