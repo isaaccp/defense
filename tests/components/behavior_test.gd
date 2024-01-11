@@ -14,11 +14,7 @@ var behavior_component: BehaviorComponent
 func make_behavior(condition: ConditionDef) -> StoredBehavior:
 	var behavior = StoredBehavior.new()
 	behavior.stored_rules.append(
-		RuleDef.make(
-			RuleSkillDef.from_skill(target_self),
-			RuleSkillDef.from_skill(heal),
-			RuleSkillDef.from_skill(condition),
-		)
+		TestUtils.rule_def(target_self, heal, condition)
 	)
 	return behavior
 

@@ -58,10 +58,7 @@ class TestPositionReachedConditions extends LevelTest:
 	func make_move_behavior() -> StoredBehavior:
 		var behavior = StoredBehavior.new()
 		behavior.stored_rules.append(
-			RuleDef.make(
-				RuleSkillDef.from_skill(tower_target),
-				RuleSkillDef.from_skill(move_to),
-			)
+			TestUtils.rule_def(tower_target, move_to)
 		)
 		return behavior
 

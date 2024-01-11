@@ -16,17 +16,11 @@ var enemy_health: HealthComponent
 func make_sword_behavior(move: bool = false) -> StoredBehavior:
 	var behavior = StoredBehavior.new()
 	behavior.stored_rules.append(
-		RuleDef.make(
-			RuleSkillDef.from_skill(enemy_target),
-			RuleSkillDef.from_skill(sword_attack),
-		)
+		TestUtils.rule_def(enemy_target, sword_attack)
 	)
 	if move:
 		behavior.stored_rules.append(
-			RuleDef.make(
-				RuleSkillDef.from_skill(enemy_target),
-				RuleSkillDef.from_skill(move_to),
-			)
+			TestUtils.rule_def(enemy_target, move_to),
 		)
 	return behavior
 

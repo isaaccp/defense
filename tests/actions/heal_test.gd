@@ -16,10 +16,7 @@ var heal_amount: int
 func make_heal_behavior() -> StoredBehavior:
 	var behavior = StoredBehavior.new()
 	behavior.stored_rules.append(
-		RuleDef.make(
-			RuleSkillDef.from_skill(self_target),
-			RuleSkillDef.from_skill(heal),
-		)
+		TestUtils.rule_def(self_target, heal)
 	)
 	return behavior
 

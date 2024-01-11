@@ -2,6 +2,15 @@ extends RefCounted
 
 class_name TestUtils
 
+const always = preload("res://skill_tree/conditions/always.tres")
+
+static func rule_def(target: TargetSelectionDef, action: ActionDef, condition: ConditionDef = always) -> RuleDef:
+	return RuleDef.make(
+		RuleSkillDef.from_skill(target),
+		RuleSkillDef.from_skill(action),
+		RuleSkillDef.from_skill(condition),
+	)
+
 static func set_character_behavior(character: Node2D, behavior: StoredBehavior):
 	var persistent_state = Component.get_persistent_game_state_component_or_die(character)
 	persistent_state.state.behavior = behavior
