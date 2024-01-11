@@ -12,6 +12,12 @@ const default_auto_animation = "auto"
 
 @export_group("Optional")
 
+signal default_animation_finished
+signal animation_finished(anim: String)
+
+func _ready():
+	animation_player.animation_finished.connect(_on_animation_finished)
+
 func run():
 	if animation_player.has_animation(default_auto_animation):
 		animation_player.play(default_auto_animation)
@@ -29,6 +35,11 @@ func stop_animation(animation: String) -> bool:
 		animation_player.stop()
 		return true
 	return false
+
+func _on_animation_finished(anim: String):
+	if anim == default_auto_animation:
+		default_animation_finished.emit()
+	animation_finished.emit(anim)
 
 static func get_or_null(node) -> AnimationComponent:
 	return Component.get_or_null(node, component) as AnimationComponent

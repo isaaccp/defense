@@ -7,6 +7,9 @@ const component = &"AutoFreeComponent"
 @export_group("Optional")
 ## If > 0, free after this time.
 @export var free_after_secs: float = -1.0
+## If animation_component is provided, will free after animation finishes.
+@export var animation_component: AnimationComponent
+# Remove animation_player once everyone has moved to animation_component.
 ## If animation_player is provided, will free after animation finishes.
 @export var animation_player: AnimationPlayer
 ## If hitbox_component is provided, will free after all hits used.
@@ -20,6 +23,9 @@ signal freed
 func run():
 	if animation_player:
 		animation_player.animation_finished.connect(
+			func(_anim): AutoFreeComponent._free_parent(self))
+	if animation_component:
+		animation_component.animation_finished.connect(
 			func(_anim): AutoFreeComponent._free_parent(self))
 	if hitbox_component:
 		hitbox_component.all_hits_used.connect(
