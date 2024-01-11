@@ -14,6 +14,15 @@ enum Type {
 	POSITION,
 }
 
+enum PositionType {
+	## Returns the main position of the target. In the case of actors, this
+	## is usually the bottom of the sprite. Useful for movement commands, etc.
+	DEFAULT,
+	## If target is an actor and has a hurtbox, it'll return the center of the
+	## hurtbox. Otherwise it falls back to DEFAULT behavior. Useful for attacks.
+	HURTBOX,
+}
+
 var type: Type
 var actor: Actor:
 	get:
@@ -91,9 +100,13 @@ func _to_string():
 		Type.POSITION:
 			return "(%0.1f,%0.1f)" % [pos.x, pos.y]
 
-func position() -> Vector2:
+func position(position_type: PositionType = PositionType.DEFAULT) -> Vector2:
 	match type:
 		Type.ACTOR:
+			if position_type == PositionType.HURTBOX:
+				var hurtbox = HurtboxComponent.get_or_null(actor)
+				if hurtbox:
+					return hurtbox.global_position
 			return actor.position
 		Type.POSITION:
 			return pos
