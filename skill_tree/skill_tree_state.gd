@@ -2,10 +2,8 @@ extends Resource
 
 class_name SkillTreeState
 
-const always = preload("res://skill_tree/conditions/always.tres")
-
-@export var acquired_skills: Array[StringName] = [always.skill_name]
-@export var unlocked_skills: Array[StringName] = [always.skill_name]
+@export var acquired_skills: Array[StringName] = [&"Always"]
+@export var unlocked_skills: Array[StringName] = [&"Always"]
 
 # If set, all skills are acquired/unlocked..
 @export var full_acquired = false
