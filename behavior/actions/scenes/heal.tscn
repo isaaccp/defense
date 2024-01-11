@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvqs2vr7vmiqd"]
+[gd_scene load_steps=12 format=3 uid="uid://dvqs2vr7vmiqd"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_gdnu2"]
 [ext_resource type="Texture2D" uid="uid://dwxn6iingnvfv" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 C.png" id="2_a7i15"]
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="3_ige4x"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="4_gnrrg"]
 [ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="4_kx22j"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="6_i4f3j"]
 
 [sub_resource type="Animation" id="Animation_3ijhw"]
 length = 0.001
@@ -62,11 +63,14 @@ hframes = 6
 vframes = 30
 frame = 150
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("6_i4f3j")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_ipcst")
 }
-autoplay = "auto"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("3_ige4x")]
 action_scene = NodePath("..")
@@ -77,5 +81,5 @@ hits = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_rcqhs")
 
-[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("4_gnrrg")]
-animation_player = NodePath("../Sprite2D/AnimationPlayer")
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("4_gnrrg")]
+animation_component = NodePath("../AnimationComponent")

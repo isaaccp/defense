@@ -15,7 +15,6 @@ var sprite: Sprite2D
 var prev_modulate: Color = Color.WHITE
 var teleport_out: ActionScene
 
-
 func post_initialize():
 	assert(cooldown > 0)
 	initial_target_pos = target.position()

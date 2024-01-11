@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cijtqs10m4lpv"]
+[gd_scene load_steps=8 format=3 uid="uid://cijtqs10m4lpv"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_ep8dm"]
 [ext_resource type="Texture2D" uid="uid://dwxn6iingnvfv" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 C.png" id="2_qjk37"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_alqc3"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="5_t7f30"]
 
 [sub_resource type="Animation" id="Animation_dscwg"]
@@ -43,7 +44,7 @@ _data = {
 
 [node name="BlinkAwayFadeOut" type="Node2D" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_ep8dm")
-animation_player = NodePath("Sprite2D/AnimationPlayer")
+animation_player = NodePath("AnimationComponent/AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -52,10 +53,15 @@ hframes = 6
 vframes = 30
 frame = 114
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_alqc3")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_y2uok")
 }
 autoplay = "auto"
 
-[node name="AutoFreeComponent" parent="." instance=ExtResource("5_t7f30")]
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("5_t7f30")]
+animation_component = NodePath("../AnimationComponent")

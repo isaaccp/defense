@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c02ggs5jcswcx"]
+[gd_scene load_steps=12 format=3 uid="uid://c02ggs5jcswcx"]
 
 [ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_7tlx4"]
 [ext_resource type="Texture2D" uid="uid://dwxn6iingnvfv" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 C.png" id="2_8esxd"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_xlg1x"]
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="3_yukr8"]
 [ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="4_3b43y"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="4_10vvc"]
@@ -56,17 +57,21 @@ radius = 5.0
 script = ExtResource("1_7tlx4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0.364706, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("2_8esxd")
 hframes = 6
 vframes = 30
 frame = 150
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_xlg1x")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_ipcst")
 }
-autoplay = "auto"
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("3_yukr8")]
 action_scene = NodePath("..")
@@ -76,5 +81,5 @@ hits = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_rcqhs")
 
-[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("4_10vvc")]
-animation_player = NodePath("../Sprite2D/AnimationPlayer")
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("4_10vvc")]
+animation_component = NodePath("../AnimationComponent")
