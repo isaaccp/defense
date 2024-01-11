@@ -14,6 +14,8 @@ const NoAction = &"__no_action__"
 ## to handle all the target types declared here. It is used by the UI to
 ## prevent invalid configurations.
 @export var supported_target_types: Array[Target.Type]
+## Attack type, only set for attacks.
+@export var attack_type: AttackType
 
 func _init():
 	skill_type = SkillType.ACTION

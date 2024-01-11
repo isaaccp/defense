@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://cv6d4t5ga1m38"]
+[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://cv6d4t5ga1m38"]
 
 [ext_resource type="Script" path="res://behavior/actions/sword_attack_action.gd" id="1_c6hd2"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_fdht4"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_k0wwd"]
+[ext_resource type="Resource" uid="uid://8iy07y3y0b0e" path="res://game_logic/attack_types/melee.tres" id="2_jbjy1"]
 
 [sub_resource type="Resource" id="Resource_t8063"]
 script = ExtResource("1_k0wwd")
@@ -13,6 +14,7 @@ cmp = 0
 script = ExtResource("1_fdht4")
 action_script = ExtResource("1_c6hd2")
 supported_target_types = Array[int]([1])
+attack_type = ExtResource("2_jbjy1")
 params = SubResource("Resource_t8063")
 abstract = true
 skill_name = &"Sword Attack"

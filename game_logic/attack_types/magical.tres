@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AttackType" load_steps=2 format=3 uid="uid://dmi8jfkld1td3"]
+
+[ext_resource type="Script" path="res://game_logic/attack_types/attack_type.gd" id="1_06743"]
+
+[resource]
+script = ExtResource("1_06743")
+name = &"Magical"

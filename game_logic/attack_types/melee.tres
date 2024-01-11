@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="AttackType" load_steps=2 format=3 uid="uid://8iy07y3y0b0e"]
+
+[ext_resource type="Script" path="res://game_logic/attack_types/attack_type.gd" id="1_1lvkv"]
+
+[resource]
+script = ExtResource("1_1lvkv")
+name = &"Melee"
