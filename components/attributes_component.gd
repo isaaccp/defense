@@ -8,21 +8,23 @@ class_name AttributesComponent
 @export_group("Optional")
 @export var status_component: StatusComponent
 
+var attributes: Attributes
+
 var speed: float:
-	get:
-		if status_component:
-			return status_component.adjusted_speed(base_attributes.speed)
-		else:
-			return base_attributes.speed
+	get: return attributes.speed
 var health: int:
-	get:
-		if status_component:
-			return status_component.adjusted_health(base_attributes.health)
-		else:
-			return base_attributes.health
-var damage_multiplier:
-	get:
-		if status_component:
-			return status_component.adjusted_damage_multiplier(base_attributes.damage_multiplier)
-		else:
-			return base_attributes.damage_multiplier
+	get: return attributes.health
+var damage_multiplier: float:
+	get: return attributes.damage_multiplier
+var armor: int:
+	get: return attributes.armor
+
+func _ready():
+	if status_component:
+		status_component.statuses_changed.connect(_on_statuses_changed)
+		_on_statuses_changed()
+	else:
+		attributes = base_attributes
+
+func _on_statuses_changed(_statuses: Array[StatusDef.Id] = []):
+	attributes = status_component.adjusted_attributes(base_attributes)

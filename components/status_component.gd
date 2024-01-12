@@ -20,7 +20,7 @@ const component: StringName = &"StatusComponent"
 # Keep track of time to know when to expire.
 @export var elapsed_time: float = 0.0
 
-signal statuses_changed(statuses: Array)
+signal statuses_changed(statuses: Array[StatusDef.Id])
 signal able_to_act_changed(able_to_act: bool)
 
 class StatusState extends RefCounted:
@@ -98,15 +98,15 @@ func adjusted_speed(base_speed: float) -> int:
 			speed *= 1.5
 	return speed
 
-func adjusted_health(base_health: int) -> int:
-	return base_health
-
-func adjusted_damage_multiplier(base_damage_multiplier: float) -> float:
-	var damage_multiplier = base_damage_multiplier
+func adjusted_attributes(base_attributes: Attributes):
+	var attributes = base_attributes.duplicate(true)
 	for status in get_statuses():
-		if status == StatusDef.Id.STRENGTH_SURGE:
-			damage_multiplier *= 2.0
-	return damage_multiplier
+		match status:
+			StatusDef.Id.SWIFTNESS:
+				attributes.speed *= 1.5
+			StatusDef.Id.STRENGTH_SURGE:
+				attributes.damage_multiplier *= 2.0
+	return attributes
 
 func _emit_status_added_signals(status_id: StatusDef.Id):
 	if status_id == StatusDef.Id.PARALYZED:
