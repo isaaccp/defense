@@ -7,3 +7,4 @@
 script = ExtResource("1_wueem")
 online = 0
 level_provider = ExtResource("1_m8po7")
+fallback_local_nakama = false

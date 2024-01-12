@@ -3,24 +3,26 @@ extends Node
 class_name AttributesComponent
 
 @export_group("Required")
-@export var speed: float:
-	get:
-		if status_component:
-			return status_component.adjusted_speed(speed)
-		else:
-			return speed
-@export var health: int:
-	get:
-		if status_component:
-			return status_component.adjusted_health(health)
-		else:
-			return health
-@export var damage_multiplier = 1.0:
-	get:
-		if status_component:
-			return status_component.adjusted_damage_multiplier(damage_multiplier)
-		else:
-			return damage_multiplier
+@export var base_attributes: Attributes
 
 @export_group("Optional")
 @export var status_component: StatusComponent
+
+var speed: float:
+	get:
+		if status_component:
+			return status_component.adjusted_speed(base_attributes.speed)
+		else:
+			return base_attributes.speed
+var health: int:
+	get:
+		if status_component:
+			return status_component.adjusted_health(base_attributes.health)
+		else:
+			return base_attributes.health
+var damage_multiplier:
+	get:
+		if status_component:
+			return status_component.adjusted_damage_multiplier(base_attributes.damage_multiplier)
+		else:
+			return base_attributes.damage_multiplier
