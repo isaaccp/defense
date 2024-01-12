@@ -33,6 +33,9 @@ class LogEntry extends RefCounted:
 		type = type_
 		message = message_
 
+	func _to_string():
+		return "%0.2f: [%s] %s" % [time, LoggingComponent.log_type_name(type), message]
+
 # TODO: Implement some max limit and rollover.
 var entries: Array[LogEntry]
 var running = false

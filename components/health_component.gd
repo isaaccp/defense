@@ -34,27 +34,10 @@ enum ShowHealth {
 	set(value):
 		max_health = value
 		if health > max_health:
-			health = max_health
+			_update_health(max_health, true, "max health reduced")
 
-@export var health: int:
-	set(value):
-		var prev_health = health
-		health = clampi(value, 0, max_health)
-		var update = HealthUpdate.new()
-		update.health = health
-		update.prev_health = prev_health
-		update.is_heal = health > prev_health
-		update.max_health = max_health
-		health_updated.emit(update)
-		# Do not log on initial heal.
-		if initial_heal:
-			initial_heal = false
-		else:
-			_log("Health: %d -> %d" % [update.prev_health, update.health])
+@export var health: int
 @export var is_dead: bool = false
-
-# To avoid
-var initial_heal = true
 
 func _ready():
 	if show_health in [ShowHealth.NEVER, ShowHealth.WHEN_NOT_FULL]:
@@ -63,16 +46,48 @@ func _ready():
 
 func _initialize():
 	max_health = attributes_component.health
-	heal_full()
+	_update_health(max_health)
 
-func heal_full():
-	health = max_health
+# Returns true if hit caused any damage.
+func process_hit(hit_effect: HitEffect) -> bool:
+	var adjusted_damage = hit_effect.adjusted_damage()
+	var damage_str = "%d" % adjusted_damage
+	# If damage was 0 to begin with, just return.
+	if adjusted_damage <= 0:
+		_log_blocked_damage(damage_str)
+		return false
+	var after_armor_damage = max(0, adjusted_damage - attributes_component.armor)
+	if after_armor_damage != adjusted_damage:
+		damage_str = "%d (%s - %d (armor))" % [after_armor_damage, damage_str, attributes_component.armor]
+	if after_armor_damage <= 0:
+		_log_blocked_damage(damage_str)
+		return false
+	var after_resistance_damage = after_armor_damage
+	# TODO: Apply resistances.
+	if after_resistance_damage != after_armor_damage:
+		# Update damage_str.
+		pass
+	if after_resistance_damage <= 0:
+		_log_blocked_damage(damage_str)
+		return false
+	var new_health = health - after_resistance_damage
+	_update_health(new_health, true, damage_str)
+	return true
 
-func heal(dmg: int):
-	damage(-dmg)
+func _log_blocked_damage(damage_details: String):
+	_log("dmg: %s" % damage_details)
 
-func damage(dmg: int):
-	health -= dmg
+func _update_health(new_health: int, should_log: bool = false, message: String = ""):
+	var prev_health = health
+	health = clampi(new_health, 0, max_health)
+	var update = HealthUpdate.new()
+	update.health = health
+	update.prev_health = prev_health
+	update.is_heal = health > prev_health
+	update.max_health = max_health
+	health_updated.emit(update)
+	if should_log:
+		_log("Health: %d -> %d, dmg: %s" % [update.prev_health, update.health, message])
 	if health == 0 and not is_dead:
 		_log("Died")
 		is_dead = true

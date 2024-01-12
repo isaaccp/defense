@@ -2,12 +2,20 @@ extends Resource
 
 class_name HitEffect
 
-# Damage on hit.
+## Damage on hit.
 @export var damage: int
+## Type of damage inflicted.
 @export var damage_type: DamageType
 # Status on hit.
+## Status inflicted, if any.
 @export var status: StatusDef.Id
+## Duration for status.
 @export var status_duration: float
+## Whether status only gets inflicted if hit causes damage
+## (set to true for e.g. poison attack with a weapon).
+## Defaults to false as HitEffect is also used for Status-only
+## effects.
+@export var status_on_damage_only = false
 
 # Set by hitbox on hit.
 var action_name: StringName

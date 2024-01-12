@@ -27,15 +27,14 @@ func can_handle_collision():
 func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEffect):
 	hurtbox_hit.emit()
 	_log("%s's %s %s" % [owner_name, hitbox_name, hit_effect.log_text()])
+	var damaged = false
 	if health_component:
-		var adjusted_damage = hit_effect.adjusted_damage()
-		# TODO: Further adjusting depending on e.g. armor, etc.
-		if adjusted_damage != 0:
-			health_component.damage(adjusted_damage)
-	if status_component:
-		if hit_effect.status != StatusDef.Id.UNSPECIFIED:
-			# TODO: Check for protection and what not.
-			status_component.set_status(hit_effect.action_name, hit_effect.status, hit_effect.status_duration)
+		damaged = health_component.process_hit(hit_effect)
+	if not hit_effect.status_on_damage_only or damaged:
+		if status_component:
+			if hit_effect.status != StatusDef.Id.UNSPECIFIED:
+				# TODO: Check for protection and what not.
+				status_component.set_status(hit_effect.action_name, hit_effect.status, hit_effect.status_duration)
 
 func _log(message: String):
 	if not logging_component:
