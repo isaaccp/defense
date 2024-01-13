@@ -27,10 +27,9 @@ tracks/0/keys = {
 "values": [Vector2(0, -16)]
 }
 
-[sub_resource type="Animation" id="Animation_rxvlw"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_3orma"]
+resource_name = "death"
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,7 +40,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_7tu7v")]
+"values": [ExtResource("2_8hrxe")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -101,7 +100,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -16)]
+"values": [Vector2(0, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_phdlm"]
@@ -180,9 +179,10 @@ tracks/5/keys = {
 "values": [Vector2(0, -16)]
 }
 
-[sub_resource type="Animation" id="Animation_3orma"]
-resource_name = "death"
+[sub_resource type="Animation" id="Animation_rxvlw"]
+resource_name = "run"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -193,7 +193,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_8hrxe")]
+"values": [ExtResource("2_7tu7v")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -253,7 +253,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -8)]
+"values": [Vector2(0, -16)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xa574"]
@@ -356,6 +356,7 @@ condition = SubResource("Resource_ihc8l")
 
 [sub_resource type="Resource" id="Resource_w8vxy"]
 script = ExtResource("4_758bh")
+name = ""
 stored_rules = Array[ExtResource("7_x14vd")]([SubResource("Resource_pqkju"), SubResource("Resource_tn5be")])
 
 [sub_resource type="Resource" id="Resource_e6m2r"]
@@ -371,7 +372,7 @@ damage_multiplier = 1.0
 armor = 2
 resistance = Array[ExtResource("5_eunku")]([SubResource("Resource_e6m2r")])
 
-[node name="Skeleton" instance=ExtResource("1_yojas")]
+[node name="SkeletonWarrior" instance=ExtResource("1_yojas")]
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -16)
