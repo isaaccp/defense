@@ -13,6 +13,10 @@ class_name Gameplay
 @export var characters: Array[GameplayCharacter] = []
 @export var save_state: SaveState
 
+var state = StateMachine.new()
+var CHARACTER_SELECTION = state.add("character_selection")
+var LEVEL = state.add("level")
+
 # Not constants so tests can speed them up.
 var ready_to_fight_wait = 1.0
 var level_end_wait = 3.0
@@ -25,14 +29,10 @@ var characters_ready = {}
 signal level_started
 
 func _ready():
+	state.connect_signals(self)
 	# TODO: Encapsulate all the hud business better.
 	Global.subviewport = %SubViewport
-	ui_layer.hud.show_play_controls(false)
-	ui_layer.show()
-	ui_layer.hud.hide()
-	ui_layer.hud.set_peer(multiplayer.get_unique_id())
-	ui_layer.character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
-	ui_layer.show_screen(ui_layer.character_selection_screen)
+	state.change_state.call_deferred(CHARACTER_SELECTION)
 
 func initialize(game_mode: GameMode, save_state: SaveState):
 	self.save_state = save_state
@@ -40,9 +40,25 @@ func initialize(game_mode: GameMode, save_state: SaveState):
 	if game_mode.is_multiplayer():
 		assert(level_provider.players == 2)
 
-func _on_character_selection_screen_selection_ready(character_selections: Array):
+func _on_character_selection_entered():
+	ui_layer.hud.show_play_controls(false)
+	ui_layer.show()
+	ui_layer.hud.hide()
+	ui_layer.hud.set_peer(multiplayer.get_unique_id())
+	ui_layer.character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
+	ui_layer.show_screen(ui_layer.character_selection_screen)
+
+func _on_character_selection_exited():
 	ui_layer.hide_screen()
+
+func _on_level_entered():
 	ui_layer.hud.show()
+	play_next_level()
+
+func _on_level_exited():
+	pass
+
+func _on_character_selection_screen_selection_ready(character_selections: Array):
 	var players = OnlineMatch.get_sorted_players()
 	for selection in range(character_selections.size()):
 		var idx = character_selections[selection]
@@ -56,7 +72,7 @@ func _on_character_selection_screen_selection_ready(character_selections: Array)
 		if level_provider.skill_tree_state:
 			gameplay_character.skill_tree_state = level_provider.skill_tree_state
 		characters.append(gameplay_character)
-	play_next_level.call_deferred()
+	state.change_state(LEVEL)
 
 func _load_next_level(advance: bool = true):
 	level = null
