@@ -3,6 +3,9 @@ extends Resource
 
 class_name StoredBehavior
 
+## Name. Needs to be set in order to store behavior in library.
+@export var name: String
+## Rules.
 @export var stored_rules: Array[RuleDef]
 
 # When behavior is set through editor/etc, we don't write (well, we do for now,

@@ -94,4 +94,5 @@ condition = SubResource("Resource_1fkqq")
 
 [resource]
 script = ExtResource("1_7epv0")
+name = ""
 stored_rules = Array[ExtResource("3_erdfh")]([SubResource("Resource_pmy3a"), SubResource("Resource_r3l3c")])
