@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://wfrxew4t25e2"]
+
+[ext_resource type="Script" path="res://ui/gameplay_menu.gd" id="1_abf2l"]
+[ext_resource type="PackedScene" uid="uid://dc2r43mchebnk" path="res://ui/confirmable_button.tscn" id="2_86at4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28ly6"]
+bg_color = Color(0, 0, 0, 0.54902)
+
+[node name="GameplayMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_abf2l")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_28ly6")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -33.0
+offset_right = 58.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SaveAndQuitButton" parent="PanelContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("2_86at4")]
+layout_mode = 2
+text = "Save and Quit"
+confirmation_text = "Any changes (e.g. XP spent on skills, behavior changes) since the start of the current level will be lost.
+
+Changes to the behavior library will be kept."
+
+[node name="ResetLevelButton" parent="PanelContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("2_86at4")]
+layout_mode = 2
+text = "Reset Level"
+confirmation_text = "Any changes (e.g. XP spent on skills, behavior changes) since the start of the current level will be reverted."
+
+[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/SaveAndQuitButton" to="PanelContainer" method="_on_save_and_quit_button_pressed_confirmed"]
+[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/ResetLevelButton" to="PanelContainer" method="_on_reset_level_button_pressed_confirmed"]

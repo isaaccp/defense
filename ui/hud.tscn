@@ -134,5 +134,7 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 64
 text = "Next level!"
 
+[connection signal="pause_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_pause_pressed"]
+[connection signal="play_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_play_pressed"]
 [connection signal="restart_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_restart_pressed"]
 [connection signal="pressed" from="EndLevelConfirmation" to="." method="_on_end_level_confirmation_pressed"]

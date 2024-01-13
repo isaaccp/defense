@@ -24,6 +24,8 @@ var level_failed_wait = 1.0
 
 var level_scene: PackedScene
 var level: Level
+var full_pause = false
+var level_pause = false
 var characters_ready = {}
 
 signal level_started
@@ -176,3 +178,27 @@ func _on_restart_requested():
 	ui_layer.hud.show_play_controls(false)
 	level.queue_free()
 	play_next_level(false)
+
+func _on_gameplay_ui_layer_full_pause_requested():
+	full_pause = true
+	get_tree().paused = true
+
+func _on_gameplay_ui_layer_full_resume_requested():
+	full_pause = false
+	if not level_pause:
+		get_tree().paused = false
+
+func _on_gameplay_ui_layer_play_controls_pause_pressed():
+	level_pause = true
+	get_tree().paused = true
+
+func _on_gameplay_ui_layer_play_controls_play_pressed():
+	level_pause = false
+	assert(not full_pause)
+	get_tree().paused = false
+
+func _on_gameplay_ui_layer_reset_requested():
+	pass # Replace with function body.
+
+func _on_gameplay_ui_layer_save_and_quit_requested():
+	pass # Replace with function body.

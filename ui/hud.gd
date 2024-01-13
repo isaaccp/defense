@@ -41,6 +41,8 @@ signal restart_requested
 signal end_level_confirmed
 signal view_log_requested(logging_component: LoggingComponent)
 signal upgrade_window_requested(character: Character)
+signal play_controls_play_pressed
+signal play_controls_pause_pressed
 
 func _ready():
 	for label in message_label.values():
@@ -225,3 +227,9 @@ func _on_upgrade_window_requested(character: Character):
 func _on_end_level_confirmation_pressed():
 	show_end_level_confirmation(false)
 	end_level_confirmed.emit()
+
+func _on_play_controls_play_pressed():
+	play_controls_play_pressed.emit()
+
+func _on_play_controls_pause_pressed():
+	play_controls_pause_pressed.emit()

@@ -8,32 +8,28 @@ var hud: Hud
 var speeds = [1, 2, 0.5]
 var current_speed = 0
 
-var _is_root = false
-
-func _ready():
-	if get_parent() == get_tree().root:
-		_is_root = true
-
 func initialize(hud_: Hud):
 	hud = hud_
 
 func _pause(pause: bool = true):
-	if not _is_root:
-		get_tree().paused = pause
+	if pause:
+		pause_pressed.emit()
+	else:
+		play_pressed.emit()
 
 func _on_stop_button_pressed():
 	# TODO: pause.
 	%RestartDialog.show()
 
 func _on_pause_button_pressed():
-	if not _is_root:
+	if hud:
 		hud.show_main_message("Paused", 1.0)
 	%PlayButton.show()
 	%PauseButton.hide()
 	_pause()
 
 func _on_play_button_pressed():
-	if not _is_root:
+	if hud:
 		hud.hide_main_message()
 	%PlayButton.hide()
 	%PauseButton.show()
