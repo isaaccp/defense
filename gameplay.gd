@@ -11,6 +11,7 @@ class_name Gameplay
 @export_group("Debug")
 @export var level_provider: LevelProvider
 @export var characters: Array[GameplayCharacter] = []
+@export var save_state: SaveState
 
 # Not constants so tests can speed them up.
 var ready_to_fight_wait = 1.0
@@ -25,19 +26,19 @@ signal level_started
 
 func _ready():
 	# TODO: Encapsulate all the hud business better.
-	ui_layer.hud.hide()
-	ui_layer.hud.show_play_controls(false)
 	Global.subviewport = %SubViewport
-
-func start(game_mode: GameMode):
-	level_provider = game_mode.level_provider
-	if game_mode.is_multiplayer():
-		assert(level_provider.players == 2)
+	ui_layer.hud.show_play_controls(false)
 	ui_layer.show()
 	ui_layer.hud.hide()
 	ui_layer.hud.set_peer(multiplayer.get_unique_id())
 	ui_layer.character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
 	ui_layer.show_screen(ui_layer.character_selection_screen)
+
+func initialize(game_mode: GameMode, save_state: SaveState):
+	self.save_state = save_state
+	level_provider = game_mode.level_provider
+	if game_mode.is_multiplayer():
+		assert(level_provider.players == 2)
 
 func _on_character_selection_screen_selection_ready(character_selections: Array):
 	ui_layer.hide_screen()

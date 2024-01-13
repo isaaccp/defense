@@ -2,9 +2,9 @@ extends Node2D
 
 class_name Main
 
-@export_group("Internal")
-@export var ui_layer: UILayer
-@export var gameplay: Gameplay
+const gameplay_scene = preload("res://gameplay.tscn")
+
+var ui_layer: UILayer
 
 var players_ready := {}
 var character_selections = {}
@@ -12,6 +12,7 @@ var game_over = false
 var game_mode: GameMode
 
 func _ready():
+	ui_layer = %UILayer
 	# TODO: Just to make it faster for dev, remove later.
 	# _on_title_screen_connect_selected.call_deferred()
 	pass
@@ -37,9 +38,18 @@ func player_ready(session_id: String) -> void:
 				OnlineMatch.start_playing()
 			start_gameplay.rpc()
 
+func load_save_state() -> SaveState:
+	if not FileAccess.file_exists("user://defense_save.tres"):
+		return SaveState.new()
+	var save_state = load("user://defense_save.tres")
+	return save_state
+
 @rpc("authority", "call_local")
 func start_gameplay():
 	ui_layer.hide_screen()
 	ui_layer.hide()
 	print("Start game")
-	gameplay.start(game_mode)
+	var gameplay = gameplay_scene.instantiate() as Gameplay
+	var save_state = load_save_state()
+	gameplay.initialize(game_mode, save_state)
+	add_child(gameplay)
