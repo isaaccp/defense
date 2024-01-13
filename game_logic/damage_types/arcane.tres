@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_0amv7")
 name = &"Arcane"
+macro_type = 2

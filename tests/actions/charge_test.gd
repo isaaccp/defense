@@ -59,8 +59,10 @@ func test_charge_short_distance():
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emit_count(character_status, "statuses_changed", 2)
 	# Check that first hit (second update after first heal) did 'sword_damage'.
+	# (-1 because of armor, should use test enemies in tests so their attributes
+	# are not changed randomly, needing adjustments).
 	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.prev_health - health_update.health, sword_damage)
+	assert_eq(health_update.prev_health - health_update.health, sword_damage - 1)
 
 func test_charge_long_distance():
 	# Due to distance, strength surge should trigger shortly after
@@ -88,7 +90,7 @@ func test_charge_long_distance():
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
 	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2)
+	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2 - 1)
 
 func test_charge_cooldown():
 	var extra_enemy = enemy_scene.instantiate()

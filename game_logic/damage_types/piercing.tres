@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_v7vxl")
 name = &"Piercing"
+macro_type = 1

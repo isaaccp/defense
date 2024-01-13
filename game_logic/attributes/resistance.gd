@@ -8,3 +8,6 @@ class_name Resistance
 ## * A positive number means damage applied is reduced by that %-age.
 ## * A negative number means damage applied is increased by that %-age.
 @export_range(-100,100) var percentage: int = 0
+
+func multiplier() -> float:
+	return (100-percentage) / 100.0

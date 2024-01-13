@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_i5uov")
 name = &"Slashing"
+macro_type = 1

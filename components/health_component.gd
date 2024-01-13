@@ -51,27 +51,31 @@ func _initialize():
 # Returns true if hit caused any damage.
 func process_hit(hit_effect: HitEffect) -> bool:
 	var adjusted_damage = hit_effect.adjusted_damage()
+	# Check if it's a heal.
+	if adjusted_damage < 0:
+		_update_health(health - adjusted_damage, true, "heal %d" % -adjusted_damage)
+		return true
 	var damage_str = "%d" % adjusted_damage
 	# If damage was 0 to begin with, just return.
-	if adjusted_damage <= 0:
-		_log_blocked_damage(damage_str)
+	if adjusted_damage == 0:
 		return false
-	var after_armor_damage = max(0, adjusted_damage - attributes_component.armor)
-	if after_armor_damage != adjusted_damage:
-		damage_str = "%d (%s - %d (armor))" % [after_armor_damage, damage_str, attributes_component.armor]
-	if after_armor_damage <= 0:
-		_log_blocked_damage(damage_str)
-		return false
-	var after_resistance_damage = after_armor_damage
-	# TODO: Apply resistances.
+	var after_armor_damage = adjusted_damage
+	if hit_effect.damage_type.macro_type == DamageType.MacroType.PHYSICAL:
+		after_armor_damage = max(0, adjusted_damage - attributes_component.armor)
+		if after_armor_damage != adjusted_damage:
+			damage_str = "%d (%s - %d (armor))" % [after_armor_damage, damage_str, attributes_component.armor]
+		if after_armor_damage <= 0:
+			_log_blocked_damage(damage_str)
+			return false
+	var resistance_multiplier = attributes_component.resistance_multiplier_for(hit_effect.damage_type)
+	var after_resistance_damage = after_armor_damage * resistance_multiplier
 	if after_resistance_damage != after_armor_damage:
-		# Update damage_str.
-		pass
+		damage_str = "%d (%s * %0.1f (%s))" % [after_resistance_damage, damage_str, resistance_multiplier, hit_effect.damage_type.name]
 	if after_resistance_damage <= 0:
 		_log_blocked_damage(damage_str)
 		return false
 	var new_health = health - after_resistance_damage
-	_update_health(new_health, true, damage_str)
+	_update_health(new_health, true, "dmg: %s" % damage_str)
 	return true
 
 func _log_blocked_damage(damage_details: String):
@@ -87,7 +91,7 @@ func _update_health(new_health: int, should_log: bool = false, message: String =
 	update.max_health = max_health
 	health_updated.emit(update)
 	if should_log:
-		_log("Health: %d -> %d, dmg: %s" % [update.prev_health, update.health, message])
+		_log("Health: %d -> %d, %s" % [update.prev_health, update.health, message])
 	if health == 0 and not is_dead:
 		_log("Died")
 		is_dead = true

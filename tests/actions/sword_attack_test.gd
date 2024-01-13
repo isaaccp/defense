@@ -46,7 +46,7 @@ func test_sword_works_within_distance():
 	level.start()
 
 	watch_signals(character_behavior)
-	await wait_for_signal(enemy_health.died, 2, "Waiting for enemy to die")
+	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
 	assert_signal_emitted(character_behavior, "behavior_updated")
 	assert_signal_emitted(enemy_health, "died")
 
@@ -61,7 +61,7 @@ func test_sword_doesnt_work_out_of_distance():
 
 	watch_signals(character_behavior)
 	watch_signals(enemy_health)
-	await wait_seconds(2, "Waiting to confirm enemy doesn't die, behavior doesn't change")
+	await wait_seconds(3, "Waiting to confirm enemy doesn't die, behavior doesn't change")
 	assert_signal_not_emitted(character_behavior, "behavior_updated")
 	assert_signal_not_emitted(enemy_health, "died")
 
@@ -75,6 +75,6 @@ func test_move_and_sword_works_out_of_distance():
 	level.start()
 
 	watch_signals(character_behavior)
-	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	await wait_for_signal(enemy_health.died, 4, "Waiting for enemy to die")
 	assert_signal_emitted(character_behavior, "behavior_updated")
 	assert_signal_emitted(enemy_health, "died")
