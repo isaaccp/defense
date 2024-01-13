@@ -1,11 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7ah75hdw70ik"]
+[gd_scene load_steps=36 format=3 uid="uid://c7ah75hdw70ik"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_yojas"]
 [ext_resource type="Texture2D" uid="uid://fd7sbroscg0y" path="res://enemies/skeleton_warrior/Run.png" id="2_7tu7v"]
 [ext_resource type="Texture2D" uid="uid://jjl0r87khm2m" path="res://enemies/skeleton_warrior/Death.png" id="2_8hrxe"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_758bh"]
 [ext_resource type="Resource" uid="uid://c635s5x8n53gr" path="res://game_logic/damage_types/piercing.tres" id="4_n033s"]
 [ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="5_eunku"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_mqksg"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_cbno3"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="6_vuj23"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_x14vd"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="8_ok866"]
 
 [sub_resource type="Animation" id="Animation_1usfe"]
 length = 0.001
@@ -263,6 +268,96 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3fkpu"]
 
+[sub_resource type="Resource" id="Resource_k0v8b"]
+script = ExtResource("5_mqksg")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_ljs7v"]
+script = ExtResource("6_cbno3")
+name = &"Sword Attack"
+skill_type = 1
+params = SubResource("Resource_k0v8b")
+
+[sub_resource type="Resource" id="Resource_8lwyn"]
+script = ExtResource("5_mqksg")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_7uegf"]
+script = ExtResource("6_cbno3")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="GDScript" id="GDScript_2x4wa"]
+script/source = "extends PositionTargetSorter
+
+func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
+	var distance_a = this_actor.position.distance_to(pos_a)
+	var distance_b = this_actor.position.distance_to(pos_b)
+	return distance_a < distance_b
+"
+
+[sub_resource type="Resource" id="Resource_ks4dw"]
+script = ExtResource("8_ok866")
+type = 2
+sorter_script = SubResource("GDScript_2x4wa")
+skill_name = &"Closest First"
+skill_type = 4
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_ol7a5"]
+script = ExtResource("5_mqksg")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = SubResource("Resource_ks4dw")
+
+[sub_resource type="Resource" id="Resource_r2rdg"]
+script = ExtResource("6_cbno3")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_ol7a5")
+
+[sub_resource type="Resource" id="Resource_pqkju"]
+script = ExtResource("7_x14vd")
+target_selection = SubResource("Resource_r2rdg")
+action = SubResource("Resource_ljs7v")
+condition = SubResource("Resource_7uegf")
+
+[sub_resource type="Resource" id="Resource_dooyh"]
+script = ExtResource("5_mqksg")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_8nea1"]
+script = ExtResource("6_cbno3")
+name = &"Move To"
+skill_type = 1
+params = SubResource("Resource_dooyh")
+
+[sub_resource type="Resource" id="Resource_ihc8l"]
+script = ExtResource("6_cbno3")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_8lwyn")
+
+[sub_resource type="Resource" id="Resource_qcrwj"]
+script = ExtResource("6_cbno3")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_ol7a5")
+
+[sub_resource type="Resource" id="Resource_tn5be"]
+script = ExtResource("7_x14vd")
+target_selection = SubResource("Resource_qcrwj")
+action = SubResource("Resource_8nea1")
+condition = SubResource("Resource_ihc8l")
+
+[sub_resource type="Resource" id="Resource_w8vxy"]
+script = ExtResource("4_758bh")
+stored_rules = Array[ExtResource("7_x14vd")]([SubResource("Resource_pqkju"), SubResource("Resource_tn5be")])
+
 [sub_resource type="Resource" id="Resource_e6m2r"]
 script = ExtResource("5_eunku")
 damage_type = ExtResource("4_n033s")
@@ -315,6 +410,9 @@ position = Vector2(0, -35)
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_3fkpu")
+
+[node name="BehaviorComponent" parent="." index="7"]
+stored_behavior = SubResource("Resource_w8vxy")
 
 [node name="AttributesComponent" parent="." index="10"]
 base_attributes = SubResource("Resource_fbov8")
