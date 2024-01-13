@@ -69,5 +69,5 @@ layout_mode = 2
 text = "Reset Level"
 confirmation_text = "Any changes (e.g. XP spent on skills, behavior changes) since the start of the current level will be reverted."
 
-[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/SaveAndQuitButton" to="PanelContainer" method="_on_save_and_quit_button_pressed_confirmed"]
-[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/ResetLevelButton" to="PanelContainer" method="_on_reset_level_button_pressed_confirmed"]
+[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/SaveAndQuitButton" to="." method="_on_save_and_quit_button_pressed_confirmed"]
+[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/ResetLevelButton" to="." method="_on_reset_level_button_pressed_confirmed"]

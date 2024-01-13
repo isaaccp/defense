@@ -52,4 +52,9 @@ func start_gameplay():
 	var gameplay = gameplay_scene.instantiate() as Gameplay
 	var save_state = load_save_state()
 	gameplay.initialize(game_mode, save_state)
+	gameplay.save_and_quit.connect(_on_save_and_quit)
 	add_child(gameplay)
+
+func _on_save_and_quit(save_state: SaveState):
+	ResourceSaver.save(save_state, "user://defense_save.tres")
+	get_tree().quit()

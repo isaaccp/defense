@@ -11,7 +11,7 @@ class_name Gameplay
 @export_group("Debug")
 @export var level_provider: LevelProvider
 @export var characters: Array[GameplayCharacter] = []
-@export var save_state: SaveState
+@export var behavior_library: BehaviorLibrary
 
 var state = StateMachine.new()
 var CHARACTER_SELECTION = state.add("character_selection")
@@ -29,6 +29,7 @@ var level_pause = false
 var characters_ready = {}
 
 signal level_started
+signal save_and_quit(save_state: SaveState)
 
 func _ready():
 	state.connect_signals(self)
@@ -37,10 +38,10 @@ func _ready():
 	state.change_state.call_deferred(CHARACTER_SELECTION)
 
 func initialize(game_mode: GameMode, save_state: SaveState):
-	self.save_state = save_state
 	level_provider = game_mode.level_provider
 	if game_mode.is_multiplayer():
 		assert(level_provider.players == 2)
+	_load_save_state(save_state)
 
 func _on_character_selection_entered():
 	ui_layer.hud.show_play_controls(false)
@@ -173,6 +174,17 @@ func _start_level():
 	level.start()
 	level_started.emit()
 
+func _load_save_state(save_state: SaveState):
+	if save_state.behavior_library:
+		behavior_library = save_state.behavior_library
+	else:
+		behavior_library = BehaviorLibrary.new()
+
+func _get_save_state() -> SaveState:
+	var save_state = SaveState.new()
+	save_state.behavior_library = behavior_library
+	return save_state
+
 func _on_restart_requested():
 	# TODO: Maybe find a way to merge with _on_end_level.
 	ui_layer.hud.show_play_controls(false)
@@ -201,4 +213,4 @@ func _on_gameplay_ui_layer_reset_requested():
 	pass # Replace with function body.
 
 func _on_gameplay_ui_layer_save_and_quit_requested():
-	pass # Replace with function body.
+	save_and_quit.emit(_get_save_state())
