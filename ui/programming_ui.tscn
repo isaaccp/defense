@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7bsv7cscwbmr"]
+[gd_scene load_steps=11 format=3 uid="uid://c7bsv7cscwbmr"]
 
 [ext_resource type="Script" path="res://ui/programming_ui.gd" id="1_xf4ix"]
 [ext_resource type="Script" path="res://ui/script_tree.gd" id="2_dh7cw"]
 [ext_resource type="Script" path="res://ui/toolbox.gd" id="2_pkup4"]
 [ext_resource type="Resource" uid="uid://dgs55tgbrgkhv" path="res://character/playable_characters/test/programming_ui_char.tres" id="2_wilel"]
+[ext_resource type="PackedScene" uid="uid://bhwhcbxitg8lf" path="res://ui/behavior_library_ui.tscn" id="3_dopn3"]
 [ext_resource type="PackedScene" uid="uid://c3oy80g32pyjn" path="res://ui/config_pane.tscn" id="4_5vsiq"]
 [ext_resource type="Texture2D" uid="uid://c8t68dpweqvr3" path="res://ui/icons/Remove.svg" id="5_1pqdw"]
 [ext_resource type="Texture2D" uid="uid://b0vdhdrhn6cj1" path="res://ui/icons/Edit.svg" id="6_jvltx"]
@@ -57,21 +58,50 @@ theme = SubResource("Theme_8i0e7")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="BehaviorLibraryContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer"]
+layout_mode = 2
+text = "Behavior Library"
+
+[node name="BehaviorLibraryUI" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer" instance=ExtResource("3_dopn3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveToLibraryButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save to Library"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 split_offset = 150
 
-[node name="ScriptMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
+[node name="ScriptMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+[node name="ScriptLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Script"
 
-[node name="Script" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+[node name="Script" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -85,23 +115,43 @@ delete_icon = ExtResource("5_1pqdw")
 edit_icon = ExtResource("6_jvltx")
 drag_icon = ExtResource("12_5n6c8")
 
-[node name="ConfigPane" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" instance=ExtResource("4_5vsiq")]
+[node name="ConfigPane" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" instance=ExtResource("4_5vsiq")]
 unique_name_in_owner = true
 visible = false
 
-[node name="ToolsMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="RevertButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Revert"
+
+[node name="ToolsMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
 layout_mode = 2
 text = "Components"
 
-[node name="Toolbox" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="Toolbox" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -109,21 +159,35 @@ size_flags_vertical = 3
 hide_root = true
 script = ExtResource("2_pkup4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="SaveBehaviorNameDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Save behavior"
+initial_position = 1
+size = Vector2i(300, 100)
+ok_button_text = "Save"
 
-[node name="SaveButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveBehaviorNameDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 51.0
+
+[node name="Name" type="Label" parent="SaveBehaviorNameDialog/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+
+[node name="BehaviorNameLineEdit" type="LineEdit" parent="SaveBehaviorNameDialog/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Save"
+placeholder_text = "behavior name"
 
-[node name="CancelButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Cancel"
-
-[connection signal="button_clicked" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" to="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_button_clicked"]
-[connection signal="config_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script/ConfigPane" to="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_config_pane_config_confirmed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="behavior_activated" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer/BehaviorLibraryUI" to="." method="_on_behavior_library_ui_behavior_activated"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer/HBoxContainer/SaveToLibraryButton" to="." method="_on_save_to_library_button_pressed"]
+[connection signal="button_clicked" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" to="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_button_clicked"]
+[connection signal="config_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script/ConfigPane" to="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/Script" method="_on_config_pane_config_confirmed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ScriptMargin/VBoxContainer/HBoxContainer/RevertButton" to="." method="_on_revert_button_pressed"]
+[connection signal="confirmed" from="SaveBehaviorNameDialog" to="." method="_on_save_behavior_name_dialog_confirmed"]
+[connection signal="text_changed" from="SaveBehaviorNameDialog/HBoxContainer/BehaviorNameLineEdit" to="." method="_on_behavior_name_line_edit_text_changed"]

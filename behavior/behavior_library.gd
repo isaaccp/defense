@@ -15,18 +15,25 @@ class_name BehaviorLibrary
 
 # behavior should have a name and not exist in the library.
 func add(behavior: StoredBehavior):
-	assert(behavior.name.is_empty())
+	assert(not behavior.name.is_empty())
 	assert(not behaviors.any(func(b): return b.name == behavior.name))
 	behaviors.append(behavior)
 
 func replace(behavior: StoredBehavior):
-	assert(behavior.name.is_empty())
+	assert(not behavior.name.is_empty())
 	for i in range(behaviors.size()):
 		var b = behaviors[i]
 		if b.name == behavior.name:
 			behaviors[i] = behavior
 			return
 	assert(false, "Could not find behavior to replace")
+
+func delete(name: String):
+	for i in range(behaviors.size()):
+		var b = behaviors[i]
+		if b.name == name:
+			behaviors.remove_at(i)
+			return
 
 func contains(name: String) -> bool:
 	return behaviors.any(func(b): return b.name == name)

@@ -86,23 +86,6 @@ alignment = 1
 [node name="HudCharacterView" parent="TopHud/CharacterViews" instance=ExtResource("2_ok2lg")]
 layout_mode = 2
 
-[node name="ProgrammingUIParent" type="Control" parent="."]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(900, 500)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -200.0
-offset_right = 400.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="TopRightControls" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 1
@@ -119,6 +102,17 @@ layout_mode = 2
 [node name="VictoryLoss" parent="TopRightControls" instance=ExtResource("2_q37k0")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="ProgrammingUIParent" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="EndLevelConfirmation" type="Button" parent="."]
 unique_name_in_owner = true

@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhwhcbxitg8lf"]
+
+[ext_resource type="Script" path="res://ui/behavior_library_ui.gd" id="1_34oqy"]
+
+[node name="BehaviorLibraryUI" type="PanelContainer"]
+offset_right = 325.0
+offset_bottom = 97.0
+size_flags_vertical = 3
+script = ExtResource("1_34oqy")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Show only usable with current skills"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Filter: "
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Behaviors" type="ItemList" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+allow_search = false
+auto_height = true
+item_count = 3
+item_0/text = "foo"
+item_1/text = "bar"
+item_2/text = "blorp"
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+title = "Behavior"
+size = Vector2i(79, 35)
+item_count = 1
+item_0/text = "Delete"
+item_0/id = 0
+
+[connection signal="item_activated" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_item_activated"]
+[connection signal="item_clicked" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_item_clicked"]
+[connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]

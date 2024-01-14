@@ -179,6 +179,7 @@ func _load_save_state(save_state: SaveState):
 		behavior_library = save_state.behavior_library
 	else:
 		behavior_library = BehaviorLibrary.new()
+	ui_layer.hud.set_behavior_library(behavior_library)
 
 func _get_save_state() -> SaveState:
 	var save_state = SaveState.new()

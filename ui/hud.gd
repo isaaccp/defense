@@ -10,6 +10,7 @@ class_name Hud
 
 var characters: Array[Character]
 var characters_ready: Dictionary
+var behavior_library: BehaviorLibrary
 
 enum MessageType {
 	MAIN,
@@ -48,6 +49,9 @@ func _ready():
 	for label in message_label.values():
 		label.hide()
 	%PlayControls.initialize(self)
+
+func set_behavior_library(behavior_library: BehaviorLibrary):
+	self.behavior_library = behavior_library
 
 func set_characters(character_node: Node) -> void:
 	characters.clear()
@@ -118,7 +122,7 @@ func _on_configure_behavior_pressed(character_idx: int):
 		child.queue_free()
 	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
 	var gameplay_character = Component.get_persistent_game_state_component_or_die(character).state
-	programming_ui.initialize(gameplay_character)
+	programming_ui.initialize(gameplay_character, behavior_library)
 	%ProgrammingUIParent.add_child(programming_ui)
 	programming_ui.saved.connect(_save_and_close.bind(character_idx))
 	programming_ui.canceled.connect(_close)
