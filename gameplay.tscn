@@ -6,22 +6,22 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_3kqhi"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("ui_layer", "level_parent")]
+[node name="Gameplay" type="Node2D" node_paths=PackedStringArray("ui_layer")]
 script = ExtResource("1_2toda")
 ui_layer = NodePath("GameplayUILayer")
-level_parent = NodePath("SubViewport/LevelParent")
 
 [node name="GameplayUILayer" parent="." instance=ExtResource("1_3xnco")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../SubViewport/LevelParent")
+spawn_path = NodePath("../SubViewport/RunParent")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 unique_name_in_owner = true
 transparent_bg = true
 size = Vector2i(1152, 648)
 
-[node name="LevelParent" type="Node2D" parent="SubViewport"]
+[node name="RunParent" type="Node2D" parent="SubViewport"]
+unique_name_in_owner = true
 
 [node name="LevelLayer" type="CanvasLayer" parent="."]
 layer = 0

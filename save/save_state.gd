@@ -8,3 +8,4 @@ class_name SaveState
 
 # Run state.
 # E.g. current level, current acquired skill tree, etc.
+@export var run_save_state: RunSaveState

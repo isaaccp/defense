@@ -2,9 +2,6 @@ extends UILayerBase
 
 class_name GameplayUILayer
 
-# TODO: Unclear if this scene provides a lot of value, maybe I should
-# add the scene directly in gameplay so I can connect directly to signals
-# instead of having to proxy them through here.
 @export_group("Internal")
 @export var character_selection_screen: CharacterSelectionScreen
 @export var hud: Hud
@@ -14,7 +11,7 @@ signal character_selection_screen_selection_ready(character_selections: Array[En
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
 # Restarts the level without any changes.
 signal restart_requested
-# Requests a pause on level, hud, etc still work.
+# Requests a pause on level. Hud, etc still work.
 signal play_controls_play_pressed
 # Resumes pause on level.
 signal play_controls_pause_pressed
@@ -31,6 +28,15 @@ func _ready():
 	super()
 	overlay = %Overlay
 	%GameplayMenu.enable(false)
+
+func start_character_selection(level_provider: LevelProvider):
+	show()
+	hud.hide()
+	character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
+	show_screen(character_selection_screen)
+
+func end_character_selection():
+	character_selection_screen.hide()
 
 func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
 	character_selection_screen_selection_ready.emit(character_selections)

@@ -34,7 +34,7 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "",
- "selected": "sword_attack_test.gd",
+ "selected": "programming_ui_test.gd",
  "should_exit": false,
  "should_exit_on_success": false,
  "should_maximize": false,

@@ -17,13 +17,17 @@ class_name LevelProvider
 
 var current_level = -1
 
-func next_level() -> PackedScene:
-	if last_level():
-		return null
+
+func advance() -> bool:
+	if is_last_level():
+		return false
 	current_level += 1
+	return true
+
+func load_level() -> PackedScene:
 	return levels[current_level]
 
-func last_level():
+func is_last_level():
 	return current_level + 1 == levels.size()
 
 # For testing.

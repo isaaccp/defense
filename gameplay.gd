@@ -2,178 +2,55 @@ extends Node2D
 
 class_name Gameplay
 
-@export_group("Required")
-
 @export_group("Internal")
 @export var ui_layer: GameplayUILayer
-@export var level_parent: Node2D
 
 @export_group("Debug")
+# TODO: Remove next two, move to run.
 @export var level_provider: LevelProvider
-@export var characters: Array[GameplayCharacter] = []
 @export var behavior_library: BehaviorLibrary
 
+const run_scene = preload("res://run/run.tscn")
+
+# RunSaveState loaded from main SaveState.
+var loaded_run_save_state: RunSaveState
+
 var state = StateMachine.new()
-var CHARACTER_SELECTION = state.add("character_selection")
-var LEVEL = state.add("level")
+var RUN = state.add("run")
+# We'll later have an extra state for "between runs" unlocks.
 
-# Not constants so tests can speed them up.
-var ready_to_fight_wait = 1.0
-var level_end_wait = 3.0
-var level_failed_wait = 1.0
+# Current run if we are in RUN state.
+var run: Run
 
-var level_scene: PackedScene
-var level: Level
-var full_pause = false
-var level_pause = false
-var characters_ready = {}
-
-signal level_started
+signal run_started
 signal save_and_quit(save_state: SaveState)
 
 func _ready():
 	state.connect_signals(self)
 	# TODO: Encapsulate all the hud business better.
 	Global.subviewport = %SubViewport
-	state.change_state.call_deferred(CHARACTER_SELECTION)
+	state.change_state.call_deferred(RUN)
 
 func initialize(game_mode: GameMode, save_state: SaveState):
-	level_provider = game_mode.level_provider
+	_load_save_state(save_state)
 	if game_mode.is_multiplayer():
 		assert(level_provider.players == 2)
-	_load_save_state(save_state)
+	# TODO: Remove below.
+	level_provider = game_mode.level_provider
 
-func _on_character_selection_entered():
-	ui_layer.hud.show_play_controls(false)
-	ui_layer.show()
-	ui_layer.hud.hide()
-	ui_layer.hud.set_peer(multiplayer.get_unique_id())
-	ui_layer.character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
-	ui_layer.show_screen(ui_layer.character_selection_screen)
-
-func _on_character_selection_exited():
-	ui_layer.hide_screen()
-
-func _on_level_entered():
+func _on_run_entered():
 	ui_layer.hud.show()
-	play_next_level()
-
-func _on_level_exited():
-	pass
-
-func _on_character_selection_screen_selection_ready(character_selections: Array):
-	var players = OnlineMatch.get_sorted_players()
-	for selection in range(character_selections.size()):
-		var idx = character_selections[selection]
-		# TODO: Remove the number when we don't allow two of
-		# the same character.
-		var gameplay_character = level_provider.available_characters[idx].duplicate(true) as GameplayCharacter
-		gameplay_character.name = "%s (%d)" % [gameplay_character.name, selection]
-		gameplay_character.peer_id = players[selection % players.size()].peer_id
-		if level_provider.behavior:
-			gameplay_character.behavior = level_provider.behavior
-		if level_provider.skill_tree_state:
-			gameplay_character.skill_tree_state = level_provider.skill_tree_state
-		characters.append(gameplay_character)
-	state.change_state(LEVEL)
-
-func _load_next_level(advance: bool = true):
-	level = null
-	if advance:
-		level_scene = level_provider.next_level()
-		# Should only happen if there are no levels.
-		if level_scene == null:
-			return
-	level = level_scene.instantiate() as Level
-
-func play_next_level(advance: bool = true):
-	_load_next_level(advance)
-	if level == null:
-		_credits()
-		return
-	play_level()
-
-func play_level():
-	level.initialize(characters)
-	var victory = Component.get_victory_loss_condition_component_or_die(level)
-	victory.level_failed.connect(_on_level_failed)
-	victory.level_finished.connect(_on_level_finished)
-	ui_layer.hud.set_victory_loss(victory)
-	level_parent.add_child(level, true)
-	ui_layer.hud.set_characters(level.characters)
-	ui_layer.hud.set_towers(level.towers)
-	ui_layer.hud.start_character_setup(_on_all_ready)
-	ui_layer.hud.show_main_message("Prepare", 2.0)
-	# Everything is set up, wait until all players are ready.
-
-func _on_level_failed(_loss_type: VictoryLossConditionComponent.LossType):
-	_on_level_end(false)
-
-func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType):
-	_on_level_end(true)
-
-func _on_level_end(success: bool):
-	ui_layer.hud.show_victory_loss_text(true)
-	ui_layer.hud.show_play_controls(false)
-	# TODO: Maybe later have a way to inspect level, e.g. see
-	# health of enemies, inspect logs, etc before moving on.
-	if success:
-		await ui_layer.hud.show_main_message("Victory!", level_end_wait)
+	run = run_scene.instantiate() as Run
+	var run_save_state: RunSaveState
+	if loaded_run_save_state:
+		run_save_state = loaded_run_save_state
 	else:
-		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
-	ui_layer.hud.show_victory_loss(false)
-	# TODO: Set something up that calls _wrapup_level when done.
-	ui_layer.hud.show_end_level_confirmation(true, success)
-	await ui_layer.hud.end_level_confirmed
-	level.queue_free()
-	ui_layer.hide_log_viewer()
-	# Call play_next_level deferred as otherwise
-	# we load the new level before we free the
-	# current one.
-	if not success:
-		play_next_level.call_deferred(false)
-	else:
-		if level_provider.last_level():
-			_credits()
-			return
-		# TODO: Calculate XP, etc, show stats.
-		_grant_xp(level)
-		play_next_level.call_deferred(true)
+		run_save_state = RunSaveState.make([], level_provider)
+	run.initialize(ui_layer, run_save_state)
+	%RunParent.add_child(run)
 
-func _grant_xp(level: Level):
-	# Level will be freed up on next frame, so this can't do
-	# any await, etc.
-	for character in characters:
-		character.grant_xp(level.xp)
-
-func _credits():
-	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
-	print("Finished the game")
-
-func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
-	_update_behavior(character_idx, behavior)
-	# TODO: Fix and uncomment for multiplayer.
-	# _on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
-
-@rpc("any_peer")
-func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedByteArray):
-	var behavior = Behavior.deserialize(serialized_behavior)
-	_update_behavior(character_idx, behavior)
-
-func _update_behavior(character_idx: int, behavior: StoredBehavior):
-	characters[character_idx].behavior = behavior
-
-func _on_all_ready():
-	_start_level()
-
-func _start_level():
-	ui_layer.hud.show_character_buttons(false)
-	ui_layer.hud.show_victory_loss_text(false)
-	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
-	await get_tree().create_timer(ready_to_fight_wait).timeout
-	ui_layer.hud.show_play_controls()
-	level.start()
-	level_started.emit()
+func _on_run_exited():
+	run = null
 
 func _load_save_state(save_state: SaveState):
 	if save_state.behavior_library:
@@ -181,38 +58,23 @@ func _load_save_state(save_state: SaveState):
 	else:
 		behavior_library = BehaviorLibrary.new()
 	ui_layer.hud.set_behavior_library(behavior_library)
+	if save_state.run_save_state:
+		loaded_run_save_state = save_state.run_save_state
 
 func _get_save_state() -> SaveState:
 	var save_state = SaveState.new()
 	save_state.behavior_library = behavior_library
+	if run:
+		save_state.run_save_state = run.get_save_state()
 	return save_state
 
-func _on_restart_requested():
-	# TODO: Maybe find a way to merge with _on_end_level.
-	ui_layer.hud.show_play_controls(false)
-	level.queue_free()
-	play_next_level(false)
-
 func _on_gameplay_ui_layer_full_pause_requested():
-	full_pause = true
 	get_tree().paused = true
 
 func _on_gameplay_ui_layer_full_resume_requested():
-	full_pause = false
-	if not level_pause:
-		get_tree().paused = false
-
-func _on_gameplay_ui_layer_play_controls_pause_pressed():
-	level_pause = true
-	get_tree().paused = true
-
-func _on_gameplay_ui_layer_play_controls_play_pressed():
-	level_pause = false
-	assert(not full_pause)
+	if state.is_state(RUN) and run.paused():
+		return
 	get_tree().paused = false
-
-func _on_gameplay_ui_layer_reset_requested():
-	pass # Replace with function body.
 
 func _on_gameplay_ui_layer_save_and_quit_requested():
 	save_and_quit.emit(_get_save_state())

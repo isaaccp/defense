@@ -34,10 +34,24 @@ class_name Level
 @export var towers: Node2D
 @export var spawners: Node2D
 @export var starting_positions: Node
-var is_frozen: bool = false
+
+var ui_layer: GameplayUILayer
+
+# Not constants so tests can speed them up.
+var ready_to_fight_wait = 1.0
+var level_end_wait = 3.0
+var level_failed_wait = 1.0
+
+var is_paused = false
 
 # Only for F6.
 var gameplay: Node
+
+signal level_finished
+signal level_failed
+
+signal level_pause_requested
+signal level_resume_requested
 
 func _ready():
 	# Only when launched with F6.
@@ -81,7 +95,8 @@ func prepare_test_gameplay_characters():
 		for i in range(test_gameplay_characters.size()):
 			test_gameplay_characters[i].behavior = StoredBehavior.new()
 
-func initialize(gameplay_characters: Array[GameplayCharacter]):
+func initialize(ui_layer: GameplayUILayer, gameplay_characters: Array[GameplayCharacter]):
+	self.ui_layer = ui_layer
 	for i in gameplay_characters.size():
 		if skill_tree_state_add:
 			gameplay_characters[i].skill_tree_state.add(skill_tree_state_add)
@@ -94,6 +109,64 @@ func initialize(gameplay_characters: Array[GameplayCharacter]):
 		character.peer_id = gameplay_characters[i].peer_id
 		character.position = starting_positions.get_child(i).position
 		characters.add_child(character)
+	var victory = Component.get_victory_loss_condition_component_or_die(self)
+	victory.level_failed.connect(_on_level_failed)
+	victory.level_finished.connect(_on_level_finished)
+	# TODO: Wrap this up inside ui_layer.prepare_level() or similar.
+	ui_layer.show()
+	ui_layer.hud.show()
+	ui_layer.hud.show_play_controls(false)
+	ui_layer.hud.set_victory_loss(victory)
+	ui_layer.hud.set_characters(characters)
+	ui_layer.hud.set_towers(towers)
+	ui_layer.hud.start_character_setup(_on_all_ready)
+	ui_layer.hud.show_main_message("Prepare", 2.0)
+	ui_layer.play_controls_play_pressed.connect(_on_play_pressed)
+	ui_layer.play_controls_pause_pressed.connect(_on_pause_pressed)
+
+func _on_all_ready():
+	# TODO: Wrap this up inside ui_layer.start_level() or similar.
+	ui_layer.hud.show_character_buttons(false)
+	ui_layer.hud.show_victory_loss_text(false)
+	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
+	await get_tree().create_timer(ready_to_fight_wait).timeout
+	ui_layer.hud.show_play_controls()
+	start()
+
+func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
+	_on_level_end(false)
+
+func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType):
+	_on_level_end(true)
+
+func _on_level_end(win: bool):
+	# TODO: Maybe later have a way to inspect level, e.g. see
+	# health of enemies, inspect logs, etc before moving on.
+	ui_layer.hud.show_victory_loss_text(true)
+	ui_layer.hud.show_play_controls(false)
+	if win:
+		await ui_layer.hud.show_main_message("Victory!", level_end_wait)
+	else:
+		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
+	ui_layer.hud.show_victory_loss(false)
+	ui_layer.hud.show_end_level_confirmation(true, win)
+	await ui_layer.hud.end_level_confirmed
+	ui_layer.hide_log_viewer()
+	if win:
+		level_finished.emit()
+	else:
+		level_failed.emit()
+
+func _on_play_pressed():
+	is_paused = false
+	get_tree().paused = false
+
+func _on_pause_pressed():
+	is_paused = true
+	get_tree().paused = true
+
+func paused() -> bool:
+	return is_paused
 
 func start():
 	var victory_loss = Component.get_victory_loss_condition_component_or_die(self)

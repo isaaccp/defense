@@ -15,9 +15,11 @@ func enable(enabled: bool):
 
 func _on_save_and_quit_button_pressed_confirmed():
 	save_and_quit_requested.emit()
+	enable(false)
 
 func _on_reset_level_button_pressed_confirmed():
 	reset_requested.emit()
+	enable(false)
 
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
