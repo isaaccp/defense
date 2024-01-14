@@ -1,173 +1,13 @@
-[gd_scene load_steps=43 format=3 uid="uid://d2smyr2b4hedx"]
+[gd_scene load_steps=11 format=3 uid="uid://d2smyr2b4hedx"]
 
 [ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_lg7ly"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_0k78r"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="3_c524b"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_ga0tb"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="9_q18a6"]
-[ext_resource type="Script" path="res://behavior/behavior.gd" id="9_tlmf1"]
 [ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="10_i2ble"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="10_ioijj"]
 [ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="11_xq6on"]
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="12_jc17h"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="13_a4snf"]
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="14_xy0ig"]
-
-[sub_resource type="Resource" id="Resource_3chx1"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_l1w4o"]
-script = ExtResource("9_q18a6")
-name = &"Sword Attack"
-skill_type = 1
-params = SubResource("Resource_3chx1")
-
-[sub_resource type="Resource" id="Resource_ocylu"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_l5qeq"]
-script = ExtResource("9_q18a6")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_ocylu")
-
-[sub_resource type="Resource" id="Resource_iwep0"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_x0vq8"]
-script = ExtResource("9_q18a6")
-name = &"Enemy"
-skill_type = 2
-params = SubResource("Resource_iwep0")
-
-[sub_resource type="Resource" id="Resource_r71dr"]
-script = ExtResource("10_ioijj")
-target_selection = SubResource("Resource_x0vq8")
-action = SubResource("Resource_l1w4o")
-condition = SubResource("Resource_l5qeq")
-
-[sub_resource type="Resource" id="Resource_8fnw4"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_sstb7"]
-script = ExtResource("9_q18a6")
-name = &"Move To"
-skill_type = 1
-params = SubResource("Resource_8fnw4")
-
-[sub_resource type="Resource" id="Resource_ji5f6"]
-script = ExtResource("9_q18a6")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_ocylu")
-
-[sub_resource type="Resource" id="Resource_eg6c8"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_ys4nw"]
-script = ExtResource("9_q18a6")
-name = &"Enemy"
-skill_type = 2
-params = SubResource("Resource_eg6c8")
-
-[sub_resource type="Resource" id="Resource_3mxge"]
-script = ExtResource("10_ioijj")
-target_selection = SubResource("Resource_ys4nw")
-action = SubResource("Resource_sstb7")
-condition = SubResource("Resource_ji5f6")
-
-[sub_resource type="Resource" id="Resource_538f1"]
-resource_local_to_scene = true
-script = ExtResource("9_tlmf1")
-saved_rules = Array[ExtResource("10_ioijj")]([SubResource("Resource_r71dr"), SubResource("Resource_3mxge")])
-
-[sub_resource type="Resource" id="Resource_1qj77"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_i8ukx"]
-script = ExtResource("9_q18a6")
-name = &"Heal"
-skill_type = 1
-params = SubResource("Resource_1qj77")
-
-[sub_resource type="Resource" id="Resource_370hd"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_uvtt5"]
-script = ExtResource("9_q18a6")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_370hd")
-
-[sub_resource type="Resource" id="Resource_rnh6r"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_rlu6j"]
-script = ExtResource("9_q18a6")
-name = &"Ally"
-skill_type = 2
-params = SubResource("Resource_rnh6r")
-
-[sub_resource type="Resource" id="Resource_efkp4"]
-script = ExtResource("10_ioijj")
-target_selection = SubResource("Resource_rlu6j")
-action = SubResource("Resource_i8ukx")
-condition = SubResource("Resource_uvtt5")
-
-[sub_resource type="Resource" id="Resource_es4da"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_wtnil"]
-script = ExtResource("9_q18a6")
-name = &"Move To"
-skill_type = 1
-params = SubResource("Resource_es4da")
-
-[sub_resource type="Resource" id="Resource_nct7c"]
-script = ExtResource("9_q18a6")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_370hd")
-
-[sub_resource type="Resource" id="Resource_eehjr"]
-script = ExtResource("4_ga0tb")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_b51v2"]
-script = ExtResource("9_q18a6")
-name = &"Ally"
-skill_type = 2
-params = SubResource("Resource_eehjr")
-
-[sub_resource type="Resource" id="Resource_c0vj3"]
-script = ExtResource("10_ioijj")
-target_selection = SubResource("Resource_b51v2")
-action = SubResource("Resource_wtnil")
-condition = SubResource("Resource_nct7c")
-
-[sub_resource type="Resource" id="Resource_q6pxc"]
-resource_local_to_scene = true
-script = ExtResource("9_tlmf1")
-saved_rules = Array[ExtResource("10_ioijj")]([SubResource("Resource_efkp4"), SubResource("Resource_c0vj3")])
 
 [sub_resource type="Resource" id="Resource_p55gh"]
 script = ExtResource("12_jc17h")
@@ -182,7 +22,6 @@ initial_delay = 1.0
 [node name="Level" instance=ExtResource("1_lg7ly")]
 players = 2
 test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("2_0k78r"), ExtResource("3_c524b")])
-test_behaviors = Array[ExtResource("9_tlmf1")]([SubResource("Resource_538f1"), SubResource("Resource_q6pxc")])
 
 [node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_i2ble")]
 position = Vector2(680, 224)
