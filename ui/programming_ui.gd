@@ -2,10 +2,8 @@
 extends Control
 class_name ProgrammingUI
 
-# TODO: Make the script tree a scene, including save/cancel,
-# that should make it unnecessary for us to keep behavior here.
-# Then move library handling inside BehaviorLibraryUI, passing
-# script tree in initialize. Library only needs script_tree to
+# TODO: Move library handling inside BehaviorLibraryUI, passing
+# script tree in initialize. Library only needs behavior_editor to
 # operate.
 
 @export_category("Testing")
@@ -20,7 +18,7 @@ var _behavior_library: BehaviorLibrary
 var _behavior_library_ui: BehaviorLibraryUI
 var _save_to_library_dialog: AcceptDialog
 
-@onready var _script_tree = %Script as ScriptTree
+@onready var _behavior_editor = %BehaviorEditor as BehaviorEditor
 @onready var _toolbox = %Toolbox as Toolbox
 
 signal canceled
@@ -50,7 +48,7 @@ func editor_initialize(b: StoredBehavior):
 
 	# Support re-init
 	if is_inside_tree():
-		_setup_tree()
+		_setup_editor()
 
 func _ready():
 	# Only when launched with F6.
@@ -63,23 +61,12 @@ func _ready():
 	_behavior_library_ui = %BehaviorLibraryUI
 	_save_to_library_dialog = %SaveBehaviorNameDialog
 	_save_to_library_dialog.register_text_enter(%BehaviorNameLineEdit)
-	_setup_tree()
+	_setup_editor()
 
-func _setup_tree():
+func _setup_editor():
 	%Title.text = _title_text
-	%SaveButton.disabled = _save_disabled
-	_script_tree.load_behavior(_behavior)
 	_toolbox.load_skills(_skills)
-
-# TODO: Move those three inside script_tree.
-func _on_save_button_pressed():
-	saved.emit(_script_tree.get_behavior())
-
-func _on_cancel_button_pressed():
-	canceled.emit()
-
-func _on_revert_button_pressed():
-	_setup_tree()
+	_behavior_editor.load_behavior(_behavior, _save_disabled)
 
 # TODO: Move all below to behavior_library_ui
 func _on_save_to_library_button_pressed():
@@ -89,7 +76,7 @@ func _on_save_to_library_button_pressed():
 
 func _on_save_behavior_name_dialog_confirmed():
 	var behavior_name = %BehaviorNameLineEdit.text
-	var behavior = _script_tree.get_behavior()
+	var behavior = _behavior_editor.get_behavior()
 	behavior.name = behavior_name
 	assert(not behavior_name.is_empty())
 	if _behavior_library.contains(behavior_name):
@@ -102,4 +89,10 @@ func _on_behavior_name_line_edit_text_changed(new_text: String):
 	_save_to_library_dialog.get_ok_button().disabled = new_text.is_empty()
 
 func _on_behavior_library_ui_behavior_activated(behavior):
-	_script_tree.load_behavior(behavior)
+	_behavior_editor.load_behavior(behavior, _save_disabled)
+
+func _on_behavior_editor_behavior_saved(behavior):
+	saved.emit(behavior)
+
+func _on_behavior_editor_canceled():
+	canceled.emit()

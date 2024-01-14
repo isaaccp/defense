@@ -13,9 +13,10 @@ func test_last_empty():
 	ui.initialize(ui.test_character)
 	add_child_autoqfree(ui)
 
-	var script_tree = ui.get_node("%Script") as ScriptTree
-	var last_rule = _last_rule_line(script_tree)
-	assert_true(script_tree._is_empty(last_rule), "last rule should be an empty placeholder")
+	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
+	var behavior_editor_view = behavior_editor.get_node("%BehaviorEditorView") as BehaviorEditorView
+	var last_rule = _last_rule_line(behavior_editor_view)
+	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
 
 func test_empty_after_new_drop():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
@@ -28,19 +29,20 @@ func test_empty_after_new_drop():
 	var src = _find_toolbox_item(toolbox, "Once")
 	var src_rect = toolbox.get_item_area_rect(src, 0)
 
-	var script_tree = ui.get_node("%Script") as ScriptTree
-	var start_count = script_tree.get_root().get_child_count()
-	var last_rule = _last_rule_line(script_tree)
-	assert_true(script_tree._is_empty(last_rule), "last rule should be an empty placeholder")
-	var dest_rect = script_tree.get_item_area_rect(last_rule, ScriptTree.Column.CONDITION)
+	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
+	var behavior_editor_view = behavior_editor.get_node("%BehaviorEditorView") as BehaviorEditorView
+	var start_count = behavior_editor_view.get_root().get_child_count()
+	var last_rule = _last_rule_line(behavior_editor_view)
+	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
+	var dest_rect = behavior_editor_view.get_item_area_rect(last_rule, BehaviorEditorView.Column.CONDITION)
 
 	await _drag_drop(toolbox.global_position + src_rect.get_center(),
-		script_tree.global_position + dest_rect.get_center())
+		behavior_editor_view.global_position + dest_rect.get_center())
 
-	assert_gt(script_tree.get_root().get_child_count(), start_count)
+	assert_gt(behavior_editor_view.get_root().get_child_count(), start_count)
 
-	var new_last_rule = _last_rule_line(script_tree)
-	assert_true(script_tree._is_empty(new_last_rule), "new last rule should be an empty placeholder")
+	var new_last_rule = _last_rule_line(behavior_editor_view)
+	assert_true(behavior_editor_view._is_empty(new_last_rule), "new last rule should be an empty placeholder")
 	assert_not_same(new_last_rule, last_rule)
 
 	if is_failing(): # TODO: Only if !gut.add_children_to._cmdln_mode?
@@ -58,19 +60,20 @@ func test_noop_always_drop():
 	var src = _find_toolbox_item(toolbox, "Always")
 	var src_rect = toolbox.get_item_area_rect(src, 0)
 
-	var script_tree = ui.get_node("%Script") as ScriptTree
-	var start_count = script_tree.get_root().get_child_count()
-	var last_rule = _last_rule_line(script_tree)
-	assert_true(script_tree._is_empty(last_rule), "last rule should be an empty placeholder")
-	var dest_rect = script_tree.get_item_area_rect(last_rule, ScriptTree.Column.CONDITION)
+	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
+	var behavior_editor_view = behavior_editor.get_node("%BehaviorEditorView") as BehaviorEditorView
+	var start_count = behavior_editor_view.get_root().get_child_count()
+	var last_rule = _last_rule_line(behavior_editor_view)
+	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
+	var dest_rect = behavior_editor_view.get_item_area_rect(last_rule, BehaviorEditorView.Column.CONDITION)
 
 	await _drag_drop(toolbox.global_position + src_rect.get_center(),
-		script_tree.global_position + dest_rect.get_center())
+		behavior_editor_view.global_position + dest_rect.get_center())
 
-	assert_eq(script_tree.get_root().get_child_count(), start_count)
+	assert_eq(behavior_editor_view.get_root().get_child_count(), start_count)
 
-	var new_last_rule = _last_rule_line(script_tree)
-	assert_true(script_tree._is_empty(new_last_rule), "last rule should still be an empty placeholder")
+	var new_last_rule = _last_rule_line(behavior_editor_view)
+	assert_true(behavior_editor_view._is_empty(new_last_rule), "last rule should still be an empty placeholder")
 	assert_same(new_last_rule, last_rule)
 
 	if is_failing(): # TODO: Only if !gut.add_children_to._cmdln_mode?
@@ -108,9 +111,9 @@ func _notification(what):
 		get_logger().info("Notification: DRAG_END")
 		drag_stop.emit()
 
-func _last_rule_line(script_tree: ScriptTree) -> TreeItem:
-	assert_gt(script_tree.get_root().get_child_count(), 0, "some rule lines must be present in behavior list")
-	return script_tree.get_root().get_children()[-1]
+func _last_rule_line(behavior_editor_view: BehaviorEditorView) -> TreeItem:
+	assert_gt(behavior_editor_view.get_root().get_child_count(), 0, "some rule lines must be present in behavior list")
+	return behavior_editor_view.get_root().get_children()[-1]
 
 func _find_toolbox_item(toolbox: Tree, text: String) -> TreeItem:
 	for header in toolbox.get_root().get_children():

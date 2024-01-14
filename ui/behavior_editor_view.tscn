@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://25gbhyy7yo58"]
+
+[ext_resource type="PackedScene" uid="uid://c3oy80g32pyjn" path="res://ui/config_pane.tscn" id="1_o0o61"]
+[ext_resource type="Script" path="res://ui/behavior_editor_view.gd" id="1_xjfhe"]
+
+[node name="BehaviorEditorView" type="Tree"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+column_titles_visible = true
+hide_root = true
+select_mode = 1
+script = ExtResource("1_xjfhe")
+
+[node name="ConfigPane" parent="." instance=ExtResource("1_o0o61")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="button_clicked" from="." to="." method="_on_button_clicked"]
+[connection signal="config_confirmed" from="ConfigPane" to="." method="_on_config_pane_config_confirmed"]

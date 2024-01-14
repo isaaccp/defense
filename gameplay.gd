@@ -152,7 +152,8 @@ func _credits():
 
 func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 	_update_behavior(character_idx, behavior)
-	_on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
+	# TODO: Fix and uncomment for multiplayer.
+	# _on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
 
 @rpc("any_peer")
 func _on_peer_behavior_modified(character_idx: int, serialized_behavior: PackedByteArray):

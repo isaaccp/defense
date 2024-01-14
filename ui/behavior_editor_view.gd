@@ -1,6 +1,7 @@
 @tool
 extends Tree
-class_name ScriptTree
+
+class_name BehaviorEditorView
 
 @export var delete_icon: Texture2D
 @export var edit_icon: Texture2D
@@ -8,7 +9,10 @@ class_name ScriptTree
 
 const always = preload("res://skill_tree/conditions/always.tres")
 
-var _root: TreeItem
+var root: TreeItem
+
+# First loaded behavior, so it can be restored through revert.
+var original_behavior: StoredBehavior
 
 enum Column {
 	BUTTONS = 0,
@@ -25,20 +29,19 @@ enum ButtonIdx {
 func _init_tree():
 	# Note: This is currently only used as a list, not actually a tree.
 	# TODO: Do we need nested behaviors?
-	var tree = self
-	_root = tree.create_item()
-	tree.hide_root = true
+	root = create_item()
+	hide_root = true
 
-	tree.set_column_expand(Column.BUTTONS, false)
-	tree.set_column_title(Column.TARGET, "Target")
-	tree.set_column_title(Column.CONDITION, "Condition")
-	tree.set_column_title(Column.ACTION, "Action")
+	set_column_expand(Column.BUTTONS, false)
+	set_column_title(Column.TARGET, "Target")
+	set_column_title(Column.CONDITION, "Condition")
+	set_column_title(Column.ACTION, "Action")
 
 func load_behavior(behavior: StoredBehavior) -> void:
-	if not _root:
+	if not root:
 		_init_tree()
-	for c in _root.get_children():
-		_root.remove_child(c)
+	for c in root.get_children():
+		root.remove_child(c)
 	if behavior:
 		var restored_behavior = behavior.restore()
 		for rule in restored_behavior.rules:
@@ -46,7 +49,7 @@ func load_behavior(behavior: StoredBehavior) -> void:
 	_add_row()
 
 func _add_row(rule: Rule = null) -> TreeItem:
-	var row = self.create_item(_root)
+	var row = create_item(root)
 	row.add_button(Column.BUTTONS, drag_icon, ButtonIdx.MOVE, rule == null, "Drag")
 	row.add_button(Column.BUTTONS, delete_icon, ButtonIdx.DELETE, rule == null, "Delete")
 	row.set_selectable(Column.BUTTONS, false)
@@ -253,10 +256,11 @@ func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 
 func get_behavior() -> StoredBehavior:
 	var behavior = StoredBehavior.new()
-	for child in _root.get_children():
-		# TODO: Actually show something to user if there are invalid rows.
-		if not _is_valid(child):
+	for child in root.get_children():
+		if _is_empty(child):
 			continue
+		if not _is_valid(child):
+			return null
 		var target_name = child.get_metadata(Column.TARGET).name
 		var action_name = child.get_metadata(Column.ACTION).name
 		var condition_name = child.get_metadata(Column.CONDITION).name
