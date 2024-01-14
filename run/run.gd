@@ -33,7 +33,7 @@ func _ready():
 	else:
 		state.change_state(WITHIN_LEVEL)
 
-func initialize(ui_layer: GameplayUILayer, run_save_state: RunSaveState):
+func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	self.ui_layer = ui_layer
 	gameplay_characters = run_save_state.gameplay_characters
 	level_provider = run_save_state.level_provider
@@ -60,7 +60,7 @@ func _on_character_selection_finished(character_selections: Array[Enum.Character
 		if level_provider.skill_tree_state:
 			gameplay_character.skill_tree_state = level_provider.skill_tree_state
 		gameplay_characters.append(gameplay_character)
-	state.change_state(WITHIN_LEVEL)
+	state.change_state.call_deferred(WITHIN_LEVEL)
 
 func _on_character_selection_exited():
 	ui_layer.end_character_selection()
@@ -74,7 +74,7 @@ func _on_within_level_entered():
 	_snapshot_characters()
 	level_scene = level_provider.load_level()
 	level = level_scene.instantiate()
-	level.initialize(ui_layer, gameplay_characters)
+	level.initialize(gameplay_characters, ui_layer)
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
 	# TODO: Add a MultiplayerSpawner here so scenes get spawned.

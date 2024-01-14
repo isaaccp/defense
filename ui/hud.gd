@@ -5,8 +5,6 @@ class_name Hud
 @export_group("Internal")
 @export var peer: Label
 @export var time: Label
-@export var main_message: Label
-@export var bottom_message: Label
 
 var characters: Array[Character]
 var characters_ready: Dictionary
@@ -18,8 +16,8 @@ enum MessageType {
 }
 
 @onready var message_label = {
-	MessageType.MAIN: main_message,
-	MessageType.BOTTOM: bottom_message,
+	MessageType.MAIN: %MainMessage,
+	MessageType.BOTTOM: %BottomMessage,
 }
 
 var message_generation = {

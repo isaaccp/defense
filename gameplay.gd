@@ -35,18 +35,16 @@ func initialize(game_mode: GameMode, save_state: SaveState):
 	_load_save_state(save_state)
 	if game_mode.is_multiplayer():
 		assert(level_provider.players == 2)
-	# TODO: Remove below.
 	level_provider = game_mode.level_provider
 
 func _on_run_entered():
-	ui_layer.hud.show()
 	run = run_scene.instantiate() as Run
 	var run_save_state: RunSaveState
 	if loaded_run_save_state:
 		run_save_state = loaded_run_save_state
 	else:
 		run_save_state = RunSaveState.make([], level_provider)
-	run.initialize(ui_layer, run_save_state)
+	run.initialize(run_save_state, ui_layer)
 	%RunParent.add_child(run)
 
 func _on_run_exited():

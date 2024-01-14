@@ -7,7 +7,7 @@ class_name GameplayUILayer
 @export var hud: Hud
 var overlay: Node
 
-signal character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId])
+signal character_selection_screen_selection_ready(character_selections: Array[int])
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
 # Restarts the level without any changes.
 signal restart_requested
@@ -38,7 +38,7 @@ func start_character_selection(level_provider: LevelProvider):
 func end_character_selection():
 	character_selection_screen.hide()
 
-func _on_character_selection_screen_selection_ready(character_selections: Array[Enum.CharacterId]):
+func _on_character_selection_screen_selection_ready(character_selections: Array[int]):
 	character_selection_screen_selection_ready.emit(character_selections)
 
 func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):

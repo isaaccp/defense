@@ -1,7 +1,5 @@
 extends Control
 
-@onready var conditions_text: RichTextLabel = %Text
-
 var victory_loss: VictoryLossConditionComponent
 
 func initialize(victory_loss_condition_compoment: VictoryLossConditionComponent):
@@ -40,7 +38,7 @@ func _initialize_text(
 	else:
 		text += loss_text
 	text += "[/ul]\n"
-	conditions_text.text = text
+	%Text.text = text
 
 func show_text(visible: bool = true):
 	%PanelContainer.visible = visible

@@ -95,7 +95,7 @@ func prepare_test_gameplay_characters():
 		for i in range(test_gameplay_characters.size()):
 			test_gameplay_characters[i].behavior = StoredBehavior.new()
 
-func initialize(ui_layer: GameplayUILayer, gameplay_characters: Array[GameplayCharacter]):
+func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
 	self.ui_layer = ui_layer
 	for i in gameplay_characters.size():
 		if skill_tree_state_add:
@@ -113,45 +113,49 @@ func initialize(ui_layer: GameplayUILayer, gameplay_characters: Array[GameplayCh
 	victory.level_failed.connect(_on_level_failed)
 	victory.level_finished.connect(_on_level_finished)
 	# TODO: Wrap this up inside ui_layer.prepare_level() or similar.
-	ui_layer.show()
-	ui_layer.hud.show()
-	ui_layer.hud.show_play_controls(false)
-	ui_layer.hud.set_victory_loss(victory)
-	ui_layer.hud.set_characters(characters)
-	ui_layer.hud.set_towers(towers)
-	ui_layer.hud.start_character_setup(_on_all_ready)
-	ui_layer.hud.show_main_message("Prepare", 2.0)
-	ui_layer.play_controls_play_pressed.connect(_on_play_pressed)
-	ui_layer.play_controls_pause_pressed.connect(_on_pause_pressed)
+	if ui_layer:
+		ui_layer.show()
+		ui_layer.hud.show()
+		ui_layer.hud.show_play_controls(false)
+		ui_layer.hud.set_victory_loss(victory)
+		ui_layer.hud.set_characters(characters)
+		ui_layer.hud.set_towers(towers)
+		ui_layer.hud.start_character_setup(_on_all_ready)
+		ui_layer.hud.show_main_message("Prepare", 2.0)
+		ui_layer.play_controls_play_pressed.connect(_on_play_pressed)
+		ui_layer.play_controls_pause_pressed.connect(_on_pause_pressed)
 
 func _on_all_ready():
 	# TODO: Wrap this up inside ui_layer.start_level() or similar.
-	ui_layer.hud.show_character_buttons(false)
-	ui_layer.hud.show_victory_loss_text(false)
-	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
+	if ui_layer:
+		ui_layer.hud.show_character_buttons(false)
+		ui_layer.hud.show_victory_loss_text(false)
+		ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
 	await get_tree().create_timer(ready_to_fight_wait).timeout
-	ui_layer.hud.show_play_controls()
+	if ui_layer:
+		ui_layer.hud.show_play_controls()
 	start()
 
-func _on_level_failed(loss_type: VictoryLossConditionComponent.LossType):
+func _on_level_failed(_loss_type: VictoryLossConditionComponent.LossType):
 	_on_level_end(false)
 
-func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType):
+func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType):
 	_on_level_end(true)
 
 func _on_level_end(win: bool):
 	# TODO: Maybe later have a way to inspect level, e.g. see
 	# health of enemies, inspect logs, etc before moving on.
-	ui_layer.hud.show_victory_loss_text(true)
-	ui_layer.hud.show_play_controls(false)
-	if win:
-		await ui_layer.hud.show_main_message("Victory!", level_end_wait)
-	else:
-		await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
-	ui_layer.hud.show_victory_loss(false)
-	ui_layer.hud.show_end_level_confirmation(true, win)
-	await ui_layer.hud.end_level_confirmed
-	ui_layer.hide_log_viewer()
+	if ui_layer:
+		ui_layer.hud.show_victory_loss_text(true)
+		ui_layer.hud.show_play_controls(false)
+		if win:
+			await ui_layer.hud.show_main_message("Victory!", level_end_wait)
+		else:
+			await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
+		ui_layer.hud.show_victory_loss(false)
+		ui_layer.hud.show_end_level_confirmation(true, win)
+		await ui_layer.hud.end_level_confirmed
+		ui_layer.hide_log_viewer()
 	if win:
 		level_finished.emit()
 	else:
