@@ -32,10 +32,8 @@ func initialize(character: GameplayCharacter, behavior_library: BehaviorLibrary 
 	_behavior = character.behavior
 	_skills = character.skill_tree_state
 	_save_disabled = false
-	_behavior_library_ui = %BehaviorLibraryUI
-	_save_to_library_dialog = %SaveBehaviorNameDialog
 	_behavior_library = behavior_library
-	_behavior_library_ui.initialize(_behavior_library)
+	%BehaviorLibraryUI.initialize(_behavior_library)
 
 func editor_initialize(b: StoredBehavior):
 	_skills = SkillTreeState.new()
@@ -62,6 +60,8 @@ func _ready():
 		_save_disabled = true
 		canceled.connect(get_tree().quit)
 	%BehaviorLibraryContainer.visible = _behavior_library != null
+	_behavior_library_ui = %BehaviorLibraryUI
+	_save_to_library_dialog = %SaveBehaviorNameDialog
 	_save_to_library_dialog.register_text_enter(%BehaviorNameLineEdit)
 	_setup_tree()
 
