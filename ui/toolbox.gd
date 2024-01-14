@@ -28,7 +28,7 @@ func _clear_tree():
 		for c in header.get_children():
 			header.remove_child(c)
 
-func load_skills(skills: SkillTreeState):
+func initialize(skills: SkillTreeState):
 	var tree = self
 	if not _root:
 		_init_tree()

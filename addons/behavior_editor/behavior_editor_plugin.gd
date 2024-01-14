@@ -3,18 +3,11 @@ extends EditorPlugin
 
 var ui: ProgrammingUI
 var _in_obj: StoredBehavior
-var _visible = false
-
-func _enter_tree():
-	# Initialization the plugin.
-	ui = preload("res://ui/programming_ui.tscn").instantiate()
-	ui.saved.connect(_on_save)
-	ui.canceled.connect(_on_cancel)
 
 func _exit_tree():
-	# Clean-up the plugin.
-	_make_visible(false)
-	ui.free()
+	if is_instance_valid(ui):
+		remove_control_from_bottom_panel(ui)
+		ui.free()
 
 func _handles(o: Object) -> bool:
 	return o is StoredBehavior
@@ -22,10 +15,14 @@ func _handles(o: Object) -> bool:
 func _edit(o: Object):
 	_in_obj = o as StoredBehavior
 	if not o:
-		_make_visible(false)
+		if is_instance_valid(ui):
+			remove_control_from_bottom_panel(ui)
+			ui.free()
 		return
+	ui = preload("res://ui/programming_ui.tscn").instantiate()
+	ui.saved.connect(_on_save)
 	ui.editor_initialize(o)
-	_make_visible(true)
+	add_control_to_bottom_panel(ui, "Behavior Editor")
 
 func _on_save(b: StoredBehavior):
 	# Just overwriting the input makes the change appear in the inspector.
@@ -38,13 +35,5 @@ func _on_save(b: StoredBehavior):
 		ResourceSaver.save(_in_obj)
 
 func _on_cancel():
-	# Reinitialize
-	ui.editor_initialize(_in_obj)
-
-func _make_visible(vis: bool):
-	if vis and !_visible:
-		add_control_to_bottom_panel(ui, "Behavior Editor")
-		_visible = true
-	elif not vis and _visible:
-		remove_control_from_bottom_panel(ui)
-		_visible = false
+	remove_control_from_bottom_panel(ui)
+	ui.free()

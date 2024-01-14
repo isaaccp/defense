@@ -10,7 +10,7 @@ func after_each():
 
 func test_last_empty():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
-	ui.initialize(ui.test_character)
+	ui._initialize_from_test_character()
 	add_child_autoqfree(ui)
 
 	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
@@ -20,7 +20,7 @@ func test_last_empty():
 
 func test_empty_after_new_drop():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
-	ui.initialize(ui.test_character)
+	ui._initialize_from_test_character()
 	add_child_autoqfree(ui)
 	ui.show()
 	await wait_frames(1)
@@ -51,7 +51,7 @@ func test_empty_after_new_drop():
 func test_noop_always_drop():
 	# FIXME: Deal with orphans
 	var ui = _ui_scene.instantiate() as ProgrammingUI
-	ui.initialize(ui.test_character)
+	ui._initialize_from_test_character()
 	add_child_autoqfree(ui)
 	ui.show()
 	await wait_frames(1)

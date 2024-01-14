@@ -9,10 +9,13 @@ signal canceled
 # First loaded behavior, so it can be restored through revert.
 var original_behavior: StoredBehavior
 
-func load_behavior(behavior: StoredBehavior, save_disabled: bool) -> void:
-	%SaveButton.disabled = save_disabled
-	if not original_behavior:
-		original_behavior = behavior
+func initialize(behavior: StoredBehavior, is_editor: bool):
+	original_behavior = behavior
+	load_behavior(original_behavior)
+	if is_editor:
+		%CancelButton.hide()
+
+func load_behavior(behavior: StoredBehavior) -> void:
 	%BehaviorEditorView.load_behavior(behavior)
 
 func get_behavior() -> StoredBehavior:

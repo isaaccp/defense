@@ -71,14 +71,6 @@ text = "Behavior Library"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="SaveToLibraryButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save to Library"
-
 [node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -121,32 +113,5 @@ size_flags_vertical = 3
 hide_root = true
 script = ExtResource("2_pkup4")
 
-[node name="SaveBehaviorNameDialog" type="AcceptDialog" parent="."]
-unique_name_in_owner = true
-title = "Save behavior"
-initial_position = 1
-size = Vector2i(300, 100)
-ok_button_text = "Save"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SaveBehaviorNameDialog"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 292.0
-offset_bottom = 51.0
-
-[node name="Name" type="Label" parent="SaveBehaviorNameDialog/HBoxContainer"]
-layout_mode = 2
-text = "Name: "
-
-[node name="BehaviorNameLineEdit" type="LineEdit" parent="SaveBehaviorNameDialog/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "behavior name"
-
-[connection signal="behavior_activated" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer/BehaviorLibraryUI" to="." method="_on_behavior_library_ui_behavior_activated"]
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer/HBoxContainer/SaveToLibraryButton" to="." method="_on_save_to_library_button_pressed"]
 [connection signal="behavior_saved" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer/BehaviorEditor" to="." method="_on_behavior_editor_behavior_saved"]
 [connection signal="canceled" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer/BehaviorEditor" to="." method="_on_behavior_editor_canceled"]
-[connection signal="confirmed" from="SaveBehaviorNameDialog" to="." method="_on_save_behavior_name_dialog_confirmed"]
-[connection signal="text_changed" from="SaveBehaviorNameDialog/HBoxContainer/BehaviorNameLineEdit" to="." method="_on_behavior_name_line_edit_text_changed"]

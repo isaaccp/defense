@@ -49,6 +49,14 @@ item_0/text = "foo"
 item_1/text = "bar"
 item_2/text = "blorp"
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveToLibraryButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save to Library"
+
 [node name="PopupMenu" type="PopupMenu" parent="."]
 unique_name_in_owner = true
 title = "Behavior"
@@ -57,6 +65,32 @@ item_count = 1
 item_0/text = "Delete"
 item_0/id = 0
 
+[node name="SaveBehaviorNameDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Save behavior"
+initial_position = 1
+size = Vector2i(300, 100)
+ok_button_text = "Save"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SaveBehaviorNameDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 51.0
+
+[node name="Name" type="Label" parent="SaveBehaviorNameDialog/HBoxContainer"]
+layout_mode = 2
+text = "Name: "
+
+[node name="BehaviorNameLineEdit" type="LineEdit" parent="SaveBehaviorNameDialog/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "behavior name"
+
+[connection signal="behavior_activated" from="." to="." method="_on_behavior_activated"]
 [connection signal="item_activated" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_item_activated"]
 [connection signal="item_clicked" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_item_clicked"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/SaveToLibraryButton" to="." method="_on_save_to_library_button_pressed"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
+[connection signal="confirmed" from="SaveBehaviorNameDialog" to="." method="_on_save_behavior_name_dialog_confirmed"]
