@@ -1,8 +1,7 @@
-extends Node2D
+extends Actor
 
 class_name Level
 
-@export var xp: int = 100
 @export_group("Tutorial")
 # To be used for e.g. tutorial levels in which we may
 # want a particular set of skills acquired.
@@ -132,7 +131,8 @@ func _on_summary_entered():
 		ui_layer.hud.show_victory_loss_text(true)
 		ui_layer.hud.show_victory_loss(false)
 		ui_layer.hide_log_viewer()
-		ui_layer.show_level_end(win, characters)
+		var xp = XPComponent.get_or_die(self).xp()
+		ui_layer.show_level_end(win, characters, xp.text if win else "")
 		ui_layer.play_next_selected.connect(_on_play_next_selected)
 		ui_layer.try_again_selected.connect(_on_try_again_selected)
 
@@ -158,6 +158,10 @@ func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType
 	win = true
 	state.change_state.call_deferred(SUMMARY)
 
+func granted_xp() -> int:
+	var xp = XPComponent.get_or_die(self).xp()
+	return xp.amount if xp else 0
+
 func _on_play_pressed():
 	is_paused = false
 	get_tree().paused = false
@@ -174,10 +178,8 @@ func start():
 	if instant_win:
 		victory_loss.victory.append(VictoryLossConditionComponent.VictoryType.TIME)
 		victory_loss.time = 0.1
-	victory_loss.level_started()
-	_run()
-
-func _run():
+	# Runs all components.
+	run()
 	_run_nodes(characters.get_children())
 	_run_nodes(enemies.get_children())
 	_run_nodes(towers.get_children())

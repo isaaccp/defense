@@ -8,6 +8,8 @@ class_name Spawner
 
 var placer: SpawnPlacerComponent
 
+signal finished_spawning
+
 func _ready():
 	if Engine.is_editor_hint():
 		_on_ready_editor()
@@ -37,9 +39,13 @@ func _ready():
 
 	assert(placement_node, "placement_node not set")
 	placer.placement_node = placement_node
+	placer.finished_spawning.connect(_on_finished_spawning)
 
 func finished():
 	return placer.finished
+
+func _on_finished_spawning():
+	finished_spawning.emit()
 
 func _on_ready_editor():
 	var enemies_path = "../../Enemies"

@@ -18,6 +18,8 @@ const component = &"SpawnPlacerComponent"
 var placement_node: Node2D
 var finished = false
 
+signal finished_spawning
+
 func run():
 	assert(config.interval > 0.5, "Minimum spawn interval")
 	_place_loop.call_deferred()
@@ -47,6 +49,7 @@ func _place_loop():
 		await get_tree().create_timer(config.interval-0.5, false).timeout
 
 	finished = true
+	finished_spawning.emit()
 	if spawn_animation_component:
 		await spawn_animation_component.on_spawning_end()
 

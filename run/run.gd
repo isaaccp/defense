@@ -100,7 +100,7 @@ func _on_level_finished():
 
 func _grant_xp(level: Level):
 	for character in gameplay_characters:
-		character.grant_xp(level.xp)
+		character.grant_xp(level.granted_xp())
 
 func _on_within_level_exited():
 	%StateParent.remove_child(level)
@@ -152,7 +152,7 @@ func _on_reset_requested():
 	_on_level_failed()
 
 func _on_abandon_run_requested():
-	# TODO: Set up something so we can show win/loss.
+	get_tree().paused = false
 	state.change_state.call_deferred(RUN_SUMMARY)
 
 func paused():

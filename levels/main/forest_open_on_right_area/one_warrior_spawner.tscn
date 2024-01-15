@@ -23,3 +23,6 @@ placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_gl8do")]
 spawn_placer_config = SubResource("Resource_c5rpu")
+
+[node name="XPComponent" parent="." index="5"]
+level_xp_type = 1

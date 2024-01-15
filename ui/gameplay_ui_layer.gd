@@ -108,8 +108,8 @@ func show_upgrade_window(character: Character):
 	})
 	hud.hide()
 
-func show_level_end(win: bool, character_node: Node):
-	%LevelEnd.prepare(win, character_node)
+func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
+	%LevelEnd.prepare(win, character_node, granted_xp_text)
 	%LevelEnd.show()
 
 func hide_level_end():

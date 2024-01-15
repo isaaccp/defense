@@ -18,6 +18,7 @@ var available_characters: Array[GameplayCharacter]
 func set_characters(num_characters: int, available_characters_: Array[GameplayCharacter]) -> void:
 	selections_wanted = num_characters
 	available_characters = available_characters_
+	selections.clear()
 
 func _on_show(_info: Dictionary = {}) -> void:
 	sorted_players = OnlineMatch.get_sorted_players()

@@ -2,7 +2,7 @@ extends RefCounted
 
 class_name StateMachine
 
-const debug = false
+const debug = true
 
 class State:
 	var name: String

@@ -48,10 +48,16 @@ func _on_menu_exited():
 func _on_run_entered():
 	run = run_scene.instantiate() as Run
 	run.initialize(save_state.run_save_state, ui_layer)
+	run.run_finished.connect(_on_run_finished)
 	%RunParent.add_child(run)
 
 func _on_run_exited():
+	run.queue_free()
 	run = null
+
+func _on_run_finished():
+	save_state.run_save_state = null
+	state.change_state.call_deferred(MENU)
 
 func _on_gameplay_ui_layer_full_pause_requested():
 	get_tree().paused = true
