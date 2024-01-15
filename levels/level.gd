@@ -56,9 +56,6 @@ var ready_to_fight_wait = 1.0
 var level_end_wait = 3.0
 var level_failed_wait = 1.0
 
-# Only for F6.
-var gameplay: Node
-
 signal level_finished
 signal level_failed
 
@@ -192,18 +189,18 @@ func _standalone_ready():
 	var parent = get_parent()
 	get_parent().remove_child(self)
 
-	var level_provider = LevelProvider.new()
-	level_provider.levels.append(load(scene_file_path))
-
+	var game_mode = GameMode.new()
+	game_mode.level_provider = LevelProvider.new()
+	game_mode.level_provider.levels.append(load(scene_file_path))
 	prepare_test_gameplay_characters()
 
-	gameplay = load("res://gameplay.tscn").instantiate()
+	# No type to prevent pulling in deps.
+	var gameplay = load("res://gameplay.tscn").instantiate()
+	var save_state = SaveState.make_new()
+	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider)
+	gameplay.initialize(game_mode, save_state)
 	parent.add_child(gameplay)
-	gameplay.characters = test_gameplay_characters
-	gameplay.level_provider = level_provider
-	gameplay.ui_layer.show()
-	gameplay.ui_layer.hud.show()
-	gameplay.play_next_level()
+	gameplay._on_gameplay_ui_layer_continue_run()
 
 func prepare_test_gameplay_characters():
 	var num_players = players if players != -1 else starting_positions.get_child_count()

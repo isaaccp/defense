@@ -43,11 +43,7 @@ func load_save_state() -> SaveState:
 	if FileAccess.file_exists("user://defense_save.tres"):
 		save_state = load("user://defense_save.tres")
 	else:
-		save_state = SaveState.new()
-	if not save_state.behavior_library:
-		save_state.behavior_library = BehaviorLibrary.new()
-	if not save_state.unlocked_skills:
-		save_state.unlocked_skills = SkillTreeState.new()
+		save_state = SaveState.make_new()
 	return save_state
 
 @rpc("authority", "call_local")
