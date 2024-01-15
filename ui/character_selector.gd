@@ -24,6 +24,7 @@ func _ready():
 		button.set_meta("character_idx", i)
 		button.label_text = description
 		button.pressed.connect(_character_selected.bind(button, i))
+		button.custom_minimum_size = Vector2(300, 250)
 		options.add_child(button)
 
 func _description(character: GameplayCharacter) -> String:
