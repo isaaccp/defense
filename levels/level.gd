@@ -156,6 +156,7 @@ func _on_level_end(win: bool):
 		ui_layer.hud.show_end_level_confirmation(true, win)
 		await ui_layer.hud.end_level_confirmed
 		ui_layer.hide_log_viewer()
+		ui_layer.hud.hide()
 	if win:
 		level_finished.emit()
 	else:

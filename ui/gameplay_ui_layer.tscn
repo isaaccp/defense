@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://5ity5n7jy3b8"]
+[gd_scene load_steps=8 format=3 uid="uid://5ity5n7jy3b8"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui_layer.gd" id="1_2vged"]
+[ext_resource type="PackedScene" uid="uid://ct18o8uebe4yt" path="res://ui/gameplay_menu_screen.tscn" id="2_fwi3t"]
 [ext_resource type="PackedScene" uid="uid://bp627of2jpvl8" path="res://ui/character_selection_screen.tscn" id="2_rk245"]
 [ext_resource type="PackedScene" uid="uid://brpcb8r5ubqip" path="res://ui/upgrade_character_screen.tscn" id="3_x1mfn"]
 [ext_resource type="PackedScene" uid="uid://bfketgt7bwsh2" path="res://ui/log_viewer.tscn" id="5_0qbeh"]
@@ -22,6 +23,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="GameplayMenuScreen" parent="Screens" instance=ExtResource("2_fwi3t")]
+unique_name_in_owner = true
+layout_mode = 1
 
 [node name="CharacterSelectionScreen" parent="Screens" instance=ExtResource("2_rk245")]
 visible = false
@@ -56,6 +61,8 @@ layout_mode = 1
 unique_name_in_owner = true
 visible = false
 
+[connection signal="continue_run" from="Screens/GameplayMenuScreen" to="." method="_on_gameplay_menu_screen_continue_run"]
+[connection signal="new_run" from="Screens/GameplayMenuScreen" to="." method="_on_gameplay_menu_screen_new_run"]
 [connection signal="selection_ready" from="Screens/CharacterSelectionScreen" to="." method="_on_character_selection_screen_selection_ready"]
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
 [connection signal="play_controls_pause_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_pause_pressed"]
@@ -63,6 +70,7 @@ visible = false
 [connection signal="restart_requested" from="Overlay/HUD" to="." method="_on_hud_restart_requested"]
 [connection signal="upgrade_window_requested" from="Overlay/HUD" to="." method="_on_hud_upgrade_window_requested"]
 [connection signal="view_log_requested" from="Overlay/HUD" to="." method="_on_hud_view_log_requested"]
+[connection signal="abandon_run_requested" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_abandon_run_requested"]
 [connection signal="closed" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_closed"]
 [connection signal="reset_requested" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_reset_requested"]
 [connection signal="save_and_quit_requested" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_save_and_quit_requested"]

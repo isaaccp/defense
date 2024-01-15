@@ -6,7 +6,8 @@ var ui_layer: GameplayUILayer
 var level_provider: LevelProvider
 var gameplay_characters: Array[GameplayCharacter]
 
-var state = StateMachine.new()
+const StateMachineName = "run"
+var state = StateMachine.new(StateMachineName)
 var CHARACTER_SELECTION = state.add("character_selection")
 var WITHIN_LEVEL = state.add("within_level")
 var BETWEEN_LEVELS = state.add("between_levels")
@@ -40,7 +41,9 @@ func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	# Technically only needed during LEVEL state, but easier than connect/disconnect.
 	ui_layer.restart_requested.connect(_on_restart_requested)
 	ui_layer.reset_requested.connect(_on_reset_requested)
+	ui_layer.abandon_run_requested.connect(_on_abandon_run_requested)
 	ui_layer.behavior_modified.connect(_on_behavior_modified)
+	ui_layer.state_machine_stack.add_state_machine(state)
 
 func _on_character_selection_entered():
 	ui_layer.start_character_selection(level_provider)
@@ -97,6 +100,7 @@ func _grant_xp(level: Level):
 		character.grant_xp(level.xp)
 
 func _on_within_level_exited():
+	ui_layer.hud.hide()
 	%StateParent.remove_child(level)
 	level.queue_free()
 	level = null
@@ -123,6 +127,8 @@ func _on_run_summary_exited():
 	pass
 
 func finish_run():
+	# TODO: Differentiate failure vs success.
+	ui_layer.state_machine_stack.remove_state_machine(state)
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
 	run_finished.emit()
@@ -143,6 +149,10 @@ func _restore_characters_snapshot():
 func _on_reset_requested():
 	_restore_characters_snapshot()
 	_on_level_failed()
+
+func _on_abandon_run_requested():
+	# TODO: Set up something so we can show win/loss.
+	state.change_state.call_deferred(RUN_SUMMARY)
 
 func paused():
 	return state.is_state(WITHIN_LEVEL) and level.paused()

@@ -1,4 +1,4 @@
-extends Object
+extends RefCounted
 
 class_name StateMachine
 
@@ -22,12 +22,14 @@ class State:
 	func exit_method():
 		return "_on_%s_exited" % name
 
+var name: String
 var id: int
 var state: State
 var states: Array[State]
 var obj: Object
 
-func _init():
+func _init(name: String):
+	self.name = name
 	self.id = Time.get_ticks_usec()
 	state = null
 
@@ -42,6 +44,9 @@ func current_state_name():
 func is_state(state: State):
 	assert(state.id == id)
 	return self.state == state
+
+func has_state(state_name: String):
+	return states.any(func(s): return s.name == state_name)
 
 func change_state(new_state: State):
 	assert(new_state.id == id)
