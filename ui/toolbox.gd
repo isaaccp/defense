@@ -38,21 +38,21 @@ func initialize(skills: SkillTreeState):
 	if not skills:
 		return
 
-	for target_type in skills.acquired_target_selections:
+	for target_type in skills.target_selections:
 		var target_item = tree.create_item(_targets)
 		var target = SkillManager.make_target_selection_instance(target_type)
 		target_item.set_text(0, target_type)
 		target_item.set_tooltip_text(0, target.full_description())
 		target_item.set_metadata(0, metadata(0, target_type, target.params))
 
-	for condition_type in skills.acquired_conditions:
+	for condition_type in skills.conditions:
 		var condition_item = tree.create_item(_triggers)
 		var condition = SkillManager.make_condition_instance(condition_type)
 		condition_item.set_text(0, condition_type)
 		condition_item.set_tooltip_text(0, condition.full_description())
 		condition_item.set_metadata(0, metadata(1, condition_type, condition.params))
 
-	for action_type in skills.acquired_actions:
+	for action_type in skills.actions:
 		var action_item = tree.create_item(_actions)
 		var action_def = SkillManager.make_action_instance(action_type)
 		var action = Action.make_runnable_action(action_def)

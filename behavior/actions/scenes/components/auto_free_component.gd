@@ -21,7 +21,7 @@ signal freed
 func run():
 	if animation_component:
 		animation_component.animation_finished.connect(
-			func(_anim): AutoFreeComponent._free_parent(self))
+			func(_anim): AutoFreeComponent._free_parent.bind(self))
 	if hitbox_component:
 		hitbox_component.all_hits_used.connect(
 			AutoFreeComponent._free_parent.bind(self))

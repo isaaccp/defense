@@ -4,12 +4,10 @@
 [ext_resource type="Script" path="res://gameplay_character.gd" id="2_wv48f"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_ro8tn"]
 
-[sub_resource type="Resource" id="Resource_v3psc"]
+[sub_resource type="Resource" id="Resource_ha8jy"]
 script = ExtResource("3_ro8tn")
-acquired_skills = Array[StringName]([&"Always", &"Move To", &"Ally", &"Closest First", &"Heal"])
-unlocked_skills = Array[StringName]([&"Always"])
-full_acquired = false
-full_unlocked = true
+skills = Array[StringName]([&"Always", &"Ally", &"Move To", &"Heal", &"Closest First"])
+full = false
 
 [resource]
 script = ExtResource("2_wv48f")
@@ -18,7 +16,7 @@ character_id = 1
 starting_kit = "Healer"
 scene = ExtResource("2_bfn1c")
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
-skill_tree_state = SubResource("Resource_v3psc")
+acquired_skills = SubResource("Resource_ha8jy")
 peer_id = 0
 xp = 0
 total_xp = 0

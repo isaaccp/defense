@@ -9,24 +9,24 @@ class_name ProgrammingUI
 signal canceled
 signal saved(behavior: StoredBehavior)
 
-func initialize(title: String, behavior: StoredBehavior, skill_tree_state: SkillTreeState, behavior_library: BehaviorLibrary = null, is_editor = false):
+func initialize(title: String, behavior: StoredBehavior, acquired_skills: SkillTreeState, behavior_library: BehaviorLibrary = null, is_editor = false):
 	assert(behavior)
-	assert(skill_tree_state)
+	assert(acquired_skills)
 	%Title.text = title
 	%BehaviorLibraryUI.initialize(behavior_library, %BehaviorEditor as BehaviorEditor)
 	%BehaviorLibraryContainer.visible = behavior_library != null
 	%BehaviorEditor.initialize(behavior, is_editor)
-	%Toolbox.initialize(skill_tree_state)
+	%Toolbox.initialize(acquired_skills)
 
 func editor_initialize(b: StoredBehavior):
 	if not b:
 		print("unexpected null StoredBehavior in editor_initialized")
 		return
 
-	var skill_tree_state = SkillTreeState.new()
-	skill_tree_state.full_acquired = true
+	var acquired_skills = SkillTreeState.new()
+	acquired_skills.full = true
 
-	initialize("Editing %s" % b.resource_path, b, skill_tree_state, null, true)
+	initialize("Editing %s" % b.resource_path, b, acquired_skills, null, true)
 
 func _ready():
 	# Only when launched with F6.
@@ -36,7 +36,7 @@ func _ready():
 		canceled.connect(get_tree().quit)
 
 func _initialize_from_test_character():
-	initialize(test_character.name, test_character.behavior, test_character.skill_tree_state, BehaviorLibrary.new())
+	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, BehaviorLibrary.new())
 
 func _on_behavior_editor_behavior_saved(behavior):
 	saved.emit(behavior)

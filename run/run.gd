@@ -60,8 +60,6 @@ func _on_character_selection_finished(character_selections: Array[Enum.Character
 		gameplay_character.peer_id = players[selection % players.size()].peer_id
 		if level_provider.behavior:
 			gameplay_character.behavior = level_provider.behavior
-		if level_provider.skill_tree_state:
-			gameplay_character.skill_tree_state = level_provider.skill_tree_state
 		gameplay_characters.append(gameplay_character)
 	state.change_state.call_deferred(WITHIN_LEVEL)
 

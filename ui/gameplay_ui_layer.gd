@@ -7,6 +7,8 @@ class_name GameplayUILayer
 @export var hud: Hud
 var overlay: Node
 
+var save_state: SaveState
+
 # Keeps track of the stack of states, e.g. gameplay/run/etc, so it
 # can be used for UI decisions easily.
 var state_machine_stack: StateMachineStack
@@ -40,6 +42,9 @@ func _ready():
 	super()
 	overlay = %Overlay
 	%GameplayMenu.enable(false)
+
+func set_save_state(save_state: SaveState):
+	self.save_state = save_state
 
 func initialize_state_machine_stack(sm: StateMachine):
 	state_machine_stack = StateMachineStack.new(sm)
@@ -85,8 +90,10 @@ func _on_hud_upgrade_window_requested(character):
 	show_upgrade_window(character)
 
 func show_upgrade_window(character: Character):
-	show_screen(%UpgradeCharacterScreen)
-	%UpgradeCharacterScreen.show_upgrades(character)
+	show_screen(%UpgradeCharacterScreen, {
+		"save_state": save_state,
+		"character": character,
+	})
 	hud.hide()
 
 func _input(event: InputEvent):

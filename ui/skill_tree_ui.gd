@@ -1,9 +1,19 @@
 extends Control
 
+class_name SkillTreeUI
+
 const skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
 
+enum Mode {
+	ACQUIRE,
+	UNLOCK,
+}
+
+var mode: Mode
+var save_state: SaveState
+var unlocked_skills: SkillTreeState
 var character: GameplayCharacter
-var skill_tree_state: SkillTreeState
+var acquired_skills: SkillTreeState
 
 @onready var _tabs = %Trees as TabContainer
 
@@ -33,31 +43,50 @@ func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		# So it works as a standalone scene for easy testing.
-		if test_character:
-			initialize(test_character, test_show_all)
+		# TODO: Update so it works and so you can test both modes.
+		#if test_character:
+		#	initialize(test_character, test_show_all)
+		pass
 	_setup_tree()
 
-func initialize(gameplay_character: GameplayCharacter, show_all: bool):
-	character = gameplay_character
-	skill_tree_state = character.skill_tree_state
+func initialize(mode: Mode, save_state: SaveState, character: GameplayCharacter, show_all: bool = false):
+	assert(save_state)
+	if mode == Mode.ACQUIRE:
+		assert(character)
+	self.mode = mode
+	self.save_state = save_state
+	self.character = character
+	unlocked_skills = save_state.unlocked_skills
+	assert(unlocked_skills)
+	if character:
+		acquired_skills = character.acquired_skills
+		assert(acquired_skills)
 	hide_locked_skills = not show_all
 
 func _tint(s: Skill) -> Color:
 	var type_mod = Color.WHITE
 	if s.skill_type in _skill_colors:
 		type_mod = _skill_colors[s.skill_type]
-	if not skill_tree_state.acquired(s):
-		if _can_purchase(s): # Interesting to buy
-			return type_mod.lightened(0.5)
-		elif skill_tree_state.unlocked(s): # Save up for
-			return type_mod.lightened(0.25)
-		else: # Future
-			return type_mod * Color.DARK_GRAY
+	if mode == Mode.UNLOCK:
+		if not unlocked_skills.available(s):
+			if _can_unlock(s):
+				return type_mod.lightened(0.5)
+			else:
+				return type_mod * Color.DARK_GRAY
+	else:
+		if not acquired_skills.available(s):
+			if _can_purchase(s): # Interesting to buy
+				return type_mod.lightened(0.5)
+			elif unlocked_skills.available(s): # Save up for
+				return type_mod.lightened(0.25)
+			else: # Future
+				return type_mod * Color.DARK_GRAY
 	# Owned
 	return type_mod.darkened(0.25)
 
 func _setup_tree():
-	%Title.text = "%s: Skill Tree" % character.name
+	# TODO: Pass text.
+	%Title.text = "Skill Tree"
 
 	_tabs.tab_changed.connect(_on_tab_changed)
 	for t in skill_tree_collection.skill_trees:
@@ -72,8 +101,12 @@ func _setup_tree():
 		graph.set_meta("tree_type", t.tree_type)
 		_tabs.add_child(graph)
 		for s in t.skills:
-			if hide_locked_skills and not skill_tree_state.unlocked(s):
-				continue
+			if mode == Mode.ACQUIRE and hide_locked_skills:
+				if unlocked_skills.available(s):
+					continue
+			elif mode == Mode.UNLOCK and hide_locked_skills:
+				if s.parent and not unlocked_skills.available(s):
+					continue
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
 			skill.set_meta("skill", s)
@@ -109,33 +142,49 @@ func _setup_tree():
 	_update_purchase_state()
 
 func _can_purchase(skill: Skill) -> bool:
-	if skill_tree_state.acquired(skill):
+	if acquired_skills.available(skill):
 		return false
-	if not skill_tree_state.unlocked(skill):
+	if not unlocked_skills.available(skill):
 		return false
-	if skill.parent and not skill_tree_state.acquired(skill.parent):
+	if skill.parent and not acquired_skills.available(skill.parent):
 		return false
 	if not character.has_xp(purchase_cost):
 		return false
 	return true
 
+func _can_unlock(skill: Skill) -> bool:
+	if unlocked_skills.available(skill):
+		return false
+	if skill.parent and not unlocked_skills.available(skill.parent):
+		return false
+	# TODO: Check meta-xp.
+	return true
+
 func _skill_state(skill: Skill) -> String:
-	if skill_tree_state.acquired(skill):
-		return "Owned"
-	if not skill_tree_state.unlocked(skill):
-		return "Locked"
-	if skill.parent and not skill_tree_state.acquired(skill.parent):
-		return "Need Parent"
-	if not character.has_xp(purchase_cost):
-		return "Need XP"
-	return "Available"
+	if mode == Mode.ACQUIRE:
+		if acquired_skills.available(skill):
+			return "Owned"
+		if not unlocked_skills.available(skill):
+			return "Locked"
+		if skill.parent and not acquired_skills.available(skill.parent):
+			return "Need Parent"
+		if not character.has_xp(purchase_cost):
+			return "Need XP"
+		return "Available"
+	else:
+		if unlocked_skills.available(skill):
+			return "Unlocked"
+		if skill.parent and not unlocked_skills.available(skill.parent):
+			return "Need Parent"
+		# TODO: Check SaveState for enough meta-XP.
+		return "Unlockable"
 
 func _avail_icon(skill: Skill) -> TextureRect:
 	var out = TextureRect.new()
 	# TODO: enum
 	match _skill_state(skill):
 		# TODO: Move these to exports when nodes become their own scene.
-		"Owned":
+		"Owned", "Unlocked":
 			out.texture = preload("res://ui/icons/CheckBox.svg")
 			# Mute a bit so it's less attention grabbing than available.
 			out.self_modulate = Color.DARK_GRAY
@@ -148,7 +197,7 @@ func _avail_icon(skill: Skill) -> TextureRect:
 		"Need XP":
 			out.texture = preload("res://ui/icons/Unlock.svg")
 			out.self_modulate = Color.DARK_GRAY
-		"Available":
+		"Available", "Unlockable":
 			out.texture = preload("res://ui/icons/Unlock.svg")
 			out.self_modulate = Color.LIGHT_GREEN
 		_:
@@ -186,32 +235,42 @@ func _on_ok_pressed():
 	ok_pressed.emit()
 
 func _on_buy_button_pressed():
-	assert(character.has_xp(purchase_cost), "should not happen")
-	character.use_xp(purchase_cost)
-	skill_tree_state.acquire(selected_skill)
+	if mode == Mode.ACQUIRE:
+		assert(character.has_xp(purchase_cost), "should not happen")
+		character.use_xp(purchase_cost)
+		acquired_skills.mark_available(selected_skill)
+	else:
+		# TODO: Check meta-XP and use it.
+		unlocked_skills.mark_available(selected_skill)
 	selected_node.self_modulate = _tint(selected_skill)
 	_update_info_panel(selected_skill)
 	_update_purchase_state()
 
 func _update_purchase_state():
-	%Status.text = "XP: %d" % character.xp
+	if mode == Mode.ACQUIRE:
+		%Status.text = "XP: %d" % character.xp
+	else:
+		# TODO: Update from meta-xp in SaveState.
+		pass
 
 	var total_count = 0
 	for tab in _tabs.get_children():
-		var can_purchase_count = 0
+		var available_count  = 0
 		for node in tab.get_children():
 			var s = node.get_meta("skill")
-			if _can_purchase(s):
-				can_purchase_count += 1
+			if mode == Mode.ACQUIRE and _can_purchase(s):
+				available_count += 1
+			elif mode == Mode.UNLOCK and _can_unlock(s):
+				available_count += 1
 			# We may have satisfied prereqs or run out of XP after a purchase,
 			# so we update icons for the whole graph.
 			_update_node_icon(node, s)
 		# TODO: Make this a nice thing.
 		var graph_name = SkillTree.TreeType.keys()[tab.get_meta('tree_type')]
-		if can_purchase_count > 0:
-			graph_name += " (%d)" % can_purchase_count
+		if available_count > 0:
+			graph_name += " (%d)" % available_count
 		tab.name = graph_name
-		total_count += can_purchase_count
+		total_count += available_count
 	available_upgrades = total_count
 
 func _update_node_icon(node: GraphNode, skill: Skill):

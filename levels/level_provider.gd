@@ -11,7 +11,7 @@ class_name LevelProvider
 # The following two override the settings in the character loaded, leave
 # empty except for debugging/testing.
 # Unlocked skills on start.
-@export var skill_tree_state: SkillTreeState
+@export var unlocked_skills: SkillTreeState
 # Initial behavior for characters.
 @export var behavior: StoredBehavior = StoredBehavior.new()
 
@@ -35,5 +35,5 @@ func set_from(other: LevelProvider):
 	players = other.players
 	levels = other.levels
 	available_characters = other.available_characters
-	skill_tree_state = other.skill_tree_state
+	unlocked_skills = other.unlocked_skills
 	behavior = other.behavior

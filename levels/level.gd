@@ -5,12 +5,17 @@ class_name Level
 @export var xp: int = 100
 @export_group("Tutorial")
 # To be used for e.g. tutorial levels in which we may
-# want a particular set of skills acquired/unlocked.
+# want a particular set of skills acquired.
 # Replaces skill tree state.
-@export var skill_tree_state_override: SkillTreeState
+@export var acquired_skills_override: SkillTreeState
 # Same as above, but it only adds to existing tree, so
 # it's less work if you don't need to remove skills.
-@export var skill_tree_state_add: SkillTreeState
+@export var acquired_skills_override_add: SkillTreeState
+# Same for unlocked_skills.
+# TODO: Actually use those, should be done from outside,
+# or pass unlocked_skills to level if needed.
+@export var unlocked_skills_override: SkillTreeState
+@export var unlocked_skills_override_add: SkillTreeState
 
 @export_group("Testing")
 # For testing long level flows, instantly wins level.
@@ -98,10 +103,10 @@ func prepare_test_gameplay_characters():
 func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
 	self.ui_layer = ui_layer
 	for i in gameplay_characters.size():
-		if skill_tree_state_add:
-			gameplay_characters[i].skill_tree_state.add(skill_tree_state_add)
-		if skill_tree_state_override:
-			gameplay_characters[i].skill_tree_state = skill_tree_state_override
+		if acquired_skills_override_add:
+			gameplay_characters[i].acquired_skills.add(acquired_skills_override_add)
+		if acquired_skills_override:
+			gameplay_characters[i].acquired_skills = acquired_skills_override
 		var character = gameplay_characters[i].make_character_body()
 		character.actor_name = gameplay_characters[i].name
 		character.name = character.actor_name

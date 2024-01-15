@@ -2,10 +2,10 @@ extends Screen
 
 const skill_tree_scene = preload("res://ui/skill_tree.tscn")
 
-func show_upgrades(character: Character):
-	var persistent_state = Component.get_persistent_game_state_component_or_die(character)
-	var skill_tree = skill_tree_scene.instantiate()
-	skill_tree.initialize(persistent_state.state, false)
+func _on_show(info: Dictionary):
+	var persistent_state = Component.get_persistent_game_state_component_or_die(info.character)
+	var skill_tree = skill_tree_scene.instantiate() as SkillTreeUI
+	skill_tree.initialize(SkillTreeUI.Mode.ACQUIRE, info.save_state, persistent_state.state, false)
 	skill_tree.ok_pressed.connect(_on_skill_tree_ok_pressed.bind(skill_tree))
 	add_child(skill_tree)
 

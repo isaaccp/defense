@@ -8,7 +8,7 @@ class_name GameplayCharacter
 @export var scene: PackedScene
 @export_multiline var description: String
 @export var behavior: StoredBehavior
-@export var skill_tree_state: SkillTreeState
+@export var acquired_skills: SkillTreeState
 
 @export_group("Debug")
 @export var peer_id: int

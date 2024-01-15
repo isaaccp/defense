@@ -39,9 +39,15 @@ func player_ready(session_id: String) -> void:
 			start_gameplay.rpc()
 
 func load_save_state() -> SaveState:
-	if not FileAccess.file_exists("user://defense_save.tres"):
-		return SaveState.new()
-	var save_state = load("user://defense_save.tres")
+	var save_state: SaveState
+	if FileAccess.file_exists("user://defense_save.tres"):
+		save_state = load("user://defense_save.tres")
+	else:
+		save_state = SaveState.new()
+	if not save_state.behavior_library:
+		save_state.behavior_library = BehaviorLibrary.new()
+	if not save_state.unlocked_skills:
+		save_state.unlocked_skills = SkillTreeState.new()
 	return save_state
 
 @rpc("authority", "call_local")
