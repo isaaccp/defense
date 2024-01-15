@@ -5,7 +5,6 @@ class_name GameplayUILayer
 @export_group("Internal")
 @export var character_selection_screen: CharacterSelectionScreen
 @export var hud: Hud
-var overlay: Node
 
 var save_state: SaveState
 
@@ -37,11 +36,28 @@ signal full_resume_requested
 signal save_and_quit_requested
 ## Abandon run requested from menu.
 signal abandon_run_requested
+## Play next level selected.
+signal play_next_selected
+## Try level again selected.
+signal try_again_selected
 
 func _ready():
 	super()
-	overlay = %Overlay
 	%GameplayMenu.enable(false)
+	# Hide all top level items. We want to make sure that we can
+	# show/hide them in editor for debugging without causing significant
+	# issues.
+	for screen in %Screens.get_children():
+		screen.hide()
+	for overlay in %Overlay.get_children():
+		overlay.hide()
+	for window in %Windows.get_children():
+		window.hide()
+
+func show_screen(screen: Control, info: Dictionary = {}) -> void:
+	show()
+	%Screens.show()
+	super(screen, info)
 
 func set_save_state(save_state: SaveState):
 	self.save_state = save_state
@@ -51,16 +67,12 @@ func initialize_state_machine_stack(sm: StateMachine):
 	%GameplayMenu.initialize(state_machine_stack)
 
 func show_gameplay_menu_screen(existing_run: bool):
-	show()
-	hud.hide()
 	show_screen(%GameplayMenuScreen, {"existing_run": existing_run})
 
 func hide_gameplay_menu_screen():
 	hide_screen()
 
 func start_character_selection(level_provider: LevelProvider):
-	show()
-	hud.hide()
 	character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
 	show_screen(character_selection_screen)
 
@@ -96,6 +108,13 @@ func show_upgrade_window(character: Character):
 	})
 	hud.hide()
 
+func show_level_end(win: bool, character_node: Node):
+	%LevelEnd.prepare(win, character_node)
+	%LevelEnd.show()
+
+func hide_level_end():
+	%LevelEnd.hide()
+
 func _input(event: InputEvent):
 	if event.is_action_pressed("ui_cancel"):
 		%GameplayMenu.enable(true)
@@ -125,3 +144,10 @@ func _on_gameplay_menu_screen_continue_run():
 
 func _on_gameplay_menu_abandon_run_requested():
 	abandon_run_requested.emit()
+
+
+func _on_level_end_play_next_selected():
+	play_next_selected.emit()
+
+func _on_level_end_try_again_selected():
+	try_again_selected.emit()

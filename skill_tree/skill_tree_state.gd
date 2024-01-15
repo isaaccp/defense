@@ -38,9 +38,9 @@ func _init():
 		if skill_type == Skill.SkillType.UNSPECIFIED:
 			continue
 		skills_by_name[skill_type] = {}
-	_process.call_deferred()
+	_process_skills.call_deferred()
 
-func _process():
+func _process_skills():
 	for skill_name in skills:
 		var skill = SkillManager.lookup_skill(skill_name)
 		skills_by_name[skill.skill_type][skill_name] = true

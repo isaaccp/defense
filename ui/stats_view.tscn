@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://db273rof73fog"]
+
+[ext_resource type="Script" path="res://ui/stats_view.gd" id="1_uekkl"]
+
+[node name="StatsView" type="PanelContainer"]
+script = ExtResource("1_uekkl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stats for Foo"
+
+[node name="Stats" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="StatName" type="Label" parent="MarginContainer/VBoxContainer/Stats"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage Dealt"
+
+[node name="StatValue" type="Label" parent="MarginContainer/VBoxContainer/Stats"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "28"
+horizontal_alignment = 2

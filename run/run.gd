@@ -27,13 +27,15 @@ signal level_resumed
 
 func _ready():
 	state.connect_signals(self)
+	# Needs to happen before we change level, otherwise we
+	# could end up adding the level state machine.
+	ui_layer.state_machine_stack.add_state_machine(state)
 	# If we restored from a save game, gameplay_characters should be set,
 	# go straight to level.
 	if gameplay_characters.size() == 0:
 		state.change_state(CHARACTER_SELECTION)
 	else:
 		state.change_state(WITHIN_LEVEL)
-	ui_layer.state_machine_stack.add_state_machine(state)
 
 func _exit_tree():
 	ui_layer.state_machine_stack.remove_state_machine(state)
@@ -101,7 +103,6 @@ func _grant_xp(level: Level):
 		character.grant_xp(level.xp)
 
 func _on_within_level_exited():
-	ui_layer.hud.hide()
 	%StateParent.remove_child(level)
 	level.queue_free()
 	level = null

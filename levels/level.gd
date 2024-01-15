@@ -47,14 +47,13 @@ var state = StateMachine.new(StateMachineName)
 var PREPARE = state.add("prepare")
 var COMBAT = state.add("combat")
 var SUMMARY = state.add("summary")
+var DONE = state.add("done", true)
 
 var win: bool
 var is_paused = false
 
 # Not constants so tests can speed them up.
 var ready_to_fight_wait = 1.0
-var level_end_wait = 3.0
-var level_failed_wait = 1.0
 
 signal level_finished
 signal level_failed
@@ -70,10 +69,13 @@ func _ready():
 	state.change_state.call_deferred(PREPARE)
 	if ui_layer:
 		ui_layer.state_machine_stack.add_state_machine(state)
+		ui_layer.show()
+		ui_layer.hud.show()
 
 func _exit_tree():
 	if ui_layer:
 			ui_layer.state_machine_stack.remove_state_machine(state)
+			ui_layer.hud.hide()
 
 func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
 	self.ui_layer = ui_layer
@@ -96,8 +98,6 @@ func _on_prepare_entered():
 	victory.level_finished.connect(_on_level_finished)
 	# TODO: Wrap this up inside ui_layer.prepare_level() or similar.
 	if ui_layer:
-		ui_layer.show()
-		ui_layer.hud.show()
 		ui_layer.hud.show_play_controls(false)
 		ui_layer.hud.set_victory_loss(victory)
 		ui_layer.hud.set_characters(characters)
@@ -130,21 +130,24 @@ func _on_combat_exited():
 func _on_summary_entered():
 	if ui_layer:
 		ui_layer.hud.show_victory_loss_text(true)
-		if win:
-			await ui_layer.hud.show_main_message("Victory!", level_end_wait)
-		else:
-			await ui_layer.hud.show_main_message("Failed!", level_failed_wait)
 		ui_layer.hud.show_victory_loss(false)
-		ui_layer.hud.show_end_level_confirmation(true, win)
-		await ui_layer.hud.end_level_confirmed
 		ui_layer.hide_log_viewer()
-		ui_layer.hud.hide()
-	if win:
-		level_finished.emit()
-	else:
-		level_failed.emit()
+		ui_layer.show_level_end(win, characters)
+		ui_layer.play_next_selected.connect(_on_play_next_selected)
+		ui_layer.try_again_selected.connect(_on_try_again_selected)
+
+func _on_play_next_selected():
+	level_finished.emit()
+	state.change_state.call_deferred(DONE)
+
+func _on_try_again_selected():
+	level_failed.emit()
+	state.change_state.call_deferred(DONE)
 
 func _on_summary_exited():
+	pass
+
+func _on_done_entered():
 	pass
 
 func _on_level_failed(_loss_type: VictoryLossConditionComponent.LossType):
@@ -188,7 +191,9 @@ func _standalone_ready():
 	# Immediately remove self, we'll test with a copy. Keep parent ref.
 	var parent = get_parent()
 	get_parent().remove_child(self)
+	_standalone_ready_next_frame.call_deferred(parent)
 
+func _standalone_ready_next_frame(parent: Node):
 	var game_mode = GameMode.new()
 	game_mode.level_provider = LevelProvider.new()
 	game_mode.level_provider.levels.append(load(scene_file_path))

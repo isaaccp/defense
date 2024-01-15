@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5ity5n7jy3b8"]
+[gd_scene load_steps=9 format=3 uid="uid://5ity5n7jy3b8"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui_layer.gd" id="1_2vged"]
 [ext_resource type="PackedScene" uid="uid://ct18o8uebe4yt" path="res://ui/gameplay_menu_screen.tscn" id="2_fwi3t"]
@@ -7,16 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://bfketgt7bwsh2" path="res://ui/log_viewer.tscn" id="5_0qbeh"]
 [ext_resource type="PackedScene" uid="uid://cqmsmsumhossr" path="res://ui/hud.tscn" id="5_uol5s"]
 [ext_resource type="PackedScene" uid="uid://wfrxew4t25e2" path="res://ui/gameplay_menu.tscn" id="5_wda70"]
+[ext_resource type="PackedScene" uid="uid://cnlvjh7aefr5h" path="res://ui/level_end.tscn" id="7_ymkay"]
 
 [node name="GameplayUILayer" type="CanvasLayer" node_paths=PackedStringArray("character_selection_screen", "hud", "screens")]
 process_mode = 3
-visible = false
 script = ExtResource("1_2vged")
 character_selection_screen = NodePath("Screens/CharacterSelectionScreen")
 hud = NodePath("Overlay/HUD")
 screens = NodePath("Screens")
 
 [node name="Screens" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +28,7 @@ grow_vertical = 2
 
 [node name="GameplayMenuScreen" parent="Screens" instance=ExtResource("2_fwi3t")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="CharacterSelectionScreen" parent="Screens" instance=ExtResource("2_rk245")]
@@ -48,14 +51,21 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="HUD" parent="Overlay" instance=ExtResource("5_uol5s")]
+visible = false
 layout_mode = 1
 mouse_filter = 2
 
 [node name="GameplayMenu" parent="Overlay" instance=ExtResource("5_wda70")]
 unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="LevelEnd" parent="Overlay" instance=ExtResource("7_ymkay")]
+unique_name_in_owner = true
 layout_mode = 1
 
 [node name="Windows" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="LogViewer" parent="Windows" instance=ExtResource("5_0qbeh")]
 unique_name_in_owner = true
@@ -74,3 +84,5 @@ visible = false
 [connection signal="closed" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_closed"]
 [connection signal="reset_requested" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_reset_requested"]
 [connection signal="save_and_quit_requested" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_save_and_quit_requested"]
+[connection signal="play_next_selected" from="Overlay/LevelEnd" to="." method="_on_level_end_play_next_selected"]
+[connection signal="try_again_selected" from="Overlay/LevelEnd" to="." method="_on_level_end_try_again_selected"]
