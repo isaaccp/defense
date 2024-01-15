@@ -57,14 +57,6 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SaveAndQuitButton" parent="PanelContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("2_86at4")]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Save and Quit"
-confirmation_text = "Any changes (e.g. XP spent on skills, behavior changes) since the start of the current level will be lost.
-
-Changes to the behavior library will be kept."
-
 [node name="ResetLevelButton" parent="PanelContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("2_86at4")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -77,6 +69,14 @@ layout_mode = 2
 text = "Abandon Run"
 confirmation_text = "Are you sure you want to abandon this run?"
 
-[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/SaveAndQuitButton" to="." method="_on_save_and_quit_button_pressed_confirmed"]
+[node name="SaveAndQuitButton" parent="PanelContainer/MarginContainer/VBoxContainer/Buttons" instance=ExtResource("2_86at4")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save and Quit"
+confirmation_text = "Any changes (e.g. XP spent on skills, behavior changes) since the start of the current level will be lost.
+
+Changes to the behavior library will be kept."
+
 [connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/ResetLevelButton" to="." method="_on_reset_level_button_pressed_confirmed"]
 [connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/AbandonRunButton" to="." method="_on_abandon_run_button_pressed_confirmed"]
+[connection signal="pressed_confirmed" from="PanelContainer/MarginContainer/VBoxContainer/Buttons/SaveAndQuitButton" to="." method="_on_save_and_quit_button_pressed_confirmed"]

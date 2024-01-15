@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1ab1h7rtohbt"]
+[gd_scene load_steps=6 format=3 uid="uid://d1ab1h7rtohbt"]
 
 [ext_resource type="Script" path="res://ui/ui_layer.gd" id="1_8smwk"]
 [ext_resource type="PackedScene" uid="uid://cys516tfuqeh3" path="res://ui/title_screen.tscn" id="2_5d83l"]
 [ext_resource type="PackedScene" uid="uid://bylu7ejd83wf" path="res://ui/match_screen.tscn" id="3_d456q"]
 [ext_resource type="PackedScene" uid="uid://dvgoqpr65uay" path="res://ui/ready_screen.tscn" id="4_teaj2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4a3f"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="UILayer" type="CanvasLayer" node_paths=PackedStringArray("title_screen", "match_screen", "ready_screen", "overlay_message", "screens", "initial_screen")]
 process_mode = 3
@@ -14,6 +17,14 @@ ready_screen = NodePath("Screens/ReadyScreen")
 overlay_message = NodePath("Overlay/Message")
 screens = NodePath("Screens")
 initial_screen = NodePath("Screens/TitleScreen")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o4a3f")
 
 [node name="Screens" type="Control" parent="."]
 layout_mode = 3
