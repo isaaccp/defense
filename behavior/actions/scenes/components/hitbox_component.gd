@@ -88,9 +88,14 @@ func _status_str() -> String:
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = action_scene.attributes_component.damage_multiplier
-	hurtbox.handle_collision(action_scene.owner_name, action_scene.name, hit_effect)
+	var hit_result = hurtbox.handle_collision(action_scene.owner_name, action_scene.name, hit_effect)
 
-	action_scene.action_scene_log("%s %s" % [hurtbox.get_parent().name, hit_effect.log_text()])
+	# TODO: Could update log to also include hit_result information, although alternatively we can
+	# not include it and make enemy logs viewable, in which case you could see it there.
+	action_scene.action_scene_log(
+		"%s %s" % [hurtbox.get_parent().name, hit_effect.log_text()],
+		hit_result.stats_update()
+	)
 	if hits > 0:
 		hits_left -= 1
 		if hits_left == 0:

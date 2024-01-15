@@ -49,8 +49,8 @@ func initialize(owner_name_: String, action_def_: ActionDef, target_: Target, at
 	if target_component:
 		target_component.target = target_
 
-func action_scene_log(message: String):
+func action_scene_log(message: String, stats_update: Array[Stat]):
 	if not logging_component:
 		return
 	var full_message = "%s: %s" % [name, message]
-	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message)
+	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message, stats_update)
