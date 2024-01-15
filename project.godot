@@ -30,12 +30,18 @@ gdscript/warnings/shadowed_variable_base_class=0
 
 [display]
 
+window/size/mode=2
 window/size/window_width_override=1728
 window/size/window_height_override=972
+window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/behavior_editor/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/skill_lookup/plugin.cfg")
+
+[gui]
+
+theme/custom="res://theme/main_theme.tres"
 
 [layer_names]
 

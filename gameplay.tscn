@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpvryr0tdcnfy"]
+[gd_scene load_steps=5 format=3 uid="uid://cpvryr0tdcnfy"]
 
 [ext_resource type="Script" path="res://gameplay.gd" id="1_2toda"]
 [ext_resource type="PackedScene" uid="uid://5ity5n7jy3b8" path="res://ui/gameplay_ui_layer.tscn" id="1_3xnco"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxynd"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3kqhi"]
 viewport_path = NodePath("SubViewport")
@@ -26,15 +29,19 @@ unique_name_in_owner = true
 [node name="LevelLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="TextureRect" type="TextureRect" parent="LevelLayer"]
+[node name="PanelContainer" type="PanelContainer" parent="LevelLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vxynd")
+
+[node name="TextureRect" type="TextureRect" parent="LevelLayer/PanelContainer"]
+layout_mode = 2
 texture = SubResource("ViewportTexture_3kqhi")
-expand_mode = 2
-stretch_mode = 4
+expand_mode = 5
+stretch_mode = 5
 
 [connection signal="behavior_modified" from="GameplayUILayer" to="." method="_on_behavior_modified"]
 [connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]
