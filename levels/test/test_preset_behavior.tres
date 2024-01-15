@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=31 format=3 uid="uid://dko6s3kgrapkm"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=29 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_dv7bi"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="2_cwces"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="6_653s3"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="7_4xswo"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="9_peqn1"]
 
 [sub_resource type="Resource" id="Resource_h13ej"]
 script = ExtResource("3_4yb6m")
@@ -130,17 +129,9 @@ script = ExtResource("2_cwces")
 name = ""
 stored_rules = Array[ExtResource("5_6s65h")]([SubResource("Resource_66hom"), SubResource("Resource_0vv00"), SubResource("Resource_8cr5j")])
 
-[sub_resource type="Resource" id="Resource_x5gu8"]
-script = ExtResource("9_peqn1")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
-full_acquired = false
-full_unlocked = false
-
 [resource]
 script = ExtResource("7_4xswo")
 players = 1
 levels = Array[PackedScene]([ExtResource("7_cb8qh")])
 available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_dv7bi")])
-skill_tree_state = SubResource("Resource_x5gu8")
 behavior = SubResource("Resource_4lrpe")
