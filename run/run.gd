@@ -33,6 +33,10 @@ func _ready():
 		state.change_state(CHARACTER_SELECTION)
 	else:
 		state.change_state(WITHIN_LEVEL)
+	ui_layer.state_machine_stack.add_state_machine(state)
+
+func _exit_tree():
+	ui_layer.state_machine_stack.remove_state_machine(state)
 
 func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	self.ui_layer = ui_layer
@@ -43,7 +47,6 @@ func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	ui_layer.reset_requested.connect(_on_reset_requested)
 	ui_layer.abandon_run_requested.connect(_on_abandon_run_requested)
 	ui_layer.behavior_modified.connect(_on_behavior_modified)
-	ui_layer.state_machine_stack.add_state_machine(state)
 
 func _on_character_selection_entered():
 	ui_layer.start_character_selection(level_provider)
@@ -126,7 +129,6 @@ func _on_run_summary_exited():
 
 func finish_run():
 	# TODO: Differentiate failure vs success.
-	ui_layer.state_machine_stack.remove_state_machine(state)
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
 	run_finished.emit()
