@@ -21,7 +21,7 @@ signal freed
 func run():
 	if animation_component:
 		animation_component.animation_finished.connect(
-			func(_anim): AutoFreeComponent._free_parent.bind(self))
+			func(_anim): AutoFreeComponent._free_parent(self))
 	if hitbox_component:
 		hitbox_component.all_hits_used.connect(
 			AutoFreeComponent._free_parent.bind(self))
@@ -29,7 +29,9 @@ func run():
 		motion_component.motion_done.connect(
 			AutoFreeComponent._free_parent.bind(self))
 	if free_after_secs > 0:
-		get_tree().create_timer(free_after_secs, false).timeout.connect(
+		var timer = %Timer as Timer
+		timer.start(free_after_secs)
+		timer.timeout.connect(
 			AutoFreeComponent._free_parent.bind(self))
 
 static func _free_parent(node: Node) -> void:
