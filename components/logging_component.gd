@@ -38,6 +38,7 @@ class LogEntry extends RefCounted:
 
 # TODO: Implement some max limit and rollover.
 var entries: Array[LogEntry]
+var stats: Stats
 var running = false
 var elapsed_time = 0.0
 
@@ -55,7 +56,7 @@ static func log_type_name(type: LogType):
 static func short_log_type_name(type: LogType):
 	return LogType.keys()[type][0]
 
-func add_log_entry(type: LogType, message: String, time: float = -1.0):
+func add_log_entry(type: LogType, message: String, stats_updates: Array[Stat] = [], time: float = -1.0):
 	# this is there in case someone needs to provide log entries with time.
 	if time < 0:
 		time = elapsed_time
@@ -64,3 +65,5 @@ func add_log_entry(type: LogType, message: String, time: float = -1.0):
 	log_entry_added.emit(le)
 	if type in print_logtypes:
 		print("[%0.2f] %s(%s): %s" % [time, get_parent().name, LoggingComponent.log_type_name(type), message])
+	for stat in stats_updates:
+		stats.add_stat(stat)
