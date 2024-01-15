@@ -10,13 +10,13 @@ func add_stat(stat: Stat):
 	else:
 		stats[stat.name] = stat.value
 
+func add(other: Stats):
+	for stat_name in other.stats:
+		var stat = Stat.new(stat_name, other.stats[stat_name])
+		add_stat(stat)
+
 func get_value(name: StringName):
 	return stats.get(name, 0)
-
-func all()-> Array[StringName]:
-	var stat_names: Array[StringName] = []
-	stat_names.assign(stats.keys())
-	return stat_names
 
 func _to_string():
 	var s = ""
