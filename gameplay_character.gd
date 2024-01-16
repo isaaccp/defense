@@ -2,19 +2,29 @@ extends Resource
 
 class_name GameplayCharacter
 
+
+@export_group("Character Definition")
+## Character name.
 @export var name: String
+## A brief description of the character kit.
 @export var starting_kit: String
+## Scene to use for the character in-game.
 @export var scene_id: Enum.CharacterSceneId
+## Multiline description of character, backstory, etc.
 @export_multiline var description: String
+## Default behavior for this character, can be left unset.
 @export var behavior: StoredBehavior
+## Initial acquired skills.
 @export var acquired_skills: SkillTreeState
 
-@export_group("Debug")
-@export var peer_id: int
+# Those could be put in a separate resource for grouping.
+@export_group("Extra Save Data")
+## Used to track health across levels, on save, etc.
+@export var health: int
+## Used to track XP across levels, on save, etc.
 @export var xp: int
-# Total accummulated XP, for fun.
-@export var total_xp: int
 
+var peer_id: int
 var actor: Character
 
 func use_xp(amount: int) -> void:
@@ -26,7 +36,6 @@ func has_xp(amount: int) -> bool:
 
 func grant_xp(amount: int) -> void:
 	xp += amount
-	total_xp += amount
 
 func make_character_body() -> Character:
 	var scene = CharacterSceneManager.get_character_scene(scene_id)
