@@ -18,4 +18,4 @@
 [resource]
 script = ExtResource("1_sstov")
 tree_type = 1
-skills = Array[Resource]([ExtResource("2_vu0ia"), ExtResource("3_n3lg8"), ExtResource("3_lulvd"), ExtResource("3_oj4av"), ExtResource("5_jcphg"), ExtResource("4_efvur"), ExtResource("5_axcoh"), ExtResource("6_ya2sl"), ExtResource("10_jp7jp"), ExtResource("6_g73vn"), ExtResource("12_rhord"), ExtResource("13_tdsq7"), ExtResource("14_ee58q")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_vu0ia"), ExtResource("3_n3lg8"), ExtResource("3_lulvd"), ExtResource("3_oj4av"), ExtResource("5_jcphg"), ExtResource("4_efvur"), ExtResource("5_axcoh"), ExtResource("6_ya2sl"), ExtResource("10_jp7jp"), ExtResource("6_g73vn"), ExtResource("12_rhord"), ExtResource("13_tdsq7"), ExtResource("14_ee58q")])

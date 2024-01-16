@@ -47,6 +47,9 @@ func load_skill_type_dir(trees: Dictionary, base_path: String, skill_type: Skill
 		dir.list_dir_begin()
 		var filename = dir.get_next()
 		while filename != "":
+			if not filename.ends_with(".tres"):
+				_show_error("Found unexpected file %s" % filename)
+				return
 			print("  Loading %s" % filename)
 			var skill = load(dir_path + "/" + filename) as Skill
 			if skill.skill_name in skill_names:
