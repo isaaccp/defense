@@ -199,7 +199,7 @@ func _avail_icon(skill: Skill) -> TextureRect:
 		"Need Parent":
 			out.texture = preload("res://ui/icons/Unlinked.svg")
 			out.self_modulate = Color.LIGHT_GREEN
-		"Need XP":
+		"Need XP", "Need Meta XP":
 			out.texture = preload("res://ui/icons/Unlock.svg")
 			out.self_modulate = Color.DARK_GRAY
 		"Available", "Unlockable":
@@ -248,7 +248,8 @@ func _on_buy_button_pressed():
 		character.use_xp(purchase_cost)
 		acquired_skills.mark_available(selected_skill)
 	else:
-		# TODO: Check meta-XP and use it.
+		assert(save_state.meta_xp >= purchase_cost)
+		save_state.meta_xp -= purchase_cost
 		unlocked_skills.mark_available(selected_skill)
 	selected_node.self_modulate = _tint(selected_skill)
 	_update_info_panel(selected_skill)
@@ -258,8 +259,7 @@ func _update_purchase_state():
 	if mode == Mode.ACQUIRE:
 		%Status.text = "XP: %d" % character.xp
 	else:
-		# TODO: Update from meta-xp in SaveState.
-		pass
+		%Status.text = "Meta XP: %d" % save_state.meta_xp
 
 	var total_count = 0
 	for tab in _tabs.get_children():
