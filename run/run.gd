@@ -13,13 +13,21 @@ var WITHIN_LEVEL = state.add("within_level")
 var BETWEEN_LEVELS = state.add("between_levels")
 var RUN_SUMMARY = state.add("run_summary")
 
+# TODO: Make this configurale, or move full meta_xp calculation
+# to some helper class.
+const meta_xp_per_level = 50
+
 # State-dependent variables.
 # If in WITHIN_LEVEL, current level being played.
 var level: Level
 var level_scene: PackedScene
+
 # A copy of characters' state as they were when level started.
 # Allows to reset state.
 var characters_snapshot: Array[GameplayCharacter]
+# TODO: Must be moved into run_save_state so we can keep track
+# across Save & Quit but it needs to be a Resource first.
+var stats = Stats.new()
 
 signal run_finished
 signal level_paused
@@ -112,13 +120,15 @@ func _on_between_levels_entered():
 	# TODO: Do some stuff here like show map/whatever.
 	# Should only get here if there are more levels.
 	assert(level_provider.advance())
+	stats.add_stat(Stat.new(Stat.LevelsBeaten, 1))
 	state.change_state.call_deferred(WITHIN_LEVEL)
 
 func _on_between_levels_exited():
 	pass
 
 func _on_run_summary_entered():
-	# TODO: Implement run summary screen.
+	# TODO: Implement run summary screen and remove this.
+	print("Summary: %s" % _meta_xp_text())
 	finish_run.call_deferred()
 	# var summary = summary_scene.instantiate() as RunSummary
 	# summary.initialize(characters, run_victory)
@@ -154,6 +164,16 @@ func _on_reset_requested():
 func _on_abandon_run_requested():
 	get_tree().paused = false
 	state.change_state.call_deferred(RUN_SUMMARY)
+
+func _meta_xp_text() -> String:
+	var meta_xp_text = ""
+	meta_xp_text += "Meta XP\n"
+	meta_xp_text += "Levels Beaten: %d * %d\n" % [stats.get_value(Stat.LevelsBeaten), meta_xp_per_level]
+	meta_xp_text += "Total: %d" % meta_xp()
+	return meta_xp_text
+
+func meta_xp() -> int:
+	return stats.get_value(Stat.LevelsBeaten) * 50
 
 func paused():
 	return state.is_state(WITHIN_LEVEL) and level.paused()

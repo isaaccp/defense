@@ -160,7 +160,8 @@ func _can_unlock(skill: Skill) -> bool:
 		return false
 	if skill.parent and not unlocked_skills.available(skill.parent):
 		return false
-	# TODO: Check meta-xp.
+	if save_state.meta_xp < purchase_cost:
+		return false
 	return true
 
 func _skill_state(skill: Skill) -> String:
@@ -179,7 +180,8 @@ func _skill_state(skill: Skill) -> String:
 			return "Unlocked"
 		if skill.parent and not unlocked_skills.available(skill.parent):
 			return "Need Parent"
-		# TODO: Check SaveState for enough meta-XP.
+		if save_state.meta_xp < purchase_cost:
+			return "Need Meta XP"
 		return "Unlockable"
 
 func _avail_icon(skill: Skill) -> TextureRect:

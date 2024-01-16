@@ -53,6 +53,7 @@ func _on_run_entered():
 	%RunParent.add_child(run)
 
 func _on_run_exited():
+	save_state.meta_xp += run.meta_xp()
 	run.queue_free()
 	run = null
 
