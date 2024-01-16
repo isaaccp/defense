@@ -4,7 +4,7 @@ class_name GameplayCharacter
 
 @export var name: String
 @export var starting_kit: String
-@export var scene: PackedScene
+@export var scene_id: Enum.CharacterSceneId
 @export_multiline var description: String
 @export var behavior: StoredBehavior
 @export var acquired_skills: SkillTreeState
@@ -29,6 +29,7 @@ func grant_xp(amount: int) -> void:
 	total_xp += amount
 
 func make_character_body() -> Character:
+	var scene = CharacterSceneManager.get_character_scene(scene_id)
 	actor = scene.instantiate() as Character
 	actor.actor_name = name
 	var persistent_game_state = Component.get_persistent_game_state_component_or_die(actor)

@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://btxbesb7qp4a4"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=4 format=3 uid="uid://btxbesb7qp4a4"]
 
 [ext_resource type="Script" path="res://gameplay_character.gd" id="1_e15xr"]
-[ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="1_vcos6"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_icq27"]
 
 [sub_resource type="Resource" id="Resource_2impa"]
@@ -12,9 +11,8 @@ full = false
 [resource]
 script = ExtResource("1_e15xr")
 name = "Larian"
-character_id = 1
 starting_kit = "Archer"
-scene = ExtResource("1_vcos6")
+scene_id = 1
 description = "A forest elf on a secret mission"
 acquired_skills = SubResource("Resource_2impa")
 peer_id = 0

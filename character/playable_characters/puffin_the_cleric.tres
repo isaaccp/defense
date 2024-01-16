@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://dyrr5aucf70fk"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=4 format=3 uid="uid://dyrr5aucf70fk"]
 
-[ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="2_bfn1c"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="2_wv48f"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_ro8tn"]
 
@@ -12,9 +11,8 @@ full = false
 [resource]
 script = ExtResource("2_wv48f")
 name = "Puffin"
-character_id = 1
 starting_kit = "Healer"
-scene = ExtResource("2_bfn1c")
+scene_id = 1
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
 acquired_skills = SubResource("Resource_ha8jy")
 peer_id = 0
