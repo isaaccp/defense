@@ -2,10 +2,7 @@ extends Resource
 
 class_name SkillTreeState
 
-@export var skills: Array[Skill]:
-	set(value):
-		skills = value
-		_process_skills()
+@export var skills: Array[StringName] = [&"Always"]
 
 # If set, all skills are available.
 @export var full = false
@@ -41,16 +38,18 @@ func _init():
 		if skill_type == Skill.SkillType.UNSPECIFIED:
 			continue
 		skills_by_name[skill_type] = {}
+	_process_skills.call_deferred()
 
 func _process_skills():
-	for skill in skills:
-		skills_by_name[skill.skill_type][skill.skill_name] = true
+	for skill_name in skills:
+		var skill = SkillManager.lookup_skill(skill_name)
+		skills_by_name[skill.skill_type][skill_name] = true
 
 ## Whether skill has been acquired/unlocked in the tree.
 func available(skill: Skill) -> bool:
 	if full:
 		return true
-	return skill.skill_name in skills_by_name[skill.skill_type]
+	return skill.skill_name in skills_by_name
 
 ## Whether skill is reachable in the tree (i.e., parent is
 ## available.
@@ -62,7 +61,7 @@ func reachable(skill: Skill) -> bool:
 func mark_available(skill: Skill):
 	assert(not available(skill), "Skill already available!")
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
-	skills.append(skill)
+	skills.append(skill.skill_name)
 	skills_by_name[skill.skill_type][skill.skill_name] = true
 
 # Used for tutorial levels, etc that need to add to a tree.

@@ -105,10 +105,10 @@ func _setup_tree():
 		_tabs.add_child(graph)
 		for s in t.skills:
 			if mode == Mode.ACQUIRE and hide_locked_skills:
-				if not unlocked_skills.available(s):
+				if unlocked_skills.available(s):
 					continue
 			elif mode == Mode.UNLOCK and hide_locked_skills:
-				if s.parent and not unlocked_skills.available(s.parent):
+				if s.parent and not unlocked_skills.available(s):
 					continue
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()

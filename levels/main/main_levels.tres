@@ -13,4 +13,4 @@
 script = ExtResource("2_3n011")
 players = 2
 levels = Array[PackedScene]([ExtResource("4_rmm38"), ExtResource("5_uogry"), ExtResource("6_rnivb")])
-available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_ug4xc"), ExtResource("3_w6bpn"), ExtResource("2_84oyx"), ExtResource("4_muu8k")])
+available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_w6bpn"), ExtResource("4_muu8k")])
