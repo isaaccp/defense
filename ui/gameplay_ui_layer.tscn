@@ -19,7 +19,6 @@ screens = NodePath("Screens")
 
 [node name="Screens" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +42,12 @@ layout_mode = 1
 
 [node name="PreRunScreen" parent="Screens" instance=ExtResource("5_1ei0w")]
 unique_name_in_owner = true
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Overlay" type="Control" parent="."]
 unique_name_in_owner = true
@@ -66,6 +71,7 @@ layout_mode = 1
 
 [node name="LevelEnd" parent="Overlay" instance=ExtResource("7_ymkay")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="Windows" type="Node" parent="."]
