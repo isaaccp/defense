@@ -15,13 +15,13 @@ class_name HitResult
 func stats_update() -> Array[Stat]:
 	var updates: Array[Stat] = []
 	if damage > 0:
-		updates.append(Stat.new(Stat.DamageDealt, damage))
+		updates.append(Stat.make(Stat.DamageDealt, damage))
 	elif damage < 0:
-		updates.append(Stat.new(Stat.DamageHealed, -damage))
+		updates.append(Stat.make(Stat.DamageHealed, -damage))
 	# TODO: Status.
 	# TODO: Damage per damage type.
 	if destroyed:
-		updates.append(Stat.new(Stat.EnemiesDestroyed, 1))
+		updates.append(Stat.make(Stat.EnemiesDestroyed, 1))
 	return updates
 
 func log_text() -> String:

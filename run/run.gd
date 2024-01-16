@@ -3,6 +3,7 @@ extends Node
 class_name Run
 
 var ui_layer: GameplayUILayer
+var run_save_state: RunSaveState
 var level_provider: LevelProvider
 var gameplay_characters: Array[GameplayCharacter]
 
@@ -25,9 +26,6 @@ var level_scene: PackedScene
 # A copy of characters' state as they were when level started.
 # Allows to reset state.
 var characters_snapshot: Array[GameplayCharacter]
-# TODO: Must be moved into run_save_state so we can keep track
-# across Save & Quit but it needs to be a Resource first.
-var stats = Stats.new()
 
 signal run_finished
 signal level_paused
@@ -50,6 +48,7 @@ func _exit_tree():
 
 func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	self.ui_layer = ui_layer
+	self.run_save_state = run_save_state
 	gameplay_characters = run_save_state.gameplay_characters
 	level_provider = run_save_state.level_provider
 	# Technically only needed during LEVEL state, but easier than connect/disconnect.
@@ -120,7 +119,7 @@ func _on_between_levels_entered():
 	# TODO: Do some stuff here like show map/whatever.
 	# Should only get here if there are more levels.
 	assert(level_provider.advance())
-	stats.add_stat(Stat.new(Stat.LevelsBeaten, 1))
+	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
 	state.change_state.call_deferred(WITHIN_LEVEL)
 
 func _on_between_levels_exited():
@@ -168,12 +167,12 @@ func _on_abandon_run_requested():
 func _meta_xp_text() -> String:
 	var meta_xp_text = ""
 	meta_xp_text += "Meta XP\n"
-	meta_xp_text += "Levels Beaten: %d * %d\n" % [stats.get_value(Stat.LevelsBeaten), meta_xp_per_level]
+	meta_xp_text += "Levels Beaten: %d * %d\n" % [run_save_state.stats.get_value(Stat.LevelsBeaten), meta_xp_per_level]
 	meta_xp_text += "Total: %d" % meta_xp()
 	return meta_xp_text
 
 func meta_xp() -> int:
-	return stats.get_value(Stat.LevelsBeaten) * 50
+	return run_save_state.stats.get_value(Stat.LevelsBeaten) * 50
 
 func paused():
 	return state.is_state(WITHIN_LEVEL) and level.paused()

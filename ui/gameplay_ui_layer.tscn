@@ -42,12 +42,7 @@ layout_mode = 1
 
 [node name="PreRunScreen" parent="Screens" instance=ExtResource("5_1ei0w")]
 unique_name_in_owner = true
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 
 [node name="Overlay" type="Control" parent="."]
 unique_name_in_owner = true

@@ -1,4 +1,4 @@
-extends RefCounted
+extends Resource
 
 class_name Stat
 
@@ -14,9 +14,20 @@ const DamageHealed: StringName = &"damage_healed"
 # Run Stats.
 const LevelsBeaten: StringName = &"levels_beaten"
 
-var name: StringName
-var value: Variant
+@export var name: StringName
+@export var int_value: IntValue
+@export var float_value: FloatValue
 
-func _init(name: StringName, value: Variant):
-	self.name = name
-	self.value = value
+var value: Variant:
+	get:
+		return int_value.value if int_value else float_value.value
+
+static func make(name: StringName, value: Variant) -> Stat:
+	var stat = Stat.new()
+	stat.name = name
+	if typeof(value) == TYPE_INT:
+		stat.int_value = IntValue.make(value)
+	elif typeof(value) == TYPE_FLOAT:
+		stat.float_value = FloatValue.make(value)
+	return stat
+

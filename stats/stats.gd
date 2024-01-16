@@ -1,8 +1,8 @@
-extends RefCounted
+extends Resource
 
 class_name Stats
 
-var stats: Dictionary
+@export var stats: Dictionary
 
 func add_stat(stat: Stat):
 	if stat.name in stats:
@@ -12,7 +12,7 @@ func add_stat(stat: Stat):
 
 func add(other: Stats):
 	for stat_name in other.stats:
-		var stat = Stat.new(stat_name, other.stats[stat_name])
+		var stat = Stat.make(stat_name, other.stats[stat_name])
 		add_stat(stat)
 
 func get_value(name: StringName):
