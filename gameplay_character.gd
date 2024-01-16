@@ -3,7 +3,6 @@ extends Resource
 class_name GameplayCharacter
 
 @export var name: String
-@export var character_id: Enum.CharacterId
 @export var starting_kit: String
 @export var scene: PackedScene
 @export_multiline var description: String
@@ -31,7 +30,6 @@ func grant_xp(amount: int) -> void:
 
 func make_character_body() -> Character:
 	actor = scene.instantiate() as Character
-	actor.id = character_id
 	actor.actor_name = name
 	var persistent_game_state = Component.get_persistent_game_state_component_or_die(actor)
 	persistent_game_state.state = self

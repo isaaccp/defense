@@ -61,7 +61,7 @@ func _on_character_selection_entered():
 	ui_layer.start_character_selection(level_provider)
 	ui_layer.character_selection_screen_selection_ready.connect(_on_character_selection_finished)
 
-func _on_character_selection_finished(character_selections: Array[Enum.CharacterId]):
+func _on_character_selection_finished(character_selections: Array[int]):
 	var players = OnlineMatch.get_sorted_players()
 	for selection in range(character_selections.size()):
 		var idx = character_selections[selection]
