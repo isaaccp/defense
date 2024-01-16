@@ -7,7 +7,8 @@ class_name SaveState
 @export var behavior_library: BehaviorLibrary
 # If needed later, keep one of those per game-mode.
 @export var unlocked_skills: SkillTreeState
-
+# Set initially to skip the "PRE_RUN" section on first run.
+@export var first_run = true
 # Run state.
 # E.g. current level, current acquired skill tree, etc.
 @export var run_save_state: RunSaveState

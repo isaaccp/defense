@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://5ity5n7jy3b8"]
+[gd_scene load_steps=10 format=3 uid="uid://5ity5n7jy3b8"]
 
 [ext_resource type="Script" path="res://ui/gameplay_ui_layer.gd" id="1_2vged"]
 [ext_resource type="PackedScene" uid="uid://ct18o8uebe4yt" path="res://ui/gameplay_menu_screen.tscn" id="2_fwi3t"]
 [ext_resource type="PackedScene" uid="uid://bp627of2jpvl8" path="res://ui/character_selection_screen.tscn" id="2_rk245"]
 [ext_resource type="PackedScene" uid="uid://brpcb8r5ubqip" path="res://ui/upgrade_character_screen.tscn" id="3_x1mfn"]
 [ext_resource type="PackedScene" uid="uid://bfketgt7bwsh2" path="res://ui/log_viewer.tscn" id="5_0qbeh"]
+[ext_resource type="PackedScene" uid="uid://bd7ks13koti84" path="res://ui/pre_run_screen.tscn" id="5_1ei0w"]
 [ext_resource type="PackedScene" uid="uid://cqmsmsumhossr" path="res://ui/hud.tscn" id="5_uol5s"]
 [ext_resource type="PackedScene" uid="uid://wfrxew4t25e2" path="res://ui/gameplay_menu.tscn" id="5_wda70"]
 [ext_resource type="PackedScene" uid="uid://cnlvjh7aefr5h" path="res://ui/level_end.tscn" id="7_ymkay"]
@@ -40,6 +41,9 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="PreRunScreen" parent="Screens" instance=ExtResource("5_1ei0w")]
+unique_name_in_owner = true
+
 [node name="Overlay" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
@@ -74,6 +78,7 @@ visible = false
 [connection signal="continue_run" from="Screens/GameplayMenuScreen" to="." method="_on_gameplay_menu_screen_continue_run"]
 [connection signal="new_run" from="Screens/GameplayMenuScreen" to="." method="_on_gameplay_menu_screen_new_run"]
 [connection signal="selection_ready" from="Screens/CharacterSelectionScreen" to="." method="_on_character_selection_screen_selection_ready"]
+[connection signal="continue_pressed" from="Screens/PreRunScreen" to="." method="_on_pre_run_screen_continue_pressed"]
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
 [connection signal="play_controls_pause_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_pause_pressed"]
 [connection signal="play_controls_play_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_play_pressed"]

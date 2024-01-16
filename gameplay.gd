@@ -15,6 +15,7 @@ var save_state: SaveState
 const StateMachineName = "gameplay"
 var state = StateMachine.new(StateMachineName)
 var MENU = state.add("menu")
+var PRE_RUN = state.add("pre_run")
 var RUN = state.add("run")
 # We'll later have an extra state for "between runs" unlocks.
 
@@ -59,6 +60,15 @@ func _on_run_finished():
 	save_state.run_save_state = null
 	state.change_state.call_deferred(MENU)
 
+func _on_pre_run_entered():
+	ui_layer.show_pre_run_screen()
+
+func _on_pre_run_exited():
+	ui_layer.hide_screen()
+
+func _on_gameplay_ui_layer_pre_run_continue_pressed():
+	state.change_state.call_deferred(RUN)
+
 func _on_gameplay_ui_layer_full_pause_requested():
 	get_tree().paused = true
 
@@ -72,7 +82,11 @@ func _on_gameplay_ui_layer_save_and_quit_requested():
 
 func _on_gameplay_ui_layer_new_run():
 	save_state.run_save_state = RunSaveState.make([], level_provider)
-	state.change_state.call_deferred(RUN)
+	if save_state.first_run:
+		save_state.first_run = false
+		state.change_state.call_deferred(RUN)
+	else:
+		state.change_state.call_deferred(PRE_RUN)
 
 func _on_gameplay_ui_layer_continue_run():
 	state.change_state.call_deferred(RUN)

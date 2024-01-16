@@ -51,6 +51,7 @@ stretch_mode = 5
 [connection signal="new_run" from="GameplayUILayer" to="." method="_on_gameplay_ui_layer_new_run"]
 [connection signal="play_controls_pause_pressed" from="GameplayUILayer" to="." method="_on_gameplay_ui_layer_play_controls_pause_pressed"]
 [connection signal="play_controls_play_pressed" from="GameplayUILayer" to="." method="_on_gameplay_ui_layer_play_controls_play_pressed"]
+[connection signal="pre_run_continue_pressed" from="GameplayUILayer" to="." method="_on_gameplay_ui_layer_pre_run_continue_pressed"]
 [connection signal="reset_requested" from="GameplayUILayer" to="." method="_on_gameplay_ui_layer_reset_requested"]
 [connection signal="restart_requested" from="GameplayUILayer" to="." method="_on_restart_requested"]
 [connection signal="save_and_quit_requested" from="GameplayUILayer" to="." method="_on_gameplay_ui_layer_save_and_quit_requested"]

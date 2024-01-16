@@ -40,6 +40,8 @@ signal abandon_run_requested
 signal play_next_selected
 ## Try level again selected.
 signal try_again_selected
+## Continue pressed on pre run screen.
+signal pre_run_continue_pressed
 
 func _ready():
 	super()
@@ -108,6 +110,9 @@ func show_upgrade_window(character: Character):
 	})
 	hud.hide()
 
+func show_pre_run_screen():
+	show_screen(%PreRunScreen, {"save_state": save_state})
+
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
 	%LevelEnd.prepare(win, character_node, granted_xp_text)
 	%LevelEnd.show()
@@ -151,3 +156,6 @@ func _on_level_end_play_next_selected():
 
 func _on_level_end_try_again_selected():
 	try_again_selected.emit()
+
+func _on_pre_run_screen_continue_pressed():
+	pre_run_continue_pressed.emit()

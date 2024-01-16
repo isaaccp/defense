@@ -49,7 +49,7 @@ func _ready():
 		pass
 	_setup_tree()
 
-func initialize(mode: Mode, save_state: SaveState, character: GameplayCharacter, show_all: bool = false):
+func initialize(mode: Mode, save_state: SaveState, character: GameplayCharacter = null, show_all: bool = false):
 	assert(save_state)
 	if mode == Mode.ACQUIRE:
 		assert(character)
@@ -87,7 +87,10 @@ func _tint(s: Skill) -> Color:
 func _setup_tree():
 	# TODO: Pass text.
 	%Title.text = "Skill Tree"
-
+	if mode == Mode.ACQUIRE:
+		%BuyButton.text = "Buy"
+	else:
+		%BuyButton.text = "Unlock"
 	_tabs.tab_changed.connect(_on_tab_changed)
 	for t in skill_tree_collection.skill_trees:
 		var seen := {}
@@ -227,7 +230,10 @@ func _update_info_panel(skill: Skill):
 		%BuyButton.disabled = true
 		%Info.text = "Select a skill..."
 		return
-	%BuyButton.disabled = not _can_purchase(skill)
+	if mode == Mode.UNLOCK:
+		%BuyButton.disabled = not _can_unlock(skill)
+	else:
+		%BuyButton.disabled = not _can_purchase(skill)
 	%Info.text = "Name: %s\nType: %s\nState: %s\n..." % [
 		skill.name(), skill.type_name(), _skill_state(skill)]
 

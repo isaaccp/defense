@@ -1,10 +1,10 @@
 @tool
 extends Node
 
-var actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
-var conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
-var targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
-var target_sorts = preload("res://skill_tree/skill_type_collections/target_sort_collection.tres")
+const actions = preload("res://skill_tree/skill_type_collections/action_collection.tres")
+const conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
+const targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
+const target_sorts = preload("res://skill_tree/skill_type_collections/target_sort_collection.tres")
 
 var action_by_name: Dictionary
 var condition_by_name: Dictionary
@@ -14,11 +14,7 @@ var target_sort_by_name: Dictionary
 var skill_by_name: Dictionary
 var all_skills: Array[StringName]
 
-func _ready():
-	refresh()
-
-# TODO: Refactor this ugly stuff.
-func refresh():
+func _init():
 	all_skills.clear()
 	action_by_name.clear()
 	condition_by_name.clear()
