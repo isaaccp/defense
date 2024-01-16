@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://g1au3en4bc7j"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=10 format=3 uid="uid://g1au3en4bc7j"]
 
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="1_mq8lb"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="1_xl5p5"]
+[ext_resource type="Resource" uid="uid://cd07rgpgh7lss" path="res://skill_tree/targets/enemy.tres" id="2_1cbg3"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_2bsii"]
+[ext_resource type="Resource" uid="uid://cb3mi3783pack" path="res://skill_tree/actions/move_to.tres" id="3_e0dux"]
+[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="4_x35qw"]
+[ext_resource type="Resource" uid="uid://crd5cdw57rf3c" path="res://skill_tree/actions/seeking_bolt.tres" id="5_1le3t"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="6_klkn1"]
 
-[sub_resource type="Resource" id="Resource_1uxd1"]
+[sub_resource type="Resource" id="Resource_s33h2"]
 script = ExtResource("2_2bsii")
-skills = Array[StringName]([&"Always", &"Enemy", &"Closest First", &"Move To", &"Seeking Bolt"])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_1cbg3"), ExtResource("3_e0dux"), ExtResource("4_x35qw"), ExtResource("5_1le3t"), ExtResource("6_klkn1")])
 full = false
 
 [resource]
@@ -16,7 +21,7 @@ character_id = 1
 starting_kit = "Wizard"
 scene = ExtResource("1_mq8lb")
 description = "An aspiring wizard on its way to the Wizard's College in the capital"
-acquired_skills = SubResource("Resource_1uxd1")
+acquired_skills = SubResource("Resource_s33h2")
 peer_id = 0
 xp = 0
 total_xp = 0

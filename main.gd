@@ -44,6 +44,12 @@ func load_save_state() -> SaveState:
 		save_state = load("user://defense_save.tres")
 	else:
 		save_state = SaveState.make_new()
+		# When starting a new game, unlock all the skills initially available
+		# to any playable character.
+		for gc in game_mode.level_provider.available_characters:
+			for skill in gc.acquired_skills.skills:
+				if not save_state.unlocked_skills.available(skill):
+					save_state.unlocked_skills.mark_available(skill)
 	return save_state
 
 @rpc("authority", "call_local")

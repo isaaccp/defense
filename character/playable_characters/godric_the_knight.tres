@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://bix5m3wtgncj4"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=10 format=3 uid="uid://bix5m3wtgncj4"]
 
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="1_28nqh"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="1_g060r"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_60gha"]
+[ext_resource type="Resource" uid="uid://cd07rgpgh7lss" path="res://skill_tree/targets/enemy.tres" id="2_a5ncl"]
+[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="3_04amc"]
+[ext_resource type="Resource" uid="uid://cb3mi3783pack" path="res://skill_tree/actions/move_to.tres" id="4_qjp4d"]
+[ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="5_ikfeo"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="6_ehag6"]
 
 [sub_resource type="Resource" id="Resource_7laic"]
 script = ExtResource("2_60gha")
-skills = Array[StringName]([&"Always", &"Enemy", &"Closest First", &"Move To", &"Sword Attack"])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_a5ncl"), ExtResource("3_04amc"), ExtResource("4_qjp4d"), ExtResource("5_ikfeo"), ExtResource("6_ehag6")])
 full = false
 
 [resource]

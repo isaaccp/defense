@@ -1,12 +1,17 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://dyrr5aucf70fk"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=10 format=3 uid="uid://dyrr5aucf70fk"]
 
+[ext_resource type="Resource" uid="uid://dvs6g4m5siut3" path="res://skill_tree/targets/ally.tres" id="2_41y0g"]
 [ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="2_bfn1c"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="2_wv48f"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_ro8tn"]
+[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="3_u77us"]
+[ext_resource type="Resource" uid="uid://cb3mi3783pack" path="res://skill_tree/actions/move_to.tres" id="4_a57sf"]
+[ext_resource type="Resource" uid="uid://buewl5eydlx7c" path="res://skill_tree/actions/heal.tres" id="5_hwlj5"]
+[ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="6_0mpcm"]
 
-[sub_resource type="Resource" id="Resource_ha8jy"]
+[sub_resource type="Resource" id="Resource_lla2m"]
 script = ExtResource("3_ro8tn")
-skills = Array[StringName]([&"Always", &"Ally", &"Move To", &"Heal", &"Closest First"])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_41y0g"), ExtResource("3_u77us"), ExtResource("4_a57sf"), ExtResource("5_hwlj5"), ExtResource("6_0mpcm")])
 full = false
 
 [resource]
@@ -16,7 +21,7 @@ character_id = 1
 starting_kit = "Healer"
 scene = ExtResource("2_bfn1c")
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
-acquired_skills = SubResource("Resource_ha8jy")
+acquired_skills = SubResource("Resource_lla2m")
 peer_id = 0
 xp = 0
 total_xp = 0
