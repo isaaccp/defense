@@ -84,6 +84,7 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 	var new_health = health - after_resistance_damage
 	_update_health(new_health, true, "dmg: %s" % damage_str)
 	hit_result.damage = prev_health - health
+	hit_result.destroyed = is_dead
 	return hit_result
 
 func _log_blocked_damage(damage_details: String):

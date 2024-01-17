@@ -8,7 +8,6 @@ class_name HitResult
 @export var damage_type: DamageType
 ## Destroyed enemy.
 @export var destroyed: bool
-# Status on hit.
 ## Status inflicted, if any.
 @export var status: StatusDef.Id
 
