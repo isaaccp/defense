@@ -2,10 +2,13 @@ extends Resource
 
 class_name LevelProvider
 
+@export_group("Required")
 @export var players: int
 @export var levels: Array[PackedScene]
 @export var available_characters: Array[GameplayCharacter]
 
+@export_group("Storage")
+@export var current_level = 0
 
 @export_group("Testing")
 # The following two override the settings in the character loaded, leave
@@ -15,7 +18,7 @@ class_name LevelProvider
 # Initial behavior for characters.
 @export var behavior: StoredBehavior = StoredBehavior.new()
 
-var current_level = 0
+
 
 func advance() -> bool:
 	if is_last_level():

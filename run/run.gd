@@ -115,9 +115,12 @@ func _on_level_finished():
 	level_xp = level.granted_xp()
 	# Needs to be recorded here in case it's the last level.
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
+	# Need to advance level_provider at the same time, so that if
+	# we save at this point, the stats and next level match.
 	if level_provider.is_last_level():
 		state.change_state.call_deferred(RUN_SUMMARY)
 	else:
+		assert(level_provider.advance())
 		state.change_state.call_deferred(BETWEEN_LEVELS)
 
 func _on_within_level_exited():
@@ -125,7 +128,6 @@ func _on_within_level_exited():
 	level.queue_free()
 	level = null
 	level_scene = null
-
 
 func _on_between_levels_entered():
 	# TODO: Do something fancy with animations and what not.
@@ -145,7 +147,6 @@ func _on_between_levels_entered():
 	ui_layer.between_levels_continue_selected.connect(_on_between_levels_continue_selected, CONNECT_ONE_SHOT)
 
 func _on_between_levels_continue_selected():
-	assert(level_provider.advance())
 	state.change_state.call_deferred(WITHIN_LEVEL)
 
 func _on_between_levels_exited():
