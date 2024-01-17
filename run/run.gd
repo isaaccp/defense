@@ -121,7 +121,9 @@ func _on_level_finished():
 		state.change_state.call_deferred(RUN_SUMMARY)
 	else:
 		assert(level_provider.advance())
-		state.change_state.call_deferred(BETWEEN_LEVELS)
+		# Call this in the same frame explicitly so we update all the
+		# bits of the RunSaveState in the same frame.
+		state.change_state(BETWEEN_LEVELS, false)
 
 func _on_within_level_exited():
 	%StateParent.remove_child(level)

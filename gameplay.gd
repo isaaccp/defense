@@ -61,6 +61,7 @@ func _on_run_exited():
 
 func _on_run_finished():
 	save_state.run_save_state = null
+	save_requested.emit(save_state)
 	state.change_state.call_deferred(MENU)
 
 func _on_run_save_requested():
