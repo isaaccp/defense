@@ -13,7 +13,7 @@ cmp = 0
 [resource]
 script = ExtResource("2_lpwjs")
 type = 3
-description = "Targets the center of the level"
+description_text = "Targets the center of the level"
 selector_script = ExtResource("4_w3i8k")
 sortable = false
 params = SubResource("Resource_oit4y")

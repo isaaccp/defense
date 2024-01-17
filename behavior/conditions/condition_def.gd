@@ -34,6 +34,7 @@ enum Type {
 
 @export var type: Type
 @export var evaluator_script: GDScript
+@export_multiline var description_text: String = "<missing description>"
 
 const NoCondition = &"__no_condition__"
 
@@ -59,5 +60,5 @@ func supported_target_types_str() -> String:
 		return "Actor"
 	return "<fix me>"
 
-func full_description():
-	return "%s\nSupported Target Types: %s" % [name(), supported_target_types_str()]
+func description():
+	return "%s\nSupported Target Types: %s" % [description_text, supported_target_types_str()]

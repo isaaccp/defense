@@ -12,7 +12,7 @@ cmp = 0
 [resource]
 script = ExtResource("1_awb10")
 type = 1
-description = "Targets the tower"
+description_text = "Targets the tower"
 selector_script = ExtResource("3_ainap")
 sortable = false
 params = SubResource("Resource_oit4y")

@@ -3,7 +3,7 @@ extends Skill
 
 class_name MetaSkill
 
-@export_multiline var description: String
+@export_multiline var description_text: String = "<missing description>"
 
 func _init():
 	skill_type = SkillType.META_SKILL
@@ -11,5 +11,5 @@ func _init():
 func name() -> String:
 	return skill_name
 
-func full_description() -> String:
-	return "%s\n%s" % [name(), description]
+func description() -> String:
+	return description_text

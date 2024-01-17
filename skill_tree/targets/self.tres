@@ -13,7 +13,7 @@ cmp = 0
 [resource]
 script = ExtResource("1_mjmbq")
 type = 1
-description = "Targets oneself"
+description_text = "Targets oneself"
 selector_script = ExtResource("3_8tp1d")
 sortable = false
 params = SubResource("Resource_7ir3x")

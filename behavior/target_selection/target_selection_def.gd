@@ -6,7 +6,7 @@ class_name TargetSelectionDef
 ## Type of Target that this selector returns.
 @export var type: Target.Type
 ## Description for target.
-@export_multiline var description: String
+@export_multiline var description_text: String = "<missing description>"
 ## Selector script.
 @export var selector_script: GDScript
 ## Whether the target is sortable. If it is, it must provide
@@ -36,5 +36,5 @@ func validate():
 func name() -> String:
 	return skill_name
 
-func full_description():
-	return "%s\n%s\nTarget Type: %s" % [name(), description, Target.target_type_str(type)]
+func description():
+	return "%s\nTarget Type: %s" % [description_text, Target.target_type_str(type)]

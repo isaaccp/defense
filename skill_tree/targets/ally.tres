@@ -14,7 +14,7 @@ sort = ExtResource("2_a11vh")
 [resource]
 script = ExtResource("3_mefl5")
 type = 1
-description = "Targets actors of the same side (but not oneself or the tower)"
+description_text = "Targets actors of the same side (but not oneself or the tower)"
 selector_script = ExtResource("4_y3bvn")
 sortable = true
 params = SubResource("Resource_simwv")

@@ -30,9 +30,9 @@ func supported_target_types_str() -> String:
 	var supported_targets = supported_target_types.map(func(t): return Target.target_type_str(t))
 	return ",".join(supported_targets)
 
-func full_description() -> String:
+func description() -> String:
 	# TODO: Figure out a cleaner way to do this. As of now using duck
 	# typing to not create a loop with Action dependency.
 	var action = action_script.new()
 	action.def = self
-	return "%s\n%s" % [name(), action.full_description()]
+	return action.full_description()

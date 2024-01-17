@@ -18,13 +18,13 @@ enum SkillType {
 @export var tree_type: SkillTree.TreeType
 
 func type_name() -> String:
-	return SkillType.keys()[skill_type]
+	return SkillType.keys()[skill_type].capitalize()
 
 static func skill_type_filesystem_string(skill_type: SkillType) -> String:
 	assert(skill_type != SkillType.UNSPECIFIED)
 	return SkillType.keys()[skill_type].to_lower()
 
-func full_description():
+func description():
 	assert(false, "implement in subclass")
 
 func _to_string() -> String:

@@ -20,7 +20,7 @@ enum Type {
 ## bad combinations.
 @export var type: Type
 @export var sorter_script: GDScript
-@export var description: String
+@export_multiline var description_text: String = "<missing description>"
 
 func _init():
 	skill_type = SkillType.TARGET_SORT
@@ -45,5 +45,5 @@ func supported_target_types_str() -> String:
 func name() -> String:
 	return skill_name
 
-func full_description():
-	return description
+func description():
+	return description_text

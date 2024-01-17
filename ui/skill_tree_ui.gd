@@ -97,6 +97,9 @@ func _setup_tree():
 		%BuyButton.text = "Unlock"
 	_tabs.tab_changed.connect(_on_tab_changed)
 	for t in skill_tree_collection.skill_trees:
+		# Skip META tree in ACQUIRE mode.
+		if mode == Mode.ACQUIRE and t.tree_type == SkillTree.TreeType.META:
+			continue
 		var seen := {}
 		# TODO: The graph should be an instanced scene, probably
 		var graph = GraphEdit.new()
@@ -117,7 +120,7 @@ func _setup_tree():
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
 			skill.set_meta("skill", s)
-			skill.tooltip_text = s.full_description()
+			skill.tooltip_text = s.description()
 			skill.self_modulate = _tint(s)
 			skill.draggable = false
 			skill.title = s.name()
@@ -241,8 +244,9 @@ func _update_info_panel(skill: Skill):
 		%BuyButton.disabled = not _can_unlock(skill)
 	else:
 		%BuyButton.disabled = not _can_purchase(skill)
-	%Info.text = "Name: %s\nType: %s\nState: %s\n..." % [
-		skill.name(), skill.type_name(), _skill_state(skill)]
+	%Info.text = "Name: %s\nType: %s\nState: %s\nDescription: %s\nCost: %d" % [
+		skill.name(), skill.type_name(), _skill_state(skill),
+		skill.description(), purchase_cost]
 
 func _on_ok_pressed():
 	ok_pressed.emit()

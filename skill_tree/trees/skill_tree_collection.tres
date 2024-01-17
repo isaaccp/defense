@@ -10,4 +10,4 @@
 
 [resource]
 script = ExtResource("1_gr80f")
-skill_trees = Array[Resource("res://skill_tree/skill_tree.gd")]([ExtResource("2_5ruhs"), ExtResource("3_iikjy"), ExtResource("3_ic7n0"), ExtResource("4_0n42x"), ExtResource("5_wnl86"), ExtResource("6_yyoin")])
+skill_trees = Array[Resource("res://skill_tree/skill_tree.gd")]([ExtResource("3_iikjy"), ExtResource("2_5ruhs"), ExtResource("3_ic7n0"), ExtResource("4_0n42x"), ExtResource("5_wnl86"), ExtResource("6_yyoin")])
