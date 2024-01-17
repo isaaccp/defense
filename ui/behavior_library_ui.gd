@@ -59,7 +59,7 @@ func _on_save_to_library_button_pressed():
 	save_to_library_dialog.show()
 	var selected_behavior = get_selected()
 	behavior_name_line_edit.text = selected_behavior.name if selected_behavior else ""
-
+	behavior_name_line_edit.grab_focus()
 func _on_save_behavior_name_dialog_confirmed():
 	var behavior_name = behavior_name_line_edit.text
 	var behavior = behavior_editor.get_behavior()

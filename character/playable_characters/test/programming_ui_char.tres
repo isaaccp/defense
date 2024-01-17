@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=5 format=3 uid="uid://dgs55tgbrgkhv"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=6 format=3 uid="uid://dgs55tgbrgkhv"]
 
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="1_8c2xd"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_bxl72"]
-[ext_resource type="PackedScene" uid="uid://dme6lif4cwji3" path="res://character/character.tscn" id="7_vy3e2"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="8_c4bmv"]
+
+[sub_resource type="Resource" id="Resource_0rmgq"]
+script = ExtResource("1_8c2xd")
+skills = Array[StringName]([&"Always", &"Enemy", &"Move To", &"Closest First"])
+full = true
 
 [sub_resource type="Resource" id="Resource_uaejn"]
 script = ExtResource("1_bxl72")
@@ -12,11 +17,10 @@ stored_rules = Array[Resource("res://behavior/rule_def.gd")]([])
 [resource]
 script = ExtResource("8_c4bmv")
 name = "TestGuy"
-character_id = 1
 starting_kit = ""
-scene = ExtResource("7_vy3e2")
+scene_id = 0
 description = ""
 behavior = SubResource("Resource_uaejn")
-peer_id = 0
+acquired_skills = SubResource("Resource_0rmgq")
+health = 0
 xp = 0
-total_xp = 0
