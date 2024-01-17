@@ -35,7 +35,7 @@ signal ok_pressed
 @export var selected_skill: Skill
 
 # Do something better later.
-var purchase_cost = 50
+var purchase_cost = 150
 var available_upgrades: int
 var hide_locked_skills: bool
 
