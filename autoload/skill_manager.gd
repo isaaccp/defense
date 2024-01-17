@@ -5,21 +5,25 @@ const actions = preload("res://skill_tree/skill_type_collections/action_collecti
 const conditions = preload("res://skill_tree/skill_type_collections/condition_collection.tres")
 const targets = preload("res://skill_tree/skill_type_collections/target_collection.tres")
 const target_sorts = preload("res://skill_tree/skill_type_collections/target_sort_collection.tres")
+const meta_skills = preload("res://skill_tree/skill_type_collections/meta_skill_collection.tres")
 
 var action_by_name: Dictionary
 var condition_by_name: Dictionary
 var target_by_name: Dictionary
 var target_sort_by_name: Dictionary
+var meta_skill_by_name: Dictionary
 
 var skill_by_name: Dictionary
 var all_skills: Array[StringName]
 
 func _init():
+	# TODO: Simplify this repetitive code.
 	all_skills.clear()
 	action_by_name.clear()
 	condition_by_name.clear()
 	target_by_name.clear()
 	target_sort_by_name.clear()
+	meta_skill_by_name.clear()
 	for action in actions.skills:
 		action_by_name[action.skill_name] = action
 		all_skills.append(action.skill_name)
@@ -37,6 +41,10 @@ func _init():
 		target_sort_by_name[target_sort.skill_name] = target_sort
 		all_skills.append(target_sort.skill_name)
 		skill_by_name[target_sort.skill_name] = target_sort
+	for meta_skill in meta_skills.skills:
+		meta_skill_by_name[meta_skill.skill_name] = meta_skill
+		all_skills.append(meta_skill.skill_name)
+		skill_by_name[meta_skill.skill_name] = meta_skill
 
 func lookup_skill(name: StringName) -> Skill:
 	return skill_by_name[name]
@@ -187,5 +195,12 @@ func make_position_target_sorter(target_sort: TargetSort) -> PositionTargetSorte
 func all_target_sorts() -> Array[StringName]:
 	var all: Array[StringName] = []
 	for skill_name in target_sort_by_name.keys():
+		all.append(skill_name)
+	return all
+
+# Meta skills.
+func all_meta_skills() -> Array[StringName]:
+	var all: Array[StringName] = []
+	for skill_name in meta_skill_by_name.keys():
 		all.append(skill_name)
 	return all

@@ -36,6 +36,12 @@ var conditions: Array[StringName]:
 			return SkillManager.all_conditions()
 		return _cast(skills_by_name[Skill.SkillType.CONDITION].keys())
 
+var meta_skills: Array[StringName]:
+	get:
+		if full:
+			return SkillManager.all_meta_skills()
+		return _cast(skills_by_name[Skill.SkillType.META_SKILL].keys())
+
 func _init():
 	for skill_type in Skill.SkillType.values():
 		if skill_type == Skill.SkillType.UNSPECIFIED:

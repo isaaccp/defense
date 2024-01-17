@@ -3,6 +3,7 @@ extends Node2D
 class_name Gameplay
 
 const run_scene = preload("res://run/run.tscn")
+const behavior_library_meta_skill = preload("res://skill_tree/meta_skills/behavior_library.tres")
 
 @export_group("Internal")
 @export var ui_layer: GameplayUILayer
@@ -32,7 +33,6 @@ func _ready():
 	Global.subviewport = %SubViewport
 	ui_layer.set_save_state(save_state)
 	ui_layer.initialize_state_machine_stack(state)
-	ui_layer.hud.set_behavior_library(save_state.behavior_library)
 	state.change_state.call_deferred(MENU)
 
 func initialize(game_mode: GameMode, save_state: SaveState):
@@ -48,6 +48,8 @@ func _on_menu_exited():
 	ui_layer.hide_gameplay_menu_screen()
 
 func _on_run_entered():
+	if save_state.unlocked_skills.available(behavior_library_meta_skill):
+		ui_layer.hud.set_behavior_library(save_state.behavior_library)
 	run = run_scene.instantiate() as Run
 	run.initialize(save_state.run_save_state, ui_layer)
 	run.run_finished.connect(_on_run_finished)

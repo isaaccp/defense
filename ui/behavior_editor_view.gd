@@ -80,16 +80,15 @@ func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
 		Column.TARGET:
 			var target = _target_from_meta(meta)
 			if target:
-				row.set_tooltip_text(idx, target.full_description())
+				row.set_tooltip_text(idx, target.description())
 		Column.CONDITION:
 			var condition = _condition_from_meta(meta)
 			if condition:
-				row.set_tooltip_text(idx, condition.full_description())
+				row.set_tooltip_text(idx, condition.description())
 		Column.ACTION:
 			var action_def = _action_from_meta(meta)
 			if action_def:
-				var action = Action.make_runnable_action(action_def)
-				row.set_tooltip_text(idx, action.full_description())
+				row.set_tooltip_text(idx, action_def.description())
 	row.set_metadata(idx, meta)
 
 func _column_empty(column: int, meta):
