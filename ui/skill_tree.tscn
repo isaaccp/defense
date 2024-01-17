@@ -23,7 +23,7 @@ scene_id = 0
 description = ""
 acquired_skills = SubResource("Resource_jl0re")
 health = 0
-xp = 100
+xp = 300
 
 [sub_resource type="LabelSettings" id="LabelSettings_6lxjg"]
 font_size = 14
@@ -37,6 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_un8q3")
 script = ExtResource("1_44fad")
+test_mode = 1
 test_character = SubResource("Resource_bwe5d")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

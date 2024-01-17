@@ -43,10 +43,11 @@ func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
 		var save_state = SaveState.make_new()
-		save_state.unlocked_skills.full = true
 		if test_mode == Mode.UNLOCK:
+			save_state.meta_xp = 300
 			initialize(test_mode, save_state)
 		elif test_mode == Mode.ACQUIRE:
+			save_state.unlocked_skills.full = true
 			assert(test_character)
 			initialize(test_mode, save_state, test_character)
 		pass
