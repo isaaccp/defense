@@ -44,14 +44,17 @@ layout_mode = 1
 
 [node name="PreRunScreen" parent="Screens" instance=ExtResource("5_1ei0w")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="RunSummaryScreen" parent="Screens" instance=ExtResource("6_3etjm")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="BetweenLevelsScreen" parent="Screens" instance=ExtResource("7_ngnnb")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="Overlay" type="Control" parent="."]

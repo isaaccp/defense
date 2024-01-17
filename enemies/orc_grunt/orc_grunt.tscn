@@ -1,35 +1,19 @@
-[gd_scene load_steps=36 format=3 uid="uid://c7ah75hdw70ik"]
+[gd_scene load_steps=33 format=3 uid="uid://ck2tfnr0oy6s4"]
 
-[ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_yojas"]
-[ext_resource type="Texture2D" uid="uid://fd7sbroscg0y" path="res://enemies/skeleton_warrior/Run.png" id="2_7tu7v"]
-[ext_resource type="Texture2D" uid="uid://jjl0r87khm2m" path="res://enemies/skeleton_warrior/Death.png" id="2_8hrxe"]
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_758bh"]
-[ext_resource type="Resource" uid="uid://c635s5x8n53gr" path="res://game_logic/damage_types/piercing.tres" id="4_n033s"]
-[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="5_eunku"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_mqksg"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_cbno3"]
-[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="6_vuj23"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_x14vd"]
-[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="8_ok866"]
+[ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_ngdbc"]
+[ext_resource type="Texture2D" uid="uid://c3amdk0cx4sc3" path="res://enemies/orc_grunt/Death.png" id="2_5hwt6"]
+[ext_resource type="Texture2D" uid="uid://rwfknglx4x3g" path="res://enemies/orc_grunt/Run.png" id="2_47j5l"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="3_chmqa"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_ra0qe"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_oh1pa"]
+[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_2h085"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_l80cu"]
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="8_i4fbg"]
 
-[sub_resource type="Animation" id="Animation_1usfe"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -16)]
-}
-
-[sub_resource type="Animation" id="Animation_3orma"]
-resource_name = "death"
+[sub_resource type="Animation" id="Animation_5v2y6"]
+resource_name = "run"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -40,7 +24,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_8hrxe")]
+"values": [ExtResource("2_47j5l")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -100,10 +84,10 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -8)]
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_phdlm"]
+[sub_resource type="Animation" id="Animation_cmlyo"]
 resource_name = "idle"
 length = 0.1
 tracks/0/type = "value"
@@ -116,7 +100,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_7tu7v")]
+"values": [ExtResource("2_47j5l")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -176,13 +160,26 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -16)]
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_rxvlw"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_m0c2q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t1sp5"]
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -193,7 +190,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_7tu7v")]
+"values": [ExtResource("2_5hwt6")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -253,44 +250,44 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -16)]
+"values": [Vector2(0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xa574"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkxn"]
 _data = {
-"RESET": SubResource("Animation_1usfe"),
-"death": SubResource("Animation_3orma"),
-"idle": SubResource("Animation_phdlm"),
-"run": SubResource("Animation_rxvlw")
+"RESET": SubResource("Animation_m0c2q"),
+"default": SubResource("Animation_t1sp5"),
+"idle": SubResource("Animation_cmlyo"),
+"run": SubResource("Animation_5v2y6")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1o62j"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0a8ol"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3fkpu"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6bloc"]
 
-[sub_resource type="Resource" id="Resource_k0v8b"]
-script = ExtResource("5_mqksg")
+[sub_resource type="Resource" id="Resource_ie11l"]
+script = ExtResource("5_oh1pa")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_ljs7v"]
-script = ExtResource("6_cbno3")
+[sub_resource type="Resource" id="Resource_qnj4y"]
+script = ExtResource("6_2h085")
 name = &"Sword Attack"
 skill_type = 1
-params = SubResource("Resource_k0v8b")
+params = SubResource("Resource_ie11l")
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
-script = ExtResource("5_mqksg")
+script = ExtResource("5_oh1pa")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_7uegf"]
-script = ExtResource("6_cbno3")
+[sub_resource type="Resource" id="Resource_84d0r"]
+script = ExtResource("6_2h085")
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_8lwyn")
 
-[sub_resource type="GDScript" id="GDScript_2x4wa"]
+[sub_resource type="GDScript" id="GDScript_ivwlo"]
 script/source = "extends PositionTargetSorter
 
 func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
@@ -299,87 +296,81 @@ func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
 	return distance_a < distance_b
 "
 
-[sub_resource type="Resource" id="Resource_ks4dw"]
-script = ExtResource("8_ok866")
+[sub_resource type="Resource" id="Resource_osub8"]
+script = ExtResource("8_i4fbg")
 type = 2
-sorter_script = SubResource("GDScript_2x4wa")
-description_text = "<missing description>"
+sorter_script = SubResource("GDScript_ivwlo")
+description_text = "Sorts by distance, selecting closest target"
 skill_name = &"Closest First"
 skill_type = 4
 tree_type = 1
 
-[sub_resource type="Resource" id="Resource_ol7a5"]
-script = ExtResource("5_mqksg")
+[sub_resource type="Resource" id="Resource_pd5og"]
+script = ExtResource("5_oh1pa")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = SubResource("Resource_ks4dw")
+sort = SubResource("Resource_osub8")
 
-[sub_resource type="Resource" id="Resource_r2rdg"]
-script = ExtResource("6_cbno3")
+[sub_resource type="Resource" id="Resource_ygu0t"]
+script = ExtResource("6_2h085")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_ol7a5")
+params = SubResource("Resource_pd5og")
 
-[sub_resource type="Resource" id="Resource_pqkju"]
-script = ExtResource("7_x14vd")
-target_selection = SubResource("Resource_r2rdg")
-action = SubResource("Resource_ljs7v")
-condition = SubResource("Resource_7uegf")
+[sub_resource type="Resource" id="Resource_6j6po"]
+script = ExtResource("7_l80cu")
+target_selection = SubResource("Resource_ygu0t")
+action = SubResource("Resource_qnj4y")
+condition = SubResource("Resource_84d0r")
 
-[sub_resource type="Resource" id="Resource_dooyh"]
-script = ExtResource("5_mqksg")
+[sub_resource type="Resource" id="Resource_ovn8s"]
+script = ExtResource("5_oh1pa")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_8nea1"]
-script = ExtResource("6_cbno3")
+[sub_resource type="Resource" id="Resource_2ecxs"]
+script = ExtResource("6_2h085")
 name = &"Move To"
 skill_type = 1
-params = SubResource("Resource_dooyh")
+params = SubResource("Resource_ovn8s")
 
-[sub_resource type="Resource" id="Resource_ihc8l"]
-script = ExtResource("6_cbno3")
+[sub_resource type="Resource" id="Resource_f5iq0"]
+script = ExtResource("6_2h085")
 name = &"Always"
 skill_type = 3
 params = SubResource("Resource_8lwyn")
 
-[sub_resource type="Resource" id="Resource_qcrwj"]
-script = ExtResource("6_cbno3")
+[sub_resource type="Resource" id="Resource_8ihip"]
+script = ExtResource("6_2h085")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_ol7a5")
+params = SubResource("Resource_pd5og")
 
-[sub_resource type="Resource" id="Resource_tn5be"]
-script = ExtResource("7_x14vd")
-target_selection = SubResource("Resource_qcrwj")
-action = SubResource("Resource_8nea1")
-condition = SubResource("Resource_ihc8l")
+[sub_resource type="Resource" id="Resource_y202r"]
+script = ExtResource("7_l80cu")
+target_selection = SubResource("Resource_8ihip")
+action = SubResource("Resource_2ecxs")
+condition = SubResource("Resource_f5iq0")
 
-[sub_resource type="Resource" id="Resource_w8vxy"]
-script = ExtResource("4_758bh")
+[sub_resource type="Resource" id="Resource_qefch"]
+script = ExtResource("4_ra0qe")
 name = ""
-stored_rules = Array[ExtResource("7_x14vd")]([SubResource("Resource_pqkju"), SubResource("Resource_tn5be")])
+stored_rules = Array[ExtResource("7_l80cu")]([SubResource("Resource_6j6po"), SubResource("Resource_y202r")])
 
-[sub_resource type="Resource" id="Resource_e6m2r"]
-script = ExtResource("5_eunku")
-damage_type = ExtResource("4_n033s")
-percentage = 100
-
-[sub_resource type="Resource" id="Resource_fbov8"]
-script = ExtResource("6_vuj23")
-speed = 30.0
-health = 8
+[sub_resource type="Resource" id="Resource_fgoat"]
+script = ExtResource("3_chmqa")
+speed = 35.0
+health = 6
 recovery = 0.0
 damage_multiplier = 1.0
-armor = 2
-resistance = Array[ExtResource("5_eunku")]([SubResource("Resource_e6m2r")])
+armor = 0
+resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
 
-[node name="SkeletonWarrior" instance=ExtResource("1_yojas")]
+[node name="OrcGrunt" instance=ExtResource("1_ngdbc")]
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, -16)
-texture = ExtResource("2_7tu7v")
-offset = Vector2(0, -16)
+position = Vector2(0, -32)
+texture = ExtResource("2_5hwt6")
 hframes = 3
 vframes = 2
 metadata/_aseprite_wizard_config_ = {
@@ -390,9 +381,9 @@ metadata/_aseprite_wizard_config_ = {
 "o_folder": "",
 "o_name": "",
 "only_visible": false,
-"op_exp": true,
+"op_exp": false,
 "player": "AnimationComponent/AnimationPlayer",
-"source": "res://assets/pixel-crawler/Enemy/Skeleton Crew/Skeleton - Warrior/Death/Death.aseprite"
+"source": "res://assets/pixel-crawler/Enemy/Orc Crew/Orc/Death/Death.aseprite"
 }
 
 [node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
@@ -400,22 +391,22 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_xa574")
+"": SubResource("AnimationLibrary_qjkxn")
 }
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_1o62j")
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_0a8ol")
 
 [node name="HealthComponent" parent="." index="5"]
 position = Vector2(0, -35)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -15)
-shape = SubResource("CapsuleShape2D_3fkpu")
+shape = SubResource("CapsuleShape2D_6bloc")
 
 [node name="BehaviorComponent" parent="." index="7"]
-stored_behavior = SubResource("Resource_w8vxy")
+stored_behavior = SubResource("Resource_qefch")
 
 [node name="AttributesComponent" parent="." index="10"]
-base_attributes = SubResource("Resource_fbov8")
+base_attributes = SubResource("Resource_fgoat")

@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 class_name BehaviorComponent
@@ -46,6 +47,8 @@ signal behavior_updated(action_name: StringName, target: Target)
 var behavior: Behavior
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	status_component.able_to_act_changed.connect(_on_able_to_act_changed)
 
 func run():
@@ -144,3 +147,12 @@ func _log(message: String):
 	if not logging_component:
 		return
 	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, message)
+
+func _get_configuration_warnings():
+	var warnings = PackedStringArray()
+	if not get_parent() is Node2D:
+		return warnings
+	if get_parent() is Enemy:
+		if not stored_behavior:
+			warnings.append("BehaviorComponent in Enemy needs to set stored_behavior")
+	return warnings

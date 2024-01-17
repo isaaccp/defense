@@ -215,7 +215,10 @@ func _standalone_ready_next_frame(parent: Node):
 	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider)
 	gameplay.initialize(game_mode, save_state)
 	parent.add_child(gameplay)
-	gameplay._on_gameplay_ui_layer_continue_run()
+	# initialize() calls deferred to set state to MENU, so need
+	# to wait a bit for it.
+	await parent.get_tree().create_timer(0.1).timeout
+	gameplay.state.change_state(gameplay.RUN)
 
 func prepare_test_gameplay_characters():
 	var num_players = players if players != -1 else starting_positions.get_child_count()
@@ -226,9 +229,12 @@ func prepare_test_gameplay_characters():
 	if not test_gameplay_characters:
 		var gcs: Array[GameplayCharacter] = []
 		for i in range(num_players):
-			var gc = load("res://character/playable_characters/godric_the_knight.tres")
+			var gc = load("res://character/playable_characters/godric_the_knight.tres").duplicate(true)
 			gcs.append(gc)
 		test_gameplay_characters = gcs
+		for gc in test_gameplay_characters:
+			# TODO: Just call initialize() when gc has it.
+			gc.health = gc.attributes.health
 	if test_behaviors:
 		for i in range(test_gameplay_characters.size()):
 			test_gameplay_characters[i].behavior = test_behaviors[i]

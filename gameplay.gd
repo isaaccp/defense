@@ -45,7 +45,7 @@ func _on_menu_entered():
 	ui_layer.show_gameplay_menu_screen(save_state.run_save_state != null)
 
 func _on_menu_exited():
-	ui_layer.hide_gameplay_menu_screen()
+	ui_layer.hide_screen()
 
 func _on_run_entered():
 	if save_state.unlocked_skills.available(behavior_library_meta_skill):

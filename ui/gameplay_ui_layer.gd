@@ -75,9 +75,6 @@ func initialize_state_machine_stack(sm: StateMachine):
 func show_gameplay_menu_screen(existing_run: bool):
 	show_screen(%GameplayMenuScreen, {"existing_run": existing_run})
 
-func hide_gameplay_menu_screen():
-	hide_screen()
-
 func start_character_selection(level_provider: LevelProvider):
 	character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
 	show_screen(character_selection_screen)
