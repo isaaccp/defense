@@ -7,8 +7,6 @@ const gameplay_scene = preload("res://gameplay.tscn")
 var ui_layer: UILayer
 
 var players_ready := {}
-var character_selections = {}
-var game_over = false
 var game_mode: GameMode
 
 func _ready():
@@ -61,9 +59,13 @@ func start_gameplay():
 	var gameplay = gameplay_scene.instantiate() as Gameplay
 	var save_state = load_save_state()
 	gameplay.initialize(game_mode, save_state)
-	gameplay.save_and_quit.connect(_on_save_and_quit)
+	gameplay.save_requested.connect(_on_save_requested)
+	gameplay.save_and_quit_requested.connect(_on_save_and_quit_requested)
 	add_child(gameplay)
 
-func _on_save_and_quit(save_state: SaveState):
+func _on_save_requested(save_state: SaveState):
+	ResourceSaver.save(save_state, "user://defense_save.tres")
+
+func _on_save_and_quit_requested(save_state: SaveState):
 	ResourceSaver.save(save_state, "user://defense_save.tres")
 	get_tree().quit()

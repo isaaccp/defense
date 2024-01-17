@@ -44,6 +44,8 @@ signal try_again_selected
 signal pre_run_continue_pressed
 ## Continue pressed on run sumary screen.
 signal run_summary_continue_selected
+## Continue pressed on between levels screen.
+signal between_levels_continue_selected
 
 func _ready():
 	super()
@@ -118,6 +120,9 @@ func show_pre_run_screen():
 func show_run_summary_screen(text: String):
 	show_screen(%RunSummaryScreen, {"text": text})
 
+func show_between_levels_screen(text: String):
+	show_screen(%BetweenLevelsScreen, {"text": text})
+
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
 	%LevelEnd.prepare(win, character_node, granted_xp_text)
 	%LevelEnd.show()
@@ -155,7 +160,6 @@ func _on_gameplay_menu_screen_continue_run():
 func _on_gameplay_menu_abandon_run_requested():
 	abandon_run_requested.emit()
 
-
 func _on_level_end_play_next_selected():
 	play_next_selected.emit()
 
@@ -167,4 +171,8 @@ func _on_pre_run_screen_continue_pressed():
 
 func _on_run_summary_screen_continue_selected():
 	run_summary_continue_selected.emit()
+	hide_screen()
+
+func _on_between_levels_screen_continue_selected():
+	between_levels_continue_selected.emit()
 	hide_screen()

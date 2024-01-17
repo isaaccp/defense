@@ -23,7 +23,8 @@ var RUN = state.add("run")
 var run: Run
 
 signal run_started
-signal save_and_quit(save_state: SaveState)
+signal save_and_quit_requested(save_state: SaveState)
+signal save_requested(save_state: SaveState)
 
 func _ready():
 	state.connect_signals(self)
@@ -50,6 +51,7 @@ func _on_run_entered():
 	run = run_scene.instantiate() as Run
 	run.initialize(save_state.run_save_state, ui_layer)
 	run.run_finished.connect(_on_run_finished)
+	run.save_requested.connect(_on_run_save_requested)
 	%RunParent.add_child(run)
 
 func _on_run_exited():
@@ -60,6 +62,9 @@ func _on_run_exited():
 func _on_run_finished():
 	save_state.run_save_state = null
 	state.change_state.call_deferred(MENU)
+
+func _on_run_save_requested():
+	save_requested.emit(save_state)
 
 func _on_pre_run_entered():
 	ui_layer.show_pre_run_screen()
@@ -79,7 +84,7 @@ func _on_gameplay_ui_layer_full_resume_requested():
 	get_tree().paused = false
 
 func _on_gameplay_ui_layer_save_and_quit_requested():
-	save_and_quit.emit(save_state)
+	save_and_quit_requested.emit(save_state)
 
 func _on_gameplay_ui_layer_new_run():
 	save_state.run_save_state = RunSaveState.make([], level_provider)

@@ -41,6 +41,7 @@ var characters_snapshot: Array[GameplayCharacter]
 signal run_finished
 signal level_paused
 signal level_resumed
+signal save_requested
 
 func _ready():
 	state.connect_signals(self)
@@ -112,6 +113,8 @@ func _on_level_failed():
 func _on_level_finished():
 	# Record xp gains here but apply and show them visually in BETWEEN_LEVELS.
 	level_xp = level.granted_xp()
+	# Needs to be recorded here in case it's the last level.
+	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
 	if level_provider.is_last_level():
 		state.change_state.call_deferred(RUN_SUMMARY)
 	else:
@@ -123,26 +126,30 @@ func _on_within_level_exited():
 	level = null
 	level_scene = null
 
+
 func _on_between_levels_entered():
-	# TODO: Do some stuff here like show map/whatever.
-	# Should only get here if there are more levels.
-	_grant_xp(level_xp)
+	# TODO: Do something fancy with animations and what not.
+	var text = ""
+	for character in gameplay_characters:
+		var prev_health = character.health
+		character.after_level_heal()
+		var prev_xp = character.xp
+		character.grant_xp(level_xp)
+		text += "%s\n" % character.name
+		text += "  XP: %d -> %d\n" % [prev_xp, character.xp]
+		text += "  HP: %d -> %d\n" % [prev_health, character.health]
+		text += "\n"
 	level_xp = 0
-	_heal_characters()
+	save_requested.emit()
+	ui_layer.show_between_levels_screen(text)
+	ui_layer.between_levels_continue_selected.connect(_on_between_levels_continue_selected, CONNECT_ONE_SHOT)
+
+func _on_between_levels_continue_selected():
 	assert(level_provider.advance())
-	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
 	state.change_state.call_deferred(WITHIN_LEVEL)
 
 func _on_between_levels_exited():
 	pass
-
-func _grant_xp(xp: int):
-	for character in gameplay_characters:
-		character.grant_xp(xp)
-
-func _heal_characters():
-	for character in gameplay_characters:
-		character.after_level_heal()
 
 func _on_run_summary_entered():
 	ui_layer.show_run_summary_screen(_meta_xp_text())
