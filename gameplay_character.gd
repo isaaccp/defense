@@ -16,6 +16,8 @@ class_name GameplayCharacter
 @export var behavior: StoredBehavior
 ## Initial acquired skills.
 @export var acquired_skills: SkillTreeState
+## Attributes.
+@export var attributes: Attributes
 
 # Those could be put in a separate resource for grouping.
 @export_group("Extra Save Data")
@@ -36,6 +38,10 @@ func has_xp(amount: int) -> bool:
 
 func grant_xp(amount: int) -> void:
 	xp += amount
+
+func after_level_heal():
+	var new_health = health + attributes.health * attributes.recovery
+	health = min(new_health, attributes.health)
 
 func make_character_body() -> Character:
 	var scene = CharacterSceneManager.get_character_scene(scene_id)

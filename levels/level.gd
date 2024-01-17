@@ -79,16 +79,19 @@ func _exit_tree():
 func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
 	self.ui_layer = ui_layer
 	for i in gameplay_characters.size():
+		var gc = gameplay_characters[i]
 		if acquired_skills_override_add:
-			gameplay_characters[i].acquired_skills.add(acquired_skills_override_add)
+			gc.acquired_skills.add(acquired_skills_override_add)
 		if acquired_skills_override:
-			gameplay_characters[i].acquired_skills = acquired_skills_override
-		var character = gameplay_characters[i].make_character_body()
-		character.actor_name = gameplay_characters[i].name
-		character.name = character.actor_name
+			gc.acquired_skills = acquired_skills_override
+		var character = gc.make_character_body()
+		# Consider putting all this in initialize.
+		character.actor_name = gc.name
 		character.idx = i
-		character.peer_id = gameplay_characters[i].peer_id
+		character.peer_id = gc.peer_id
 		character.position = starting_positions.get_child(i).position
+		var attributes_component = AttributesComponent.get_or_die(character)
+		attributes_component.base_attributes = gc.attributes
 		characters.add_child(character)
 
 func _on_prepare_entered():
@@ -137,6 +140,11 @@ func _on_summary_entered():
 		ui_layer.try_again_selected.connect(_on_try_again_selected)
 
 func _on_play_next_selected():
+	# Save health into persistent state and move on.
+	for character in characters.get_children():
+		var persistent_state = Component.get_persistent_game_state_component_or_die(character)
+		var health_component = Component.get_health_component_or_die(character)
+		persistent_state.state.health = health_component.health
 	level_finished.emit()
 	state.change_state.call_deferred(DONE)
 

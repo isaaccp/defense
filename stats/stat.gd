@@ -20,7 +20,10 @@ const LevelsBeaten: StringName = &"levels_beaten"
 
 var value: Variant:
 	get:
-		return int_value.value if int_value else float_value.value
+		if int_value:
+			return int_value.value
+		else:
+			return float_value.value
 
 static func make(name: StringName, value: Variant) -> Stat:
 	var stat = Stat.new()

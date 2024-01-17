@@ -69,22 +69,22 @@ func _all_spawners_finished() -> bool:
 func _time_since_last_spawn_xp_string(granted: int, base: int, multiplier: float, time_str: String) -> String:
 	return "Base XP: %d\nTime multiplier: %0.1f (finished within %s of last spawn)\nXP: %d" % [base, multiplier, time_str, granted]
 
-func _on_level_finished(victory_type: VictoryLossConditionComponent.VictoryType):
+func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType):
 	granted_xp = GrantedXP.new()
 	match level_xp_type:
 		LevelXPType.TIME_SINCE_LAST_SPAWN:
 			counting_time = false
 			if elapsed_time < experience_time_2x:
-				granted_xp.amount = base_xp * 2
+				granted_xp.amount = round(base_xp * 2)
 				granted_xp.text = _time_since_last_spawn_xp_string(granted_xp.amount, base_xp, 2, "< %ds" % experience_time_2x)
 			elif elapsed_time < experience_time_1_5x:
-				granted_xp.amount = base_xp * 1.5
+				granted_xp.amount = round(base_xp * 1.5)
 				granted_xp.text = _time_since_last_spawn_xp_string(granted_xp.amount, base_xp, 1.5, "< %ds" % experience_time_1_5x)
 			elif elapsed_time < experience_time_1x:
 				granted_xp.amount = base_xp
 				granted_xp.text = _time_since_last_spawn_xp_string(granted_xp.amount, base_xp, 1.0, "< %ds" % experience_time_1x)
 			else:
-				granted_xp.amount = base_xp * 0.5
+				granted_xp.amount = round(base_xp * 0.5)
 				granted_xp.text = _time_since_last_spawn_xp_string(granted_xp.amount, base_xp, 0.5, "> %ds" % experience_time_1x)
 
 func xp() -> GrantedXP:

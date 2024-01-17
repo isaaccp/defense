@@ -68,7 +68,7 @@ func add_log_entry(type: LogType, message: String, stats_updates: Array[Stat] = 
 	entries.append(le)
 	log_entry_added.emit(le)
 	if type in print_logtypes:
-		print("[%0.2f] %s(%s): %s" % [time, get_parent().name, LoggingComponent.log_type_name(type), message])
+		print("[%0.2f] %s(%s): %s" % [time, get_parent().actor_name, LoggingComponent.log_type_name(type), message])
 	if track_stats:
 		for stat in stats_updates:
 			stats.add_stat(stat)

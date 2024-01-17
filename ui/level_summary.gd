@@ -14,14 +14,15 @@ func prepare(character_node: Node):
 	for c in %StatsContainer.get_children():
 		c.queue_free()
 	var stats = Stats.new()
+	var stats_view: StatsView
 	for character in character_node.get_children():
 		assert(character is Character)
 		var logging_component = Component.get_logging_component_or_die(character)
 		var character_stats = logging_component.stats
-		var stats_view: StatsView = stats_view_scene.instantiate()
+		stats_view = stats_view_scene.instantiate()
 		stats_view.initialize("Stats for %s" % character.actor_name, stat_names, character_stats)
 		%StatsContainer.add_child(stats_view)
 		stats.add(character_stats)
-	var stats_view: StatsView = stats_view_scene.instantiate()
+	stats_view = stats_view_scene.instantiate()
 	stats_view.initialize("Overall", stat_names, stats)
 	%StatsContainer.add_child(stats_view)

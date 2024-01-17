@@ -28,6 +28,7 @@ enum ShowHealth {
 
 @export_group("Optional")
 @export var logging_component: LoggingComponent
+@export var persistent_game_state_component: PersistentGameStateComponent
 
 @export_group("Debug")
 @export var max_health: int:
@@ -46,7 +47,10 @@ func _ready():
 
 func _initialize():
 	max_health = attributes_component.health
-	_update_health(max_health)
+	if persistent_game_state_component:
+		_update_health(persistent_game_state_component.state.health)
+	else:
+		_update_health(max_health)
 
 # Returns true if hit caused any damage.
 func process_hit(hit_effect: HitEffect) -> HitResult:

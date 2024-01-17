@@ -2,6 +2,8 @@ extends Node
 
 class_name AttributesComponent
 
+const component = &"AttributesComponent"
+
 @export_group("Required")
 @export var base_attributes: Attributes
 
@@ -27,6 +29,7 @@ var resistance: Array[Resistance]:
 	set(value): pass
 
 func _ready():
+
 	if status_component:
 		status_component.statuses_changed.connect(_on_statuses_changed)
 		_on_statuses_changed()
@@ -41,3 +44,11 @@ func resistance_multiplier_for(damage_type: DamageType) -> float:
 
 func _on_statuses_changed(_statuses: Array[StatusDef.Id] = []):
 	attributes = status_component.adjusted_attributes(base_attributes)
+
+static func get_or_null(node) -> AttributesComponent:
+	return Component.get_or_null(node, component) as AttributesComponent
+
+static func get_or_die(node) -> AttributesComponent:
+	var c = get_or_null(node)
+	assert(c)
+	return c

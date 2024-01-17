@@ -4,8 +4,17 @@ class_name Run
 
 var ui_layer: GameplayUILayer
 var run_save_state: RunSaveState
-var level_provider: LevelProvider
-var gameplay_characters: Array[GameplayCharacter]
+
+var level_provider: LevelProvider:
+	get:
+		return run_save_state.level_provider
+	set(value):
+		assert(false, "level_provider should not be set")
+var gameplay_characters: Array[GameplayCharacter]:
+	get:
+		return run_save_state.gameplay_characters
+	set(value):
+		run_save_state.gameplay_characters = value
 
 const StateMachineName = "run"
 var state = StateMachine.new(StateMachineName)
@@ -22,6 +31,8 @@ const meta_xp_per_level = 50
 # If in WITHIN_LEVEL, current level being played.
 var level: Level
 var level_scene: PackedScene
+# Saved in WITHIN_LEVEL, to be used during BETWEEN_LEVELS.
+var level_xp: int
 
 # A copy of characters' state as they were when level started.
 # Allows to reset state.
@@ -49,8 +60,6 @@ func _exit_tree():
 func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	self.ui_layer = ui_layer
 	self.run_save_state = run_save_state
-	gameplay_characters = run_save_state.gameplay_characters
-	level_provider = run_save_state.level_provider
 	# Technically only needed during LEVEL state, but easier than connect/disconnect.
 	ui_layer.restart_requested.connect(_on_restart_requested)
 	ui_layer.reset_requested.connect(_on_reset_requested)
@@ -68,8 +77,10 @@ func _on_character_selection_finished(character_selections: Array[int]):
 		# TODO: Remove the number when we don't allow two of
 		# the same character.
 		var gameplay_character = level_provider.available_characters[idx].duplicate(true) as GameplayCharacter
+		# TODO: Move this to initialize() in GC.
 		gameplay_character.name = "%s (%d)" % [gameplay_character.name, selection]
 		gameplay_character.peer_id = players[selection % players.size()].peer_id
+		gameplay_character.health = gameplay_character.attributes.health
 		if level_provider.behavior:
 			gameplay_character.behavior = level_provider.behavior
 		gameplay_characters.append(gameplay_character)
@@ -99,15 +110,12 @@ func _on_level_failed():
 	_on_within_level_entered()
 
 func _on_level_finished():
-	_grant_xp(level)
+	# Record xp gains here but apply and show them visually in BETWEEN_LEVELS.
+	level_xp = level.granted_xp()
 	if level_provider.is_last_level():
 		state.change_state.call_deferred(RUN_SUMMARY)
 	else:
 		state.change_state.call_deferred(BETWEEN_LEVELS)
-
-func _grant_xp(level: Level):
-	for character in gameplay_characters:
-		character.grant_xp(level.granted_xp())
 
 func _on_within_level_exited():
 	%StateParent.remove_child(level)
@@ -118,12 +126,23 @@ func _on_within_level_exited():
 func _on_between_levels_entered():
 	# TODO: Do some stuff here like show map/whatever.
 	# Should only get here if there are more levels.
+	_grant_xp(level_xp)
+	level_xp = 0
+	_heal_characters()
 	assert(level_provider.advance())
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
 	state.change_state.call_deferred(WITHIN_LEVEL)
 
 func _on_between_levels_exited():
 	pass
+
+func _grant_xp(xp: int):
+	for character in gameplay_characters:
+		character.grant_xp(xp)
+
+func _heal_characters():
+	for character in gameplay_characters:
+		character.after_level_heal()
 
 func _on_run_summary_entered():
 	# TODO: Implement run summary screen and remove this.
@@ -176,9 +195,3 @@ func meta_xp() -> int:
 
 func paused():
 	return state.is_state(WITHIN_LEVEL) and level.paused()
-
-func get_save_state() -> RunSaveState:
-	var run_state = RunSaveState.new()
-	run_state.gameplay_characters = gameplay_characters
-	run_state.level_provider = level_provider
-	return run_state
