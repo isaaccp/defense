@@ -27,8 +27,8 @@ var _skill_colors = {
 signal ok_pressed
 
 @export_group("Testing")
+@export var test_mode: Mode
 @export var test_character: GameplayCharacter
-@export var test_show_all: bool
 
 @export_group("Debug")
 @export var selected_node: GraphNode
@@ -42,10 +42,13 @@ var hide_locked_skills: bool
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
-		# So it works as a standalone scene for easy testing.
-		# TODO: Update so it works and so you can test both modes.
-		#if test_character:
-		#	initialize(test_character, test_show_all)
+		var save_state = SaveState.make_new()
+		save_state.unlocked_skills.full = true
+		if test_mode == Mode.UNLOCK:
+			initialize(test_mode, save_state)
+		elif test_mode == Mode.ACQUIRE:
+			assert(test_character)
+			initialize(test_mode, save_state, test_character)
 		pass
 	_setup_tree()
 
