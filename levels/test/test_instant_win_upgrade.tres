@@ -9,3 +9,4 @@ script = ExtResource("2_glaws")
 players = 2
 levels = Array[PackedScene]([ExtResource("1_iqt4n"), ExtResource("1_iqt4n")])
 available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_gnsko")])
+current_level = 0

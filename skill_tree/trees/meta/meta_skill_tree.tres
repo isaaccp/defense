@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkillTree" load_steps=3 format=3 uid="uid://texer0y616o"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_t8g4s"]
+[ext_resource type="Resource" uid="uid://bj12af7xsthcs" path="res://skill_tree/meta_skills/behavior_library.tres" id="2_dpmq8"]
+
+[resource]
+script = ExtResource("1_t8g4s")
+tree_type = 6
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_dpmq8")])

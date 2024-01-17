@@ -9,7 +9,7 @@ enum SkillType {
 	TARGET,
 	CONDITION,
 	TARGET_SORT,
-	META,
+	META_SKILL,
 }
 
 @export var skill_name: StringName

@@ -15,10 +15,12 @@ var skill_types = [
 	Skill.SkillType.TARGET,
 	Skill.SkillType.CONDITION,
 	Skill.SkillType.TARGET_SORT,
+	Skill.SkillType.META_SKILL,
 ]
 
 var tree_types = [
 	SkillTree.TreeType.GENERAL,
+	SkillTree.TreeType.META,
 	SkillTree.TreeType.WARRIOR,
 	SkillTree.TreeType.ROGUE,
 	SkillTree.TreeType.CLERIC,

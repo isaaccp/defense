@@ -3,10 +3,10 @@ extends Skill
 
 class_name MetaSkill
 
-@export var description: String
+@export_multiline var description: String
 
 func _init():
-	skill_type = SkillType.META
+	skill_type = SkillType.META_SKILL
 
 func name() -> String:
 	return skill_name

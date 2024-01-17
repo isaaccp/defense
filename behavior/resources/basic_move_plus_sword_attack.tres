@@ -41,6 +41,7 @@ func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
 script = ExtResource("5_xekng")
 type = 2
 sorter_script = SubResource("GDScript_i10ol")
+description = ""
 skill_name = &"Closest First"
 skill_type = 4
 tree_type = 1

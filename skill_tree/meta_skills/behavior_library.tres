@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MetaSkill" load_steps=2 format=3 uid="uid://bj12af7xsthcs"]
+
+[ext_resource type="Script" path="res://meta/meta_skill.gd" id="1_4ojx0"]
+
+[resource]
+script = ExtResource("1_4ojx0")
+description = "Allows saving behaviors across runs to easily re-use them."
+skill_name = &"Behavior Library"
+skill_type = 5
+tree_type = 6
