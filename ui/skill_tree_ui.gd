@@ -113,6 +113,7 @@ func _setup_tree():
 			var skill = GraphNode.new()
 			# var skill = skill_node_scene.instantiate()
 			skill.set_meta("skill", s)
+			skill.tooltip_text = s.full_description()
 			skill.self_modulate = _tint(s)
 			skill.draggable = false
 			skill.title = s.name()

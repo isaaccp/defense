@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=7 format=3 uid="uid://dvs6g4m5siut3"]
+[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=6 format=3 uid="uid://dvs6g4m5siut3"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_eob2b"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="2_a11vh"]
-[ext_resource type="Resource" uid="uid://c2lpsyebwog7q" path="res://skill_tree/targets/self.tres" id="2_wqgpg"]
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_mefl5"]
 [ext_resource type="Script" path="res://behavior/target_selection/ally_target_selector.gd" id="4_y3bvn"]
 
@@ -22,5 +21,4 @@ params = SubResource("Resource_simwv")
 abstract = true
 skill_name = &"Ally"
 skill_type = 2
-parent = ExtResource("2_wqgpg")
 tree_type = 1

@@ -8,6 +8,7 @@
 script = ExtResource("2_56w3l")
 type = 2
 sorter_script = ExtResource("3_677ug")
+description = "Sorts by distance, selecting farthest target"
 skill_name = &"Farthest First"
 skill_type = 4
 parent = ExtResource("1_pa4xv")

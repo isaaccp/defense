@@ -128,7 +128,7 @@ func full_description() -> String:
 	return "%s\n%s" % [description(), attributes()]
 
 func description() -> String:
-	return "<missing description for %s>" % def.name()
+	return "<missing description>"
 
 func _range_str() -> String:
 	var max_str = "inf" if max_distance == MaxDistance else "%0.1f" % max_distance
@@ -140,6 +140,6 @@ func attributes():
 	if cooldown > 0:
 		attrs += "Cooldown: %0.1f\n" % cooldown
 	if abortable:
-		attrs += "Can be preempted"
+		attrs += "Can be preempted\n"
 	attrs += "Supported Target Types: %s" % def.supported_target_types_str()
 	return attrs

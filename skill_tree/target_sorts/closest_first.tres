@@ -7,6 +7,7 @@
 script = ExtResource("1_fy5qd")
 type = 2
 sorter_script = ExtResource("2_ns2ml")
+description = "Sorts by distance, selecting closest target"
 skill_name = &"Closest First"
 skill_type = 4
 tree_type = 1
