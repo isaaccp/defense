@@ -42,6 +42,8 @@ signal play_next_selected
 signal try_again_selected
 ## Continue pressed on pre run screen.
 signal pre_run_continue_pressed
+## Continue pressed on run sumary screen.
+signal run_summary_continue_selected
 
 func _ready():
 	super()
@@ -113,6 +115,9 @@ func show_upgrade_window(character: Character):
 func show_pre_run_screen():
 	show_screen(%PreRunScreen, {"save_state": save_state})
 
+func show_run_summary_screen(text: String):
+	show_screen(%RunSummaryScreen, {"text": text})
+
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
 	%LevelEnd.prepare(win, character_node, granted_xp_text)
 	%LevelEnd.show()
@@ -159,3 +164,7 @@ func _on_level_end_try_again_selected():
 
 func _on_pre_run_screen_continue_pressed():
 	pre_run_continue_pressed.emit()
+
+func _on_run_summary_screen_continue_selected():
+	run_summary_continue_selected.emit()
+	hide_screen()

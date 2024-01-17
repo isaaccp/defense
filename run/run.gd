@@ -145,16 +145,14 @@ func _heal_characters():
 		character.after_level_heal()
 
 func _on_run_summary_entered():
-	# TODO: Implement run summary screen and remove this.
-	print("Summary: %s" % _meta_xp_text())
-	finish_run.call_deferred()
-	# var summary = summary_scene.instantiate() as RunSummary
-	# summary.initialize(characters, run_victory)
-	# StateParent.add_child(summary)
-	# summary.done.connect(finish_run)
+	ui_layer.show_run_summary_screen(_meta_xp_text())
+	ui_layer.run_summary_continue_selected.connect(_on_run_summary_continue_selected)
 
 func _on_run_summary_exited():
 	pass
+
+func _on_run_summary_continue_selected():
+	finish_run.call_deferred()
 
 func finish_run():
 	# TODO: Differentiate failure vs success.

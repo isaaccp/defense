@@ -17,11 +17,11 @@ script = ExtResource("1_xhm8v")
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="StatsView" parent="StatsContainer" instance=ExtResource("2_ik166")]
+[node name="SampleStatsView" parent="StatsContainer" instance=ExtResource("2_ik166")]
 layout_mode = 2
 
-[node name="StatsView2" parent="StatsContainer" instance=ExtResource("2_ik166")]
+[node name="SampleStatsView2" parent="StatsContainer" instance=ExtResource("2_ik166")]
 layout_mode = 2
 
-[node name="StatsView3" parent="StatsContainer" instance=ExtResource("2_ik166")]
+[node name="SampleStatsView3" parent="StatsContainer" instance=ExtResource("2_ik166")]
 layout_mode = 2

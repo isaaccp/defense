@@ -13,46 +13,57 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_po8jr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -118.0
-offset_top = -40.0
-offset_right = 118.0
-offset_bottom = 40.0
+offset_left = -358.0
+offset_top = -105.0
+offset_right = 358.0
+offset_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LevelSummary" parent="VBoxContainer" instance=ExtResource("1_80ckp")]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Stats"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelSummary" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_80ckp")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="XPLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+[node name="XPLabel" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayNextButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="PlayNextButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Play Next"
 
-[node name="TryAgainButton" parent="VBoxContainer/HBoxContainer" instance=ExtResource("2_f80ev")]
+[node name="TryAgainButton" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_f80ev")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Try Again"
 confirmation_text = "You won. Please confirm you want to try again."
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/PlayNextButton" to="." method="_on_play_next_button_pressed"]
-[connection signal="pressed_confirmed" from="VBoxContainer/HBoxContainer/TryAgainButton" to="." method="_on_try_again_button_pressed_confirmed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/PlayNextButton" to="." method="_on_play_next_button_pressed"]
+[connection signal="pressed_confirmed" from="PanelContainer/VBoxContainer/HBoxContainer/TryAgainButton" to="." method="_on_try_again_button_pressed_confirmed"]
