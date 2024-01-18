@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b7ancivyvj36e"
+path="res://.godot/imported/HolyStaff.aseprite-f8c8903a9e5d0a403f6e8fdd1c9e8bef.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Weapons/HolyStaff.aseprite"
+dest_files=["res://.godot/imported/HolyStaff.aseprite-f8c8903a9e5d0a403f6e8fdd1c9e8bef.res"]
+
+[params]
+
