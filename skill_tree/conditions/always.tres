@@ -13,6 +13,7 @@ cmp = 0
 script = ExtResource("2_7lr6o")
 type = 1
 evaluator_script = ExtResource("1_utwvb")
+description_text = "<missing description>"
 params = SubResource("Resource_8lwyn")
 abstract = true
 skill_name = &"Always"

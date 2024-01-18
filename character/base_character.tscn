@@ -23,9 +23,6 @@ script = ExtResource("1_1mnbb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-offset = Vector2(0, -16)
-hframes = 3
-vframes = 2
 metadata/_aseprite_wizard_config_ = {
 "keep_anim_length": false,
 "layer": "",
@@ -38,11 +35,7 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Heroes/Knight/Run/Run.aseprite"
 }
 
-[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("2_oxhjf")]
-animation_player = NodePath("AnimationPlayer")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
-root_node = NodePath("../../Sprite2D")
+[node name="AnimationComponent" parent="." instance=ExtResource("2_oxhjf")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -55,10 +48,10 @@ shape = SubResource("CircleShape2D_7fvau")
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("4_r4r2v")]
 status_component = NodePath("../StatusComponent")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "persistent_game_state_component", "logging_component") instance=ExtResource("5_xneld")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component", "persistent_game_state_component") instance=ExtResource("5_xneld")]
 attributes_component = NodePath("../AttributesComponent")
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 logging_component = NodePath("../LoggingComponent")
+persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
 health_component = NodePath("../HealthComponent")

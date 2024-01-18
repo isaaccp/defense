@@ -14,6 +14,7 @@ cmp = 0
 script = ExtResource("2_hcgbt")
 type = 1
 evaluator_script = ExtResource("1_nkc6u")
+description_text = "<missing description>"
 params = SubResource("Resource_opf8v")
 abstract = true
 skill_name = &"Once"

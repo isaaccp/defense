@@ -14,6 +14,7 @@ cmp = 0
 script = ExtResource("2_8blmi")
 type = 2
 evaluator_script = ExtResource("1_i024q")
+description_text = "<missing description>"
 params = SubResource("Resource_e7tbt")
 abstract = true
 skill_name = &"Target Health"

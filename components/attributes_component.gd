@@ -29,7 +29,6 @@ var resistance: Array[Resistance]:
 	set(value): pass
 
 func _ready():
-
 	if status_component:
 		status_component.statuses_changed.connect(_on_statuses_changed)
 		_on_statuses_changed()
@@ -52,3 +51,12 @@ static func get_or_die(node) -> AttributesComponent:
 	var c = get_or_null(node)
 	assert(c)
 	return c
+
+func _get_configuration_warnings():
+	var warnings = PackedStringArray()
+	if not get_parent() is Node2D:
+		return warnings
+	if get_parent() is Enemy:
+		if not base_attributes:
+			warnings.append("AttributesComponent in Enemy needs to set base_attributes")
+	return warnings
