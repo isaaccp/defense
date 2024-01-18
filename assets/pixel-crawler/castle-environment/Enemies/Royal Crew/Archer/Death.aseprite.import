@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d131lqu74doo3"
+path="res://.godot/imported/Death.aseprite-d90be8db13167e9244b1898fcfb94afc.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Archer/Death.aseprite"
+dest_files=["res://.godot/imported/Death.aseprite-d90be8db13167e9244b1898fcfb94afc.res"]
+
+[params]
+

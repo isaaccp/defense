@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://byn17xrijmm8i"
+path="res://.godot/imported/Idle.aseprite-603afc931d404ebcd9ce2582955d544c.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Archer/Idle.aseprite"
+dest_files=["res://.godot/imported/Idle.aseprite-603afc931d404ebcd9ce2582955d544c.res"]
+
+[params]
+

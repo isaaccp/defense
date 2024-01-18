@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cifg55uojgv8f"
+path="res://.godot/imported/MockUp_02.aseprite-66b6e2f8156d22b65ffbfc575a587482.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Social/MockUp_02.aseprite"
+dest_files=["res://.godot/imported/MockUp_02.aseprite-66b6e2f8156d22b65ffbfc575a587482.res"]
+
+[params]
+

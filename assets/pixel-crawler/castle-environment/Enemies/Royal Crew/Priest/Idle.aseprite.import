@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bvaq7xhdhgfn4"
+path="res://.godot/imported/Idle.aseprite-886d0310b36f30fd31adb1c704cd333c.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Priest/Idle.aseprite"
+dest_files=["res://.godot/imported/Idle.aseprite-886d0310b36f30fd31adb1c704cd333c.res"]
+
+[params]
+

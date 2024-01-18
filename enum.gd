@@ -6,4 +6,6 @@ enum CharacterSceneId {
 	UNSPECIFIED,
 	KNIGHT,
 	WIZARD,
+	ROGUE,
+	CLERIC,
 }

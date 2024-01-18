@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqovejwqgp0ed"]
+
+[ext_resource type="PackedScene" uid="uid://bmpg7h70fd2ji" path="res://character/base_character.tscn" id="1_qgcx4"]
+[ext_resource type="Texture2D" uid="uid://dc322qr27maf6" path="res://character/rogue/Run.png" id="2_hw44n"]
+
+[node name="Rogue" instance=ExtResource("1_qgcx4")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -16)
+texture = ExtResource("2_hw44n")
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 0,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"player": "AnimationComponent/AnimationPlayer",
+"source": "res://assets/pixel-crawler/Heroes/Rogue/Death/Death.aseprite"
+}
+
+[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -1)
+
+[node name="HealthComponent" parent="." index="6"]
+position = Vector2(0, -37)
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -15)

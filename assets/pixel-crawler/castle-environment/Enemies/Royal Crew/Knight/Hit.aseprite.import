@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c7bg7otfdb4w6"
+path="res://.godot/imported/Hit.aseprite-5fb44efeacd2660d2b2c6f996bb98a9e.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Knight/Hit.aseprite"
+dest_files=["res://.godot/imported/Hit.aseprite-5fb44efeacd2660d2b2c6f996bb98a9e.res"]
+
+[params]
+

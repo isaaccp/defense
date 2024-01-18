@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cto8ffiwfvl35"
+path="res://.godot/imported/Hit.aseprite-25c54fc8f2f5ffd9eb6917fc285a9774.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Priest/Hit.aseprite"
+dest_files=["res://.godot/imported/Hit.aseprite-25c54fc8f2f5ffd9eb6917fc285a9774.res"]
+
+[params]
+

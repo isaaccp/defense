@@ -29,20 +29,19 @@ signal behavior_updated(action_name: StringName, target: Target)
 			return persistent_game_state_component.state.behavior
 		return stored_behavior
 
-@export_group("Debug")
-@export var rule: Rule
-@export var target: Target
-@export var action: Action
-@export var action_cooldowns: Dictionary
+var rule: Rule
+var target: Target
+var action: Action
+var action_cooldowns: Dictionary
 # Keep track of time so we can do pause-aware stuff.
-@export var elapsed_time: float = 0.0
+var elapsed_time: float = 0.0
 # How often to check whether a higher-priority action should
 # stop an abortable action.
-@export var abortable_action_check_period = 0.1
-@export var next_abortable_action_check_time: float
+var abortable_action_check_period = 0.1
+var next_abortable_action_check_time: float
 
-@export var running = false
-@export var able_to_act = true
+var running = false
+var able_to_act = true
 
 var behavior: Behavior
 

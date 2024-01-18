@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c2gf3caij6np1"
+path="res://.godot/imported/Hit.aseprite-b2f13cd1f8127832183a81f191c68c6b.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Soldier/Hit.aseprite"
+dest_files=["res://.godot/imported/Hit.aseprite-b2f13cd1f8127832183a81f191c68c6b.res"]
+
+[params]
+

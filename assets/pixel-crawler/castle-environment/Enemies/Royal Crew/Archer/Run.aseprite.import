@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cjia8aenu2vuy"
+path="res://.godot/imported/Run.aseprite-acf5888d782d9902f3b0091917ee287e.res"
+
+[deps]
+
+source_file="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Archer/Run.aseprite"
+dest_files=["res://.godot/imported/Run.aseprite-acf5888d782d9902f3b0091917ee287e.res"]
+
+[params]
+

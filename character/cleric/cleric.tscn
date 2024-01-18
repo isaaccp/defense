@@ -1,5 +1,330 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0bwe45brhwcv"]
+[gd_scene load_steps=15 format=3 uid="uid://ck757ft7x41g7"]
 
-[ext_resource type="PackedScene" uid="uid://bmpg7h70fd2ji" path="res://character/base_character.tscn" id="1_vws3n"]
+[ext_resource type="PackedScene" uid="uid://bmpg7h70fd2ji" path="res://character/base_character.tscn" id="1_b1c7k"]
+[ext_resource type="Texture2D" uid="uid://dp2hk7qnrd3pc" path="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Priest/Run-Sheet.png" id="2_7t0xh"]
+[ext_resource type="Texture2D" uid="uid://cx27i8gr75erd" path="res://assets/pixel-crawler/castle-environment/Weapons/Weapons.png" id="3_0x3v3"]
+[ext_resource type="Texture2D" uid="uid://7jw02l2qmlf3" path="res://assets/pixel-crawler/textures/right_hand.tres" id="4_3ixxk"]
+[ext_resource type="Texture2D" uid="uid://djfl1ccspvfio" path="res://assets/pixel-crawler/textures/left_hand.tres" id="5_3hwcr"]
+[ext_resource type="Texture2D" uid="uid://c22jbox0jtqyn" path="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Priest/Death-Sheet.png" id="6_jjcna"]
+[ext_resource type="Texture2D" uid="uid://ct5eepk2pj2o" path="res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Priest/Idle-Sheet.png" id="7_070mx"]
 
-[node name="Cleric" instance=ExtResource("1_vws3n")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnr22"]
+atlas = ExtResource("3_0x3v3")
+region = Rect2(128, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey4bw"]
+atlas = ExtResource("3_0x3v3")
+region = Rect2(144, 112, 16, 16)
+
+[sub_resource type="Animation" id="Animation_lhha0"]
+resource_name = "death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_jjcna")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D/RightHand:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872664, 0.261799, 0.523599, 1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D/RightHand:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(11, 21), Vector2(12, 22), Vector2(14, 22), Vector2(17, 23), Vector2(21, 31)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D/LeftHand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, 23), Vector2(-5, 25), Vector2(-5, 28), Vector2(-2, 28), Vector2(6, 29)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Sprite2D/LeftHand:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, -0.261799, 1.5708, 1.5708]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Sprite2D:hframes")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_x5ot2"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_070mx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D/RightHand:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(11, 21), Vector2(11, 21.5), Vector2(11, 22), Vector2(11, 21.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D/LeftHand:position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, 23), Vector2(-5, 24), Vector2(-5, 25), Vector2(-5, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_bu312"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D/RightHand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(11, 21), Vector2(10.5, 21), Vector2(10, 20.5), Vector2(10, 21), Vector2(10.5, 20.5), Vector2(11, 21)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D/LeftHand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5, 23), Vector2(-5.5, 22.5), Vector2(-6, 22), Vector2(-5.75, 22.5), Vector2(-5, 23)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_7t0xh")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D/RightHand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Sprite2D:hframes")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Sprite2D/LeftHand:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_or5tu"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t7fvm"]
+_data = {
+"RESET": SubResource("Animation_or5tu"),
+"death": SubResource("Animation_lhha0"),
+"idle": SubResource("Animation_x5ot2"),
+"run": SubResource("Animation_bu312")
+}
+
+[node name="Cleric" instance=ExtResource("1_b1c7k")]
+texture_filter = 1
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, -32)
+texture = ExtResource("6_jjcna")
+hframes = 6
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 0,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"player": "AnimationComponent/AnimationPlayer",
+"source": "res://assets/pixel-crawler/castle-environment/Enemies/Royal Crew/Priest/Hit.aseprite"
+}
+
+[node name="RightHand" type="Sprite2D" parent="Sprite2D" index="0"]
+show_behind_parent = true
+position = Vector2(11, 21)
+texture = ExtResource("4_3ixxk")
+
+[node name="Weapon" type="Sprite2D" parent="Sprite2D/RightHand" index="0"]
+show_behind_parent = true
+position = Vector2(0, -5)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_bnr22")
+
+[node name="LeftHand" type="Sprite2D" parent="Sprite2D" index="1"]
+position = Vector2(-5, 23)
+texture = ExtResource("5_3hwcr")
+
+[node name="HolyBook" type="Sprite2D" parent="Sprite2D/LeftHand" index="0"]
+position = Vector2(4, 0)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_ey4bw")
+
+[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_t7fvm")
+}
+speed_scale = 0.5
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+position = Vector2(0, -1)
+
+[node name="HealthComponent" parent="." index="6"]
+position = Vector2(0, -35)
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+visible = false
+position = Vector2(0, -15)
