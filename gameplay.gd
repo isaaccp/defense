@@ -9,9 +9,9 @@ const behavior_library_meta_skill = preload("res://skill_tree/meta_skills/behavi
 @export var ui_layer: GameplayUILayer
 
 @export_group("Debug")
-# TODO: Remove next two, move to run.
 @export var level_provider: LevelProvider
 var save_state: SaveState
+var force_behavior_library = false
 
 const StateMachineName = "gameplay"
 var state = StateMachine.new(StateMachineName)
@@ -40,6 +40,9 @@ func initialize(game_mode: GameMode, save_state: SaveState):
 	level_provider = game_mode.level_provider
 	if game_mode.is_multiplayer():
 		assert(level_provider.players == 2)
+	if game_mode.dev_behavior_library:
+		save_state.behavior_library = game_mode.dev_behavior_library
+		force_behavior_library = true
 
 func _on_menu_entered():
 	ui_layer.show_gameplay_menu_screen(save_state.run_save_state != null)
@@ -48,7 +51,7 @@ func _on_menu_exited():
 	ui_layer.hide_screen()
 
 func _on_run_entered():
-	if save_state.unlocked_skills.available(behavior_library_meta_skill):
+	if force_behavior_library or save_state.unlocked_skills.available(behavior_library_meta_skill):
 		ui_layer.hud.set_behavior_library(save_state.behavior_library)
 	run = run_scene.instantiate() as Run
 	run.initialize(save_state.run_save_state, ui_layer)
