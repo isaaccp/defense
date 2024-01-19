@@ -27,7 +27,7 @@ func initialize(character_: Character) -> void:
 		_set_health(health.health, health.max_health)
 	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
-	var behavior = BehaviorComponent.get_or_die(character)
+	var behavior = character.get_component_or_die(BehaviorComponent)
 	behavior.behavior_updated.connect(_on_behavior_updated)
 	var state = Component.get_persistent_game_state_component_or_die(character).state
 	%Title.text = state.name
