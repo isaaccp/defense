@@ -56,6 +56,10 @@ func run():
 	behavior.prepare(actor, side_component)
 	running = true
 
+func stop():
+	_interrupt()
+	running = false
+
 func _on_able_to_act_changed(can_act: bool):
 	able_to_act = can_act
 	if not can_act:

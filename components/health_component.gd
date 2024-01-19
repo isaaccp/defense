@@ -40,6 +40,8 @@ enum ShowHealth {
 @export var health: int
 @export var is_dead: bool = false
 
+var running = false
+
 func _ready():
 	if show_health in [ShowHealth.NEVER, ShowHealth.WHEN_NOT_FULL]:
 		%HealthBar.hide()
@@ -52,8 +54,17 @@ func _initialize():
 	else:
 		_update_health(max_health)
 
+func run():
+	running = true
+
+func stop():
+	running = false
+
 # Returns true if hit caused any damage.
 func process_hit(hit_effect: HitEffect) -> HitResult:
+	if not running:
+		print("Ignoring hit received while not running")
+		return
 	var hit_result = HitResult.new()
 	var prev_health = health
 	var adjusted_damage = hit_effect.adjusted_damage()

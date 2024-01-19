@@ -7,6 +7,11 @@ extends Actor
 ## * a BehaviorComponent
 class_name Unit
 
+## Makes the Unit stay idle.
+func force_idle(idle: bool = true):
+	var behavior = BehaviorComponent.get_or_die(self)
+	behavior.force_idle(idle)
+
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	_missing_component_warning(warnings, BehaviorComponent)
