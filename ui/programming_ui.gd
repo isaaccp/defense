@@ -28,6 +28,17 @@ func editor_initialize(b: StoredBehavior):
 
 	initialize("Editing %s" % b.resource_path, b, acquired_skills, null, true)
 
+
+func library_editor_initialize(l: BehaviorLibrary):
+	if not l:
+		print("unexpected null BehaviorLibrary in library_editor_initialize")
+		return
+
+	var acquired_skills = SkillTreeState.new()
+	acquired_skills.full = true
+
+	initialize("Editing %s" % l.resource_path, StoredBehavior.new(), acquired_skills, l, true)
+
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:

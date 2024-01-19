@@ -38,6 +38,8 @@ class GrantedXP extends RefCounted:
 var granted_xp: GrantedXP
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	victory_loss_condition_component.level_finished.connect(_on_level_finished)
 
 func run():
