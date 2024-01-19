@@ -36,7 +36,7 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 		set_character_behaviors(move_sword_behavior, move_sword_behavior)
 		# Set up tower.
 		tower = level.towers.get_child(0)
-		tower_health = Component.get_health_component_or_die(tower)
+		tower_health = HealthComponent.get_or_die(tower)
 
 	func test_tower_destruction_fails_level():
 		level.start()

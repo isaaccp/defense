@@ -7,7 +7,7 @@ var tower: Node2D
 # Refactor this with HudCharacterView.
 func initialize(tower_: Node2D) -> void:
 	tower = tower_
-	var health = Component.get_health_component_or_die(tower)
+	var health = HealthComponent.get_or_die(tower)
 	health.health_updated.connect(_on_health_updated)
 	# Set health to current value (in case we missed the signal setting initial health,
 	# which happens when we play a level through F6). We only can do it if

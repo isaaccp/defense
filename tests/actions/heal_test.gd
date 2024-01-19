@@ -31,8 +31,8 @@ func before_each():
 	add_child_autoqfree(level)
 	# Set up character.
 	character = level.characters.get_child(0)
-	character_behavior = Component.get_behavior_component_or_die(character)
-	character_health = Component.get_health_component_or_die(character)
+	character_behavior = BehaviorComponent.get_or_die(character)
+	character_health = HealthComponent.get_or_die(character)
 
 func test_heal_works():
 	TestUtils.set_character_behavior(character, make_heal_behavior())

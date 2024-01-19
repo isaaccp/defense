@@ -20,7 +20,7 @@ func make_behavior(condition: ConditionDef) -> StoredBehavior:
 
 func before_each():
 	body = body_scene.instantiate()
-	behavior_component = Component.get_behavior_component_or_die(body)
+	behavior_component = BehaviorComponent.get_or_die(body)
 	behavior_component.persistent_game_state_component = null
 	add_child_autoqfree(body)
 

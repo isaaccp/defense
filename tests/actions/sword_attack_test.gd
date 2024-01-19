@@ -30,11 +30,11 @@ func before_each():
 	add_child_autoqfree(level)
 	# Set up character.
 	character = level.characters.get_child(0)
-	character_behavior = Component.get_behavior_component_or_die(character)
+	character_behavior = BehaviorComponent.get_or_die(character)
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
-	Component.get_behavior_component_or_die(enemy).stored_behavior = StoredBehavior.new()
-	enemy_health = Component.get_health_component_or_die(enemy)
+	BehaviorComponent.get_or_die(enemy).stored_behavior = StoredBehavior.new()
+	enemy_health = HealthComponent.get_or_die(enemy)
 
 func test_sword_works_within_distance():
 	# Basic sword attack only behavior.

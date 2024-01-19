@@ -60,13 +60,13 @@ func _ready():
 	if LossType.ANY_CHARACTER_DIED in loss or LossType.ALL_CHARACTERS_DIED in loss:
 		assert(characters)
 		for character in characters.get_children():
-			var health = Component.get_health_component_or_die(character)
+			var health = HealthComponent.get_or_die(character)
 			health.died.connect(_on_character_died)
 	if LossType.TOWER_DIED in loss:
 		assert(towers)
 		assert(towers.get_child_count() == 1)
 		var tower = towers.get_child(0)
-		var health_component = Component.get_health_component_or_die(tower)
+		var health_component = HealthComponent.get_or_die(tower)
 		health_component.died.connect(_on_tower_died)
 
 func run():
@@ -102,7 +102,7 @@ func _on_removing_enemy(node: Node):
 	# TODO: Will need changes when we have spawners.
 	# If this is the last enemy and it's dead, declare victory.
 	if enemies.get_child_count() == 1:
-		if Component.get_health_component_or_die(node).is_dead:
+		if HealthComponent.get_or_die(node).is_dead:
 			for spawner in spawners.get_children():
 				if not spawner.finished():
 					return

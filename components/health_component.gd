@@ -121,3 +121,11 @@ func _on_health_updated(update: HealthUpdate):
 
 func _on_died():
 	%HealthBar.visible = false
+
+static func get_or_null(node) -> HealthComponent:
+	return Component.get_or_null(node, component) as HealthComponent
+
+static func get_or_die(node) -> HealthComponent:
+	var c = get_or_null(node)
+	assert(c)
+	return c

@@ -2,7 +2,6 @@ extends RefCounted
 
 class_name Component
 
-# Body components.
 static func get_or_die(node: Node, component_name: String) -> Node:
 	var component = get_or_null(node, component_name)
 	assert(component, "Couldn't find wanted component")
@@ -11,24 +10,7 @@ static func get_or_die(node: Node, component_name: String) -> Node:
 static func get_or_null(node: Node, component_name: String) -> Node:
 	return node.get_node_or_null(component_name)
 
-static func get_health_component_or_null(node: Node) -> HealthComponent:
-	return get_or_null(node, HealthComponent.component) as HealthComponent
-
-static func get_health_component_or_die(node: Node) -> HealthComponent:
-	var component = get_health_component_or_null(node)
-	if not component:
-		assert(false)
-	return component
-
-static func get_behavior_component_or_null(node: Node) -> BehaviorComponent:
-	return get_or_null(node, BehaviorComponent.component) as BehaviorComponent
-
-static func get_behavior_component_or_die(node: Node) -> BehaviorComponent:
-	var component = get_behavior_component_or_null(node)
-	if not component:
-		assert(false)
-	return component
-
+# TODO: Move all those inside the components as already done for most.
 static func get_logging_component_or_null(node: Node) -> LoggingComponent:
 	return get_or_null(node, LoggingComponent.component) as LoggingComponent
 

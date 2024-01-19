@@ -147,6 +147,14 @@ func _log(message: String):
 		return
 	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, message)
 
+static func get_or_null(node) -> BehaviorComponent:
+	return Component.get_or_null(node, component) as BehaviorComponent
+
+static func get_or_die(node) -> BehaviorComponent:
+	var c = get_or_null(node)
+	assert(c)
+	return c
+
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	if not get_parent() is Node2D:

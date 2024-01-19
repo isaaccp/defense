@@ -17,7 +17,7 @@ func _ready():
 
 func initialize(character_: Character) -> void:
 	character = character_
-	var health = Component.get_health_component_or_die(character)
+	var health = HealthComponent.get_or_die(character)
 	health.health_updated.connect(_on_health_updated)
 	# Set health to current value (in case we missed the signal setting initial health,
 	# which happens when we play a level through F6). We only can do it if
@@ -27,7 +27,7 @@ func initialize(character_: Character) -> void:
 		_set_health(health.health, health.max_health)
 	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
-	var behavior = Component.get_behavior_component_or_die(character)
+	var behavior = BehaviorComponent.get_or_die(character)
 	behavior.behavior_updated.connect(_on_behavior_updated)
 	var state = Component.get_persistent_game_state_component_or_die(character).state
 	%Title.text = state.name

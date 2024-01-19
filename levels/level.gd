@@ -143,7 +143,7 @@ func _on_play_next_selected():
 	# Save health into persistent state and move on.
 	for character in characters.get_children():
 		var persistent_state = Component.get_persistent_game_state_component_or_die(character)
-		var health_component = Component.get_health_component_or_die(character)
+		var health_component = HealthComponent.get_or_die(character)
 		persistent_state.state.health = health_component.health
 	level_finished.emit()
 	state.change_state.call_deferred(DONE)
