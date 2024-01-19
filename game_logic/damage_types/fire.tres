@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DamageType" load_steps=2 format=3 uid="uid://pj3so5bnl4wa"]
+
+[ext_resource type="Script" path="res://game_logic/damage_types/damage_type.gd" id="1_d5ppk"]
+
+[resource]
+script = ExtResource("1_d5ppk")
+name = &"Fire"
+macro_type = 3

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=7 format=3 uid="uid://bubctjjwg0rlo"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=8 format=3 uid="uid://bubctjjwg0rlo"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_iburd"]
 [ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_nl8en"]
 [ext_resource type="Resource" uid="uid://bdsw02ntoq6v2" path="res://skill_tree/actions/blink_to.tres" id="3_ffeml"]
+[ext_resource type="Resource" uid="uid://bcfnql2jmatdi" path="res://skill_tree/actions/fire_burst.tres" id="4_pi1j4"]
 [ext_resource type="Resource" uid="uid://crd5cdw57rf3c" path="res://skill_tree/actions/seeking_bolt.tres" id="4_vhtuk"]
 [ext_resource type="Resource" uid="uid://sbnms0qspna1" path="res://skill_tree/actions/teleport_away.tres" id="5_rswv1"]
 [ext_resource type="Resource" uid="uid://wi55i11ogew5" path="res://skill_tree/actions/teleport_to.tres" id="6_mqqjo"]
@@ -10,4 +11,4 @@
 [resource]
 script = ExtResource("1_iburd")
 tree_type = 5
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_nl8en"), ExtResource("3_ffeml"), ExtResource("4_vhtuk"), ExtResource("5_rswv1"), ExtResource("6_mqqjo")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_nl8en"), ExtResource("3_ffeml"), ExtResource("4_pi1j4"), ExtResource("4_vhtuk"), ExtResource("5_rswv1"), ExtResource("6_mqqjo")])

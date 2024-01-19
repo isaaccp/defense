@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=7 format=3 uid="uid://bcfnql2jmatdi"]
+
+[ext_resource type="Script" path="res://behavior/actions/fire_burst_action.gd" id="1_iy3ja"]
+[ext_resource type="Resource" uid="uid://dmi8jfkld1td3" path="res://game_logic/attack_types/magical.tres" id="2_r805t"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_xkl34"]
+[ext_resource type="Resource" uid="uid://crd5cdw57rf3c" path="res://skill_tree/actions/seeking_bolt.tres" id="4_prks1"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="5_tegaq"]
+
+[sub_resource type="Resource" id="Resource_xrcsq"]
+script = ExtResource("3_xkl34")
+editor_string = ""
+cmp = 0
+
+[resource]
+script = ExtResource("5_tegaq")
+action_script = ExtResource("1_iy3ja")
+supported_target_types = Array[int]([1, 3])
+attack_type = ExtResource("2_r805t")
+params = SubResource("Resource_xrcsq")
+abstract = true
+skill_name = &"Fire Burst"
+skill_type = 1
+parent = ExtResource("4_prks1")
+tree_type = 5
