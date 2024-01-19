@@ -14,6 +14,6 @@ func _get_configuration_warnings():
 	return warnings
 
 func _missing_component_warning(warnings: PackedStringArray, component_class: Object):
-	var component = component_class.get_or_null(self)
+	var component = get_component_or_null(component_class)
 	if not component:
 		warnings.append("Missing expected component: %s" % component_class.component)
