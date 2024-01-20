@@ -78,12 +78,11 @@ func _on_character_selection_finished(character_selections: Array[int]):
 		# TODO: Remove the number when we don't allow two of
 		# the same character.
 		var gameplay_character = level_provider.available_characters[idx].duplicate(true) as GameplayCharacter
-		# TODO: Move this to initialize() in GC.
-		gameplay_character.name = "%s (%d)" % [gameplay_character.name, selection]
-		gameplay_character.peer_id = players[selection % players.size()].peer_id
-		gameplay_character.health = gameplay_character.attributes.health
-		if level_provider.behavior:
-			gameplay_character.behavior = level_provider.behavior
+		gameplay_character.initialize(
+			"%s (%d)" % [gameplay_character.name, selection],
+			players[selection % players.size()].peer_id,
+			level_provider.behavior
+		)
 		gameplay_characters.append(gameplay_character)
 	state.change_state.call_deferred(WITHIN_LEVEL)
 

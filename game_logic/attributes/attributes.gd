@@ -14,3 +14,8 @@ class_name Attributes
 @export var armor: int = 0
 ## Resistances. See Resistance definition.
 @export var resistance: Array[Resistance]
+
+func _to_string():
+	for property in get_property_list():
+		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
+			print("%s: %s" % [property.name, get(property.name)])

@@ -22,6 +22,8 @@ func before_each():
 	add_child_autoqfree(logging_component)
 	add_child_autoqfree(health_component)
 
+	health_component.run()
+
 	await wait_frames(2)
 
 	watch_signals(health_component)
@@ -36,7 +38,9 @@ func test_hit_no_armor():
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 
 	# Must return true as damage is happening.
-	assert_eq(health_component.process_hit(hit_effect), true)
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, 12)
+	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 	assert_eq(health_component.health, max_health - 12)
 	assert_signal_emitted(health_component, "health_updated")
 	var params = get_signal_parameters(health_component, "health_updated")
@@ -46,7 +50,6 @@ func test_hit_no_armor():
 	assert_eq(health_update.health, max_health - 12)
 	assert_eq(health_update.prev_health, max_health)
 	assert_eq(health_update.is_heal, false)
-	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_physical_hit_armor_damage():
 	var hit_effect = HitEffect.new()
@@ -56,7 +59,8 @@ func test_physical_hit_armor_damage():
 	# Check armor effect.
 	attributes_component.base_attributes.armor = 2
 	# Still true as damage gets through.
-	assert_eq(health_component.process_hit(hit_effect), true)
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, 10)
 	assert_eq(health_component.health, max_health - 10)
 	assert_signal_emitted(health_component, "health_updated")
 	var params = get_signal_parameters(health_component, "health_updated")
@@ -77,7 +81,8 @@ func test_physical_hit_armor_no_damage():
 	attributes_component.base_attributes.armor = 2
 
 	# Should return false as no damage gets through.
-	assert_eq(health_component.process_hit(hit_effect), false)
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, 0)
 	# No change.
 	assert_eq(health_component.health, max_health)
 	assert_signal_not_emitted(health_component, "health_updated")
@@ -89,7 +94,8 @@ func test_non_physical_hit_ignores_armor():
 	# Check non-physical damage ignores armor.death.
 	hit_effect.damage_type = preload("res://game_logic/damage_types/arcane.tres")
 	# True as damage gets through now.
-	assert_eq(health_component.process_hit(hit_effect), true)
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, 2)
 	assert_eq(health_component.health, max_health - 2)
 	assert_signal_emitted(health_component, "health_updated")
 	var params = get_signal_parameters(health_component, "health_updated")
@@ -111,8 +117,9 @@ func test_resistance_plus_armor():
 	attributes_component.base_attributes.resistance.append(resistance)
 
 	# True as damage gets through.
-	assert_eq(health_component.process_hit(hit_effect), true)
+	var hit_result = health_component.process_hit(hit_effect)
 	var expected_damage = (20 - 4) / 2
+	assert_eq(hit_result.damage, expected_damage)
 	assert_eq(health_component.health, max_health - expected_damage)
 	assert_signal_emitted(health_component, "health_updated")
 	var params = get_signal_parameters(health_component, "health_updated")
@@ -132,8 +139,9 @@ func test_vulnerability():
 	attributes_component.base_attributes.resistance.append(resistance)
 
 	# True as damage gets through.
-	assert_eq(health_component.process_hit(hit_effect), true)
+	var hit_result = health_component.process_hit(hit_effect)
 	var expected_damage = 10 * 2
+	assert_eq(hit_result.damage, expected_damage)
 	assert_eq(health_component.health, max_health - expected_damage)
 	assert_signal_emitted(health_component, "health_updated")
 	var params = get_signal_parameters(health_component, "health_updated")
@@ -149,8 +157,9 @@ func test_heal():
 	hit_effect.damage = -10
 
 	attributes_component.base_attributes.armor = 5
-	# Return true for heal.
-	assert_eq(health_component.process_hit(hit_effect), true)
+
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, -10)
 	assert_eq(health_component.health, 20 + 10)
 	assert_signal_emitted(health_component, "health_updated")
 	var params = get_signal_parameters(health_component, "health_updated")
@@ -170,7 +179,8 @@ func test_death():
 	watch_signals(logging_component)
 
 	# Check death.
-	assert_eq(health_component.process_hit(hit_effect), true)
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, max_health)
 	assert_eq(health_component.health, 0)
 	assert_true(health_component.is_dead)
 	assert_signal_emitted(health_component, "health_updated")

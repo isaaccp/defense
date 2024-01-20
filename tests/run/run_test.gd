@@ -20,6 +20,7 @@ func before_all():
 
 func before_each():
 	ui_layer = gameplay_ui_layer_scene.instantiate()
+	ui_layer.initialize_state_machine_stack(StateMachine.new("test_sm"))
 	# If we don't create a copy, level_provider would be shared
 	# across tests.
 	level_provider = double_level_provider(instant_win_level_provider)
@@ -56,10 +57,16 @@ func test_end_to_end():
 	assert_call_count(level_provider, "load_level", 1)
 
 	run.level.level_finished.emit()
-	await wait_frames(5)
+	await wait_frames(2)
+
+	gut.p("Between Levels")
+	assert_call_count(level_provider, "advance", 1)
+	assert(run.state.is_state(run.BETWEEN_LEVELS))
+	ui_layer.between_levels_continue_selected.emit()
+
+	await wait_frames(2)
 
 	gut.p("Loading next level")
-	assert_call_count(level_provider, "advance", 1)
 	assert_call_count(level_provider, "load_level", 2)
 
 	# TODO: Test failure condition.

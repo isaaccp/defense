@@ -28,6 +28,8 @@ func before_all():
 	sword_attack.free()
 
 func before_each():
+	test_character.initialize("test_character", 1)
+	test_character.attributes.speed = 50
 	level = basic_test_level_scene.instantiate() as Level
 	level.initialize([test_character])
 	add_child_autoqfree(level)
@@ -80,6 +82,7 @@ func test_charge_long_distance():
 	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
 
 	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	TestUtils.dump_all_emits(self, character_status, "statuses_changed")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.STRENGTH_SURGE]], 2)

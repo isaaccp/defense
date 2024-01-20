@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://by5s8kqpfh420"]
+
+[ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_ar6xk"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="2_y85g6"]
+
+[sub_resource type="Resource" id="Resource_ex7xn"]
+script = ExtResource("2_y85g6")
+speed = 30.0
+health = 30
+recovery = 0.0
+damage_multiplier = 1.0
+armor = 0
+resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
+
+[node name="TestEnemy" instance=ExtResource("1_ar6xk")]
+
+[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
+
+[node name="AttributesComponent" parent="." index="10"]
+base_attributes = SubResource("Resource_ex7xn")

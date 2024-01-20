@@ -364,4 +364,4 @@ logging_component = NodePath("../LoggingComponent")
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("12_abtbt")]
 
 [node name="LoggingComponent" parent="." instance=ExtResource("13_p8iyf")]
-print_logtypes = Array[int]([1])
+print_logtypes = Array[int]([1, 3, 0])

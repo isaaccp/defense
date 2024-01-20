@@ -1,11 +1,11 @@
 extends GutTest
 
-const body_scene = preload("res://character/character.tscn")
+const test_enemy_scene = preload("res://enemies/test_enemy.tscn")
 const heal = preload("res://skill_tree/actions/heal.tres")
 const target_self = preload("res://skill_tree/targets/self.tres")
 const always = preload("res://skill_tree/conditions/always.tres")
 
-var body: CharacterBody2D
+var enemy: Enemy
 var behavior_component: BehaviorComponent
 
 # TODO: Add some "do nothing" action and use it so it's faster
@@ -19,10 +19,9 @@ func make_behavior(condition: ConditionDef) -> StoredBehavior:
 	return behavior
 
 func before_each():
-	body = body_scene.instantiate()
-	behavior_component = BehaviorComponent.get_or_die(body)
-	behavior_component.persistent_game_state_component = null
-	add_child_autoqfree(body)
+	enemy = test_enemy_scene.instantiate()
+	behavior_component = BehaviorComponent.get_or_die(enemy)
+	add_child_autoqfree(enemy)
 
 func test_basic_behavior():
 	behavior_component.stored_behavior = make_behavior(always)

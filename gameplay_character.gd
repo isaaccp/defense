@@ -29,6 +29,13 @@ class_name GameplayCharacter
 var peer_id: int
 var actor: Character
 
+func initialize(name: String, peer_id: int, behavior: StoredBehavior = null):
+	self.name = name
+	self.peer_id = peer_id
+	health = attributes.health
+	if behavior:
+		self.behavior = behavior
+
 func use_xp(amount: int) -> void:
 	assert(xp >= amount, "Tried to use more XP than possible")
 	xp -= amount
