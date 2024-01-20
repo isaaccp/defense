@@ -18,7 +18,8 @@ class_name LevelProvider
 # Initial behavior for characters.
 @export var behavior: StoredBehavior = StoredBehavior.new()
 
-
+func reset():
+	current_level = 0
 
 func advance() -> bool:
 	if is_last_level():
