@@ -11,7 +11,7 @@ func show_log(logging_component_: LoggingComponent):
 
 func reset():
 	%Logs.text = ""
-	if logging_component:
+	if is_instance_valid(logging_component):
 		logging_component.log_entry_added.disconnect(_add_log_entry)
 	logging_component = null
 

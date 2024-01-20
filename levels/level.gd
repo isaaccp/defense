@@ -164,6 +164,7 @@ func _on_level_failed(_loss_type: VictoryLossConditionComponent.LossType):
 
 func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType):
 	win = true
+	stop()
 	state.change_state.call_deferred(SUMMARY)
 
 func granted_xp() -> int:
@@ -193,9 +194,19 @@ func start():
 	_run_nodes(towers.get_children())
 	_run_nodes(spawners.get_children())
 
+func stop():
+	_stop_nodes(characters.get_children())
+	_stop_nodes(enemies.get_children())
+	_stop_nodes(towers.get_children())
+	_stop_nodes(spawners.get_children())
+
 func _run_nodes(nodes: Array):
 	for node in nodes:
 		node.run()
+
+func _stop_nodes(nodes: Array):
+	for node in nodes:
+		node.stop()
 
 func _standalone_ready():
 	# Immediately remove self, we'll test with a copy. Keep parent ref.
