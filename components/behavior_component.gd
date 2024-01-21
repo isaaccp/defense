@@ -163,7 +163,4 @@ func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	if not get_parent() is Node2D:
 		return warnings
-	if get_parent() is Enemy:
-		if not stored_behavior:
-			warnings.append("BehaviorComponent in Enemy needs to set stored_behavior")
 	return warnings

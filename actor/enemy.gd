@@ -9,5 +9,10 @@ func _get_configuration_warnings():
 	if not attributes_component:
 		warnings.append("AttributesComponent is required")
 	elif not attributes_component.base_attributes:
-		warnings.append("AttributesComponent needs to set base_attributes")
+		warnings.append("AttributesComponent in Enemy needs to set base_attributes")
+	var behavior_component = BehaviorComponent.get_or_null(self)
+	if not behavior_component:
+		warnings.append("BehaviorComponent is required")
+		if not behavior_component.stored_behavior:
+			warnings.append("BehaviorComponent in Enemy needs to set stored_behavior")
 	return warnings
