@@ -6,7 +6,7 @@
 cd $(git rev-parse --show-toplevel)
 cycles_before=$(wc -l < current_cycles)
 ./deps.py . > /dev/null || exit 1
-./dot_find_cycles.py --shortest-only Digraph.gv | sort > current_cycles || exit 1
+./dot_find_cycles.py --only-shortest Digraph.gv | sort > current_cycles || exit 1
 cycles_after=$(wc -l < current_cycles)
 
 git diff --exit-code current_cycles
