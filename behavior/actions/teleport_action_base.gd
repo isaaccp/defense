@@ -17,7 +17,7 @@ var teleport_out: ActionScene
 
 func post_initialize():
 	assert(cooldown > 0)
-	initial_target_pos = target.position()
+	initial_target_pos = target_position()
 	sprite = body.get_node("Sprite2D")
 	prev_modulate = sprite.modulate
 	_start_teleport.call_deferred()

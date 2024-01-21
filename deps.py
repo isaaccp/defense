@@ -16,7 +16,6 @@ regex = re.compile("[A-Z]+[a-z]*\\w+")
 ignore = ["Component", "TestUtils", "GutHookScript", "GutStringUtils", "RichButton"]
 # Simulates the effect of removing the dependency between X and Y if it exists.
 simulate_removals = {
-        "NodeTargetSelector": ["SkillManager"],
 }
 
 def get_deps(directory):

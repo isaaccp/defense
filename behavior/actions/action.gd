@@ -36,7 +36,6 @@ const MaxDistance = 10_000_000
 # Whether this action is considered finished.
 @export var finished = false
 
-
 var target: Target
 var body: CharacterBody2D
 var action_sprites: Node2D
@@ -133,6 +132,10 @@ func description() -> String:
 func _range_str() -> String:
 	var max_str = "inf" if max_distance == MaxDistance else "%0.1f" % max_distance
 	return "Range: (%0.1f,%s)" % [min_distance, max_str]
+
+func target_position(position_type: Target.PositionType = Target.PositionType.DEFAULT) -> Vector2:
+	var action_target = ActionTarget.new(target, position_type)
+	return action_target.target_position()
 
 func attributes():
 	var attrs = ""

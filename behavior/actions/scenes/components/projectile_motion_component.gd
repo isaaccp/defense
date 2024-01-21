@@ -29,14 +29,14 @@ func run():
 	running = true
 	if homing:
 		assert(target_component, "homing was set but target was not provided")
-		assert(target_component.target, "target_component didn't have a target")
-		assert(target_component.target.type == Target.Type.ACTOR)
+		assert(target_component.action_target, "target_component didn't have a target")
+		assert(target_component.action_target.target.type == Target.Type.ACTOR)
 		# Target may become invalid later, but it must be valid on run.
-		assert(target_component.target.valid())
+		assert(target_component.action_target.target.valid())
 	velocity = global_transform.x * speed
 
 func steer_force() -> Vector2:
-	var desired = (target_component.target.position() - global_position).normalized() * speed
+	var desired = (target_component.action_target.target_position() - global_position).normalized() * speed
 	return (desired - velocity).normalized() * steering_force
 
 func _physics_process(delta: float):
@@ -46,7 +46,7 @@ func _physics_process(delta: float):
 	## If target is no longer valid, mark done and return.
 	## Should later signal for some animation.
 	if homing:
-		if not target_component.target.valid():
+		if not target_component.action_target.target.valid():
 			mark_done()
 			return
 		steer = steer_force()

@@ -7,7 +7,7 @@ class_name TargetComponent
 const component = &"TargetComponent"
 
 ## Set through script.
-var target: Target
+var action_target: ActionTarget
 
 static func get_or_null(node) -> TargetComponent:
 	return Component.get_or_null(node, component) as TargetComponent

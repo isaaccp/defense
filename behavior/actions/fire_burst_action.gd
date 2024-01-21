@@ -12,7 +12,7 @@ func post_initialize():
 	_fire_burst.call_deferred()
 
 func _fire_burst():
-	var dir = (target.position(Target.PositionType.HURTBOX) - body.position).normalized()
+	var dir = (target_position(Target.PositionType.HURTBOX) - body.position).normalized()
 	fire_burst = fire_burst_scene.instantiate() as ActionScene
 	_initialize_action_scene(fire_burst)
 	fire_burst.look_at(fire_burst.position + dir)

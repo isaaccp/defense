@@ -15,7 +15,7 @@ func spawn_projectile():
 	# So in multi-projectile subclasses it keeps firing at last position
 	# rather than stopping. Could be made configurable.
 	if target.valid():
-		last_target_pos = target.position(Target.PositionType.HURTBOX)
+		last_target_pos = target_position(Target.PositionType.HURTBOX)
 	var dir = (last_target_pos - body.position).normalized()
 	var projectile = projectile_scene.instantiate() as ActionScene
 	_initialize_action_scene(projectile)

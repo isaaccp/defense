@@ -100,20 +100,6 @@ func _to_string():
 		Type.POSITION:
 			return "(%0.1f,%0.1f)" % [pos.x, pos.y]
 
-func position(position_type: PositionType = PositionType.DEFAULT) -> Vector2:
-	match type:
-		Type.ACTOR:
-			if position_type == PositionType.HURTBOX:
-				var hurtbox = HurtboxComponent.get_or_null(actor)
-				if hurtbox:
-					return hurtbox.global_position
-			return actor.position
-		Type.POSITION:
-			return pos
-		_:
-			assert(false, "Unexpected call to position()")
-	return Vector2.ZERO
-
 static func make_invalid() -> Target:
 	return Target.new()
 

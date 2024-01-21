@@ -2,6 +2,9 @@ extends Actor
 
 class_name ActionScene
 
+@export_group("Required")
+@export var target_position_type: Target.PositionType = Target.PositionType.DEFAULT
+
 @export_group("Optional")
 ## Set this to internal animation player in the scene
 ## if you want access in the action (e.g. to get the duration).
@@ -47,7 +50,7 @@ func initialize(owner_name: String, action_def: ActionDef, target: Target, attri
 
 	var target_component = TargetComponent.get_or_null(self)
 	if target_component:
-		target_component.target = target
+		target_component.action_target = ActionTarget.new(target, target_position_type)
 
 func action_scene_log(message: String, stats_update: Array[Stat]):
 	if not logging_component:

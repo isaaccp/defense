@@ -54,7 +54,7 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 		return
 	if hit_only_target:
 		var actor = hurtbox.get_parent()
-		if actor != target_component.target.actor:
+		if actor != target_component.action_target.target.actor:
 			return
 	if friendly_fire:  # No checks needed.
 		if hurtbox.can_handle_collision():

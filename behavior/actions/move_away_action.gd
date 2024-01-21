@@ -16,5 +16,5 @@ func post_initialize():
 
 
 func _nav_dest(target: Target) -> Vector2:
-	var dir = target.position().direction_to(body.global_position)
+	var dir = target_position().direction_to(body.global_position)
 	return body.position + dir * move_away_distance

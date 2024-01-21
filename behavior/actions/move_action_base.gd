@@ -37,7 +37,7 @@ func _on_velocity_computed(velocity: Vector2):
 # Called periodically to get nav agent target_position.
 # For overriding in subclasses.
 func _nav_dest(target: Target) -> Vector2:
-	return target.position()
+	return target_position()
 
 func _start_target_position_refresh():
 	while target.valid() and not finished:
