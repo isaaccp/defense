@@ -3,5 +3,4 @@ Behavior -> SkillManager -> Behavior
 GameplayMenu -> Run -> GameplayUILayer -> GameplayMenu
 NodeTargetSelector -> SkillManager -> NodeTargetSelector
 PositionTargetSelector -> SkillManager -> PositionTargetSelector
-PositionToActorConditionEvaluatorAdapter -> TargetActorConditionEvaluator -> PositionToActorConditionEvaluatorAdapter
 Skill -> SkillTree -> Skill
