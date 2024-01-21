@@ -46,17 +46,9 @@ func _init():
 		all_skills.append(meta_skill.skill_name)
 		skill_by_name[meta_skill.skill_name] = meta_skill
 
+# Skill.
 func lookup_skill(name: StringName) -> Skill:
 	return skill_by_name[name]
-
-# Action
-func lookup_action(name: StringName) -> ActionDef:
-	return action_by_name[name]
-
-func make_action_instance(name: StringName) -> ActionDef:
-	var action = lookup_action(name).duplicate(true)
-	action.abstract = false
-	return action
 
 func restore_rule(saved_rule: RuleDef) -> Rule:
 	var rule = Rule.new()
@@ -81,6 +73,15 @@ func restore_skill(saved_skill: RuleSkillDef) -> Skill:
 	skill.params = saved_skill.params
 	return skill
 
+# Action
+func lookup_action(name: StringName) -> ActionDef:
+	return action_by_name[name]
+
+func make_action_instance(name: StringName) -> ActionDef:
+	var action = lookup_action(name).duplicate(true)
+	action.abstract = false
+	return action
+
 func all_actions() -> Array[StringName]:
 	var all: Array[StringName] = []
 	for name in action_by_name.keys():
@@ -95,42 +96,6 @@ func make_condition_instance(name: StringName) -> ConditionDef:
 	var condition = lookup_condition(name).duplicate(true)
 	condition.abstract = false
 	return condition
-
-func make_any_condition_evaluator(condition: ConditionDef) -> AnyConditionEvaluator:
-	assert(not condition.abstract)
-	var evaluator = condition.evaluator_script.new() as AnyConditionEvaluator
-	evaluator.def = condition
-	return evaluator
-
-func make_self_condition_evaluator(condition: ConditionDef, actor: Actor) -> SelfConditionEvaluator:
-	assert(not condition.abstract)
-	var evaluator = condition.evaluator_script.new() as SelfConditionEvaluator
-	evaluator.def = condition
-	evaluator.actor = actor
-	return evaluator
-
-func make_target_actor_condition_evaluator(condition: ConditionDef, actor: Actor) -> TargetActorConditionEvaluator:
-	assert(not condition.abstract)
-	if not condition.type in [ConditionDef.Type.TARGET_ACTOR, ConditionDef.Type.TARGET_POSITION]:
-		return null
-	var evaluator: TargetActorConditionEvaluator
-	if condition.type == ConditionDef.Type.TARGET_ACTOR:
-		evaluator = condition.evaluator_script.new() as TargetActorConditionEvaluator
-	else:
-		var position_evaluator = make_position_condition_evaluator(condition, actor)
-		evaluator = PositionToActorConditionEvaluatorAdapter.new(position_evaluator)
-	evaluator.def = condition
-	evaluator.actor = actor
-	return evaluator
-
-func make_position_condition_evaluator(condition: ConditionDef, actor: Actor) -> PositionConditionEvaluator:
-	assert(not condition.abstract)
-	if not condition.type in [ConditionDef.Type.TARGET_POSITION]:
-		return null
-	var evaluator = condition.evaluator_script.new() as PositionConditionEvaluator
-	evaluator.def = condition
-	evaluator.actor = actor
-	return evaluator
 
 func all_conditions() -> Array[StringName]:
 	var all: Array[StringName] = []

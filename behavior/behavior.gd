@@ -26,18 +26,18 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 		# Create evaluators that are not target related.
 		match rule.condition.type:
 			ConditionDef.Type.ANY:
-				evaluator = SkillManager.make_any_condition_evaluator(rule.condition)
+				evaluator = AnyConditionEvaluator.make(rule.condition)
 			ConditionDef.Type.SELF:
-				evaluator = SkillManager.make_self_condition_evaluator(rule.condition, actor)
+				evaluator = SelfConditionEvaluator.make(rule.condition, actor)
 			ConditionDef.Type.GLOBAL:
 				# TODO: Implement.
 				pass
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
-				var target_evaluator = SkillManager.make_target_actor_condition_evaluator(rule.condition, actor)
+				var target_evaluator = TargetActorConditionEvaluator.make(rule.condition, actor)
 				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_evaluator)
 			Target.Type.POSITION:
-				var position_evaluator =  SkillManager.make_position_condition_evaluator(rule.condition, actor)
+				var position_evaluator =  PositionConditionEvaluator.make(rule.condition, actor)
 				target_selector = SkillManager.make_position_target_selector(rule.target_selection, position_evaluator)
 		target_selectors.append(target_selector)
 		condition_evaluators.append(evaluator)
