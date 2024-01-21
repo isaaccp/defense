@@ -27,7 +27,6 @@ class_name GameplayCharacter
 @export var xp: int
 
 var peer_id: int
-var actor: Character
 
 func initialize(name: String, peer_id: int, behavior: StoredBehavior = null):
 	self.name = name
@@ -49,11 +48,3 @@ func grant_xp(amount: int) -> void:
 func after_level_heal():
 	var new_health = health + attributes.health * attributes.recovery
 	health = min(new_health, attributes.health)
-
-func make_character_body() -> Character:
-	var scene = CharacterSceneManager.get_character_scene(scene_id)
-	actor = scene.instantiate() as Character
-	actor.actor_name = name
-	var persistent_game_state = Component.get_persistent_game_state_component_or_die(actor)
-	persistent_game_state.state = self
-	return actor

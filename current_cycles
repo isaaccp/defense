@@ -1,7 +1,5 @@
 AttributesComponent -> StatusComponent -> HealthComponent -> AttributesComponent
 Behavior -> SkillManager -> Behavior
-BehaviorComponent -> PersistentGameStateComponent -> GameplayCharacter -> Character -> Unit -> BehaviorComponent
-Character -> Unit -> HealthComponent -> PersistentGameStateComponent -> GameplayCharacter -> Character
 GameplayMenu -> Run -> GameplayUILayer -> GameplayMenu
 NodeTargetSelector -> SkillManager -> NodeTargetSelector
 PositionTargetSelector -> SkillManager -> PositionTargetSelector

@@ -84,7 +84,7 @@ func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: Gamepla
 			gc.acquired_skills.add(acquired_skills_override_add)
 		if acquired_skills_override:
 			gc.acquired_skills = acquired_skills_override
-		var character = gc.make_character_body()
+		var character = Character.make(gc)
 		# Consider putting all this in initialize.
 		character.actor_name = gc.name
 		character.idx = i

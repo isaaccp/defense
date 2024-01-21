@@ -12,6 +12,7 @@ class_name TargetSelectionDef
 ## Whether the target is sortable. If it is, it must provide
 ## the {sort} placeholder in params.editor_string.
 @export var sortable = true
+
 var default_sort = preload("res://skill_tree/target_sorts/closest_first.tres")
 # TODO: Allow for target selections to have different default
 # sorts if we have a check on the tree building to validate that
