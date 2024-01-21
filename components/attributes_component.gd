@@ -56,7 +56,4 @@ func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	if not get_parent() is Node2D:
 		return warnings
-	if get_parent() is Enemy:
-		if not base_attributes:
-			warnings.append("AttributesComponent in Enemy needs to set base_attributes")
 	return warnings
