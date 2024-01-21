@@ -85,7 +85,7 @@ def main():
     for i in C:
         first_string = min(i, key=lambda s: s.lower())
         index = i.index(first_string)
-        reordered_cycle = i[index:] + i[:index] + [i[index]]
+        reordered_cycle = i[index:] + i[:index] + [first_string]
         print(" -> ".join(reordered_cycle))
 
 def remove_super_cycles(cycle_list):
