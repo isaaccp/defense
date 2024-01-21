@@ -87,7 +87,7 @@ func _status_str() -> String:
 	return "applied %s (%0.1fs)" % [StatusDef.name(hit_effect.status), hit_effect.status_duration]
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
-	hit_effect.damage_multiplier = action_scene.attributes_component.damage_multiplier
+	hit_effect.damage_multiplier = action_scene.attributes.damage_multiplier
 	var hit_result = hurtbox.handle_collision(action_scene.owner_name, action_scene.name, hit_effect)
 
 	# TODO: Could update log to also include hit_result information, although alternatively we can

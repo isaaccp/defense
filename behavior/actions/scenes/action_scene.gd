@@ -11,8 +11,8 @@ class_name ActionScene
 var action_def: ActionDef
 var owner_name: String
 
-# From Body components.
-var attributes_component: AttributesComponent
+# From actor invoking the action..
+var attributes: Attributes
 var side_component: SideComponent
 var logging_component: LoggingComponent
 
@@ -38,16 +38,16 @@ func _standalone_ready():
 	action_scene_player.action_scene = load(scene_file_path)
 	parent.add_child(action_scene_player)
 
-func initialize(owner_name_: String, action_def_: ActionDef, target_: Target, attributes_component_: AttributesComponent, side_component_: SideComponent, logging_component_: LoggingComponent):
-	owner_name = owner_name_
-	action_def = action_def_
-	attributes_component = attributes_component_
-	side_component = side_component_
-	logging_component = logging_component_
+func initialize(owner_name: String, action_def: ActionDef, target: Target, attributes: Attributes, side_component: SideComponent, logging_component: LoggingComponent):
+	self.owner_name = owner_name
+	self.action_def = action_def
+	self.attributes = attributes
+	self.side_component = side_component
+	self.logging_component = logging_component
 
 	var target_component = TargetComponent.get_or_null(self)
 	if target_component:
-		target_component.target = target_
+		target_component.target = target
 
 func action_scene_log(message: String, stats_update: Array[Stat]):
 	if not logging_component:
