@@ -43,7 +43,7 @@ func load_behavior(behavior: StoredBehavior) -> void:
 	for c in root.get_children():
 		root.remove_child(c)
 	if behavior:
-		var restored_behavior = behavior.restore()
+		var restored_behavior = SkillManager.restore_behavior(behavior)
 		for rule in restored_behavior.rules:
 			_add_row(rule)
 	_add_row()
