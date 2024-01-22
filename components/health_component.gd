@@ -28,7 +28,6 @@ enum ShowHealth {
 
 @export_group("Optional")
 @export var logging_component: LoggingComponent
-@export var persistent_game_state_component: PersistentGameStateComponent
 
 @export_group("Debug")
 @export var max_health: int:
@@ -40,6 +39,9 @@ enum ShowHealth {
 @export var health: int
 @export var is_dead: bool = false
 
+# If different than zero, initial health will be set to this, otherwise to
+# health obtained from attributes.
+var initial_health = 0
 var running = false
 
 func _ready():
@@ -49,10 +51,9 @@ func _ready():
 
 func _initialize():
 	max_health = attributes_component.health
-	if persistent_game_state_component:
-		_update_health(persistent_game_state_component.state.health)
-	else:
-		_update_health(max_health)
+	if initial_health == 0:
+		initial_health = max_health
+	_update_health(initial_health)
 
 func run():
 	running = true

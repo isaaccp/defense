@@ -26,7 +26,8 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var stored_behavior: StoredBehavior:
 	get:
 		if persistent_game_state_component:
-			return persistent_game_state_component.state.behavior
+			var gameplay_character = persistent_game_state_component.state as GameplayCharacter
+			return gameplay_character.behavior
 		return stored_behavior
 
 var rule: Rule

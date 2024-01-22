@@ -2,7 +2,6 @@ extends Resource
 
 class_name GameplayCharacter
 
-
 @export_group("Character Definition")
 ## Character name.
 @export var name: String

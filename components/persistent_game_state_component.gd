@@ -3,6 +3,6 @@ extends Node
 
 class_name PersistentGameStateComponent
 
-var state: GameplayCharacter
+var state: RefCounted
 
 const component = &"PersistentGameStateComponent"

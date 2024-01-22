@@ -1,1 +1,0 @@
-Action -> ActionTarget -> HurtboxComponent -> HealthComponent -> PersistentGameStateComponent -> GameplayCharacter -> SkillTreeState -> SkillManager -> Behavior -> Action
