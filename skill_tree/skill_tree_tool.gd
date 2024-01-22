@@ -19,12 +19,12 @@ var skill_types = [
 ]
 
 var tree_types = [
-	SkillTree.TreeType.META,
-	SkillTree.TreeType.GENERAL,
-	SkillTree.TreeType.WARRIOR,
-	SkillTree.TreeType.ROGUE,
-	SkillTree.TreeType.CLERIC,
-	SkillTree.TreeType.WIZARD,
+	Skill.TreeType.META,
+	Skill.TreeType.GENERAL,
+	Skill.TreeType.WARRIOR,
+	Skill.TreeType.ROGUE,
+	Skill.TreeType.CLERIC,
+	Skill.TreeType.WIZARD,
 ]
 
 # To ensure there is no duplicate names.

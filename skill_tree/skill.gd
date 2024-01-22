@@ -12,10 +12,20 @@ enum SkillType {
 	META_SKILL,
 }
 
+enum TreeType {
+	UNSPECIFIED,
+	GENERAL,
+	WARRIOR,
+	ROGUE,
+	CLERIC,
+	WIZARD,
+	META,
+}
+
 @export var skill_name: StringName
 @export var skill_type: SkillType
 @export var parent: Skill
-@export var tree_type: SkillTree.TreeType
+@export var tree_type: Skill.TreeType
 
 func type_name() -> String:
 	return SkillType.keys()[skill_type].capitalize()

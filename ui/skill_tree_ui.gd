@@ -98,7 +98,7 @@ func _setup_tree():
 	_tabs.tab_changed.connect(_on_tab_changed)
 	for t in skill_tree_collection.skill_trees:
 		# Skip META tree in ACQUIRE mode.
-		if mode == Mode.ACQUIRE and t.tree_type == SkillTree.TreeType.META:
+		if mode == Mode.ACQUIRE and t.tree_type == Skill.TreeType.META:
 			continue
 		var seen := {}
 		# TODO: The graph should be an instanced scene, probably
@@ -107,7 +107,7 @@ func _setup_tree():
 		graph.show_menu = false
 		graph.minimap_enabled = true
 		graph.panning_scheme = GraphEdit.SCROLL_PANS
-		graph.name = SkillTree.TreeType.keys()[t.tree_type]
+		graph.name = Skill.TreeType.keys()[t.tree_type]
 		graph.set_meta("tree_type", t.tree_type)
 		_tabs.add_child(graph)
 		for s in t.skills:
@@ -283,7 +283,7 @@ func _update_purchase_state():
 			# so we update icons for the whole graph.
 			_update_node_icon(node, s)
 		# TODO: Make this a nice thing.
-		var graph_name = SkillTree.TreeType.keys()[tab.get_meta('tree_type')]
+		var graph_name = Skill.TreeType.keys()[tab.get_meta('tree_type')]
 		if available_count > 0:
 			graph_name += " (%d)" % available_count
 		tab.name = graph_name
