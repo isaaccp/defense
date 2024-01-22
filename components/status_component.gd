@@ -4,10 +4,6 @@ class_name StatusComponent
 
 const component: StringName = &"StatusComponent"
 
-@export_group("Required")
-# For statuses that cause damage.
-@export var health_component: HealthComponent
-
 @export_group("Optional")
 @export var logging_component: LoggingComponent
 

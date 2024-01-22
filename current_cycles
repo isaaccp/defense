@@ -1,4 +1,2 @@
 Action -> ActionTarget -> HurtboxComponent -> HealthComponent -> PersistentGameStateComponent -> GameplayCharacter -> SkillTreeState -> SkillManager -> Behavior -> Action
-Action -> StatusComponent -> HealthComponent -> PersistentGameStateComponent -> GameplayCharacter -> SkillTreeState -> SkillManager -> Behavior -> Action
-AttributesComponent -> StatusComponent -> HealthComponent -> AttributesComponent
 GameplayMenu -> Run -> GameplayUILayer -> GameplayMenu
