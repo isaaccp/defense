@@ -104,7 +104,6 @@ func all_conditions() -> Array[StringName]:
 	return all
 
 # Target
-
 func lookup_target(name: StringName) -> TargetSelectionDef:
 	return target_by_name[name]
 
@@ -112,22 +111,6 @@ func make_target_selection_instance(name: StringName) -> TargetSelectionDef:
 	var target = lookup_target(name).duplicate(true)
 	target.abstract = false
 	return target
-
-func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
-	assert(not target.abstract)
-	assert(target.type == Target.Type.ACTOR)
-	var selector = target.selector_script.new() as NodeTargetSelector
-	selector.def = target
-	selector.condition_evaluator = target_actor_evaluator
-	return selector
-
-func make_position_target_selector(target: TargetSelectionDef, target_position_evaluator: PositionConditionEvaluator) -> PositionTargetSelector:
-	assert(not target.abstract)
-	assert(target.type == Target.Type.POSITION)
-	var selector = target.selector_script.new() as PositionTargetSelector
-	selector.def = target
-	selector.condition_evaluator = target_position_evaluator
-	return selector
 
 func all_target_selections() -> Array[StringName]:
 	var all: Array[StringName] = []
@@ -139,23 +122,6 @@ func all_target_selections() -> Array[StringName]:
 # Stateless and not parameterizable, so no need to make instances.
 func lookup_target_sort(name: StringName) -> TargetSort:
 	return target_sort_by_name[name]
-
-func make_actor_target_sorter(target_sort: TargetSort) -> ActorTargetSorter:
-	assert(target_sort.type in [TargetSort.Type.ACTOR, TargetSort.Type.POSITION])
-	var sorter: ActorTargetSorter
-	if target_sort.type == TargetSort.Type.ACTOR:
-		sorter = target_sort.sorter_script.new() as ActorTargetSorter
-	else:
-		var position_sorter = make_position_target_sorter(target_sort)
-		sorter = PositionToActorTargetSorterAdapter.new(position_sorter)
-	sorter.def = target_sort
-	return sorter
-
-func make_position_target_sorter(target_sort: TargetSort) -> PositionTargetSorter:
-	assert(target_sort.type in [TargetSort.Type.POSITION])
-	var sorter = target_sort.sorter_script.new() as PositionTargetSorter
-	sorter.def = target_sort
-	return sorter
 
 func all_target_sorts() -> Array[StringName]:
 	var all: Array[StringName] = []

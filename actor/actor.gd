@@ -10,6 +10,9 @@ var running = false
 # True if stop() was called on this actor.
 var stopped = false
 
+# True if destroyed, subclasses should set it.
+var destroyed = false
+
 func get_component_or_die(component_class: Object) -> Node:
 	var component = get_component_or_null(component_class)
 	assert(component, "Couldn't find wanted component")

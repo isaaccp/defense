@@ -9,9 +9,7 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 	if def.sortable:
 		assert(def.params.placeholder_set(SkillParams.PlaceholderId.SORT))
 		var target_sort = def.params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
-		# TODO: This creates a cycle. It could be moved to Behavior or we could
-		# split out SkillManager on per-skill-type managers.
-		var sorter = SkillManager.make_actor_target_sorter(target_sort)
+		var sorter = TargetSorterFactory.make_actor_target_sorter(target_sort)
 		sorter.sort(actor, targets)
 	for target in targets:
 		# Verify condition.
@@ -23,8 +21,7 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 				continue
 		# Skip if dead (we may want to allow later through a setting if e.g. we
 		# want to be able to resurrect).
-		var health_component = Component.get_or_null(target, HealthComponent.component)
-		if health_component and health_component.is_dead:
+		if target.destroyed:
 			continue
 		# If we didn't check distance earlier, check it on the node
 		# that we would return.

@@ -35,10 +35,10 @@ func prepare(actor_: Actor, side_component_: SideComponent):
 		match rule.target_selection.type:
 			Target.Type.ACTOR:
 				var target_evaluator = ConditionEvaluatorFactory.make_target_actor_condition_evaluator(rule.condition, actor)
-				target_selector = SkillManager.make_actor_target_selector(rule.target_selection, target_evaluator)
+				target_selector = TargetSelectorFactory.make_actor_target_selector(rule.target_selection, target_evaluator)
 			Target.Type.POSITION:
 				var position_evaluator = ConditionEvaluatorFactory.make_position_condition_evaluator(rule.condition, actor)
-				target_selector = SkillManager.make_position_target_selector(rule.target_selection, position_evaluator)
+				target_selector = TargetSelectorFactory.make_position_target_selector(rule.target_selection, position_evaluator)
 		target_selectors.append(target_selector)
 		condition_evaluators.append(evaluator)
 	assert(rules.size() == target_selectors.size())
