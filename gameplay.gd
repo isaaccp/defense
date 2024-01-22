@@ -13,8 +13,7 @@ const behavior_library_meta_skill = preload("res://skill_tree/meta_skills/behavi
 var save_state: SaveState
 var force_behavior_library = false
 
-const StateMachineName = "gameplay"
-var state = StateMachine.new(StateMachineName)
+var state = StateMachine.new(Constants.GameplayStateMachineName)
 var MENU = state.add("menu")
 var PRE_RUN = state.add("pre_run")
 var RUN = state.add("run")

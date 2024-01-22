@@ -20,7 +20,7 @@ func enable(enabled: bool):
 	set_process_input(enabled)
 	if not enabled:
 		return
-	var run_sm = state_machine_stack.get_state_machine(Run.StateMachineName)
+	var run_sm = state_machine_stack.get_state_machine(Constants.RunStateMachineName)
 	# Unfortunately can't do checks using the variable names as they are not
 	# accesibles to the class. Could create constant strings for each of them,
 	# but it would be twice as many lines to define the states.

@@ -16,8 +16,7 @@ var gameplay_characters: Array[GameplayCharacter]:
 	set(value):
 		run_save_state.gameplay_characters = value
 
-const StateMachineName = "run"
-var state = StateMachine.new(StateMachineName)
+var state = StateMachine.new(Constants.RunStateMachineName)
 var CHARACTER_SELECTION = state.add("character_selection")
 var WITHIN_LEVEL = state.add("within_level")
 var BETWEEN_LEVELS = state.add("between_levels")

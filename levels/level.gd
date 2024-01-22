@@ -41,8 +41,7 @@ class_name Level
 
 var ui_layer: GameplayUILayer
 
-const StateMachineName = "level"
-var state = StateMachine.new(StateMachineName)
+var state = StateMachine.new(Constants.LevelStateMachineName)
 var PREPARE = state.add("prepare")
 var COMBAT = state.add("combat")
 var SUMMARY = state.add("summary")
