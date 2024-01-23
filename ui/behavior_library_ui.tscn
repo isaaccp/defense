@@ -25,14 +25,15 @@ layout_mode = 2
 button_pressed = true
 text = "Show only usable with current skills"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="FilterHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FilterHBoxContainer"]
 layout_mode = 2
 text = "Filter: "
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="FilterLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/FilterHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -47,7 +48,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
-allow_search = false
 hide_root = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]

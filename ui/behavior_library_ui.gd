@@ -47,6 +47,8 @@ func _ready():
 		add_item(behavior)
 
 func add_item(behavior: StoredBehavior):
+	# TODO: Implement filtering using the LineEdit if at some point
+	# we think the built-in search is not good enough.
 	var tree_item = behavior_list.create_item(root)
 	item_by_name[behavior.name] = tree_item
 	update_metadata(behavior)
