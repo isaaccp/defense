@@ -25,6 +25,8 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var logging_component: LoggingComponent
 @export var stored_behavior: StoredBehavior:
 	get:
+		if Engine.is_editor_hint():
+			return null
 		if persistent_game_state_component:
 			var gameplay_character = persistent_game_state_component.state as GameplayCharacter
 			return gameplay_character.behavior

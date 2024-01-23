@@ -20,7 +20,7 @@ func _ready():
 		bait.name = "Bait"
 		add_child(bait)
 		var gc = load("res://character/playable_characters/godric_the_knight.tres")
-		var character = Character.make(gc)
+		var character = CharacterSceneManager.make(gc)
 		bait.add_child(character)
 		character.global_position = Vector2(100, 100)
 		var spawns = Node2D.new()

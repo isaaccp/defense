@@ -323,7 +323,6 @@ position = Vector2(0, -28)
 attributes_component = NodePath("../AttributesComponent")
 show_health = 1
 logging_component = NodePath("../LoggingComponent")
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("3_15loy")]
 health_component = NodePath("../HealthComponent")

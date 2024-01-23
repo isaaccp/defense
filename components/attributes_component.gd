@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 class_name AttributesComponent
@@ -29,6 +30,8 @@ var resistance: Array[Resistance]:
 	set(value): pass
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	if status_component:
 		status_component.statuses_changed.connect(_on_statuses_changed)
 		_on_statuses_changed()

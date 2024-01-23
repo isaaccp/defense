@@ -48,10 +48,10 @@ shape = SubResource("CircleShape2D_7fvau")
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("4_r4r2v")]
 status_component = NodePath("../StatusComponent")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component", "persistent_game_state_component") instance=ExtResource("5_xneld")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("5_xneld")]
 attributes_component = NodePath("../AttributesComponent")
 logging_component = NodePath("../LoggingComponent")
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
+is_dead = true
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
 health_component = NodePath("../HealthComponent")
@@ -84,9 +84,9 @@ shape = SubResource("CapsuleShape2D_4y0tt")
 [node name="SideComponent" parent="." instance=ExtResource("9_4wyt1")]
 side = 1
 
-[node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component", "logging_component") instance=ExtResource("10_lydou")]
-health_component = NodePath("../HealthComponent")
+[node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("10_lydou")]
 logging_component = NodePath("../LoggingComponent")
+elapsed_time = 562.681
 
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("9_ql6uj")]
 

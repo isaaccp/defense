@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 class_name HealthComponent
@@ -45,6 +46,8 @@ var initial_health = 0
 var running = false
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	if show_health in [ShowHealth.NEVER, ShowHealth.WHEN_NOT_FULL]:
 		%HealthBar.hide()
 	_initialize.call_deferred()
