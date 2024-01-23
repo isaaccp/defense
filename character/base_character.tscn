@@ -86,7 +86,6 @@ side = 1
 
 [node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("10_lydou")]
 logging_component = NodePath("../LoggingComponent")
-elapsed_time = 562.681
 
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("9_ql6uj")]
 
