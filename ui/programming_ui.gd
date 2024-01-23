@@ -13,7 +13,7 @@ func initialize(title: String, behavior: StoredBehavior, acquired_skills: SkillT
 	assert(behavior)
 	assert(acquired_skills)
 	%Title.text = title
-	%BehaviorLibraryUI.initialize(behavior_library, %BehaviorEditor as BehaviorEditor)
+	%BehaviorLibraryUI.initialize(behavior_library, acquired_skills, %BehaviorEditor as BehaviorEditor)
 	%BehaviorLibraryContainer.visible = behavior_library != null
 	%BehaviorEditor.initialize(behavior, is_editor)
 	%Toolbox.initialize(acquired_skills)
@@ -42,15 +42,28 @@ func library_editor_initialize(l: BehaviorLibrary):
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
-		# So it works as a standalone scene for easy testing.
-		_initialize_from_test_character()
-		canceled.connect(get_tree().quit)
-
-func _initialize_from_test_character():
-	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, BehaviorLibrary.new())
+		_standalone_ready.call_deferred()
 
 func _on_behavior_editor_behavior_saved(behavior):
 	saved.emit(behavior)
 
 func _on_behavior_editor_canceled():
 	canceled.emit()
+
+func _standalone_ready():
+	# Immediately remove self, we'll test with a copy. Keep parent ref.
+	var parent = get_parent()
+	get_parent().remove_child(self)
+	_standalone_ready_next_frame.call_deferred(parent)
+
+func _standalone_ready_next_frame(parent: Node):
+	# Just so we don't trigger again the _ready() F6 detector.
+	var node = Node.new()
+	parent.add_child(node)
+	var programming_ui = load(scene_file_path).instantiate()
+	programming_ui._initialize_from_test_character()
+	programming_ui.canceled.connect(parent.get_tree().quit)
+	node.add_child(programming_ui)
+
+func _initialize_from_test_character():
+	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, BehaviorLibrary.new())

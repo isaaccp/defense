@@ -8,6 +8,12 @@ class_name StoredBehavior
 ## Rules.
 @export var stored_rules: Array[RuleDef]
 
+func required_skills() -> Array[StringName]:
+	var skills: Array[StringName] = []
+	for rule in stored_rules:
+		skills.append_array(rule.required_skills())
+	return skills
+
 func serialize() -> PackedByteArray:
 	var data = []
 	#for stored_rule in stored_rules:

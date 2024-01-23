@@ -8,14 +8,13 @@ const component: StringName = &"StatusComponent"
 @export_group("Optional")
 @export var logging_component: LoggingComponent
 
-@export_group("Debug")
 # Used to keep detailed state about statuses. Keyed by (action_id, status_id) so
 # multiple actions can provide a status without removing it too early.
-@export var status_metadata: Dictionary
+var status_metadata: Dictionary
 # Map of current statuses mapping to Dictionary of actions that provide it.
-@export var current_statuses: Dictionary
+var current_statuses: Dictionary
 # Keep track of time to know when to expire.
-@export var elapsed_time: float = 0.0
+var elapsed_time: float = 0.0
 
 signal statuses_changed(statuses: Array[StatusDef.Id])
 signal able_to_act_changed(able_to_act: bool)

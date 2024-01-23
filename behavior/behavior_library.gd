@@ -37,3 +37,9 @@ func delete(name: String):
 
 func contains(name: String) -> bool:
 	return behaviors.any(func(b): return b.name == name)
+
+func get_by_name(name: String) -> StoredBehavior:
+	for behavior in behaviors:
+		if behavior.name == name:
+			return behavior
+	return null

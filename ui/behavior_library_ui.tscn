@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhwhcbxitg8lf"]
+[gd_scene load_steps=3 format=3 uid="uid://bhwhcbxitg8lf"]
 
 [ext_resource type="Script" path="res://ui/behavior_library_ui.gd" id="1_34oqy"]
+[ext_resource type="Texture2D" uid="uid://c8t68dpweqvr3" path="res://ui/icons/Remove.svg" id="2_ycu5q"]
 
 [node name="BehaviorLibraryUI" type="PanelContainer"]
 offset_right = 325.0
 offset_bottom = 97.0
 size_flags_vertical = 3
 script = ExtResource("1_34oqy")
+delete_icon = ExtResource("2_ycu5q")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -17,7 +19,8 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OnlyAvailableCheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Show only usable with current skills"
@@ -38,12 +41,14 @@ layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="Behaviors" type="ItemList" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="Behaviors" type="Tree" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 allow_search = false
-auto_height = true
+hide_root = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -52,14 +57,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save to Library"
-
-[node name="PopupMenu" type="PopupMenu" parent="."]
-unique_name_in_owner = true
-title = "Behavior"
-size = Vector2i(79, 35)
-item_count = 1
-item_0/text = "Delete"
-item_0/id = 0
 
 [node name="SaveBehaviorNameDialog" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
@@ -85,8 +82,8 @@ size_flags_horizontal = 3
 placeholder_text = "behavior name"
 
 [connection signal="behavior_activated" from="." to="." method="_on_behavior_activated"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/OnlyAvailableCheckButton" to="." method="_on_only_available_check_button_toggled"]
+[connection signal="button_clicked" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_button_clicked"]
 [connection signal="item_activated" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_item_activated"]
-[connection signal="item_clicked" from="MarginContainer/VBoxContainer/ScrollContainer/Behaviors" to="." method="_on_behaviors_item_clicked"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/SaveToLibraryButton" to="." method="_on_save_to_library_button_pressed"]
-[connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]
 [connection signal="confirmed" from="SaveBehaviorNameDialog" to="." method="_on_save_behavior_name_dialog_confirmed"]
