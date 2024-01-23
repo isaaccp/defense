@@ -11,6 +11,8 @@ const always = preload("res://skill_tree/conditions/always.tres")
 
 var root: TreeItem
 
+var acquired_skills: SkillTreeState
+
 # First loaded behavior, so it can be restored through revert.
 var original_behavior: StoredBehavior
 
@@ -26,7 +28,9 @@ enum ButtonIdx {
 	DELETE = 1,
 }
 
-func _init_tree():
+func initialize(acquired_skills: SkillTreeState):
+	self.acquired_skills = acquired_skills
+
 	# Note: This is currently only used as a list, not actually a tree.
 	# TODO: Do we need nested behaviors?
 	root = create_item()
@@ -38,8 +42,6 @@ func _init_tree():
 	set_column_title(Column.ACTION, "Action")
 
 func load_behavior(behavior: StoredBehavior) -> void:
-	if not root:
-		_init_tree()
 	for c in root.get_children():
 		root.remove_child(c)
 	if behavior:
@@ -54,17 +56,26 @@ func _add_row(rule: Rule = null) -> TreeItem:
 	row.add_button(Column.BUTTONS, delete_icon, ButtonIdx.DELETE, rule == null, "Delete")
 	row.set_selectable(Column.BUTTONS, false)
 	if rule:
-		_set_column(row, Column.TARGET, str(rule.target_selection), _metadata(rule.target_selection.skill_name, rule.target_selection.params))
-		_add_button_if_params(row, Column.TARGET, rule.target_selection.params)
-		_set_column(row, Column.CONDITION, str(rule.condition), _metadata(rule.condition.skill_name, rule.condition.params))
-		_add_button_if_params(row, Column.CONDITION, rule.condition.params)
-		_set_column(row, Column.ACTION, str(rule.action), _metadata(rule.action.skill_name, rule.action.params))
-		_add_button_if_params(row, Column.ACTION, rule.action.params)
+		_add_skill(row, Column.TARGET, rule.target_selection)
+		_add_skill(row, Column.CONDITION, rule.condition)
+		_add_skill(row, Column.ACTION, rule.action)
 	else:
 		_set_column(row, Column.TARGET, "[Target]", _metadata(TargetSelectionDef.NoTarget))
-		_set_column(row, Column.CONDITION, str(always), _metadata(always.skill_name, always.params))
+		_add_skill(row, Column.CONDITION, always)
 		_set_column(row, Column.ACTION, "[Action]", _metadata(ActionDef.NoAction))
 	return row
+
+func _add_skill(row: TreeItem, column: int, skill: ParamSkill):
+	row.set_text(column, skill.skill_name)
+	row.set_tooltip_text(column, skill.description())
+	row.set_metadata(column, _metadata(skill.skill_name, skill.params))
+	_add_button_if_params(row, column, skill.params)
+	var acquired = acquired_skills.all_available_by_name(skill.required_skills())
+	if not acquired:
+		row.set_tooltip_text(column, "Missing skill. Change or delete to be able to use this behavior.")
+		row.set_custom_bg_color(column, Color.RED, true)
+	else:
+		row.clear_custom_bg_color(column)
 
 func _add_button_if_params(row: TreeItem, column: int, params: SkillParams):
 	if params and params.placeholders.size() > 0:
@@ -74,21 +85,8 @@ func _add_button_if_params(row: TreeItem, column: int, params: SkillParams):
 		if row.get_button_count(column) > 0:
 			row.erase_button(column, 0)
 
-func _set_column(row: TreeItem, idx: int, name: String, meta: Dictionary):
-	row.set_text(idx, name)
-	match idx:
-		Column.TARGET:
-			var target = _target_from_meta(meta)
-			if target:
-				row.set_tooltip_text(idx, target.description())
-		Column.CONDITION:
-			var condition = _condition_from_meta(meta)
-			if condition:
-				row.set_tooltip_text(idx, condition.description())
-		Column.ACTION:
-			var action_def = _action_from_meta(meta)
-			if action_def:
-				row.set_tooltip_text(idx, action_def.description())
+func _set_column(row: TreeItem, idx: int, text: String, meta: Dictionary):
+	row.set_text(idx, text)
 	row.set_metadata(idx, meta)
 
 func _column_empty(column: int, meta):
@@ -128,8 +126,8 @@ func _is_valid(item: TreeItem) -> bool:
 			return false
 	return true
 
-func _metadata(name: StringName, data: Variant = null) -> Dictionary:
-	return {"name": name, "data": data}
+func _metadata(name: StringName, params: SkillParams = null) -> Dictionary:
+	return {"name": name, "params": params}
 
 func _get_drag_data(at_position):
 	var item = get_item_at_position(at_position)
@@ -166,20 +164,36 @@ func _can_drop_data(at_position: Vector2, data) -> bool:
 		return _check_compatibility(item, col, data)
 	return false
 
+func _skill_from_meta(meta) -> ParamSkill:
+	var skill = SkillManager.lookup_skill(meta.name)
+	var skill_type = skill.skill_type
+	match skill_type:
+		Skill.SkillType.TARGET: return _target_from_meta(meta)
+		Skill.SkillType.ACTION: return _action_from_meta(meta)
+		Skill.SkillType.CONDITION: return _condition_from_meta(meta)
+	assert(false, "Should not reach")
+	return null
+
 func _target_from_meta(meta) -> TargetSelectionDef:
 	if not meta or meta.name == TargetSelectionDef.NoTarget:
 		return null
-	return SkillManager.make_target_selection_instance(meta.name)
+	var target = SkillManager.make_target_selection_instance(meta.name)
+	target.params = meta.params
+	return target
 
 func _condition_from_meta(meta) -> ConditionDef:
 	if not meta or meta.name == ConditionDef.NoCondition:
 		return null
-	return SkillManager.make_condition_instance(meta.name)
+	var condition = SkillManager.make_condition_instance(meta.name)
+	condition.params = meta.params
+	return condition
 
 func _action_from_meta(meta) -> ActionDef:
 	if not meta or meta.name == ActionDef.NoAction:
 		return null
-	return SkillManager.make_action_instance(meta.name)
+	var action = SkillManager.make_action_instance(meta.name)
+	action.params = meta.params
+	return action
 
 func _check_compatibility(item: TreeItem, column: int, data) -> bool:
 	if _is_empty(item):
@@ -232,8 +246,9 @@ func _drop_data(at_position: Vector2, data):
 
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.MOVE, false)
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.DELETE, false)
-	_set_column(item, col, data.text,  _metadata(data.name, data.params))
-	_add_button_if_params(item, col, data.params)
+
+	var skill = _skill_from_meta(data)
+	_add_skill(item, col, skill)
 
 	if was_empty and not _is_empty(item):
 		# Replace the blank item we just filled in
@@ -260,15 +275,9 @@ func get_behavior() -> StoredBehavior:
 			continue
 		if not _is_valid(child):
 			return null
-		var target_name = child.get_metadata(Column.TARGET).name
-		var action_name = child.get_metadata(Column.ACTION).name
-		var condition_name = child.get_metadata(Column.CONDITION).name
-		var target = SkillManager.make_target_selection_instance(target_name)
-		target.params = child.get_metadata(Column.TARGET).data as SkillParams
-		var action = SkillManager.make_action_instance(action_name)
-		action.params = child.get_metadata(Column.ACTION).data as SkillParams
-		var condition = SkillManager.make_condition_instance(condition_name)
-		condition.params = child.get_metadata(Column.CONDITION).data as SkillParams
+		var target = _target_from_meta(child.get_metadata(Column.TARGET))
+		var action = _action_from_meta(child.get_metadata(Column.ACTION))
+		var condition = _condition_from_meta(child.get_metadata(Column.CONDITION))
 		var rule = RuleDef.make(
 			RuleSkillDef.from_skill(target),
 			RuleSkillDef.from_skill(action),

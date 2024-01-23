@@ -5,6 +5,7 @@ class_name ProgrammingUI
 @export_category("Testing")
 ## Used for F6 debug runs.
 @export var test_character: GameplayCharacter
+@export var test_behavior_library: BehaviorLibrary
 
 signal canceled
 signal saved(behavior: StoredBehavior)
@@ -15,7 +16,7 @@ func initialize(title: String, behavior: StoredBehavior, acquired_skills: SkillT
 	%Title.text = title
 	%BehaviorLibraryUI.initialize(behavior_library, acquired_skills, %BehaviorEditor as BehaviorEditor)
 	%BehaviorLibraryContainer.visible = behavior_library != null
-	%BehaviorEditor.initialize(behavior, is_editor)
+	%BehaviorEditor.initialize(behavior, acquired_skills, is_editor)
 	%Toolbox.initialize(acquired_skills)
 
 func editor_initialize(b: StoredBehavior):
@@ -66,4 +67,4 @@ func _standalone_ready_next_frame(parent: Node):
 	node.add_child(programming_ui)
 
 func _initialize_from_test_character():
-	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, BehaviorLibrary.new())
+	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, test_behavior_library)

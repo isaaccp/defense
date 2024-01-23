@@ -9,8 +9,9 @@ signal canceled
 # First loaded behavior, so it can be restored through revert.
 var original_behavior: StoredBehavior
 
-func initialize(behavior: StoredBehavior, is_editor: bool):
+func initialize(behavior: StoredBehavior, acquired_skills: SkillTreeState, is_editor: bool):
 	original_behavior = behavior
+	%BehaviorEditorView.initialize(acquired_skills)
 	load_behavior(original_behavior)
 	if is_editor:
 		%CancelButton.hide()

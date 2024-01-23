@@ -37,5 +37,8 @@ static func skill_type_filesystem_string(skill_type: SkillType) -> String:
 func description():
 	assert(false, "implement in subclass")
 
+func required_skills() -> Array[StringName]:
+	return [skill_name]
+
 func _to_string() -> String:
 	return skill_name
