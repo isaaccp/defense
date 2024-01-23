@@ -4,6 +4,7 @@ extends Control
 class_name BehaviorLibraryUI
 
 @export var delete_icon: Texture2D
+@export var not_available_color: Color
 
 # Initialized from outside.
 var behavior_library: BehaviorLibrary
@@ -16,8 +17,7 @@ var acquired_skills: SkillTreeState
 var behavior_list: Tree
 var root: TreeItem
 var item_by_name: Dictionary
-# Name of the behavior selected when we show a popup.
-var popup_name: String
+
 
 enum Column {
 	BUTTONS = 0,
@@ -61,6 +61,8 @@ func update_metadata(behavior: StoredBehavior):
 		tree_item.add_button(Column.BUTTONS, delete_icon, ButtonIdx.DELETE, false, "Delete")
 	tree_item.set_text(Column.NAME, behavior.name)
 	tree_item.set_metadata(Column.NAME, {"available": available})
+	tree_item.set_custom_color(Column.NAME, Color.WHITE if available else not_available_color)
+	tree_item.set_tooltip_text(Column.NAME, "All skills acquired" if available else "Missing skills")
 	tree_item.visible = (not %OnlyAvailableCheckButton.pressed) or available
 
 func get_selected() -> StoredBehavior:

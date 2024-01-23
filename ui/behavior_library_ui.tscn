@@ -9,6 +9,7 @@ offset_bottom = 97.0
 size_flags_vertical = 3
 script = ExtResource("1_34oqy")
 delete_icon = ExtResource("2_ycu5q")
+not_available_color = Color(1, 1, 1, 0.501961)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
