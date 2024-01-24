@@ -79,8 +79,7 @@ side = 2
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("10_yatxq")]
 status_component = NodePath("../StatusComponent")
 
-[node name="StatusComponent" parent="." node_paths=PackedStringArray("health_component", "logging_component") instance=ExtResource("7_hqrrl")]
-health_component = NodePath("../HealthComponent")
+[node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("7_hqrrl")]
 logging_component = NodePath("../LoggingComponent")
 
 [node name="LoggingComponent" parent="." instance=ExtResource("8_1okrv")]

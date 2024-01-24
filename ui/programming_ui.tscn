@@ -1,83 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://c7bsv7cscwbmr"]
+[gd_scene load_steps=7 format=3 uid="uid://c7bsv7cscwbmr"]
 
 [ext_resource type="Script" path="res://ui/programming_ui.gd" id="1_xf4ix"]
 [ext_resource type="Script" path="res://ui/toolbox.gd" id="2_pkup4"]
 [ext_resource type="Resource" uid="uid://dgs55tgbrgkhv" path="res://character/playable_characters/test/programming_ui_char.tres" id="2_wilel"]
-[ext_resource type="Script" path="res://behavior/behavior_library.gd" id="3_dfgvw"]
 [ext_resource type="PackedScene" uid="uid://bhwhcbxitg8lf" path="res://ui/behavior_library_ui.tscn" id="3_dopn3"]
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="3_ko3mt"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_e617b"]
 [ext_resource type="PackedScene" uid="uid://d16hng75dnkhk" path="res://ui/behavior_editor.tscn" id="4_rs50h"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="5_7v4d0"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="6_2vqk8"]
-[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="7_gnfgh"]
-
-[sub_resource type="Resource" id="Resource_0e0lt"]
-script = ExtResource("4_e617b")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_euk48"]
-script = ExtResource("5_7v4d0")
-name = &"Bow Attack"
-skill_type = 1
-params = SubResource("Resource_0e0lt")
-
-[sub_resource type="Resource" id="Resource_8lwyn"]
-script = ExtResource("4_e617b")
-editor_string = ""
-cmp = 0
-
-[sub_resource type="Resource" id="Resource_vf2xq"]
-script = ExtResource("5_7v4d0")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
-
-[sub_resource type="GDScript" id="GDScript_xcbbc"]
-script/source = "extends PositionTargetSorter
-
-func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
-	var distance_a = this_actor.position.distance_to(pos_a)
-	var distance_b = this_actor.position.distance_to(pos_b)
-	return distance_a < distance_b
-"
-
-[sub_resource type="Resource" id="Resource_35wok"]
-script = ExtResource("7_gnfgh")
-type = 2
-sorter_script = SubResource("GDScript_xcbbc")
-description_text = "Sorts by distance, selecting closest target"
-skill_name = &"Closest First"
-skill_type = 4
-tree_type = 1
-
-[sub_resource type="Resource" id="Resource_kpxd7"]
-script = ExtResource("4_e617b")
-editor_string = "Enemy ({sort})"
-cmp = 0
-sort = SubResource("Resource_35wok")
-
-[sub_resource type="Resource" id="Resource_defhq"]
-script = ExtResource("5_7v4d0")
-name = &"Enemy"
-skill_type = 2
-params = SubResource("Resource_kpxd7")
-
-[sub_resource type="Resource" id="Resource_02xvn"]
-script = ExtResource("6_2vqk8")
-target_selection = SubResource("Resource_defhq")
-action = SubResource("Resource_euk48")
-condition = SubResource("Resource_vf2xq")
-
-[sub_resource type="Resource" id="Resource_mj1kl"]
-script = ExtResource("3_ko3mt")
-name = "bow"
-stored_rules = Array[ExtResource("6_2vqk8")]([SubResource("Resource_02xvn")])
-
-[sub_resource type="Resource" id="Resource_3lmwn"]
-script = ExtResource("3_dfgvw")
-behaviors = Array[ExtResource("3_ko3mt")]([SubResource("Resource_mj1kl")])
 
 [sub_resource type="Theme" id="Theme_8i0e7"]
 MarginContainer/constants/margin_bottom = 4
@@ -94,7 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xf4ix")
 test_character = ExtResource("2_wilel")
-test_behavior_library = SubResource("Resource_3lmwn")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

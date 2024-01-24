@@ -15,6 +15,8 @@ func post_initialize():
 # Runs the appropriate physics process for entity.
 func physics_process(_delta: float):
 	super(_delta)
+	if finished:
+		return
 	# I don't think this should happen?
 	if not target.valid():
 		print("This happened, remove comment above or figure out why. If you don't see this comment in a way, remove this check")
@@ -46,4 +48,6 @@ func _start_target_position_refresh():
 
 func action_finished():
 	super()
+	if is_instance_valid(navigation_agent):
+		navigation_agent.velocity_computed.disconnect(_on_velocity_computed)
 	body.velocity = Vector2.ZERO

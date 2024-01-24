@@ -217,6 +217,7 @@ func _standalone_ready_next_frame(parent: Node):
 	var game_mode = GameMode.new()
 	game_mode.level_provider = LevelProvider.new()
 	game_mode.level_provider.levels.append(load(scene_file_path))
+	game_mode.dev_behavior_library = load("res://behavior/resources/dev_behavior_library.tres")
 	prepare_test_gameplay_characters()
 
 	# No type to prevent pulling in deps.
@@ -240,6 +241,8 @@ func prepare_test_gameplay_characters():
 		var gcs: Array[GameplayCharacter] = []
 		for i in range(num_players):
 			var gc = load("res://character/playable_characters/godric_the_knight.tres").duplicate(true)
+			gc.acquired_skills = SkillTreeState.new()
+			gc.acquired_skills.full = true
 			gcs.append(gc)
 		test_gameplay_characters = gcs
 		for gc in test_gameplay_characters:

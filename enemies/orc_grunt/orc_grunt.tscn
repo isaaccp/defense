@@ -367,6 +367,7 @@ armor = 0
 resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
 
 [node name="OrcGrunt" instance=ExtResource("1_ngdbc")]
+actor_name = "Orc Grunt"
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -32)

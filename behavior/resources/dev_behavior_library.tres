@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BehaviorLibrary" load_steps=32 format=3 uid="uid://bfaftc351hhvi"]
+[gd_resource type="Resource" script_class="BehaviorLibrary" load_steps=42 format=3 uid="uid://bfaftc351hhvi"]
 
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_enl0e"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_v57ou"]
@@ -157,6 +157,69 @@ script = ExtResource("1_enl0e")
 name = "bow_and_move"
 stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_4hfxd"), SubResource("Resource_ngdmp")])
 
+[sub_resource type="Resource" id="Resource_wdub2"]
+script = ExtResource("2_v57ou")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_g3pck"]
+script = ExtResource("3_6wex8")
+name = &"Hold Person"
+skill_type = 1
+params = SubResource("Resource_wdub2")
+
+[sub_resource type="Resource" id="Resource_tfkdw"]
+script = ExtResource("2_v57ou")
+editor_string = ""
+cmp = 0
+
+[sub_resource type="Resource" id="Resource_jmsls"]
+script = ExtResource("3_6wex8")
+name = &"Always"
+skill_type = 3
+params = SubResource("Resource_tfkdw")
+
+[sub_resource type="GDScript" id="GDScript_owwbg"]
+script/source = "extends PositionTargetSorter
+
+func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
+	var distance_a = this_actor.position.distance_to(pos_a)
+	var distance_b = this_actor.position.distance_to(pos_b)
+	return distance_a < distance_b
+"
+
+[sub_resource type="Resource" id="Resource_js3u5"]
+script = ExtResource("5_reeqg")
+type = 2
+sorter_script = SubResource("GDScript_owwbg")
+description_text = "Sorts by distance, selecting closest target"
+skill_name = &"Closest First"
+skill_type = 4
+tree_type = 1
+
+[sub_resource type="Resource" id="Resource_ehbn4"]
+script = ExtResource("2_v57ou")
+editor_string = "Enemy ({sort})"
+cmp = 0
+sort = SubResource("Resource_js3u5")
+
+[sub_resource type="Resource" id="Resource_o6cbu"]
+script = ExtResource("3_6wex8")
+name = &"Enemy"
+skill_type = 2
+params = SubResource("Resource_ehbn4")
+
+[sub_resource type="Resource" id="Resource_2tjs6"]
+script = ExtResource("4_7mu3l")
+target_selection = SubResource("Resource_o6cbu")
+action = SubResource("Resource_g3pck")
+condition = SubResource("Resource_jmsls")
+
+[sub_resource type="Resource" id="Resource_20flv"]
+script = ExtResource("1_enl0e")
+name = "hold_person"
+stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_2tjs6")])
+
 [resource]
 script = ExtResource("6_7v2r3")
-behaviors = Array[ExtResource("1_enl0e")]([SubResource("Resource_orsrc"), SubResource("Resource_rq4xr")])
+behaviors = Array[ExtResource("1_enl0e")]([SubResource("Resource_orsrc"), SubResource("Resource_rq4xr"), SubResource("Resource_20flv")])

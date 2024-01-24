@@ -26,7 +26,7 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var stored_behavior: StoredBehavior:
 	get:
 		if Engine.is_editor_hint():
-			return null
+			return stored_behavior
 		if persistent_game_state_component:
 			var gameplay_character = persistent_game_state_component.state as GameplayCharacter
 			return gameplay_character.behavior
@@ -84,40 +84,38 @@ func _physics_process(delta: float):
 
 	assert(behavior, "Missing behavior")
 
-	if not able_to_act:
-		return
+	if able_to_act:
+		# For change detection.
+		var prev_action_name = _action_name(action)
+		var prev_target = target
 
-	# For change detection.
-	var prev_action_name = _action_name(action)
-	var prev_target = target
-
-	# If action is finished, clear everything so we re-evaluate.
-	if action and action.finished:
-		_on_action_finished(action)
-		rule = null
-		action = null
-		target = null
-	# After this point, if action is still set, we can assume is not finished.
-	var abortable_check_needed = action and action.abortable and next_abortable_action_check_time < elapsed_time
-	if not rule or abortable_check_needed:
-		var result = behavior.choose(action_cooldowns, elapsed_time)
-		if not result.is_empty():
-			if result.rule != rule or not result.target.equals(target) or action.finished:
-				rule = result.rule
-				target = result.target
-				_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
-				if action:
-					_log("preempted %s" % action.def.name())
-					action.action_finished()
-					_on_action_finished(action)
-				action = result.action
-				action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component)
-		if action and action.abortable:
-			next_abortable_action_check_time = elapsed_time + abortable_action_check_period
-	_emit_updated_if_changed(prev_action_name, prev_target)
-	# No rule implies no action.
-	if rule:
-		action.physics_process(delta)
+		# If action is finished, clear everything so we re-evaluate.
+		if action and action.finished:
+			_on_action_finished(action)
+			rule = null
+			action = null
+			target = null
+		# After this point, if action is still set, we can assume is not finished.
+		var abortable_check_needed = action and action.abortable and next_abortable_action_check_time < elapsed_time
+		if not rule or abortable_check_needed:
+			var result = behavior.choose(action_cooldowns, elapsed_time)
+			if not result.is_empty():
+				if result.rule != rule or not result.target.equals(target) or action.finished:
+					rule = result.rule
+					target = result.target
+					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
+					if action:
+						_log("preempted %s" % action.def.name())
+						action.action_finished()
+						_on_action_finished(action)
+					action = result.action
+					action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component)
+			if action and action.abortable:
+				next_abortable_action_check_time = elapsed_time + abortable_action_check_period
+		_emit_updated_if_changed(prev_action_name, prev_target)
+		# No rule implies no action.
+		if rule:
+			action.physics_process(delta)
 	# Always run this to update animation, etc.
 	_post_action()
 
