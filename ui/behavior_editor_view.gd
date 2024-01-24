@@ -70,7 +70,7 @@ func _add_row(rule: Rule = null) -> TreeItem:
 	return row
 
 func _add_skill(row: TreeItem, column: int, skill: ParamSkill):
-	row.set_text(column, skill.skill_name)
+	row.set_text(column, str(skill))
 	row.set_tooltip_text(column, skill.description())
 	row.set_metadata(column, _metadata(skill.skill_name, skill.params))
 	_add_button_if_params(row, column, skill.params)
