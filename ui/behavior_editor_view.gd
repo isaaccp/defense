@@ -116,7 +116,7 @@ func _column_valid(column: int, meta):
 	assert(false, "Unexpected call")
 	return false
 
-func _column_acquired(column: int, meta: Dictionary):
+func _column_acquired(_column: int, meta: Dictionary):
 	if not meta:
 		return false
 	var skill = _skill_from_meta(meta)
