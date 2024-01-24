@@ -45,6 +45,7 @@ func _ready():
 	if get_parent() == get_tree().root:
 		_standalone_ready.call_deferred()
 
+
 func _on_behavior_editor_behavior_saved(behavior):
 	saved.emit(behavior)
 

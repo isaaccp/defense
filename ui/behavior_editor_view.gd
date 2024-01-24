@@ -28,6 +28,9 @@ enum ButtonIdx {
 	DELETE = 1,
 }
 
+signal can_save_to_behavior_updated(can_save: bool)
+signal can_save_to_behavior_library_updated(can_save: bool)
+
 func initialize(acquired_skills: SkillTreeState):
 	self.acquired_skills = acquired_skills
 
@@ -49,6 +52,7 @@ func load_behavior(behavior: StoredBehavior) -> void:
 		for rule in restored_behavior.rules:
 			_add_row(rule)
 	_add_row()
+	_check_can_save()
 
 func _add_row(rule: Rule = null) -> TreeItem:
 	var row = create_item(root)
@@ -112,6 +116,12 @@ func _column_valid(column: int, meta):
 	assert(false, "Unexpected call")
 	return false
 
+func _column_acquired(column: int, meta: Dictionary):
+	if not meta:
+		return false
+	var skill = _skill_from_meta(meta)
+	return acquired_skills.all_available_by_name(skill.required_skills())
+
 func _is_empty(item: TreeItem) -> bool:
 	for c in range(Column.BUTTONS+1, columns): # Skip buttons
 		var meta = item.get_metadata(c)
@@ -119,10 +129,18 @@ func _is_empty(item: TreeItem) -> bool:
 			return false
 	return true
 
+# True if all fields are set.
 func _is_valid(item: TreeItem) -> bool:
 	for c in range(Column.BUTTONS+1, columns): # Skip buttons
 		var meta = item.get_metadata(c)
 		if not _column_valid(c, meta):
+			return false
+	return true
+
+func _is_acquired(item: TreeItem) -> bool:
+	for c in range(Column.BUTTONS+1, columns): # Skip buttons
+		var meta = item.get_metadata(c)
+		if not _column_acquired(c, meta):
 			return false
 	return true
 
@@ -254,6 +272,8 @@ func _drop_data(at_position: Vector2, data):
 		# Replace the blank item we just filled in
 		_add_row()
 
+	_check_can_save()
+
 func _on_button_clicked(item, column, button_id, _mouse_button_index):
 	if column == Column.BUTTONS:
 		if button_id == ButtonIdx.DELETE: # delete
@@ -267,6 +287,23 @@ func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 	var params = result as SkillParams
 	var text = params.interpolated_text()
 	item.set_text(col, text)
+
+func _check_can_save():
+	var can_save_to_behavior = true
+	var can_save_to_behavior_library = true
+
+	for tree_item in root.get_children():
+		if _is_empty(tree_item):
+			continue
+		if not _is_valid(tree_item):
+			can_save_to_behavior = false
+			can_save_to_behavior_library = false
+			break
+		if not _is_acquired(tree_item):
+			can_save_to_behavior = false
+
+	can_save_to_behavior_updated.emit(can_save_to_behavior)
+	can_save_to_behavior_library_updated.emit(can_save_to_behavior_library)
 
 func get_behavior() -> StoredBehavior:
 	var behavior = StoredBehavior.new()

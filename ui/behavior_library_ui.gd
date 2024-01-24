@@ -34,6 +34,7 @@ func initialize(behavior_library: BehaviorLibrary, acquired_skills: SkillTreeSta
 	self.behavior_library = behavior_library
 	self.behavior_editor = behavior_editor
 	self.acquired_skills = acquired_skills
+	behavior_editor.can_save_to_behavior_library_updated.connect(_on_can_save_to_behavior_library_updated)
 
 func _ready():
 	behavior_list = %Behaviors
@@ -71,6 +72,9 @@ func get_selected() -> StoredBehavior:
 		return null
 	else:
 		return behavior_library.get_by_name(tree_item.get_text(Column.NAME))
+
+func _on_can_save_to_behavior_library_updated(can_save: bool):
+	%SaveToLibraryButton.disabled = not can_save
 
 func _on_behaviors_item_activated():
 	behavior_activated.emit(get_selected())

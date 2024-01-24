@@ -5,6 +5,7 @@ class_name BehaviorEditor
 
 signal behavior_saved(behavior: StoredBehavior)
 signal canceled
+signal can_save_to_behavior_library_updated(can_save: bool)
 
 # First loaded behavior, so it can be restored through revert.
 var original_behavior: StoredBehavior
@@ -34,3 +35,9 @@ func _on_cancel_button_pressed():
 
 func _on_revert_button_pressed():
 	%BehaviorEditorView.load_behavior(original_behavior)
+
+func _on_behavior_editor_view_can_save_to_behavior_updated(can_save: bool):
+	%SaveButton.disabled = not can_save
+
+func _on_behavior_editor_view_can_save_to_behavior_library_updated(can_save: bool):
+	can_save_to_behavior_library_updated.emit(can_save)

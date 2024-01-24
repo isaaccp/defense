@@ -21,8 +21,10 @@ drag_icon = ExtResource("5_r4r0k")
 layout_mode = 2
 
 [node name="SaveButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 text = "Save"
 
 [node name="CancelButton" type="Button" parent="HBoxContainer"]
@@ -37,6 +39,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Revert"
 
+[connection signal="can_save_to_behavior_library_updated" from="BehaviorEditorView" to="." method="_on_behavior_editor_view_can_save_to_behavior_library_updated"]
+[connection signal="can_save_to_behavior_updated" from="BehaviorEditorView" to="." method="_on_behavior_editor_view_can_save_to_behavior_updated"]
 [connection signal="pressed" from="HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/RevertButton" to="." method="_on_revert_button_pressed"]
