@@ -79,7 +79,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 				var sort_name = options[idx]
 				opt.add_item(sort_name)
 				if sort and sort.name() == sort_name:
-					opt.select(idx)
+					opt.select(idx+1)
 			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))
 			input.add_child(opt)
 
