@@ -281,7 +281,7 @@ func _on_button_clicked(item, column, button_id, _mouse_button_index):
 		elif button_id == ButtonIdx.MOVE:
 			print("TODO: Make clicking on MOVE do something")
 	elif column != Column.BUTTONS and button_id == 0: # config
-		%ConfigPane.setup(item, column)
+		%ConfigPane.setup(item, column, acquired_skills)
 
 func _on_config_pane_config_confirmed(item: TreeItem, col, result):
 	var params = result as SkillParams

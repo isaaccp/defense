@@ -4,6 +4,7 @@ extends PopupPanel
 var _item: TreeItem
 var _col: int
 var _params: SkillParams
+var _acquired_skills: SkillTreeState
 
 @onready var input = %Input
 
@@ -13,10 +14,11 @@ signal config_confirmed(item: TreeItem, col: int, result: String)
 func _ready():
 	%OK.disabled = true
 
-func setup(item: TreeItem, col: int) -> void:
+func setup(item: TreeItem, col: int, acquired_skills: SkillTreeState) -> void:
 	_item = item
 	_col = col
-	_params = item.get_metadata(col).data as SkillParams
+	_params = item.get_metadata(col).params as SkillParams
+	_acquired_skills = acquired_skills
 
 	for c in input.get_children():
 		input.remove_child(c)
@@ -72,8 +74,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			opt.fit_to_longest_item = false
 
 			var sort = _params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
-			# TODO: Make it so you only have sorts acquired.
-			var options = SkillManager.all_target_sorts()
+			var options = _acquired_skills.target_sorts
 			for idx in range(options.size()):
 				var sort_name = options[idx]
 				opt.add_item(sort_name)
