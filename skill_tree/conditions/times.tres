@@ -16,7 +16,6 @@ type = 1
 evaluator_script = ExtResource("1_bw8bs")
 description_text = "<missing description>"
 params = SubResource("Resource_l5ow1")
-abstract = true
 skill_name = &"Times"
 skill_type = 3
 parent = ExtResource("2_wy280")

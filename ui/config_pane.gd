@@ -78,7 +78,7 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			for idx in range(options.size()):
 				var sort_name = options[idx]
 				opt.add_item(sort_name)
-				if sort and sort.name() == sort_name:
+				if sort and sort.name == sort_name:
 					opt.select(idx+1)
 			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))
 			input.add_child(opt)
@@ -113,7 +113,7 @@ func _on_sort_selected(selection: int, placeholder: SkillParams.PlaceholderId, o
 	var name = options[selection-1]
 	var sort = SkillManager.lookup_target_sort(name)
 	assert(sort)
-	_params.set_placeholder_value(placeholder, sort)
+	_params.set_placeholder_value(placeholder, StoredSkill.from_skill(sort))
 	_check_ok()
 
 func results() -> SkillParams:

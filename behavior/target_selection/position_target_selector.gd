@@ -7,9 +7,7 @@ var condition_evaluator: PositionConditionEvaluator
 func select_target(action: Action, actor: Actor, side_component: SideComponent) -> Target:
 	var targets = select_targets(action, actor, side_component)
 	if def.sortable:
-		assert(def.params.placeholder_set(SkillParams.PlaceholderId.SORT))
-		var target_sort = def.params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
-		var sorter = TargetSorterFactory.make_position_target_sorter(target_sort)
+		var sorter = TargetSorterFactory.make_position_target_sorter(def.sort())
 		sorter.sort(actor, targets)
 	for target in targets:
 		# Verify condition.

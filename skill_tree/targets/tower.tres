@@ -16,7 +16,6 @@ description_text = "Targets the tower"
 selector_script = ExtResource("3_ainap")
 sortable = false
 params = SubResource("Resource_oit4y")
-abstract = true
 skill_name = &"Tower"
 skill_type = 2
 tree_type = 1

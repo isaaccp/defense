@@ -21,7 +21,4 @@ position = Vector2(338, 222)
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_psc1g")]
 position = Vector2(299, 199)
 
-[node name="AttributesComponent" parent="YSorted/Towers/Column" index="5"]
-health = 20
-
 [editable path="YSorted/Towers/Column"]

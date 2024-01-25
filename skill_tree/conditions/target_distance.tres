@@ -16,7 +16,6 @@ type = 3
 evaluator_script = ExtResource("1_d7xrg")
 description_text = "<missing description>"
 params = SubResource("Resource_noqfo")
-abstract = true
 skill_name = &"Target Distance"
 skill_type = 3
 parent = ExtResource("2_l7qbk")

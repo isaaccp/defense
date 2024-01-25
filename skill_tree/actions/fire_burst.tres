@@ -17,7 +17,6 @@ action_script = ExtResource("1_iy3ja")
 supported_target_types = Array[int]([1, 3])
 attack_type = ExtResource("2_r805t")
 params = SubResource("Resource_xrcsq")
-abstract = true
 skill_name = &"Fire Burst"
 skill_type = 1
 parent = ExtResource("4_prks1")

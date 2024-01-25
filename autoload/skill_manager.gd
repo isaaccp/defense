@@ -60,7 +60,11 @@ func restore_rule(stored_rule: RuleDef) -> Rule:
 func restore_skill(stored_skill: StoredSkill) -> Skill:
 	var skill = lookup_skill(stored_skill.name).duplicate(true)
 	if stored_skill is StoredParamSkill:
+		assert(skill is ParamSkill)
 		skill.params = stored_skill.params
+		if skill.params.placeholder_set(SkillParams.PlaceholderId.SORT):
+			var stored_sort = skill.params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
+			skill.restored_skill_params.sort = restore_skill(stored_sort)
 	return skill
 
 # Action

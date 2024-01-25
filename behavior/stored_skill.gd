@@ -14,3 +14,6 @@ static func from_skill(skill: Skill) -> StoredSkill:
 	stored_skill.name = skill.skill_name
 	stored_skill.skill_type = skill.skill_type
 	return stored_skill
+
+func _to_string() -> String:
+	return name

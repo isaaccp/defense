@@ -32,7 +32,7 @@ enum CmpOp {
 @export var cmp: CmpOp
 @export var int_value: IntValue
 @export var float_value: FloatValue
-@export var sort: TargetSort
+@export var sort: StoredSkill
 
 # Don't want those to end up saved in resources.
 # @export_group("Debug")
@@ -57,7 +57,7 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 			float_value = FloatValue.make(value)
 		PlaceholderId.SORT:
 			assert(value is TargetSort)
-			sort = value as TargetSort
+			sort = StoredSkill.from_skill(value)
 
 func get_placeholder_string(placeholder: PlaceholderId) -> String:
 	match placeholder:

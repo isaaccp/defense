@@ -61,7 +61,6 @@ tree_type = 1
 script = ExtResource("5_hex2m")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = SubResource("Resource_vhcuj")
 
 [sub_resource type="Resource" id="Resource_r565m"]
 script = ExtResource("6_m8yb4")

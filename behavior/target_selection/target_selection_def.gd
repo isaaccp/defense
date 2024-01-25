@@ -29,6 +29,10 @@ func _set_default():
 	if sortable:
 		params.set_placeholder_value(SkillParams.PlaceholderId.SORT, default_sort)
 
+func sort() -> TargetSort:
+	assert(restored_skill_params.sort)
+	return restored_skill_params.sort
+
 func validate():
 	if sortable:
 		if not params.editor_string.contains("{sort}"):

@@ -15,7 +15,6 @@ type = 1
 evaluator_script = ExtResource("1_utwvb")
 description_text = "<missing description>"
 params = SubResource("Resource_8lwyn")
-abstract = true
 skill_name = &"Always"
 skill_type = 3
 tree_type = 1

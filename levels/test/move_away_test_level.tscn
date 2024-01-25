@@ -64,7 +64,6 @@ tree_type = 1
 script = ExtResource("4_60r1h")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = SubResource("Resource_mearl")
 
 [sub_resource type="Resource" id="Resource_gajmh"]
 script = ExtResource("5_mm07s")
@@ -143,7 +142,6 @@ params = SubResource("Resource_q5xon")
 script = ExtResource("4_60r1h")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = ExtResource("7_ypwre")
 
 [sub_resource type="Resource" id="Resource_c1khk"]
 script = ExtResource("5_mm07s")
@@ -178,7 +176,6 @@ params = SubResource("Resource_8lwyn")
 script = ExtResource("4_60r1h")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = ExtResource("7_ypwre")
 
 [sub_resource type="Resource" id="Resource_peoiw"]
 script = ExtResource("5_mm07s")

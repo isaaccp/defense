@@ -16,7 +16,6 @@ action_script = ExtResource("1_oopmu")
 supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_12hpy")
 params = SubResource("Resource_dkefb")
-abstract = true
 skill_name = &"Seeking Bolt"
 skill_type = 1
 tree_type = 5

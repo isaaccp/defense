@@ -16,7 +16,6 @@ type = 2
 evaluator_script = ExtResource("1_i024q")
 description_text = "<missing description>"
 params = SubResource("Resource_e7tbt")
-abstract = true
 skill_name = &"Target Health"
 skill_type = 3
 parent = ExtResource("2_5slir")

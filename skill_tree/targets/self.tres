@@ -17,7 +17,6 @@ description_text = "Targets oneself"
 selector_script = ExtResource("3_8tp1d")
 sortable = false
 params = SubResource("Resource_7ir3x")
-abstract = true
 skill_name = &"Self"
 skill_type = 2
 parent = ExtResource("2_tgo4a")

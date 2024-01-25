@@ -16,7 +16,6 @@ action_script = ExtResource("1_c6hd2")
 supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_jbjy1")
 params = SubResource("Resource_t8063")
-abstract = true
 skill_name = &"Sword Attack"
 skill_type = 1
 tree_type = 2
