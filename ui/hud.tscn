@@ -60,30 +60,33 @@ theme_override_font_sizes/font_size = 18
 text = "Bottom Message"
 horizontal_alignment = 1
 
-[node name="TopHud" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -192.5
+offset_right = 192.5
+offset_bottom = 502.0
 grow_horizontal = 2
 
-[node name="TowerHud" type="PanelContainer" parent="TopHud"]
+[node name="TopHud" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TowerHud" type="PanelContainer" parent="PanelContainer/TopHud"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HudTowerView" parent="TopHud/TowerHud" instance=ExtResource("2_7mw8q")]
+[node name="HudTowerView" parent="PanelContainer/TopHud/TowerHud" instance=ExtResource("2_7mw8q")]
 layout_mode = 2
 
-[node name="CharacterViews" type="HBoxContainer" parent="TopHud"]
+[node name="CharacterViews" type="HBoxContainer" parent="PanelContainer/TopHud"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="HudCharacterView" parent="TopHud/CharacterViews" instance=ExtResource("2_ok2lg")]
+[node name="HudCharacterView" parent="PanelContainer/TopHud/CharacterViews" instance=ExtResource("2_ok2lg")]
 layout_mode = 2
 
 [node name="TopRightControls" type="HBoxContainer" parent="."]

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://behavior/stored_skill.gd" id="2_ipgp5"]
 [ext_resource type="Script" path="res://behavior/target_selection/enemy_target_selector.gd" id="3_46sih"]
 
-[sub_resource type="Resource" id="Resource_6d8ym"]
+[sub_resource type="Resource" id="Resource_q3ocn"]
 script = ExtResource("2_ipgp5")
 name = &"Closest First"
 skill_type = 4
@@ -14,7 +14,7 @@ skill_type = 4
 script = ExtResource("1_4ggyl")
 editor_string = "Enemy ({sort})"
 cmp = 0
-sort = SubResource("Resource_6d8ym")
+sort = SubResource("Resource_q3ocn")
 
 [resource]
 script = ExtResource("2_2oq6d")

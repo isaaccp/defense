@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://dvs6g4m5siut3" path="res://skill_tree/targets/ally.tres" id="3_53msf"]
 [ext_resource type="Script" path="res://behavior/target_selection/self_or_ally_target_selector.gd" id="4_q8qsf"]
 
-[sub_resource type="Resource" id="Resource_rjn5i"]
+[sub_resource type="Resource" id="Resource_nc0kq"]
 script = ExtResource("2_jvokt")
 name = &"Closest First"
 skill_type = 4
@@ -15,7 +15,7 @@ skill_type = 4
 script = ExtResource("1_pwxcs")
 editor_string = "Self or Ally ({sort})"
 cmp = 0
-sort = SubResource("Resource_rjn5i")
+sort = SubResource("Resource_nc0kq")
 
 [resource]
 script = ExtResource("2_lh6h8")

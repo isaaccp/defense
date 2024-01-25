@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="3_mefl5"]
 [ext_resource type="Script" path="res://behavior/target_selection/ally_target_selector.gd" id="4_y3bvn"]
 
-[sub_resource type="Resource" id="Resource_rylqr"]
+[sub_resource type="Resource" id="Resource_lla0y"]
 script = ExtResource("2_4g1n1")
 name = &"Closest First"
 skill_type = 4
@@ -14,7 +14,7 @@ skill_type = 4
 script = ExtResource("1_eob2b")
 editor_string = "Ally ({sort})"
 cmp = 0
-sort = SubResource("Resource_rylqr")
+sort = SubResource("Resource_lla0y")
 
 [resource]
 script = ExtResource("3_mefl5")

@@ -103,19 +103,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Ready"
 
-[node name="Control" type="Control" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
 theme_override_constants/margin_top = 2
 
-[node name="HudStatusDisplay" parent="Control/MarginContainer" instance=ExtResource("2_aw5xw")]
+[node name="HudStatusDisplay" parent="MarginContainer/VBoxContainer/MarginContainer" instance=ExtResource("2_aw5xw")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
