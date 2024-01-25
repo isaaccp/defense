@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="LevelProvider" load_steps=23 format=3 uid="uid://bmvux5rjsxklv"]
 
 [ext_resource type="PackedScene" uid="uid://bl8mdgqo1xlv0" path="res://levels/test/test_one_vs_two_level.tscn" id="1_61jmt"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_byy2n"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="2_byy2n"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_dmu74"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_ajx3i"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_apwm0"]

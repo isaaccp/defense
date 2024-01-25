@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_2w86k"]
 [ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_dvhob"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_uipkv"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="7_uipkv"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_nxbma"]
 
 [sub_resource type="Resource" id="Resource_ueppd"]

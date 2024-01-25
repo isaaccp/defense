@@ -3,9 +3,9 @@ extends Resource
 
 class_name RuleDef
 
-@export var target_selection: RuleSkillDef
-@export var action: RuleSkillDef
-@export var condition: RuleSkillDef
+@export var target_selection: StoredParamSkill
+@export var action: StoredParamSkill
+@export var condition: StoredParamSkill
 
 func required_skills() -> Array[StringName]:
 	var skills: Array[StringName] = []
@@ -24,7 +24,7 @@ func _to_string() -> String:
 		condition.name,
 	]
 
-static func make(target_selection: RuleSkillDef, action: RuleSkillDef, condition: RuleSkillDef) -> RuleDef:
+static func make(target_selection: StoredParamSkill, action: StoredParamSkill, condition: StoredParamSkill) -> RuleDef:
 	var rule = RuleDef.new()
 	rule.target_selection = target_selection
 	rule.action = action

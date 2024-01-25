@@ -6,9 +6,9 @@ const always = preload("res://skill_tree/conditions/always.tres")
 
 static func rule_def(target: TargetSelectionDef, action: ActionDef, condition: ConditionDef = always) -> RuleDef:
 	return RuleDef.make(
-		RuleSkillDef.from_skill(target),
-		RuleSkillDef.from_skill(action),
-		RuleSkillDef.from_skill(condition),
+		StoredParamSkill.from_skill(target),
+		StoredParamSkill.from_skill(action),
+		StoredParamSkill.from_skill(condition),
 	)
 
 static func set_character_behavior(character: Node2D, behavior: StoredBehavior):

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="4_60r1h"]
 [ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="4_kj4lc"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="4_yshdq"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="5_mm07s"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="5_mm07s"]
 [ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="6_6kniy"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="6_btg8e"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="7_k3fxa"]

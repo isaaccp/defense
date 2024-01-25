@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_n0ihp"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_7k77e"]
 [ext_resource type="PackedScene" uid="uid://cilbbmjxhyi8t" path="res://enemies/barrel/barrel.tscn" id="2_al4rm"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="3_f1wt6"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="3_f1wt6"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="4_tkvsd"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="5_t2s1p"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="6_nxkar"]

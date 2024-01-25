@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_7delc"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_7epv0"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_modbu"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="2_modbu"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_erdfh"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="5_674i2"]
 
@@ -13,9 +13,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_3eho1"]
 script = ExtResource("2_modbu")
+params = SubResource("Resource_c573f")
 name = &"Sword Attack"
 skill_type = 1
-params = SubResource("Resource_c573f")
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("1_7delc")
@@ -24,9 +24,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_upjf1"]
 script = ExtResource("2_modbu")
+params = SubResource("Resource_8lwyn")
 name = &"Always"
 skill_type = 3
-params = SubResource("Resource_8lwyn")
 
 [sub_resource type="GDScript" id="GDScript_e2sav"]
 script/source = "extends PositionTargetSorter
@@ -54,9 +54,9 @@ sort = SubResource("Resource_y0n0d")
 
 [sub_resource type="Resource" id="Resource_h4hw6"]
 script = ExtResource("2_modbu")
+params = SubResource("Resource_eywbu")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_eywbu")
 
 [sub_resource type="Resource" id="Resource_pmy3a"]
 script = ExtResource("3_erdfh")
@@ -71,21 +71,21 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_t7nqt"]
 script = ExtResource("2_modbu")
+params = SubResource("Resource_e5wsl")
 name = &"Charge"
 skill_type = 1
-params = SubResource("Resource_e5wsl")
 
 [sub_resource type="Resource" id="Resource_1fkqq"]
 script = ExtResource("2_modbu")
+params = SubResource("Resource_8lwyn")
 name = &"Always"
 skill_type = 3
-params = SubResource("Resource_8lwyn")
 
 [sub_resource type="Resource" id="Resource_5df3n"]
 script = ExtResource("2_modbu")
+params = SubResource("Resource_eywbu")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_eywbu")
 
 [sub_resource type="Resource" id="Resource_r3l3c"]
 script = ExtResource("3_erdfh")

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://e61vy14vtwyo" path="res://enemies/orc_archer/Run.png" id="3_c2ix8"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="5_ppmrm"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="6_2kkh2"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_ae2gu"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="6_ae2gu"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_174ti"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="9_ky3ae"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="10_cxdft"]

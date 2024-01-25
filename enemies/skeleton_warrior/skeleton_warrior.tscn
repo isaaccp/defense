@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://c635s5x8n53gr" path="res://game_logic/damage_types/piercing.tres" id="4_n033s"]
 [ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="5_eunku"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_mqksg"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_cbno3"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="6_cbno3"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="6_vuj23"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_x14vd"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="8_ok866"]

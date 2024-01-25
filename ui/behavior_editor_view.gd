@@ -316,9 +316,9 @@ func get_behavior() -> StoredBehavior:
 		var action = _action_from_meta(child.get_metadata(Column.ACTION))
 		var condition = _condition_from_meta(child.get_metadata(Column.CONDITION))
 		var rule = RuleDef.make(
-			RuleSkillDef.from_skill(target),
-			RuleSkillDef.from_skill(action),
-			RuleSkillDef.from_skill(condition),
+			StoredParamSkill.from_skill(target),
+			StoredParamSkill.from_skill(action),
+			StoredParamSkill.from_skill(condition),
 		)
 		behavior.stored_rules.append(rule)
 	return behavior

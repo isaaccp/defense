@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_u12oj"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="5_traho"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="6_cxhvn"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="7_2p23u"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="7_2p23u"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_8kx3c"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="9_gxkya"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="10_lt1sc"]

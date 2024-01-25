@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="3_mwhu2"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_tgq0t"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_gp48s"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="6_q6t6v"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="6_q6t6v"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_k2205"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="8_wmqx2"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="9_652d4"]

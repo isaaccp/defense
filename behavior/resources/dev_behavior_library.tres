@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_enl0e"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_v57ou"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="3_6wex8"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="3_6wex8"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="4_7mu3l"]
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="5_reeqg"]
 [ext_resource type="Script" path="res://behavior/behavior_library.gd" id="6_7v2r3"]

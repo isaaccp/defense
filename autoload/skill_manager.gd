@@ -50,27 +50,17 @@ func _init():
 func lookup_skill(name: StringName) -> Skill:
 	return skill_by_name[name]
 
-func restore_rule(saved_rule: RuleDef) -> Rule:
+func restore_rule(stored_rule: RuleDef) -> Rule:
 	var rule = Rule.new()
-	rule.target_selection = restore_skill(saved_rule.target_selection) as TargetSelectionDef
-	rule.condition = restore_skill(saved_rule.condition) as ConditionDef
-	rule.action = restore_skill(saved_rule.action) as ActionDef
+	rule.target_selection = restore_skill(stored_rule.target_selection) as TargetSelectionDef
+	rule.condition = restore_skill(stored_rule.condition) as ConditionDef
+	rule.action = restore_skill(stored_rule.action) as ActionDef
 	return rule
 
-func restore_skill(saved_skill: RuleSkillDef) -> Skill:
-	# As of now all skills are ParamSkill subclasses.
-	var skill: ParamSkill
-	match saved_skill.skill_type:
-		Skill.SkillType.ACTION:
-			skill = make_action_instance(saved_skill.name)
-		Skill.SkillType.TARGET:
-			skill = make_target_selection_instance(saved_skill.name)
-		Skill.SkillType.CONDITION:
-			skill = make_condition_instance(saved_skill.name)
-		_:
-			assert(false, "Unexpected skill type to restore")
-	assert(skill, "Failed to restore new skill instance")
-	skill.params = saved_skill.params
+func restore_skill(stored_skill: StoredSkill) -> Skill:
+	var skill = lookup_skill(stored_skill.name).duplicate(true)
+	if stored_skill is StoredParamSkill:
+		skill.params = stored_skill.params
 	return skill
 
 # Action
@@ -79,7 +69,6 @@ func lookup_action(name: StringName) -> ActionDef:
 
 func make_action_instance(name: StringName) -> ActionDef:
 	var action = lookup_action(name).duplicate(true)
-	action.abstract = false
 	return action
 
 func all_actions() -> Array[StringName]:
@@ -94,7 +83,6 @@ func lookup_condition(name: StringName) -> ConditionDef:
 
 func make_condition_instance(name: StringName) -> ConditionDef:
 	var condition = lookup_condition(name).duplicate(true)
-	condition.abstract = false
 	return condition
 
 func all_conditions() -> Array[StringName]:
@@ -109,7 +97,6 @@ func lookup_target(name: StringName) -> TargetSelectionDef:
 
 func make_target_selection_instance(name: StringName) -> TargetSelectionDef:
 	var target = lookup_target(name).duplicate(true)
-	target.abstract = false
 	return target
 
 func all_target_selections() -> Array[StringName]:

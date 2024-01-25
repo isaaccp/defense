@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Behavior" load_steps=18 format=3 uid="uid://bqup0xqgl0kxe"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_at6fq"]
-[ext_resource type="Script" path="res://behavior/rule_skill_def.gd" id="2_cdd0h"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="2_cdd0h"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_dv0do"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_6didq"]
 
