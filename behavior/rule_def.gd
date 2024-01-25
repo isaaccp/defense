@@ -11,8 +11,8 @@ func required_skills() -> Array[StringName]:
 	var skills: Array[StringName] = []
 	skills.append(target_selection.name)
 	if target_selection.params.placeholder_set(SkillParams.PlaceholderId.SORT):
-		var target_sort = target_selection.params.get_placeholder_value(SkillParams.PlaceholderId.SORT) as TargetSort
-		skills.append(target_sort.name())
+		var stored_sort = target_selection.params.get_placeholder_value(SkillParams.PlaceholderId.SORT) as StoredSkill
+		skills.append(stored_sort.name)
 	skills.append(action.name)
 	skills.append(condition.name)
 	return skills
