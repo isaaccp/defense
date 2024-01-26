@@ -1,14 +1,11 @@
-[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://baxeui7tkbgba"]
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://baxeui7tkbgba"]
 
-[ext_resource type="Texture2D" uid="uid://di354xvqlehpt" path="res://assets/kenney_fantasy-ui-borders/Vector/fantasy-ui-borders.svg" id="1_fikrm"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6qnv"]
-atlas = ExtResource("1_fikrm")
-region = Rect2(550, 40, 48, 48)
+[ext_resource type="Texture2D" uid="uid://b278peic5pdrn" path="res://assets/kenney_fantasy-ui-borders/Vector/fantasy-ui-borders-background-grey-51.svg" id="1_yxwh3"]
 
 [resource]
-texture = SubResource("AtlasTexture_h6qnv")
+texture = ExtResource("1_yxwh3")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
+region_rect = Rect2(674, 226, 48, 48)

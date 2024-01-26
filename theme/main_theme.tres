@@ -3,13 +3,12 @@
 [ext_resource type="StyleBox" uid="uid://djq0nqdnrsqnb" path="res://theme/hover_style_box_texture.tres" id="1_3qyws"]
 [ext_resource type="StyleBox" uid="uid://nc4pa2w33h54" path="res://theme/normal_style_box_texture.tres" id="1_h3hmy"]
 [ext_resource type="StyleBox" uid="uid://baxeui7tkbgba" path="res://theme/panel_style_box_texture.tres" id="3_40l1v"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6a7yb"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
+[ext_resource type="StyleBox" uid="uid://dpi34ke7nsm2e" path="res://theme/disabled_button_style_box_texture.tres" id="3_s6mdm"]
 
 [resource]
 default_font_size = 24
 Button/colors/font_hover_color = Color(0.184314, 0.184314, 0.184314, 1)
+Button/styles/disabled = ExtResource("3_s6mdm")
 Button/styles/focus = ExtResource("1_3qyws")
 Button/styles/hover = ExtResource("1_3qyws")
 Button/styles/normal = ExtResource("1_h3hmy")
@@ -20,11 +19,10 @@ CheckButton/colors/font_hover_pressed_color = Color(0.184314, 0.184314, 0.184314
 CheckButton/styles/focus = ExtResource("1_3qyws")
 CheckButton/styles/hover = ExtResource("1_3qyws")
 CheckButton/styles/hover_pressed = ExtResource("1_3qyws")
-CheckButton/styles/normal = ExtResource("1_h3hmy")
-CheckButton/styles/pressed = ExtResource("1_h3hmy")
+CheckButton/styles/normal = ExtResource("3_s6mdm")
+CheckButton/styles/pressed = ExtResource("3_s6mdm")
 MarginContainer/constants/margin_bottom = 4
 MarginContainer/constants/margin_left = 4
 MarginContainer/constants/margin_right = 4
 MarginContainer/constants/margin_top = 4
-Panel/styles/panel = SubResource("StyleBoxFlat_6a7yb")
 PanelContainer/styles/panel = ExtResource("3_40l1v")

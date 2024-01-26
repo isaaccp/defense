@@ -1,0 +1,15 @@
+[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://dpi34ke7nsm2e"]
+
+[ext_resource type="Texture2D" uid="uid://di354xvqlehpt" path="res://assets/kenney_fantasy-ui-borders/Vector/fantasy-ui-borders.svg" id="1_oti7q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eonvn"]
+atlas = ExtResource("1_oti7q")
+region = Rect2(798, 102, 48, 48)
+
+[resource]
+texture = SubResource("AtlasTexture_eonvn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+modulate_color = Color(0.87451, 0.87451, 0.87451, 0.501961)
