@@ -63,8 +63,6 @@ func _get_configuration_warnings():
 	#  * the ones we have below intended for when instantiating a spawner in a level
 	# Internal warnings would be added here, and returned even in the spawner scene.
 	# The other ones are added below and returned only in the tree.
-	if not get_parent() is Node2D:
-		return warnings
 	if not placement_node:
 		warnings.append("Must set placement_node")
 	var config_component = SpawnConfigComponent.get_or_null(self)
