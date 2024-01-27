@@ -5,16 +5,15 @@
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="3_p28ke"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="4_w5bw1"]
 
-[sub_resource type="Resource" id="Resource_dobrv"]
+[sub_resource type="Resource" id="Resource_dnvqw"]
 script = ExtResource("4_w5bw1")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
-full_acquired = true
-full_unlocked = true
+skills = Array[StringName]([&"Always", &"Enemy", &"Move To", &"Closest First"])
+full = true
 
 [resource]
 script = ExtResource("3_p28ke")
 players = 1
 levels = Array[PackedScene]([ExtResource("2_4yctn")])
 available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_x5jr5")])
-skill_tree_state = SubResource("Resource_dobrv")
+current_level = 0
+unlocked_skills = SubResource("Resource_dnvqw")
