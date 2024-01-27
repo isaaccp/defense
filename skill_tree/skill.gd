@@ -42,3 +42,8 @@ func required_skills() -> Array[StringName]:
 
 func _to_string() -> String:
 	return skill_name
+
+## Creates a new copy of the Skill. Each subclass should only copy the minimum
+## amount required, otherwise maintain references to same objects.
+func clone() -> Skill:
+	return duplicate()

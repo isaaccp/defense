@@ -265,7 +265,9 @@ func _drop_data(at_position: Vector2, data):
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.MOVE, false)
 	item.set_button_disabled(Column.BUTTONS, ButtonIdx.DELETE, false)
 
-	var skill = _skill_from_meta(data)
+	# Need to clone skill so params are not shared across multiple instances
+	# of the same skill.
+	var skill = _skill_from_meta(data).clone()
 	_add_skill(item, col, skill)
 
 	if was_empty and not _is_empty(item):

@@ -58,7 +58,10 @@ func restore_rule(stored_rule: RuleDef) -> Rule:
 	return rule
 
 func restore_skill(stored_skill: StoredSkill) -> Skill:
-	var skill = lookup_skill(stored_skill.name).duplicate(true)
+	# Do not do a deep duplicate. clone() will duplicate the properties that
+	# strictly needed. In particular, we must not duplicate the GDscripts in
+	# actions, etc as it'd trigger reparsing any time we do a restore.
+	var skill = lookup_skill(stored_skill.name).clone()
 	if stored_skill is StoredParamSkill:
 		assert(skill is ParamSkill)
 		skill.params = stored_skill.params

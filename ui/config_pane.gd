@@ -113,7 +113,7 @@ func _on_sort_selected(selection: int, placeholder: SkillParams.PlaceholderId, o
 	var name = options[selection-1]
 	var sort = SkillManager.lookup_target_sort(name)
 	assert(sort)
-	_params.set_placeholder_value(placeholder, StoredSkill.from_skill(sort))
+	_params.set_placeholder_value(placeholder, sort)
 	_check_ok()
 
 func results() -> SkillParams:

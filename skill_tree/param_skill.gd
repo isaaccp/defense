@@ -24,3 +24,8 @@ func _to_string() -> String:
 		return name()
 	else:
 		return params.interpolated_text()
+
+func clone() -> Skill:
+	var param_skill: ParamSkill = duplicate()
+	param_skill.params = params.duplicate(true)
+	return param_skill
