@@ -7,11 +7,11 @@ class_name StatusLibrary
 		statuses = value
 		_index()
 
-var status_by_id: Dictionary
+var status_by_name: Dictionary
 
 func _index():
 	for status in statuses:
-		status_by_id[status.id] = status
-		
-func get_status(status: StatusDef.Id) -> StatusDef:
-	return status_by_id[status] as StatusDef
+		status_by_name[status.name] = status
+
+func get_status(status: StringName) -> StatusDef:
+	return status_by_name[status] as StatusDef

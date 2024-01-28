@@ -57,7 +57,7 @@ func test_charge_short_distance():
 	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
 
 	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
-	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
+	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[&"Swiftness"]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emit_count(character_status, "statuses_changed", 2)
 	# Check that first hit (second update after first heal) did 'sword_damage'.
@@ -83,9 +83,9 @@ func test_charge_long_distance():
 
 	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
 	TestUtils.dump_all_emits(self, character_status, "statuses_changed")
-	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.SWIFTNESS]], 0)
+	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[&"Swiftness"]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
-	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[StatusDef.Id.STRENGTH_SURGE]], 2)
+	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[&"Strength Surge"]], 2)
 	assert_signal_emit_count(character_status, "statuses_changed", 3)
 
 	# Check that first hit (second update after first heal) did more than 'sword damage' * 2.

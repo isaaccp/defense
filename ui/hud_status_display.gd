@@ -15,6 +15,6 @@ func _add_icon(icon: Texture, tooltip: String):
 	status_icon.initialize(icon, tooltip)
 	add_child(status_icon)
 
-func add_status(status_id: StatusDef.Id):
-	var status = status_library.get_status(status_id)
+func add_status(status_name: StringName):
+	var status = status_library.get_status(status_name)
 	_add_icon(status.icon, status.description)

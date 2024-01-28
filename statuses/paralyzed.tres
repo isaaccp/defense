@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="StatusDef" load_steps=3 format=3 uid="uid://btqpxax02w0pm"]
+[gd_resource type="Resource" script_class="StatusDef" load_steps=3 format=3 uid="uid://baxfskqke7i8v"]
 
 [ext_resource type="Texture2D" uid="uid://nixg4osj8j7m" path="res://assets/status/debuffs/paralyzed.png" id="1_e5gag"]
-[ext_resource type="Script" path="res://statuses/status.gd" id="2_6320i"]
+[ext_resource type="Script" path="res://statuses/status_def.gd" id="2_6320i"]
 
 [resource]
 script = ExtResource("2_6320i")
-id = 3
+name = &"Paralyzed"
 description = "Unable to move or act"
 icon = ExtResource("1_e5gag")

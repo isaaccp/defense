@@ -82,9 +82,9 @@ func _damage_str(adjusted_damage: int) -> String:
 	return "%s for %s" % [hit_type, damage_str]
 
 func _status_str() -> String:
-	if hit_effect.status == StatusDef.Id.UNSPECIFIED:
+	if hit_effect.status == "":
 		return ""
-	return "applied %s (%0.1fs)" % [StatusDef.name(hit_effect.status), hit_effect.status_duration]
+	return "applied %s (%0.1fs)" % [hit_effect.status, hit_effect.status_duration]
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = action_scene.attributes.damage_multiplier

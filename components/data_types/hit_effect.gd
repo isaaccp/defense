@@ -8,7 +8,7 @@ class_name HitEffect
 @export var damage_type: DamageType
 # Status on hit.
 ## Status inflicted, if any.
-@export var status: StatusDef.Id
+@export var status: StringName
 ## Duration for status.
 @export var status_duration: float
 ## Whether status only gets inflicted if hit causes damage
@@ -43,6 +43,6 @@ func _damage_str() -> String:
 	return "%s for %s" % [hit_type, damage_str]
 
 func _status_str() -> String:
-	if status == StatusDef.Id.UNSPECIFIED:
+	if status == "":
 		return ""
-	return "applied %s (%0.1fs)" % [StatusDef.name(status), status_duration]
+	return "applied %s (%0.1fs)" % [status, status_duration]

@@ -9,7 +9,7 @@ class_name HitResult
 ## Destroyed enemy.
 @export var destroyed: bool
 ## Status inflicted, if any.
-@export var status: StatusDef.Id
+@export var status: StringName
 
 func stats_update() -> Array[Stat]:
 	var updates: Array[Stat] = []
@@ -37,6 +37,6 @@ func _damage_str() -> String:
 	return "%s for %d" % [hit_type, abs_damage]
 
 func _status_str() -> String:
-	if status == StatusDef.Id.UNSPECIFIED:
+	if status == "":
 		return ""
-	return "applied %s" % [StatusDef.name(status)]
+	return "applied %s" % [status]

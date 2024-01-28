@@ -44,7 +44,7 @@ func resistance_multiplier_for(damage_type: DamageType) -> float:
 			return r.multiplier()
 	return 1.0
 
-func _on_statuses_changed(_statuses: Array[StatusDef.Id] = []):
+func _on_statuses_changed(_statuses: Array[StringName] = []):
 	attributes = status_component.adjusted_attributes(base_attributes)
 
 static func get_or_null(node) -> AttributesComponent:
