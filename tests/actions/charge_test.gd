@@ -92,6 +92,7 @@ func test_charge_long_distance():
 	# The '2' is hardcoded in StatusComponent as of now.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
+	TestUtils.dump_all_emits(self, enemy_health, "health_updated")
 	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
 	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2 - 1)
 

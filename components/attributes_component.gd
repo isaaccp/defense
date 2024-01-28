@@ -9,7 +9,7 @@ const component = &"AttributesComponent"
 @export var base_attributes: Attributes
 
 @export_group("Optional")
-@export var status_component: StatusComponent
+@export var effect_actuator_component: EffectActuatorComponent
 
 var attributes: Attributes
 
@@ -32,9 +32,9 @@ var resistance: Array[Resistance]:
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	if status_component:
-		status_component.statuses_changed.connect(_on_statuses_changed)
-		_on_statuses_changed()
+	if effect_actuator_component:
+		effect_actuator_component.attribute_effects_changed.connect(_on_attribute_effects_changed)
+		_on_attribute_effects_changed()
 	else:
 		attributes = base_attributes
 
@@ -44,8 +44,8 @@ func resistance_multiplier_for(damage_type: DamageType) -> float:
 			return r.multiplier()
 	return 1.0
 
-func _on_statuses_changed(_statuses: Array[StringName] = []):
-	attributes = status_component.adjusted_attributes(base_attributes)
+func _on_attribute_effects_changed():
+	attributes = effect_actuator_component.modified_attributes(base_attributes)
 
 static func get_or_null(node) -> AttributesComponent:
 	return Component.get_or_null(node, component) as AttributesComponent

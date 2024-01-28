@@ -1,7 +1,7 @@
 extends MoveActionBase
 
-const swiftness = preload("res://statuses/swiftness.tres")
-const strength_surge = preload("res://statuses/strength_surge.tres")
+const swiftness = preload("res://effects/statuses/swiftness.tres")
+const strength_surge = preload("res://effects/statuses/strength_surge.tres")
 
 # If we moved more than this, trigger strengthened at the end.
 const charge_threshold = 100.0
@@ -15,7 +15,7 @@ func _init():
 func post_initialize():
 	super()
 	original_position = body.global_position
-	status_component.set_status(def.skill_name, swiftness.name, -1)
+	status_component.set_status(def.skill_name, swiftness, -1)
 
 func action_finished():
 	super()
@@ -23,7 +23,7 @@ func action_finished():
 	var distance = original_position.distance_to(body.global_position)
 	if distance >= charge_threshold:
 		action_log("%0.1f (>= %0.1f), triggering surge" % [distance, charge_threshold])
-		status_component.set_status(def.skill_name, strength_surge.name, strengh_surge_duration)
+		status_component.set_status(def.skill_name, strength_surge, strengh_surge_duration)
 	else:
 		action_log("%0.1f (< %0.1f), not triggering surge" % [distance, charge_threshold])
 

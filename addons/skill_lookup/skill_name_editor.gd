@@ -7,9 +7,6 @@ var current_value: StringName
 var updating = false
 var skills: Array[StringName]
 var id_by_skill: Dictionary
-# I don't understand why the property is updated twice when
-# adding a new empty element. We want to show the pop-up only once.
-var first = true
 
 func _init():
 	skills = SkillManager.all_skills

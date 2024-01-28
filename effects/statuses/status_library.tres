@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="StatusLibrary" load_steps=2 format=3 uid="uid://dlkrl1i2r8pii"]
 
-[ext_resource type="Script" path="res://statuses/status_library.gd" id="1_yu84l"]
+[ext_resource type="Script" path="res://effects/status_library.gd" id="1_yu84l"]
 
 [resource]
 script = ExtResource("1_yu84l")
-statuses = Array[Resource("res://statuses/status.gd")]([])
+statuses = Array[Resource("res://effects/status_def.gd")]([])

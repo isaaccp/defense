@@ -34,10 +34,10 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 		hit_result = HitResult.new()
 	if not hit_effect.status_on_damage_only or hit_result.damage != 0:
 		if status_component:
-			if hit_effect.status != "":
+			if hit_effect.status:
 				# TODO: Check for protection and what not.
 				status_component.set_status(hit_effect.action_name, hit_effect.status, hit_effect.status_duration)
-				hit_result.status = hit_effect.status
+				hit_result.status = hit_effect.status.name
 	return hit_result
 
 func _log(message: String):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=12 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_sx4w7"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="8_567i8"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_hnhby"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_yatxq"]
+[ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="11_g44ii"]
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
@@ -56,7 +57,7 @@ status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "health_component", "logging_component") instance=ExtResource("6_v211g")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "health_component", "logging_component") instance=ExtResource("6_v211g")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -65,6 +66,7 @@ animation_component = NodePath("../AnimationComponent")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
 
@@ -76,10 +78,13 @@ collision_shape = NodePath("../CollisionShape2D")
 [node name="SideComponent" parent="." instance=ExtResource("9_hnhby")]
 side = 2
 
-[node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("10_yatxq")]
-status_component = NodePath("../StatusComponent")
+[node name="AttributesComponent" parent="." node_paths=PackedStringArray("effect_actuator_component") instance=ExtResource("10_yatxq")]
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("7_hqrrl")]
 logging_component = NodePath("../LoggingComponent")
 
 [node name="LoggingComponent" parent="." instance=ExtResource("8_1okrv")]
+
+[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("11_g44ii")]
+status_component = NodePath("../StatusComponent")

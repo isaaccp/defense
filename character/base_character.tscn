@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=15 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_1mnbb"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_oxhjf"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dqq1u1lvtpoqe" path="res://components/persistent_game_state_component.tscn" id="9_ql6uj"]
 [ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="10_lydou"]
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="11_0ewa0"]
+[ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="12_o0jr4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
 
@@ -45,8 +46,8 @@ shape = SubResource("CircleShape2D_7fvau")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="AttributesComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("4_r4r2v")]
-status_component = NodePath("../StatusComponent")
+[node name="AttributesComponent" parent="." node_paths=PackedStringArray("effect_actuator_component") instance=ExtResource("4_r4r2v")]
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("5_xneld")]
 attributes_component = NodePath("../AttributesComponent")
@@ -59,7 +60,7 @@ animation_component = NodePath("../AnimationComponent")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
 body = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -68,6 +69,7 @@ animation_component = NodePath("../AnimationComponent")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
@@ -90,3 +92,6 @@ logging_component = NodePath("../LoggingComponent")
 [node name="PersistentGameStateComponent" parent="." instance=ExtResource("9_ql6uj")]
 
 [node name="LoggingComponent" parent="." instance=ExtResource("11_0ewa0")]
+
+[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("12_o0jr4")]
+status_component = NodePath("../StatusComponent")

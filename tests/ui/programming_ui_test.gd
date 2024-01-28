@@ -27,6 +27,7 @@ func test_empty_after_new_drop():
 
 	var toolbox = ui.get_node("%Toolbox") as Tree
 	var src = _find_toolbox_item(toolbox, "Once")
+	assert_not_null(src, "Could not find Once")
 	var src_rect = toolbox.get_item_area_rect(src, 0)
 
 	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
@@ -58,6 +59,7 @@ func test_noop_always_drop():
 
 	var toolbox = ui.get_node("%Toolbox") as Tree
 	var src = _find_toolbox_item(toolbox, "Always")
+	assert_not_null(src, "Could not find Always")
 	var src_rect = toolbox.get_item_area_rect(src, 0)
 
 	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor

@@ -17,6 +17,7 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var side_component: SideComponent
 @export var attributes_component: AttributesComponent
 @export var status_component: StatusComponent
+@export var effect_actuator_component: EffectActuatorComponent
 
 @export_group("Optional")
 # If set, behavior is obtained through there.
@@ -51,7 +52,7 @@ var behavior: Behavior
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	status_component.able_to_act_changed.connect(_on_able_to_act_changed)
+	effect_actuator_component.able_to_act_changed.connect(_on_able_to_act_changed)
 
 func run():
 	var actor = (body as Node2D) as Actor
