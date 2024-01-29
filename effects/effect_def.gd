@@ -15,3 +15,7 @@ enum EffectType {
 @export var name: StringName
 @export var effect_types: Array[EffectType]
 @export var effect_script: GDScript
+
+func _to_string():
+	var effect_type_strings = effect_types.map(func(x): return EffectType.keys()[x].capitalize())
+	return "%s\n[%s]" % [name, ",".join(effect_type_strings)]

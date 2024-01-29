@@ -71,8 +71,12 @@ func _on_able_to_act_changed(can_act: bool):
 
 func _interrupt():
 	if action:
+		var prev_action_name = _action_name(action)
+		var prev_target = target
 		_log("interrupted %s" % action.def.name())
 		action.action_finished()
+		_on_action_finished()
+		_emit_updated_if_changed(prev_action_name, prev_target)
 
 func _physics_process(delta: float):
 	if not running:
@@ -92,24 +96,21 @@ func _physics_process(delta: float):
 
 		# If action is finished, clear everything so we re-evaluate.
 		if action and action.finished:
-			_on_action_finished(action)
-			rule = null
-			action = null
-			target = null
+			_on_action_finished()
 		# After this point, if action is still set, we can assume is not finished.
 		var abortable_check_needed = action and action.abortable and next_abortable_action_check_time < elapsed_time
 		if not rule or abortable_check_needed:
 			var result = behavior.choose(action_cooldowns, elapsed_time)
 			if not result.is_empty():
 				if result.rule != rule or not result.target.equals(target) or action.finished:
-					rule = result.rule
-					target = result.target
-					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
 					if action:
 						_log("preempted %s" % action.def.name())
 						action.action_finished()
-						_on_action_finished(action)
+						_on_action_finished()
+					rule = result.rule
+					target = result.target
 					action = result.action
+					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
 					action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component)
 			if action and action.abortable:
 				next_abortable_action_check_time = elapsed_time + abortable_action_check_period
@@ -120,12 +121,15 @@ func _physics_process(delta: float):
 	# Always run this to update animation, etc.
 	_post_action()
 
-func _on_action_finished(action: Action):
+func _on_action_finished():
 	assert(action.finished)
 	if action.cooldown > 0:
 		var eligible_at = elapsed_time + action.cooldown
 		action_cooldowns[action.def.skill_name] = eligible_at
 		_log("%s: %0.1f cooldown, eligible at %0.2f" % [ action.def.name(), action.cooldown, eligible_at])
+	rule = null
+	action = null
+	target = null
 
 func _action_name(action: Action) -> StringName:
 	if action:
