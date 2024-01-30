@@ -11,6 +11,8 @@ class_name ActionScene
 ## TODO: Replace with AnimationComponent.
 @export var animation_player: AnimationPlayer
 
+signal hit(hit_result: HitResult)
+
 var action_def: ActionDef
 var owner_name: String
 
@@ -57,3 +59,6 @@ func action_scene_log(message: String, stats_update: Array[Stat]):
 		return
 	var full_message = "%s: %s" % [name, message]
 	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message, stats_update)
+
+func on_hit(hit_result: HitResult):
+	hit.emit(hit_result)

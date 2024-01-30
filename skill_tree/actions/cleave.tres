@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=7 format=3 uid="uid://y4mv5gjqjdex"]
+
+[ext_resource type="Script" path="res://behavior/actions/cleave_action.gd" id="1_g8swy"]
+[ext_resource type="Resource" uid="uid://8iy07y3y0b0e" path="res://game_logic/attack_types/melee.tres" id="2_rhncr"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_jma2a"]
+[ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="4_e5ifr"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="5_gwjrp"]
+
+[sub_resource type="Resource" id="Resource_k1kc6"]
+script = ExtResource("3_jma2a")
+editor_string = ""
+cmp = 0
+
+[resource]
+script = ExtResource("5_gwjrp")
+action_script = ExtResource("1_g8swy")
+supported_target_types = Array[int]([1])
+attack_type = ExtResource("2_rhncr")
+params = SubResource("Resource_k1kc6")
+skill_name = &"Cleave"
+skill_type = 1
+parent = ExtResource("4_e5ifr")
+tree_type = 2

@@ -5,6 +5,10 @@ class_name HitboxComponent
 const component = &"HitboxComponent"
 
 @export_group("Required")
+# TODO: Remove action_scene from here, this dependency should be reversed.
+# Whatever we need from action scene should be added to a component and then
+# used here. Then we should emit a "hit" signal that can be connected from
+# action scene instead of calling action_scene.on_hit.
 @export var action_scene: ActionScene
 ## Whether it's a heal.
 ## It's just use to make sure that healing doesn't emit positive damage.
@@ -89,6 +93,8 @@ func _status_str() -> String:
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = action_scene.attributes.damage_multiplier
 	var hit_result = hurtbox.handle_collision(action_scene.owner_name, action_scene.name, hit_effect)
+
+	action_scene.on_hit(hit_result)
 
 	# TODO: Could update log to also include hit_result information, although alternatively we can
 	# not include it and make enemy logs viewable, in which case you could see it there.
