@@ -51,8 +51,8 @@ effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("5_xneld")]
 attributes_component = NodePath("../AttributesComponent")
+show_health = 1
 logging_component = NodePath("../LoggingComponent")
-is_dead = true
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
 health_component = NodePath("../HealthComponent")

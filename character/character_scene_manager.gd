@@ -7,6 +7,7 @@ const character_scenes = {
 	Enum.CharacterSceneId.KNIGHT: preload("res://character/character.tscn"),
 	Enum.CharacterSceneId.WIZARD: preload("res://character/wizard/wizard.tscn"),
 	Enum.CharacterSceneId.CLERIC: preload("res://character/cleric/cleric.tscn"),
+	Enum.CharacterSceneId.ROGUE: preload("res://character/rogue/rogue.tscn"),
 }
 
 static func get_character_scene(scene_id: Enum.CharacterSceneId) -> PackedScene:
