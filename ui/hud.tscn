@@ -66,8 +66,8 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -192.5
-offset_right = 192.5
-offset_bottom = 502.0
+offset_right = 157.5
+offset_bottom = 243.0
 grow_horizontal = 2
 
 [node name="TopHud" type="VBoxContainer" parent="PanelContainer"]
