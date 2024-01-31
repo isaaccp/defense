@@ -47,14 +47,15 @@ _data = {
 [sub_resource type="Resource" id="Resource_tjb81"]
 script = ExtResource("4_kx22j")
 damage = -15
-status = 0
 status_duration = 0.0
+status_on_damage_only = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
 radius = 5.0
 
-[node name="Heal" type="Node2D"]
+[node name="Heal" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_gdnu2")
+hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -72,8 +73,7 @@ libraries = {
 "": SubResource("AnimationLibrary_ipcst")
 }
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("3_ige4x")]
-action_scene = NodePath("..")
+[node name="HitboxComponent" parent="." instance=ExtResource("3_ige4x")]
 is_heal = true
 hit_effect = SubResource("Resource_tjb81")
 hits = 1

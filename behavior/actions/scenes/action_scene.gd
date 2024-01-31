@@ -4,6 +4,7 @@ class_name ActionScene
 
 @export_group("Required")
 @export var target_position_type: Target.PositionType = Target.PositionType.DEFAULT
+@export var hitbox_component: HitboxComponent
 
 @export_group("Optional")
 ## Set this to internal animation player in the scene
@@ -15,11 +16,6 @@ signal hit(hit_result: HitResult)
 
 var action_def: ActionDef
 var owner_name: String
-
-# From actor invoking the action..
-var attributes: Attributes
-var side_component: SideComponent
-var logging_component: LoggingComponent
 
 # TODO: As of now animations on action scenes don't use the
 # AnimationComponent and instead run automatically as soon as
@@ -46,19 +42,13 @@ func _standalone_ready():
 func initialize(owner_name: String, action_def: ActionDef, target: Target, attributes: Attributes, side_component: SideComponent, logging_component: LoggingComponent):
 	self.owner_name = owner_name
 	self.action_def = action_def
-	self.attributes = attributes
-	self.side_component = side_component
-	self.logging_component = logging_component
 
 	var target_component = TargetComponent.get_or_null(self)
 	if target_component:
 		target_component.action_target = ActionTarget.new(target, target_position_type)
+	if hitbox_component:
+		hitbox_component.initialize(owner_name, action_def, attributes, side_component, logging_component)
+		hitbox_component.hit.connect(_on_hit)
 
-func action_scene_log(message: String, stats_update: Array[Stat]):
-	if not logging_component:
-		return
-	var full_message = "%s: %s" % [name, message]
-	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message, stats_update)
-
-func on_hit(hit_result: HitResult):
+func _on_hit(hit_result: HitResult):
 	hit.emit(hit_result)

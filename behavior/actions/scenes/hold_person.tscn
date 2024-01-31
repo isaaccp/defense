@@ -55,8 +55,9 @@ status_on_damage_only = false
 [sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
 radius = 5.0
 
-[node name="HoldPerson" type="Node2D"]
+[node name="HoldPerson" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_7tlx4")
+hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0.364706, 1)
@@ -75,8 +76,7 @@ libraries = {
 "": SubResource("AnimationLibrary_ipcst")
 }
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("3_yukr8")]
-action_scene = NodePath("..")
+[node name="HitboxComponent" parent="." instance=ExtResource("3_yukr8")]
 hit_effect = SubResource("Resource_0ijhm")
 hits = 1
 

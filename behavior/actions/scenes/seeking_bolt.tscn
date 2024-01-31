@@ -52,14 +52,15 @@ _data = {
 script = ExtResource("4_0qlfr")
 damage = 5
 damage_type = ExtResource("5_336ys")
-status = 0
 status_duration = 0.0
+status_on_damage_only = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
 radius = 5.0
 
-[node name="SeekingOrb" type="Node2D"]
+[node name="SeekingOrb" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_kb4ja")
+hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -77,8 +78,7 @@ libraries = {
 }
 speed_scale = 1.5
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene", "target_component") instance=ExtResource("2_qnqde")]
-action_scene = NodePath("..")
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("target_component") instance=ExtResource("2_qnqde")]
 hit_effect = SubResource("Resource_aci18")
 hits = 1
 hit_only_target = true

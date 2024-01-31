@@ -50,7 +50,7 @@ _data = {
 "auto": SubResource("Animation_4cdsn")
 }
 
-[sub_resource type="Resource" id="Resource_ucm66"]
+[sub_resource type="Resource" id="Resource_7adx6"]
 script = ExtResource("11_yffno")
 damage = 8
 damage_type = ExtResource("10_a3rfp")
@@ -60,8 +60,9 @@ status_on_damage_only = false
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khm1e"]
 radius = 8.0
 
-[node name="Cleave" type="Node2D"]
+[node name="Cleave" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_nibt2")
+hitbox_component = NodePath("HitboxComponent")
 actor_name = "Cleave"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -78,9 +79,8 @@ libraries = {
 }
 speed_scale = 2.0
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("9_b1org")]
-action_scene = NodePath("..")
-hit_effect = SubResource("Resource_ucm66")
+[node name="HitboxComponent" parent="." instance=ExtResource("9_b1org")]
+hit_effect = SubResource("Resource_7adx6")
 hits = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

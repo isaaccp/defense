@@ -89,7 +89,6 @@ func test_charge_long_distance():
 	assert_signal_emit_count(character_status, "statuses_changed", 3)
 
 	# Check that first hit (second update after first heal) did more than 'sword damage' * 2.
-	# The '2' is hardcoded in StatusComponent as of now.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
 	TestUtils.dump_all_emits(self, enemy_health, "health_updated")

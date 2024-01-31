@@ -50,19 +50,19 @@ _data = {
 "auto": SubResource("Animation_4cdsn")
 }
 
-[sub_resource type="Resource" id="Resource_ucm66"]
+[sub_resource type="Resource" id="Resource_l3jok"]
 script = ExtResource("9_g2oh2")
 damage = 5
 damage_type = ExtResource("10_d28bf")
-status = 0
 status_duration = 0.0
 status_on_damage_only = false
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khm1e"]
 radius = 8.0
 
-[node name="SwordAttack" type="Node2D"]
+[node name="SwordAttack" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_sepy6")
+hitbox_component = NodePath("HitboxComponent")
 actor_name = "Sword Slash"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -79,9 +79,8 @@ libraries = {
 }
 speed_scale = 2.0
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("8_kcqxb")]
-action_scene = NodePath("..")
-hit_effect = SubResource("Resource_ucm66")
+[node name="HitboxComponent" parent="." instance=ExtResource("8_kcqxb")]
+hit_effect = SubResource("Resource_l3jok")
 hits = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

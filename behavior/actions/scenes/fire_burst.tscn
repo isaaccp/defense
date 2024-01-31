@@ -170,7 +170,6 @@ _data = {
 script = ExtResource("5_n6611")
 damage = 8
 damage_type = ExtResource("5_dd7x0")
-status = 0
 status_duration = 0.0
 status_on_damage_only = false
 
@@ -178,8 +177,9 @@ status_on_damage_only = false
 radius = 5.0
 height = 10.0
 
-[node name="FireBurst" type="Node2D"]
+[node name="FireBurst" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_gis8j")
+hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
@@ -197,8 +197,7 @@ libraries = {
 "": SubResource("AnimationLibrary_oc43d")
 }
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("action_scene") instance=ExtResource("3_a4xt7")]
-action_scene = NodePath("..")
+[node name="HitboxComponent" parent="." instance=ExtResource("3_a4xt7")]
 hit_effect = SubResource("Resource_dxpu2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
