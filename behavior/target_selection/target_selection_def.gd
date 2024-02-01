@@ -26,7 +26,7 @@ func _init():
 	_set_default.call_deferred()
 
 func _set_default():
-	if sortable:
+	if sortable and not params.placeholder_set(SkillParams.PlaceholderId.SORT):
 		params.set_placeholder_value(SkillParams.PlaceholderId.SORT, default_sort)
 
 func sort() -> TargetSort:
