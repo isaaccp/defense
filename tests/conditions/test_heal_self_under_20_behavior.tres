@@ -13,9 +13,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_w7psa"]
 script = ExtResource("7_uipkv")
+params = SubResource("Resource_ueppd")
 name = &"Heal"
 skill_type = 1
-params = SubResource("Resource_ueppd")
 
 [sub_resource type="Resource" id="Resource_jofjl"]
 script = ExtResource("2_btuym")
@@ -30,9 +30,9 @@ int_value = SubResource("Resource_jofjl")
 
 [sub_resource type="Resource" id="Resource_reb6y"]
 script = ExtResource("7_uipkv")
+params = SubResource("Resource_05s5o")
 name = &"Target Health"
 skill_type = 3
-params = SubResource("Resource_05s5o")
 
 [sub_resource type="Resource" id="Resource_mbwdw"]
 script = ExtResource("3_dvhob")
@@ -41,9 +41,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_c0bv5"]
 script = ExtResource("7_uipkv")
+params = SubResource("Resource_mbwdw")
 name = &"Self"
 skill_type = 2
-params = SubResource("Resource_mbwdw")
 
 [sub_resource type="Resource" id="Resource_ttugj"]
 script = ExtResource("8_nxbma")
