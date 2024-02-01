@@ -83,6 +83,7 @@ func mark_available(skill: Skill):
 	assert(not available(skill), "Skill already available!")
 	assert(skill.skill_type != Skill.SkillType.UNSPECIFIED)
 	skills.append(skill.skill_name)
+	skills_by_name[skill.skill_name] = true
 	skills_by_type_and_name[skill.skill_type][skill.skill_name] = true
 
 # Used for tutorial levels, etc that need to add to a tree.
