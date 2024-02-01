@@ -1,27 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqovejwqgp0ed"]
+[gd_scene load_steps=9 format=3 uid="uid://dn04ecvpftf0a"]
 
-[ext_resource type="PackedScene" uid="uid://bmpg7h70fd2ji" path="res://character/base_character.tscn" id="1_qgcx4"]
-[ext_resource type="Texture2D" uid="uid://dbiwinsljfqoo" path="res://character/rogue/Death.png" id="2_dh8k5"]
-[ext_resource type="Texture2D" uid="uid://cah5jxrdpwaq1" path="res://character/rogue/Run.png" id="3_sov40"]
+[ext_resource type="PackedScene" uid="uid://bmpg7h70fd2ji" path="res://character/base_character.tscn" id="1_io0ow"]
+[ext_resource type="Texture2D" uid="uid://ennk52fhox3v" path="res://character/knight/Run.png" id="2_svkp0"]
+[ext_resource type="Texture2D" uid="uid://cvoj8nscg4q6p" path="res://character/knight/Death.png" id="3_j2imx"]
 
-[sub_resource type="Animation" id="Animation_psvn1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -32)]
-}
-
-[sub_resource type="Animation" id="Animation_2bteb"]
-resource_name = "death"
+[sub_resource type="Animation" id="Animation_oya6n"]
+resource_name = "run"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -32,7 +18,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_dh8k5")]
+"values": [ExtResource("2_svkp0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -92,10 +78,97 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -16)]
+"values": [Vector2(0, -32)]
 }
 
-[sub_resource type="Animation" id="Animation_it0ri"]
+[sub_resource type="Animation" id="Animation_j6d27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_svkp0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Sprite2D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Sprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../Sprite2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+
+[sub_resource type="Animation" id="Animation_bn0m6"]
 resource_name = "idle"
 length = 0.1
 loop_mode = 1
@@ -109,7 +182,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_sov40")]
+"values": [ExtResource("2_svkp0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -172,10 +245,9 @@ tracks/5/keys = {
 "values": [Vector2(0, -32)]
 }
 
-[sub_resource type="Animation" id="Animation_rr68s"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_8i438"]
+resource_name = "death"
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -186,7 +258,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_sov40")]
+"values": [ExtResource("3_j2imx")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -246,22 +318,22 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -32)]
+"values": [Vector2(8, -16)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ot8e"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1426"]
 _data = {
-"RESET": SubResource("Animation_psvn1"),
-"death": SubResource("Animation_2bteb"),
-"idle": SubResource("Animation_it0ri"),
-"run": SubResource("Animation_rr68s")
+"RESET": SubResource("Animation_j6d27"),
+"death": SubResource("Animation_8i438"),
+"idle": SubResource("Animation_bn0m6"),
+"run": SubResource("Animation_oya6n")
 }
 
-[node name="Rogue" instance=ExtResource("1_qgcx4")]
+[node name="Knight" instance=ExtResource("1_io0ow")]
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, -32)
-texture = ExtResource("3_sov40")
+texture = ExtResource("2_svkp0")
 hframes = 3
 vframes = 2
 metadata/_aseprite_wizard_config_ = {
@@ -274,7 +346,7 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "op_exp": false,
 "player": "AnimationComponent/AnimationPlayer",
-"source": "res://assets/pixel-crawler/Heroes/Rogue/Run/Run.aseprite"
+"source": "res://assets/pixel-crawler/Heroes/Knight/Death/Death.aseprite"
 }
 
 [node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
@@ -282,14 +354,14 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_6ot8e")
+"": SubResource("AnimationLibrary_n1426")
 }
 
 [node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, -1)
+position = Vector2(0, 0)
 
 [node name="HealthComponent" parent="." index="6"]
-position = Vector2(0, -37)
+position = Vector2(0, -34)
 
-[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+[node name="HurtboxComponent" parent="." index="9"]
 position = Vector2(0, -15)

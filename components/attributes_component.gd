@@ -5,10 +5,10 @@ class_name AttributesComponent
 
 const component = &"AttributesComponent"
 
-@export_group("Required")
-@export var base_attributes: Attributes
-
 @export_group("Optional")
+## Base attributes for the unit, required for enemies.
+## Characters set it from the GameplayCharacter.
+@export var base_attributes: Attributes
 @export var effect_actuator_component: EffectActuatorComponent
 
 var attributes: Attributes

@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_ug4xc"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_3n011"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="2_84oyx"]
-[ext_resource type="Resource" uid="uid://c51q3621oi1ev" path="res://character/playable_characters/larian_the_rogue.tres" id="3_fnt7r"]
+[ext_resource type="Resource" path="res://character/playable_characters/larian_the_rogue.tres" id="3_fnt7r"]
 [ext_resource type="Resource" uid="uid://g1au3en4bc7j" path="res://character/playable_characters/bernie_the_wizard.tres" id="4_muu8k"]
 [ext_resource type="PackedScene" uid="uid://c8il5cl6p05m7" path="res://levels/main/forest_open_on_right_area/one_warrior_spawner.tscn" id="4_rmm38"]
 [ext_resource type="PackedScene" uid="uid://caol5sewu4epj" path="res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn" id="5_7pkgq"]

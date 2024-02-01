@@ -4,7 +4,7 @@ extends Object
 class_name CharacterSceneManager
 
 const character_scenes = {
-	Enum.CharacterSceneId.KNIGHT: preload("res://character/character.tscn"),
+	Enum.CharacterSceneId.KNIGHT: preload("res://character/knight/knight.tscn"),
 	Enum.CharacterSceneId.WIZARD: preload("res://character/wizard/wizard.tscn"),
 	Enum.CharacterSceneId.CLERIC: preload("res://character/cleric/cleric.tscn"),
 	Enum.CharacterSceneId.ROGUE: preload("res://character/rogue/rogue.tscn"),
