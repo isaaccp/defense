@@ -54,10 +54,13 @@ func compatible_with_target(target_type: Target.Type) -> bool:
 	return false
 
 func supported_target_types_str() -> String:
-	if type in [Type.ANY, Type.GLOBAL, Type.SELF]:
-		return "All"
-	if type == Type.TARGET_ACTOR:
-		return "Actor"
+	match type:
+		Type.ANY, Type.GLOBAL, Type.SELF:
+			return "ALL"
+		Type.TARGET_ACTOR:
+			return "ACTOR"
+		Type.TARGET_POSITION:
+			return "ACTOR, POSITION"
 	return "<fix me>"
 
 func description():

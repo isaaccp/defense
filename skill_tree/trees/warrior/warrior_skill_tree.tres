@@ -1,12 +1,11 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=6 format=3 uid="uid://cqeainxeyjmyr"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=5 format=3 uid="uid://cqeainxeyjmyr"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_61adr"]
 [ext_resource type="Resource" uid="uid://celgigrf5o7sb" path="res://skill_tree/actions/charge.tres" id="2_bi1st"]
-[ext_resource type="Resource" uid="uid://cb3mi3783pack" path="res://skill_tree/actions/move_to.tres" id="3_rkod7"]
 [ext_resource type="Resource" uid="uid://y4mv5gjqjdex" path="res://skill_tree/actions/cleave.tres" id="3_wjkha"]
 [ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="4_bfwp5"]
 
 [resource]
 script = ExtResource("1_61adr")
 tree_type = 2
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_bi1st"), ExtResource("3_wjkha"), ExtResource("3_rkod7"), ExtResource("4_bfwp5")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_bi1st"), ExtResource("3_wjkha"), ExtResource("4_bfwp5")])

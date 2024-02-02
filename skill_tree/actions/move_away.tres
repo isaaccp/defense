@@ -16,4 +16,4 @@ supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_6kuty")
 skill_name = &"Move Away"
 skill_type = 1
-tree_type = 3
+tree_type = 1
