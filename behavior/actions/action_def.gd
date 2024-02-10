@@ -16,6 +16,8 @@ const NoAction = &"__no_action__"
 @export var supported_target_types: Array[Target.Type]
 ## Attack type, only set for attacks.
 @export var attack_type: AttackType
+## Action tags.
+@export var tags: Array[ActionTag.Tag]
 
 func _init():
 	skill_type = SkillType.ACTION
