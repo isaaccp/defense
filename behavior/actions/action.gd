@@ -27,6 +27,9 @@ const MaxDistance = 10_000_000
 # to stop triggering it if you are too close to the closest enemy, but not
 # switch to the "second closest" enemy.
 @export var filter_with_distance = true
+# How long until post_prepare() gets invoked. See more details on
+# post_prepare().
+@export var prepare_time = -1.0
 # How long until this action can be triggered again.
 # Ignored if negative.
 @export var cooldown = -1.0
@@ -34,7 +37,11 @@ const MaxDistance = 10_000_000
 # meets the initial condition, and stop the action if it no longer does.
 @export var finish_on_unmet_condition = false
 # Whether this action is considered finished.
-@export var finished = false
+var finished = false
+# Whether this action is in the prepare stage. It is automatically
+# set to true on initialization if prepare_time is > 0. If you want
+# to manually do preparation, set to true on _init().
+var is_preparing = false
 
 var target: Target
 var body: CharacterBody2D
@@ -69,6 +76,9 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 	logging_component = logging_component_
 	if finish_on_unmet_condition:
 		_start_condition_checker.call_deferred()
+	if prepare_time > 0:
+		is_preparing = true
+		_schedule_post_prepare.call_deferred()
 	post_initialize()
 
 func _start_condition_checker():
@@ -82,6 +92,30 @@ func _start_condition_checker():
 # If you schedule work with await, make sure to check for
 # "finished" after awaiting and exiting.
 func post_initialize():
+	# If the action doesn't require preparing (because prepare_time is < 0
+	# and is_preparing wasn't explicitly set to true), immediately call
+	# post_prepare(). This allows subclasses to put code in post_prepare()
+	# regardless of whether other subclasses set prepare_time/is_preparing
+	# or not.
+	if not is_preparing:
+		post_prepare.call_deferred()
+
+func _schedule_post_prepare():
+	await Global.get_tree().create_timer(prepare_time, false).timeout
+	if not _after_await_check(false):
+		return
+	on_finished_preparing()
+
+func on_finished_preparing():
+	if is_preparing:
+		is_preparing = false
+		post_prepare()
+
+# If prepare_time is set, it'll be called that time after post_initialize().
+# If is_preparing was set to true, explicitly, it'll be called when
+# on_finished_preparing() is invoked.
+# Otherwise, it'll be called deferred at the end of post_initialize().
+func post_prepare():
 	pass
 
 # Runs the appropriate physics process for entity.

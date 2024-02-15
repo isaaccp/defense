@@ -16,6 +16,7 @@ script = ExtResource("5_gwjrp")
 action_script = ExtResource("1_g8swy")
 supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_rhncr")
+tags = Array[int]([])
 params = SubResource("Resource_k1kc6")
 skill_name = &"Cleave"
 skill_type = 1

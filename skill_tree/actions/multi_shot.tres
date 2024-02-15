@@ -16,6 +16,7 @@ script = ExtResource("1_x5d6n")
 action_script = ExtResource("1_odoh6")
 supported_target_types = Array[int]([1, 3])
 attack_type = ExtResource("2_53eww")
+tags = Array[int]([])
 params = SubResource("Resource_ga8o4")
 skill_name = &"Multi Shot"
 skill_type = 1

@@ -16,6 +16,7 @@ script = ExtResource("5_tegaq")
 action_script = ExtResource("1_iy3ja")
 supported_target_types = Array[int]([1, 3])
 attack_type = ExtResource("2_r805t")
+tags = Array[int]([0, 1])
 params = SubResource("Resource_xrcsq")
 skill_name = &"Fire Burst"
 skill_type = 1

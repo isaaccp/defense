@@ -6,10 +6,11 @@ func _init():
 	# TODO: Enable this when archers have a way to get away from enemies.
 	# min_distance = 100
 	max_distance = 300
+	prepare_time = 0.3
 
 func post_initialize():
 	spawn_projectile()
-	Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
+	Global.get_tree().create_timer(0.7, false).timeout.connect(action_finished)
 
 func description():
 	return "Fires an arrow at a target"

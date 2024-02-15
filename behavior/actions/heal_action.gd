@@ -6,6 +6,7 @@ const heal_effect_scene = preload("res://behavior/actions/scenes/heal.tscn")
 
 func _init():
 	spawn_scene = heal_effect_scene
-	duration = 1.0
+	duration = 0.5
+	prepare_time = 0.5
 	cooldown = 5.0
 	max_distance = 200

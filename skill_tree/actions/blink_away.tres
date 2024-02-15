@@ -13,6 +13,7 @@ cmp = 0
 script = ExtResource("2_r27qf")
 action_script = ExtResource("1_p5cae")
 supported_target_types = Array[int]([1, 3])
+tags = Array[int]([])
 params = SubResource("Resource_sl318")
 skill_name = &"Blink Away"
 skill_type = 1
