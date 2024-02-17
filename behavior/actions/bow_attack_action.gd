@@ -8,7 +8,7 @@ func _init():
 	max_distance = 300
 	prepare_time = 0.3
 
-func post_initialize():
+func post_prepare():
 	spawn_projectile()
 	Global.get_tree().create_timer(0.7, false).timeout.connect(action_finished)
 

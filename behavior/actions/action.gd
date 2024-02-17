@@ -30,6 +30,8 @@ const MaxDistance = 10_000_000
 # How long until post_prepare() gets invoked. See more details on
 # post_prepare().
 @export var prepare_time = -1.0
+# If true, it'll check that target is still valid after prepare.
+@export var need_valid_target_after_prepare = false
 # How long until this action can be triggered again.
 # Ignored if negative.
 @export var cooldown = -1.0
@@ -102,11 +104,11 @@ func post_initialize():
 
 func _schedule_post_prepare():
 	await Global.get_tree().create_timer(prepare_time, false).timeout
-	if not _after_await_check(false):
-		return
 	on_finished_preparing()
 
 func on_finished_preparing():
+	if not _after_await_check(need_valid_target_after_prepare):
+		return
 	if is_preparing:
 		is_preparing = false
 		post_prepare()

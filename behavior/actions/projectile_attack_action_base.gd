@@ -4,11 +4,15 @@ class_name ProjectileAttackActionBase
 
 var projectile_scene: PackedScene
 var last_target_pos: Vector2
+
 # Could provide more stuff here, e.g. multiple shots, wait times before/after,
 # etc. For now keep it simple.
 
 func _init():
 	super()
+
+func post_initialize():
+	last_target_pos = target_position(Target.PositionType.HURTBOX)
 
 func spawn_projectile():
 	assert(projectile_scene, "Must be provided in subclass")
