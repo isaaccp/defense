@@ -350,7 +350,7 @@ stored_rules = Array[ExtResource("7_x14vd")]([SubResource("Resource_42bis"), Sub
 [sub_resource type="Resource" id="Resource_e6m2r"]
 script = ExtResource("5_eunku")
 damage_type = ExtResource("4_n033s")
-percentage = 100
+percentage = 50
 
 [sub_resource type="Resource" id="Resource_fbov8"]
 script = ExtResource("6_vuj23")
