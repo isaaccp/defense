@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnsf1muqgpiu1"]
+[gd_scene load_steps=9 format=3 uid="uid://cnsf1muqgpiu1"]
 
 [ext_resource type="PackedScene" uid="uid://i0ffjyhoyu76" path="res://spawners/spawner.tscn" id="1_a7635"]
+[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="3_knaj1"]
 [ext_resource type="Texture2D" uid="uid://d1g08qh7vyfxf" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 F.png" id="4_a0u74"]
+[ext_resource type="Script" path="res://spawners/components/spawn_config_component.gd" id="4_aa4gf"]
 
 [sub_resource type="Animation" id="Animation_bldkl"]
 length = 0.001
@@ -97,6 +99,11 @@ _data = {
 [node name="PortalSpawner" instance=ExtResource("1_a7635")]
 actor_name = "Portal Spawner"
 
+[node name="SpawnPlacerComponent" parent="." index="2" node_paths=PackedStringArray("spawn_provider_component", "spawn_position_component", "spawn_animation_component")]
+spawn_provider_component = NodePath("../SpawnProviderComponent")
+spawn_position_component = NodePath("../SpawnPositionComponent")
+spawn_animation_component = NodePath("../SpawnAnimationControllerComponent")
+
 [node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
@@ -115,3 +122,9 @@ offset = Vector2(-16, -32)
 hframes = 6
 vframes = 30
 frame = 89
+
+[node name="SpawnAnimationControllerComponent" parent="." index="4" node_paths=PackedStringArray("animation_component")]
+animation_component = NodePath("../AnimationComponent")
+
+[node name="SpawnConfigComponent" type="Node" parent="." index="5" instance=ExtResource("3_knaj1")]
+script = ExtResource("4_aa4gf")

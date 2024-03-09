@@ -318,9 +318,45 @@ speed_scale = 0.5
 visible = false
 position = Vector2(0, -1)
 
-[node name="HealthComponent" parent="." index="6"]
+[node name="AttributesComponent" parent="." index="5" node_paths=PackedStringArray("effect_actuator_component")]
+effect_actuator_component = NodePath("../EffectActuatorComponent")
+
+[node name="HealthComponent" parent="." index="6" node_paths=PackedStringArray("attributes_component", "logging_component")]
 position = Vector2(0, -35)
+attributes_component = NodePath("../AttributesComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="DeathHandlerComponent" parent="." index="7" node_paths=PackedStringArray("health_component", "animation_component", "collision_shape")]
+health_component = NodePath("../HealthComponent")
+animation_component = NodePath("../AnimationComponent")
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="BehaviorComponent" parent="." index="8" node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "persistent_game_state_component", "health_component", "logging_component")]
+body = NodePath("..")
+navigation_agent = NodePath("../NavigationAgent2D")
+action_sprites = NodePath("../ActionSprites")
+sprite = NodePath("../Sprite2D")
+animation_component = NodePath("../AnimationComponent")
+side_component = NodePath("../SideComponent")
+attributes_component = NodePath("../AttributesComponent")
+status_component = NodePath("../StatusComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
+persistent_game_state_component = NodePath("../PersistentGameStateComponent")
+health_component = NodePath("../HealthComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="HurtboxComponent" parent="." index="9" node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component")]
+side_component = NodePath("../SideComponent")
+logging_component = NodePath("../LoggingComponent")
+health_component = NodePath("../HealthComponent")
+status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 visible = false
 position = Vector2(0, -15)
+
+[node name="StatusComponent" parent="." index="11" node_paths=PackedStringArray("logging_component")]
+logging_component = NodePath("../LoggingComponent")
+
+[node name="EffectActuatorComponent" parent="." index="14" node_paths=PackedStringArray("status_component")]
+status_component = NodePath("../StatusComponent")
