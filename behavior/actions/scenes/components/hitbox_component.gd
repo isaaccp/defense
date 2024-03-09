@@ -14,7 +14,13 @@ const component = &"HitboxComponent"
 @export var friendly_fire = false
 ## If hits > 0, emit signal when out of hits.
 @export var hits: int
+
 @export_group("Optional")
+## If > 0, each target will be hit at most these many times.
+## This doesn't affect 'hits'. E.g. if 'hits' is 2, then setting
+## 'max_hits_per_target' to 1 just means that the attack can hit twice but
+## it must hit different targets.
+@export var max_hits_per_target = 0
 ## If set, this will only collide against desired target.
 @export var hit_only_target = false
 ## Provides access to target, only used if "hit_only_target" is true.
@@ -32,6 +38,7 @@ var logging_component: LoggingComponent
 
 var collision_shape: CollisionShape2D
 var running = false
+var hits_per_target: Dictionary
 
 signal all_hits_used
 signal hit(hit_result: HitResult)
@@ -70,18 +77,31 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 		var actor = hurtbox.get_parent()
 		if actor != target_component.action_target.target.actor:
 			return
-	if friendly_fire:  # No checks needed.
-		if hurtbox.can_handle_collision():
-			_process_hurtbox_hit(hurtbox)
+	var process: bool
+	if friendly_fire:
+		process = true
 	else:
-		var process: bool
 		if not is_heal:
 			process = side_component.is_enemy(hurtbox.side_component)
 		else:
 			process = side_component.is_ally(hurtbox.side_component)
-		if process:
-			if hurtbox.can_handle_collision():
-				_process_hurtbox_hit(hurtbox)
+	if process:
+		if hurtbox.can_handle_collision():
+			if max_hits_per_target > 0:
+				if not hurtbox in hits_per_target:
+					hits_per_target[hurtbox] = 0
+				## Already reached max hits for this target, skip.
+				if hits_per_target[hurtbox] >= max_hits_per_target:
+					return
+				else:
+					# At this point we'll always run _process_hurtbox_hit,
+					# so we can update this already.
+					hits_per_target[hurtbox] += 1
+			if hits > 0:
+				hits_left -= 1
+				if hits_left == 0:
+					all_hits_used.emit()
+			_process_hurtbox_hit(hurtbox)
 
 func _damage_str(adjusted_damage: int) -> String:
 	if not hit_effect.damage:
@@ -113,10 +133,6 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 		"%s %s" % [hurtbox.get_parent().name, hit_effect.log_text()],
 		hit_result.stats_update()
 	)
-	if hits > 0:
-		hits_left -= 1
-		if hits_left == 0:
-			all_hits_used.emit()
 
 func hitbox_log(message: String, stats_update: Array[Stat]):
 	if not logging_component:

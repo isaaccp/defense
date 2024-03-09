@@ -3,6 +3,7 @@ extends RefCounted
 class_name TestUtils
 
 const always = preload("res://skill_tree/conditions/always.tres")
+const barrel_scene = preload("res://enemies/barrel/barrel.tscn")
 
 static func rule_def(target: TargetSelectionDef, action: ActionDef, condition: ConditionDef = always) -> RuleDef:
 	return RuleDef.make(
@@ -56,3 +57,10 @@ static func dump_all_emits(test: GutTest, object: Object, signal_name: String):
 	test.gut.p("Emits for %s" % signal_name)
 	for i in test.get_signal_emit_count(object, signal_name):
 		test.gut.p(test.get_signal_parameters(object, signal_name, i))
+
+static func make_barrel(hp: int = 0):
+	var barrel = barrel_scene.instantiate()
+	if hp != 0:
+		var attributes = barrel.get_component_or_die(AttributesComponent)
+		attributes.base_attributes.health = hp
+	return barrel

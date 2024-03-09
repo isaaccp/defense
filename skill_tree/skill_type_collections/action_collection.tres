@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=17 format=3 uid="uid://d33nhlf0klhr6"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=18 format=3 uid="uid://d33nhlf0klhr6"]
 
 [ext_resource type="Script" path="res://skill_type_collection.gd" id="1_d2onc"]
 [ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_3eeij"]
@@ -16,7 +16,8 @@
 [ext_resource type="Resource" uid="uid://crd5cdw57rf3c" path="res://skill_tree/actions/seeking_bolt.tres" id="11_prk8f"]
 [ext_resource type="Resource" uid="uid://wi55i11ogew5" path="res://skill_tree/actions/teleport_to.tres" id="12_tpax8"]
 [ext_resource type="Resource" uid="uid://bvxe5mref8kvh" path="res://skill_tree/actions/move_away.tres" id="13_oudcj"]
+[ext_resource type="Resource" uid="uid://qmjj1eacb88f" path="res://skill_tree/actions/sweeping_attack.tres" id="14_nqsc2"]
 
 [resource]
 script = ExtResource("1_d2onc")
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("6_v7bs0"), ExtResource("6_1re0o"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("13_oudcj"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("11_prk8f"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8")])
+skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("6_v7bs0"), ExtResource("6_1re0o"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("13_oudcj"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("11_prk8f"), ExtResource("14_nqsc2"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8")])

@@ -3,8 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ey8bv"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_2xijh"]
 
-[node name="Level" instance=ExtResource("1_ey8bv")]
+[node name="Level" node_paths=PackedStringArray("characters", "enemies", "towers", "spawners", "starting_positions") instance=ExtResource("1_ey8bv")]
 players = 1
+characters = NodePath("YSorted/Characters")
+enemies = NodePath("YSorted/Enemies")
+towers = NodePath("YSorted/Towers")
+spawners = NodePath("YSorted/Spawners")
+starting_positions = NodePath("StartingPositions")
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(129, 119)
@@ -15,5 +20,14 @@ position = Vector2(43, 203)
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_2xijh")]
 collision_mask = 0
 
-[node name="VictoryLossConditionComponent" parent="." index="4"]
+[node name="VictoryLossConditionComponent" parent="." index="4" node_paths=PackedStringArray("characters", "towers", "enemies", "spawners")]
 loss = Array[int]([2])
+characters = NodePath("../YSorted/Characters")
+towers = NodePath("../YSorted/Towers")
+enemies = NodePath("../YSorted/Enemies")
+spawners = NodePath("../YSorted/Spawners")
+
+[node name="XPComponent" parent="." index="5" node_paths=PackedStringArray("characters", "spawners", "victory_loss_condition_component")]
+characters = NodePath("../YSorted/Characters")
+spawners = NodePath("../YSorted/Spawners")
+victory_loss_condition_component = NodePath("../VictoryLossConditionComponent")
