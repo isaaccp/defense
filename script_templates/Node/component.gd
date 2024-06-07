@@ -23,4 +23,3 @@ func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	# TODO
 	return warnings
-

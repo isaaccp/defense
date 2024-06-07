@@ -27,10 +27,9 @@ tracks/0/keys = {
 "values": [Vector2(0, -32)]
 }
 
-[sub_resource type="Animation" id="Animation_212t2"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_2jl7m"]
+resource_name = "death"
 length = 0.6
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,7 +40,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_0cv38")]
+"values": [ExtResource("2_u40gh")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -89,7 +88,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 2]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -181,9 +180,10 @@ tracks/5/keys = {
 "values": [Vector2(0, -32)]
 }
 
-[sub_resource type="Animation" id="Animation_2jl7m"]
-resource_name = "death"
+[sub_resource type="Animation" id="Animation_212t2"]
+resource_name = "run"
 length = 0.6
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -194,7 +194,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_u40gh")]
+"values": [ExtResource("2_0cv38")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -242,7 +242,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4, 2]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -405,15 +405,46 @@ libraries = {
 position = Vector2(0, 0)
 shape = SubResource("CircleShape2D_g3no4")
 
-[node name="HealthComponent" parent="." index="5"]
+[node name="HealthComponent" parent="." index="5" node_paths=PackedStringArray("attributes_component", "logging_component")]
 position = Vector2(0, -38)
+attributes_component = NodePath("../AttributesComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="HurtboxComponent" parent="." index="6" node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component")]
+side_component = NodePath("../SideComponent")
+logging_component = NodePath("../LoggingComponent")
+health_component = NodePath("../HealthComponent")
+status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_w60on")
 
-[node name="BehaviorComponent" parent="." index="7"]
+[node name="BehaviorComponent" parent="." index="7" node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "health_component", "logging_component")]
+body = NodePath("..")
+navigation_agent = NodePath("../NavigationAgent2D")
+action_sprites = NodePath("../ActionSprites")
+sprite = NodePath("../Sprite2D")
+animation_component = NodePath("../AnimationComponent")
+side_component = NodePath("../SideComponent")
+attributes_component = NodePath("../AttributesComponent")
+status_component = NodePath("../StatusComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
+health_component = NodePath("../HealthComponent")
+logging_component = NodePath("../LoggingComponent")
 stored_behavior = SubResource("Resource_8pv2o")
 
-[node name="AttributesComponent" parent="." index="10"]
+[node name="DeathHandlerComponent" parent="." index="8" node_paths=PackedStringArray("health_component", "animation_component", "collision_shape")]
+health_component = NodePath("../HealthComponent")
+animation_component = NodePath("../AnimationComponent")
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="AttributesComponent" parent="." index="10" node_paths=PackedStringArray("effect_actuator_component")]
 base_attributes = SubResource("Resource_ppug7")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
+
+[node name="StatusComponent" parent="." index="11" node_paths=PackedStringArray("logging_component")]
+logging_component = NodePath("../LoggingComponent")
+
+[node name="EffectActuatorComponent" parent="." index="13" node_paths=PackedStringArray("status_component")]
+status_component = NodePath("../StatusComponent")

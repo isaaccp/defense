@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://j04etfa2ncij"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://j04etfa2ncij"]
 
+[ext_resource type="Script" path="res://gameplay_character.gd" id="1_ioige"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_x5jr5"]
 [ext_resource type="PackedScene" uid="uid://bbo0hd6gduxbc" path="res://levels/tutorial/tutorial_attack.tscn" id="2_4yctn"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="3_p28ke"]
@@ -14,6 +15,6 @@ full = true
 script = ExtResource("3_p28ke")
 players = 1
 levels = Array[PackedScene]([ExtResource("2_4yctn")])
-available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_x5jr5")])
+available_characters = Array[ExtResource("1_ioige")]([ExtResource("1_x5jr5")])
 current_level = 0
 unlocked_skills = SubResource("Resource_dnvqw")

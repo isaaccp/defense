@@ -15,4 +15,3 @@ static func make_position_target_selector(target: TargetSelectionDef, target_pos
 	selector.def = target
 	selector.condition_evaluator = target_position_evaluator
 	return selector
-

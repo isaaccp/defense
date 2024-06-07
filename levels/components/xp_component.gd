@@ -106,5 +106,3 @@ func _get_configuration_warnings():
 		return warnings
 	# TODO
 	return warnings
-
-

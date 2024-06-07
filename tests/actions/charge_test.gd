@@ -6,7 +6,7 @@ const sword_attack_action = preload("res://skill_tree/actions/sword_attack.tres"
 const charge_action = preload("res://skill_tree/actions/charge.tres")
 const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
 const charge_behavior = preload("res://tests/actions/charge_behavior.tres")
-const test_character = preload("res://character/playable_characters/test_character.tres")
+var test_character = preload("res://character/playable_characters/test_character.tres")
 
 var level: Level
 var character: Node2D

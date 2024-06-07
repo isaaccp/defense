@@ -6,7 +6,7 @@ const cleave_scene = preload("res://behavior/actions/scenes/cleave.tscn")
 const cleave_action = preload("res://skill_tree/actions/cleave.tres")
 const move_to = preload("res://skill_tree/actions/move_to.tres")
 const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
-const test_character = preload("res://character/playable_characters/test_character.tres")
+var test_character = preload("res://character/playable_characters/test_character.tres")
 const enemy_target = preload("res://skill_tree/targets/enemy.tres")
 
 var level: Level

@@ -33,4 +33,3 @@ static func make(name: StringName, value: Variant) -> Stat:
 	elif typeof(value) == TYPE_FLOAT:
 		stat.float_value = FloatValue.make(value)
 	return stat
-

@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=6 format=3 uid="uid://dyrr5aucf70fk"]
+[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=7 format=3 uid="uid://dyrr5aucf70fk"]
 
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="2_vgaol"]
 [ext_resource type="Script" path="res://gameplay_character.gd" id="2_wv48f"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="2_xm6an"]
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_ro8tn"]
@@ -16,7 +17,7 @@ health = 50
 recovery = 0.25
 damage_multiplier = 1.0
 armor = 0
-resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
+resistance = Array[ExtResource("2_vgaol")]([])
 
 [resource]
 script = ExtResource("2_wv48f")

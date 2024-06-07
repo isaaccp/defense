@@ -79,4 +79,3 @@ func _component_warnings(warnings: PackedStringArray, config_component: SpawnCon
 			if not config_component or not config_component.get(config_name):
 				var article = "the" if config_component else "a"
 				warnings.append("This Spawner requires %s child SpawnConfigComponent to provide %s" % [article, config_name])
-

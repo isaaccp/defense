@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=18 format=3 uid="uid://d1ix5kyitpnfk"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=19 format=3 uid="uid://d1ix5kyitpnfk"]
 
+[ext_resource type="Script" path="res://gameplay_character.gd" id="1_rhg10"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_ug4xc"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_3n011"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="2_84oyx"]
@@ -43,5 +44,5 @@ _bundled = {
 script = ExtResource("2_3n011")
 players = 2
 levels = Array[PackedScene]([SubResource("PackedScene_1tpq4"), ExtResource("4_rmm38"), ExtResource("5_uogry"), ExtResource("6_rnivb")])
-available_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
+available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 current_level = 0
