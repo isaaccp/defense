@@ -5,8 +5,10 @@ class_name HitboxComponent
 const component = &"HitboxComponent"
 
 @export_group("Required")
-## Whether it's a heal.
-## It's just use to make sure that healing doesn't emit positive damage.
+## Whether it's a heal/friendly.
+## It's just used to make sure that healing doesn't emit positive damage and
+## to determine if it's friendly or not (should probably be renamed to
+## is_friendly).
 @export var is_heal = false
 @export var hit_effect: HitEffect
 ## * If not is_heal, whether allies get hit.
@@ -62,6 +64,7 @@ func run():
 	running = true
 	assert(hit_effect.damage < 0 == is_heal)
 	hit_effect.action_name = action_def.skill_name
+	hit_effect.attack_type = action_def.attack_type
 	hits_left = hits
 
 func _on_area_entered(area):

@@ -38,11 +38,8 @@ func _ready():
 	else:
 		attributes = base_attributes
 
-func resistance_multiplier_for(damage_type: DamageType) -> float:
-	for r in attributes.resistance:
-		if r.damage_type == damage_type:
-			return r.multiplier()
-	return 1.0
+func resistance_multiplier_for(attack_type: AttackType, damage_type: DamageType) -> float:
+	return attributes.resistance_multiplier_for(attack_type, damage_type)
 
 func _on_attribute_effects_changed():
 	attributes = effect_actuator_component.modified_attributes(base_attributes)

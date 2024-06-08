@@ -89,7 +89,7 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 		if after_armor_damage <= 0:
 			_log_blocked_damage(damage_str)
 			return hit_result
-	var resistance_multiplier = attributes_component.resistance_multiplier_for(hit_effect.damage_type)
+	var resistance_multiplier = attributes_component.resistance_multiplier_for(hit_effect.attack_type, hit_effect.damage_type)
 	var after_resistance_damage = after_armor_damage * resistance_multiplier
 	if after_resistance_damage != after_armor_damage:
 		damage_str = "%d (%s * %0.1f (%s))" % [after_resistance_damage, damage_str, resistance_multiplier, hit_effect.damage_type.name]

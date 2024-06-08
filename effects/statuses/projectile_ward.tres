@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusDef" load_steps=4 format=3 uid="uid://bug08p4b6x26n"]
+
+[ext_resource type="Script" path="res://effects/statuses/projectile_ward.gd" id="1_xlcpq"]
+[ext_resource type="Texture2D" uid="uid://wsvx7u74dfl4" path="res://assets/status/buffs/defense_boost.png" id="2_iusji"]
+[ext_resource type="Script" path="res://effects/status_def.gd" id="3_duxap"]
+
+[resource]
+script = ExtResource("3_duxap")
+description = "Increases ranged damage resistance by 50%"
+icon = ExtResource("2_iusji")
+name = &"Projectile Ward"
+effect_types = Array[int]([1])
+effect_script = ExtResource("1_xlcpq")

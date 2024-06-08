@@ -19,6 +19,7 @@ class_name HitEffect
 
 # Set by hitbox on hit.
 var action_name: StringName
+var attack_type: AttackType
 var damage_multiplier: float = 1.0
 
 func adjusted_damage():

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctlt0l8skjgus"]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_01sb4"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_66r2r"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="4_vikeo"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="7_g1a4a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
+radius = 5.0
+
+[node name="BaseSingleTargetActionScene" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_01sb4")
+hitbox_component = NodePath("HitboxComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="AnimationComponent" parent="." instance=ExtResource("3_66r2r")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_vikeo")]
+hits = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_rcqhs")
+
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("7_g1a4a")]
+animation_component = NodePath("../AnimationComponent")

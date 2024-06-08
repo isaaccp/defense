@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://q3l1kv2tklgw"]
+
+[ext_resource type="PackedScene" uid="uid://ctlt0l8skjgus" path="res://behavior/actions/scenes/base_single_target_action_scene.tscn" id="1_bu4yc"]
+[ext_resource type="Texture2D" uid="uid://sqtp0mrj1hdp" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 C.png" id="2_amibw"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="3_kh216"]
+[ext_resource type="Resource" uid="uid://bug08p4b6x26n" path="res://effects/statuses/projectile_ward.tres" id="4_53tri"]
+
+[sub_resource type="Animation" id="Animation_74kss"]
+resource_name = "auto"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_gykcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1vhvb"]
+_data = {
+"RESET": SubResource("Animation_gykcn"),
+"auto": SubResource("Animation_74kss")
+}
+
+[sub_resource type="Resource" id="Resource_q8old"]
+script = ExtResource("3_kh216")
+damage = 0
+status = ExtResource("4_53tri")
+status_duration = 5.0
+status_on_damage_only = false
+
+[node name="ProjectileWard" node_paths=PackedStringArray("hitbox_component") instance=ExtResource("1_bu4yc")]
+hitbox_component = NodePath("HitboxComponent")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_amibw")
+hframes = 9
+vframes = 30
+frame = 63
+
+[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_1vhvb")
+}
+
+[node name="HitboxComponent" parent="." index="2"]
+is_heal = true
+hit_effect = SubResource("Resource_q8old")
+
+[node name="AutoFreeComponent" parent="." index="3" node_paths=PackedStringArray("animation_component")]
+animation_component = NodePath("../AnimationComponent")
