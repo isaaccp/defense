@@ -1,7 +1,7 @@
 @tool
 extends EditorScript
 
-var base_name = "magic_armor"
+var base_name = "unset"
 
 const base_action_scene = preload("res://behavior/actions/scenes/base_single_target_action_scene.tscn")
 
