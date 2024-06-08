@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="StatusLibrary" load_steps=2 format=3 uid="uid://dlkrl1i2r8pii"]
+[gd_resource type="Resource" script_class="StatusLibrary" load_steps=8 format=3 uid="uid://dlkrl1i2r8pii"]
 
 [ext_resource type="Script" path="res://effects/status_library.gd" id="1_yu84l"]
+[ext_resource type="Script" path="res://effects/status_def.gd" id="2_fs4ks"]
+[ext_resource type="Resource" uid="uid://c6hr5mwis60g0" path="res://effects/statuses/magic_armor.tres" id="3_hudq7"]
+[ext_resource type="Resource" uid="uid://bug08p4b6x26n" path="res://effects/statuses/projectile_ward.tres" id="4_2mexg"]
+[ext_resource type="Resource" uid="uid://d1mfjkx7ca01j" path="res://effects/statuses/paralyzed.tres" id="5_th37v"]
+[ext_resource type="Resource" uid="uid://qrowjxk0qh01" path="res://effects/statuses/strength_surge.tres" id="6_pb216"]
+[ext_resource type="Resource" uid="uid://b1mkr4txcdkal" path="res://effects/statuses/swiftness.tres" id="7_yw7qa"]
 
 [resource]
 script = ExtResource("1_yu84l")
-statuses = Array[Resource("res://effects/status_def.gd")]([])
+statuses = Array[ExtResource("2_fs4ks")]([ExtResource("3_hudq7"), ExtResource("4_2mexg"), ExtResource("5_th37v"), ExtResource("6_pb216"), ExtResource("7_yw7qa")])

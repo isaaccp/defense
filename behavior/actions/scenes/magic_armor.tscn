@@ -5,6 +5,21 @@
 [ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="6_2hxu3"]
 [ext_resource type="Resource" uid="uid://c6hr5mwis60g0" path="res://effects/statuses/magic_armor.tres" id="7_emrdf"]
 
+[sub_resource type="Animation" id="Animation_4decw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 7)]
+}
+
 [sub_resource type="Animation" id="Animation_0w8l8"]
 resource_name = "auto"
 length = 0.6
@@ -20,21 +35,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
-}
-
-[sub_resource type="Animation" id="Animation_4decw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(0, 7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q3fco"]

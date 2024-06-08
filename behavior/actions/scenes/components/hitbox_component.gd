@@ -62,7 +62,7 @@ func run():
 		assert(false, "run() call twice")
 	collision_shape.disabled = false
 	running = true
-	assert(hit_effect.damage < 0 == is_heal)
+	assert((hit_effect.damage == 0) || (hit_effect.damage < 0 == is_heal))
 	hit_effect.action_name = action_def.skill_name
 	hit_effect.attack_type = action_def.attack_type
 	hits_left = hits
