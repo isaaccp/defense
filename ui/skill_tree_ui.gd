@@ -274,6 +274,9 @@ func _update_purchase_state():
 	for tab in _tabs.get_children():
 		var available_count  = 0
 		for node in tab.get_children():
+			# See https://github.com/godotengine/godot/issues/91857
+			if node.name == "_connection_layer":
+				continue
 			var s = node.get_meta("skill")
 			if mode == Mode.ACQUIRE and _can_purchase(s):
 				available_count += 1
