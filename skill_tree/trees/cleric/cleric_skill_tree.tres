@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=5 format=3 uid="uid://cfcoskuxunyjf"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=6 format=3 uid="uid://cfcoskuxunyjf"]
 
 [ext_resource type="Script" path="res://skill_tree/skill_tree.gd" id="1_50w7a"]
 [ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_d4imn"]
 [ext_resource type="Resource" uid="uid://buewl5eydlx7c" path="res://skill_tree/actions/heal.tres" id="2_fb7xy"]
 [ext_resource type="Resource" uid="uid://b01kxudyjuv78" path="res://skill_tree/actions/hold_person.tres" id="3_4uof3"]
+[ext_resource type="Resource" uid="uid://blxoeo676uvmd" path="res://skill_tree/actions/projectile_ward.tres" id="5_6r2cx"]
 
 [resource]
 script = ExtResource("1_50w7a")
 tree_type = 4
-skills = Array[ExtResource("2_d4imn")]([ExtResource("2_fb7xy"), ExtResource("3_4uof3")])
+skills = Array[ExtResource("2_d4imn")]([ExtResource("2_fb7xy"), ExtResource("3_4uof3"), ExtResource("5_6r2cx")])
