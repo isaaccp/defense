@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=4 format=3 uid="uid://c676jgjqj8td3"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=5 format=3 uid="uid://c676jgjqj8td3"]
 
 [ext_resource type="Script" path="res://skill_type_collection.gd" id="1_1afph"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_71kr0"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="2_mckfa"]
 [ext_resource type="Resource" uid="uid://bh04aym60yde5" path="res://skill_tree/target_sorts/farthest_first.tres" id="3_fruh4"]
 
 [resource]
 script = ExtResource("1_1afph")
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_mckfa"), ExtResource("3_fruh4")])
+skills = Array[ExtResource("2_71kr0")]([ExtResource("2_mckfa"), ExtResource("3_fruh4")])

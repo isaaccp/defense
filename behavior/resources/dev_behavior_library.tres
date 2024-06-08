@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BehaviorLibrary" load_steps=62 format=3 uid="uid://bfaftc351hhvi"]
+[gd_resource type="Resource" script_class="BehaviorLibrary" load_steps=65 format=3 uid="uid://bfaftc351hhvi"]
 
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_enl0e"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_v57ou"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="4_7mu3l"]
 [ext_resource type="Script" path="res://behavior/stored_skill.gd" id="5_7yy3c"]
 [ext_resource type="Script" path="res://behavior/behavior_library.gd" id="6_7v2r3"]
+[ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="6_s534k"]
 
 [sub_resource type="Resource" id="Resource_ojvym"]
 script = ExtResource("2_v57ou")
@@ -149,7 +150,7 @@ script = ExtResource("2_v57ou")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_mgu20"]
+[sub_resource type="Resource" id="Resource_gdwx7"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_ms6fv")
 name = &"Heal"
@@ -160,7 +161,7 @@ script = ExtResource("2_v57ou")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_jk7r3"]
+[sub_resource type="Resource" id="Resource_p54ri"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_pxhu5")
 name = &"Always"
@@ -177,33 +178,44 @@ editor_string = "Ally ({sort})"
 cmp = 0
 sort = SubResource("Resource_pacl1")
 
-[sub_resource type="Resource" id="Resource_p1ne7"]
+[sub_resource type="Resource" id="Resource_37dhc"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_htuis")
 name = &"Ally"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_asfc6"]
+[sub_resource type="Resource" id="Resource_wyx17"]
 script = ExtResource("4_7mu3l")
-target_selection = SubResource("Resource_p1ne7")
-action = SubResource("Resource_mgu20")
-condition = SubResource("Resource_jk7r3")
+target_selection = SubResource("Resource_37dhc")
+action = SubResource("Resource_gdwx7")
+condition = SubResource("Resource_p54ri")
 
 [sub_resource type="Resource" id="Resource_4d74m"]
 script = ExtResource("2_v57ou")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_8o6fj"]
+[sub_resource type="Resource" id="Resource_ub4c5"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_4d74m")
 name = &"Move To"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_ire45"]
+[sub_resource type="Resource" id="Resource_t2nru"]
+script = ExtResource("6_s534k")
+defined = true
+value = 100.0
+
+[sub_resource type="Resource" id="Resource_ga2rp"]
+script = ExtResource("2_v57ou")
+editor_string = "distance {cmp} {float_value}"
+cmp = 5
+float_value = SubResource("Resource_t2nru")
+
+[sub_resource type="Resource" id="Resource_uqg1p"]
 script = ExtResource("3_6wex8")
-params = SubResource("Resource_pxhu5")
-name = &"Always"
+params = SubResource("Resource_ga2rp")
+name = &"Target Distance"
 skill_type = 3
 
 [sub_resource type="Resource" id="Resource_1g3wj"]
@@ -217,22 +229,22 @@ editor_string = "Ally ({sort})"
 cmp = 0
 sort = SubResource("Resource_1g3wj")
 
-[sub_resource type="Resource" id="Resource_pvg6y"]
+[sub_resource type="Resource" id="Resource_3sn2m"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_x5wfh")
 name = &"Ally"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_bjnom"]
+[sub_resource type="Resource" id="Resource_j8i0f"]
 script = ExtResource("4_7mu3l")
-target_selection = SubResource("Resource_pvg6y")
-action = SubResource("Resource_8o6fj")
-condition = SubResource("Resource_ire45")
+target_selection = SubResource("Resource_3sn2m")
+action = SubResource("Resource_ub4c5")
+condition = SubResource("Resource_uqg1p")
 
-[sub_resource type="Resource" id="Resource_2fxar"]
+[sub_resource type="Resource" id="Resource_w4u6w"]
 script = ExtResource("1_enl0e")
 name = "heal_and_move"
-stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_asfc6"), SubResource("Resource_bjnom")])
+stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_wyx17"), SubResource("Resource_j8i0f")])
 
 [sub_resource type="Resource" id="Resource_piy75"]
 script = ExtResource("2_v57ou")
@@ -321,4 +333,4 @@ stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_mlloo"), Sub
 
 [resource]
 script = ExtResource("6_7v2r3")
-behaviors = Array[ExtResource("1_enl0e")]([SubResource("Resource_ma4ch"), SubResource("Resource_iyf1j"), SubResource("Resource_2fxar"), SubResource("Resource_055hc")])
+behaviors = Array[ExtResource("1_enl0e")]([SubResource("Resource_ma4ch"), SubResource("Resource_iyf1j"), SubResource("Resource_w4u6w"), SubResource("Resource_055hc")])

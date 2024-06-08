@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=3 format=3 uid="uid://de3kn8x0a50vl"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=4 format=3 uid="uid://de3kn8x0a50vl"]
 
 [ext_resource type="Script" path="res://skill_type_collection.gd" id="1_tv1xd"]
 [ext_resource type="Resource" uid="uid://bj12af7xsthcs" path="res://skill_tree/meta_skills/behavior_library.tres" id="2_05xne"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_ht1sp"]
 
 [resource]
 script = ExtResource("1_tv1xd")
-skills = Array[Resource("res://skill_tree/skill.gd")]([ExtResource("2_05xne")])
+skills = Array[ExtResource("2_ht1sp")]([ExtResource("2_05xne")])

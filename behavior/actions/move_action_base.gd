@@ -7,6 +7,7 @@ func _init():
 	min_distance = 25
 	# See explanation in action.gd
 	filter_with_distance = false
+	finish_on_unmet_condition = true
 
 func post_initialize():
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
