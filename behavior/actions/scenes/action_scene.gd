@@ -1,3 +1,4 @@
+@tool
 extends Actor
 
 class_name ActionScene
