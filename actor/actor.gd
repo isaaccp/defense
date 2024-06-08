@@ -25,6 +25,8 @@ func get_component_or_null(component_class: Object) -> Node:
 
 ## Calls run in all components.
 func run():
+	if Engine.is_editor_hint():
+		return
 	if running:
 		assert(false, "run() called twice for actor %s" % actor_name)
 	running = true

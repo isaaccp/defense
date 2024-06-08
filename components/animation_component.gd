@@ -21,6 +21,8 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func run():
+	if Engine.is_editor_hint():
+		return
 	if animation_player.has_animation(default_auto_animation):
 		animation_player.play(default_auto_animation)
 
