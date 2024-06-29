@@ -36,12 +36,26 @@ func before_each():
 	enemy.get_component_or_die(BehaviorComponent).stored_behavior = StoredBehavior.new()
 	enemy_health = enemy.get_component_or_die(HealthComponent)
 
-func test_sword_works_within_distance():
+func test_sword_works_within_distance_from_left():
 	# Basic sword attack only behavior.
 	TestUtils.set_character_behavior(character, make_sword_behavior())
 
 	# Put the enemy close to the character.
-	enemy.position = character.position + Vector2.RIGHT * 30
+	enemy.position = character.position + Vector2.RIGHT * 49
+
+	level.start()
+
+	watch_signals(character_behavior)
+	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	assert_signal_emitted(character_behavior, "behavior_updated")
+	assert_signal_emitted(enemy_health, "died")
+
+func test_sword_works_within_distance_from_bottom_right():
+	# Basic sword attack only behavior.
+	TestUtils.set_character_behavior(character, make_sword_behavior())
+
+	# Put the enemy close to the character.
+	enemy.position = character.position + Vector2.LEFT * 30 + Vector2.UP * 30
 
 	level.start()
 

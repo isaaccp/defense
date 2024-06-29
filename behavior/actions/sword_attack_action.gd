@@ -6,7 +6,7 @@ var sword_attack: ActionScene
 var attack_dir: Vector2
 
 func _init():
-	max_distance = 40
+	max_distance = 50
 	prepare_time = 0.2
 
 func post_initialize():
@@ -19,7 +19,7 @@ func _swing_sword():
 	sword_attack = sword_attack_scene.instantiate() as ActionScene
 	_initialize_action_scene(sword_attack)
 	sword_attack.look_at(sword_attack.position + attack_dir)
-	sword_attack.position += attack_dir * 15
+	sword_attack.position += attack_dir * 25
 	action_sprites.add_child(sword_attack)
 	Global.get_tree().create_timer(0.8, false).timeout.connect(action_finished)
 
