@@ -50,8 +50,7 @@ status = ExtResource("4_53tri")
 status_duration = 5.0
 status_on_damage_only = false
 
-[node name="ProjectileWard" node_paths=PackedStringArray("hitbox_component") instance=ExtResource("1_bu4yc")]
-hitbox_component = NodePath("HitboxComponent")
+[node name="ProjectileWard" instance=ExtResource("1_bu4yc")]
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_amibw")
@@ -70,6 +69,3 @@ libraries = {
 [node name="HitboxComponent" parent="." index="2"]
 is_heal = true
 hit_effect = SubResource("Resource_q8old")
-
-[node name="AutoFreeComponent" parent="." index="3" node_paths=PackedStringArray("animation_component")]
-animation_component = NodePath("../AnimationComponent")
