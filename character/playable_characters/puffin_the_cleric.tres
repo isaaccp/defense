@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_ha8jy"]
 script = ExtResource("3_ro8tn")
-skills = Array[StringName]([&"Always", &"Ally", &"Move To", &"Heal", &"Closest First", &"Target Distance", &"Magic Armor"])
+skills = Array[StringName]([&"Always", &"Ally", &"Move To", &"Heal", &"Closest First", &"Target Distance", &"Magic Armor", &"Projectile Ward"])
 full = false
 
 [sub_resource type="Resource" id="Resource_x24g2"]
