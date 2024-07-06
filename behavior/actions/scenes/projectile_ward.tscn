@@ -46,6 +46,8 @@ _data = {
 [sub_resource type="Resource" id="Resource_q8old"]
 script = ExtResource("3_kh216")
 damage = 0
+fraction_armor_pen = 0.0
+flat_armor_pen = 0
 status = ExtResource("4_53tri")
 status_duration = 5.0
 status_on_damage_only = false

@@ -6,6 +6,10 @@ class_name HitEffect
 @export var damage: int
 ## Type of damage inflicted.
 @export var damage_type: DamageType
+## Fraction armor penetration. Ignore this fraction of armor.
+@export var fraction_armor_pen: float
+## Flat armor penetration. Ignore this much armor (applied after percentage).
+@export var flat_armor_pen: int
 # Status on hit.
 ## Status inflicted, if any.
 @export var status: StatusDef
@@ -32,6 +36,7 @@ func log_text() -> String:
 	return effect_str
 
 func _damage_str() -> String:
+	# TODO: Display armor penetration in some way.
 	if not damage:
 		return ""
 	var hit_type = "healed" if damage < 0 else "hit"

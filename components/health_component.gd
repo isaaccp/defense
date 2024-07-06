@@ -83,7 +83,15 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 		return hit_result
 	var after_armor_damage = adjusted_damage
 	if hit_effect.damage_type.macro_type == DamageType.MacroType.PHYSICAL:
-		after_armor_damage = max(0, adjusted_damage - attributes_component.armor)
+		var effective_armor = float(attributes_component.armor)
+		if hit_effect.fraction_armor_pen > 0:
+			effective_armor -= effective_armor * hit_effect.fraction_armor_pen
+		if hit_effect.flat_armor_pen > 0:
+			effective_armor -= hit_effect.flat_armor_pen
+			if effective_armor < 0:
+				effective_armor = 0
+		effective_armor = round(effective_armor)
+		after_armor_damage = max(0, adjusted_damage - effective_armor)
 		if after_armor_damage != adjusted_damage:
 			damage_str = "%d (%s - %d (armor))" % [after_armor_damage, damage_str, attributes_component.armor]
 		if after_armor_damage <= 0:

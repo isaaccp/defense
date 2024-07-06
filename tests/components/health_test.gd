@@ -88,12 +88,74 @@ func test_physical_hit_armor_no_damage():
 	assert_signal_not_emitted(health_component, "health_updated")
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
+func test_physical_hit_flat_armor_pen():
+	var hit_effect = HitEffect.new()
+	hit_effect.damage = 2
+	hit_effect.flat_armor_pen = 1
+	attributes_component.base_attributes.armor = 2
+	# damage - (armor - flat_armor_pen)
+	var expected_damage = 1
+	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, expected_damage)
+	assert_eq(health_component.health, max_health - expected_damage)
+	assert_signal_emitted(health_component, "health_updated")
+	var params = get_signal_parameters(health_component, "health_updated")
+	assert_not_null(params)
+	var health_update = params[0] as HealthComponent.HealthUpdate
+	# 1 damage, due to armor penetration.
+	assert_eq(health_update.health, max_health - expected_damage)
+	assert_eq(health_update.prev_health, max_health)
+	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
+
+func test_physical_hit_fraction_armor_pen():
+	var hit_effect = HitEffect.new()
+	hit_effect.damage = 2
+	hit_effect.fraction_armor_pen = 0.5
+	attributes_component.base_attributes.armor = 2
+	# damage - (armor - armor * fraction_armor_pen)
+	var expected_damage = 1
+	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, expected_damage)
+	assert_eq(health_component.health, max_health - expected_damage)
+	assert_signal_emitted(health_component, "health_updated")
+	var params = get_signal_parameters(health_component, "health_updated")
+	assert_not_null(params)
+	var health_update = params[0] as HealthComponent.HealthUpdate
+	# 1 damage, due to armor penetration.
+	assert_eq(health_update.health, max_health - expected_damage)
+	assert_eq(health_update.prev_health, max_health)
+	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
+
+func test_physical_hit_both_armor_pen():
+	var hit_effect = HitEffect.new()
+	hit_effect.damage = 2
+	hit_effect.fraction_armor_pen = 0.5
+	hit_effect.flat_armor_pen = 1
+	attributes_component.base_attributes.armor = 2
+	# damage - (armor - (armor * fraction_armor_pen + flat_armor_pen)
+	var expected_damage = 2
+	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
+	var hit_result = health_component.process_hit(hit_effect)
+	assert_eq(hit_result.damage, expected_damage)
+	assert_eq(health_component.health, max_health - expected_damage)
+	assert_signal_emitted(health_component, "health_updated")
+	var params = get_signal_parameters(health_component, "health_updated")
+	assert_not_null(params)
+	var health_update = params[0] as HealthComponent.HealthUpdate
+	# 1 damage, due to armor penetration.
+	assert_eq(health_update.health, max_health - expected_damage)
+	assert_eq(health_update.prev_health, max_health)
+	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
+
 func test_non_physical_hit_ignores_armor():
 	var hit_effect = HitEffect.new()
 	hit_effect.damage = 2
 	# Check non-physical damage ignores armor.death.
 	hit_effect.damage_type = preload("res://game_logic/damage_types/arcane.tres")
-	# True as damage gets through now.
+	# Same armor as damage.
+	attributes_component.base_attributes.armor = 2
 	var hit_result = health_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, 2)
 	assert_eq(health_component.health, max_health - 2)
