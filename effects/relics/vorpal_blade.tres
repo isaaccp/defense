@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://dwg70jy7rj4cx"]
+
+[ext_resource type="Script" path="res://effects/relics/vorpal_blade.gd" id="1_lp3oc"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rqagy"]
+
+[resource]
+script = ExtResource("2_rqagy")
+description = "Slashing attacks gain 1 armor penetration"
+name = &"Vorpal Blade"
+effect_types = Array[int]([2])
+effect_script = ExtResource("1_lp3oc")

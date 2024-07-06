@@ -15,6 +15,10 @@ signal log_entry_added(log_entry: LogEntry)
 # TODO: Make a dictionary on _ready() if we have many.
 @export var print_logtypes: Array[LogType]
 
+# If set, log all messages to output.
+# Can be set manually to debug when needed.
+var log_all: bool = false
+
 # Even if those look like they map to components, they are user-facing, so we
 # shouldn't "ship our org chart" here and better to have a explicit LogType
 # instead of e.g. using the component name.
@@ -67,7 +71,7 @@ func add_log_entry(type: LogType, message: String, stats_updates: Array[Stat] = 
 	var le = LogEntry.new(time, type, message)
 	entries.append(le)
 	log_entry_added.emit(le)
-	if type in print_logtypes:
+	if log_all or type in print_logtypes:
 		print("[%0.2f] %s(%s): %s" % [time, get_parent().actor_name, LoggingComponent.log_type_name(type), message])
 	if track_stats:
 		for stat in stats_updates:

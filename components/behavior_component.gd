@@ -111,7 +111,7 @@ func _physics_process(delta: float):
 					target = result.target
 					action = result.action
 					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
-					action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component)
+					action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component, effect_actuator_component)
 			if action and action.abortable:
 				next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 		_emit_updated_if_changed(prev_action_name, prev_target)

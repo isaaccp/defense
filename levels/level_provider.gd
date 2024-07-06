@@ -33,6 +33,10 @@ func load_level() -> PackedScene:
 func is_last_level():
 	return current_level + 1 == levels.size()
 
+# TODO: Do something better, maybe :)
+func are_relics_available():
+	return (current_level % 2) == 1
+
 # For testing.
 func set_from(other: LevelProvider):
 	players = other.players

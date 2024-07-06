@@ -40,7 +40,7 @@ func _standalone_ready():
 	action_scene_player.action_scene = load(scene_file_path)
 	parent.add_child(action_scene_player)
 
-func initialize(owner_name: String, action_def: ActionDef, target: Target, attributes: Attributes, side_component: SideComponent, logging_component: LoggingComponent):
+func initialize(owner_name: String, action_def: ActionDef, target: Target, attributes: Attributes, side_component: SideComponent, logging_component: LoggingComponent, effect_actuator_component: EffectActuatorComponent):
 	self.owner_name = owner_name
 	self.action_def = action_def
 
@@ -48,7 +48,7 @@ func initialize(owner_name: String, action_def: ActionDef, target: Target, attri
 	if target_component:
 		target_component.action_target = ActionTarget.new(target, target_position_type)
 	if hitbox_component:
-		hitbox_component.initialize(owner_name, action_def, attributes, side_component, logging_component)
+		hitbox_component.initialize(owner_name, action_def, attributes, side_component, logging_component, effect_actuator_component)
 		hitbox_component.hit.connect(_on_hit)
 
 func _on_hit(hit_result: HitResult):

@@ -37,6 +37,7 @@ var action_def: ActionDef
 var attributes: Attributes
 var side_component: SideComponent
 var logging_component: LoggingComponent
+var effect_actuator_component: EffectActuatorComponent
 
 var collision_shape: CollisionShape2D
 var running = false
@@ -50,12 +51,13 @@ func _ready():
 	assert(collision_shape)
 	collision_shape.disabled = true
 
-func initialize(owner_name: String, action_def: ActionDef, attributes: Attributes, side_component: SideComponent, logging_component: LoggingComponent):
+func initialize(owner_name: String, action_def: ActionDef, attributes: Attributes, side_component: SideComponent, logging_component: LoggingComponent, effect_actuator_component: EffectActuatorComponent):
 	self.owner_name = owner_name
 	self.action_def = action_def
 	self.attributes = attributes
 	self.side_component = side_component
 	self.logging_component = logging_component
+	self.effect_actuator_component = effect_actuator_component
 
 func run():
 	if running:
@@ -125,7 +127,8 @@ func _status_str() -> String:
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = attributes.damage_multiplier
-	var hit_result = hurtbox.handle_collision(owner_name, get_parent().name, hit_effect)
+	var effective_hit_effect = effect_actuator_component.modified_hit_effect(hit_effect)
+	var hit_result = hurtbox.handle_collision(owner_name, get_parent().name, effective_hit_effect)
 
 	hit.emit(hit_result)
 
@@ -133,7 +136,7 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	# not include it and make enemy logs viewable, in which case you could see it there.
 
 	hitbox_log(
-		"%s %s" % [hurtbox.get_parent().name, hit_effect.log_text()],
+		"%s %s" % [hurtbox.get_parent().name, effective_hit_effect.log_text()],
 		hit_result.stats_update()
 	)
 

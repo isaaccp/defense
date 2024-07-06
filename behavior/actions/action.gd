@@ -53,6 +53,7 @@ var side_component: SideComponent
 var attributes_component: AttributesComponent
 var status_component: StatusComponent
 var logging_component: LoggingComponent
+var effect_actuator_component: EffectActuatorComponent
 
 static func make_runnable_action(action_def: ActionDef) -> Action:
 	var action = action_def.action_script.new() as Action
@@ -66,7 +67,8 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 				action_sprites_: Node2D, side_component_: SideComponent,
 				attributes_component_: AttributesComponent,
 				status_component_: StatusComponent,
-				logging_component_: LoggingComponent) -> void:
+				logging_component_: LoggingComponent,
+				effect_actuator_component_: EffectActuatorComponent) -> void:
 	target = target_
 	assert(def.compatible_with_target(target.type), "Unsupported target type: %s" % target.type)
 	body = body_
@@ -76,6 +78,7 @@ func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: Navi
 	attributes_component = attributes_component_
 	status_component = status_component_
 	logging_component = logging_component_
+	effect_actuator_component = effect_actuator_component_
 	if finish_on_unmet_condition:
 		_start_condition_checker.call_deferred()
 	if prepare_time > 0:
@@ -134,7 +137,7 @@ func action_finished():
 	finished = true
 
 func _initialize_action_scene(action_scene: ActionScene) -> void:
-	action_scene.initialize(body.name, def, target, attributes_component.attributes, side_component, logging_component)
+	action_scene.initialize(body.name, def, target, attributes_component.attributes, side_component, logging_component, effect_actuator_component)
 
 # Can call this after awaiting to:
 #  * check if action is finished

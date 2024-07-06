@@ -51,6 +51,8 @@ flat_armor_pen = 0
 status = ExtResource("4_53tri")
 status_duration = 5.0
 status_on_damage_only = false
+action_name = &""
+damage_multiplier = 1.0
 
 [node name="ProjectileWard" instance=ExtResource("1_bu4yc")]
 

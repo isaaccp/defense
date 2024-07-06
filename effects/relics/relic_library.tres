@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RelicLibrary" load_steps=4 format=3 uid="uid://ic0hy7kikmrw"]
+
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="1_wxb7g"]
+[ext_resource type="Resource" uid="uid://dwg70jy7rj4cx" path="res://effects/relics/vorpal_blade.tres" id="2_6b71a"]
+[ext_resource type="Script" path="res://effects/relic_library.gd" id="3_g7pc6"]
+
+[resource]
+script = ExtResource("3_g7pc6")
+relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a")])

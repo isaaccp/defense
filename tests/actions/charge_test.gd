@@ -102,7 +102,7 @@ func test_charge_cooldown():
 	TestUtils.set_character_behavior(character, make_charge_behavior())
 
 	# Put the enemy close to the character, less than charge threshold distance.
-	enemy.position = character.position + Vector2.RIGHT * runnable_charge_action.charge_threshold / 2.0
+	enemy.position = character.position + Vector2.RIGHT * runnable_charge_action.charge_threshold / 1.2
 	# Second enemy a bit farther away.
 	extra_enemy.position = enemy.position + Vector2.RIGHT * 300
 

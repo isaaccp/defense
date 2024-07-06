@@ -21,10 +21,11 @@ class_name HitEffect
 ## effects.
 @export var status_on_damage_only = false
 
-# Set by hitbox on hit.
-var action_name: StringName
-var attack_type: AttackType
-var damage_multiplier: float = 1.0
+@export_group("Internal - Do not set")
+# Set by hitbox on hit, but exported so the object can be duplicated easily.
+@export var action_name: StringName
+@export var attack_type: AttackType
+@export var damage_multiplier: float = 1.0
 
 func adjusted_damage():
 	return round(float(damage) * damage_multiplier)
