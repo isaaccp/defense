@@ -51,6 +51,7 @@ func test_end_to_end():
 	ui_layer.character_selection_screen_selection_ready.emit(selection)
 
 	await wait_frames(1, "Waiting for level load")
+	assert_eq(run.run_save_state.current_level, 0)
 	assert(run.state.is_state(run.WITHIN_LEVEL))
 	assert_not_null(run.level)
 	assert_eq(hud.character_view_count(), expected_characters)
@@ -60,7 +61,7 @@ func test_end_to_end():
 	await wait_frames(2)
 
 	gut.p("Between Levels")
-	assert_call_count(level_provider, "advance", 1)
+	assert_eq(run.run_save_state.current_level, 1)
 	assert(run.state.is_state(run.BETWEEN_LEVELS))
 	ui_layer.between_levels_continue_selected.emit()
 

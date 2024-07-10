@@ -33,10 +33,9 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="CharacterSelectionScreen" parent="Screens" node_paths=PackedStringArray("characters_container") instance=ExtResource("2_rk245")]
+[node name="CharacterSelectionScreen" parent="Screens" instance=ExtResource("2_rk245")]
 visible = false
 layout_mode = 1
-characters_container = NodePath("VBoxContainer/CharactersContainer")
 
 [node name="UpgradeCharacterScreen" parent="Screens" instance=ExtResource("3_x1mfn")]
 unique_name_in_owner = true
@@ -68,11 +67,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="HUD" parent="Overlay" node_paths=PackedStringArray("peer") instance=ExtResource("5_uol5s")]
+[node name="HUD" parent="Overlay" instance=ExtResource("5_uol5s")]
 visible = false
 layout_mode = 1
 mouse_filter = 2
-peer = NodePath("VBoxContainer/Peer")
 
 [node name="GameplayMenu" parent="Overlay" instance=ExtResource("5_wda70")]
 unique_name_in_owner = true

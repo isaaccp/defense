@@ -33,9 +33,9 @@ var level_scene: PackedScene
 # Saved in WITHIN_LEVEL, to be used during BETWEEN_LEVELS.
 var level_xp: int
 
-# A copy of characters' state as they were when level started.
+# A copy of run_save_state when level is entered for first time.
 # Allows to reset state.
-var characters_snapshot: Array[GameplayCharacter]
+var run_save_state_snapshot: RunSaveState
 
 signal run_finished
 signal level_paused
@@ -94,10 +94,14 @@ func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 	# _on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
 
 func _on_within_level_entered():
-	_snapshot_characters()
-	level_scene = level_provider.load_level()
+	_snapshot_run_save_state()
+	level_scene = level_provider.load_level(run_save_state.current_level)
 	level = level_scene.instantiate()
 	level.initialize(gameplay_characters, ui_layer)
+	if level_provider.are_relics_available(run_save_state.current_level):
+		level.selected_relics = level_provider.relic_library.lookup_relics(run_save_state.relic_library_state.selected_relics())
+	else:
+		level.selected_relics = []
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
 	# TODO: Add a MultiplayerSpawner here so scenes get spawned.
@@ -115,10 +119,15 @@ func _on_level_finished():
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
 	# Need to advance level_provider at the same time, so that if
 	# we save at this point, the stats and next level match.
-	if level_provider.is_last_level():
+	if level_provider.is_last_level(run_save_state.current_level):
 		state.change_state.call_deferred(RUN_SUMMARY)
 	else:
-		assert(level_provider.advance())
+		run_save_state.current_level += 1
+		# If the next level has relics available, they need to be selected
+		# here so when we snapshot on entering the next level the relics are
+		# already chosen and user can't save-scum.
+		if level_provider.are_relics_available(run_save_state.current_level):
+			run_save_state.relic_library_state.select_relics(3)
 		# Call this in the same frame explicitly so we update all the
 		# bits of the RunSaveState in the same frame.
 		state.change_state(BETWEEN_LEVELS, false)
@@ -171,18 +180,14 @@ func finish_run():
 func _on_restart_requested():
 	_on_level_failed()
 
-func _snapshot_characters():
-	characters_snapshot.clear()
-	for character in gameplay_characters:
-		characters_snapshot.append(character.duplicate(true))
+func _snapshot_run_save_state():
+	run_save_state_snapshot = run_save_state.duplicate(true)
 
-func _restore_characters_snapshot():
-	gameplay_characters.clear()
-	for character in characters_snapshot:
-		gameplay_characters.append(character)
+func _restore_run_save_state_snapshot():
+	run_save_state = run_save_state_snapshot
 
 func _on_reset_requested():
-	_restore_characters_snapshot()
+	_restore_run_save_state_snapshot()
 	_on_level_failed()
 
 func _on_abandon_run_requested():

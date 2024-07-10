@@ -99,11 +99,6 @@ _data = {
 [node name="PortalSpawner" instance=ExtResource("1_a7635")]
 actor_name = "Portal Spawner"
 
-[node name="SpawnPlacerComponent" parent="." index="2" node_paths=PackedStringArray("spawn_provider_component", "spawn_position_component", "spawn_animation_component")]
-spawn_provider_component = NodePath("../SpawnProviderComponent")
-spawn_position_component = NodePath("../SpawnPositionComponent")
-spawn_animation_component = NodePath("../SpawnAnimationControllerComponent")
-
 [node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
@@ -123,8 +118,7 @@ hframes = 6
 vframes = 30
 frame = 89
 
-[node name="SpawnAnimationControllerComponent" parent="." index="4" node_paths=PackedStringArray("animation_component")]
-animation_component = NodePath("../AnimationComponent")
+[node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("3_knaj1")]
 
-[node name="SpawnConfigComponent" type="Node" parent="." index="5" instance=ExtResource("3_knaj1")]
+[node name="@Node@19095" type="Node" parent="." index="6" instance=ExtResource("3_knaj1")]
 script = ExtResource("4_aa4gf")

@@ -6,9 +6,7 @@ class_name LevelProvider
 @export var players: int
 @export var levels: Array[PackedScene]
 @export var available_characters: Array[GameplayCharacter]
-
-@export_group("Storage")
-@export var current_level = 0
+@export var relic_library: RelicLibrary
 
 @export_group("Testing")
 # The following two override the settings in the character loaded, leave
@@ -18,23 +16,16 @@ class_name LevelProvider
 # Initial behavior for characters.
 @export var behavior: StoredBehavior = StoredBehavior.new()
 
-func reset():
-	current_level = 0
-
-func advance() -> bool:
-	if is_last_level():
-		return false
-	current_level += 1
-	return true
-
-func load_level() -> PackedScene:
+func load_level(current_level: int) -> PackedScene:
 	return levels[current_level]
 
-func is_last_level():
+func is_last_level(current_level: int):
 	return current_level + 1 == levels.size()
 
 # TODO: Do something better, maybe :)
-func are_relics_available():
+func are_relics_available(current_level):
+	if not relic_library:
+		return false
 	return (current_level % 2) == 1
 
 # For testing.

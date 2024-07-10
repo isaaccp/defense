@@ -38,7 +38,7 @@ class_name Level
 @export var towers: Node2D
 @export var spawners: Node2D
 @export var starting_positions: Node
-
+var selected_relics: Array[RelicDef]
 var ui_layer: GameplayUILayer
 
 var state = StateMachine.new(Constants.LevelStateMachineName)
@@ -103,6 +103,7 @@ func _on_prepare_entered():
 		ui_layer.hud.set_victory_loss(victory)
 		ui_layer.hud.set_characters(characters)
 		ui_layer.hud.set_towers(towers)
+		ui_layer.hud.set_level_options(selected_relics)
 		ui_layer.hud.start_character_setup(_on_all_ready)
 		ui_layer.hud.show_main_message("Prepare", 2.0)
 		ui_layer.play_controls_play_pressed.connect(_on_play_pressed)

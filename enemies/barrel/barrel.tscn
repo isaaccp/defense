@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://cilbbmjxhyi8t"]
+[gd_scene load_steps=16 format=3 uid="uid://cilbbmjxhyi8t"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_j240n"]
 [ext_resource type="Texture2D" uid="uid://kydsbc6g3737" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_full.tres" id="2_8we7e"]
 [ext_resource type="Texture2D" uid="uid://fbmqclmv36jp" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_half.tres" id="3_hhttp"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_6cufv"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="4_81wwm"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="5_wc1y6"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="6_cnckx"]
 
 [sub_resource type="Animation" id="Animation_6jr7e"]
 length = 0.001
@@ -70,7 +72,7 @@ height = 22.0
 [sub_resource type="Resource" id="Resource_kfr1l"]
 script = ExtResource("4_6cufv")
 name = ""
-stored_rules = Array[Resource("res://behavior/rule_def.gd")]([])
+stored_rules = Array[ExtResource("5_wc1y6")]([])
 
 [sub_resource type="Resource" id="Resource_7dmrm"]
 script = ExtResource("4_81wwm")
@@ -79,7 +81,7 @@ health = 5
 recovery = 0.0
 damage_multiplier = 1.0
 armor = 0
-resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
+resistance = Array[ExtResource("6_cnckx")]([])
 
 [node name="Barrel" instance=ExtResource("1_j240n")]
 actor_name = "Barrel"
@@ -101,47 +103,18 @@ libraries = {
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_p7io6")
 
-[node name="HealthComponent" parent="." index="5" node_paths=PackedStringArray("attributes_component", "logging_component")]
+[node name="HealthComponent" parent="." index="5"]
 position = Vector2(0, -23)
-attributes_component = NodePath("../AttributesComponent")
-logging_component = NodePath("../LoggingComponent")
 
-[node name="HurtboxComponent" parent="." index="6" node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component")]
+[node name="HurtboxComponent" parent="." index="6"]
 position = Vector2(0, -8)
-side_component = NodePath("../SideComponent")
-logging_component = NodePath("../LoggingComponent")
-health_component = NodePath("../HealthComponent")
-status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_p245c")
 
-[node name="BehaviorComponent" parent="." index="7" node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "health_component", "logging_component")]
-body = NodePath("..")
-navigation_agent = NodePath("../NavigationAgent2D")
-action_sprites = NodePath("../ActionSprites")
-sprite = NodePath("../Sprite2D")
-animation_component = NodePath("../AnimationComponent")
-side_component = NodePath("../SideComponent")
-attributes_component = NodePath("../AttributesComponent")
-status_component = NodePath("../StatusComponent")
-effect_actuator_component = NodePath("../EffectActuatorComponent")
-health_component = NodePath("../HealthComponent")
-logging_component = NodePath("../LoggingComponent")
+[node name="BehaviorComponent" parent="." index="7"]
 stored_behavior = SubResource("Resource_kfr1l")
 
-[node name="DeathHandlerComponent" parent="." index="8" node_paths=PackedStringArray("health_component", "animation_component", "collision_shape")]
-health_component = NodePath("../HealthComponent")
-animation_component = NodePath("../AnimationComponent")
-collision_shape = NodePath("../CollisionShape2D")
-
-[node name="AttributesComponent" parent="." index="10" node_paths=PackedStringArray("effect_actuator_component")]
+[node name="AttributesComponent" parent="." index="10"]
 base_attributes = SubResource("Resource_7dmrm")
-effect_actuator_component = NodePath("../EffectActuatorComponent")
-
-[node name="StatusComponent" parent="." index="11" node_paths=PackedStringArray("logging_component")]
-logging_component = NodePath("../LoggingComponent")
-
-[node name="EffectActuatorComponent" parent="." index="13" node_paths=PackedStringArray("status_component")]
-status_component = NodePath("../StatusComponent")

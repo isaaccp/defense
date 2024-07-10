@@ -9,6 +9,7 @@ class_name Hud
 var characters: Array[Character]
 var characters_ready: Dictionary
 var behavior_library: BehaviorLibrary
+var relic_choices: Array[RelicDef]
 
 enum MessageType {
 	MAIN,
@@ -33,6 +34,7 @@ var message_tween = {
 const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
 const hud_tower_view_scene = preload("res://ui/hud_tower_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
+const relic_choice_window_scene = preload("res://ui/relic_choice_window.tscn")
 
 signal all_ready
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
@@ -79,6 +81,11 @@ func set_towers(towers: Node) -> void:
 	var view = hud_tower_view_scene.instantiate() as HudTowerView
 	view.initialize(tower)
 	%TowerHud.add_child(view)
+
+func set_level_options(selected_relics: Array[RelicDef]):
+	var has_relics = len(selected_relics) > 0
+	%SelectRelicButton.visible = has_relics
+	relic_choices = selected_relics
 
 func show_play_controls(show: bool = true):
 	%PlayControls.visible = show
@@ -223,3 +230,18 @@ func _on_play_controls_play_pressed():
 
 func _on_play_controls_pause_pressed():
 	play_controls_pause_pressed.emit()
+
+func _on_select_relic_button_pressed():
+	var relic_window = relic_choice_window_scene.instantiate() as RelicChoiceWindow
+	%LevelOptionsParent.add_child(relic_window)
+	relic_window.initialize(relic_choices)
+	relic_window.relic_selected.connect(_on_relic_selected)
+	relic_window.relic_selection_canceled.connect(_on_relic_selection_canceled)
+	relic_window.popup()
+
+func _on_relic_selected(relic_name: StringName):
+	print("Relic selected ", relic_name)
+	%SelectRelicButton.disabled = true
+
+func _on_relic_selection_canceled():
+	pass

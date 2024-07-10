@@ -108,11 +108,6 @@ actor_name = "Orc Warrior Spawner"
 [node name="SpawnProviderComponent" parent="." index="0"]
 config = SubResource("Resource_rttpn")
 
-[node name="SpawnPlacerComponent" parent="." index="2" node_paths=PackedStringArray("spawn_provider_component", "spawn_position_component", "spawn_animation_component")]
-spawn_provider_component = NodePath("../SpawnProviderComponent")
-spawn_position_component = NodePath("../SpawnPositionComponent")
-spawn_animation_component = NodePath("../SpawnAnimationControllerComponent")
-
 [node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
@@ -132,9 +127,6 @@ hframes = 6
 vframes = 30
 frame = 89
 
-[node name="SpawnAnimationControllerComponent" parent="." index="4" node_paths=PackedStringArray("animation_component")]
-animation_component = NodePath("../AnimationComponent")
-
 [node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("5_2omxo")]
 
 [node name="@Node@18497" parent="." index="6" instance=ExtResource("5_2omxo")]
@@ -143,5 +135,7 @@ animation_component = NodePath("../AnimationComponent")
 
 [node name="@Node@19200" parent="." index="8" instance=ExtResource("5_2omxo")]
 
-[node name="@Node@18884" type="Node" parent="." index="9" instance=ExtResource("5_2omxo")]
+[node name="@Node@18884" parent="." index="9" instance=ExtResource("5_2omxo")]
+
+[node name="@Node@19096" type="Node" parent="." index="10" instance=ExtResource("5_2omxo")]
 script = ExtResource("6_nvhp2")

@@ -80,6 +80,14 @@ layout_mode = 2
 [node name="HudTowerView" parent="PanelContainer/TopHud/TowerHud" instance=ExtResource("2_7mw8q")]
 layout_mode = 2
 
+[node name="LevelOptions" type="HBoxContainer" parent="PanelContainer/TopHud"]
+layout_mode = 2
+
+[node name="SelectRelicButton" type="Button" parent="PanelContainer/TopHud/LevelOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Select Relic"
+
 [node name="CharacterViews" type="HBoxContainer" parent="PanelContainer/TopHud"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -117,6 +125,13 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="LevelOptionsParent" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="PanelContainer/TopHud/LevelOptions/SelectRelicButton" to="." method="_on_select_relic_button_pressed"]
 [connection signal="pause_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_pause_pressed"]
 [connection signal="play_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_play_pressed"]
 [connection signal="restart_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_restart_pressed"]

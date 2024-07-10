@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://bpb88hbwflw3h" path="res://levels/decorations/big_tree_green.tscn" id="3_new6j"]
 [ext_resource type="PackedScene" uid="uid://beiqqepnyv85l" path="res://levels/decorations/tree_green.tscn" id="4_urrag"]
 
-[node name="Level" node_paths=PackedStringArray("characters", "enemies", "towers", "spawners", "starting_positions") instance=ExtResource("1_etbkj")]
-characters = NodePath("YSorted/Characters")
-enemies = NodePath("YSorted/Enemies")
-towers = NodePath("YSorted/Towers")
-spawners = NodePath("YSorted/Spawners")
-starting_positions = NodePath("StartingPositions")
+[node name="Level" instance=ExtResource("1_etbkj")]
+instant_win = null
+players = null
+test_gameplay_characters = null
+test_behaviors = null
+actor_name = null
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(414, 224)
@@ -77,14 +77,3 @@ position = Vector2(309, 179)
 
 [node name="NavigationRegion2D" parent="." index="3"]
 visible = false
-
-[node name="VictoryLossConditionComponent" parent="." index="4" node_paths=PackedStringArray("characters", "towers", "enemies", "spawners")]
-characters = NodePath("../YSorted/Characters")
-towers = NodePath("../YSorted/Towers")
-enemies = NodePath("../YSorted/Enemies")
-spawners = NodePath("../YSorted/Spawners")
-
-[node name="XPComponent" parent="." index="5" node_paths=PackedStringArray("characters", "spawners", "victory_loss_condition_component")]
-characters = NodePath("../YSorted/Characters")
-spawners = NodePath("../YSorted/Spawners")
-victory_loss_condition_component = NodePath("../VictoryLossConditionComponent")

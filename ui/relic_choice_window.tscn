@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmm3tagla0le1"]
+
+[ext_resource type="Script" path="res://ui/relic_choice_window.gd" id="1_j0o68"]
+
+[node name="RelicChoiceWindow" type="Window"]
+initial_position = 1
+size = Vector2i(600, 400)
+exclusive = true
+unresizable = true
+always_on_top = true
+script = ExtResource("1_j0o68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RelicContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CancelButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="pressed" from="VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
