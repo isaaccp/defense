@@ -29,3 +29,4 @@ acquired_skills = SubResource("Resource_ehvd2")
 attributes = SubResource("Resource_2wm0w")
 health = 0
 xp = 0
+relics = Array[StringName]([])

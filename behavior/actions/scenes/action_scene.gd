@@ -13,7 +13,7 @@ class_name ActionScene
 ## TODO: Replace with AnimationComponent.
 @export var animation_player: AnimationPlayer
 
-signal hit(hit_result: HitResult)
+signal hit(hit_effect: HitEffect, hit_result: HitResult)
 
 var action_def: ActionDef
 var owner_name: String
@@ -51,5 +51,5 @@ func initialize(owner_name: String, action_def: ActionDef, target: Target, attri
 		hitbox_component.initialize(owner_name, action_def, attributes, side_component, logging_component, effect_actuator_component)
 		hitbox_component.hit.connect(_on_hit)
 
-func _on_hit(hit_result: HitResult):
-	hit.emit(hit_result)
+func _on_hit(hit_effect: HitEffect, hit_result: HitResult):
+	hit.emit(hit_effect, hit_result)

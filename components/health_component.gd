@@ -5,6 +5,7 @@ class_name HealthComponent
 
 const component: StringName = &"HealthComponent"
 
+signal hit(hit_effect: HitEffect)
 signal health_updated(update: HealthUpdate)
 signal died
 
@@ -66,6 +67,7 @@ func stop():
 
 # Returns true if hit caused any damage.
 func process_hit(hit_effect: HitEffect) -> HitResult:
+	hit.emit(hit_effect)
 	if not running:
 		print("Ignoring hit received while not running")
 		return

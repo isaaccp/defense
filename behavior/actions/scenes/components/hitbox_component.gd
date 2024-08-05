@@ -44,7 +44,7 @@ var running = false
 var hits_per_target: Dictionary
 
 signal all_hits_used
-signal hit(hit_result: HitResult)
+signal hit(hit_effect: HitEffect, hit_result: HitResult)
 
 func _ready():
 	collision_shape = $CollisionShape2D
@@ -130,7 +130,7 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	var effective_hit_effect = effect_actuator_component.modified_hit_effect(hit_effect)
 	var hit_result = hurtbox.handle_collision(owner_name, get_parent().name, effective_hit_effect)
 
-	hit.emit(hit_result)
+	hit.emit(effective_hit_effect, hit_result)
 
 	# TODO: Could update log to also include hit_result information, although alternatively we can
 	# not include it and make enemy logs viewable, in which case you could see it there.

@@ -28,7 +28,7 @@ func _swing_sword():
 func description():
 	return "Performs a sword attack. If enemy is killed, cooldown is waived. (TODO: damage)"
 
-func _on_hit(hit_result: HitResult):
+func _on_hit(hit_effect: HitEffect, hit_result: HitResult):
 	if hit_result.destroyed:
 		action_log("Cleave: Cooldown removed as enemy was destroyed")
 		cooldown = 0.0

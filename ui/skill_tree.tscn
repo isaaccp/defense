@@ -24,7 +24,7 @@ description = ""
 acquired_skills = SubResource("Resource_jl0re")
 health = 0
 xp = 300
-relics = null
+relics = Array[StringName]([])
 
 [sub_resource type="LabelSettings" id="LabelSettings_6lxjg"]
 font_size = 14

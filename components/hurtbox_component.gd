@@ -4,7 +4,7 @@ class_name HurtboxComponent
 
 const component = &"HurtboxComponent"
 
-signal hurtbox_hit
+signal hit(hit_effect: HitEffect)
 
 @export_group("Required")
 @export var side_component: SideComponent
@@ -25,7 +25,7 @@ func can_handle_collision():
 	return true
 
 func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEffect) -> HitResult:
-	hurtbox_hit.emit()
+	hit.emit(hit_effect)
 	_log("%s's %s %s" % [owner_name, hitbox_name, hit_effect.log_text()])
 	var hit_result: HitResult
 	if health_component:
