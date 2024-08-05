@@ -6,11 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://beiqqepnyv85l" path="res://levels/decorations/tree_green.tscn" id="4_urrag"]
 
 [node name="Level" instance=ExtResource("1_etbkj")]
-instant_win = null
-players = null
-test_gameplay_characters = null
-test_behaviors = null
-actor_name = null
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(414, 224)

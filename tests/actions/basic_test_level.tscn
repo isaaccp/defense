@@ -4,11 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_2xijh"]
 
 [node name="Level" instance=ExtResource("1_ey8bv")]
-instant_win = null
 players = 1
-test_gameplay_characters = null
-test_behaviors = null
-actor_name = null
 
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(129, 119)

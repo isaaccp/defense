@@ -4,25 +4,38 @@ class_name RelicChoiceWindow
 
 const rich_button_scene = preload("res://ui/rich_button.tscn")
 
-signal relic_selected(relic_name: StringName)
+var selected_relic: StringName
+
+signal relic_selected(relic_name: StringName, gc: GameplayCharacter)
 signal relic_selection_canceled
 
-func initialize(relics: Array[RelicDef]):
+func initialize(relics: Array[RelicDef], characters: Array[GameplayCharacter]):
+	%RelicSelectionContainer.visible = true
+	%CharacterSelectionContainer.visible = false
+	var min_size = Vector2(300, 250)
 	for relic in relics:
 		var button = rich_button_scene.instantiate()
 		var description = "[b][center]%s[/center][/b]\n" % relic.name
 		description += relic.description
 		button.label_text = description
 		button.pressed.connect(_relic_selected.bind(relic.name))
-		button.custom_minimum_size = Vector2(300, 250)
+		button.custom_minimum_size = min_size
 		%RelicContainer.add_child(button)
+	for character in characters:
+		var button = rich_button_scene.instantiate()
+		var description = "[b][center]%s[/center][/b]\n" % character.name
+		button.label_text = description
+		button.pressed.connect(_character_selected.bind(character))
+		button.custom_minimum_size = min_size
+		%CharacterContainer.add_child(button)
 
 func _relic_selected(relic_name: StringName):
-	# TODO: After we select relic we need to decide for which character it is.
-	# Probably the easiest way is to just have another set of controls in this
-	# window that allows to select character and directly emit here both
-	# the relic_name and the character that was chosen.
-	relic_selected.emit(relic_name)
+	selected_relic = relic_name
+	%RelicSelectionContainer.visible = false
+	%CharacterSelectionContainer.visible = true
+
+func _character_selected(gc: GameplayCharacter):
+	relic_selected.emit(selected_relic, gc)
 	queue_free()
 
 func _on_cancel_button_pressed():

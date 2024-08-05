@@ -11,12 +11,15 @@ const component = &"EffectActuatorComponent"
 signal able_to_act_changed(can_act: bool)
 signal attribute_effects_changed
 
+const relic_library = preload("res://effects/relics/relic_library.tres")
+
 # TODO: Move to a single place if https://github.com/godotengine/godot-proposals/issues/6416 is implemented.
 var running = false
 
 var effect_by_name: Dictionary
 var effect_script_by_name: Dictionary
 var effect_script_by_effect_type: Dictionary
+var relics: Array[RelicDef]
 
 var unable_to_act_count = 0:
 	set(value):
@@ -32,6 +35,11 @@ func run():
 	running = true
 	status_component.status_added.connect(_on_status_added)
 	status_component.status_removed.connect(_on_status_removed)
+
+func add_relic_by_name(relic_name: StringName):
+	var relic = relic_library.get_relic(relic_name)
+	relics.append(relic)
+	_add_effect(relic)
 
 func modified_attributes(base_attributes: Attributes) -> Attributes:
 	var attributes = base_attributes.duplicate(true)

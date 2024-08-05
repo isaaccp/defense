@@ -16,5 +16,4 @@ script = ExtResource("3_p28ke")
 players = 1
 levels = Array[PackedScene]([ExtResource("2_4yctn")])
 available_characters = Array[ExtResource("1_ioige")]([ExtResource("1_x5jr5")])
-current_level = 0
 unlocked_skills = SubResource("Resource_dnvqw")

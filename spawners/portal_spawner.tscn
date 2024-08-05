@@ -120,5 +120,7 @@ frame = 89
 
 [node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("3_knaj1")]
 
-[node name="@Node@19095" type="Node" parent="." index="6" instance=ExtResource("3_knaj1")]
+[node name="@Node@19095" parent="." index="6" instance=ExtResource("3_knaj1")]
+
+[node name="@Node@18397" type="Node" parent="." index="7" instance=ExtResource("3_knaj1")]
 script = ExtResource("4_aa4gf")

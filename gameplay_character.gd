@@ -25,6 +25,8 @@ class_name GameplayCharacter
 @export var health: int
 ## Used to track XP across levels, on save, etc.
 @export var xp: int
+## List of relics the character has.
+@export var relics: Array[StringName]
 
 var peer_id: int
 
@@ -48,3 +50,6 @@ func grant_xp(amount: int) -> void:
 func after_level_heal():
 	var new_health = health + attributes.health * attributes.recovery
 	health = min(new_health, attributes.health)
+
+func add_relic(relic_name: StringName):
+	relics.append(relic_name)

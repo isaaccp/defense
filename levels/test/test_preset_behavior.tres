@@ -116,5 +116,4 @@ script = ExtResource("7_4xswo")
 players = 1
 levels = Array[PackedScene]([ExtResource("7_cb8qh")])
 available_characters = Array[ExtResource("1_jouxj")]([ExtResource("1_dv7bi")])
-current_level = 0
 behavior = SubResource("Resource_4lrpe")

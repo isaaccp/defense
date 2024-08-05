@@ -89,8 +89,11 @@ func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: Gamepla
 		character.idx = i
 		character.peer_id = gc.peer_id
 		character.position = starting_positions.get_child(i).position
-		var attributes_component = AttributesComponent.get_or_die(character)
+		var attributes_component = character.get_component_or_die(AttributesComponent)
 		attributes_component.base_attributes = gc.attributes
+		var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
+		for relic in gc.relics:
+			effect_actuator_component.add_relic_by_name(relic)
 		characters.add_child(character)
 
 func _on_prepare_entered():

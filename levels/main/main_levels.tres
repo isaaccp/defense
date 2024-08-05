@@ -47,4 +47,3 @@ players = 2
 levels = Array[PackedScene]([SubResource("PackedScene_1tpq4"), ExtResource("4_rmm38"), ExtResource("5_uogry"), ExtResource("6_rnivb")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 relic_library = ExtResource("15_0q7yn")
-current_level = 0

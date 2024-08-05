@@ -14,7 +14,19 @@ script = ExtResource("1_j0o68")
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="RelicContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="RelicSelectionContainer" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RelicContainer" type="HBoxContainer" parent="VBoxContainer/RelicSelectionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CharacterSelectionContainer" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CharacterContainer" type="HBoxContainer" parent="VBoxContainer/CharacterSelectionContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
