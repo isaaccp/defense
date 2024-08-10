@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsabhsq53warn"]
+[gd_scene load_steps=6 format=3 uid="uid://bsabhsq53warn"]
 
 [ext_resource type="Script" path="res://ui/hud_character_view.gd" id="1_xuorh"]
 [ext_resource type="PackedScene" uid="uid://djdh7mp64thdi" path="res://ui/hud_status_display.tscn" id="2_aw5xw"]
+[ext_resource type="PackedScene" uid="uid://dhoqr0ca7h26x" path="res://ui/hud_relic_display.tscn" id="3_ofasq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2xvb"]
 bg_color = Color(0, 0, 0, 1)
@@ -111,6 +112,14 @@ theme_override_constants/margin_top = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+
+[node name="HudRelicDisplay" parent="MarginContainer/VBoxContainer/MarginContainer2" instance=ExtResource("3_ofasq")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ViewLogButton" to="." method="_on_view_log_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons/ConfigButton" to="." method="_on_config_button_pressed"]

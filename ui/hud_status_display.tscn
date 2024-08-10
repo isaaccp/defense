@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://djdh7mp64thdi"]
 
 [ext_resource type="Script" path="res://ui/hud_status_display.gd" id="1_lm8cb"]
-[ext_resource type="Resource" uid="uid://dlkrl1i2r8pii" path="res://statuses/status_library.tres" id="2_fv0c8"]
+[ext_resource type="Resource" uid="uid://dlkrl1i2r8pii" path="res://effects/statuses/status_library.tres" id="2_fv0c8"]
 [ext_resource type="PackedScene" uid="uid://brexrvwh1flqv" path="res://ui/hud_status_icon.tscn" id="3_hh06h"]
 
 [node name="HudStatusDisplay" type="HFlowContainer"]

@@ -9,11 +9,9 @@ signal readiness_updated(ready: bool)
 signal view_log_requested(logging_component: LoggingComponent)
 signal upgrade_window_requested(character: Character)
 
-@onready var hud_status_display: HudStatusDisplay = %HudStatusDisplay
-
 func _ready():
 	%ConfigContainer.hide()
-	hud_status_display.clear()
+	%HudStatusDisplay.clear()
 
 func initialize(character_: Character) -> void:
 	character = character_
@@ -31,6 +29,8 @@ func initialize(character_: Character) -> void:
 	behavior.behavior_updated.connect(_on_behavior_updated)
 	var state = Component.get_persistent_game_state_component_or_die(character).state
 	%Title.text = state.name
+	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
+	effect_actuator_component.relics_changed.connect(_on_relics_changed)
 
 func is_local() -> bool:
 	if OnlineMatch.match_mode == OnlineMatch.MatchMode.NONE:
@@ -60,9 +60,14 @@ func _on_health_updated(health_update: HealthComponent.HealthUpdate):
 	_set_health(health_update.health, health_update.max_health)
 
 func _on_statuses_changed(statuses: Array):
-	hud_status_display.clear()
+	%HudStatusDisplay.clear()
 	for status_id in statuses:
-		hud_status_display.add_status(status_id)
+		%HudStatusDisplay.add_status(status_id)
+
+func _on_relics_changed(relics: Array[RelicDef]):
+	%HudRelicDisplay.clear()
+	for relic in relics:
+		%HudRelicDisplay.add_relic(relic)
 
 func _on_behavior_updated(action_name: StringName, _target: Target):
 	# TODO: Do something with target, e.g. hovering could highlight the

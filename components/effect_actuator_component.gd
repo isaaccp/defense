@@ -17,6 +17,7 @@ const component = &"EffectActuatorComponent"
 
 signal able_to_act_changed(can_act: bool)
 signal attribute_effects_changed
+signal relics_changed(relics: Array[RelicDef])
 
 const relic_library = preload("res://effects/relics/relic_library.tres")
 
@@ -52,6 +53,7 @@ func load_relic(relic_name: StringName):
 	var relic = relic_library.get_relic(relic_name)
 	relics.append(relic)
 	_add_effect(relic)
+	relics_changed.emit(relics)
 
 func add_relic(relic_name: StringName):
 	load_relic(relic_name)

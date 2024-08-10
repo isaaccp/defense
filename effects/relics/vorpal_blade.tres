@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://dwg70jy7rj4cx"]
+[gd_resource type="Resource" script_class="RelicDef" load_steps=4 format=3 uid="uid://dwg70jy7rj4cx"]
 
 [ext_resource type="Script" path="res://effects/relics/vorpal_blade.gd" id="1_lp3oc"]
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rqagy"]
+[ext_resource type="Texture2D" uid="uid://rer30d12sf6l" path="res://assets/kyrises_rpg_icon_pack/icons/48x48/sword_01c.png" id="2_wn86s"]
 
 [resource]
 script = ExtResource("2_rqagy")
 description = "Slashing attacks gain 1 armor penetration"
+icon = ExtResource("2_wn86s")
 name = &"Vorpal Blade"
 effect_types = Array[int]([2])
 effect_script = ExtResource("1_lp3oc")
