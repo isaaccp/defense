@@ -129,11 +129,3 @@ func all_meta_skills() -> Array[StringName]:
 	for skill_name in meta_skill_by_name.keys():
 		all.append(skill_name)
 	return all
-
-# Behavior.
-func restore_behavior(stored_behavior: StoredBehavior) -> Behavior:
-	var behavior = Behavior.new()
-	for stored_rule in stored_behavior.stored_rules:
-		var rule = SkillManager.restore_rule(stored_rule)
-		behavior.rules.append(rule)
-	return behavior

@@ -34,6 +34,8 @@ func before_each():
 
 func test_effect_actuator():
 	var effect_actuator: EffectActuatorComponent = character.get_component_or_die(EffectActuatorComponent)
+	# Needed to load the relics from GameplayCharacter.
+	effect_actuator.run()
 	# Test that hit effect is modified as expected.
 	var hit_effect = HitEffect.new()
 	hit_effect.damage_type = slashing_damage_type

@@ -233,18 +233,15 @@ func _on_play_controls_pause_pressed():
 
 func _on_select_relic_button_pressed():
 	var relic_window = relic_choice_window_scene.instantiate() as RelicChoiceWindow
-	var gameplay_characters: Array[GameplayCharacter] = []
-	for character in characters:
-		var gameplay_character = Component.get_persistent_game_state_component_or_die(character).state
-		gameplay_characters.append(gameplay_character)
 	%LevelOptionsParent.add_child(relic_window)
-	relic_window.initialize(relic_choices, gameplay_characters)
+	relic_window.initialize(relic_choices, characters)
 	relic_window.relic_selected.connect(_on_relic_selected)
 	relic_window.relic_selection_canceled.connect(_on_relic_selection_canceled)
 	relic_window.popup()
 
-func _on_relic_selected(relic_name: StringName, gc: GameplayCharacter):
-	gc.add_relic(relic_name)
+func _on_relic_selected(relic_name: StringName, character: Character):
+	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
+	effect_actuator_component.add_relic(relic_name)
 	%SelectRelicButton.disabled = true
 
 func _on_relic_selection_canceled():

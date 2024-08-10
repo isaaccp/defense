@@ -6,10 +6,10 @@ const rich_button_scene = preload("res://ui/rich_button.tscn")
 
 var selected_relic: StringName
 
-signal relic_selected(relic_name: StringName, gc: GameplayCharacter)
+signal relic_selected(relic_name: StringName, character: Character)
 signal relic_selection_canceled
 
-func initialize(relics: Array[RelicDef], characters: Array[GameplayCharacter]):
+func initialize(relics: Array[RelicDef], characters: Array[Character]):
 	%RelicSelectionContainer.visible = true
 	%CharacterSelectionContainer.visible = false
 	var min_size = Vector2(300, 250)
@@ -34,8 +34,8 @@ func _relic_selected(relic_name: StringName):
 	%RelicSelectionContainer.visible = false
 	%CharacterSelectionContainer.visible = true
 
-func _character_selected(gc: GameplayCharacter):
-	relic_selected.emit(selected_relic, gc)
+func _character_selected(character: Character):
+	relic_selected.emit(selected_relic, character)
 	queue_free()
 
 func _on_cancel_button_pressed():

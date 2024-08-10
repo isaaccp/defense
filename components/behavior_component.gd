@@ -56,7 +56,7 @@ func _ready():
 
 func run():
 	var actor = (body as Node2D) as Actor
-	behavior = SkillManager.restore_behavior(stored_behavior)
+	behavior = Behavior.restore(stored_behavior)
 	behavior.prepare(actor, side_component)
 	running = true
 

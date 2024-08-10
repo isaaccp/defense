@@ -93,5 +93,6 @@ logging_component = NodePath("../LoggingComponent")
 
 [node name="LoggingComponent" parent="." instance=ExtResource("11_0ewa0")]
 
-[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("12_o0jr4")]
+[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component", "persistent_game_state_component") instance=ExtResource("12_o0jr4")]
 status_component = NodePath("../StatusComponent")
+persistent_game_state_component = NodePath("../PersistentGameStateComponent")

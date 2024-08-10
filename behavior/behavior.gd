@@ -15,6 +15,13 @@ var side_component: SideComponent
 var target_selectors: Array[TargetSelector] = []
 var condition_evaluators: Array[ConditionEvaluator] = []
 
+static func restore(stored_behavior: StoredBehavior) -> Behavior:
+	var behavior = Behavior.new()
+	for stored_rule in stored_behavior.stored_rules:
+		var rule = SkillManager.restore_rule(stored_rule)
+		behavior.rules.append(rule)
+	return behavior
+
 func prepare(actor_: Actor, side_component_: SideComponent):
 	actor = actor_
 	side_component = side_component_

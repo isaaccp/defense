@@ -8,6 +8,13 @@ const component = &"EffectActuatorComponent"
 @export_group("Required")
 @export var status_component: StatusComponent
 
+@export_group("Optional")
+# Should be set for characters for relic management. If we want enemies to have relics in the
+# future the best option would likely be to have a RelicComponent that manages relics
+# and can rely on persistent GameplayCharacter for characters and manage the relics
+# itself for enemies.
+@export var persistent_game_state_component: PersistentGameStateComponent
+
 signal able_to_act_changed(can_act: bool)
 signal attribute_effects_changed
 
@@ -19,6 +26,7 @@ var running = false
 var effect_by_name: Dictionary
 var effect_script_by_name: Dictionary
 var effect_script_by_effect_type: Dictionary
+var gameplay_character: GameplayCharacter
 var relics: Array[RelicDef]
 
 var unable_to_act_count = 0:
@@ -33,13 +41,22 @@ func run():
 	if running:
 		assert(false, "run() called twice on %s" % component)
 	running = true
+	if persistent_game_state_component:
+		gameplay_character = persistent_game_state_component.state
+		for relic_name in gameplay_character.relics:
+			load_relic(relic_name)
 	status_component.status_added.connect(_on_status_added)
 	status_component.status_removed.connect(_on_status_removed)
 
-func add_relic_by_name(relic_name: StringName):
+func load_relic(relic_name: StringName):
 	var relic = relic_library.get_relic(relic_name)
 	relics.append(relic)
 	_add_effect(relic)
+
+func add_relic(relic_name: StringName):
+	load_relic(relic_name)
+	if gameplay_character:
+		gameplay_character.add_relic(relic_name)
 
 func modified_attributes(base_attributes: Attributes) -> Attributes:
 	var attributes = base_attributes.duplicate(true)
