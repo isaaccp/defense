@@ -35,9 +35,13 @@ func _log_type_color(log_type: LoggingComponent.LogType) -> String:
 	return "white"
 
 func _add_log_entry(log_entry: LoggingComponent.LogEntry):
+	%Logs.append_text("[%0.2f] " % log_entry.time)
+	if not log_entry.tooltip.is_empty():
+		%Logs.push_hint(log_entry.tooltip)
 	var color = _log_type_color(log_entry.type)
-	var entry_text = "[%0.2f] [color=%s]%s[/color]\n" % [log_entry.time, color, log_entry.message]
-	%Logs.text += entry_text
+	%Logs.append_text("[color=%s]%s[/color]\n" % [color, log_entry.message])
+	if not log_entry.tooltip.is_empty():
+		%Logs.pop()
 
 func _on_close_requested():
 	reset()

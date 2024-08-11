@@ -17,7 +17,7 @@ signal log_entry_added(log_entry: LogEntry)
 
 # If set, log all messages to output.
 # Can be set manually to debug when needed.
-var log_all: bool = true
+var log_all: bool = false
 
 # Even if those look like they map to components, they are user-facing, so we
 # shouldn't "ship our org chart" here and better to have a explicit LogType
@@ -35,11 +35,13 @@ class LogEntry extends RefCounted:
 	var time: float
 	var type: LogType
 	var message: String
+	var tooltip: String
 
-	func _init(time_: float, type_: LogType, message_: String):
+	func _init(time_: float, type_: LogType, message_: String, tooltip_: String = ""):
 		time = time_
 		type = type_
 		message = message_
+		tooltip = tooltip_
 
 	func _to_string():
 		return "%0.2f: [%s] %s" % [time, LoggingComponent.log_type_name(type), message]
@@ -64,11 +66,11 @@ static func log_type_name(type: LogType):
 static func short_log_type_name(type: LogType):
 	return LogType.keys()[type][0]
 
-func add_log_entry(type: LogType, message: String, stats_updates: Array[Stat] = [], time: float = -1.0):
+func add_log_entry(type: LogType, message: String, tooltip: String = "", stats_updates: Array[Stat] = [], time: float = -1.0):
 	# this is there in case someone needs to provide log entries with time.
 	if time < 0:
 		time = elapsed_time
-	var le = LogEntry.new(time, type, message)
+	var le = LogEntry.new(time, type, message, tooltip)
 	entries.append(le)
 	log_entry_added.emit(le)
 	if log_all or type in print_logtypes:

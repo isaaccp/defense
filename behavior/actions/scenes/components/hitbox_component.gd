@@ -125,23 +125,22 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 
 	# effect_log is authoritative, if nothing called the logger function, no changes should
 	# have been made. We can add a explicit check for this if needed later.
-	var log_text = ""
-	if effect_log.is_empty():
-		log_text = "  Hit Effect: %s" % effective_hit_text
-	else:
-		var applied_effects = Utils.filter_and_join_strings(effect_log, "\n    ")
-		log_text = "  Original Hit Effect: %s\n  Applied Effects:\n    %s\n  Effective Hit Effect: %s" % [
+	var tooltip = ""
+	if not effect_log.is_empty():
+		var applied_effects = Utils.filter_and_join_strings(effect_log, "\n  ")
+		tooltip = "Original Hit Effect: %s\nApplied Effects:\n  %s\nEffective Hit Effect: %s" % [
 			original_hit_text, applied_effects, effective_hit_text]
 	hitbox_log(
-		"%s\n%s" % [hurtbox.get_parent().actor_name, log_text],
+		"%s %s" % [hurtbox.get_parent().actor_name, effective_hit_text],
+		tooltip,
 		hit_result.stats_update()
 	)
 
-func hitbox_log(message: String, stats_update: Array[Stat]):
+func hitbox_log(message: String, tooltip: String, stats_update: Array[Stat]):
 	if not logging_component:
 		return
 	var full_message = "%s: %s" % [get_parent().actor_name, message]
-	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message, stats_update)
+	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message, tooltip, stats_update)
 
 static func get_or_null(node: Node) -> HitboxComponent:
 	return Component.get_or_null(node, component) as HitboxComponent

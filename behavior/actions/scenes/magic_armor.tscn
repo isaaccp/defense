@@ -55,6 +55,7 @@ action_name = &""
 damage_multiplier = 1.0
 
 [node name="MagicArmor" instance=ExtResource("1_acl8n")]
+actor_name = "Magic Armor"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_jfgix")
