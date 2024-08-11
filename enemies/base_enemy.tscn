@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=13 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" path="res://actor/enemy.gd" id="1_1ol1r"]
+[ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_ra8mw"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_sx4w7"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="4_he7s5"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="5_s5sa1"]
@@ -17,6 +18,9 @@ y_sort_enabled = true
 collision_mask = 8
 script = ExtResource("1_1ol1r")
 actor_name = "Base Enemy"
+
+[node name="CharacterBodyComponent" parent="." node_paths=PackedStringArray("character_body") instance=ExtResource("2_ra8mw")]
+character_body = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -57,8 +61,8 @@ status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "health_component", "logging_component") instance=ExtResource("6_v211g")]
-body = NodePath("..")
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "character_body_component", "health_component", "logging_component") instance=ExtResource("6_v211g")]
+actor = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
 sprite = NodePath("../Sprite2D")
@@ -67,6 +71,7 @@ side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
+character_body_component = NodePath("../CharacterBodyComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
 

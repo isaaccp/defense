@@ -46,6 +46,7 @@ var finished = false
 var is_preparing = false
 
 var target: Target
+var actor: Actor
 var body: CharacterBody2D
 var action_sprites: Node2D
 var navigation_agent: NavigationAgent2D
@@ -63,15 +64,17 @@ static func make_runnable_action(action_def: ActionDef) -> Action:
 func _init():
 	pass
 
-func initialize(target_: Target, body_: CharacterBody2D, navigation_agent_: NavigationAgent2D,
+func initialize(target_: Target, actor_: Actor, navigation_agent_: NavigationAgent2D,
 				action_sprites_: Node2D, side_component_: SideComponent,
 				attributes_component_: AttributesComponent,
 				status_component_: StatusComponent,
 				logging_component_: LoggingComponent,
-				effect_actuator_component_: EffectActuatorComponent) -> void:
+				effect_actuator_component_: EffectActuatorComponent,
+				character_body_component_: CharacterBodyComponent) -> void:
 	target = target_
 	assert(def.compatible_with_target(target.type), "Unsupported target type: %s" % target.type)
-	body = body_
+	actor = actor_
+	body = character_body_component_.character_body
 	navigation_agent = navigation_agent_
 	action_sprites = action_sprites_
 	side_component = side_component_
@@ -137,7 +140,7 @@ func action_finished():
 	finished = true
 
 func _initialize_action_scene(action_scene: ActionScene) -> void:
-	action_scene.initialize(body.name, def, target, attributes_component.attributes, side_component, logging_component, effect_actuator_component)
+	action_scene.initialize(actor.actor_name, def, target, attributes_component.attributes, side_component, logging_component, effect_actuator_component)
 
 # Can call this after awaiting to:
 #  * check if action is finished
@@ -148,7 +151,7 @@ func _after_await_check(check_target: bool) -> bool:
 		# Nothing to clean up, as clean up should already have
 		# happened when action_finished() was called.
 		return false
-	if not is_instance_valid(body):
+	if not is_instance_valid(actor):
 		action_finished()
 		return false
 	if check_target and not target.valid():

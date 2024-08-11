@@ -15,4 +15,7 @@ func _get_configuration_warnings():
 		warnings.append("BehaviorComponent is required")
 		if not behavior_component.stored_behavior:
 			warnings.append("BehaviorComponent in Enemy needs to set stored_behavior")
+	var character_body_component = get_component_or_null(CharacterBodyComponent)
+	if not character_body_component:
+		warnings.append("CharacterBodyComponent is required")
 	return warnings

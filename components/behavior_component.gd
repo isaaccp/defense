@@ -8,8 +8,7 @@ const component: StringName = &"BehaviorComponent"
 signal behavior_updated(action_name: StringName, target: Target)
 
 @export_group("Required")
-# TODO: Change to Actor once we have a way to get the body through a component.
-@export var body: CharacterBody2D
+@export var actor: Actor
 @export var navigation_agent: NavigationAgent2D
 @export var action_sprites: Node2D
 @export var sprite: Sprite2D
@@ -18,6 +17,7 @@ signal behavior_updated(action_name: StringName, target: Target)
 @export var attributes_component: AttributesComponent
 @export var status_component: StatusComponent
 @export var effect_actuator_component: EffectActuatorComponent
+@export var character_body_component: CharacterBodyComponent
 
 @export_group("Optional")
 # If set, behavior is obtained through there.
@@ -55,7 +55,6 @@ func _ready():
 	effect_actuator_component.able_to_act_changed.connect(_on_able_to_act_changed)
 
 func run():
-	var actor = (body as Node2D) as Actor
 	behavior = Behavior.restore(stored_behavior)
 	behavior.prepare(actor, side_component)
 	running = true
@@ -111,7 +110,7 @@ func _physics_process(delta: float):
 					target = result.target
 					action = result.action
 					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
-					action.initialize(target, body, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component, effect_actuator_component)
+					action.initialize(target, actor, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component, effect_actuator_component, character_body_component)
 			if action and action.abortable:
 				next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 		_emit_updated_if_changed(prev_action_name, prev_target)
@@ -145,6 +144,7 @@ func _emit_updated_if_changed(prev_action_name: StringName, prev_target: Target)
 		behavior_updated.emit(action_name, target)
 
 func _post_action():
+	var body = character_body_component.character_body
 	if body.velocity.length() < 0.1:
 		animation_component.play_animation("idle")
 	else:

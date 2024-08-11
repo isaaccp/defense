@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://camb4jx7y3ygt"]
+[gd_scene load_steps=17 format=3 uid="uid://camb4jx7y3ygt"]
 
 [ext_resource type="Script" path="res://actor/tower.gd" id="1_3tt8j"]
 [ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="3_enchd"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="4_asgae"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="5_5ko8r"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="7_lgmfc"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="7_v2vco"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0l7o0"]
@@ -64,9 +65,10 @@ radius = 15.0
 script = ExtResource("7_v2vco")
 speed = 0.0
 health = 60
+recovery = 0.0
 damage_multiplier = 1.0
 armor = 0
-resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
+resistance = Array[ExtResource("7_lgmfc")]([])
 
 [node name="Column" type="StaticBody2D" groups=["towers"]]
 y_sort_enabled = true

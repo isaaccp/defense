@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=16 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" path="res://character/character.gd" id="1_1mnbb"]
+[ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_jmljm"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_oxhjf"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="4_r4r2v"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="5_xneld"]
@@ -21,6 +22,9 @@
 y_sort_enabled = true
 collision_mask = 8
 script = ExtResource("1_1mnbb")
+
+[node name="CharacterBodyComponent" parent="." node_paths=PackedStringArray("character_body") instance=ExtResource("2_jmljm")]
+character_body = NodePath("..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -60,8 +64,8 @@ animation_component = NodePath("../AnimationComponent")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("body", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
-body = NodePath("..")
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "character_body_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
+actor = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
 sprite = NodePath("../Sprite2D")
@@ -70,6 +74,7 @@ side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
 status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
+character_body_component = NodePath("../CharacterBodyComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
