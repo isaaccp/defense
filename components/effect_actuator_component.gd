@@ -66,10 +66,11 @@ func modified_attributes(base_attributes: Attributes) -> Attributes:
 		effect_script.modify_attributes(attributes)
 	return attributes
 
-func modified_hit_effect(base_hit_effect: HitEffect) -> HitEffect:
+# logger takes a String as parameter.
+func modified_hit_effect(base_hit_effect: HitEffect, logger: Callable = Callable()) -> HitEffect:
 	var hit_effect = base_hit_effect.duplicate(true)
 	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.HIT_EFFECT, []):
-		effect_script.modify_hit_effect(hit_effect)
+		effect_script.modify_hit_effect(hit_effect, logger)
 	return hit_effect
 
 func _on_status_added(status: StatusDef):

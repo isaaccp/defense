@@ -17,7 +17,7 @@ signal log_entry_added(log_entry: LogEntry)
 
 # If set, log all messages to output.
 # Can be set manually to debug when needed.
-var log_all: bool = false
+var log_all: bool = true
 
 # Even if those look like they map to components, they are user-facing, so we
 # shouldn't "ship our org chart" here and better to have a explicit LogType

@@ -45,11 +45,28 @@ func _damage_str() -> String:
 	var abs_adjusted_damage = abs(adjusted_damage())
 	var damage_str = (
 		str(abs_adjusted_damage) if abs_adjusted_damage == abs_damage
-		else "[hint=%d (base) * %0.1f (mult)]%d[/hint]" % [abs_damage, damage_multiplier, abs_adjusted_damage]
+		else "%d (base) * %0.1f (mult)" % [abs_damage, damage_multiplier, abs_adjusted_damage]
 	)
+	var types = []
+	if attack_type:
+		types.append(attack_type.name)
+	if damage_type:
+		types.append(damage_type.name)
+	if not types.is_empty():
+		damage_str += " (%s)" % Utils.filter_and_join_strings(types)
+	var armor_pen_strs = []
+	if fraction_armor_pen > 0:
+		armor_pen_strs.append("%d%" % (fraction_armor_pen * 100))
+	if flat_armor_pen > 0:
+		armor_pen_strs.append("%d" % flat_armor_pen)
+	if not armor_pen_strs.is_empty():
+		damage_str += " (armor pen: %s)" % Utils.filter_and_join_strings(armor_pen_strs)
 	return "%s for %s" % [hit_type, damage_str]
 
 func _status_str() -> String:
 	if not status:
 		return ""
-	return "applied %s (%0.1fs)" % [status.name, status_duration]
+	var if_damaged_str = ""
+	if status_on_damage_only:
+		if_damaged_str = " if hit causes damage"
+	return "will apply %s (%0.1fs)%s" % [status.name, status_duration, if_damaged_str]

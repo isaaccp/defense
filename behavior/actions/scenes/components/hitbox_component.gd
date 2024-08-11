@@ -108,35 +108,32 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 					all_hits_used.emit()
 			_process_hurtbox_hit(hurtbox)
 
-func _damage_str(adjusted_damage: int) -> String:
-	if not hit_effect.damage:
-		return ""
-	var hit_type = "healed" if is_heal else "hit"
-	var abs_damage = abs(hit_effect.damage)
-	var abs_adjusted_damage = abs(adjusted_damage)
-	var damage_str = (
-		str(abs_adjusted_damage) if abs_adjusted_damage == abs_damage
-		else "[hint=%d (base) * %0.1f (mult)]%d[/hint]" % [abs_damage, attributes.damage_multiplier, abs_adjusted_damage]
-	)
-	return "%s for %s" % [hit_type, damage_str]
-
-func _status_str() -> String:
-	if not hit_effect.status:
-		return ""
-	return "applied %s (%0.1fs)" % [hit_effect.status, hit_effect.status_duration]
-
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = attributes.damage_multiplier
-	var effective_hit_effect = effect_actuator_component.modified_hit_effect(hit_effect)
+	var effect_log = []
+	var effective_hit_effect = effect_actuator_component.modified_hit_effect(
+		hit_effect, func(text: String): effect_log.append(text)
+	)
 	var hit_result = hurtbox.handle_collision(owner_name, get_parent().actor_name, effective_hit_effect)
 
 	hit.emit(effective_hit_effect, hit_result)
 
 	# TODO: Could update log to also include hit_result information, although alternatively we can
 	# not include it and make enemy logs viewable, in which case you could see it there.
+	var original_hit_text = hit_effect.log_text()
+	var effective_hit_text = effective_hit_effect.log_text()
 
+	# effect_log is authoritative, if nothing called the logger function, no changes should
+	# have been made. We can add a explicit check for this if needed later.
+	var log_text = ""
+	if effect_log.is_empty():
+		log_text = "  Hit Effect: %s" % effective_hit_text
+	else:
+		var applied_effects = Utils.filter_and_join_strings(effect_log, "\n    ")
+		log_text = "  Original Hit Effect: %s\n  Applied Effects:\n    %s\n  Effective Hit Effect: %s" % [
+			original_hit_text, applied_effects, effective_hit_text]
 	hitbox_log(
-		"%s %s" % [hurtbox.get_parent().actor_name, effective_hit_effect.log_text()],
+		"%s\n%s" % [hurtbox.get_parent().actor_name, log_text],
 		hit_result.stats_update()
 	)
 
