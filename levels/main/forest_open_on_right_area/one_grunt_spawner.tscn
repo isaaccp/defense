@@ -34,5 +34,7 @@ spawn_placer_config = SubResource("Resource_3auca")
 
 [node name="@Node@18393" parent="YSorted/Spawners/PortalSpawner" index="10" instance=ExtResource("3_fokjr")]
 
-[node name="@Node@18393" type="Node" parent="YSorted/Spawners/PortalSpawner" index="12" instance=ExtResource("3_fokjr")]
+[node name="_Node_18393" parent="YSorted/Spawners/PortalSpawner" index="12" instance=ExtResource("3_fokjr")]
+
+[node name="@Node@18394" type="Node" parent="YSorted/Spawners/PortalSpawner" index="14" instance=ExtResource("3_fokjr")]
 script = ExtResource("7_knr0c")

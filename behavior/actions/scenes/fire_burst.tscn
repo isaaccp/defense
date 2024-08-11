@@ -170,8 +170,12 @@ _data = {
 script = ExtResource("5_n6611")
 damage = 8
 damage_type = ExtResource("5_dd7x0")
+fraction_armor_pen = 0.0
+flat_armor_pen = 0
 status_duration = 0.0
 status_on_damage_only = false
+action_name = &""
+damage_multiplier = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2vcwy"]
 radius = 5.0
@@ -199,6 +203,7 @@ libraries = {
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_a4xt7")]
 hit_effect = SubResource("Resource_dxpu2")
+max_hits_per_target = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(10, 0)

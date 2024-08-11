@@ -128,7 +128,7 @@ func _status_str() -> String:
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = attributes.damage_multiplier
 	var effective_hit_effect = effect_actuator_component.modified_hit_effect(hit_effect)
-	var hit_result = hurtbox.handle_collision(owner_name, get_parent().name, effective_hit_effect)
+	var hit_result = hurtbox.handle_collision(owner_name, get_parent().actor_name, effective_hit_effect)
 
 	hit.emit(effective_hit_effect, hit_result)
 
@@ -136,14 +136,14 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	# not include it and make enemy logs viewable, in which case you could see it there.
 
 	hitbox_log(
-		"%s %s" % [hurtbox.get_parent().name, effective_hit_effect.log_text()],
+		"%s %s" % [hurtbox.get_parent().actor_name, effective_hit_effect.log_text()],
 		hit_result.stats_update()
 	)
 
 func hitbox_log(message: String, stats_update: Array[Stat]):
 	if not logging_component:
 		return
-	var full_message = "%s: %s" % [get_parent().name, message]
+	var full_message = "%s: %s" % [get_parent().actor_name, message]
 	logging_component.add_log_entry(LoggingComponent.LogType.ACTION, full_message, stats_update)
 
 static func get_or_null(node: Node) -> HitboxComponent:

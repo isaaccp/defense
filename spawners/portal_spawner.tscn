@@ -124,5 +124,7 @@ frame = 89
 
 [node name="@Node@18397" parent="." index="7" instance=ExtResource("3_knaj1")]
 
-[node name="@Node@18397" type="Node" parent="." index="8" instance=ExtResource("3_knaj1")]
+[node name="_Node_18397" parent="." index="8" instance=ExtResource("3_knaj1")]
+
+[node name="@Node@18398" type="Node" parent="." index="9" instance=ExtResource("3_knaj1")]
 script = ExtResource("4_aa4gf")
