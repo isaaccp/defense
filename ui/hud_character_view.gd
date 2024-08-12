@@ -6,7 +6,7 @@ var character: Character
 
 signal config_button_pressed
 signal readiness_updated(ready: bool)
-signal view_log_requested(logging_component: LoggingComponent)
+signal view_log_requested(character: Character)
 signal upgrade_window_requested(character: Character)
 
 func _ready():
@@ -90,7 +90,7 @@ func _ready_button_toggled(toggled_on: bool):
 	readiness_updated.emit(toggled_on)
 
 func _on_view_log_button_pressed():
-	view_log_requested.emit(Component.get_logging_component_or_die(character))
+	view_log_requested.emit(character)
 
 func _on_upgrade_button_pressed():
 	upgrade_window_requested.emit(character)

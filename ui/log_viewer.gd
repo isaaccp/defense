@@ -3,7 +3,9 @@ extends Window
 var logging_component: LoggingComponent
 
 # TODO: Optimize/GC/etc if the amount of logs becomes a problem.
-func show_log(logging_component_: LoggingComponent):
+func show_log(actor_name: String, logging_component_: LoggingComponent):
+	reset()
+	title = "Log Viewer: %s" % actor_name
 	logging_component = logging_component_
 	show()
 	_update_logs_content()

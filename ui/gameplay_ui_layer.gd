@@ -91,11 +91,11 @@ func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 func _on_hud_restart_requested():
 	restart_requested.emit()
 
-func _on_hud_view_log_requested(logging_component):
-	show_log_viewer(logging_component)
+func _on_hud_view_log_requested(character: Character):
+	show_log_viewer(character)
 
-func show_log_viewer(logging_component: LoggingComponent):
-	%LogViewer.show_log(logging_component)
+func show_log_viewer(character: Character):
+	%LogViewer.show_log(character.actor_name, character.get_component_or_die(LoggingComponent))
 
 func hide_log_viewer():
 	%LogViewer.reset()

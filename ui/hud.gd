@@ -40,7 +40,7 @@ signal all_ready
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
 signal restart_requested
 signal end_level_confirmed
-signal view_log_requested(logging_component: LoggingComponent)
+signal view_log_requested(character: Character)
 signal upgrade_window_requested(character: Character)
 signal play_controls_play_pressed
 signal play_controls_pause_pressed
@@ -219,8 +219,8 @@ func character_view(i: int) -> HudCharacterView:
 func _on_play_controls_restart_pressed():
 	restart_requested.emit()
 
-func _on_view_log_requested(logging_component: LoggingComponent):
-	view_log_requested.emit(logging_component)
+func _on_view_log_requested(character: Character):
+	view_log_requested.emit(character)
 
 func _on_upgrade_window_requested(character: Character):
 	upgrade_window_requested.emit(character)
