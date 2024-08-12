@@ -28,7 +28,13 @@ class_name HitEffect
 @export var damage_multiplier: float = 1.0
 
 func adjusted_damage():
-	return round(float(damage) * damage_multiplier)
+	# If we are healing, don't apply damage_multiplier.
+	# TODO: We may want to fully separate damage and healing instead of relying
+	# on negative damage. Then we could implement multipliers similar to
+	# resistances, with separate multipliers per damage type, etc.
+	if damage > 0:
+		return round(float(damage) * damage_multiplier)
+	return damage
 
 func log_text() -> String:
 	var damage_str = _damage_str()

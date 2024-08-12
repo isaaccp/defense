@@ -26,7 +26,6 @@ func can_handle_collision():
 
 func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEffect) -> HitResult:
 	hit.emit(hit_effect)
-	_log("%s's %s %s" % [owner_name, hitbox_name, hit_effect.log_text()])
 	var hit_result: HitResult
 	if health_component:
 		hit_result = health_component.process_hit(hit_effect)
@@ -38,12 +37,14 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 				# TODO: Check for protection and what not.
 				status_component.set_status(hit_effect.action_name, hit_effect.status, hit_effect.status_duration)
 				hit_result.status = hit_effect.status.name
+
+	_log("%s's %s %s. Result: %s" % [owner_name, hitbox_name, hit_effect.log_text(), hit_result.log_text()])
 	return hit_result
 
-func _log(message: String):
+func _log(message: String, tooltip: String = ""):
 	if not logging_component:
 		return
-	logging_component.add_log_entry(LoggingComponent.LogType.HURT, message)
+	logging_component.add_log_entry(LoggingComponent.LogType.HURT, message, tooltip)
 
 static func get_or_null(node: Node) -> HurtboxComponent:
 	return Component.get_or_null(node, component) as HurtboxComponent
