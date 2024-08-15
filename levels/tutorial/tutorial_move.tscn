@@ -1,18 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://404r5ooscyrr"]
+[gd_scene load_steps=3 format=3 uid="uid://404r5ooscyrr"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_wqmgd"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="2_7ckkc"]
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_dw0nd"]
-
-[sub_resource type="Resource" id="Resource_gkh1c"]
-script = ExtResource("2_dw0nd")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always", &"Sword Attack", &"Enemy"])
-full_acquired = false
-full_unlocked = false
 
 [node name="TutorialMove" instance=ExtResource("1_wqmgd")]
-skill_tree_state_override = SubResource("Resource_gkh1c")
 players = 1
 
 [node name="First" parent="StartingPositions" index="0"]

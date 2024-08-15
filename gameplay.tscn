@@ -1,13 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpvryr0tdcnfy"]
+[gd_scene load_steps=3 format=3 uid="uid://cpvryr0tdcnfy"]
 
 [ext_resource type="Script" path="res://gameplay.gd" id="1_2toda"]
 [ext_resource type="PackedScene" uid="uid://5ity5n7jy3b8" path="res://ui/gameplay_ui_layer.tscn" id="1_3xnco"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxynd"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_3kqhi"]
-viewport_path = NodePath("SubViewport")
 
 [node name="Gameplay" type="Node2D" node_paths=PackedStringArray("ui_layer")]
 script = ExtResource("1_2toda")
@@ -16,32 +10,31 @@ ui_layer = NodePath("GameplayUILayer")
 [node name="GameplayUILayer" parent="." instance=ExtResource("1_3xnco")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../SubViewport/RunParent")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-unique_name_in_owner = true
-transparent_bg = true
-size = Vector2i(1152, 648)
-
-[node name="RunParent" type="Node2D" parent="SubViewport"]
-unique_name_in_owner = true
+spawn_path = NodePath("../LevelLayer/SubViewportContainer/SubViewport/RunParent")
 
 [node name="LevelLayer" type="CanvasLayer" parent="."]
 layer = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="LevelLayer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="LevelLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vxynd")
+stretch = true
 
-[node name="TextureRect" type="TextureRect" parent="LevelLayer/PanelContainer"]
-layout_mode = 2
-texture = SubResource("ViewportTexture_3kqhi")
-expand_mode = 5
-stretch_mode = 5
+[node name="SubViewport" type="SubViewport" parent="LevelLayer/SubViewportContainer"]
+unique_name_in_owner = true
+transparent_bg = true
+handle_input_locally = false
+physics_object_picking = true
+size = Vector2i(1920, 1080)
+size_2d_override = Vector2i(1200, 675)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="RunParent" type="Node2D" parent="LevelLayer/SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
 
 [connection signal="behavior_modified" from="GameplayUILayer" to="." method="_on_behavior_modified"]
 [connection signal="character_selection_screen_selection_ready" from="GameplayUILayer" to="." method="_on_character_selection_screen_selection_ready"]

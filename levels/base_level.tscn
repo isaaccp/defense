@@ -28,7 +28,6 @@ layer_0/tile_data = PackedInt32Array(2752585, 393216, 8, 2687049, 393216, 8, 262
 layer_1/name = "Decorations"
 layer_1/y_sort_enabled = true
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array()
 
 [node name="StartingPositions" type="Node2D" parent="."]
 

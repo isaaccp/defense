@@ -362,14 +362,14 @@ resistance = Array[ExtResource("10_os1sv")]([])
 [node name="OrcWarrior" instance=ExtResource("1_u12oj")]
 actor_name = "Orc Warrior"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -16)
 texture = ExtResource("1_ngnr6")
 offset = Vector2(0, -24)
 hframes = 2
 vframes = 2
 
-[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
@@ -378,21 +378,21 @@ libraries = {
 "": SubResource("AnimationLibrary_5x0w4")
 }
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_oxahg")
 
-[node name="HealthComponent" parent="." index="5"]
+[node name="HealthComponent" parent="." index="6"]
 position = Vector2(0, -36)
 
-[node name="HurtboxComponent" parent="." index="6"]
+[node name="HurtboxComponent" parent="." index="7"]
 position = Vector2(0, -15)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 shape = SubResource("CapsuleShape2D_guxf3")
 
-[node name="BehaviorComponent" parent="." index="7"]
+[node name="BehaviorComponent" parent="." index="8"]
 stored_behavior = SubResource("Resource_u7uff")
 
-[node name="AttributesComponent" parent="." index="10"]
+[node name="AttributesComponent" parent="." index="11"]
 base_attributes = SubResource("Resource_b38p6")

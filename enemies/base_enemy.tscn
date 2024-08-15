@@ -16,6 +16,7 @@
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
 collision_mask = 8
+input_pickable = true
 script = ExtResource("1_1ol1r")
 actor_name = "Base Enemy"
 

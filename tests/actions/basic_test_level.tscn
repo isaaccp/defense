@@ -14,6 +14,7 @@ position = Vector2(43, 203)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_2xijh")]
 collision_mask = 0
+input_pickable = false
 
 [node name="VictoryLossConditionComponent" parent="." index="4"]
 loss = Array[int]([2])
