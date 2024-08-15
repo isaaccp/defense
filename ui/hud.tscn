@@ -62,13 +62,13 @@ horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -192.5
-offset_right = 157.5
-offset_bottom = 243.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -256.0
+offset_right = 305.0
+offset_bottom = 256.0
+grow_vertical = 2
 
 [node name="TopHud" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -88,7 +88,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Select Relic"
 
-[node name="CharacterViews" type="HBoxContainer" parent="PanelContainer/TopHud"]
+[node name="CharacterViews" type="VBoxContainer" parent="PanelContainer/TopHud"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -97,20 +97,21 @@ alignment = 1
 [node name="HudCharacterView" parent="PanelContainer/TopHud/CharacterViews" instance=ExtResource("2_ok2lg")]
 layout_mode = 2
 
-[node name="TopRightControls" type="HBoxContainer" parent="."]
+[node name="TopControls" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -288.0
-offset_bottom = 42.0
-grow_horizontal = 0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.5
+offset_right = 164.5
+offset_bottom = 87.0
+grow_horizontal = 2
 
-[node name="PlayControls" parent="TopRightControls" instance=ExtResource("4_qisxk")]
+[node name="PlayControls" parent="TopControls" instance=ExtResource("4_qisxk")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VictoryLoss" parent="TopRightControls" instance=ExtResource("2_q37k0")]
+[node name="VictoryLoss" parent="TopControls" instance=ExtResource("2_q37k0")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -132,6 +133,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="pressed" from="PanelContainer/TopHud/LevelOptions/SelectRelicButton" to="." method="_on_select_relic_button_pressed"]
-[connection signal="pause_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_pause_pressed"]
-[connection signal="play_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_play_pressed"]
-[connection signal="restart_pressed" from="TopRightControls/PlayControls" to="." method="_on_play_controls_restart_pressed"]
+[connection signal="pause_pressed" from="TopControls/PlayControls" to="." method="_on_play_controls_pause_pressed"]
+[connection signal="play_pressed" from="TopControls/PlayControls" to="." method="_on_play_controls_play_pressed"]
+[connection signal="restart_pressed" from="TopControls/PlayControls" to="." method="_on_play_controls_restart_pressed"]

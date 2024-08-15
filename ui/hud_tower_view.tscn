@@ -15,7 +15,6 @@ corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
 [node name="HudTowerView" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
 offset_right = 167.0
 offset_bottom = 66.0
 script = ExtResource("1_7apd8")

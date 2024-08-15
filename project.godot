@@ -32,7 +32,6 @@ gdscript/warnings/shadowed_variable_base_class=0
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
 window/size/resizable=false
 window/size/window_width_override=1728
 window/size/window_height_override=972
