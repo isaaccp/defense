@@ -3,6 +3,11 @@ extends Unit
 
 class_name Enemy
 
+signal selected(enemy: Enemy)
+
+func _ready():
+	$PickableComponent.selected.connect(selected.emit)
+
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	var attributes_component = AttributesComponent.get_or_null(self)

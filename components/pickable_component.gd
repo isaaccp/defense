@@ -50,12 +50,6 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 	if not mouse_event:
 		return
 	if mouse_event.button_index == 1:
-		# Current status: works, but this selection is based on the collission
-		# shape used for moving, so you have to click on the feet to highlight.
-		# Maybe we need an extra collission shape just for this or otherwise
-		# maybe when paused we draw the feet shapes somehow and highlight them
-		# when over them, so you can easily see what's up.
-		print("selected %s" % get_parent().actor_name)
 		selected.emit(get_parent())
 
 func run():

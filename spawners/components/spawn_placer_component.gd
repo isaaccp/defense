@@ -18,6 +18,7 @@ const component = &"SpawnPlacerComponent"
 var placement_node: Node2D
 var finished = false
 
+signal enemy_spawned(enemy: Enemy)
 signal finished_spawning
 
 func run():
@@ -43,6 +44,7 @@ func _place_loop():
 			spawn.run()
 		else:
 			print("Unrunnable spawn: %s", spawn.name)
+		enemy_spawned.emit(spawn as Enemy)
 		spawned += 1
 		if spawned == config.amount:
 			break

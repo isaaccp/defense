@@ -187,6 +187,11 @@ func start():
 	if instant_win:
 		victory_loss.victory.append(VictoryLossConditionComponent.VictoryType.TIME)
 		victory_loss.time = 0.1
+
+	# Connect spawners so we can track enemies to make them pickable.
+	for spawner in spawners.get_children():
+		spawner.enemy_spawned.connect(_on_enemy_spawned)
+
 	# Runs all components.
 	run()
 	_run_nodes(characters.get_children())
@@ -207,6 +212,12 @@ func _run_nodes(nodes: Array):
 func _stop_nodes(nodes: Array):
 	for node in nodes:
 		node.stop()
+
+func _on_enemy_spawned(enemy: Enemy):
+	enemy.selected.connect(_on_enemy_selected)
+
+func _on_enemy_selected(enemy: Enemy):
+	print("enemy selected in level: %s" % enemy.actor_name)
 
 func _standalone_ready():
 	# Immediately remove self, we'll test with a copy. Keep parent ref.
