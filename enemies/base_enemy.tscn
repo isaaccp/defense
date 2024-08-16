@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=14 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_ra8mw"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_hnhby"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_yatxq"]
 [ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="11_g44ii"]
+[ext_resource type="PackedScene" uid="uid://dxlpeence2pav" path="res://components/pickable_component.tscn" id="13_dlre1"]
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
@@ -41,6 +42,7 @@ metadata/_aseprite_wizard_config_ = {
 [node name="AnimationComponent" parent="." instance=ExtResource("2_sx4w7")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 5)
 
 [node name="ActionSprites" type="Node2D" parent="."]
@@ -94,3 +96,9 @@ logging_component = NodePath("../LoggingComponent")
 
 [node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("11_g44ii")]
 status_component = NodePath("../StatusComponent")
+
+[node name="PickableComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("13_dlre1")]
+collision_shape = NodePath("../CollisionShape2D")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -331,7 +331,7 @@ _data = {
 
 [node name="Knight" instance=ExtResource("1_io0ow")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -32)
 texture = ExtResource("2_svkp0")
 hframes = 3
@@ -349,7 +349,7 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Heroes/Knight/Death/Death.aseprite"
 }
 
-[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
@@ -357,11 +357,11 @@ libraries = {
 "": SubResource("AnimationLibrary_n1426")
 }
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, 0)
 
-[node name="HealthComponent" parent="." index="6"]
+[node name="HealthComponent" parent="." index="7"]
 position = Vector2(0, -34)
 
-[node name="HurtboxComponent" parent="." index="9"]
+[node name="HurtboxComponent" parent="." index="10"]
 position = Vector2(0, -15)

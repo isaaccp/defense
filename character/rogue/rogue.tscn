@@ -259,7 +259,7 @@ _data = {
 
 [node name="Rogue" instance=ExtResource("1_qgcx4")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -32)
 texture = ExtResource("3_sov40")
 hframes = 3
@@ -277,7 +277,7 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Heroes/Rogue/Run/Run.aseprite"
 }
 
-[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
@@ -285,10 +285,10 @@ libraries = {
 "": SubResource("AnimationLibrary_6ot8e")
 }
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -1)
 
-[node name="HealthComponent" parent="." index="6"]
+[node name="HealthComponent" parent="." index="7"]
 position = Vector2(0, -37)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
