@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqmsmsumhossr"]
+[gd_scene load_steps=7 format=3 uid="uid://cqmsmsumhossr"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_veies"]
 [ext_resource type="PackedScene" uid="uid://dqb2biimjiq37" path="res://ui/hud_tower_view.tscn" id="2_7mw8q"]
 [ext_resource type="PackedScene" uid="uid://bsabhsq53warn" path="res://ui/hud_character_view.tscn" id="2_ok2lg"]
 [ext_resource type="PackedScene" uid="uid://cdotafm655xbv" path="res://ui/hud_victory_loss.tscn" id="2_q37k0"]
 [ext_resource type="PackedScene" uid="uid://br8aaytuluka5" path="res://ui/play_controls.tscn" id="4_qisxk"]
+[ext_resource type="PackedScene" uid="uid://u7s6mhky7v7u" path="res://ui/hud_enemy_view.tscn" id="6_aon3l"]
 
 [node name="HUD" type="Control" node_paths=PackedStringArray("peer")]
 process_mode = 3
@@ -131,6 +132,24 @@ unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="RightHud" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="HudEnemyView" parent="RightHud" instance=ExtResource("6_aon3l")]
+layout_mode = 2
 
 [connection signal="pressed" from="PanelContainer/TopHud/LevelOptions/SelectRelicButton" to="." method="_on_select_relic_button_pressed"]
 [connection signal="pause_pressed" from="TopControls/PlayControls" to="." method="_on_play_controls_pause_pressed"]

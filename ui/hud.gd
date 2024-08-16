@@ -33,6 +33,7 @@ var message_tween = {
 
 const hud_character_view_scene = preload("res://ui/hud_character_view.tscn")
 const hud_tower_view_scene = preload("res://ui/hud_tower_view.tscn")
+const hud_enemy_view_scene = preload("res://ui/hud_enemy_view.tscn")
 const programming_ui_scene = preload("res://ui/programming_ui.tscn")
 const relic_choice_window_scene = preload("res://ui/relic_choice_window.tscn")
 
@@ -81,6 +82,18 @@ func set_towers(towers: Node) -> void:
 	var view = hud_tower_view_scene.instantiate() as HudTowerView
 	view.initialize(tower)
 	%TowerHud.add_child(view)
+
+func clear_enemy_hud():
+	%RightHud.hide()
+	for child in %RightHud.get_children():
+		child.queue_free()
+
+func set_selected_enemy(enemy: Enemy):
+	clear_enemy_hud()
+	%RightHud.show()
+	var enemy_hud = hud_enemy_view_scene.instantiate() as HudEnemyView
+	enemy_hud.initialize(enemy)
+	%RightHud.add_child(enemy_hud)
 
 func set_level_options(selected_relics: Array[RelicDef]):
 	var has_relics = len(selected_relics) > 0

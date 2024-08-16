@@ -7,6 +7,8 @@ extends Actor
 ## * a BehaviorComponent
 class_name Unit
 
+signal died
+
 func _ready():
 	if Engine.is_editor_hint():
 		return
@@ -19,6 +21,7 @@ func force_idle(idle: bool = true):
 	behavior.force_idle(idle)
 
 func _on_died():
+	died.emit()
 	destroyed = true
 
 func _get_configuration_warnings():

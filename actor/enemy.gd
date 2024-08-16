@@ -6,6 +6,7 @@ class_name Enemy
 signal selected(enemy: Enemy)
 
 func _ready():
+	super()
 	$PickableComponent.selected.connect(selected.emit)
 
 func _get_configuration_warnings():

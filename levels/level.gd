@@ -103,6 +103,7 @@ func _on_prepare_entered():
 		ui_layer.hud.set_victory_loss(victory)
 		ui_layer.hud.set_characters(characters)
 		ui_layer.hud.set_towers(towers)
+		ui_layer.hud.clear_enemy_hud()
 		ui_layer.hud.set_level_options(selected_relics)
 		ui_layer.hud.start_character_setup(_on_all_ready)
 		ui_layer.hud.show_main_message("Prepare", 2.0)
@@ -217,7 +218,7 @@ func _on_enemy_spawned(enemy: Enemy):
 	enemy.selected.connect(_on_enemy_selected)
 
 func _on_enemy_selected(enemy: Enemy):
-	print("enemy selected in level: %s" % enemy.actor_name)
+	ui_layer.hud.set_selected_enemy(enemy)
 
 func _standalone_ready():
 	# Immediately remove self, we'll test with a copy. Keep parent ref.
