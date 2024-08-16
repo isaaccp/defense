@@ -41,7 +41,7 @@ signal all_ready
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
 signal restart_requested
 signal end_level_confirmed
-signal view_log_requested(character: Character)
+signal view_log_requested(actor: Actor)
 signal upgrade_window_requested(character: Character)
 signal play_controls_play_pressed
 signal play_controls_pause_pressed
@@ -93,6 +93,8 @@ func set_selected_enemy(enemy: Enemy):
 	%RightHud.show()
 	var enemy_hud = hud_enemy_view_scene.instantiate() as HudEnemyView
 	enemy_hud.initialize(enemy)
+	enemy_hud.view_log_requested.connect(_on_view_log_requested)
+
 	%RightHud.add_child(enemy_hud)
 
 func set_level_options(selected_relics: Array[RelicDef]):
@@ -232,8 +234,8 @@ func character_view(i: int) -> HudCharacterView:
 func _on_play_controls_restart_pressed():
 	restart_requested.emit()
 
-func _on_view_log_requested(character: Character):
-	view_log_requested.emit(character)
+func _on_view_log_requested(actor: Actor):
+	view_log_requested.emit(actor)
 
 func _on_upgrade_window_requested(character: Character):
 	upgrade_window_requested.emit(character)
