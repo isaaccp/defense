@@ -39,6 +39,7 @@ const relic_choice_window_scene = preload("res://ui/relic_choice_window.tscn")
 
 signal all_ready
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
+signal relic_selected(relic_name: StringName, gc: GameplayCharacter)
 signal restart_requested
 signal end_level_confirmed
 signal view_log_requested(actor: Actor)
@@ -104,6 +105,10 @@ func set_level_options(selected_relics: Array[RelicDef]):
 
 func show_play_controls(show: bool = true):
 	%PlayControls.visible = show
+	%PlayControls.reset()
+
+func show_level_options(show: bool = true):
+	%LevelOptions.visible = show
 
 func set_victory_loss(victory_loss: VictoryLossConditionComponent):
 	%VictoryLoss.initialize(victory_loss)
@@ -255,9 +260,15 @@ func _on_select_relic_button_pressed():
 	relic_window.popup()
 
 func _on_relic_selected(relic_name: StringName, character: Character):
+	# Adds relic to Character in Level. Emits signal so run_save_state
+	# and gameplay_character can be updated.
 	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
 	effect_actuator_component.add_relic(relic_name)
-	%SelectRelicButton.disabled = true
+
+	var gameplay_character = character.get_component_or_die(PersistentGameStateComponent).state as GameplayCharacter
+	relic_selected.emit(relic_name, gameplay_character)
+
+	%SelectRelicButton.visible = false
 
 func _on_relic_selection_canceled():
 	pass

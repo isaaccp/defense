@@ -65,6 +65,7 @@ func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	ui_layer.reset_requested.connect(_on_reset_requested)
 	ui_layer.abandon_run_requested.connect(_on_abandon_run_requested)
 	ui_layer.behavior_modified.connect(_on_behavior_modified)
+	ui_layer.relic_selected.connect(_on_relic_selected)
 
 func _on_character_selection_entered():
 	ui_layer.start_character_selection(level_provider)
@@ -93,8 +94,9 @@ func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 	# TODO: Fix and uncomment for multiplayer.
 	# _on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
 
-func _on_within_level_entered():
-	_snapshot_run_save_state()
+func _on_within_level_entered(save_snapshot: bool = true):
+	if save_snapshot:
+		_snapshot_run_save_state()
 	level_scene = level_provider.load_level(run_save_state.current_level)
 	level = level_scene.instantiate()
 	level.initialize(gameplay_characters, ui_layer)
@@ -108,9 +110,10 @@ func _on_within_level_entered():
 	%StateParent.add_child(level, true)
 
 func _on_level_failed():
+	level.exit()
 	%StateParent.remove_child(level)
-	level.queue_free()
-	_on_within_level_entered()
+	# Run _on_within_level_entered but don't save snapshot.
+	_on_within_level_entered(false)
 
 func _on_level_finished():
 	# Record xp gains here but apply and show them visually in BETWEEN_LEVELS.
@@ -133,10 +136,15 @@ func _on_level_finished():
 		state.change_state(BETWEEN_LEVELS, false)
 
 func _on_within_level_exited():
+	level.exit()
 	%StateParent.remove_child(level)
-	level.queue_free()
 	level = null
 	level_scene = null
+
+func _on_relic_selected(relic_name: String, gc: GameplayCharacter):
+	run_save_state.relic_library_state.mark_relic_used(relic_name)
+	run_save_state.relic_library_state.clear_relic_selection()
+	gc.add_relic(relic_name)
 
 func _on_between_levels_entered():
 	# TODO: Do something fancy with animations and what not.
@@ -181,9 +189,17 @@ func _on_restart_requested():
 	_on_level_failed()
 
 func _snapshot_run_save_state():
-	run_save_state_snapshot = run_save_state.duplicate(true)
+	print("Saving run save state snapshot")
+	print("Relic library state on current state: %s" % [run_save_state.relic_library_state.available_relics])
+	print("Relics on GC0 current state: %s" % [run_save_state.gameplay_characters[0].relics])
+	run_save_state_snapshot = run_save_state.clone()
 
 func _restore_run_save_state_snapshot():
+	print("Restoring run save state snapshot")
+	print("Relic library state on current state: %s" % [run_save_state.relic_library_state.available_relics])
+	print("Relics on GC0 current state: %s" % [run_save_state.gameplay_characters[0].relics])
+	print("Relic library state on snapshot: %s" % [run_save_state_snapshot.relic_library_state.available_relics])
+	print("Relics on GC0 snapshot: %s" % [run_save_state_snapshot.gameplay_characters[0].relics])
 	run_save_state = run_save_state_snapshot
 
 func _on_reset_requested():

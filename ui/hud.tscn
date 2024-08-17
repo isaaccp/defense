@@ -82,6 +82,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="LevelOptions" type="HBoxContainer" parent="PanelContainer/TopHud"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="SelectRelicButton" type="Button" parent="PanelContainer/TopHud/LevelOptions"]

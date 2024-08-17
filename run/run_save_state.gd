@@ -18,3 +18,13 @@ static func make(gameplay_characters: Array[GameplayCharacter], level_provider: 
 	run_save_state.relic_library_state = RelicLibraryState.from_relic_library(level_provider.relic_library)
 	run_save_state.stats = Stats.new()
 	return run_save_state
+
+# Creates a copy of this resource. This is necessary because duplicate(true)
+# doesn't actually duplicate subresources in Arrays.
+# See https://github.com/godotengine/godot/issues/74918
+func clone():
+	var clone = duplicate(true)
+
+	for i in clone.gameplay_characters.size():
+		clone.gameplay_characters[i] = clone.gameplay_characters[i].duplicate(true)
+	return clone

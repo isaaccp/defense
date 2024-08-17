@@ -76,6 +76,7 @@ size_flags_horizontal = 3
 text = "Idle"
 
 [node name="ViewLogButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Log"
 

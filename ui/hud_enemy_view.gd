@@ -6,6 +6,7 @@ var enemy: Enemy
 
 signal view_log_requested(enemy: Enemy)
 
+# TODO: Refactor with HudCharacterView, which is largely the same.
 func initialize(enemy_: Enemy) -> void:
 	enemy = enemy_
 	var health = HealthComponent.get_or_die(enemy)
@@ -31,10 +32,13 @@ func initialize(enemy_: Enemy) -> void:
 	%HudStatusDisplay.clear()
 	var effect_actuator_component = enemy.get_component_or_die(EffectActuatorComponent)
 	effect_actuator_component.relics_changed.connect(_on_relics_changed)
+	# One-off call to add existing relics.
+	_on_relics_changed(effect_actuator_component.relics)
 	enemy.died.connect(_on_enemy_died)
 
 func _on_enemy_died():
 	%ActionLabel.text = "Dead"
+	%ViewLogButton.disabled = true
 
 func _set_health(health: int, max_health: int):
 	%HealthBar.value = health
@@ -60,4 +64,5 @@ func _on_behavior_updated(action_name: StringName, _target: Target):
 	%ActionLabel.text = str(action_name) if action_name != ActionDef.NoAction else "Idle"
 
 func _on_view_log_button_pressed():
-	view_log_requested.emit(enemy)
+	if is_instance_valid(enemy):
+		view_log_requested.emit(enemy)

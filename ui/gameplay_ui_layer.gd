@@ -20,6 +20,8 @@ signal continue_run
 signal character_selection_screen_selection_ready(character_selections: Array[int])
 ## Behavior was modified in the programming UI.
 signal behavior_modified(character_idx: int, behavior: StoredBehavior)
+## A relic was selected at the beginning of the level in the relic selection window.
+signal relic_selected(relic_name: String, gc: GameplayCharacter)
 ## Restarts the level without any changes.
 signal restart_requested
 ## Requests a pause on level. Hud, etc still work.
@@ -173,3 +175,6 @@ func _on_run_summary_screen_continue_selected():
 func _on_between_levels_screen_continue_selected():
 	between_levels_continue_selected.emit()
 	hide_screen()
+
+func _on_hud_relic_selected(relic_name: String, gc: GameplayCharacter):
+	relic_selected.emit(relic_name, gc)

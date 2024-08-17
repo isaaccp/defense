@@ -11,6 +11,10 @@ var current_speed = 0
 func initialize(hud_: Hud):
 	hud = hud_
 
+func reset():
+	%PauseButton.show()
+	%PlayButton.hide()
+
 func _pause(pause: bool = true):
 	if pause:
 		pause_pressed.emit()

@@ -27,7 +27,6 @@ var running = false
 var effect_by_name: Dictionary
 var effect_script_by_name: Dictionary
 var effect_script_by_effect_type: Dictionary
-var gameplay_character: GameplayCharacter
 var relics: Array[RelicDef]
 
 var unable_to_act_count = 0:
@@ -38,14 +37,18 @@ var unable_to_act_count = 0:
 			able_to_act_changed.emit(true)
 		unable_to_act_count = value
 
+func _ready():
+	if Engine.is_editor_hint():
+		return
+	if persistent_game_state_component:
+		var gameplay_character = persistent_game_state_component.state as GameplayCharacter
+		for relic_name in gameplay_character.relics:
+			load_relic(relic_name)
+
 func run():
 	if running:
 		assert(false, "run() called twice on %s" % component)
 	running = true
-	if persistent_game_state_component:
-		gameplay_character = persistent_game_state_component.state
-		for relic_name in gameplay_character.relics:
-			load_relic(relic_name)
 	status_component.status_added.connect(_on_status_added)
 	status_component.status_removed.connect(_on_status_removed)
 
@@ -57,8 +60,6 @@ func load_relic(relic_name: StringName):
 
 func add_relic(relic_name: StringName):
 	load_relic(relic_name)
-	if gameplay_character:
-		gameplay_character.add_relic(relic_name)
 
 func modified_attributes(base_attributes: Attributes) -> Attributes:
 	var attributes = base_attributes.duplicate(true)

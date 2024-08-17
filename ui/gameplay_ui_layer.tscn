@@ -99,6 +99,7 @@ visible = false
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
 [connection signal="play_controls_pause_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_pause_pressed"]
 [connection signal="play_controls_play_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_play_pressed"]
+[connection signal="relic_selected" from="Overlay/HUD" to="." method="_on_hud_relic_selected"]
 [connection signal="restart_requested" from="Overlay/HUD" to="." method="_on_hud_restart_requested"]
 [connection signal="upgrade_window_requested" from="Overlay/HUD" to="." method="_on_hud_upgrade_window_requested"]
 [connection signal="view_log_requested" from="Overlay/HUD" to="." method="_on_hud_view_log_requested"]

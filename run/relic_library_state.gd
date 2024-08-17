@@ -35,6 +35,9 @@ func select_relics(number: int):
 func selected_relics() -> Array[StringName]:
 	return next_relic_selection
 
+func clear_relic_selection():
+	next_relic_selection = []
+
 func mark_relic_used(relic: StringName):
 	for i in range(len(available_relics)):
 		if available_relics[i] == relic:

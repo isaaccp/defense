@@ -75,6 +75,15 @@ func _exit_tree():
 			ui_layer.state_machine_stack.remove_state_machine(state)
 			ui_layer.hud.hide()
 
+func exit():
+	# Sometimes level pauses the tree, make sure to unpause.
+	# Should be called instead of level.queue_free().
+	# This can't be on _exit_tree() because get_tree() checks to
+	# make sure it's inside the tree. Weirdly it seems to work,
+	# but it causes a warning.
+	get_tree().paused = false
+	queue_free()
+
 func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
 	self.ui_layer = ui_layer
 	for i in gameplay_characters.size():
@@ -100,6 +109,7 @@ func _on_prepare_entered():
 	# TODO: Wrap this up inside ui_layer.prepare_level() or similar.
 	if ui_layer:
 		ui_layer.hud.show_play_controls(false)
+		ui_layer.hud.show_level_options(true)
 		ui_layer.hud.set_victory_loss(victory)
 		ui_layer.hud.set_characters(characters)
 		ui_layer.hud.set_towers(towers)
@@ -120,7 +130,8 @@ func _on_all_ready():
 
 func _on_combat_entered():
 	if ui_layer:
-			ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
+		ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
+		ui_layer.hud.show_level_options(false)
 	await get_tree().create_timer(ready_to_fight_wait).timeout
 	if ui_layer:
 		ui_layer.hud.show_play_controls()

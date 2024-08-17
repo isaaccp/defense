@@ -31,6 +31,8 @@ func initialize(character_: Character) -> void:
 	%Title.text = state.name
 	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
 	effect_actuator_component.relics_changed.connect(_on_relics_changed)
+	# One-off call to add existing relics.
+	_on_relics_changed(effect_actuator_component.relics)
 
 func is_local() -> bool:
 	if OnlineMatch.match_mode == OnlineMatch.MatchMode.NONE:
