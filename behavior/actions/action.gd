@@ -175,6 +175,9 @@ func _range_str() -> String:
 	var max_str = "inf" if max_distance == MaxDistance else "%0.1f" % max_distance
 	return "Range: (%0.1f,%s)" % [min_distance, max_str]
 
+func attack_direction(position_type: Target.PositionType = Target.PositionType.HURTBOX) -> Vector2:
+	return (target_position(position_type) - actor.attack_position()).normalized()
+
 func target_position(position_type: Target.PositionType = Target.PositionType.DEFAULT) -> Vector2:
 	var action_target = ActionTarget.new(target, position_type)
 	return action_target.target_position()

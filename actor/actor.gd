@@ -47,3 +47,12 @@ func stop():
 		if child.get("component") != null:
 			if child.has_method("stop"):
 				child.stop()
+
+## Global position that should be used when spawning attacks.
+## For now, just spawn attacks from the middle of HurtboxComponent.
+## Later we can have some explicit AttackComponent or similar
+## that allows to set the position independently and e.g. even
+## fancier stuff like showing different weapons.
+func attack_position() -> Vector2:
+	var hurtbox = get_component_or_die(HurtboxComponent)
+	return hurtbox.global_position

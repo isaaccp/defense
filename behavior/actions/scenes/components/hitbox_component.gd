@@ -110,10 +110,8 @@ func _process_hurtbox_entered(hurtbox: HurtboxComponent):
 
 func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 	hit_effect.damage_multiplier = attributes.damage_multiplier
-	var effect_log = []
-	var effective_hit_effect = effect_actuator_component.modified_hit_effect(
-		hit_effect, func(text: String): effect_log.append(text)
-	)
+	var effect_log: Array[String] = []
+	var effective_hit_effect = effect_actuator_component.modified_hit_effect(hit_effect, effect_log)
 	var hit_result = hurtbox.handle_collision(owner_name, get_parent().actor_name, effective_hit_effect)
 
 	hit.emit(effective_hit_effect, hit_result)

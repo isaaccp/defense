@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://by5s8kqpfh420"]
+[gd_scene load_steps=6 format=3 uid="uid://by5s8kqpfh420"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_ar6xk"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="2_tit5b"]
 [ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="2_y85g6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fw2ex"]
 
 [sub_resource type="Resource" id="Resource_ex7xn"]
 script = ExtResource("2_y85g6")
@@ -10,14 +13,17 @@ health = 30
 recovery = 0.0
 damage_multiplier = 1.0
 armor = 0
-resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
+resistance = Array[ExtResource("2_tit5b")]([])
 
 [node name="TestEnemy" instance=ExtResource("1_ar6xk")]
 
-[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 
-[node name="AttributesComponent" parent="." index="10"]
+[node name="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CircleShape2D_fw2ex")
+
+[node name="AttributesComponent" parent="." index="11"]
 base_attributes = SubResource("Resource_ex7xn")

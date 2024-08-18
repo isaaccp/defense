@@ -92,7 +92,7 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 			if hit_effect.fraction_armor_pen > 0:
 				var fraction_armor_pen_reduction = effective_armor * hit_effect.fraction_armor_pen
 				if fraction_armor_pen_reduction > 0:
-					effective_armor_str += " - %0.2f (%-age armor pen)" % fraction_armor_pen_reduction
+					effective_armor_str += " - %0.2f (%%-age armor pen)" % fraction_armor_pen_reduction
 					effective_armor -= fraction_armor_pen_reduction
 			if hit_effect.flat_armor_pen > 0:
 				effective_armor_str += " - %d (flat armor pen)" % hit_effect.flat_armor_pen

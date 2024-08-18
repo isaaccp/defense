@@ -68,8 +68,9 @@ func modified_attributes(base_attributes: Attributes) -> Attributes:
 	return attributes
 
 # logger takes a String as parameter.
-func modified_hit_effect(base_hit_effect: HitEffect, logger: Callable = Callable()) -> HitEffect:
+func modified_hit_effect(base_hit_effect: HitEffect, effect_log: Array[String]) -> HitEffect:
 	var hit_effect = base_hit_effect.duplicate(true)
+	var logger = func(text: String): effect_log.append(text)
 	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.HIT_EFFECT, []):
 		effect_script.modify_hit_effect(hit_effect, logger)
 	return hit_effect

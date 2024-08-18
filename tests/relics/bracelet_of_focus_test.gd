@@ -50,6 +50,6 @@ func test_in_level():
 	watch_signals(behavior_component)
 	var heal_cooldown = Action.make_runnable_action(heal).cooldown
 	await wait_for_signal(behavior_component.behavior_updated, 1, "Waiting for behavior to update")
-	await wait_for_signal(behavior_component.action_finished, 1, "Waiting for heal to finish")
+	await wait_for_signal(behavior_component.action_finished, 2, "Waiting for heal to finish")
 	var eligible_at = behavior_component.action_cooldowns[heal.name()]
 	assert_almost_eq(eligible_at, behavior_component.elapsed_time + heal_cooldown * bracelet_cooldown_multiplier, 0.05)

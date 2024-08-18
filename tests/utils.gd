@@ -55,8 +55,10 @@ static func assert_last_action_not(test: GutTest, behavior: BehaviorComponent, e
 
 static func dump_all_emits(test: GutTest, object: Object, signal_name: String):
 	test.gut.p("Emits for %s" % signal_name)
+	print("Emits for %s" % signal_name)
 	for i in test.get_signal_emit_count(object, signal_name):
 		test.gut.p(test.get_signal_parameters(object, signal_name, i))
+		print(test.get_signal_parameters(object, signal_name, i))
 
 static func make_barrel(hp: int = 0):
 	var barrel = barrel_scene.instantiate()

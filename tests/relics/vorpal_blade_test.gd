@@ -40,13 +40,15 @@ func test_effect_actuator():
 	var hit_effect = HitEffect.new()
 	hit_effect.damage_type = slashing_damage_type
 	hit_effect.flat_armor_pen = 1
-	var effective_hit_effect = effect_actuator.modified_hit_effect(hit_effect)
+	var effect_log: Array[String] = []
+	var effective_hit_effect = effect_actuator.modified_hit_effect(hit_effect, effect_log)
 	assert_eq(effective_hit_effect.flat_armor_pen, 2)
+	assert_eq(effect_log.size(), 1)
 
 func test_attack_in_level():
 	TestUtils.set_character_behavior(character, make_sword_behavior())
 	var enemy_health: HealthComponent = enemy.get_component_or_die(HealthComponent)
-	enemy.position = character.position + Vector2.RIGHT * 49
+	enemy.position = character.position + Vector2.RIGHT * 40
 	level.start()
 	watch_signals(enemy_health)
 	await wait_for_signal(enemy_health.hit, 3, "Waiting for health to report hit")

@@ -171,6 +171,7 @@ func test_non_physical_hit_ignores_armor():
 func test_resistance_plus_armor():
 	var hit_effect = HitEffect.new()
 	hit_effect.damage = 20
+	hit_effect.attack_type = preload("res://game_logic/attack_types/melee.tres")
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 	attributes_component.base_attributes.armor = 4
 	var resistance = Resistance.new()
@@ -194,6 +195,7 @@ func test_resistance_plus_armor():
 func test_vulnerability():
 	var hit_effect = HitEffect.new()
 	hit_effect.damage = 10
+	hit_effect.attack_type = preload("res://game_logic/attack_types/melee.tres")
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 	var resistance = Resistance.new()
 	resistance.damage_type = hit_effect.damage_type

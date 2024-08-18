@@ -51,7 +51,7 @@ func _damage_str() -> String:
 	var abs_adjusted_damage = abs(adjusted_damage())
 	var damage_str = (
 		str(abs_adjusted_damage) if abs_adjusted_damage == abs_damage
-		else "%d (base) * %0.1f (mult)" % [abs_damage, damage_multiplier, abs_adjusted_damage]
+		else "%d (base) * %0.1f (mult) = %0.1f" % [abs_damage, damage_multiplier, abs_adjusted_damage]
 	)
 	var types = []
 	if attack_type:

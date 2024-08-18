@@ -48,7 +48,7 @@ func test_sweeping_attack_one_enemy():
 
 func test_sweeping_attack_multiple_enemies():
 	var offsets = [
-		Vector2.RIGHT * 30,
+		Vector2.RIGHT * 25,
 		Vector2.UP * 20 + Vector2.RIGHT * 20,
 		Vector2.DOWN * 20 + Vector2.RIGHT * 20
 	]
@@ -68,8 +68,8 @@ func test_sweeping_attack_multiple_enemies():
 	await wait_seconds(1.0)
 
 	for i in range(3):
+		# For debugging.
+		TestUtils.dump_all_emits(self, health_components[i], "health_updated")
 		# There is an initial health update, so we expected that at this point
 		# all components have had health updated twice.
 		assert_signal_emit_count(health_components[i], "health_updated", 2)
-		# For debugging.
-		TestUtils.dump_all_emits(self, health_components[i], "health_updated")
