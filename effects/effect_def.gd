@@ -10,6 +10,8 @@ enum EffectType {
 	HIT_EFFECT,
 	## Effects that change ability to act.
 	ABLE_TO_ACT,
+	## Effects that modify action cooldown.
+	ACTION_COOLDOWN,
 }
 
 @export var name: StringName

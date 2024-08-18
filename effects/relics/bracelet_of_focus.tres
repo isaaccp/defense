@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=4 format=3 uid="uid://c3iep61v2vnxn"]
+
+[ext_resource type="Script" path="res://effects/relics/bracelet_of_focus.gd" id="1_0v6ry"]
+[ext_resource type="Texture2D" uid="uid://bmp6wffl34q78" path="res://assets/kyrises_rpg_icon_pack/icons/32x32/ring_02d.png" id="2_8p4ce"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="3_0ya5i"]
+
+[resource]
+script = ExtResource("3_0ya5i")
+description = "Reduces action cooldown by 30%"
+icon = ExtResource("2_8p4ce")
+name = &"Bracelet of Focus"
+effect_types = Array[int]([4])
+effect_script = ExtResource("1_0v6ry")

@@ -123,9 +123,18 @@ func _physics_process(delta: float):
 func _on_action_finished():
 	assert(action.finished)
 	if action.cooldown > 0:
-		var eligible_at = elapsed_time + action.cooldown
+		var effect_log: Array[String] = []
+		var effective_cooldown = effect_actuator_component.modified_cooldown(action.def, action.cooldown, effect_log)
+		var eligible_at = elapsed_time + effective_cooldown
 		action_cooldowns[action.def.skill_name] = eligible_at
-		_log("%s: %0.1f cooldown, eligible at %0.2f" % [ action.def.name(), action.cooldown, eligible_at])
+		var tooltip = ""
+		if effective_cooldown != action.cooldown:
+			assert(!effect_log.is_empty())
+			tooltip = "Original cooldown: %0.1f\n" % action.cooldown
+			for log in effect_log:
+				tooltip += log + "\n"
+			tooltip += "Effective cooldown: %0.1f\n" % effective_cooldown
+		_log("%s: %0.1f cooldown, eligible at %0.2f" % [ action.def.name(), effective_cooldown, eligible_at], tooltip)
 	rule = null
 	action = null
 	target = null
@@ -152,10 +161,10 @@ func _post_action():
 	if not is_zero_approx(body.velocity.x):
 		sprite.flip_h = body.velocity.x < 0
 
-func _log(message: String):
+func _log(message: String, tooltip: String = ""):
 	if not logging_component:
 		return
-	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, message)
+	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, message, tooltip)
 
 static func get_or_null(node) -> BehaviorComponent:
 	return Component.get_or_null(node, component) as BehaviorComponent
