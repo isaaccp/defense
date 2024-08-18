@@ -6,6 +6,7 @@ class_name BehaviorComponent
 const component: StringName = &"BehaviorComponent"
 
 signal behavior_updated(action_name: StringName, target: Target)
+signal action_finished(action_name: StringName)
 
 @export_group("Required")
 @export var actor: Actor
@@ -122,11 +123,13 @@ func _physics_process(delta: float):
 
 func _on_action_finished():
 	assert(action.finished)
-	if action.cooldown > 0:
+	if action.cooldown <= 0:
+		_log("%s: finished, no cooldown" % [ action.def.name()])
+	else:
 		var effect_log: Array[String] = []
 		var effective_cooldown = effect_actuator_component.modified_cooldown(action.def, action.cooldown, effect_log)
 		var eligible_at = elapsed_time + effective_cooldown
-		action_cooldowns[action.def.skill_name] = eligible_at
+		action_cooldowns[action.def.name()] = eligible_at
 		var tooltip = ""
 		if effective_cooldown != action.cooldown:
 			assert(!effect_log.is_empty())
@@ -135,6 +138,7 @@ func _on_action_finished():
 				tooltip += log + "\n"
 			tooltip += "Effective cooldown: %0.1f\n" % effective_cooldown
 		_log("%s: %0.1f cooldown, eligible at %0.2f" % [ action.def.name(), effective_cooldown, eligible_at], tooltip)
+	action_finished.emit(action.def.name())
 	rule = null
 	action = null
 	target = null
