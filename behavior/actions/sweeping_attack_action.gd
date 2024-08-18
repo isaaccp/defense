@@ -25,4 +25,4 @@ func _sweeping_attack():
 	Global.get_tree().create_timer(0.8, false).timeout.connect(action_finished)
 
 func description():
-	return "Performs a sweeping sword attack that hits all enemies reached (TODO: damage)"
+	return "Performs a sweeping sword attack that hits all enemies in an area, causing 5 slashing damage"

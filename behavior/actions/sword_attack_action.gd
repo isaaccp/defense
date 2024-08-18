@@ -25,4 +25,4 @@ func _swing_sword():
 	Global.get_tree().create_timer(0.8, false).timeout.connect(action_finished)
 
 func description():
-	return "Performs a sword attack (TODO: damage)"
+	return "Performs a sword attack, causing 5 slashing damage to a single target."

@@ -13,4 +13,4 @@ func post_prepare():
 	Global.get_tree().create_timer(0.7, false).timeout.connect(action_finished)
 
 func description():
-	return "Fires an arrow at a target"
+	return "Fires an arrow at a single target, causing 3 piercing damage"

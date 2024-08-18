@@ -54,5 +54,6 @@ func stop():
 ## that allows to set the position independently and e.g. even
 ## fancier stuff like showing different weapons.
 func attack_position() -> Vector2:
-	var hurtbox = get_component_or_die(HurtboxComponent)
-	return hurtbox.global_position
+	# TODO: Avoiding using get_component to prevent a cycle.
+	# As mentioned above this can be solved by adding an AttackComponent for this.
+	return $HurtboxComponent.global_position

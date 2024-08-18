@@ -40,7 +40,7 @@ func test_effect_actuator():
 	effect_actuator.run()
 	# Test that cooldown is modified as expected.
 	var effect_log: Array[String] = []
-	var new_cooldown = effect_actuator.modified_cooldown(heal, heal_cooldown, effect_log)
+	var new_cooldown = effect_actuator.modified_cooldown(heal.tags, heal_cooldown, effect_log)
 	assert_almost_eq(new_cooldown, heal_cooldown * bracelet_cooldown_multiplier, 0.01)
 	assert_eq(effect_log.size(), 1)
 

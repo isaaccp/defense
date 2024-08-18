@@ -12,4 +12,4 @@ func _init():
 	max_distance = 200
 
 func description():
-	return "Protects against ranged damage"
+	return "Protects against ranged damage, granting a 50% resistance to ranged attacks"

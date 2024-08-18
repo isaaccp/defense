@@ -11,7 +11,7 @@ deps = {}
 
 quotes_re = re.compile("\"[^\"]*.\"")
 comment_re = re.compile("#.*")
-regex = re.compile("[A-Z]+[a-z]*\\w+")
+regex = re.compile("(?<![$%])[A-Z]+[a-z]*\\w+")
 
 ignore = ["Component", "TestUtils", "GutHookScript", "GutStringUtils", "RichButton"]
 # Simulates the effect of removing the dependency between X and Y if it exists.

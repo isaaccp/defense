@@ -26,7 +26,7 @@ func _swing_sword():
 	Global.get_tree().create_timer(0.8, false).timeout.connect(action_finished)
 
 func description():
-	return "Performs a sword attack. If enemy is killed, cooldown is waived. (TODO: damage)"
+	return "Performs a strong sword attack against a single target, causing 8 slashing damage.\nIf enemy is killed, cooldown is waived."
 
 func _on_hit(hit_effect: HitEffect, hit_result: HitResult):
 	if hit_result.destroyed:

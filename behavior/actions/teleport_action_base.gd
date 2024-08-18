@@ -22,6 +22,8 @@ func post_initialize():
 	prev_modulate = sprite.modulate
 	_start_teleport.call_deferred()
 
+# TODO: Migrate to using prepare, likely cancel teleport if target died,
+# and use the last target location for teleporting.
 func _start_teleport():
 	teleport_out = teleport_fade_out_scene.instantiate() as ActionScene
 	_initialize_action_scene(teleport_out)

@@ -21,4 +21,4 @@ func post_initialize():
 	action_finished()
 
 func description():
-	return "Fires 3 arrows in 1 second"
+	return "Fires 3 arrows in 1 second, each of them causing 3 piercing damage to a single target"

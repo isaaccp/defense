@@ -17,3 +17,6 @@ func post_initialize():
 func _nav_dest() -> Vector2:
 	var dir = target_position().direction_to(body.global_position)
 	return body.position + dir * move_away_distance
+
+func description() -> String:
+	return "Moves away from the target"

@@ -12,4 +12,4 @@ func post_prepare():
 	Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
 
 func description():
-	return "Fires a seeking bolt at a target.\nThe bolt will only hit its intended target."
+	return "Fires a seeking bolt at a target, causing 5 arcane damage.\nThe bolt will only hit its intended target."

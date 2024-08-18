@@ -12,8 +12,12 @@
 script = ExtResource("4_0qlfr")
 damage = 3
 damage_type = ExtResource("4_bb8wi")
+fraction_armor_pen = 0.0
+flat_armor_pen = 0
 status_duration = 0.0
 status_on_damage_only = false
+action_name = &""
+damage_multiplier = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
 radius = 5.0

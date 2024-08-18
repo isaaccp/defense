@@ -25,8 +25,8 @@ func modify_attributes(_base_attributes: Attributes) -> void:
 func modify_hit_effect(_hit_effect: HitEffect, logger: Callable = Callable()) -> void:
 	assert(false, "Should be implemented in subclass if setting HIT_EFFECT")
 
-## Returns a modified action cooldown. The action_def is passed because some effects
-## may only apply to certain actions or tags.
+## Returns a modified action cooldown. The action def is passed because some effects
+## may only apply to certain tags.
 ## logger should be used with a single-line of information describing the effect.
 ## If the method modifies the cooldown, it *must* call the logger.
 func modified_action_cooldown(action_def: ActionDef, cooldown: float, logger: Callable = Callable()) -> float:

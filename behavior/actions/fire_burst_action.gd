@@ -30,4 +30,4 @@ func _fire_burst():
 	Global.get_tree().create_timer(0.5, false).timeout.connect(action_finished)
 
 func description():
-	return "Creates a burst of fire in front of the caster."
+	return "Creates a burst of fire in front of the caster that causes 8 fire damage in a small area."
