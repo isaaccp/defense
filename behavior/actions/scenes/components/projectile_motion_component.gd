@@ -57,6 +57,11 @@ func _physics_process(delta: float):
 	velocity = velocity.limit_length(speed)
 	action_scene.global_rotation = velocity.angle()
 	action_scene.global_position += velocity * delta
+#	queue_redraw()  # For easy debugging if something goes wrong with projectiles.
+
+#func _draw():
+#	draw_line(action_scene.global_position, action_scene.global_position + velocity, Color.RED)
+#	draw_line(action_scene.global_position, action_scene.global_position + steering_acceleration, Color.YELLOW)
 
 static func get_or_null(node: Node) -> ProjectileMotionComponent:
 	return Component.get_or_null(node, component) as ProjectileMotionComponent

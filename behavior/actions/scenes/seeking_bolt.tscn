@@ -64,6 +64,7 @@ radius = 5.0
 
 [node name="SeekingOrb" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_kb4ja")
+target_position_type = 1
 hitbox_component = NodePath("HitboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

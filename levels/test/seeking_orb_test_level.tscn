@@ -1,22 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://bymhekullapcy"]
+[gd_scene load_steps=18 format=3 uid="uid://bymhekullapcy"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_6lv26"]
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_o76r2"]
-[ext_resource type="Resource" uid="uid://btxbesb7qp4a4" path="res://character/playable_characters/larian_the_archer.tres" id="3_mwhu2"]
+[ext_resource type="Script" path="res://gameplay_character.gd" id="2_c8g10"]
+[ext_resource type="Resource" uid="uid://g1au3en4bc7j" path="res://character/playable_characters/bernie_the_wizard.tres" id="3_mwhu2"]
 [ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_tgq0t"]
 [ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="5_gp48s"]
 [ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="6_q6t6v"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_k2205"]
-[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="8_wmqx2"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="9_652d4"]
 [ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="10_jaqgg"]
-
-[sub_resource type="Resource" id="Resource_ewa5g"]
-script = ExtResource("2_o76r2")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
-full_acquired = false
-full_unlocked = false
 
 [sub_resource type="Resource" id="Resource_8lx8g"]
 script = ExtResource("5_gp48s")
@@ -25,9 +17,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_pxnul"]
 script = ExtResource("6_q6t6v")
+params = SubResource("Resource_8lx8g")
 name = &"Seeking Bolt"
 skill_type = 1
-params = SubResource("Resource_8lx8g")
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("5_gp48s")
@@ -36,26 +28,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_riwri"]
 script = ExtResource("6_q6t6v")
+params = SubResource("Resource_8lwyn")
 name = &"Always"
 skill_type = 3
-params = SubResource("Resource_8lwyn")
-
-[sub_resource type="GDScript" id="GDScript_6vj5v"]
-script/source = "extends PositionTargetSorter
-
-func compare(pos_a: Vector2, pos_b: Vector2, this_actor: Actor) -> bool:
-	var distance_a = this_actor.position.distance_to(pos_a)
-	var distance_b = this_actor.position.distance_to(pos_b)
-	return distance_a < distance_b
-"
-
-[sub_resource type="Resource" id="Resource_10ccf"]
-script = ExtResource("8_wmqx2")
-type = 2
-sorter_script = SubResource("GDScript_6vj5v")
-skill_name = &"Closest First"
-skill_type = 4
-tree_type = 1
 
 [sub_resource type="Resource" id="Resource_ti1h7"]
 script = ExtResource("5_gp48s")
@@ -64,9 +39,9 @@ cmp = 0
 
 [sub_resource type="Resource" id="Resource_jpx2r"]
 script = ExtResource("6_q6t6v")
+params = SubResource("Resource_ti1h7")
 name = &"Enemy"
 skill_type = 2
-params = SubResource("Resource_ti1h7")
 
 [sub_resource type="Resource" id="Resource_j11g3"]
 script = ExtResource("7_k2205")
@@ -76,12 +51,12 @@ condition = SubResource("Resource_riwri")
 
 [sub_resource type="Resource" id="Resource_lp8ml"]
 script = ExtResource("4_tgq0t")
+name = ""
 stored_rules = Array[ExtResource("7_k2205")]([SubResource("Resource_j11g3")])
 
 [node name="Level" instance=ExtResource("1_6lv26")]
-skill_tree_state_add = SubResource("Resource_ewa5g")
 players = 1
-test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("3_mwhu2")])
+test_gameplay_characters = Array[ExtResource("2_c8g10")]([ExtResource("3_mwhu2")])
 test_behaviors = Array[ExtResource("4_tgq0t")]([SubResource("Resource_lp8ml")])
 
 [node name="First" parent="StartingPositions" index="0"]

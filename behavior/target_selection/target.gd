@@ -60,7 +60,7 @@ func valid() -> bool:
 	if type == Type.UNSPECIFIED:
 		return false
 	if type == Type.ACTOR:
-		return actor != null and is_instance_valid(actor)
+		return actor != null and is_instance_valid(actor) and not actor.destroyed
 	if type == Type.ACTORS:
 		return not actors.is_empty()
 	if type == Type.POSITION:
