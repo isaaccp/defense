@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ck2tfnr0oy6s4"]
+[gd_scene load_steps=33 format=3 uid="uid://ck2tfnr0oy6s4"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_ngdbc"]
 [ext_resource type="Texture2D" uid="uid://c3amdk0cx4sc3" path="res://enemies/orc_grunt/Death.png" id="2_5hwt6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="6_2h085"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="7_l80cu"]
 [ext_resource type="Script" path="res://behavior/stored_skill.gd" id="8_qd5rs"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="9_erq2m"]
 
 [sub_resource type="Animation" id="Animation_m0c2q"]
 length = 0.001
@@ -351,12 +352,12 @@ health = 6
 recovery = 0.0
 damage_multiplier = 1.0
 armor = 0
-resistance = Array[Resource("res://game_logic/attributes/resistance.gd")]([])
+resistance = Array[ExtResource("9_erq2m")]([])
 
 [node name="OrcGrunt" instance=ExtResource("1_ngdbc")]
 actor_name = "Orc Grunt"
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -32)
 texture = ExtResource("2_5hwt6")
 hframes = 3
@@ -374,7 +375,7 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Enemy/Orc Crew/Orc/Death/Death.aseprite"
 }
 
-[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
@@ -382,19 +383,19 @@ libraries = {
 "": SubResource("AnimationLibrary_qjkxn")
 }
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_0a8ol")
 
-[node name="HealthComponent" parent="." index="5"]
+[node name="HealthComponent" parent="." index="6"]
 position = Vector2(0, -35)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_6bloc")
 
-[node name="BehaviorComponent" parent="." index="7"]
+[node name="BehaviorComponent" parent="." index="8"]
 stored_behavior = SubResource("Resource_qefch")
 
-[node name="AttributesComponent" parent="." index="10"]
+[node name="AttributesComponent" parent="." index="11"]
 base_attributes = SubResource("Resource_fgoat")
