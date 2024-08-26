@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnsf1muqgpiu1"]
+[gd_scene load_steps=8 format=3 uid="uid://cnsf1muqgpiu1"]
 
 [ext_resource type="PackedScene" uid="uid://i0ffjyhoyu76" path="res://spawners/spawner.tscn" id="1_a7635"]
 [ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="3_knaj1"]
 [ext_resource type="Texture2D" uid="uid://d1g08qh7vyfxf" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 F.png" id="4_a0u74"]
-[ext_resource type="Script" path="res://spawners/components/spawn_config_component.gd" id="4_aa4gf"]
 
 [sub_resource type="Animation" id="Animation_bldkl"]
 length = 0.001
@@ -119,24 +118,3 @@ vframes = 30
 frame = 89
 
 [node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("3_knaj1")]
-
-[node name="@Node@19095" parent="." index="6" instance=ExtResource("3_knaj1")]
-
-[node name="@Node@18397" parent="." index="7" instance=ExtResource("3_knaj1")]
-
-[node name="_Node_18397" parent="." index="8" instance=ExtResource("3_knaj1")]
-
-[node name="@Node@18398" parent="." index="9" instance=ExtResource("3_knaj1")]
-
-[node name="@Node@19088" parent="." index="10" instance=ExtResource("3_knaj1")]
-
-[node name="_Node_18398" parent="." index="11" instance=ExtResource("3_knaj1")]
-
-[node name="_Node_18399" parent="." index="12" instance=ExtResource("3_knaj1")]
-
-[node name="_Node_18400" parent="." index="13" instance=ExtResource("3_knaj1")]
-
-[node name="_Node_18401" parent="." index="14" instance=ExtResource("3_knaj1")]
-
-[node name="@Node@18398" type="Node" parent="." index="15" instance=ExtResource("3_knaj1")]
-script = ExtResource("4_aa4gf")

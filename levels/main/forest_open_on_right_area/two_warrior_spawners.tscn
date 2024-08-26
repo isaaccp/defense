@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2smyr2b4hedx"]
+[gd_scene load_steps=13 format=3 uid="uid://d2smyr2b4hedx"]
 
 [ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_lg7ly"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_0k78r"]
+[ext_resource type="Script" path="res://gameplay_character.gd" id="2_y5pxj"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="3_c524b"]
+[ext_resource type="Script" path="res://spawners/components/spawn_config_component.gd" id="10_3iay8"]
 [ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="10_i2ble"]
 [ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="11_xq6on"]
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="12_jc17h"]
@@ -21,20 +23,26 @@ initial_delay = 1.0
 
 [node name="Level" instance=ExtResource("1_lg7ly")]
 players = 2
-test_gameplay_characters = Array[Resource("res://gameplay_character.gd")]([ExtResource("2_0k78r"), ExtResource("3_c524b")])
+test_gameplay_characters = Array[ExtResource("2_y5pxj")]([ExtResource("2_0k78r"), ExtResource("3_c524b")])
 
 [node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_i2ble")]
 position = Vector2(680, 224)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_xq6on")]
+[node name="SpawnConfigComponent2" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_xq6on")]
 spawn_provider_config = SubResource("Resource_p55gh")
 spawn_placer_config = SubResource("Resource_qq1dk")
+
+[node name="@Node@18261" type="Node" parent="YSorted/Spawners/OrcWarriorSpawner" index="17" instance=ExtResource("11_xq6on")]
+script = ExtResource("10_3iay8")
 
 [node name="OrcWarriorSpawner2" parent="YSorted/Spawners" index="1" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_i2ble")]
 position = Vector2(680, 424)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("11_xq6on")]
+[node name="SpawnConfigComponent2" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("11_xq6on")]
 spawn_provider_config = SubResource("Resource_p55gh")
 spawn_placer_config = SubResource("Resource_qq1dk")
+
+[node name="@Node@18262" type="Node" parent="YSorted/Spawners/OrcWarriorSpawner2" index="17" instance=ExtResource("11_xq6on")]
+script = ExtResource("10_3iay8")
