@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=20 format=3 uid="uid://d1ix5kyitpnfk"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=12 format=3 uid="uid://d1ix5kyitpnfk"]
 
 [ext_resource type="Script" path="res://gameplay_character.gd" id="1_rhg10"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_ug4xc"]
@@ -8,42 +8,13 @@
 [ext_resource type="Resource" uid="uid://g1au3en4bc7j" path="res://character/playable_characters/bernie_the_wizard.tres" id="4_muu8k"]
 [ext_resource type="PackedScene" uid="uid://c8il5cl6p05m7" path="res://levels/main/forest_open_on_right_area/one_warrior_spawner.tscn" id="4_rmm38"]
 [ext_resource type="PackedScene" uid="uid://d2smyr2b4hedx" path="res://levels/main/forest_open_on_right_area/two_warrior_spawners.tscn" id="5_uogry"]
-[ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="5_y3wud"]
-[ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="6_oidea"]
+[ext_resource type="PackedScene" uid="uid://caol5sewu4epj" path="res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn" id="6_lri44"]
 [ext_resource type="PackedScene" uid="uid://beiehc7ykxgc0" path="res://levels/main/forest_open_on_right_area/two_warrior_spawners_plus_archers.tscn" id="6_rnivb"]
-[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="7_7ce5k"]
-[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="8_7kqij"]
-[ext_resource type="PackedScene" uid="uid://ck2tfnr0oy6s4" path="res://enemies/orc_grunt/orc_grunt.tscn" id="9_skl6g"]
-[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="10_toono"]
 [ext_resource type="Resource" uid="uid://ic0hy7kikmrw" path="res://effects/relics/relic_library.tres" id="15_0q7yn"]
-
-[sub_resource type="Resource" id="Resource_l5du2"]
-script = ExtResource("8_7kqij")
-spawn = ExtResource("9_skl6g")
-
-[sub_resource type="Resource" id="Resource_3auca"]
-script = ExtResource("10_toono")
-amount = 10
-interval = 2.0
-initial_delay = 1.0
-
-[sub_resource type="PackedScene" id="PackedScene_1tpq4"]
-_bundled = {
-"base_scene": 0,
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("Level", "PortalSpawner", "position", "placement_node", "SpawnConfigComponent", "spawn_provider_config", "spawn_placer_config"),
-"node_count": 3,
-"node_paths": [NodePath("./YSorted/Spawners"), NodePath("./YSorted/Spawners/PortalSpawner")],
-"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 0, 0, 1073741824, 0, 2147483647, 262145, 1, 2, 2, 2, 1073741827, 3, 0, 1073741825, 0, 2147483647, 1572868, 4, 2, 5, 5, 6, 6, 0),
-"variants": [ExtResource("5_y3wud"), ExtResource("6_oidea"), Vector2(851, 324), NodePath("../../Enemies"), ExtResource("7_7ce5k"), SubResource("Resource_l5du2"), SubResource("Resource_3auca")],
-"version": 3
-}
 
 [resource]
 script = ExtResource("2_3n011")
 players = 2
-levels = Array[PackedScene]([SubResource("PackedScene_1tpq4"), ExtResource("4_rmm38"), ExtResource("5_uogry"), ExtResource("6_rnivb")])
+levels = Array[PackedScene]([ExtResource("6_lri44"), ExtResource("4_rmm38"), ExtResource("5_uogry"), ExtResource("6_rnivb")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 relic_library = ExtResource("15_0q7yn")

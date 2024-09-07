@@ -40,31 +40,37 @@ test_gameplay_characters = Array[ExtResource("2_ijng6")]([ExtResource("2_sm8ai")
 position = Vector2(680, 224)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent2" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_yxj6g")]
+[node name="SpawnConfigComponent3" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_yxj6g")]
 spawn_provider_config = SubResource("Resource_p55gh")
 spawn_placer_config = SubResource("Resource_qq1dk")
 
-[node name="@Node@18256" type="Node" parent="YSorted/Spawners/OrcWarriorSpawner" index="17" instance=ExtResource("11_yxj6g")]
+[node name="@Node@18256" parent="YSorted/Spawners/OrcWarriorSpawner" index="8" instance=ExtResource("11_yxj6g")]
+
+[node name="@Node@18256" type="Node" parent="YSorted/Spawners/OrcWarriorSpawner" index="9" instance=ExtResource("11_yxj6g")]
 script = ExtResource("10_a5nqj")
 
 [node name="OrcWarriorSpawner2" parent="YSorted/Spawners" index="1" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_b40o5")]
 position = Vector2(680, 424)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent2" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("11_yxj6g")]
+[node name="SpawnConfigComponent3" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("11_yxj6g")]
 spawn_provider_config = SubResource("Resource_p55gh")
 spawn_placer_config = SubResource("Resource_qq1dk")
 
-[node name="@Node@18257" type="Node" parent="YSorted/Spawners/OrcWarriorSpawner2" index="17" instance=ExtResource("11_yxj6g")]
+[node name="@Node@18257" parent="YSorted/Spawners/OrcWarriorSpawner2" index="8" instance=ExtResource("11_yxj6g")]
+
+[node name="@Node@18257" type="Node" parent="YSorted/Spawners/OrcWarriorSpawner2" index="9" instance=ExtResource("11_yxj6g")]
 script = ExtResource("10_a5nqj")
 
 [node name="ArcherSpawner" parent="YSorted/Spawners" index="2" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_b40o5")]
 position = Vector2(750, 324)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent2" parent="YSorted/Spawners/ArcherSpawner" index="5" instance=ExtResource("11_yxj6g")]
+[node name="SpawnConfigComponent3" parent="YSorted/Spawners/ArcherSpawner" index="5" instance=ExtResource("11_yxj6g")]
 spawn_provider_config = SubResource("Resource_5u5nr")
 spawn_placer_config = SubResource("Resource_r6bo1")
 
-[node name="@Node@18258" type="Node" parent="YSorted/Spawners/ArcherSpawner" index="17" instance=ExtResource("11_yxj6g")]
+[node name="@Node@18258" parent="YSorted/Spawners/ArcherSpawner" index="8" instance=ExtResource("11_yxj6g")]
+
+[node name="@Node@18258" type="Node" parent="YSorted/Spawners/ArcherSpawner" index="9" instance=ExtResource("11_yxj6g")]
 script = ExtResource("10_a5nqj")
