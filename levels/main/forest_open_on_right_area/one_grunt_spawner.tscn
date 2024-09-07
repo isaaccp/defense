@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://caol5sewu4epj"]
+[gd_scene load_steps=9 format=3 uid="uid://caol5sewu4epj"]
 
 [ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_phfdv"]
 [ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="2_16vhn"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="5_ce0ha"]
 [ext_resource type="PackedScene" uid="uid://ck2tfnr0oy6s4" path="res://enemies/orc_grunt/orc_grunt.tscn" id="6_uxe78"]
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="7_03iww"]
-[ext_resource type="Script" path="res://spawners/components/spawn_config_component.gd" id="7_knr0c"]
 
 [sub_resource type="Resource" id="Resource_l5du2"]
 script = ExtResource("5_ce0ha")
@@ -20,33 +19,10 @@ initial_delay = 1.0
 
 [node name="Level" instance=ExtResource("1_phfdv")]
 
-[node name="PortalSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_16vhn")]
+[node name="OrcGruntSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_16vhn")]
 position = Vector2(851, 324)
 placement_node = NodePath("../../Enemies")
 
-[node name="SpawnConfigComponent2" parent="YSorted/Spawners/PortalSpawner" index="5" instance=ExtResource("3_fokjr")]
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcGruntSpawner" index="5" instance=ExtResource("3_fokjr")]
 spawn_provider_config = SubResource("Resource_l5du2")
 spawn_placer_config = SubResource("Resource_3auca")
-
-[node name="@Node@19091" parent="YSorted/Spawners/PortalSpawner" index="7" instance=ExtResource("3_fokjr")]
-
-[node name="@Node@28701" parent="YSorted/Spawners/PortalSpawner" index="9" instance=ExtResource("3_fokjr")]
-
-[node name="@Node@18393" parent="YSorted/Spawners/PortalSpawner" index="10" instance=ExtResource("3_fokjr")]
-
-[node name="_Node_18393" parent="YSorted/Spawners/PortalSpawner" index="12" instance=ExtResource("3_fokjr")]
-
-[node name="@Node@18394" parent="YSorted/Spawners/PortalSpawner" index="14" instance=ExtResource("3_fokjr")]
-
-[node name="@Node@19084" parent="YSorted/Spawners/PortalSpawner" index="16" instance=ExtResource("3_fokjr")]
-
-[node name="_Node_18394" parent="YSorted/Spawners/PortalSpawner" index="18" instance=ExtResource("3_fokjr")]
-
-[node name="_Node_18395" parent="YSorted/Spawners/PortalSpawner" index="20" instance=ExtResource("3_fokjr")]
-
-[node name="_Node_18396" parent="YSorted/Spawners/PortalSpawner" index="22" instance=ExtResource("3_fokjr")]
-
-[node name="_Node_18402" parent="YSorted/Spawners/PortalSpawner" index="24" instance=ExtResource("3_fokjr")]
-
-[node name="@Node@18394" type="Node" parent="YSorted/Spawners/PortalSpawner" index="26" instance=ExtResource("3_fokjr")]
-script = ExtResource("7_knr0c")

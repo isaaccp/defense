@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://i0ffjyhoyu76"]
+[gd_scene load_steps=7 format=3 uid="uid://i0ffjyhoyu76"]
 
 [ext_resource type="Script" path="res://spawners/spawner.gd" id="1_n8mv7"]
 [ext_resource type="PackedScene" uid="uid://ceuhersiei42x" path="res://spawners/components/spawn_provider_component.tscn" id="2_40ulp"]
@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bydej65035478" path="res://spawners/components/spawn_placer_component.tscn" id="4_wdsse"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="5_3q8ix"]
 [ext_resource type="PackedScene" uid="uid://bchx4dupmrbyu" path="res://spawners/components/spawn_animation_controller_component.tscn" id="6_6x3oj"]
-[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="7_8dpbu"]
-[ext_resource type="Script" path="res://spawners/components/spawn_config_component.gd" id="8_2v83i"]
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_n8mv7")
@@ -26,6 +24,3 @@ spawn_animation_component = NodePath("../SpawnAnimationControllerComponent")
 
 [node name="SpawnAnimationControllerComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("6_6x3oj")]
 animation_component = NodePath("../AnimationComponent")
-
-[node name="SpawnConfigComponent" type="Node" parent="." instance=ExtResource("7_8dpbu")]
-script = ExtResource("8_2v83i")

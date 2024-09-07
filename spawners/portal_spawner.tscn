@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnsf1muqgpiu1"]
+[gd_scene load_steps=7 format=3 uid="uid://cnsf1muqgpiu1"]
 
 [ext_resource type="PackedScene" uid="uid://i0ffjyhoyu76" path="res://spawners/spawner.tscn" id="1_a7635"]
-[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="3_knaj1"]
 [ext_resource type="Texture2D" uid="uid://d1g08qh7vyfxf" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 F.png" id="4_a0u74"]
 
 [sub_resource type="Animation" id="Animation_bldkl"]
@@ -116,5 +115,3 @@ offset = Vector2(-16, -32)
 hframes = 6
 vframes = 30
 frame = 89
-
-[node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("3_knaj1")]
