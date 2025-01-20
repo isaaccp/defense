@@ -57,5 +57,5 @@ func _setup_action_scene(instance: ActionScene) -> bool:
 		if not enemy:
 			return false
 		target = ConditionalTarget.make_actor_conditional_target(enemy, null)
-	instance.initialize("test_owner", ActionDef.new(), target, %AttributesComponent, %SideComponent, null)
+	instance.initialize("test_owner", ActionDef.new(), target, %AttributesComponent.attributes, %SideComponent, null, null)
 	return true

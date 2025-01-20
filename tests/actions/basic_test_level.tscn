@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6iaoe1retjcv"]
+[gd_scene load_steps=3 format=3 uid="uid://sqxnjf8uyw28"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ey8bv"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_2xijh"]
