@@ -16,7 +16,7 @@ var acquired_skills: SkillTreeState
 @onready var behavior_name_line_edit: LineEdit = %BehaviorNameLineEdit
 var behavior_list: Tree
 var root: TreeItem
-var item_by_name: Dictionary
+var item_by_name: Dictionary[String, TreeItem]
 
 
 enum Column {
@@ -55,7 +55,7 @@ func add_item(behavior: StoredBehavior):
 	update_metadata(behavior)
 
 func update_metadata(behavior: StoredBehavior):
-	var tree_item = item_by_name[behavior.name] as TreeItem
+	var tree_item = item_by_name[behavior.name]
 	var required_skills = behavior.required_skills()
 	var available = acquired_skills.all_available_by_name(required_skills)
 	if tree_item.get_button_count(Column.BUTTONS) == 0:

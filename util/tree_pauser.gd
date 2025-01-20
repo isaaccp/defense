@@ -3,7 +3,7 @@ extends RefCounted
 
 class_name TreePauser
 
-var state: Dictionary
+var state: Dictionary[Node, Dictionary]
 
 func pause_tree(node: Node, pause: bool):
 	pause_node(node, pause)

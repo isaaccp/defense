@@ -144,7 +144,7 @@ func _is_acquired(item: TreeItem) -> bool:
 			return false
 	return true
 
-func _metadata(name: StringName, params: SkillParams = null) -> Dictionary:
+func _metadata(name: StringName, params: SkillParams = null) -> Dictionary[String, Variant]:
 	return {"name": name, "params": params}
 
 func _get_drag_data(at_position):

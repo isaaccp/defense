@@ -6,7 +6,7 @@ class_name StateMachineStack
 # that use StateMachine, e.g. to have a full state view without big dependencies.
 
 var state_machines: Array
-var sm_by_name: Dictionary
+var sm_by_name: Dictionary[String, StateMachine]
 
 func _init(root_sm: StateMachine):
 	state_machines.append(root_sm)
