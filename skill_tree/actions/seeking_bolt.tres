@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://crd5cdw57rf3c"]
 
-[ext_resource type="Script" path="res://behavior/actions/seeking_bolt_action.gd" id="1_oopmu"]
+[ext_resource type="Script" uid="uid://bvp2ukemats4v" path="res://behavior/actions/seeking_bolt_action.gd" id="1_oopmu"]
 [ext_resource type="Resource" uid="uid://dmi8jfkld1td3" path="res://game_logic/attack_types/magical.tres" id="2_12hpy"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_maeel"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_ivjwv"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_maeel"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="3_ivjwv"]
 
 [sub_resource type="Resource" id="Resource_dkefb"]
 script = ExtResource("2_maeel")

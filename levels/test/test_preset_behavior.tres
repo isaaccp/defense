@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="LevelProvider" load_steps=27 format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_dv7bi"]
-[ext_resource type="Script" path="res://gameplay_character.gd" id="1_jouxj"]
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="2_cwces"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_4yb6m"]
-[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="4_tpntf"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="5_6s65h"]
-[ext_resource type="Script" path="res://levels/level_provider.gd" id="7_4xswo"]
+[ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_jouxj"]
+[ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="2_cwces"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="3_4yb6m"]
+[ext_resource type="Script" uid="uid://c2obyw4bqtprd" path="res://behavior/stored_param_skill.gd" id="4_tpntf"]
+[ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="5_6s65h"]
+[ext_resource type="Script" uid="uid://c8dvjpcaa6dpo" path="res://levels/level_provider.gd" id="7_4xswo"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
 
 [sub_resource type="Resource" id="Resource_h13ej"]

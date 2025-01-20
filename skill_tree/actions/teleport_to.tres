@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://wi55i11ogew5"]
 
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_4w1n5"]
-[ext_resource type="Script" path="res://behavior/actions/teleport_to_action.gd" id="1_52f08"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_4w1n5"]
+[ext_resource type="Script" uid="uid://cxm5gp6q8qpva" path="res://behavior/actions/teleport_to_action.gd" id="1_52f08"]
 [ext_resource type="Resource" uid="uid://bdsw02ntoq6v2" path="res://skill_tree/actions/blink_to.tres" id="2_shvsq"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_88nxm"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="3_88nxm"]
 
 [sub_resource type="Resource" id="Resource_cxw7u"]
 script = ExtResource("1_4w1n5")

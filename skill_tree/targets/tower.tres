@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=5 format=3 uid="uid://cgvf7q7jgtwjg"]
 
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="1_awb10"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_kue2b"]
-[ext_resource type="Script" path="res://behavior/target_selection/tower_target_selector.gd" id="3_ainap"]
+[ext_resource type="Script" uid="uid://x4kkgscrakhi" path="res://behavior/target_selection/target_selection_def.gd" id="1_awb10"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_kue2b"]
+[ext_resource type="Script" uid="uid://deoig4ce3ptng" path="res://behavior/target_selection/tower_target_selector.gd" id="3_ainap"]
 
 [sub_resource type="Resource" id="Resource_oit4y"]
 script = ExtResource("1_kue2b")

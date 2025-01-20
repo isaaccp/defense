@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="GameplayCharacter" load_steps=7 format=3 uid="uid://dgs55tgbrgkhv"]
 
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="1_8c2xd"]
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_bxl72"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_sr3rp"]
-[ext_resource type="Script" path="res://gameplay_character.gd" id="8_c4bmv"]
+[ext_resource type="Script" uid="uid://cjxs7ysk0yiya" path="res://skill_tree/skill_tree_state.gd" id="1_8c2xd"]
+[ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="1_bxl72"]
+[ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="3_sr3rp"]
+[ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="8_c4bmv"]
 
 [sub_resource type="Resource" id="Resource_0rmgq"]
 script = ExtResource("1_8c2xd")

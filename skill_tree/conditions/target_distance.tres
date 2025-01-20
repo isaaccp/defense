@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ConditionDef" load_steps=6 format=3 uid="uid://dn1xlxn35k6ub"]
 
-[ext_resource type="Script" path="res://behavior/conditions/distance_position_condition_evaluator.gd" id="1_d7xrg"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_t6ila"]
+[ext_resource type="Script" uid="uid://cl4pov735drcj" path="res://behavior/conditions/distance_position_condition_evaluator.gd" id="1_d7xrg"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_t6ila"]
 [ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="2_l7qbk"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="3_6axad"]
+[ext_resource type="Script" uid="uid://dcyviw8nie5gy" path="res://behavior/conditions/condition_def.gd" id="3_6axad"]
 
 [sub_resource type="Resource" id="Resource_noqfo"]
 script = ExtResource("1_t6ila")

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://j04etfa2ncij"]
 
-[ext_resource type="Script" path="res://gameplay_character.gd" id="1_ioige"]
+[ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_ioige"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_x5jr5"]
 [ext_resource type="PackedScene" uid="uid://bbo0hd6gduxbc" path="res://levels/tutorial/tutorial_attack.tscn" id="2_4yctn"]
-[ext_resource type="Script" path="res://levels/level_provider.gd" id="3_p28ke"]
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="4_w5bw1"]
+[ext_resource type="Script" uid="uid://c8dvjpcaa6dpo" path="res://levels/level_provider.gd" id="3_p28ke"]
+[ext_resource type="Script" uid="uid://cjxs7ysk0yiya" path="res://skill_tree/skill_tree_state.gd" id="4_w5bw1"]
 
 [sub_resource type="Resource" id="Resource_dnvqw"]
 script = ExtResource("4_w5bw1")

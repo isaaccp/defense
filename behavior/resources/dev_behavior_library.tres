@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="BehaviorLibrary" load_steps=82 format=3 uid="uid://bfaftc351hhvi"]
 
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="1_enl0e"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_v57ou"]
-[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="3_6wex8"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="4_7mu3l"]
-[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="5_7yy3c"]
-[ext_resource type="Script" path="res://behavior/behavior_library.gd" id="6_7v2r3"]
-[ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="6_s534k"]
+[ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="1_enl0e"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_v57ou"]
+[ext_resource type="Script" uid="uid://c2obyw4bqtprd" path="res://behavior/stored_param_skill.gd" id="3_6wex8"]
+[ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="4_7mu3l"]
+[ext_resource type="Script" uid="uid://bhqo018swx4s7" path="res://behavior/stored_skill.gd" id="5_7yy3c"]
+[ext_resource type="Script" uid="uid://cs07hpnmg4i86" path="res://behavior/behavior_library.gd" id="6_7v2r3"]
+[ext_resource type="Script" uid="uid://clb4qabgcoyo5" path="res://behavior/conditions/float_value.gd" id="6_s534k"]
 
 [sub_resource type="Resource" id="Resource_ojvym"]
 script = ExtResource("2_v57ou")

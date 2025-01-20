@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://buewl5eydlx7c"]
 
-[ext_resource type="Script" path="res://behavior/actions/heal_action.gd" id="1_1tnha"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_7bl7x"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="1_70syy"]
+[ext_resource type="Script" uid="uid://bu1aj2dy3bvxo" path="res://behavior/actions/heal_action.gd" id="1_1tnha"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_7bl7x"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="1_70syy"]
 
 [sub_resource type="Resource" id="Resource_tabkk"]
 script = ExtResource("1_7bl7x")

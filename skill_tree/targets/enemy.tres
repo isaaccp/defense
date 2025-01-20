@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=7 format=3 uid="uid://cd07rgpgh7lss"]
 
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_4ggyl"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_2oq6d"]
-[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="2_ipgp5"]
-[ext_resource type="Script" path="res://behavior/target_selection/enemy_target_selector.gd" id="3_46sih"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_4ggyl"]
+[ext_resource type="Script" uid="uid://x4kkgscrakhi" path="res://behavior/target_selection/target_selection_def.gd" id="2_2oq6d"]
+[ext_resource type="Script" uid="uid://bhqo018swx4s7" path="res://behavior/stored_skill.gd" id="2_ipgp5"]
+[ext_resource type="Script" uid="uid://dany5cpc4fgbj" path="res://behavior/target_selection/enemy_target_selector.gd" id="3_46sih"]
 
 [sub_resource type="Resource" id="Resource_q3ocn"]
 script = ExtResource("2_ipgp5")

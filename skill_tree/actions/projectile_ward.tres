@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://blxoeo676uvmd"]
 
-[ext_resource type="Script" path="res://behavior/actions/projectile_ward_action.gd" id="1_1gaxn"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_1xd86"]
+[ext_resource type="Script" uid="uid://bsi86nkksq02d" path="res://behavior/actions/projectile_ward_action.gd" id="1_1gaxn"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_1xd86"]
 [ext_resource type="Resource" uid="uid://dvdw68ldlqcxe" path="res://skill_tree/actions/magic_armor.tres" id="3_5owi0"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_re265"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="3_re265"]
 
 [sub_resource type="Resource" id="Resource_4nsng"]
 script = ExtResource("2_1xd86")

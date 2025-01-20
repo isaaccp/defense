@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="GameplayCharacter" load_steps=7 format=3 uid="uid://ckoq3vmb76jcy"]
 
-[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="1_gc03e"]
-[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="2_ld1pl"]
-[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="2_uhf6q"]
-[ext_resource type="Script" path="res://gameplay_character.gd" id="3_b60i4"]
+[ext_resource type="Script" uid="uid://cjxs7ysk0yiya" path="res://skill_tree/skill_tree_state.gd" id="1_gc03e"]
+[ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="2_ld1pl"]
+[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="2_uhf6q"]
+[ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="3_b60i4"]
 
 [sub_resource type="Resource" id="Resource_2impa"]
 script = ExtResource("1_gc03e")
