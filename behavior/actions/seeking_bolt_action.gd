@@ -6,6 +6,9 @@ func _init():
 	min_distance = 100
 	max_distance = 300
 	prepare_time = 0.5
+	# Needed as the homing behavior requiers target to be valid during run().
+	# Ideally this would be automatically set based on the type of target or similar.
+	need_valid_target_after_prepare = true
 
 func post_prepare():
 	spawn_projectile()
