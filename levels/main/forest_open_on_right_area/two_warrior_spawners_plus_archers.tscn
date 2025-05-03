@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://beiehc7ykxgc0"]
 
 [ext_resource type="PackedScene" uid="uid://deakioxfpy3dy" path="res://levels/stages/forest_stage_right_side_open.tscn" id="1_3372d"]
-[ext_resource type="Script" path="res://gameplay_character.gd" id="2_ijng6"]
+[ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="2_ijng6"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="2_sm8ai"]
 [ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="3_jfey7"]
 [ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="10_b40o5"]
 [ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="11_yxj6g"]
-[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="12_pv66h"]
+[ext_resource type="Script" uid="uid://du1ohbhufgg6v" path="res://spawners/components/data_types/spawn_provider_config.gd" id="12_pv66h"]
 [ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="13_t0iv3"]
-[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="14_3habc"]
+[ext_resource type="Script" uid="uid://c3nhv802mefnt" path="res://spawners/components/data_types/spawn_placer_config.gd" id="14_3habc"]
 [ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="15_kirkn"]
 
 [sub_resource type="Resource" id="Resource_p55gh"]
