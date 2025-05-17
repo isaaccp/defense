@@ -19,4 +19,6 @@ static func make_new() -> SaveState:
 	var save_state = SaveState.new()
 	save_state.behavior_library = BehaviorLibrary.new()
 	save_state.unlocked_skills = SkillTreeState.new()
+	save_state.unlocked_skills.add_skill_names(Constants.base_acquired_skills)
+
 	return save_state

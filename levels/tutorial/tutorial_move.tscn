@@ -7,7 +7,7 @@
 players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(196, 299)
+position = Vector2(297, 299)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("2_7ckkc")]
 position = Vector2(554, 304)

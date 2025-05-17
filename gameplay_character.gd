@@ -36,6 +36,7 @@ func initialize(name: String, peer_id: int, behavior: StoredBehavior = null):
 	health = attributes.health
 	if behavior:
 		self.behavior = behavior
+	acquired_skills.add_skill_names(Constants.base_acquired_skills)
 
 func use_xp(amount: int) -> void:
 	assert(xp >= amount, "Tried to use more XP than possible")

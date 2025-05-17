@@ -3,7 +3,7 @@ extends Resource
 
 class_name SkillTreeState
 
-@export var skills: Array[StringName] = [&"Always", &"Enemy", &"Move To", &"Closest First"]:
+@export var skills: Array[StringName]:
 	set(value):
 		skills = value
 		_process_skills()
@@ -86,12 +86,17 @@ func mark_available(skill: Skill):
 	skills_by_name[skill.skill_name] = true
 	skills_by_type_and_name[skill.skill_type][skill.skill_name] = true
 
-# Used for tutorial levels, etc that need to add to a tree.
-# TODO: Don't add duplicates.
-# TODO: Fix so it refreshes the dictionaries, as otherwise it
-# won't work for some use cases.
+# Used for tutorial levels to add skills from SkillTreeState.
 func add(other: SkillTreeState):
-	skills += other.skills
+	add_skill_names(other.skills)
+
+# Used to add base skills that are always available.
+func add_skill_names(skill_names: Array[StringName]):
+	var new_skills: Array[StringName]
+	for skill_name in skill_names:
+		if not skills_by_name.has(skill_name):
+			new_skills.append(skill_name)
+	skills += new_skills
 
 # TODO: Remove if we ever have typed dictionaries.
 func _cast(skill_names: Array) -> Array[StringName]:
