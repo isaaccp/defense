@@ -18,7 +18,10 @@ func test_last_empty():
 	var last_rule = _last_rule_line(behavior_editor_view)
 	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
 
-func test_empty_after_new_drop():
+# Test disabled as now _can_drop_data gets invoked with real mouse coordinates
+# instead of with inputsender coordinates.
+# See https://github.com/bitwes/Gut/issues/646#issuecomment-2888592657
+func _test_empty_after_new_drop():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
 	ui._initialize_from_test_character()
 	add_child_autoqfree(ui)
@@ -49,7 +52,10 @@ func test_empty_after_new_drop():
 	if is_failing(): # TODO: Only if !gut.add_children_to._cmdln_mode?
 		pause_before_teardown()
 
-func test_noop_always_drop():
+# Test disabled as now _can_drop_data gets invoked with real mouse coordinates
+# instead of with inputsender coordinates.
+# See https://github.com/bitwes/Gut/issues/646#issuecomment-2888592657
+func _test_noop_always_drop():
 	# FIXME: Deal with orphans
 	var ui = _ui_scene.instantiate() as ProgrammingUI
 	ui._initialize_from_test_character()

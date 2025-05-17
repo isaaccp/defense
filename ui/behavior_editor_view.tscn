@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://25gbhyy7yo58"]
 
 [ext_resource type="PackedScene" uid="uid://c3oy80g32pyjn" path="res://ui/config_pane.tscn" id="1_o0o61"]
-[ext_resource type="Script" path="res://ui/behavior_editor_view.gd" id="1_xjfhe"]
+[ext_resource type="Script" uid="uid://e851a3tmdwb1" path="res://ui/behavior_editor_view.gd" id="1_xjfhe"]
 
 [node name="BehaviorEditorView" type="Tree"]
 size_flags_horizontal = 3

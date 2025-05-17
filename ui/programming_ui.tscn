@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7bsv7cscwbmr"]
 
-[ext_resource type="Script" path="res://ui/programming_ui.gd" id="1_xf4ix"]
-[ext_resource type="Script" path="res://ui/toolbox.gd" id="2_pkup4"]
+[ext_resource type="Script" uid="uid://bxgcffjhvq2l" path="res://ui/programming_ui.gd" id="1_xf4ix"]
+[ext_resource type="Script" uid="uid://evbqbits23bc" path="res://ui/toolbox.gd" id="2_pkup4"]
 [ext_resource type="Resource" uid="uid://dgs55tgbrgkhv" path="res://character/playable_characters/test/programming_ui_char.tres" id="2_wilel"]
 [ext_resource type="PackedScene" uid="uid://bhwhcbxitg8lf" path="res://ui/behavior_library_ui.tscn" id="3_dopn3"]
 [ext_resource type="PackedScene" uid="uid://d16hng75dnkhk" path="res://ui/behavior_editor.tscn" id="4_rs50h"]
