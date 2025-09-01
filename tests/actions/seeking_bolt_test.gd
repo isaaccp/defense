@@ -34,7 +34,6 @@ func test_seeking_bolt_with_one_actor():
 	level.enemies.add_child(target)
 	target.position = character.position + 200 * Vector2.RIGHT
 	var target_health = target.get_component_or_die(HealthComponent)
-
 	level.start()
 
 	await wait_for_signal(target_health.died, 3, "Waiting for enemy to die")
@@ -68,7 +67,7 @@ func test_seeking_bolt_target_disappears():
 	var target = TestUtils.make_barrel(5)
 	level.enemies.add_child(target)
 	target.position = character.position + 250 * Vector2.RIGHT
-	var target_health = target.get_component_or_die(HealthComponent)
+	var target_damage = target.get_component_or_die(DamageComponent)
 
 	level.start()
 
@@ -83,7 +82,7 @@ func test_seeking_bolt_target_disappears():
 	hit_effect.attack_type = preload("res://game_logic/attack_types/melee.tres")
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 	hit_effect.damage = 5
-	target_health.process_hit(hit_effect)
+	target_damage.process_hit(hit_effect)
 
 	await wait_seconds(0.2, "Waiting to ensure seeking bolt disappears without issues")
 

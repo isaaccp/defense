@@ -47,11 +47,11 @@ func test_effect_actuator():
 
 func test_attack_in_level():
 	TestUtils.set_character_behavior(character, make_sword_behavior())
-	var enemy_health: HealthComponent = enemy.get_component_or_die(HealthComponent)
+	var enemy_damage: DamageComponent = enemy.get_component_or_die(DamageComponent)
 	enemy.position = character.position + Vector2.RIGHT * 40
 	level.start()
-	watch_signals(enemy_health)
-	await wait_for_signal(enemy_health.hit, 3, "Waiting for health to report hit")
-	var enemy_health_hit_params = get_signal_parameters(enemy_health, "hit", 0)
-	var hit_effect: HitEffect = enemy_health_hit_params[0]
+	watch_signals(enemy_damage)
+	await wait_for_signal(enemy_damage.hit, 3, "Waiting for health to report hit")
+	var enemy_damage_hit_params = get_signal_parameters(enemy_damage, "hit", 0)
+	var hit_effect: HitEffect = enemy_damage_hit_params[0]
 	assert_eq(hit_effect.flat_armor_pen, 1)  # Default for sword attack is 0, should be 1 now.

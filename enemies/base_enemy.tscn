@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=15 format=3 uid="uid://dkxmuee84wtoj"]
 
-[ext_resource type="Script" path="res://actor/enemy.gd" id="1_1ol1r"]
+[ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_ra8mw"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_sx4w7"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="4_he7s5"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="10_yatxq"]
 [ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="11_g44ii"]
 [ext_resource type="PackedScene" uid="uid://dxlpeence2pav" path="res://components/pickable_component.tscn" id="13_dlre1"]
+[ext_resource type="PackedScene" uid="uid://0o5ty4vnc6k3" path="res://components/damage_component.tscn" id="14_7on22"]
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
@@ -56,9 +57,10 @@ attributes_component = NodePath("../AttributesComponent")
 show_health = 1
 logging_component = NodePath("../LoggingComponent")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "health_component", "status_component") instance=ExtResource("5_s5sa1")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "health_component", "status_component") instance=ExtResource("5_s5sa1")]
 side_component = NodePath("../SideComponent")
 logging_component = NodePath("../LoggingComponent")
+damage_component = NodePath("../DamageComponent")
 health_component = NodePath("../HealthComponent")
 status_component = NodePath("../StatusComponent")
 
@@ -99,6 +101,11 @@ status_component = NodePath("../StatusComponent")
 
 [node name="PickableComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("13_dlre1")]
 collision_shape = NodePath("../CollisionShape2D")
+
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "health_component", "logging_component") instance=ExtResource("14_7on22")]
+attributes_component = NodePath("../AttributesComponent")
+health_component = NodePath("../HealthComponent")
+logging_component = NodePath("../LoggingComponent")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -14,11 +14,13 @@ signal hit(hit_effect: HitEffect)
 
 # Optional as e.g. you may still want to have a hurtbox
 # for things that can't be killed. Same for status.
+@export var damage_component: DamageComponent
+# TODO: Remove when is_dead is on actor.
 @export var health_component: HealthComponent
 @export var status_component: StatusComponent
 
 func can_handle_collision():
-	if not (health_component or status_component):
+	if not (health_component or status_component or damage_component):
 		return false
 	if health_component and health_component.is_dead:
 		return false
@@ -27,8 +29,8 @@ func can_handle_collision():
 func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEffect) -> HitResult:
 	hit.emit(hit_effect)
 	var hit_result: HitResult
-	if health_component:
-		hit_result = health_component.process_hit(hit_effect)
+	if damage_component:
+		hit_result = damage_component.process_hit(hit_effect)
 	else:
 		hit_result = HitResult.new()
 	if not hit_effect.status_on_damage_only or hit_result.damage != 0:

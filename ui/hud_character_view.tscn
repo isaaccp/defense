@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bsabhsq53warn"]
 
-[ext_resource type="Script" path="res://ui/hud_character_view.gd" id="1_xuorh"]
+[ext_resource type="Script" uid="uid://co006ierilxe4" path="res://ui/hud_character_view.gd" id="1_xuorh"]
 [ext_resource type="PackedScene" uid="uid://djdh7mp64thdi" path="res://ui/hud_status_display.tscn" id="2_aw5xw"]
 [ext_resource type="PackedScene" uid="uid://dhoqr0ca7h26x" path="res://ui/hud_relic_display.tscn" id="3_ofasq"]
 

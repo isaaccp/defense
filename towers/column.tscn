@@ -1,13 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://camb4jx7y3ygt"]
+[gd_scene load_steps=19 format=3 uid="uid://camb4jx7y3ygt"]
 
-[ext_resource type="Script" path="res://actor/tower.gd" id="1_3tt8j"]
+[ext_resource type="Script" uid="uid://bnnuvxsnfbk78" path="res://actor/tower.gd" id="1_3tt8j"]
 [ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="2_narhj"]
 [ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="3_enchd"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="4_asgae"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="5_5ko8r"]
-[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="7_lgmfc"]
-[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="7_v2vco"]
+[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="7_lgmfc"]
+[ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="7_v2vco"]
+[ext_resource type="Script" uid="uid://c68o4e3q55mv2" path="res://components/damage_component.gd" id="9_ttj04"]
+[ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="10_kgr8j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0l7o0"]
 atlas = ExtResource("1_58km4")
@@ -51,8 +53,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4jknt"]
 _data = {
-"RESET": SubResource("Animation_7qu8f"),
-"glow": SubResource("Animation_nhmel")
+&"RESET": SubResource("Animation_7qu8f"),
+&"glow": SubResource("Animation_nhmel")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fatgc"]
@@ -88,23 +90,27 @@ texture = SubResource("AtlasTexture_w54le")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Column/Glyphs"]
 libraries = {
-"": SubResource("AnimationLibrary_4jknt")
+&"": SubResource("AnimationLibrary_4jknt")
 }
 autoplay = "glow"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fatgc")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "health_component") instance=ExtResource("2_narhj")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "health_component") instance=ExtResource("2_narhj")]
 side_component = NodePath("../SideComponent")
+logging_component = NodePath("../LoggingComponent")
+damage_component = NodePath("../DamageComponent")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_h0vh8")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component") instance=ExtResource("3_enchd")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("3_enchd")]
 position = Vector2(1, -58)
 attributes_component = NodePath("../AttributesComponent")
+show_health = 1
+logging_component = NodePath("../LoggingComponent")
 
 [node name="SideComponent" parent="." instance=ExtResource("4_asgae")]
 side = 1
@@ -114,3 +120,13 @@ base_attributes = SubResource("Resource_1jmna")
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 20.0
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("attributes_component", "health_component", "logging_component")]
+script = ExtResource("9_ttj04")
+attributes_component = NodePath("../AttributesComponent")
+health_component = NodePath("../HealthComponent")
+logging_component = NodePath("../LoggingComponent")
+metadata/_custom_type_script = "uid://c68o4e3q55mv2"
+
+[node name="LoggingComponent" parent="." instance=ExtResource("10_kgr8j")]
+track_stats = false
