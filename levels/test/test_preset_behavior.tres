@@ -11,8 +11,6 @@
 
 [sub_resource type="Resource" id="Resource_h13ej"]
 script = ExtResource("3_4yb6m")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_y6qno"]
 script = ExtResource("4_tpntf")
@@ -22,8 +20,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("3_4yb6m")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_00wv8"]
 script = ExtResource("4_tpntf")
@@ -34,7 +30,6 @@ skill_type = 3
 [sub_resource type="Resource" id="Resource_g68vo"]
 script = ExtResource("3_4yb6m")
 editor_string = "Enemy ({sort})"
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_lg6ku"]
 script = ExtResource("4_tpntf")
@@ -50,8 +45,6 @@ condition = SubResource("Resource_00wv8")
 
 [sub_resource type="Resource" id="Resource_d580u"]
 script = ExtResource("3_4yb6m")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_1l77o"]
 script = ExtResource("4_tpntf")
@@ -79,8 +72,6 @@ condition = SubResource("Resource_duvtq")
 
 [sub_resource type="Resource" id="Resource_cn1r5"]
 script = ExtResource("3_4yb6m")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_k7jyb"]
 script = ExtResource("4_tpntf")
@@ -108,7 +99,6 @@ condition = SubResource("Resource_go54w")
 
 [sub_resource type="Resource" id="Resource_4lrpe"]
 script = ExtResource("2_cwces")
-name = ""
 stored_rules = Array[ExtResource("5_6s65h")]([SubResource("Resource_66hom"), SubResource("Resource_0vv00"), SubResource("Resource_8cr5j")])
 
 [resource]

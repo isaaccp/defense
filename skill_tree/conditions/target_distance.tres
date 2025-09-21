@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_noqfo"]
 script = ExtResource("1_t6ila")
 editor_string = "distance {cmp} {float_value}"
-cmp = 0
 
 [resource]
 script = ExtResource("3_6axad")

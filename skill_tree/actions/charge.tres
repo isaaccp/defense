@@ -7,14 +7,11 @@
 
 [sub_resource type="Resource" id="Resource_lot10"]
 script = ExtResource("1_1mjwe")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("2_t0f4g")
 action_script = ExtResource("1_7n25x")
 supported_target_types = Array[int]([1])
-tags = Array[int]([])
 params = SubResource("Resource_lot10")
 skill_name = &"Charge"
 skill_type = 1

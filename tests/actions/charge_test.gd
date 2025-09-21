@@ -13,7 +13,7 @@ var character: Node2D
 var character_behavior: BehaviorComponent
 var character_status: StatusComponent
 var enemy: Node2D
-var enemy_health: HealthComponent
+var enemy_vitals: VitalsComponent
 var sword_damage: int
 var runnable_charge_action: Action
 
@@ -40,7 +40,7 @@ func before_each():
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
 	BehaviorComponent.get_or_die(enemy).stored_behavior = StoredBehavior.new()
-	enemy_health = HealthComponent.get_or_die(enemy)
+	enemy_vitals = enemy.get_component_or_die(VitalsComponent) as VitalsComponent
 
 func test_charge_short_distance():
 	# Due to short distance, strength surge shouldn't trigger.
@@ -51,20 +51,21 @@ func test_charge_short_distance():
 
 	level.start()
 
-	watch_signals(character_behavior)
 	watch_signals(character_status)
 
-	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
-
-	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	# Skip first vital update on initilization.
+	await wait_process_frames(1)
+	
+	await wait_for_signal(enemy_vitals.vital_updated, 3, "Waiting for enemy to be hit")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[&"Swiftness"]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
 	assert_signal_emit_count(character_status, "statuses_changed", 2)
 	# Check that first hit (second update after first heal) did 'sword_damage'.
 	# (-1 because of armor, should use test enemies in tests so their attributes
 	# are not changed randomly, needing adjustments).
-	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.prev_health - health_update.health, sword_damage - 1)
+	var vital_update = get_signal_parameters(enemy_vitals, "vital_updated", 0)[0] as VitalsComponent.VitalUpdate
+	assert_eq(vital_update.type, VitalsComponent.VitalType.HEALTH)
+	assert_eq(vital_update.prev_value - vital_update.current_value, sword_damage - 1)
 
 func test_charge_long_distance():
 	# Due to distance, strength surge should trigger shortly after
@@ -76,12 +77,12 @@ func test_charge_long_distance():
 
 	level.start()
 
-	watch_signals(character_behavior)
 	watch_signals(character_status)
 
-	# character_status.statuses_changed.connect(func(statuses): gut.p(statuses))
-
-	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	# Skip first vital update on initilization.
+	await wait_process_frames(1)
+	
+	await wait_for_signal(enemy_vitals.vital_updated, 3, "Waiting for enemy to be hit")
 	TestUtils.dump_all_emits(self, character_status, "statuses_changed")
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[&"Swiftness"]], 0)
 	assert_signal_emitted_with_parameters(character_status, "statuses_changed", [[]], 1)
@@ -91,9 +92,10 @@ func test_charge_long_distance():
 	# Check that first hit (second update after first heal) did more than 'sword damage' * 2.
 	# This also depends on the enemy having at least sword damage * 2 health,
 	# which is the case right now but could change.
-	TestUtils.dump_all_emits(self, enemy_health, "health_updated")
-	var health_update = get_signal_parameters(enemy_health, "health_updated", 1)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.prev_health - health_update.health, sword_damage * 2 - 1)
+	TestUtils.dump_all_emits(self, enemy_vitals, "vital_updated")
+	var vital_update = get_signal_parameters(enemy_vitals, "vital_updated", 0)[0] as VitalsComponent.VitalUpdate
+	assert_eq(vital_update.type, VitalsComponent.VitalType.HEALTH)
+	assert_eq(vital_update.prev_value - vital_update.current_value, sword_damage * 2 - 1)
 
 func test_charge_cooldown():
 	var extra_enemy = enemy_scene.instantiate()

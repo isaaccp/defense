@@ -27,7 +27,7 @@ class LevelTest extends GutTest:
 class TestTowerEnemyDestructionConditions extends LevelTest:
 
 	var tower: Node2D
-	var tower_health: HealthComponent
+	var tower_vitals: VitalsComponent
 
 	func before_each():
 		scene = basic_tower_test_level_scene
@@ -35,13 +35,13 @@ class TestTowerEnemyDestructionConditions extends LevelTest:
 		add_child_autoqfree(level)
 		set_character_behaviors(move_sword_behavior, move_sword_behavior)
 		# Set up tower.
-		tower = level.towers.get_child(0)
-		tower_health = HealthComponent.get_or_die(tower)
+		tower = level.towers.get_child(0) as Tower
+		tower_vitals = tower.get_component_or_die(VitalsComponent)
 
 	func test_tower_destruction_fails_level():
 		level.start()
 		await wait_frames(1)
-		tower_health.health = 1
+		tower_vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 1)
 
 		await wait_for_signal(victory.level_failed, 3, "Waiting for level to fail")
 		assert_signal_emitted(victory, "level_failed")

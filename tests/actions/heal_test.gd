@@ -10,7 +10,7 @@ const self_target = preload("res://skill_tree/targets/self.tres")
 var level: Level
 var character: Node2D
 var character_behavior: BehaviorComponent
-var character_health: HealthComponent
+var character_vitals: VitalsComponent
 var heal_amount: int
 
 func make_heal_behavior() -> StoredBehavior:
@@ -32,18 +32,18 @@ func before_each():
 	# Set up character.
 	character = level.characters.get_child(0)
 	character_behavior = BehaviorComponent.get_or_die(character)
-	character_health = HealthComponent.get_or_die(character)
+	character_vitals = character.get_component_or_die(VitalsComponent) as VitalsComponent
 
 func test_heal_works():
 	TestUtils.set_character_behavior(character, make_heal_behavior())
 
 	await wait_frames(1)
-	character_health.health = 5
+	character_vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 5.0)
 
 	level.start()
 	watch_signals(character_behavior)
-	watch_signals(character_health)
+	watch_signals(character_vitals)
 	await wait_seconds(0.6, "Waiting for heal")
 	assert_signal_emitted(character_behavior, "behavior_updated")
-	var health_update = get_signal_parameters(character_health, "health_updated", 0)[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.health - health_update.prev_health, heal_amount)
+	var vital_update = get_signal_parameters(character_vitals, "vital_updated", 0)[0] as VitalsComponent.VitalUpdate
+	assert_eq(vital_update.current_value - vital_update.prev_value, heal_amount)

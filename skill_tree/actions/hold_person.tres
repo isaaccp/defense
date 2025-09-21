@@ -6,14 +6,11 @@
 
 [sub_resource type="Resource" id="Resource_f4mky"]
 script = ExtResource("1_jbfiu")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("2_suqtg")
 action_script = ExtResource("1_mh4xt")
 supported_target_types = Array[int]([1])
-tags = Array[int]([])
 params = SubResource("Resource_f4mky")
 skill_name = &"Hold Person"
 skill_type = 1

@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_2impa"]
 script = ExtResource("1_gc03e")
 skills = Array[StringName]([&"Always", &"Enemy", &"Closest First", &"Move To", &"Bow Attack"])
-full = false
 
 [sub_resource type="Resource" id="Resource_60uxt"]
 script = ExtResource("2_ld1pl")
@@ -16,8 +15,6 @@ speed = 40.0
 health = 45
 recovery = 0.2
 damage_multiplier = 1.1
-armor = 0
-resistance = Array[ExtResource("2_uhf6q")]([])
 
 [resource]
 script = ExtResource("3_b60i4")
@@ -27,6 +24,3 @@ scene_id = 3
 description = "A forest elf on a secret mission"
 acquired_skills = SubResource("Resource_2impa")
 attributes = SubResource("Resource_60uxt")
-health = 0
-xp = 0
-relics = Array[StringName]([])

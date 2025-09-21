@@ -8,13 +8,11 @@
 [sub_resource type="Resource" id="Resource_l5ow1"]
 script = ExtResource("1_8m636")
 editor_string = "{int_value} times"
-cmp = 0
 
 [resource]
 script = ExtResource("3_aj6lq")
 type = 1
 evaluator_script = ExtResource("1_bw8bs")
-description_text = "<missing description>"
 params = SubResource("Resource_l5ow1")
 skill_name = &"Times"
 skill_type = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=18 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" uid="uid://dx1lxhkqdrqo" path="res://character/character.gd" id="1_1mnbb"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_jmljm"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="11_0ewa0"]
 [ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="12_o0jr4"]
 [ext_resource type="PackedScene" uid="uid://0o5ty4vnc6k3" path="res://components/damage_component.tscn" id="14_osyen"]
+[ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="15_sf42f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
 
@@ -104,7 +105,11 @@ logging_component = NodePath("../LoggingComponent")
 status_component = NodePath("../StatusComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
-[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "health_component", "logging_component") instance=ExtResource("14_osyen")]
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component") instance=ExtResource("14_osyen")]
 attributes_component = NodePath("../AttributesComponent")
-health_component = NodePath("../HealthComponent")
+vitals_component = NodePath("../VitalsComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("15_sf42f")]
+attributes_component = NodePath("../AttributesComponent")
 logging_component = NodePath("../LoggingComponent")

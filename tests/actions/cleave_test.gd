@@ -14,7 +14,7 @@ var character: Node2D
 var character_behavior: BehaviorComponent
 var character_status: StatusComponent
 var enemy: Node2D
-var enemy_health: HealthComponent
+var enemy_vitals: VitalsComponent
 var cleave_damage: int
 var runnable_cleave_action: Action
 
@@ -47,7 +47,7 @@ func before_each():
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
 	BehaviorComponent.get_or_die(enemy).stored_behavior = StoredBehavior.new()
-	enemy_health = HealthComponent.get_or_die(enemy)
+	enemy_vitals = enemy.get_component_or_die(VitalsComponent) as VitalsComponent
 
 func test_cleave_cooldown_reset_on_destroy():
 	var extra_enemy = enemy_scene.instantiate()
@@ -60,15 +60,12 @@ func test_cleave_cooldown_reset_on_destroy():
 	extra_enemy.position = character.position + Vector2.UP * (runnable_cleave_action.max_distance - 5)
 
 	level.start()
-
-	# Need to wait 1 frame, otherwise health change may be reverted.
-	await wait_frames(1)
-
-	# Set health to cleave_damage - 2 to make sure cleaves kills it (orc warrior has armor 1).
-	enemy_health.health = cleave_damage - 2
-
+	
 	await wait_for_signal(character_behavior.behavior_updated, 0.1, "Wait for cleave")
 	TestUtils.assert_last_action(self, character_behavior, cleave_action.skill_name)
+	
+	# Set health to cleave_damage - 2 to make sure cleaves kills it (orc warrior has armor 1).
+	enemy_vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, cleave_damage - 2)
 
 	# Next action should be cleave again as the cooldown should be cleared on destroying first enemy.
 	await wait_for_signal(character_behavior.behavior_updated, 1.1, "Wait for next action")

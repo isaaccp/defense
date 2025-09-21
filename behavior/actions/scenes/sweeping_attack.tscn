@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://mt4di5y7nyd8"]
 
-[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_o618k"]
+[ext_resource type="Script" uid="uid://85ko3gixouso" path="res://behavior/actions/scenes/action_scene.gd" id="1_o618k"]
 [ext_resource type="Texture2D" uid="uid://crn0raslm5ryy" path="res://assets/white_slash_wide/File1.png" id="2_ounlp"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_0uuii"]
 [ext_resource type="Texture2D" uid="uid://f2ccfhe4beoq" path="res://assets/white_slash_wide/File2.png" id="4_1xsag"]
@@ -9,9 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://ci73uwwqej7pe" path="res://assets/white_slash_wide/File5.png" id="7_dyuim"]
 [ext_resource type="Texture2D" uid="uid://b8wycalvfaypv" path="res://assets/white_slash_wide/File6.png" id="8_br02g"]
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="9_q07fw"]
-[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="10_3jxcv"]
+[ext_resource type="Script" uid="uid://cq1b0xpa0efub" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="10_3jxcv"]
 [ext_resource type="Resource" uid="uid://vpfp4bhjndut" path="res://game_logic/damage_types/slashing.tres" id="10_rhv04"]
-[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="11_shjch"]
+[ext_resource type="Script" uid="uid://cj6nn7jgnsowq" path="res://components/data_types/hit_effect.gd" id="11_shjch"]
 
 [sub_resource type="Animation" id="Animation_s5oqq"]
 length = 0.001
@@ -46,20 +46,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xrr2e"]
 _data = {
-"RESET": SubResource("Animation_s5oqq"),
-"auto": SubResource("Animation_y1jgj")
+&"RESET": SubResource("Animation_s5oqq"),
+&"auto": SubResource("Animation_y1jgj")
 }
 
 [sub_resource type="Resource" id="Resource_lg0oe"]
 script = ExtResource("11_shjch")
 damage = 5
 damage_type = ExtResource("10_rhv04")
-fraction_armor_pen = 0.0
-flat_armor_pen = 0
-status_duration = 0.0
-status_on_damage_only = false
-action_name = &""
-damage_multiplier = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i3juj"]
 radius = 12.0
@@ -80,9 +74,8 @@ scale = Vector2(0.075, 0.075)
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
-root_node = NodePath("")
 libraries = {
-"": SubResource("AnimationLibrary_xrr2e")
+&"": SubResource("AnimationLibrary_xrr2e")
 }
 
 [node name="HitboxComponent" parent="." instance=ExtResource("9_q07fw")]

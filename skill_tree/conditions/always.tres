@@ -6,14 +6,11 @@
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("1_xe28x")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("2_7lr6o")
 type = 1
 evaluator_script = ExtResource("1_utwvb")
-description_text = "<missing description>"
 params = SubResource("Resource_8lwyn")
 skill_name = &"Always"
 skill_type = 3

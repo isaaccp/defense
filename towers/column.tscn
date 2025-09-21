@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://camb4jx7y3ygt"]
+[gd_scene load_steps=20 format=3 uid="uid://camb4jx7y3ygt"]
 
 [ext_resource type="Script" uid="uid://bnnuvxsnfbk78" path="res://actor/tower.gd" id="1_3tt8j"]
 [ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="7_v2vco"]
 [ext_resource type="Script" uid="uid://c68o4e3q55mv2" path="res://components/damage_component.gd" id="9_ttj04"]
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="10_kgr8j"]
+[ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="11_8sdqq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0l7o0"]
 atlas = ExtResource("1_58km4")
@@ -65,12 +66,7 @@ radius = 15.0
 
 [sub_resource type="Resource" id="Resource_1jmna"]
 script = ExtResource("7_v2vco")
-speed = 0.0
 health = 60
-recovery = 0.0
-damage_multiplier = 1.0
-armor = 0
-resistance = Array[ExtResource("7_lgmfc")]([])
 
 [node name="Column" type="StaticBody2D" groups=["towers"]]
 y_sort_enabled = true
@@ -121,12 +117,16 @@ base_attributes = SubResource("Resource_1jmna")
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 radius = 20.0
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("attributes_component", "health_component", "logging_component")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component")]
 script = ExtResource("9_ttj04")
 attributes_component = NodePath("../AttributesComponent")
-health_component = NodePath("../HealthComponent")
+vitals_component = NodePath("../VitalsComponent")
 logging_component = NodePath("../LoggingComponent")
 metadata/_custom_type_script = "uid://c68o4e3q55mv2"
 
 [node name="LoggingComponent" parent="." instance=ExtResource("10_kgr8j")]
 track_stats = false
+
+[node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("11_8sdqq")]
+attributes_component = NodePath("../AttributesComponent")
+logging_component = NodePath("../LoggingComponent")

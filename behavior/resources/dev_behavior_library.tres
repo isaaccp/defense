@@ -10,8 +10,6 @@
 
 [sub_resource type="Resource" id="Resource_ojvym"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_yxxnc"]
 script = ExtResource("3_6wex8")
@@ -21,8 +19,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_x0vsb"]
 script = ExtResource("3_6wex8")
@@ -38,7 +34,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_jdioy"]
 script = ExtResource("2_v57ou")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_fsnpx")
 
 [sub_resource type="Resource" id="Resource_m2als"]
@@ -55,8 +50,6 @@ condition = SubResource("Resource_x0vsb")
 
 [sub_resource type="Resource" id="Resource_c24jc"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_q12nn"]
 script = ExtResource("3_6wex8")
@@ -89,8 +82,6 @@ stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_lvxlc"), Sub
 
 [sub_resource type="Resource" id="Resource_4l6vi"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_n5s7j"]
 script = ExtResource("3_6wex8")
@@ -147,8 +138,6 @@ stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_m5s5m"), Sub
 
 [sub_resource type="Resource" id="Resource_ms6fv"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_gdwx7"]
 script = ExtResource("3_6wex8")
@@ -158,8 +147,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_pxhu5"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_p54ri"]
 script = ExtResource("3_6wex8")
@@ -175,7 +162,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_htuis"]
 script = ExtResource("2_v57ou")
 editor_string = "Ally ({sort})"
-cmp = 0
 sort = SubResource("Resource_pacl1")
 
 [sub_resource type="Resource" id="Resource_37dhc"]
@@ -192,8 +178,6 @@ condition = SubResource("Resource_p54ri")
 
 [sub_resource type="Resource" id="Resource_4d74m"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_ub4c5"]
 script = ExtResource("3_6wex8")
@@ -226,7 +210,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_x5wfh"]
 script = ExtResource("2_v57ou")
 editor_string = "Ally ({sort})"
-cmp = 0
 sort = SubResource("Resource_1g3wj")
 
 [sub_resource type="Resource" id="Resource_3sn2m"]
@@ -248,8 +231,6 @@ stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_wyx17"), Sub
 
 [sub_resource type="Resource" id="Resource_piy75"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_qpdx4"]
 script = ExtResource("3_6wex8")
@@ -271,7 +252,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_6f6y2"]
 script = ExtResource("2_v57ou")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_dyfks")
 
 [sub_resource type="Resource" id="Resource_cs6o4"]
@@ -288,8 +268,6 @@ condition = SubResource("Resource_7o8bt")
 
 [sub_resource type="Resource" id="Resource_p4bk4"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_j12j0"]
 script = ExtResource("3_6wex8")
@@ -311,7 +289,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_vjwxx"]
 script = ExtResource("2_v57ou")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_gcwxl")
 
 [sub_resource type="Resource" id="Resource_tnfp3"]
@@ -333,8 +310,6 @@ stored_rules = Array[ExtResource("4_7mu3l")]([SubResource("Resource_mlloo"), Sub
 
 [sub_resource type="Resource" id="Resource_gqyyd"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_c3120"]
 script = ExtResource("3_6wex8")
@@ -344,8 +319,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_rks6q"]
 script = ExtResource("2_v57ou")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_spaho"]
 script = ExtResource("3_6wex8")
@@ -361,7 +334,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_f0ayu"]
 script = ExtResource("2_v57ou")
 editor_string = "Ally ({sort})"
-cmp = 0
 sort = SubResource("Resource_ys4s4")
 
 [sub_resource type="Resource" id="Resource_tktto"]

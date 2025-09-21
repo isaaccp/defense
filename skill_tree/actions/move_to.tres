@@ -6,14 +6,11 @@
 
 [sub_resource type="Resource" id="Resource_6kuty"]
 script = ExtResource("1_72c0t")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("1_7nxwc")
 action_script = ExtResource("1_ki1ft")
 supported_target_types = Array[int]([1, 3])
-tags = Array[int]([])
 params = SubResource("Resource_6kuty")
 skill_name = &"Move To"
 skill_type = 1

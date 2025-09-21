@@ -11,7 +11,7 @@ var level: Level
 var character: Node2D
 var character_behavior: BehaviorComponent
 var enemy: Node2D
-var enemy_health: HealthComponent
+var enemy_hurtbox: HurtboxComponent
 
 func make_sword_behavior(move: bool = false) -> StoredBehavior:
 	var behavior = StoredBehavior.new()
@@ -34,7 +34,7 @@ func before_each():
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
 	enemy.get_component_or_die(BehaviorComponent).stored_behavior = StoredBehavior.new()
-	enemy_health = enemy.get_component_or_die(HealthComponent)
+	enemy_hurtbox = enemy.get_component_or_die(HurtboxComponent) as HurtboxComponent
 
 func test_sword_works_within_distance_from_left():
 	# Basic sword attack only behavior.
@@ -46,9 +46,9 @@ func test_sword_works_within_distance_from_left():
 	level.start()
 
 	watch_signals(character_behavior)
-	await wait_for_signal(enemy_health.died, 3, "Waiting for enemy to die")
+	await wait_for_signal(enemy_hurtbox.hit, 3, "Waiting for enemy to be hit")
 	assert_signal_emitted(character_behavior, "behavior_updated")
-	assert_signal_emitted(enemy_health, "died")
+	assert_signal_emitted(enemy_hurtbox, "hit")
 
 func test_sword_doesnt_work_out_of_distance():
 	# Basic sword attack only behavior.
@@ -60,10 +60,10 @@ func test_sword_doesnt_work_out_of_distance():
 	level.start()
 
 	watch_signals(character_behavior)
-	watch_signals(enemy_health)
-	await wait_seconds(3, "Waiting to confirm enemy doesn't die, behavior doesn't change")
+	watch_signals(enemy_hurtbox)
+	await wait_seconds(3, "Waiting to confirm enemy isn't hit, behavior doesn't change")
 	assert_signal_not_emitted(character_behavior, "behavior_updated")
-	assert_signal_not_emitted(enemy_health, "died")
+	assert_signal_not_emitted(enemy_hurtbox, "hit")
 
 func test_move_and_sword_works_out_of_distance():
 	# Sword attack with move fallback.
@@ -75,11 +75,13 @@ func test_move_and_sword_works_out_of_distance():
 	level.start()
 
 	watch_signals(character_behavior)
-	await wait_for_signal(enemy_health.died, 5, "Waiting for enemy to die")
+	await wait_for_signal(enemy_hurtbox.hit, 5, "Waiting for enemy to be hit")
 	assert_signal_emitted(character_behavior, "behavior_updated")
-	assert_signal_emitted(enemy_health, "died")
+	assert_signal_emitted(enemy_hurtbox, "hit")
 
 func test_move_and_sword_works_out_of_distance_from_bottom_right():
+	# This test added as due to some quirks attacks from certain areas weren't reaching.
+	
 	# Basic sword attack only behavior.
 	TestUtils.set_character_behavior(character, make_sword_behavior(true))
 
@@ -89,6 +91,6 @@ func test_move_and_sword_works_out_of_distance_from_bottom_right():
 	level.start()
 
 	watch_signals(character_behavior)
-	await wait_for_signal(enemy_health.died, 5, "Waiting for enemy to die")
+	await wait_for_signal(enemy_hurtbox.hit, 5, "Waiting for enemy to be hit")
 	assert_signal_emitted(character_behavior, "behavior_updated")
-	assert_signal_emitted(enemy_health, "died")
+	assert_signal_emitted(enemy_hurtbox, "hit")

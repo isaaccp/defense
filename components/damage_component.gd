@@ -10,7 +10,7 @@ signal hit(hit_effect: HitEffect)
 
 @export_group("Required")
 @export var attributes_component: AttributesComponent
-@export var health_component: HealthComponent
+@export var vitals_component: VitalsComponent
 
 @export_group("Optional")
 @export var logging_component: LoggingComponent
@@ -34,13 +34,11 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 		print("Ignoring hit received while not running")
 		return
 	var hit_result = HitResult.new()
-	var prev_health = health_component.health
 	var adjusted_damage = hit_effect.adjusted_damage()
 	# Check if it's a heal.
 	if adjusted_damage < 0:
-		# TODO: Update using new resource component.
-		health_component.update_health(health_component.health - adjusted_damage, true, "heal %d" % -adjusted_damage)
-		hit_result.damage = prev_health - health_component.health
+		vitals_component.apply_vital_change(VitalsComponent.VitalType.HEALTH, -adjusted_damage, true)
+		hit_result.damage = adjusted_damage
 		return hit_result
 	var damage_str = "Incoming Damage: %s\n" % adjusted_damage
 	# If damage was 0 to begin with, just return.
@@ -81,11 +79,19 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 	if after_resistance_damage <= 0:
 		_log_blocked_damage(damage_str)
 		return hit_result
-	var new_health = health_component.health - after_resistance_damage
-	health_component.update_health(new_health, true, "damage: %d" % after_resistance_damage, damage_str)
-	hit_result.damage = prev_health - health_component.health
-	hit_result.destroyed = health_component.is_dead
+	vitals_component.apply_vital_change(VitalsComponent.VitalType.HEALTH, -after_resistance_damage, true)
+	_log_damage(damage_str)
+	hit_result.damage = after_resistance_damage
+	# In test cases, actor may be unset. TODO: Consider if we want to just create a new "lifecycle"
+	# component or similar to handle this.
+	if get_parent() is Actor:
+		hit_result.destroyed = get_parent().destroyed
+	else:
+		hit_result.destroyed = false
 	return hit_result
+
+func _log_damage(damage_details: String):
+	_log("damage inflicted", damage_details)
 
 func _log_blocked_damage(damage_details: String):
 	_log("damage blocked", damage_details)

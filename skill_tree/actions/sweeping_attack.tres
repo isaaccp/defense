@@ -8,15 +8,12 @@
 
 [sub_resource type="Resource" id="Resource_08m3r"]
 script = ExtResource("2_autku")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("3_808y2")
 action_script = ExtResource("1_45fmj")
 supported_target_types = Array[int]([1, 3])
 attack_type = ExtResource("2_i24wi")
-tags = Array[int]([])
 params = SubResource("Resource_08m3r")
 skill_name = &"Sweeping Attack"
 skill_type = 1

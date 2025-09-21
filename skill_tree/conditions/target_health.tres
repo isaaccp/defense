@@ -8,7 +8,6 @@
 [sub_resource type="Resource" id="Resource_e7tbt"]
 script = ExtResource("1_puark")
 editor_string = "health {cmp} {int_value}"
-cmp = 0
 
 [resource]
 script = ExtResource("2_8blmi")

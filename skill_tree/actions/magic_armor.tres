@@ -6,14 +6,11 @@
 
 [sub_resource type="Resource" id="Resource_b00lk"]
 script = ExtResource("2_unigm")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("3_fgv7h")
 action_script = ExtResource("1_wkoc5")
 supported_target_types = Array[int]([1])
-tags = Array[int]([])
 params = SubResource("Resource_b00lk")
 skill_name = &"Magic Armor"
 skill_type = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=16 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_ra8mw"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="11_g44ii"]
 [ext_resource type="PackedScene" uid="uid://dxlpeence2pav" path="res://components/pickable_component.tscn" id="13_dlre1"]
 [ext_resource type="PackedScene" uid="uid://0o5ty4vnc6k3" path="res://components/damage_component.tscn" id="14_7on22"]
+[ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="15_katke"]
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
@@ -102,9 +103,13 @@ status_component = NodePath("../StatusComponent")
 [node name="PickableComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("13_dlre1")]
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "health_component", "logging_component") instance=ExtResource("14_7on22")]
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component") instance=ExtResource("14_7on22")]
 attributes_component = NodePath("../AttributesComponent")
-health_component = NodePath("../HealthComponent")
+vitals_component = NodePath("../VitalsComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("15_katke")]
+attributes_component = NodePath("../AttributesComponent")
 logging_component = NodePath("../LoggingComponent")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

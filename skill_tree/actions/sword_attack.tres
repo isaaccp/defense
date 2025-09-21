@@ -7,15 +7,12 @@
 
 [sub_resource type="Resource" id="Resource_t8063"]
 script = ExtResource("1_k0wwd")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("1_fdht4")
 action_script = ExtResource("1_c6hd2")
 supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_jbjy1")
-tags = Array[int]([])
 params = SubResource("Resource_t8063")
 skill_name = &"Sword Attack"
 skill_type = 1

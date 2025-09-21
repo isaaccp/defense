@@ -8,8 +8,6 @@
 
 [sub_resource type="Resource" id="Resource_ueppd"]
 script = ExtResource("3_dvhob")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_w7psa"]
 script = ExtResource("7_uipkv")
@@ -36,8 +34,6 @@ skill_type = 3
 
 [sub_resource type="Resource" id="Resource_mbwdw"]
 script = ExtResource("3_dvhob")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_c0bv5"]
 script = ExtResource("7_uipkv")
@@ -53,5 +49,4 @@ condition = SubResource("Resource_reb6y")
 
 [resource]
 script = ExtResource("1_2w86k")
-name = ""
 stored_rules = Array[ExtResource("8_nxbma")]([SubResource("Resource_ttugj")])

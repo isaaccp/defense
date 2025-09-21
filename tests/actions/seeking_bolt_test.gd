@@ -33,11 +33,10 @@ func test_seeking_bolt_with_one_actor():
 	var target = TestUtils.make_barrel(5)
 	level.enemies.add_child(target)
 	target.position = character.position + 200 * Vector2.RIGHT
-	var target_health = target.get_component_or_die(HealthComponent)
 	level.start()
 
-	await wait_for_signal(target_health.died, 3, "Waiting for enemy to die")
-	assert_signal_emitted(target_health, "died")
+	await wait_for_signal(target.died, 3, "Waiting for enemy to die")
+	assert_signal_emitted(target, "died")
 
 func test_seeking_bolt_through_other_actor():
 	TestUtils.set_character_behavior(character, make_seeking_bolt_behavior())
@@ -45,19 +44,17 @@ func test_seeking_bolt_through_other_actor():
 	var target = TestUtils.make_barrel(5)
 	level.enemies.add_child(target)
 	target.position = character.position + 200 * Vector2.RIGHT
-	var target_health = target.get_component_or_die(HealthComponent)
 
 	var obstacle = TestUtils.make_barrel(5)
 	level.enemies.add_child(obstacle)
 	obstacle.position = character.position + 100 * Vector2.RIGHT
-	var obstacle_health = obstacle.get_component_or_die(HealthComponent)
 
 	level.start()
 
-	watch_signals(obstacle_health)
-	await wait_for_signal(target_health.died, 3, "Waiting for enemy to die")
-	assert_signal_emitted(target_health, "died")
-	assert_signal_not_emitted(obstacle_health, "died")
+	watch_signals(obstacle)
+	await wait_for_signal(target.died, 3, "Waiting for enemy to die")
+	assert_signal_emitted(target, "died")
+	assert_signal_not_emitted(obstacle, "died")
 
 func test_seeking_bolt_target_disappears():
 	TestUtils.set_character_behavior(character, make_seeking_bolt_behavior())

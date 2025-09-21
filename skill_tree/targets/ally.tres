@@ -13,7 +13,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_simwv"]
 script = ExtResource("1_eob2b")
 editor_string = "Ally ({sort})"
-cmp = 0
 sort = SubResource("Resource_lla0y")
 
 [resource]
@@ -21,7 +20,6 @@ script = ExtResource("3_mefl5")
 type = 1
 description_text = "Targets actors of the same side (but not oneself or the tower)"
 selector_script = ExtResource("4_y3bvn")
-sortable = true
 params = SubResource("Resource_simwv")
 skill_name = &"Ally"
 skill_type = 2

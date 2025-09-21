@@ -17,7 +17,7 @@ signal log_entry_added(log_entry: LogEntry)
 
 # If set, log all messages to output.
 # Can be set manually to debug when needed.
-var log_all: bool = false
+var log_all: bool = true
 
 # Even if those look like they map to components, they are user-facing, so we
 # shouldn't "ship our org chart" here and better to have a explicit LogType
@@ -30,6 +30,7 @@ enum LogType {
 	HURT,
 	ACTION,
 	DAMAGE,
+	VITALS,
 }
 
 class LogEntry extends RefCounted:
@@ -75,7 +76,9 @@ func add_log_entry(type: LogType, message: String, tooltip: String = "", stats_u
 	entries.append(le)
 	log_entry_added.emit(le)
 	if log_all or type in print_logtypes:
-		print("[%0.2f] %s(%s): %s" % [time, get_parent().actor_name, LoggingComponent.log_type_name(type), message])
+		# For tests in which components are not added to an actor.
+		var actor_name = get_parent().actor_name if get_parent() is Actor else "unknown"
+		print("[%0.2f] %s(%s): %s, %s" % [time, actor_name, LoggingComponent.log_type_name(type), message, tooltip])
 	if track_stats:
 		for stat in stats_updates:
 			stats.add_stat(stat)

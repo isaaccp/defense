@@ -2,7 +2,7 @@ extends Resource
 
 class_name HitResult
 
-## Damage/heal inflicted.
+## Damage/heal inflicted. If negative, heal.
 @export var damage: int
 ## Type of damage inflicted.
 @export var damage_type: DamageType

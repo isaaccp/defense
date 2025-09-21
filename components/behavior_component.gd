@@ -23,7 +23,6 @@ signal action_finished(action_name: StringName)
 @export_group("Optional")
 # If set, behavior is obtained through there.
 @export var persistent_game_state_component: PersistentGameStateComponent
-@export var health_component: HealthComponent
 @export var logging_component: LoggingComponent
 @export var stored_behavior: StoredBehavior:
 	get:
@@ -82,7 +81,7 @@ func _physics_process(delta: float):
 	if not running:
 		return
 
-	if health_component and health_component.is_dead:
+	if get_parent().destroyed:
 		return
 
 	elapsed_time += delta

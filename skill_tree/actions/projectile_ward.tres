@@ -7,14 +7,11 @@
 
 [sub_resource type="Resource" id="Resource_4nsng"]
 script = ExtResource("2_1xd86")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("3_re265")
 action_script = ExtResource("1_1gaxn")
 supported_target_types = Array[int]([1])
-tags = Array[int]([])
 params = SubResource("Resource_4nsng")
 skill_name = &"Projectile Ward"
 skill_type = 1

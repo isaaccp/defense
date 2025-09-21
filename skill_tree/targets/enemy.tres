@@ -13,7 +13,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_xm5n1"]
 script = ExtResource("1_4ggyl")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_q3ocn")
 
 [resource]
@@ -21,7 +20,6 @@ script = ExtResource("2_2oq6d")
 type = 1
 description_text = "Targets actors of the opposing side"
 selector_script = ExtResource("3_46sih")
-sortable = true
 params = SubResource("Resource_xm5n1")
 skill_name = &"Enemy"
 skill_type = 2

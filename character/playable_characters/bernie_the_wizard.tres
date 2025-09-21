@@ -8,16 +8,12 @@
 [sub_resource type="Resource" id="Resource_1uxd1"]
 script = ExtResource("2_2bsii")
 skills = Array[StringName]([&"Always", &"Enemy", &"Closest First", &"Move To", &"Seeking Bolt"])
-full = false
 
 [sub_resource type="Resource" id="Resource_101em"]
 script = ExtResource("2_wmfby")
 speed = 30.0
 health = 35
 recovery = 0.15
-damage_multiplier = 1.0
-armor = 0
-resistance = Array[ExtResource("2_sw0pa")]([])
 
 [resource]
 script = ExtResource("1_xl5p5")
@@ -27,6 +23,3 @@ scene_id = 2
 description = "An aspiring wizard on its way to the Wizard's College in the capital"
 acquired_skills = SubResource("Resource_1uxd1")
 attributes = SubResource("Resource_101em")
-health = 0
-xp = 0
-relics = Array[StringName]([])

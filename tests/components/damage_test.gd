@@ -2,10 +2,10 @@ extends GutTest
 
 const attributes_component_scene = preload("res://components/attributes_component.tscn")
 const damage_component_scene = preload("res://components/damage_component.tscn")
-const health_component_scene = preload("res://components/health_component.tscn")
+const vitals_component_scene = preload("res://components/vitals_component.tscn")
 const logging_component_scene = preload("res://components/logging_component.tscn")
 
-var health_component: HealthComponent
+var vitals_component: VitalsComponent
 var attributes_component: AttributesComponent
 var logging_component: LoggingComponent
 var damage_component: DamageComponent
@@ -17,27 +17,28 @@ func before_each():
 	attributes_component.base_attributes = Attributes.new()
 	attributes_component.base_attributes.health = max_health
 	logging_component = logging_component_scene.instantiate()
-	health_component = health_component_scene.instantiate()
-	health_component.attributes_component = attributes_component
-	health_component.logging_component = logging_component
+	vitals_component = vitals_component_scene.instantiate()
+	vitals_component.attributes_component = attributes_component
+	vitals_component.logging_component = logging_component
 	damage_component = damage_component_scene.instantiate()
-	damage_component.health_component = health_component
+	damage_component.vitals_component = vitals_component
 	damage_component.attributes_component = attributes_component
 	add_child_autoqfree(attributes_component)
 	add_child_autoqfree(logging_component)
-	add_child_autoqfree(health_component)
+	add_child_autoqfree(vitals_component)
 	add_child_autoqfree(damage_component)
 	
 	damage_component.run()
 
 	await wait_frames(2)
 
-	watch_signals(health_component)
+	watch_signals(vitals_component)
 	watch_signals(logging_component)
 	watch_signals(damage_component)
 
 func test_initial_health():
-	assert_eq(health_component.max_health, max_health)
+	var vitals_max_health = vitals_component.get_vital_max(VitalsComponent.VitalType.HEALTH)
+	assert_eq(vitals_max_health, max_health)
 
 func test_hit_no_armor():
 	var hit_effect = HitEffect.new()
@@ -48,15 +49,15 @@ func test_hit_no_armor():
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, 12)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
-	assert_eq(health_component.health, max_health - 12)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - 12)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.max_health, max_health)
-	assert_eq(health_update.health, max_health - 12)
-	assert_eq(health_update.prev_health, max_health)
-	assert_eq(health_update.is_heal, false)
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
+	assert_eq(vital_update.max_value, max_health)
+	assert_eq(vital_update.current_value, max_health - 12)
+	assert_eq(vital_update.prev_value, max_health)
+	assert_eq(vital_update.is_increase, false)
 
 func test_physical_hit_armor_damage():
 	var hit_effect = HitEffect.new()
@@ -68,14 +69,14 @@ func test_physical_hit_armor_damage():
 	# Still true as damage gets through.
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, 10)
-	assert_eq(health_component.health, max_health - 10)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - 10)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
 	# Only 10 damage, due to armor.
-	assert_eq(health_update.health, max_health - 10)
-	assert_eq(health_update.prev_health, max_health)
+	assert_eq(vital_update.current_value, max_health - 10)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_physical_hit_armor_no_damage():
@@ -91,8 +92,8 @@ func test_physical_hit_armor_no_damage():
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, 0)
 	# No change.
-	assert_eq(health_component.health, max_health)
-	assert_signal_not_emitted(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health)
+	assert_signal_not_emitted(vitals_component, "vital_updated")
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_physical_hit_flat_armor_pen():
@@ -105,14 +106,14 @@ func test_physical_hit_flat_armor_pen():
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, expected_damage)
-	assert_eq(health_component.health, max_health - expected_damage)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - expected_damage)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
 	# 1 damage, due to armor penetration.
-	assert_eq(health_update.health, max_health - expected_damage)
-	assert_eq(health_update.prev_health, max_health)
+	assert_eq(vital_update.current_value, max_health - expected_damage)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_physical_hit_fraction_armor_pen():
@@ -125,14 +126,14 @@ func test_physical_hit_fraction_armor_pen():
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, expected_damage)
-	assert_eq(health_component.health, max_health - expected_damage)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - expected_damage)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
 	# 1 damage, due to armor penetration.
-	assert_eq(health_update.health, max_health - expected_damage)
-	assert_eq(health_update.prev_health, max_health)
+	assert_eq(vital_update.current_value, max_health - expected_damage)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_physical_hit_both_armor_pen():
@@ -146,14 +147,15 @@ func test_physical_hit_both_armor_pen():
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, expected_damage)
-	assert_eq(health_component.health, max_health - expected_damage)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(hit_result.damage, expected_damage)
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - expected_damage)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
 	# 1 damage, due to armor penetration.
-	assert_eq(health_update.health, max_health - expected_damage)
-	assert_eq(health_update.prev_health, max_health)
+	assert_eq(vital_update.current_value, max_health - expected_damage)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_non_physical_hit_ignores_armor():
@@ -165,14 +167,14 @@ func test_non_physical_hit_ignores_armor():
 	attributes_component.base_attributes.armor = 2
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, 2)
-	assert_eq(health_component.health, max_health - 2)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - 2)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
-	# 2 damage, ignoring armor.
-	assert_eq(health_update.health, max_health - 2)
-	assert_eq(health_update.prev_health, max_health)
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
+	# 1 damage, due to armor penetration.
+	assert_eq(vital_update.current_value, max_health - 2)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_resistance_plus_armor():
@@ -190,13 +192,14 @@ func test_resistance_plus_armor():
 	var hit_result = damage_component.process_hit(hit_effect)
 	var expected_damage = (20 - 4) / 2
 	assert_eq(hit_result.damage, expected_damage)
-	assert_eq(health_component.health, max_health - expected_damage)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - expected_damage)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.health, max_health - expected_damage)
-	assert_eq(health_update.prev_health, max_health)
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
+	# 1 damage, due to armor penetration.
+	assert_eq(vital_update.current_value, max_health - expected_damage)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_vulnerability():
@@ -213,17 +216,17 @@ func test_vulnerability():
 	var hit_result = damage_component.process_hit(hit_effect)
 	var expected_damage = 10 * 2
 	assert_eq(hit_result.damage, expected_damage)
-	assert_eq(health_component.health, max_health - expected_damage)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), max_health - expected_damage)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.health, max_health - expected_damage)
-	assert_eq(health_update.prev_health, max_health)
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
+	assert_eq(vital_update.current_value, max_health - expected_damage)
+	assert_eq(vital_update.prev_value, max_health)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
 func test_heal():
-	health_component.health = 20
+	vitals_component.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 20)
 	var hit_effect = HitEffect.new()
 	hit_effect.damage = -10
 
@@ -231,17 +234,18 @@ func test_heal():
 
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, -10)
-	assert_eq(health_component.health, 20 + 10)
-	assert_signal_emitted(health_component, "health_updated")
-	var params = get_signal_parameters(health_component, "health_updated")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), 20 + 10)
+	assert_signal_emitted(vitals_component, "vital_updated")
+	var params = get_signal_parameters(vitals_component, "vital_updated")
 	assert_not_null(params)
-	var health_update = params[0] as HealthComponent.HealthUpdate
-	assert_eq(health_update.health, 20 + 10)
-	assert_eq(health_update.prev_health, 20)
-	assert_true(health_update.is_heal)
+	var vital_update = params[0] as VitalsComponent.VitalUpdate
+	assert_eq(vital_update.type, VitalsComponent.VitalType.HEALTH)
+	assert_eq(vital_update.current_value, 20 + 10)
+	assert_eq(vital_update.prev_value, 20)
+	assert_true(vital_update.is_increase)
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")
 
-func test_death():
+func test_health_depleted():
 	var hit_effect = HitEffect.new()
 	hit_effect.damage = max_health
 	hit_effect.damage_type = preload("res://game_logic/damage_types/slashing.tres")
@@ -249,9 +253,7 @@ func test_death():
 	# Check death.
 	var hit_result = damage_component.process_hit(hit_effect)
 	assert_eq(hit_result.damage, max_health)
-	assert_eq(health_component.health, 0)
-	assert_true(health_component.is_dead)
-	assert_signal_emitted(health_component, "health_updated")
-	assert_signal_emitted(health_component, "died")
+	assert_eq(vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH), 0)
+	assert_signal_emitted(vitals_component, "vital_depleted")
 
 	TestUtils.dump_all_emits(self, logging_component, "log_entry_added")

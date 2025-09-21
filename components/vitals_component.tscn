@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxe3wi1mi6quo"]
+
+[ext_resource type="Script" uid="uid://cm4e1x2o15ekt" path="res://components/vitals_component.gd" id="1_r38f7"]
+
+[node name="VitalsComponent" type="Node"]
+script = ExtResource("1_r38f7")

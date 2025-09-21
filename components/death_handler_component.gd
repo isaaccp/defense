@@ -10,7 +10,8 @@ class_name DeathHandlerComponent
 
 func _ready():
 	assert(is_instance_valid(health_component))
-	health_component.died.connect(_on_died, CONNECT_DEFERRED)
+	# TODO: Move canonical death tracking to here instead of actor.
+	get_parent().died.connect(_on_died, CONNECT_DEFERRED)
 
 func _on_died():
 	if collision_shape:

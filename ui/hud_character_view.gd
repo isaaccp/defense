@@ -15,14 +15,15 @@ func _ready():
 
 func initialize(character_: Character) -> void:
 	character = character_
-	var health = HealthComponent.get_or_die(character)
-	health.health_updated.connect(_on_health_updated)
+	var vitals = character.get_component_or_die(VitalsComponent) as VitalsComponent
+	vitals.vital_updated.connect(_on_vital_updated)
 	# Set health to current value (in case we missed the signal setting initial health,
 	# which happens when we play a level through F6). We only can do it if
 	# we missed the signal, otherwise both updates happen in the same frame
 	# and the progress bar seems confused.
-	if health.health > 0:
-		_set_health(health.health, health.max_health)
+	# TODO: Update for vitals.
+	# if health.health > 0:
+	#	_set_health(health.health, health.max_health)
 	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = character.get_component_or_die(BehaviorComponent)
@@ -58,8 +59,10 @@ func _set_health(health: int, max_health: int):
 	%HealthBar.max_value = max_health
 	%HealthLabel.text = "%d / %d" % [health, max_health]
 
-func _on_health_updated(health_update: HealthComponent.HealthUpdate):
-	_set_health(health_update.health, health_update.max_health)
+func _on_vital_updated(vital_update: VitalsComponent.VitalUpdate):
+	if vital_update.type != VitalsComponent.VitalType.HEALTH:
+		return
+	_set_health(vital_update.current_value, vital_update.max_value)
 
 func _on_statuses_changed(statuses: Array):
 	%HudStatusDisplay.clear()

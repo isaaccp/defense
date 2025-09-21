@@ -8,16 +8,12 @@
 [sub_resource type="Resource" id="Resource_ha8jy"]
 script = ExtResource("3_ro8tn")
 skills = Array[StringName]([&"Always", &"Ally", &"Move To", &"Heal", &"Closest First", &"Target Distance", &"Magic Armor", &"Projectile Ward"])
-full = false
 
 [sub_resource type="Resource" id="Resource_x24g2"]
 script = ExtResource("2_xm6an")
 speed = 30.0
 health = 50
 recovery = 0.25
-damage_multiplier = 1.0
-armor = 0
-resistance = Array[ExtResource("2_vgaol")]([])
 
 [resource]
 script = ExtResource("2_wv48f")
@@ -27,6 +23,3 @@ scene_id = 4
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
 acquired_skills = SubResource("Resource_ha8jy")
 attributes = SubResource("Resource_x24g2")
-health = 0
-xp = 0
-relics = Array[StringName]([])
