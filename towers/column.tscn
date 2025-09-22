@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://camb4jx7y3ygt"]
+[gd_scene load_steps=21 format=3 uid="uid://camb4jx7y3ygt"]
 
 [ext_resource type="Script" uid="uid://bnnuvxsnfbk78" path="res://actor/tower.gd" id="1_3tt8j"]
 [ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c68o4e3q55mv2" path="res://components/damage_component.gd" id="9_ttj04"]
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="10_kgr8j"]
 [ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="11_8sdqq"]
+[ext_resource type="PackedScene" uid="uid://i2dedaqm78hc" path="res://components/ui_component.tscn" id="12_hjci4"]
 [ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="12_v12k1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0l7o0"]
@@ -127,3 +128,6 @@ logging_component = NodePath("../LoggingComponent")
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "collision_shape") instance=ExtResource("12_v12k1")]
 vitals_component = NodePath("../VitalsComponent")
 collision_shape = NodePath("../CollisionShape2D")
+
+[node name="UIComponent" parent="." node_paths=PackedStringArray("vitals_component") instance=ExtResource("12_hjci4")]
+vitals_component = NodePath("../VitalsComponent")

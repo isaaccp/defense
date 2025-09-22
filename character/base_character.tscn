@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmpg7h70fd2ji"]
+[gd_scene load_steps=18 format=3 uid="uid://bmpg7h70fd2ji"]
 
 [ext_resource type="Script" uid="uid://dx1lxhkqdrqo" path="res://character/character.gd" id="1_1mnbb"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_jmljm"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="11_0ewa0"]
 [ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="12_o0jr4"]
 [ext_resource type="PackedScene" uid="uid://0o5ty4vnc6k3" path="res://components/damage_component.tscn" id="14_osyen"]
+[ext_resource type="PackedScene" uid="uid://i2dedaqm78hc" path="res://components/ui_component.tscn" id="15_b5x5i"]
 [ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="15_sf42f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7fvau"]
@@ -105,3 +106,6 @@ logging_component = NodePath("../LoggingComponent")
 [node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("15_sf42f")]
 attributes_component = NodePath("../AttributesComponent")
 logging_component = NodePath("../LoggingComponent")
+
+[node name="UIComponent" parent="." node_paths=PackedStringArray("vitals_component") instance=ExtResource("15_b5x5i")]
+vitals_component = NodePath("../VitalsComponent")

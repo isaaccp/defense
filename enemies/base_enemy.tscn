@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=16 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_ra8mw"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dxlpeence2pav" path="res://components/pickable_component.tscn" id="13_dlre1"]
 [ext_resource type="PackedScene" uid="uid://0o5ty4vnc6k3" path="res://components/damage_component.tscn" id="14_7on22"]
 [ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="15_katke"]
+[ext_resource type="PackedScene" uid="uid://i2dedaqm78hc" path="res://components/ui_component.tscn" id="15_qcwwv"]
 
 [node name="BaseEnemy" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
@@ -103,6 +104,9 @@ logging_component = NodePath("../LoggingComponent")
 [node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("15_katke")]
 attributes_component = NodePath("../AttributesComponent")
 logging_component = NodePath("../LoggingComponent")
+
+[node name="UIComponent" parent="." node_paths=PackedStringArray("vitals_component") instance=ExtResource("15_qcwwv")]
+vitals_component = NodePath("../VitalsComponent")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

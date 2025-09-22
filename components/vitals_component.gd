@@ -50,6 +50,9 @@ func _initialize() -> void:
 	
 	if max_health > 0:
 		apply_vital_change(VitalType.HEALTH, max_health, false)
+	
+	# TODO: Get from attributes.
+	_vitals_data[VitalType.FOCUS] = {"current": 10.0, "max": 10.0}
 
 # The primary method for changing a vital's value.
 # Use positive delta for healing/gaining, negative for damage/spending.

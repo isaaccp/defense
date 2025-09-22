@@ -13,9 +13,9 @@ func initialize(tower_: Node2D) -> void:
 	# which happens when we play a level through F6). We only can do it if
 	# we missed the signal, otherwise both updates happen in the same frame
 	# and the progress bar seems confused.
-	# TODO: Update.
-	# if health.health > 0:
-	#	_set_health(health.health, health.max_health)
+	if vitals.get_vital_current(VitalsComponent.VitalType.HEALTH) > 0:
+		_set_health(vitals.get_vital_current(VitalsComponent.VitalType.HEALTH),
+					vitals.get_vital_max(VitalsComponent.VitalType.HEALTH))
 	%Title.text = tower.name.capitalize()
 
 func _set_health(health: int, max_health: int):

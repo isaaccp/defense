@@ -22,8 +22,9 @@ func initialize(character_: Character) -> void:
 	# we missed the signal, otherwise both updates happen in the same frame
 	# and the progress bar seems confused.
 	# TODO: Update for vitals.
-	# if health.health > 0:
-	#	_set_health(health.health, health.max_health)
+	if vitals.get_vital_current(VitalsComponent.VitalType.HEALTH) > 0:
+		_set_health(vitals.get_vital_current(VitalsComponent.VitalType.HEALTH),
+					vitals.get_vital_max(VitalsComponent.VitalType.HEALTH))
 	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = character.get_component_or_die(BehaviorComponent)

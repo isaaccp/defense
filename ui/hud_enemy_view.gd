@@ -15,8 +15,9 @@ func initialize(enemy_: Enemy) -> void:
 	# which happens when we play a level through F6). We only can do it if
 	# we missed the signal, otherwise both updates happen in the same frame
 	# and the progress bar seems confused.
-	# if health.health > 0:
-	#	_set_health(health.health, health.max_health)
+	if vitals.get_vital_current(VitalsComponent.VitalType.HEALTH) > 0:
+		_set_health(vitals.get_vital_current(VitalsComponent.VitalType.HEALTH),
+					vitals.get_vital_max(VitalsComponent.VitalType.HEALTH))
 	var status = Component.get_status_component_or_die(enemy)
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = enemy.get_component_or_die(BehaviorComponent)

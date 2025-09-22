@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://i2dedaqm78hc"]
+
+[ext_resource type="Script" uid="uid://b2n5qbxpqbaap" path="res://components/ui_component.gd" id="1_s2xs8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1j5r"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqnqs"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2xs8"]
+bg_color = Color(0, 0, 1, 1)
+corner_radius_top_left = 2
+corner_radius_bottom_left = 2
+
+[node name="UIComponent" type="Node2D"]
+z_index = 1
+script = ExtResource("1_s2xs8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(24, 8)
+offset_left = -12.0
+offset_top = -4.0
+offset_right = 12.0
+offset_bottom = -2.0
+theme_override_constants/separation = 2
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 3)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y1j5r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vqnqs")
+value = 50.0
+show_percentage = false
+
+[node name="FocusBar" type="ProgressBar" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 3)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_y1j5r")
+theme_override_styles/fill = SubResource("StyleBoxFlat_s2xs8")
+value = 50.0
+show_percentage = false
