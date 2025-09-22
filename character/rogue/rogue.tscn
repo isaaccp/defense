@@ -251,10 +251,10 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ot8e"]
 _data = {
-"RESET": SubResource("Animation_psvn1"),
-"death": SubResource("Animation_2bteb"),
-"idle": SubResource("Animation_it0ri"),
-"run": SubResource("Animation_rr68s")
+&"RESET": SubResource("Animation_psvn1"),
+&"death": SubResource("Animation_2bteb"),
+&"idle": SubResource("Animation_it0ri"),
+&"run": SubResource("Animation_rr68s")
 }
 
 [node name="Rogue" instance=ExtResource("1_qgcx4")]
@@ -282,14 +282,11 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_6ot8e")
+&"": SubResource("AnimationLibrary_6ot8e")
 }
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -1)
-
-[node name="HealthComponent" parent="." index="7"]
-position = Vector2(0, -37)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -15)

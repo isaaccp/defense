@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_j240n"]
 [ext_resource type="Texture2D" uid="uid://kydsbc6g3737" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_full.tres" id="2_8we7e"]
 [ext_resource type="Texture2D" uid="uid://fbmqclmv36jp" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_half.tres" id="3_hhttp"]
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="4_6cufv"]
-[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="4_81wwm"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="5_wc1y6"]
-[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="6_cnckx"]
+[ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="4_6cufv"]
+[ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="4_81wwm"]
+[ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="5_wc1y6"]
+[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="6_cnckx"]
 
 [sub_resource type="Animation" id="Animation_6jr7e"]
 length = 0.001
@@ -57,9 +57,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fnpmp"]
 _data = {
-"RESET": SubResource("Animation_6jr7e"),
-"death": SubResource("Animation_ummwa"),
-"idle": SubResource("Animation_lyghw")
+&"RESET": SubResource("Animation_6jr7e"),
+&"death": SubResource("Animation_ummwa"),
+&"idle": SubResource("Animation_lyghw")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p7io6"]
@@ -71,17 +71,10 @@ height = 22.0
 
 [sub_resource type="Resource" id="Resource_kfr1l"]
 script = ExtResource("4_6cufv")
-name = ""
-stored_rules = Array[ExtResource("5_wc1y6")]([])
 
 [sub_resource type="Resource" id="Resource_7dmrm"]
 script = ExtResource("4_81wwm")
-speed = 0.0
 health = 5
-recovery = 0.0
-damage_multiplier = 1.0
-armor = 0
-resistance = Array[ExtResource("6_cnckx")]([])
 
 [node name="Barrel" instance=ExtResource("1_j240n")]
 actor_name = "Barrel"
@@ -96,25 +89,22 @@ animation_player = NodePath("AnimationPlayer")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 root_node = NodePath("../../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_fnpmp")
+&"": SubResource("AnimationLibrary_fnpmp")
 }
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_p7io6")
 
-[node name="HealthComponent" parent="." index="6"]
-position = Vector2(0, -23)
-
-[node name="HurtboxComponent" parent="." index="7"]
+[node name="HurtboxComponent" parent="." index="6"]
 position = Vector2(0, -8)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_p245c")
 
-[node name="BehaviorComponent" parent="." index="8"]
+[node name="BehaviorComponent" parent="." index="7"]
 stored_behavior = SubResource("Resource_kfr1l")
 
-[node name="AttributesComponent" parent="." index="11"]
+[node name="AttributesComponent" parent="." index="10"]
 base_attributes = SubResource("Resource_7dmrm")

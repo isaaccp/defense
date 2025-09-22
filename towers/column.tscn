@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://camb4jx7y3ygt"]
+[gd_scene load_steps=20 format=3 uid="uid://camb4jx7y3ygt"]
 
 [ext_resource type="Script" uid="uid://bnnuvxsnfbk78" path="res://actor/tower.gd" id="1_3tt8j"]
 [ext_resource type="Texture2D" uid="uid://c3jdbafghbhuu" path="res://assets/pixel-art-top-down-basic/props.png" id="1_58km4"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="2_narhj"]
-[ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="3_enchd"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="4_asgae"]
 [ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="5_5ko8r"]
 [ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="7_lgmfc"]
@@ -101,12 +100,6 @@ damage_component = NodePath("../DamageComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_h0vh8")
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("3_enchd")]
-position = Vector2(1, -58)
-attributes_component = NodePath("../AttributesComponent")
-show_health = 1
-logging_component = NodePath("../LoggingComponent")
 
 [node name="SideComponent" parent="." instance=ExtResource("4_asgae")]
 side = 1

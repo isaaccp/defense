@@ -250,15 +250,15 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_waqxv"]
 _data = {
-"RESET": SubResource("Animation_t407s"),
-"death": SubResource("Animation_spudx"),
-"idle": SubResource("Animation_waf1q"),
-"run": SubResource("Animation_8fvto")
+&"RESET": SubResource("Animation_t407s"),
+&"death": SubResource("Animation_spudx"),
+&"idle": SubResource("Animation_waf1q"),
+&"run": SubResource("Animation_8fvto")
 }
 
 [node name="Wizard" instance=ExtResource("1_tf402")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, -32)
 texture = ExtResource("2_780y1")
 hframes = 3
@@ -277,20 +277,17 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://assets/pixel-crawler/Heroes/Wizzard/Death/Death.aseprite"
 }
 
-[node name="AnimationComponent" parent="." index="1" node_paths=PackedStringArray("animation_player")]
+[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_waqxv")
+&"": SubResource("AnimationLibrary_waqxv")
 }
 
-[node name="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" parent="." index="3"]
 visible = false
 position = Vector2(0, 0)
-
-[node name="HealthComponent" parent="." index="6"]
-position = Vector2(0, -39)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 visible = false

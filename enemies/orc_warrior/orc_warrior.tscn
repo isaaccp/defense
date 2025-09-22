@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c3wbffrkshs30" path="res://enemies/orc_warrior/Death.png" id="1_b0ldm"]
 [ext_resource type="Texture2D" uid="uid://bcp7cxvu8wudt" path="res://enemies/orc_warrior/Idle.png" id="1_ngnr6"]
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_u12oj"]
-[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="5_traho"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="6_cxhvn"]
-[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="7_2p23u"]
-[ext_resource type="Script" path="res://behavior/rule_def.gd" id="8_8kx3c"]
-[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="9_xakkp"]
-[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="10_lt1sc"]
-[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="10_os1sv"]
+[ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="5_traho"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="6_cxhvn"]
+[ext_resource type="Script" uid="uid://c2obyw4bqtprd" path="res://behavior/stored_param_skill.gd" id="7_2p23u"]
+[ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="8_8kx3c"]
+[ext_resource type="Script" uid="uid://bhqo018swx4s7" path="res://behavior/stored_skill.gd" id="9_xakkp"]
+[ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="10_lt1sc"]
+[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="10_os1sv"]
 
 [sub_resource type="Animation" id="Animation_wt2ik"]
 length = 0.001
@@ -259,10 +259,10 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5x0w4"]
 _data = {
-"RESET": SubResource("Animation_wt2ik"),
-"death": SubResource("Animation_empr5"),
-"idle": SubResource("Animation_au4fp"),
-"run": SubResource("Animation_8plry")
+&"RESET": SubResource("Animation_wt2ik"),
+&"death": SubResource("Animation_empr5"),
+&"idle": SubResource("Animation_au4fp"),
+&"run": SubResource("Animation_8plry")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oxahg"]
@@ -273,8 +273,6 @@ height = 32.0
 
 [sub_resource type="Resource" id="Resource_aasvl"]
 script = ExtResource("6_cxhvn")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_66dkm"]
 script = ExtResource("7_2p23u")
@@ -284,8 +282,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("6_cxhvn")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_xuywd"]
 script = ExtResource("7_2p23u")
@@ -301,7 +297,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_1cy7g"]
 script = ExtResource("6_cxhvn")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_rntke")
 
 [sub_resource type="Resource" id="Resource_n386v"]
@@ -318,8 +313,6 @@ condition = SubResource("Resource_xuywd")
 
 [sub_resource type="Resource" id="Resource_h5gff"]
 script = ExtResource("6_cxhvn")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_sjvcg"]
 script = ExtResource("7_2p23u")
@@ -347,17 +340,13 @@ condition = SubResource("Resource_6yx0n")
 
 [sub_resource type="Resource" id="Resource_u7uff"]
 script = ExtResource("5_traho")
-name = ""
 stored_rules = Array[ExtResource("8_8kx3c")]([SubResource("Resource_1vcx4"), SubResource("Resource_04v3w")])
 
 [sub_resource type="Resource" id="Resource_b38p6"]
 script = ExtResource("10_lt1sc")
 speed = 30.0
 health = 10
-recovery = 0.0
-damage_multiplier = 1.0
 armor = 1
-resistance = Array[ExtResource("10_os1sv")]([])
 
 [node name="OrcWarrior" instance=ExtResource("1_u12oj")]
 actor_name = "Orc Warrior"
@@ -376,24 +365,21 @@ animation_player = NodePath("AnimationPlayer")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 root_node = NodePath("../../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_5x0w4")
+&"": SubResource("AnimationLibrary_5x0w4")
 }
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_oxahg")
 
-[node name="HealthComponent" parent="." index="6"]
-position = Vector2(0, -36)
-
-[node name="HurtboxComponent" parent="." index="7"]
+[node name="HurtboxComponent" parent="." index="6"]
 position = Vector2(0, -15)
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 shape = SubResource("CapsuleShape2D_guxf3")
 
-[node name="BehaviorComponent" parent="." index="8"]
+[node name="BehaviorComponent" parent="." index="7"]
 stored_behavior = SubResource("Resource_u7uff")
 
-[node name="AttributesComponent" parent="." index="11"]
+[node name="AttributesComponent" parent="." index="10"]
 base_attributes = SubResource("Resource_b38p6")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkxmuee84wtoj"]
+[gd_scene load_steps=15 format=3 uid="uid://dkxmuee84wtoj"]
 
 [ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="1_1ol1r"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_ra8mw"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="2_sx4w7"]
-[ext_resource type="PackedScene" uid="uid://dgk65ce31q5uv" path="res://components/health_component.tscn" id="4_he7s5"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="5_s5sa1"]
 [ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="6_v211g"]
 [ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="7_hqrrl"]
@@ -52,11 +51,6 @@ position = Vector2(0, 5)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("4_he7s5")]
-attributes_component = NodePath("../AttributesComponent")
-show_health = 1
-logging_component = NodePath("../LoggingComponent")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "status_component") instance=ExtResource("5_s5sa1")]
 side_component = NodePath("../SideComponent")

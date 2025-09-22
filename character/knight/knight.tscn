@@ -323,10 +323,10 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n1426"]
 _data = {
-"RESET": SubResource("Animation_j6d27"),
-"death": SubResource("Animation_8i438"),
-"idle": SubResource("Animation_bn0m6"),
-"run": SubResource("Animation_oya6n")
+&"RESET": SubResource("Animation_j6d27"),
+&"death": SubResource("Animation_8i438"),
+&"idle": SubResource("Animation_bn0m6"),
+&"run": SubResource("Animation_oya6n")
 }
 
 [node name="Knight" instance=ExtResource("1_io0ow")]
@@ -354,14 +354,11 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_n1426")
+&"": SubResource("AnimationLibrary_n1426")
 }
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, 0)
 
-[node name="HealthComponent" parent="." index="7"]
-position = Vector2(0, -34)
-
-[node name="HurtboxComponent" parent="." index="10"]
+[node name="HurtboxComponent" parent="." index="9"]
 position = Vector2(0, -15)
