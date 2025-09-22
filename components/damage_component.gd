@@ -82,12 +82,8 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 	vitals_component.apply_vital_change(VitalsComponent.VitalType.HEALTH, -after_resistance_damage, true)
 	_log_damage(damage_str)
 	hit_result.damage = after_resistance_damage
-	# In test cases, actor may be unset. TODO: Consider if we want to just create a new "lifecycle"
-	# component or similar to handle this.
-	if get_parent() is Actor:
-		hit_result.destroyed = get_parent().destroyed
-	else:
-		hit_result.destroyed = false
+	var actor = get_parent()
+	hit_result.destroyed = actor.destroyed
 	return hit_result
 
 func _log_damage(damage_details: String):

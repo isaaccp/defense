@@ -7,7 +7,7 @@ const test_character = preload("res://character/playable_characters/test_charact
 var level: Level
 var character: Node2D
 var character_behavior: BehaviorComponent
-var character_health: HealthComponent
+var character_vitals: VitalsComponent
 
 func before_each():
 	level = empty_level_scene.instantiate()
@@ -16,13 +16,12 @@ func before_each():
 	# Set up character.
 	character = level.characters.get_child(0)
 	character_behavior = BehaviorComponent.get_or_die(character)
-	character_health = HealthComponent.get_or_die(character)
+	character_vitals = character.get_component_or_die(VitalsComponent)
 
 func test_no_heal_if_over_20():
 	TestUtils.set_character_behavior(character, behavior)
-	await wait_frames(1)
-	character_health.max_health = 40
-	character_health.health = 30
+	await wait_process_frames(1)
+	character_vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 30.0)
 	level.start()
 	watch_signals(character_behavior)
 	await wait_seconds(0.25, "Waiting to make sure no heal")
@@ -30,9 +29,8 @@ func test_no_heal_if_over_20():
 
 func test_heal_if_under_20():
 	TestUtils.set_character_behavior(character, behavior)
-	await wait_frames(1)
-	character_health.max_health = 40
-	character_health.health = 15
+	await wait_process_frames(1)
+	character_vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 15.0)
 	level.start()
 	watch_signals(character_behavior)
 	await wait_for_signal(character_behavior.behavior_updated, 0.25, "Waiting for heal")

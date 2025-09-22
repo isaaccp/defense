@@ -60,13 +60,13 @@ attributes_component = NodePath("../AttributesComponent")
 show_health = 1
 logging_component = NodePath("../LoggingComponent")
 
-[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("health_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
-health_component = NodePath("../HealthComponent")
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
+vitals_component = NodePath("../VitalsComponent")
 animation_component = NodePath("../AnimationComponent")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "character_body_component", "persistent_game_state_component", "health_component", "logging_component") instance=ExtResource("7_01gwr")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "character_body_component", "persistent_game_state_component", "logging_component") instance=ExtResource("7_01gwr")]
 actor = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -78,14 +78,12 @@ status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 character_body_component = NodePath("../CharacterBodyComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
-health_component = NodePath("../HealthComponent")
 logging_component = NodePath("../LoggingComponent")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "health_component", "status_component") instance=ExtResource("8_mrif0")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "status_component") instance=ExtResource("8_mrif0")]
 side_component = NodePath("../SideComponent")
 logging_component = NodePath("../LoggingComponent")
 damage_component = NodePath("../DamageComponent")
-health_component = NodePath("../HealthComponent")
 status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]

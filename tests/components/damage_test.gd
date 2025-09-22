@@ -4,29 +4,42 @@ const attributes_component_scene = preload("res://components/attributes_componen
 const damage_component_scene = preload("res://components/damage_component.tscn")
 const vitals_component_scene = preload("res://components/vitals_component.tscn")
 const logging_component_scene = preload("res://components/logging_component.tscn")
+const death_handler_component_scene = preload("res://components/death_handler_component.tscn")
 
+var unit: Unit
 var vitals_component: VitalsComponent
 var attributes_component: AttributesComponent
 var logging_component: LoggingComponent
 var damage_component: DamageComponent
+var death_handler_component: DeathHandlerComponent
 
 const max_health = 40
 
 func before_each():
+	unit = Unit.new()
 	attributes_component = attributes_component_scene.instantiate()
+	attributes_component.name = "AttributesComponent"
 	attributes_component.base_attributes = Attributes.new()
 	attributes_component.base_attributes.health = max_health
 	logging_component = logging_component_scene.instantiate()
+	logging_component.name = "LoggingComponent"
 	vitals_component = vitals_component_scene.instantiate()
+	vitals_component.name = "VitalsComponent"
 	vitals_component.attributes_component = attributes_component
 	vitals_component.logging_component = logging_component
 	damage_component = damage_component_scene.instantiate()
+	damage_component.name = "DamageComponent"
 	damage_component.vitals_component = vitals_component
 	damage_component.attributes_component = attributes_component
-	add_child_autoqfree(attributes_component)
-	add_child_autoqfree(logging_component)
-	add_child_autoqfree(vitals_component)
-	add_child_autoqfree(damage_component)
+	death_handler_component = death_handler_component_scene.instantiate()
+	death_handler_component.name = "DeathHandlerComponent"
+	death_handler_component.vitals_component = vitals_component
+	unit.add_child(attributes_component)
+	unit.add_child(logging_component)
+	unit.add_child(vitals_component)
+	unit.add_child(damage_component)
+	unit.add_child(death_handler_component)
+	add_child_autoqfree(unit)
 	
 	damage_component.run()
 

@@ -97,7 +97,6 @@ func _start_position_check():
 				return
 
 func _on_removing_enemy(node: Node):
-	# TODO: Will need changes when we have spawners.
 	# If this is the last enemy and it's dead, declare victory.
 	if enemies.get_child_count() == 1:
 		if node.destroyed:

@@ -2,21 +2,30 @@ extends Node2D
 
 class_name DeathHandlerComponent
 
+const component: StringName = &"DeathHandlerComponent"
 
-@export var health_component: HealthComponent
+@export var vitals_component: VitalsComponent
 @export var animation_component: AnimationComponent
 @export var free_on_death: bool = true
 @export var collision_shape: CollisionShape2D
 
-func _ready():
-	assert(is_instance_valid(health_component))
-	# TODO: Move canonical death tracking to here instead of actor.
-	get_parent().died.connect(_on_died, CONNECT_DEFERRED)
+signal died
 
-func _on_died():
+func _ready():
+	assert(is_instance_valid(vitals_component))
+	vitals_component.vital_depleted.connect(_on_vital_depleted)
+
+func _on_vital_depleted(vital_type: VitalsComponent.VitalType):
+	if vital_type != VitalsComponent.VitalType.HEALTH:
+		return
+	died.emit()
+	_on_death.call_deferred()
+	
+func _on_death():
 	if collision_shape:
 		collision_shape.disabled = true
-	await animation_component.play_animation("death")
+	if animation_component:
+		await animation_component.play_animation("death")
 	# TODO: Use AutoFreeComponent.
 	if free_on_death:
 		get_parent().queue_free()

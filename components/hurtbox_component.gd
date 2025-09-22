@@ -20,7 +20,7 @@ signal hit(hit_effect: HitEffect)
 func can_handle_collision():
 	if not (status_component or damage_component):
 		return false
-	if not get_parent() is Actor or get_parent().destroyed:
+	if get_parent().destroyed:
 		return false
 	return true
 

@@ -3,7 +3,7 @@ extends Actor
 
 ## An Actor that is considered a Unit in the game.
 ## It must have:
-## * a HealthComponent
+## * a DeathHandlerComponent
 ## * a BehaviorComponent
 class_name Unit
 
@@ -12,18 +12,17 @@ signal died
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	var vitals_component = get_component_or_die(VitalsComponent)
-	vitals_component.vital_depleted.connect(_on_vital_depleted)
+	var death_handler_component: DeathHandlerComponent = get_component_or_die(DeathHandlerComponent)
+	death_handler_component.died.connect(_on_died)
 
 ## Makes the Unit stay idle.
 func force_idle(idle: bool = true):
 	var behavior = BehaviorComponent.get_or_die(self)
 	behavior.force_idle(idle)
 
-func _on_vital_depleted(vital_type: VitalsComponent.VitalType):
-	if vital_type == VitalsComponent.VitalType.HEALTH:
-		died.emit()
-		destroyed = true
+func _on_died():
+	died.emit()
+	destroyed = true
 
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
