@@ -109,6 +109,12 @@ func run():
 func stop():
 	running = false
 
+func _process(delta: float) -> void:
+	if running:
+		var focus_regen = attributes_component.focus_regen
+		var focus_recovery = focus_regen * delta
+		apply_vital_change(VitalsComponent.VitalType.FOCUS, focus_recovery, false)
+		
 func _log(message: String, tooltip: String = ""):
 	if not logging_component:
 		return

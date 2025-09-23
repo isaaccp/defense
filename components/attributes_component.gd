@@ -22,6 +22,9 @@ var health: int:
 var focus: int:
 	get: return attributes.focus
 	set(value): pass
+var focus_regen: float:
+	get: return attributes.focus_regen
+	set(value): pass
 var damage_multiplier: float:
 	get: return attributes.damage_multiplier
 	set(value): pass

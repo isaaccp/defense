@@ -13,8 +13,8 @@ skills = Array[StringName]([&"Always", &"Enemy", &"Closest First", &"Move To", &
 script = ExtResource("2_bfkcj")
 speed = 30.0
 health = 60
-focus = 30
 recovery = 0.3
+focus = 30
 armor = 1
 
 [resource]

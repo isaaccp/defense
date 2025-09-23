@@ -7,10 +7,12 @@ class_name Attributes
 @export var speed: float
 ## Max health.
 @export var health: int
-## Max focus.
-@export var focus: int
 ## Fraction of health recovered at end of level.
 @export var recovery: float
+## Max focus.
+@export var focus: int
+## Focus regen per second.
+@export var focus_regen: float
 ## Multiplier applied to damage.
 @export var damage_multiplier: float = 1.0
 ## Flat amount removed from physical attacks.
