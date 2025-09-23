@@ -46,13 +46,17 @@ func _ready():
 func _initialize() -> void:
 	var max_health = float(attributes_component.health)
 	_vitals_data[VitalType.HEALTH] = {"current": 0.0, "max": max_health}
-	_is_initialized = true
 	
 	if max_health > 0:
 		apply_vital_change(VitalType.HEALTH, max_health, false)
 	
-	# TODO: Get from attributes.
-	_vitals_data[VitalType.FOCUS] = {"current": 10.0, "max": 10.0}
+	var max_focus = float(attributes_component.focus)
+	_vitals_data[VitalType.FOCUS] = {"current": 0.0, "max": max_focus}
+	
+	if max_focus > 0:
+		apply_vital_change(VitalType.FOCUS, max_focus, false)
+
+	_is_initialized = true
 
 # The primary method for changing a vital's value.
 # Use positive delta for healing/gaining, negative for damage/spending.

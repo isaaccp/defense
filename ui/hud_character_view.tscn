@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsabhsq53warn"]
+[gd_scene load_steps=7 format=3 uid="uid://bsabhsq53warn"]
 
 [ext_resource type="Script" uid="uid://co006ierilxe4" path="res://ui/hud_character_view.gd" id="1_xuorh"]
 [ext_resource type="PackedScene" uid="uid://djdh7mp64thdi" path="res://ui/hud_status_display.tscn" id="2_aw5xw"]
@@ -13,6 +13,11 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbhag"]
 bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6p0y"]
+bg_color = Color(0, 0, 1, 1)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
@@ -46,7 +51,35 @@ value = 50.0
 show_percentage = false
 
 [node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer/HealthBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.5
+offset_top = -11.5
+offset_right = 21.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "10/20"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FocusBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_o2xvb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b6p0y")
+value = 50.0
+show_percentage = false
+
+[node name="FocusLabel" type="Label" parent="MarginContainer/VBoxContainer/FocusBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

@@ -7,6 +7,8 @@ class_name Attributes
 @export var speed: float
 ## Max health.
 @export var health: int
+## Max focus.
+@export var focus: int
 ## Fraction of health recovered at end of level.
 @export var recovery: float
 ## Multiplier applied to damage.

@@ -19,6 +19,9 @@ var speed: float:
 var health: int:
 	get: return attributes.health
 	set(value): pass
+var focus: int:
+	get: return attributes.focus
+	set(value): pass
 var damage_multiplier: float:
 	get: return attributes.damage_multiplier
 	set(value): pass

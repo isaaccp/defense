@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://u7s6mhky7v7u"]
 
-[ext_resource type="Script" path="res://ui/hud_enemy_view.gd" id="1_21h6e"]
+[ext_resource type="Script" uid="uid://dtalfhfynbix6" path="res://ui/hud_enemy_view.gd" id="1_21h6e"]
 [ext_resource type="PackedScene" uid="uid://djdh7mp64thdi" path="res://ui/hud_status_display.tscn" id="2_u0m5l"]
 [ext_resource type="PackedScene" uid="uid://dhoqr0ca7h26x" path="res://ui/hud_relic_display.tscn" id="3_ciq6f"]
 

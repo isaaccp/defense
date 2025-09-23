@@ -21,10 +21,8 @@ func initialize(character_: Character) -> void:
 	# which happens when we play a level through F6). We only can do it if
 	# we missed the signal, otherwise both updates happen in the same frame
 	# and the progress bar seems confused.
-	# TODO: Update for vitals.
-	if vitals.get_vital_current(VitalsComponent.VitalType.HEALTH) > 0:
-		_set_health(vitals.get_vital_current(VitalsComponent.VitalType.HEALTH),
-					vitals.get_vital_max(VitalsComponent.VitalType.HEALTH))
+	_update_vital(vitals, VitalsComponent.VitalType.HEALTH)
+	_update_vital(vitals, VitalsComponent.VitalType.FOCUS)
 	var status = Component.get_status_component_or_die(character)
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = character.get_component_or_die(BehaviorComponent)
@@ -36,6 +34,27 @@ func initialize(character_: Character) -> void:
 	# One-off call to add existing relics.
 	_on_relics_changed(effect_actuator_component.relics)
 
+func _vital_bar(vital_type: VitalsComponent.VitalType) -> ProgressBar:
+	if vital_type == VitalsComponent.VitalType.HEALTH:
+		return %HealthBar
+	elif vital_type == VitalsComponent.VitalType.FOCUS:
+		return %FocusBar
+	else:
+		assert(false)
+		return null
+		
+func _update_vital(vitals: VitalsComponent, vital_type: VitalsComponent.VitalType) -> void:
+	if vitals.get_vital_current(vital_type) > 0:
+		_set_vital(vital_type, vitals.get_vital_current(vital_type),
+				   vitals.get_vital_max(vital_type))
+
+func _set_vital(vital: VitalsComponent.VitalType, current: int, max: int):
+	var bar = _vital_bar(vital)
+	bar.value = current
+	bar.max_value = max
+	# Each bar has a single child which is a label.
+	bar.get_child(0).text = "%d / %d" % [current, max]
+	
 func is_local() -> bool:
 	if OnlineMatch.match_mode == OnlineMatch.MatchMode.NONE:
 		return true
@@ -55,15 +74,8 @@ func show_buttons(show: bool, text: String) -> void:
 	else:
 		%ConfigContainer.hide()
 
-func _set_health(health: int, max_health: int):
-	%HealthBar.value = health
-	%HealthBar.max_value = max_health
-	%HealthLabel.text = "%d / %d" % [health, max_health]
-
 func _on_vital_updated(vital_update: VitalsComponent.VitalUpdate):
-	if vital_update.type != VitalsComponent.VitalType.HEALTH:
-		return
-	_set_health(vital_update.current_value, vital_update.max_value)
+	_set_vital(vital_update.type, int(vital_update.current_value), int(vital_update.max_value))
 
 func _on_statuses_changed(statuses: Array):
 	%HudStatusDisplay.clear()
