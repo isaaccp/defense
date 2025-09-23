@@ -6,6 +6,7 @@ class_name Behavior
 var rules: Array[Rule]
 var actor: Actor
 var side_component: SideComponent
+var vitals_component: VitalsComponent
 
 # TODO: Consider also preparing action if needed.
 # It would allow to do things like "every time you use this action, it
@@ -22,9 +23,10 @@ static func restore(stored_behavior: StoredBehavior) -> Behavior:
 		behavior.rules.append(rule)
 	return behavior
 
-func prepare(actor_: Actor, side_component_: SideComponent):
+func prepare(actor_: Actor, side_component_: SideComponent, vitals_component_: VitalsComponent):
 	actor = actor_
 	side_component = side_component_
+	vitals_component = vitals_component_
 	target_selectors.clear()
 	condition_evaluators.clear()
 	for rule in rules:
@@ -69,6 +71,10 @@ func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 			if not condition_evaluators[i].evaluate():
 				continue
 		var action = Action.make_runnable_action(rule.action)
+		if action.focus_cost > 0:
+			var current_focus = vitals_component.get_vital_current(VitalsComponent.VitalType.FOCUS)
+			if action.focus_cost > current_focus:
+				continue
 		var target = target_selectors[i].select_target(action, actor, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}

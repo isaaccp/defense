@@ -10,6 +10,7 @@ func _init():
 	prepare_time = 0.5
 	cooldown = 5.0
 	max_distance = 200
+	focus_cost = 1
 
 func description() -> String:
 	return "Heals the target for 15 hit points"

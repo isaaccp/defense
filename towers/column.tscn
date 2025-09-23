@@ -68,6 +68,7 @@ radius = 15.0
 [sub_resource type="Resource" id="Resource_1jmna"]
 script = ExtResource("7_v2vco")
 health = 60
+focus = null
 
 [node name="Column" type="StaticBody2D" groups=["towers"]]
 y_sort_enabled = true

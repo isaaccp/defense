@@ -35,6 +35,9 @@ const MaxDistance = 10_000_000
 # How long until this action can be triggered again.
 # Ignored if negative.
 @export var cooldown = -1.0
+# Focus cost of action. Executing this action will remove this much focus,
+# action can't be run if unit doesn't have at least this much focus.
+@export var focus_cost = 0.0
 # If true, the action will check periodically whether the target still
 # meets the initial condition, and stop the action if it no longer does.
 @export var finish_on_unmet_condition = false

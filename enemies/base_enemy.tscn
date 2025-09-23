@@ -61,7 +61,7 @@ status_component = NodePath("../StatusComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "status_component", "effect_actuator_component", "character_body_component", "logging_component") instance=ExtResource("6_v211g")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "vitals_component", "status_component", "effect_actuator_component", "character_body_component", "logging_component") instance=ExtResource("6_v211g")]
 actor = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -69,6 +69,7 @@ sprite = NodePath("../Sprite2D")
 animation_component = NodePath("../AnimationComponent")
 side_component = NodePath("../SideComponent")
 attributes_component = NodePath("../AttributesComponent")
+vitals_component = NodePath("../VitalsComponent")
 status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 character_body_component = NodePath("../CharacterBodyComponent")

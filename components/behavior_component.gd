@@ -16,6 +16,7 @@ signal action_finished(action_name: StringName)
 @export var animation_component: AnimationComponent
 @export var side_component: SideComponent
 @export var attributes_component: AttributesComponent
+@export var vitals_component: VitalsComponent
 @export var status_component: StatusComponent
 @export var effect_actuator_component: EffectActuatorComponent
 @export var character_body_component: CharacterBodyComponent
@@ -56,7 +57,7 @@ func _ready():
 
 func run():
 	behavior = Behavior.restore(stored_behavior)
-	behavior.prepare(actor, side_component)
+	behavior.prepare(actor, side_component, vitals_component)
 	running = true
 
 func stop():
@@ -111,6 +112,8 @@ func _physics_process(delta: float):
 					action = result.action
 					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
 					action.initialize(target, actor, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component, effect_actuator_component, character_body_component)
+					if action.focus_cost > 0:
+						vitals_component.apply_vital_change(VitalsComponent.VitalType.FOCUS, -action.focus_cost, true)
 			if action and action.abortable:
 				next_abortable_action_check_time = elapsed_time + abortable_action_check_period
 		_emit_updated_if_changed(prev_action_name, prev_target)
