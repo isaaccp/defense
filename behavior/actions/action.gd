@@ -190,6 +190,8 @@ func attributes():
 	attrs += _range_str() + "\n"
 	if cooldown > 0:
 		attrs += "Cooldown: %0.1f\n" % cooldown
+	if focus_cost > 0:
+		attrs += "Focus cost: %d\n" % focus_cost
 	if abortable:
 		attrs += "Can be preempted\n"
 	attrs += "Supported Target Types: %s" % def.supported_target_types_str()

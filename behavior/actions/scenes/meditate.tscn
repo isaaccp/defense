@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwq25cnw7ckkp"]
+
+[ext_resource type="Script" uid="uid://85ko3gixouso" path="res://behavior/actions/scenes/action_scene.gd" id="1_ybiaq"]
+
+[node name="Meditate" type="Node2D"]
+script = ExtResource("1_ybiaq")
