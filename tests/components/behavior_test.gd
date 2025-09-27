@@ -41,6 +41,18 @@ func test_basic_behavior():
 	TestUtils.assert_last_action(self, behavior_component, heal.skill_name)
 	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal.skill_name), 2)
 
+func test_basic_behavior_no_focus():
+	behavior_component.stored_behavior = make_behavior(always)
+	watch_signals(behavior_component)
+	await wait_seconds(0.1, "Waiting to ensure nothing happens before we do run()")
+	assert_signal_not_emitted(behavior_component, "behavior_updated")
+	var vitals_component: VitalsComponent = enemy.get_component_or_die(VitalsComponent)
+	vitals_component.test_set_vital_current(VitalsComponent.VitalType.FOCUS, 0)
+
+	behavior_component.run()
+	await wait_for_signal(behavior_component.behavior_updated, 0.1)
+	assert_signal_not_emitted(behavior_component, "behavior_updated")
+	
 func test_persistent_condition_instance():
 	behavior_component.stored_behavior = make_behavior(preload("res://skill_tree/conditions/once.tres"))
 	watch_signals(behavior_component)
