@@ -45,5 +45,6 @@ func test_heal_works():
 	watch_signals(character_vitals)
 	await wait_seconds(0.6, "Waiting for heal")
 	assert_signal_emitted(character_behavior, "behavior_updated")
-	var vital_update = get_signal_parameters(character_vitals, "vital_updated", 0)[0] as VitalsComponent.VitalUpdate
+	# First update is focus being re-plenished, second update is the heal.
+	var vital_update = get_signal_parameters(character_vitals, "vital_updated", 1)[0] as VitalsComponent.VitalUpdate
 	assert_eq(vital_update.current_value - vital_update.prev_value, heal_amount)
