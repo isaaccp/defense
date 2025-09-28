@@ -13,6 +13,7 @@ class_name HitEffect
 # Status on hit.
 ## Status inflicted, if any.
 @export var status: StatusDef
+@export var status_params: EffectParams
 ## Duration for status.
 @export var status_duration: float
 ## Whether status only gets inflicted if hit causes damage

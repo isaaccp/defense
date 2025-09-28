@@ -16,7 +16,7 @@ var current_statuses: Dictionary
 # Keep track of time to know when to expire.
 var elapsed_time: float = 0.0
 
-signal status_added(status: StatusDef)
+signal status_added(status: StatusDef, status_params: EffectParams)
 signal status_removed(status_name: StringName)
 signal statuses_changed(statuses: Array[StringName])
 
@@ -40,7 +40,7 @@ func _process(delta: float):
 	_expire_statuses()
 	elapsed_time += delta
 
-func set_status(action_name: StringName, status: StatusDef, time: float):
+func set_status(action_name: StringName, status: StatusDef, params: EffectParams, time: float):
 	var time_str = "%0.1fs" % time if time > 0 else "during action"
 	_log("%s provided by %s (%s)" % [status.name, action_name, time_str])
 	var changed = false
@@ -59,7 +59,7 @@ func set_status(action_name: StringName, status: StatusDef, time: float):
 	current_statuses[status.name][action_name] = true
 	if changed:
 		_log("%s status added" % status.name)
-		status_added.emit(status)
+		status_added.emit(status, params)
 		statuses_changed.emit(get_statuses())
 
 func remove_status(action_name: StringName, status_name: StringName, expired = false):

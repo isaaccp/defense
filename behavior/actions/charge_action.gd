@@ -15,7 +15,7 @@ func _init():
 func post_initialize():
 	super()
 	original_position = body.global_position
-	status_component.set_status(def.skill_name, swiftness, -1)
+	status_component.set_status(def.skill_name, swiftness, SwiftnessParams.make(1.5), -1)
 
 func action_finished():
 	super()
@@ -23,7 +23,7 @@ func action_finished():
 	var distance = original_position.distance_to(body.global_position)
 	if distance >= charge_threshold:
 		action_log("%0.1f (>= %0.1f), triggering surge" % [distance, charge_threshold])
-		status_component.set_status(def.skill_name, strength_surge, strengh_surge_duration)
+		status_component.set_status(def.skill_name, strength_surge, StrengthSurgeParams.make(2), strengh_surge_duration)
 	else:
 		action_log("%0.1f (< %0.1f), not triggering surge" % [distance, charge_threshold])
 

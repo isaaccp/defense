@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="StatusDef" load_steps=4 format=3 uid="uid://qrowjxk0qh01"]
 
-[ext_resource type="Script" path="res://effects/statuses/strength_surge.gd" id="1_37muf"]
+[ext_resource type="Script" uid="uid://bj3t66waxkbml" path="res://effects/statuses/strength_surge.gd" id="1_37muf"]
 [ext_resource type="Texture2D" uid="uid://b61as87s41agj" path="res://assets/status/buffs/attack_boost.png" id="1_imooe"]
-[ext_resource type="Script" path="res://effects/status_def.gd" id="2_mcdqm"]
+[ext_resource type="Script" uid="uid://tkomisxfxh3a" path="res://effects/status_def.gd" id="2_mcdqm"]
 
 [resource]
 script = ExtResource("2_mcdqm")

@@ -6,6 +6,9 @@ class_name Effect
 ## Only subscribed to if AbleToAct is set in effect_types.
 signal able_to_act(can_act: bool)
 
+func initialize(params: EffectParams) -> void:
+	pass
+
 func on_effect_added():
 	pass
 

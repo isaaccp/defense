@@ -55,7 +55,7 @@ func run():
 func load_relic(relic_name: StringName):
 	var relic = relic_library.get_relic(relic_name)
 	relics.append(relic)
-	_add_effect(relic)
+	_add_effect(relic, null)
 	relics_changed.emit(relics)
 
 func add_relic(relic_name: StringName):
@@ -83,15 +83,16 @@ func modified_cooldown(action: ActionDef, cooldown: float, effect_log: Array[Str
 		effective_cooldown = effect_script.modified_action_cooldown(action, effective_cooldown, logger)
 	return effective_cooldown
 
-func _on_status_added(status: StatusDef):
-	_add_effect(status)
+func _on_status_added(status: StatusDef, status_params: EffectParams):
+	_add_effect(status, status_params)
 
 func _on_status_removed(status_name: StringName):
 	_remove_effect(status_name)
 
-func _add_effect(effect: EffectDef):
+func _add_effect(effect: EffectDef, effect_params: EffectParams):
 	effect_by_name[effect.name] = effect
 	var script = effect.effect_script.new() as Effect
+	script.initialize(effect_params)
 	effect_script_by_name[effect.name] = script
 	# Some effect types may not require tracking like this, but unless it
 	# becomes a problem it's probably fine to track anyway.
