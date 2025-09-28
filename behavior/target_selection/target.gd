@@ -12,6 +12,8 @@ enum Type {
 	ACTORS,
 	## Returns a Vector2.
 	POSITION,
+	## Returns one Actor, only allows it to be "self".
+	SELF,
 }
 
 enum PositionType {
@@ -26,7 +28,7 @@ enum PositionType {
 var type: Type
 var actor: Actor:
 	get:
-		if type != Type.ACTOR:
+		if type != Type.ACTOR and type != Type.SELF:
 			print("unexpected actor get")
 		if not is_instance_valid(actor):
 			actor = null
@@ -61,6 +63,8 @@ func valid() -> bool:
 		return false
 	if type == Type.ACTOR:
 		return actor != null and is_instance_valid(actor) and not actor.destroyed
+	if type == Type.SELF:
+		return actor != null and is_instance_valid(actor) and not actor.destoyred
 	if type == Type.ACTORS:
 		return not actors.is_empty()
 	if type == Type.POSITION:
@@ -74,6 +78,8 @@ func meets_condition() -> bool:
 func equals(other: Target) -> bool:
 	if type == other.type:
 		match type:
+			Type.SELF:
+				return true
 			Type.ACTOR:
 				return actor == other.actor
 			Type.ACTORS:
@@ -92,6 +98,8 @@ func equals(other: Target) -> bool:
 
 func _to_string():
 	match type:
+		Type.SELF:
+			return actor.actor_name
 		Type.ACTOR:
 			return actor.actor_name
 		Type.ACTORS:

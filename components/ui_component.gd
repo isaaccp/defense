@@ -13,6 +13,8 @@ var running = false
 var config: Array[Dictionary]
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	config = [
 		{ 'bar': %HealthBar, 'vital': VitalsComponent.VitalType.HEALTH, },
 		{ 'bar': %FocusBar, 'vital': VitalsComponent.VitalType.FOCUS, },

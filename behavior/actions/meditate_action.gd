@@ -15,5 +15,5 @@ func post_initialize():
 	Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
 
 func description():
-	return "Meditates to re-focus, increasing focus regeneration by %fx for %fs." % [high_focus_regen_multiplier, high_focus_duration]
+	return "Meditates to re-focus, increasing focus regeneration by %0.2fx for %0.2fs." % [high_focus_regen_multiplier, high_focus_duration]
 	

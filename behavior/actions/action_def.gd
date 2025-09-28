@@ -26,7 +26,9 @@ func name() -> String:
 	return skill_name
 
 func compatible_with_target(target_type: Target.Type) -> bool:
-	return target_type in supported_target_types
+	# Check if target_Type is in supported_target_Types.
+	# Also allow SELF to satisfy ACTOR supported_target_type.
+	return (target_type in supported_target_types) or (target_type == Target.Type.SELF and Target.Type.ACTOR in supported_target_types)
 
 func supported_target_types_str() -> String:
 	var supported_targets = supported_target_types.map(func(t): return Target.target_type_str(t))

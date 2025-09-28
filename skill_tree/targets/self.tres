@@ -10,7 +10,7 @@ script = ExtResource("1_m2uhp")
 
 [resource]
 script = ExtResource("1_mjmbq")
-type = 1
+type = 4
 description_text = "Targets oneself"
 selector_script = ExtResource("3_8tp1d")
 sortable = false
