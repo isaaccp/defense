@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatusDef" load_steps=4 format=3 uid="uid://c3lmnj8ir6rq5"]
+
+[ext_resource type="Script" uid="uid://cfcqp3a1p2y73" path="res://effects/statuses/high_focus.gd" id="1_5nplq"]
+[ext_resource type="Script" uid="uid://tkomisxfxh3a" path="res://effects/status_def.gd" id="1_neof1"]
+[ext_resource type="Texture2D" uid="uid://txnlqdd2xr3k" path="res://assets/status/buffs/glow.png" id="2_vqyfe"]
+
+[resource]
+script = ExtResource("1_neof1")
+description = "Increases focus regeneration"
+icon = ExtResource("2_vqyfe")
+name = &"High Focus"
+effect_types = Array[int]([1])
+effect_script = ExtResource("1_5nplq")
+metadata/_custom_type_script = "uid://tkomisxfxh3a"
