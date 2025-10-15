@@ -147,7 +147,7 @@ func _setup_tree():
 				var child = seen[s]
 				parent.set_slot_enabled_right(0, true)
 				child.set_slot_enabled_left(0, true)
-				graph.connect_node(parent.name, parent.get_output_port_slot(0), child.name, child.get_input_port_slot(0))
+				graph.connect_node(parent.name, 0, child.name, 0)
 		graph.arrange_nodes()
 		graph.node_selected.connect(_on_node_selected)
 	_update_purchase_state()
