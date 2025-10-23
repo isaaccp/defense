@@ -19,6 +19,18 @@ func _ready():
 
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
+	var config_component = get_component_or_null(ConfigComponent) as ConfigComponent
+	if config_component:
+		var enemy_config = config_component.config as EnemyConfig
+		if not enemy_config:
+			warnings.append("ConfigComponent config is not set or is not an EnemyConfig")
+			return
+		if enemy_config.name == '':
+			warnings.append("EnemyConfig doesn't have name set")
+		if not enemy_config.attributes_component_config:
+			warnings.append("EnemyConfig doesn't have attributes_component_config set")
+		# ...
+		return
 	var attributes_component = AttributesComponent.get_or_null(self)
 	if not attributes_component:
 		warnings.append("AttributesComponent is required")
