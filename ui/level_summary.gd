@@ -17,7 +17,7 @@ func prepare(character_node: Node):
 	var stats_view: StatsView
 	for character in character_node.get_children():
 		assert(character is Character)
-		var logging_component = Component.get_logging_component_or_die(character)
+		var logging_component = character.get_component_or_die(LoggingComponent) as LoggingComponent
 		var character_stats = logging_component.stats
 		stats_view = stats_view_scene.instantiate()
 		stats_view.initialize("Stats for %s" % character.actor_name, stat_names, character_stats)

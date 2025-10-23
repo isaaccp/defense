@@ -23,7 +23,7 @@ func initialize(character_: Character) -> void:
 	# and the progress bar seems confused.
 	_update_vital(vitals, VitalsComponent.VitalType.HEALTH)
 	_update_vital(vitals, VitalsComponent.VitalType.FOCUS)
-	var status = Component.get_status_component_or_die(character)
+	var status = character.get_component_or_die(StatusComponent) as StatusComponent
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = character.get_component_or_die(BehaviorComponent)
 	behavior.behavior_updated.connect(_on_behavior_updated)

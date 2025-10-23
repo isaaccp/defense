@@ -18,7 +18,7 @@ func initialize(enemy_: Enemy) -> void:
 	if vitals.get_vital_current(VitalsComponent.VitalType.HEALTH) > 0:
 		_set_health(vitals.get_vital_current(VitalsComponent.VitalType.HEALTH),
 					vitals.get_vital_max(VitalsComponent.VitalType.HEALTH))
-	var status = Component.get_status_component_or_die(enemy)
+	var status = enemy.get_component_or_die(StatusComponent) as StatusComponent
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = enemy.get_component_or_die(BehaviorComponent)
 	behavior.behavior_updated.connect(_on_behavior_updated)

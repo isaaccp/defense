@@ -37,7 +37,7 @@ func before_each():
 	# Set up character.
 	character = level.characters.get_child(0)
 	character_behavior = BehaviorComponent.get_or_die(character)
-	character_status = Component.get_status_component_or_die(character)
+	character_status = character.get_component_or_die(StatusComponent) as StatusComponent
 	# Set up enemy.
 	enemy = level.enemies.get_child(0)
 	BehaviorComponent.get_or_die(enemy).stored_behavior = StoredBehavior.new()
