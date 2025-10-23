@@ -17,8 +17,6 @@ signal default_animation_finished
 signal animation_finished(anim: String)
 
 func _ready():
-	if Engine.is_editor_hint():
-		return
 	# TODO: Implement this in some trait.
 	# AnimationComponent is used across multiple types of resources.
 	var parent = get_parent()
@@ -27,6 +25,8 @@ func _ready():
 		var animation_component_config = config.get("animation_component_config") as AnimationComponentConfig
 		if animation_component_config:
 			animation_player.add_animation_library("", animation_component_config.animation_library)
+	if Engine.is_editor_hint():
+		return
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func run():

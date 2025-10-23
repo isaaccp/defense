@@ -1,3 +1,4 @@
+@tool
 extends Area2D
 
 class_name HurtboxComponent
@@ -23,6 +24,8 @@ func _ready():
 		var hurtbox_component_config = config.get("hurtbox_component_config") as HurtboxComponentConfig
 		if hurtbox_component_config:
 			$CollisionShape2D.shape = hurtbox_component_config.collision_shape
+			var rect = hurtbox_component_config.collision_shape.get_rect()
+			$CollisionShape2D.position.y = -rect.size.y / 2.0
 
 func can_handle_collision():
 	if not (status_component or damage_component):
