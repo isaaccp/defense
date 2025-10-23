@@ -42,7 +42,7 @@ func prepare(actor_: Actor, side_component_: SideComponent, vitals_component_: V
 				# TODO: Implement.
 				pass
 		match rule.target_selection.type:
-			Target.Type.ACTOR:
+			Target.Type.SELF, Target.Type.ACTOR:
 				var target_evaluator = ConditionEvaluatorFactory.make_target_actor_condition_evaluator(rule.condition, actor)
 				target_selector = TargetSelectorFactory.make_actor_target_selector(rule.target_selection, target_evaluator)
 			Target.Type.POSITION:

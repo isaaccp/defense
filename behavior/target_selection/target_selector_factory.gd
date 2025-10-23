@@ -3,7 +3,7 @@ extends Object
 class_name TargetSelectorFactory
 
 static func make_actor_target_selector(target: TargetSelectionDef, target_actor_evaluator: TargetActorConditionEvaluator) -> NodeTargetSelector:
-	assert(target.type == Target.Type.ACTOR)
+	assert(target.type == Target.Type.ACTOR || target.type == Target.Type.SELF)
 	var selector = target.selector_script.new() as NodeTargetSelector
 	selector.def = target
 	selector.condition_evaluator = target_actor_evaluator

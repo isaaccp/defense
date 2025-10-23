@@ -1,0 +1,127 @@
+[gd_scene load_steps=17 format=3 uid="uid://bjqptry8tjren"]
+
+[ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="1_0h01o"]
+[ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_8cidi"]
+[ext_resource type="Script" uid="uid://b4el76lmckyxg" path="res://components/config_component.gd" id="2_grymm"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_grymm"]
+[ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="4_ymuxt"]
+[ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="5_2dcpb"]
+[ext_resource type="PackedScene" uid="uid://bo6iov4wptl43" path="res://components/death_handler_component.tscn" id="6_xvjrt"]
+[ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="7_kg1no"]
+[ext_resource type="PackedScene" uid="uid://djvpi1umbrwxy" path="res://components/attributes_component.tscn" id="8_ofl0k"]
+[ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="9_n7mk6"]
+[ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="10_cve8t"]
+[ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="11_5hpbo"]
+[ext_resource type="PackedScene" uid="uid://dxlpeence2pav" path="res://components/pickable_component.tscn" id="12_hd7e4"]
+[ext_resource type="PackedScene" uid="uid://0o5ty4vnc6k3" path="res://components/damage_component.tscn" id="13_xb6rl"]
+[ext_resource type="PackedScene" uid="uid://cxe3wi1mi6quo" path="res://components/vitals_component.tscn" id="14_o6wa6"]
+[ext_resource type="PackedScene" uid="uid://i2dedaqm78hc" path="res://components/ui_component.tscn" id="15_d8eyj"]
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
+collision_mask = 8
+input_pickable = true
+script = ExtResource("1_0h01o")
+actor_name = "Base Enemy"
+
+[node name="ConfigComponent" type="Node" parent="."]
+script = ExtResource("2_grymm")
+
+[node name="CharacterBodyComponent" parent="." node_paths=PackedStringArray("character_body") instance=ExtResource("2_8cidi")]
+character_body = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -16)
+offset = Vector2(0, -16)
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"player": "Sprite2D/AnimationPlayer",
+"source": "res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Warrior/Death/Death.aseprite"
+}
+
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player", "config_component") instance=ExtResource("3_grymm")]
+animation_player = NodePath("AnimationPlayer")
+config_component = NodePath("../ConfigComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 5)
+
+[node name="ActionSprites" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "config_component", "logging_component", "damage_component", "status_component") instance=ExtResource("4_ymuxt")]
+side_component = NodePath("../SideComponent")
+config_component = NodePath("../ConfigComponent")
+logging_component = NodePath("../LoggingComponent")
+damage_component = NodePath("../DamageComponent")
+status_component = NodePath("../StatusComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "vitals_component", "status_component", "effect_actuator_component", "character_body_component", "logging_component", "config_component") instance=ExtResource("5_2dcpb")]
+actor = NodePath("..")
+navigation_agent = NodePath("../NavigationAgent2D")
+action_sprites = NodePath("../ActionSprites")
+sprite = NodePath("../Sprite2D")
+animation_component = NodePath("../AnimationComponent")
+side_component = NodePath("../SideComponent")
+attributes_component = NodePath("../AttributesComponent")
+vitals_component = NodePath("../VitalsComponent")
+status_component = NodePath("../StatusComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
+character_body_component = NodePath("../CharacterBodyComponent")
+logging_component = NodePath("../LoggingComponent")
+config_component = NodePath("../ConfigComponent")
+
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape") instance=ExtResource("6_xvjrt")]
+vitals_component = NodePath("../VitalsComponent")
+animation_component = NodePath("../AnimationComponent")
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="SideComponent" parent="." instance=ExtResource("7_kg1no")]
+side = 2
+
+[node name="AttributesComponent" parent="." node_paths=PackedStringArray("config_component", "effect_actuator_component") instance=ExtResource("8_ofl0k")]
+config_component = NodePath("../ConfigComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
+
+[node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("9_n7mk6")]
+logging_component = NodePath("../LoggingComponent")
+
+[node name="LoggingComponent" parent="." instance=ExtResource("10_cve8t")]
+
+[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("11_5hpbo")]
+status_component = NodePath("../StatusComponent")
+
+[node name="PickableComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("12_hd7e4")]
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component") instance=ExtResource("13_xb6rl")]
+attributes_component = NodePath("../AttributesComponent")
+vitals_component = NodePath("../VitalsComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("14_o6wa6")]
+attributes_component = NodePath("../AttributesComponent")
+logging_component = NodePath("../LoggingComponent")
+
+[node name="UIComponent" parent="." node_paths=PackedStringArray("vitals_component") instance=ExtResource("15_d8eyj")]
+vitals_component = NodePath("../VitalsComponent")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

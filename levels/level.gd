@@ -98,8 +98,6 @@ func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: Gamepla
 		character.idx = i
 		character.peer_id = gc.peer_id
 		character.position = starting_positions.get_child(i).position
-		var attributes_component = character.get_component_or_die(AttributesComponent)
-		attributes_component.base_attributes = gc.attributes
 		characters.add_child(character)
 
 func _on_prepare_entered():

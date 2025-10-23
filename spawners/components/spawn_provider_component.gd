@@ -6,12 +6,19 @@ class_name SpawnProviderComponent
 const component = &"SpawnProviderComponent"
 
 # Provides spawns to place.
+const enemy_scene = preload("res://enemies/enemy.tscn")
 
 # Make this fancier (e.g. multiple enemies, probabilities, etc).
 @export var config: SpawnProviderConfig
 
 func new_spawn() -> Node2D:
-	var spawn = config.spawn.instantiate() as Node2D
+	var spawn: Node2D
+	if config.spawn:
+		spawn = config.spawn.instantiate() as Enemy
+	else:
+		spawn = enemy_scene.instantiate() as Enemy
+		var config_component = spawn.get_component_or_die(ConfigComponent) as ConfigComponent
+		config_component.config = config.spawn_enemy_config
 	return spawn
 
 static func get_or_null(node: Node) -> SpawnProviderComponent:

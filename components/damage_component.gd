@@ -32,7 +32,7 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 	hit.emit(hit_effect)
 	if not running:
 		print("Ignoring hit received while not running")
-		return
+		return null
 	var hit_result = HitResult.new()
 	var adjusted_damage = hit_effect.adjusted_damage()
 	# Check if it's a heal.

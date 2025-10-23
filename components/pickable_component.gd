@@ -21,6 +21,9 @@ var is_paused: bool
 func _ready():
 	if Engine.is_editor_hint():
 		return
+	_initialize.call_deferred()
+
+func _initialize():
 	internal_collision_shape.position = collision_shape.position
 	internal_collision_shape.shape = collision_shape.shape.duplicate(true)
 	is_paused = get_tree().paused

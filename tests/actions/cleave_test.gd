@@ -5,7 +5,8 @@ const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tsc
 const cleave_scene = preload("res://behavior/actions/scenes/cleave.tscn")
 const cleave_action = preload("res://skill_tree/actions/cleave.tres")
 const move_to = preload("res://skill_tree/actions/move_to.tres")
-const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
+const enemy_scene = preload("res://enemies/enemy.tscn")
+const orc_warrior_config = preload("res://enemies/orc_warrior/orc_warrior.tres")
 var test_character = preload("res://character/playable_characters/test_character.tres")
 const enemy_target = preload("res://skill_tree/targets/enemy.tres")
 
@@ -51,6 +52,8 @@ func before_each():
 
 func test_cleave_cooldown_reset_on_destroy():
 	var extra_enemy = enemy_scene.instantiate()
+	var config_component = extra_enemy.get_component_or_die(ConfigComponent) as ConfigComponent
+	config_component.config = orc_warrior_config
 	level.enemies.add_child(extra_enemy)
 
 	TestUtils.set_character_behavior(character, make_cleave_behavior())
@@ -73,6 +76,8 @@ func test_cleave_cooldown_reset_on_destroy():
 
 func test_cleave_cooldown_no_reset_on_no_destroy():
 	var extra_enemy = enemy_scene.instantiate()
+	var config_component = extra_enemy.get_component_or_die(ConfigComponent) as ConfigComponent
+	config_component.config = orc_warrior_config
 	level.enemies.add_child(extra_enemy)
 
 	TestUtils.set_character_behavior(character, make_cleave_behavior())

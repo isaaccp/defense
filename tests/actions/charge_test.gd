@@ -4,7 +4,8 @@ extends GutTest
 const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
 const sword_attack_action = preload("res://skill_tree/actions/sword_attack.tres")
 const charge_action = preload("res://skill_tree/actions/charge.tres")
-const enemy_scene = preload("res://enemies/orc_warrior/orc_warrior.tscn")
+const enemy_scene = preload("res://enemies/enemy.tscn")
+const orc_warrior_config = preload("res://enemies/orc_warrior/orc_warrior.tres")
 const charge_behavior = preload("res://tests/actions/charge_behavior.tres")
 var test_character = preload("res://character/playable_characters/test_character.tres")
 
@@ -99,6 +100,8 @@ func test_charge_long_distance():
 
 func test_charge_cooldown():
 	var extra_enemy = enemy_scene.instantiate()
+	var config_component = extra_enemy.get_component_or_die(ConfigComponent) as ConfigComponent
+	config_component.config = orc_warrior_config
 	level.enemies.add_child(extra_enemy)
 
 	TestUtils.set_character_behavior(character, make_charge_behavior())

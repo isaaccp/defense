@@ -273,7 +273,6 @@ texture_filter = 1
 position = Vector2(0, -32)
 texture = ExtResource("7_070mx")
 hframes = 4
-frame = 2
 metadata/_aseprite_wizard_config_ = {
 "i_mode": 0,
 "keep_anim_length": false,
@@ -289,7 +288,7 @@ metadata/_aseprite_wizard_config_ = {
 
 [node name="RightHand" type="Sprite2D" parent="Sprite2D" index="0"]
 show_behind_parent = true
-position = Vector2(11, 22)
+position = Vector2(11, 21)
 texture = ExtResource("4_3ixxk")
 
 [node name="Weapon" type="Sprite2D" parent="Sprite2D/RightHand" index="0"]
@@ -298,7 +297,7 @@ position = Vector2(1, -12)
 texture = ExtResource("4_pq5sq")
 
 [node name="LeftHand" type="Sprite2D" parent="Sprite2D" index="1"]
-position = Vector2(-5, 25)
+position = Vector2(-5, 23)
 texture = ExtResource("5_3hwcr")
 
 [node name="HolyBook" type="Sprite2D" parent="Sprite2D/LeftHand" index="0"]

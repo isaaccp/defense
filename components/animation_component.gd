@@ -7,10 +7,14 @@ const component = &"AnimationComponent"
 const default_auto_animation = "auto"
 
 @export_group("Required")
-## Animation player in the tree. Most likely a child.
+## Animation player in the tree. Most likely a child. TODO: Once we are fully config-based, we
+## can move this into the component.
 @export var animation_player: AnimationPlayer
 
 @export_group("Optional")
+## Probably will be required later, if present, uses it to get animation library for
+## animation_player.
+@export var config_component: ConfigComponent
 
 signal default_animation_finished
 signal animation_finished(anim: String)
@@ -18,6 +22,10 @@ signal animation_finished(anim: String)
 func _ready():
 	if Engine.is_editor_hint():
 		return
+	if config_component:
+		var animation_component_config = config_component.config.get("animation_component_config") as AnimationComponentConfig
+		if animation_component_config:
+			animation_player.add_animation_library("", animation_component_config.animation_library)
 	animation_player.animation_finished.connect(_on_animation_finished)
 
 func run():

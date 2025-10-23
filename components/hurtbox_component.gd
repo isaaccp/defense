@@ -10,12 +10,20 @@ signal hit(hit_effect: HitEffect)
 @export var side_component: SideComponent
 
 @export_group("Optional")
+## Probably will be required later, if present, uses it to get collision Shape2D.
+@export var config_component: ConfigComponent
 @export var logging_component: LoggingComponent
 
 # Optional as e.g. you may still want to have a hurtbox
 # for things that can't be killed. Same for status.
 @export var damage_component: DamageComponent
 @export var status_component: StatusComponent
+
+func _ready():
+	if config_component:
+		var hurtbox_component_config = config_component.config.get("hurtbox_component_config") as HurtboxComponentConfig
+		if hurtbox_component_config:
+			$CollisionShape2D.shape = hurtbox_component_config.collision_shape
 
 func can_handle_collision():
 	if not (status_component or damage_component):
@@ -31,6 +39,9 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 		hit_result = damage_component.process_hit(hit_effect)
 	else:
 		hit_result = HitResult.new()
+	if not hit_result:
+		assert("Unexpected lack of hit_result")
+		return null
 	if not hit_effect.status_on_damage_only or hit_result.damage != 0:
 		if status_component:
 			if hit_effect.status:
