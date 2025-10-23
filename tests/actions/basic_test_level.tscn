@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://sqxnjf8uyw28"]
+[gd_scene load_steps=4 format=3 uid="uid://sqxnjf8uyw28"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_ey8bv"]
-[ext_resource type="PackedScene" uid="uid://blkrwluj7242d" path="res://enemies/orc_warrior/orc_warrior.tscn" id="2_2xijh"]
+[ext_resource type="PackedScene" uid="uid://bjqptry8tjren" path="res://enemies/enemy.tscn" id="2_nbjkh"]
+[ext_resource type="Resource" uid="uid://co503cnfuc53i" path="res://enemies/orc_warrior/orc_warrior.tres" id="3_ip8p8"]
 
 [node name="Level" instance=ExtResource("1_ey8bv")]
 players = 1
@@ -12,9 +13,8 @@ position = Vector2(129, 119)
 [node name="Second" parent="StartingPositions" index="1"]
 position = Vector2(43, 203)
 
-[node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_2xijh")]
-collision_mask = 0
-input_pickable = false
+[node name="Enemy" parent="YSorted/Enemies" index="0" instance=ExtResource("2_nbjkh")]
+config = ExtResource("3_ip8p8")
 
 [node name="VictoryLossConditionComponent" parent="." index="4"]
 loss = Array[int]([2])

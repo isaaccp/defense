@@ -6,8 +6,6 @@ class_name AttributesComponent
 const component = &"AttributesComponent"
 
 @export_group("Optional")
-## Probably will be required later, if present, uses it to get base_attributes.
-@export var config_component: ConfigComponent
 
 ## Base attributes for the unit, required for enemies.
 ## Characters set it from the GameplayCharacter.
@@ -43,9 +41,10 @@ var resistance: Array[Resistance]:
 func _ready():
 	if Engine.is_editor_hint():
 		return
-
-	if config_component:
-		var attributes_component_config = config_component.config.get("attributes_component_config") as AttributesComponentConfig
+		
+	var config = get_parent().config
+	if config:
+		var attributes_component_config = config.get("attributes_component_config") as AttributesComponentConfig
 		if attributes_component_config:
 			base_attributes = attributes_component_config.attributes
 		

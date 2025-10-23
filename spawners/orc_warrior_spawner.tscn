@@ -127,5 +127,7 @@ hframes = 6
 vframes = 30
 frame = 89
 
-[node name="SpawnConfigComponent" type="Node" parent="." index="5" instance=ExtResource("5_b7qe0")]
+[node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("5_b7qe0")]
+
+[node name="@Node@22938" type="Node" parent="." index="6" instance=ExtResource("5_b7qe0")]
 script = ExtResource("6_lpox0")

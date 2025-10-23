@@ -10,8 +10,6 @@ signal hit(hit_effect: HitEffect)
 @export var side_component: SideComponent
 
 @export_group("Optional")
-## Probably will be required later, if present, uses it to get collision Shape2D.
-@export var config_component: ConfigComponent
 @export var logging_component: LoggingComponent
 
 # Optional as e.g. you may still want to have a hurtbox
@@ -20,8 +18,9 @@ signal hit(hit_effect: HitEffect)
 @export var status_component: StatusComponent
 
 func _ready():
-	if config_component:
-		var hurtbox_component_config = config_component.config.get("hurtbox_component_config") as HurtboxComponentConfig
+	var config = get_parent().config
+	if config:
+		var hurtbox_component_config = config.get("hurtbox_component_config") as HurtboxComponentConfig
 		if hurtbox_component_config:
 			$CollisionShape2D.shape = hurtbox_component_config.collision_shape
 

@@ -7,6 +7,9 @@ extends Actor
 ## * a BehaviorComponent
 class_name Unit
 
+# Optional for now, used for enemies.
+@export var config: UnitConfig
+
 signal died
 
 func _ready():

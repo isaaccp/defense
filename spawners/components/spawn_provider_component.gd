@@ -17,8 +17,7 @@ func new_spawn() -> Node2D:
 		spawn = config.spawn.instantiate() as Enemy
 	else:
 		spawn = enemy_scene.instantiate() as Enemy
-		var config_component = spawn.get_component_or_die(ConfigComponent) as ConfigComponent
-		config_component.config = config.spawn_enemy_config
+		spawn.config = config.spawn_enemy_config
 	return spawn
 
 static func get_or_null(node: Node) -> SpawnProviderComponent:

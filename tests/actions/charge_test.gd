@@ -100,8 +100,7 @@ func test_charge_long_distance():
 
 func test_charge_cooldown():
 	var extra_enemy = enemy_scene.instantiate()
-	var config_component = extra_enemy.get_component_or_die(ConfigComponent) as ConfigComponent
-	config_component.config = orc_warrior_config
+	extra_enemy.config = orc_warrior_config
 	level.enemies.add_child(extra_enemy)
 
 	TestUtils.set_character_behavior(character, make_charge_behavior())

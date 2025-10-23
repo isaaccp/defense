@@ -26,9 +26,6 @@ signal action_finished(action_name: StringName)
 @export var persistent_game_state_component: PersistentGameStateComponent
 @export var logging_component: LoggingComponent
 
-## Probably will be required later, if present, uses it to get stored behavior.
-@export var config_component: ConfigComponent
-
 @export var stored_behavior: StoredBehavior:
 	get:
 		if Engine.is_editor_hint():
@@ -57,8 +54,9 @@ var behavior: Behavior
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	if config_component:
-		var behavior_component_config = config_component.config.get("behavior_component_config") as BehaviorComponentConfig
+	var config = get_parent().config
+	if config:
+		var behavior_component_config = config.get("behavior_component_config") as BehaviorComponentConfig
 		if behavior_component_config:
 			stored_behavior = behavior_component_config.stored_behavior
 	effect_actuator_component.able_to_act_changed.connect(_on_able_to_act_changed)

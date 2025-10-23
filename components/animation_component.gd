@@ -12,9 +12,6 @@ const default_auto_animation = "auto"
 @export var animation_player: AnimationPlayer
 
 @export_group("Optional")
-## Probably will be required later, if present, uses it to get animation library for
-## animation_player.
-@export var config_component: ConfigComponent
 
 signal default_animation_finished
 signal animation_finished(anim: String)
@@ -22,8 +19,12 @@ signal animation_finished(anim: String)
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	if config_component:
-		var animation_component_config = config_component.config.get("animation_component_config") as AnimationComponentConfig
+	# TODO: Implement this in some trait.
+	# AnimationComponent is used across multiple types of resources.
+	var parent = get_parent()
+	var config = parent.get('config')
+	if config:
+		var animation_component_config = config.get("animation_component_config") as AnimationComponentConfig
 		if animation_component_config:
 			animation_player.add_animation_library("", animation_component_config.animation_library)
 	animation_player.animation_finished.connect(_on_animation_finished)

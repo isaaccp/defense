@@ -24,7 +24,7 @@ initial_delay = 1.0
 script = ExtResource("12_jc17h")
 spawn_enemy_config = ExtResource("8_1kpyc")
 
-[node name="Level" instance=ExtResource("1_lg7ly")]
+[node name="Level2" instance=ExtResource("1_lg7ly")]
 players = 2
 test_gameplay_characters = Array[ExtResource("2_y5pxj")]([ExtResource("2_0k78r"), ExtResource("3_c524b")])
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjqptry8tjren"]
+[gd_scene load_steps=16 format=3 uid="uid://bjqptry8tjren"]
 
 [ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="1_0h01o"]
 [ext_resource type="PackedScene" uid="uid://d2a1hr2rlfukg" path="res://components/character_body_component.tscn" id="2_8cidi"]
-[ext_resource type="Script" uid="uid://b4el76lmckyxg" path="res://components/config_component.gd" id="2_grymm"]
 [ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_grymm"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="4_ymuxt"]
 [ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="5_2dcpb"]
@@ -23,9 +22,6 @@ collision_mask = 8
 input_pickable = true
 script = ExtResource("1_0h01o")
 actor_name = "Base Enemy"
-
-[node name="ConfigComponent" type="Node" parent="."]
-script = ExtResource("2_grymm")
 
 [node name="CharacterBodyComponent" parent="." node_paths=PackedStringArray("character_body") instance=ExtResource("2_8cidi")]
 character_body = NodePath("..")
@@ -49,7 +45,7 @@ metadata/_aseprite_wizard_config_ = {
 
 [node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player", "config_component") instance=ExtResource("3_grymm")]
 animation_player = NodePath("AnimationPlayer")
-config_component = NodePath("../ConfigComponent")
+config_component = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
 root_node = NodePath("../../Sprite2D")
@@ -66,7 +62,7 @@ avoidance_enabled = true
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "config_component", "logging_component", "damage_component", "status_component") instance=ExtResource("4_ymuxt")]
 side_component = NodePath("../SideComponent")
-config_component = NodePath("../ConfigComponent")
+config_component = NodePath("")
 logging_component = NodePath("../LoggingComponent")
 damage_component = NodePath("../DamageComponent")
 status_component = NodePath("../StatusComponent")
@@ -86,7 +82,7 @@ status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 character_body_component = NodePath("../CharacterBodyComponent")
 logging_component = NodePath("../LoggingComponent")
-config_component = NodePath("../ConfigComponent")
+config_component = NodePath("")
 
 [node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape") instance=ExtResource("6_xvjrt")]
 vitals_component = NodePath("../VitalsComponent")
@@ -97,7 +93,7 @@ collision_shape = NodePath("../CollisionShape2D")
 side = 2
 
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("config_component", "effect_actuator_component") instance=ExtResource("8_ofl0k")]
-config_component = NodePath("../ConfigComponent")
+config_component = NodePath("")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("9_n7mk6")]
