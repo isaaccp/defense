@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://sbnms0qspna1"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://sbnms0qspna1"]
 
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_78ipw"]
 [ext_resource type="Script" uid="uid://kmh8q8uqd44b" path="res://behavior/actions/teleport_away_action.gd" id="1_ut5i0"]
@@ -7,6 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_cxw7u"]
 script = ExtResource("1_78ipw")
+editor_string = ""
+cmp = 0
 
 [resource]
 script = ExtResource("3_4v3yi")

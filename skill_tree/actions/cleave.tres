@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=7 format=3 uid="uid://y4mv5gjqjdex"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://y4mv5gjqjdex"]
 
 [ext_resource type="Script" uid="uid://cworm31dm1cc1" path="res://behavior/actions/cleave_action.gd" id="1_g8swy"]
 [ext_resource type="Resource" uid="uid://8iy07y3y0b0e" path="res://game_logic/attack_types/melee.tres" id="2_rhncr"]
@@ -8,6 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_k1kc6"]
 script = ExtResource("3_jma2a")
+editor_string = ""
+cmp = 0
 
 [resource]
 script = ExtResource("5_gwjrp")

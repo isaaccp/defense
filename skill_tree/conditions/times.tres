@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConditionDef" load_steps=6 format=3 uid="uid://xun2hm81rhd1"]
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://xun2hm81rhd1"]
 
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_8m636"]
 [ext_resource type="Script" uid="uid://btkpkxy2kxei3" path="res://behavior/conditions/condition_times.gd" id="1_bw8bs"]
@@ -8,6 +8,7 @@
 [sub_resource type="Resource" id="Resource_l5ow1"]
 script = ExtResource("1_8m636")
 editor_string = "{int_value} times"
+cmp = 0
 
 [resource]
 script = ExtResource("3_aj6lq")

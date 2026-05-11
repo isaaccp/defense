@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://j04etfa2ncij"]
+[gd_resource type="Resource" script_class="LevelProvider" format=3 uid="uid://j04etfa2ncij"]
 
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_ioige"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_x5jr5"]

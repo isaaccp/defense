@@ -107,6 +107,8 @@ func _to_string():
 			return "[%s]" % ",".join(actor_names)
 		Type.POSITION:
 			return "(%0.1f,%0.1f)" % [pos.x, pos.y]
+	assert(false, "Unexpected target type")
+	return ""
 
 static func make_invalid() -> Target:
 	return Target.new()

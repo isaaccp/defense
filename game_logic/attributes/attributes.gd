@@ -34,7 +34,10 @@ func resistance_multiplier_for(attack_type: AttackType, damage_type: DamageType)
 			percentage += r.percentage
 	return (100-percentage) / 100.0
 
-func _to_string():
+func _to_string() -> String:
+	var attr_str = ""
 	for property in get_property_list():
 		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:
-			print("%s: %s" % [property.name, get(property.name)])
+			attr_str += "%s: %s\n" % [property.name, get(property.name)]
+	return attr_str
+	

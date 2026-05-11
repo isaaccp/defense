@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameplayCharacter" load_steps=7 format=3 uid="uid://dgs55tgbrgkhv"]
+[gd_resource type="Resource" script_class="GameplayCharacter" format=3 uid="uid://dgs55tgbrgkhv"]
 
 [ext_resource type="Script" uid="uid://cjxs7ysk0yiya" path="res://skill_tree/skill_tree_state.gd" id="1_8c2xd"]
 [ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="1_bxl72"]

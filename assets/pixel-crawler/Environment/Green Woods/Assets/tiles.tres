@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://cpd8yv3x2ulyq"]
+[gd_resource type="TileSet" format=3 uid="uid://cpd8yv3x2ulyq"]
 
 [ext_resource type="Texture2D" uid="uid://f6hsa63eojc" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Tiles.png" id="1_sl2ql"]
 [ext_resource type="Texture2D" uid="uid://b5kje386yugxs" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="2_cys74"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TargetSelectionDef" load_steps=6 format=3 uid="uid://c2lpsyebwog7q"]
+[gd_resource type="Resource" script_class="TargetSelectionDef" format=3 uid="uid://c2lpsyebwog7q"]
 
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_m2uhp"]
 [ext_resource type="Script" uid="uid://x4kkgscrakhi" path="res://behavior/target_selection/target_selection_def.gd" id="1_mjmbq"]
@@ -7,6 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_7ir3x"]
 script = ExtResource("1_m2uhp")
+editor_string = ""
+cmp = 0
 
 [resource]
 script = ExtResource("1_mjmbq")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoredBehavior" load_steps=14 format=3 uid="uid://xvk7de3pnrwf"]
+[gd_resource type="Resource" script_class="StoredBehavior" format=3 uid="uid://xvk7de3pnrwf"]
 
 [ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="1_2w86k"]
 [ext_resource type="Script" uid="uid://v5liyqorqa7c" path="res://behavior/conditions/int_value.gd" id="2_btuym"]
@@ -8,6 +8,8 @@
 
 [sub_resource type="Resource" id="Resource_ueppd"]
 script = ExtResource("3_dvhob")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_w7psa"]
 script = ExtResource("7_uipkv")
@@ -34,6 +36,8 @@ skill_type = 3
 
 [sub_resource type="Resource" id="Resource_mbwdw"]
 script = ExtResource("3_dvhob")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_c0bv5"]
 script = ExtResource("7_uipkv")

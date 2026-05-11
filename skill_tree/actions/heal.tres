@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://buewl5eydlx7c"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://buewl5eydlx7c"]
 
 [ext_resource type="Script" uid="uid://bu1aj2dy3bvxo" path="res://behavior/actions/heal_action.gd" id="1_1tnha"]
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_7bl7x"]
@@ -6,6 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_tabkk"]
 script = ExtResource("1_7bl7x")
+editor_string = ""
+cmp = 0
 
 [resource]
 script = ExtResource("1_70syy")

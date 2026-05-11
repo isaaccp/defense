@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=5 format=3 uid="uid://d1qa11vfttxsj"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://d1qa11vfttxsj"]
 
 [ext_resource type="Script" uid="uid://ckn20injevowa" path="res://behavior/actions/meditate_action.gd" id="1_wng1x"]
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_a47r3"]
@@ -6,6 +6,8 @@
 
 [sub_resource type="Resource" id="Resource_6smey"]
 script = ExtResource("2_a47r3")
+editor_string = ""
+cmp = 0
 
 [resource]
 script = ExtResource("3_giysa")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=27 format=3 uid="uid://dko6s3kgrapkm"]
+[gd_resource type="Resource" script_class="LevelProvider" format=3 uid="uid://dko6s3kgrapkm"]
 
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_dv7bi"]
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_jouxj"]
@@ -11,6 +11,8 @@
 
 [sub_resource type="Resource" id="Resource_h13ej"]
 script = ExtResource("3_4yb6m")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_y6qno"]
 script = ExtResource("4_tpntf")
@@ -20,6 +22,8 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("3_4yb6m")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_00wv8"]
 script = ExtResource("4_tpntf")
@@ -30,6 +34,7 @@ skill_type = 3
 [sub_resource type="Resource" id="Resource_g68vo"]
 script = ExtResource("3_4yb6m")
 editor_string = "Enemy ({sort})"
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_lg6ku"]
 script = ExtResource("4_tpntf")
@@ -45,6 +50,8 @@ condition = SubResource("Resource_00wv8")
 
 [sub_resource type="Resource" id="Resource_d580u"]
 script = ExtResource("3_4yb6m")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_1l77o"]
 script = ExtResource("4_tpntf")
@@ -72,6 +79,8 @@ condition = SubResource("Resource_duvtq")
 
 [sub_resource type="Resource" id="Resource_cn1r5"]
 script = ExtResource("3_4yb6m")
+editor_string = ""
+cmp = 0
 
 [sub_resource type="Resource" id="Resource_k7jyb"]
 script = ExtResource("4_tpntf")

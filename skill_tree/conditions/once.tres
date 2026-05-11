@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ConditionDef" load_steps=6 format=3 uid="uid://bp783ayeoq184"]
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://bp783ayeoq184"]
 
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_14i36"]
 [ext_resource type="Script" uid="uid://br651if1rrpnl" path="res://behavior/conditions/condition_once.gd" id="1_nkc6u"]
@@ -7,6 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_opf8v"]
 script = ExtResource("1_14i36")
+editor_string = ""
+cmp = 0
 
 [resource]
 script = ExtResource("2_hcgbt")

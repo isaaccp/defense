@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c12h44gjppwem"]
+[gd_scene format=3 uid="uid://c12h44gjppwem"]
 
 [ext_resource type="Script" uid="uid://by17sltvkkbp5" path="res://main.gd" id="1_u00ew"]
 [ext_resource type="PackedScene" uid="uid://d1ab1h7rtohbt" path="res://ui/ui_layer.tscn" id="2_81ey6"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=2028686920]
 script = ExtResource("1_u00ew")
 
-[node name="UILayer" parent="." instance=ExtResource("2_81ey6")]
+[node name="UILayer" parent="." unique_id=643723995 instance=ExtResource("2_81ey6")]
 unique_name_in_owner = true
 
 [connection signal="ready_screen_ready_pressed" from="UILayer" to="." method="_on_ready_screen_ready_pressed"]
