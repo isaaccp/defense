@@ -8,7 +8,9 @@ A roguelike tower-defense game in **Godot 4.7**. Players select heroes, place th
 ### Component System
 All game actors (`Actor` base class) are built from components. To find a component on a node:
 ```gdscript
-var vitals = Component.get_component(actor, VitalsComponent.component)
+var vitals = Component.get_or_null(actor, VitalsComponent.component)
+# or, when it must exist:
+var vitals = Component.get_or_die(actor, VitalsComponent.component)
 ```
 Components have `run()` / `stop()` lifecycle methods. Never call component logic before `run()`.
 
