@@ -1,7 +1,7 @@
 # Defense — Agent Guide
 
 ## Project Overview
-A roguelike tower-defense game in **Godot 4.5**. Players select heroes, place them in levels, and survive enemy waves. Between levels, they unlock skills that modify hero behaviors. Supports local and online (Nakama) multiplayer.
+A roguelike tower-defense game in **Godot 4.7**. Players select heroes, place them in levels, and survive enemy waves. Between levels, they unlock skills that modify hero behaviors. Supports local and online (Nakama) multiplayer.
 
 ## Key Architecture Patterns
 
