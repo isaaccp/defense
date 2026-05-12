@@ -12,7 +12,9 @@ const component: StringName = &"DeathHandlerComponent"
 signal died
 
 func _ready():
-	assert(is_instance_valid(vitals_component))
+	if not is_instance_valid(vitals_component):
+		push_error("DeathHandlerComponent requires vitals_component on '%s'" % get_parent().name)
+		return
 	vitals_component.vital_depleted.connect(_on_vital_depleted)
 
 func _on_vital_depleted(vital_type: VitalsComponent.VitalType):

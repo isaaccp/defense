@@ -93,7 +93,9 @@ func _physics_process(delta: float):
 
 	elapsed_time += delta
 
-	assert(behavior, "Missing behavior")
+	if not behavior:
+		push_error("Missing behavior on '%s'" % get_parent().name)
+		return
 
 	if able_to_act:
 		# For change detection.

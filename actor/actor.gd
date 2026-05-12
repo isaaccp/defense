@@ -16,11 +16,11 @@ var destroyed = false
 
 func get_component_or_die(component_class: Object) -> Node:
 	var component = get_component_or_null(component_class)
-	assert(component, "Couldn't find wanted component")
+	if not component:
+		push_error("Couldn't find component '%s' on actor '%s'" % [component_class.component, actor_name])
 	return component
 
 func get_component_or_null(component_class: Object) -> Node:
-	assert(component_class.component)
 	return Component.get_or_null(self, component_class.component)
 
 ## Calls run in all components.
@@ -28,7 +28,8 @@ func run():
 	if Engine.is_editor_hint():
 		return
 	if running:
-		assert(false, "run() called twice for actor %s" % actor_name)
+		push_error("run() called twice for actor '%s'" % actor_name)
+		return
 	running = true
 	for child in get_children():
 		if child.get("component") != null:
@@ -38,9 +39,11 @@ func run():
 ## Calls stop in all components.
 func stop():
 	if not running:
-		assert(false, "stop() called before running for actor %s" % actor_name)
+		push_error("stop() called before run() for actor '%s'" % actor_name)
+		return
 	if stopped:
-		assert(false, "stop() called twice for actor %s" % actor_name)
+		push_error("stop() called twice for actor '%s'" % actor_name)
+		return
 	stopped = true
 	running = false
 	for child in get_children():

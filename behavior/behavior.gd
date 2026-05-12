@@ -50,15 +50,18 @@ func prepare(actor_: Actor, side_component_: SideComponent, vitals_component_: V
 				target_selector = TargetSelectorFactory.make_position_target_selector(rule.target_selection, position_evaluator)
 		target_selectors.append(target_selector)
 		condition_evaluators.append(evaluator)
-	assert(rules.size() == target_selectors.size())
-	assert(rules.size() == condition_evaluators.size())
+	if rules.size() != target_selectors.size() or rules.size() != condition_evaluators.size():
+		push_error("Behavior array size mismatch: rules=%d selectors=%d evaluators=%d" % [
+			rules.size(), target_selectors.size(), condition_evaluators.size()
+		])
+		return
 
 # TODO: Return BehaviorResult or such.
 func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 	# This happened once becaues a single behavior resource was being
 	# shared across scene instances. Leaving here just in case.
 	if not is_instance_valid(actor):
-		assert(false, "Should not happen")
+		push_error("Behavior.choose() called with invalid actor")
 		return {}
 	for i in rules.size():
 		var rule = rules[i]

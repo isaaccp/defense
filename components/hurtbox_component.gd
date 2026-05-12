@@ -42,7 +42,7 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 	else:
 		hit_result = HitResult.new()
 	if not hit_result:
-		assert("Unexpected lack of hit_result")
+		push_error("Unexpected lack of hit_result")
 		return null
 	if not hit_effect.status_on_damage_only or hit_result.damage != 0:
 		if status_component:

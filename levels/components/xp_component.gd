@@ -44,7 +44,8 @@ func _ready():
 
 func run():
 	if running:
-		assert(false, "run() called twice on %s" % component)
+		push_error("run() called twice on %s" % component)
+		return
 	running = true
 	match level_xp_type:
 		LevelXPType.TIME_SINCE_LAST_SPAWN:

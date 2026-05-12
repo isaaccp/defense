@@ -25,7 +25,8 @@ var running = false
 
 func run():
 	if running:
-		assert(false, "run() called twice on %s" % component)
+		push_error("run() called twice on %s" % component)
+		return
 	running = true
 	if homing:
 		assert(target_component, "homing was set but target was not provided")

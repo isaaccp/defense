@@ -61,7 +61,8 @@ func initialize(owner_name: String, action_def: ActionDef, attributes: Attribute
 
 func run():
 	if running:
-		assert(false, "run() call twice")
+		push_error("run() called twice on %s" % component)
+		return
 	collision_shape.disabled = false
 	running = true
 	assert((hit_effect.damage == 0) || (hit_effect.damage < 0 == is_heal))
@@ -72,7 +73,8 @@ func run():
 func _on_area_entered(area):
 	var hurtbox = area as HurtboxComponent
 	if not hurtbox:
-		assert(false, "Unexpected hit area was not hurtbox")
+		push_error("Unexpected hit area was not hurtbox: %s" % area)
+		return
 	_process_hurtbox_entered(hurtbox)
 
 func _process_hurtbox_entered(hurtbox: HurtboxComponent):

@@ -47,7 +47,8 @@ func _ready():
 
 func run():
 	if running:
-		assert(false, "run() called twice on %s" % component)
+		push_error("run() called twice on %s" % component)
+		return
 	running = true
 	status_component.status_added.connect(_on_status_added)
 	status_component.status_removed.connect(_on_status_removed)

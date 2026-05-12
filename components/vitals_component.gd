@@ -61,7 +61,9 @@ func _initialize() -> void:
 # The primary method for changing a vital's value.
 # Use positive delta for healing/gaining, negative for damage/spending.
 func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) -> void:
-	assert(_vitals_data.has(type))
+	if not _vitals_data.has(type):
+		push_error("apply_vital_change called with unknown VitalType: %s" % type)
+		return
 
 	var vital = _vitals_data[type]
 	var prev_value = vital.current

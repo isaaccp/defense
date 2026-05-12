@@ -16,7 +16,8 @@ var running = false
 
 func run():
 	if running:
-		assert(false, "run() called twice on %s" % component)
+		push_error("run() called twice on %s" % component)
+		return
 	running = true
 
 func _get_configuration_warnings():

@@ -59,7 +59,8 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int):
 
 func run():
 	if running:
-		assert(false, "run() called twice on %s" % component)
+		push_error("run() called twice on %s" % component)
+		return
 	running = true
 
 func _get_configuration_warnings():

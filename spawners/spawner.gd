@@ -40,7 +40,9 @@ func _ready():
 		placer.run()
 		return
 
-	assert(placement_node, "placement_node not set")
+	if not placement_node:
+		push_error("placement_node not set on spawner '%s'" % name)
+		return
 	placer.placement_node = placement_node
 	placer.enemy_spawned.connect(enemy_spawned.emit)
 	placer.finished_spawning.connect(finished_spawning.emit)
