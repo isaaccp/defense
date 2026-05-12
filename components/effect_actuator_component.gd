@@ -52,6 +52,11 @@ func run():
 	status_component.status_added.connect(_on_status_added)
 	status_component.status_removed.connect(_on_status_removed)
 
+func stop():
+	running = false
+	status_component.status_added.disconnect(_on_status_added)
+	status_component.status_removed.disconnect(_on_status_removed)
+
 func load_relic(relic_name: StringName):
 	var relic = relic_library.get_relic(relic_name)
 	relics.append(relic)

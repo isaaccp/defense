@@ -138,6 +138,8 @@ func _on_combat_entered():
 func _on_combat_exited():
 	if ui_layer:
 		ui_layer.hud.show_play_controls(false)
+		ui_layer.play_controls_play_pressed.disconnect(_on_play_pressed)
+		ui_layer.play_controls_pause_pressed.disconnect(_on_pause_pressed)
 
 func _on_summary_entered():
 	if ui_layer:
@@ -146,8 +148,8 @@ func _on_summary_entered():
 		ui_layer.hide_log_viewer()
 		var xp = XPComponent.get_or_die(self).xp()
 		ui_layer.show_level_end(win, characters, xp.text if win else "")
-		ui_layer.play_next_selected.connect(_on_play_next_selected)
-		ui_layer.try_again_selected.connect(_on_try_again_selected)
+		ui_layer.play_next_selected.connect(_on_play_next_selected, CONNECT_ONE_SHOT)
+		ui_layer.try_again_selected.connect(_on_try_again_selected, CONNECT_ONE_SHOT)
 
 func _on_play_next_selected():
 	# Save health into persistent state and move on.

@@ -69,7 +69,7 @@ func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 
 func _on_character_selection_entered():
 	ui_layer.start_character_selection(level_provider)
-	ui_layer.character_selection_screen_selection_ready.connect(_on_character_selection_finished)
+	ui_layer.character_selection_screen_selection_ready.connect(_on_character_selection_finished, CONNECT_ONE_SHOT)
 
 func _on_character_selection_finished(character_selections: Array[int]):
 	var players = OnlineMatch.get_sorted_players()
@@ -171,7 +171,7 @@ func _on_between_levels_exited():
 
 func _on_run_summary_entered():
 	ui_layer.show_run_summary_screen(_meta_xp_text())
-	ui_layer.run_summary_continue_selected.connect(_on_run_summary_continue_selected)
+	ui_layer.run_summary_continue_selected.connect(_on_run_summary_continue_selected, CONNECT_ONE_SHOT)
 
 func _on_run_summary_exited():
 	pass
