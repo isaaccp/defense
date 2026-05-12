@@ -107,6 +107,18 @@ action_finished()            # marks finished=true; cooldown recorded by Behavio
 
 `ConditionEvaluatorFactory` creates the right evaluator subclass based on the condition type and wires in the actor reference.
 
+## Available Skills
+
+**Actions:** Blink Away, Blink To, Bow Attack, Charge, Cleave, Fire Burst, Heal, Hold Person, Magic Armor, Meditate, Move Away, Move To, Multi Shot, Projectile Ward, Seeking Bolt, Sweeping Attack, Sword Attack, Teleport Away, Teleport To
+
+**Conditions:** Always, Once, Self, Target Distance, Target Health, Times
+
+**Targets:** Ally, Center, Enemy, Self Or Ally, Tower
+
+**Target sorts:** Closest First, Farthest First
+
+Skills are referenced by StringName (e.g. `&"Sword Attack"`) in `StoredParamSkill` resources. The authoritative source is the `.tres` files in `skill_tree/actions/`, `skill_tree/conditions/`, `skill_tree/targets/`, and `skill_tree/target_sorts/`.
+
 ## Adding a New Skill
 
 **New Action:**

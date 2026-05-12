@@ -48,10 +48,29 @@ Standard melee frontliner. Tougher than the grunt and slightly slower. The armor
 | Armor | 0 |
 
 **Behavior (in priority order):**
-1. Always → Bow Attack → closest Enemy (range 300, ranged/piercing, 3 piercing damage)
-2. Always → Move To → closest Enemy
+1. Always → Bow Attack → closest Enemy (min range 100, max range 300, ranged/piercing, 3 piercing damage)
+2. Always → Move Away (max 120) → closest Enemy — flees when target closes within 120
+3. Always → Move To → closest Enemy
 
-Fragile ranged attacker. Despite having a long-range attack, the archer does **not** maintain distance — it will walk toward the player if out of range, and does not flee when approached. (There is a commented-out `min_distance = 100` in `bow_attack_action.gd` that would make archers kite, but it is currently disabled.)
+Kiting ranged attacker. Fires from distance, backs away when an enemy enters 120 units, and closes in if no target is in range. The min_distance=100 on the bow ensures it won't fire point-blank while retreating.
+
+---
+
+### Orc Berserker
+**File:** `orc_berserker/orc_berserker.tscn`
+
+| Stat | Value |
+|------|-------|
+| HP | 8 |
+| Speed | 45 |
+| Armor | 0 |
+
+**Behavior (in priority order):**
+1. Always → Charge → closest Enemy (min range 50, cooldown 4s — gains Swiftness; triggers Strength Surge if charged ≥ 100 units)
+2. Always → Sword Attack → closest Enemy (range 40, melee, 5 slashing damage)
+3. Always → Move To → closest Enemy
+
+Fastest enemy in the roster. Charges from range, briefly becoming even faster and dealing bonus damage if the charge covered enough ground. Once in melee, follows up with a sword attack. The 4s charge cooldown means it can't chain charges back-to-back.
 
 ---
 
@@ -95,3 +114,4 @@ Slowest enemy in the roster. Fires a homing bolt that tracks its intended target
 - No enemy has conditional behavior (e.g., reacting to low HP, targeting healers, grouping up).
 - The Skeleton Warrior and Skeleton Mage are fully implemented but absent from main level content.
 - All enemies share the same Move To fallback when their primary action is out of range or on cooldown.
+- The Orc Archer is the only enemy that actively maintains distance (kiting behavior).
