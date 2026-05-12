@@ -3,8 +3,7 @@ extends ProjectileAttackActionBase
 func _init():
 	super()
 	projectile_scene = preload("res://behavior/actions/scenes/arrow.tscn")
-	# TODO: Enable this when archers have a way to get away from enemies.
-	# min_distance = 100
+	min_distance = 100
 	max_distance = 300
 	prepare_time = 0.3
 

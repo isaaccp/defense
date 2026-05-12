@@ -62,9 +62,15 @@ var effect_actuator_component: EffectActuatorComponent
 static func make_runnable_action(action_def: ActionDef) -> Action:
 	var action = action_def.action_script.new() as Action
 	action.def = action_def
+	action.post_make()
 	return action
 
 func _init():
+	pass
+
+# Called immediately after def is set, before any target selection.
+# Override to apply param-driven properties (e.g. max_distance from float_value).
+func post_make():
 	pass
 
 func initialize(target_: Target, actor_: Actor, navigation_agent_: NavigationAgent2D,

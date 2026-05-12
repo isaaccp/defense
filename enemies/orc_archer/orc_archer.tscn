@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_scene load_steps=41 format=3 uid="uid://7eu1g5y0ekfn"]
 
 [ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
 [ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://bhqo018swx4s7" path="res://behavior/stored_skill.gd" id="9_17oqu"]
 [ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="10_cxdft"]
 [ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="10_g5ild"]
+
+[ext_resource type="Script" uid="uid://clb4qabgcoyo5" path="res://behavior/conditions/float_value.gd" id="11_fv1"]
 
 [sub_resource type="Animation" id="Animation_sy2pk"]
 length = 0.001
@@ -336,9 +338,43 @@ target_selection = SubResource("Resource_wrai3")
 action = SubResource("Resource_14hje")
 condition = SubResource("Resource_582ig")
 
+[sub_resource type="Resource" id="Resource_fv120"]
+script = ExtResource("11_fv1")
+defined = true
+value = 120.0
+
+[sub_resource type="Resource" id="Resource_maway_p"]
+script = ExtResource("6_2kkh2")
+editor_string = "max {float_value}"
+float_value = SubResource("Resource_fv120")
+
+[sub_resource type="Resource" id="Resource_maway_a"]
+script = ExtResource("6_ae2gu")
+params = SubResource("Resource_maway_p")
+name = &"Move Away"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_maway_c"]
+script = ExtResource("6_ae2gu")
+params = SubResource("Resource_8lwyn")
+name = &"Always"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_maway_t"]
+script = ExtResource("6_ae2gu")
+params = SubResource("Resource_km7cd")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_maway_r"]
+script = ExtResource("7_174ti")
+target_selection = SubResource("Resource_maway_t")
+action = SubResource("Resource_maway_a")
+condition = SubResource("Resource_maway_c")
+
 [sub_resource type="Resource" id="Resource_g1623"]
 script = ExtResource("5_ppmrm")
-stored_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_861in"), SubResource("Resource_yx63r")])
+stored_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_861in"), SubResource("Resource_maway_r"), SubResource("Resource_yx63r")])
 
 [sub_resource type="Resource" id="Resource_ln4r5"]
 script = ExtResource("10_cxdft")

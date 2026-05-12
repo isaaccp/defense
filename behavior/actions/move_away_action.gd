@@ -9,6 +9,10 @@ func _init():
 	min_distance = 0
 	finish_on_unmet_condition = true
 
+func post_make():
+	if def.params.placeholder_set(SkillParams.PlaceholderId.FLOAT_VALUE):
+		max_distance = def.params.float_value.value
+
 func post_initialize():
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	# Single-shot activation. There's no 'arriving' at running away.
