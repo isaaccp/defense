@@ -28,6 +28,8 @@ Enemy and hero AI is rule-based. Each actor has a `BehaviorComponent` that evalu
 
 Behaviors are serialized as `StoredBehavior` resources (`.tres`) and restored at runtime via `SkillManager` autoload.
 
+See `behavior/BEHAVIOR.md` for a full walkthrough of the stored-vs-runtime split, the param system, action lifecycle, and how to add new skills or configurable params to existing actions.
+
 ### Skill & Effect System
 - Skills are `Resource` subclasses with a `SkillType` enum: `ACTION`, `TARGET`, `CONDITION`, `TARGET_SORT`, `META_SKILL`.
 - Relics / statuses live in `effects/` as `.tres` files registered in `relic_library.tres` / `status_library.tres`.
@@ -65,7 +67,10 @@ util/           StateMachine, TreePauser, Utils
 **Add a new enemy type:**
 1. Create a scene extending `enemies/base_enemy.tscn`
 2. Add a `.tres` config resource (see `enemies/orc_warrior/orc_warrior.tres` as reference)
-3. Define a `StoredBehavior` resource in `behavior/resources/`
+3. Embed the `StoredBehavior` inline in the `.tscn` or `.tres` config — there is no separate behavior resources directory
+4. See `enemies/ENEMIES.md` for the current roster, stats, and behavior of all existing enemy types
+
+**Enemy design principle:** each enemy type has a single fixed behavior that is consistent across every level it appears in. Players learn enemy patterns over time. Level difficulty comes from enemy *composition* (which types appear together, in what numbers and timing), not from per-level behavior changes.
 
 **Add a new skill/action:**
 1. Create a script in `behavior/actions/` extending the base action class
