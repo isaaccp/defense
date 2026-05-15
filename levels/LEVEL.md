@@ -32,15 +32,23 @@ Level (level.gd)
 
 ## Creating a New Level
 
-The typical pattern is two nested scenes:
+A **level** is what the player plays: a specific enemy wave on a specific map. A **terrain** is the reusable map base (layout, obstacles, starting positions). The typical pattern is two nested scenes:
 
-**1. Stage scene** — defines the map: NavigationPolygon, obstacles, starting positions, towers, victory/loss conditions. Inherits `base_level.tscn`.
+**1. Terrain scene** — defines the map: NavigationPolygon, obstacles, starting positions, towers, victory/loss conditions. Inherits `base_level.tscn`. Lives in `levels/stages/`.
 
-**2. Spawner config scene** — defines which enemies spawn, how many, and at what rate. Inherits the stage scene.
+**2. Level scene** — defines the enemy wave: which enemies spawn, how many, at what rate. Inherits the terrain scene. Lives in `levels/main/`.
 
-This lets you reuse the same map layout with different enemy waves.
+This lets multiple levels share the same terrain with different waves.
 
-Example: `stages/forest_stage_right_side_open.tscn` (map) → `main/forest_open_on_right_area/one_grunt_spawner.tscn` (wave config).
+Example: `stages/forest_stage_right_side_open.tscn` (terrain) → `main/forest_open_on_right_area/one_grunt_spawner.tscn` (level).
+
+### Registering a Level in the Game
+
+A new level scene won't appear in the run until it is added to `levels/main/main_levels.tres`. Open that resource in the editor and append your scene to the levels array.
+
+### NavigationPolygon for New Terrains
+
+The default NavigationPolygon lives in `base_level.tscn`. A new terrain with a different shape or playable area must override it: select the `NavigationRegion2D` node in your terrain scene, click the polygon property to create a new one, and draw the walkable area in the editor. Obstacles placed in `YSorted/Decoration` are then automatically subtracted from it at runtime — you only need to draw the outer boundary.
 
 ### Starting Positions
 

@@ -21,15 +21,17 @@ The PREPARE state already exists in `levels/level.gd` but currently auto-places 
 This is worth doing first because it's a prerequisite for level variety to matter: if players can't choose where to stand, obstacle placement and spawn direction have no strategic weight.
 
 **What to implement:**
-- During PREPARE, show characters as draggable items the player places on the map
-- Constrain placement to a valid zone (e.g. left half of the map, or explicit placement nodes)
+- Add a `PlacementZone` node (Polygon2D or Area2D) to `base_level.tscn` with a default shape; each stage can resize/reshape it to match its layout
+- During PREPARE, show characters as draggable items the player places on the map, constrained to the PlacementZone polygon
 - A "Ready" button transitions to COMBAT
 
+Note: PREPARE already has a character setup phase (behavior configuration) and an `all_ready` → COMBAT signal chain in `hud.gd`. Placement fits alongside the existing setup UI — it doesn't replace it. Characters are currently placed at fixed positions in `initialize()` before PREPARE starts; the drag step would let the player reposition them before pressing ready.
+
 **Relevant files:**
-- `levels/level.gd` — PREPARE state is where this logic lives
-- `levels/base_level.tscn` — has `StartingPositions/First` and `StartingPositions/Second` nodes (currently just fixed Vector2 positions)
+- `levels/level.gd` — PREPARE state and `initialize()` (where characters are currently placed)
+- `levels/base_level.tscn` — add `PlacementZone` here
+- `ui/hud.gd` — `start_character_setup()` is the PREPARE UI entry point
 - `ui/` — existing UI screens for reference on how screens are structured
-- `run/run.gd` — run state machine that drives level transitions
 
 ---
 
