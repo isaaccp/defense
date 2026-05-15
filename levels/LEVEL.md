@@ -18,14 +18,16 @@ Level (level.gd)
 │   └── Spawners (Node2D)          # Enemy spawner nodes
 ├── NavigationRegion2D             # Navmesh for all pathfinding
 ├── VictoryLossConditionComponent
-└── XPComponent
+├── XPComponent
+└── PlacementComponent (Node2D)    # Where characters may be placed in PREPARE
+    └── DefaultZone (Polygon2D)    # One or more PlacementZone children
 ```
 
 ## Level State Machine
 
 `level.gd` runs four states in order:
 
-1. **PREPARE** — Pre-combat setup. Currently places characters at `StartingPositions` automatically. Intended to become an interactive placement phase (not yet implemented).
+1. **PREPARE** — Pre-combat setup. Characters are first placed at `StartingPositions`, then during PREPARE the player can drag them within the `PlacementComponent` zones before pressing Ready.
 2. **COMBAT** — Starts all actors (characters, enemies, spawners, towers). This is where gameplay happens.
 3. **SUMMARY** — Victory/loss screen, XP reward.
 4. **DONE** — Terminal state.
@@ -52,7 +54,17 @@ The default NavigationPolygon lives in `base_level.tscn`. A new terrain with a d
 
 ### Starting Positions
 
-Set `StartingPositions/First.position` and `StartingPositions/Second.position` in the editor. Characters are placed here at the start of COMBAT (or eventually by the player during PREPARE).
+Set `StartingPositions/First.position` and `StartingPositions/Second.position` in the editor. Characters are placed here at level load. During PREPARE the player can drag them inside any `PlacementZone` before pressing Ready (see below).
+
+### Placement Zones
+
+`PlacementComponent` holds one or more `PlacementZone` (Polygon2D) children defining where the player may place characters during PREPARE. `base_level.tscn` ships with a single `DefaultZone` covering the full play area; stages override this for tighter or disjoint placement areas.
+
+To restrict placement on a stage: select the `PlacementComponent` node and replace or add `PlacementZone` children, drawing each polygon in the editor. Multiple disjoint zones are supported — `PlacementComponent.contains(point)` returns true if any child zone contains the point, and out-of-bounds drops are clamped to the nearest zone edge.
+
+Zones are hidden during gameplay; they are shown (semi-transparent fill) only during PREPARE.
+
+Drag-placement is currently single-player only. In online matches characters stay at `StartingPositions`.
 
 ### Obstacles
 
@@ -109,6 +121,6 @@ This means:
 
 ## What's Not Yet Implemented
 
-- **Player character placement** — the PREPARE state exists but currently auto-places characters at fixed `StartingPositions`. The intended flow is for the player to drag characters onto the map before combat starts.
+- **Online drag-placement** — single-player placement is wired; in online matches characters still use `StartingPositions`. A follow-up should RPC the final position on drop.
 - **More decoration variety** — only tree types exist. Other obstacle shapes (walls, rocks, barrels) would need new StaticBody2D scenes.
 - **Dynamic spawn positions** — `SpawnPositionConfig` only supports `CONSTANT` (spawn at the spawner's position). Spread/random patterns are not yet implemented.

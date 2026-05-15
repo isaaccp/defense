@@ -14,28 +14,9 @@ The core problem is that levels feel samey: a plain field, identical enemy behav
 
 ---
 
-## Priority 1 — Implement Player Character Placement
+## Priority 1 — Level Variety via Obstacles and Stage Design
 
-The PREPARE state already exists in `levels/level.gd` but currently auto-places characters at fixed `StartingPositions` nodes. The intended flow is for the player to drag characters onto the map before pressing ready.
-
-This is worth doing first because it's a prerequisite for level variety to matter: if players can't choose where to stand, obstacle placement and spawn direction have no strategic weight.
-
-**What to implement:**
-- Add a `PlacementZone` node (Polygon2D or Area2D) to `base_level.tscn` with a default shape; each stage can resize/reshape it to match its layout
-- During PREPARE, show characters as draggable items the player places on the map, constrained to the PlacementZone polygon
-- A "Ready" button transitions to COMBAT
-
-Note: PREPARE already has a character setup phase (behavior configuration) and an `all_ready` → COMBAT signal chain in `hud.gd`. Placement fits alongside the existing setup UI — it doesn't replace it. Characters are currently placed at fixed positions in `initialize()` before PREPARE starts; the drag step would let the player reposition them before pressing ready.
-
-**Relevant files:**
-- `levels/level.gd` — PREPARE state and `initialize()` (where characters are currently placed)
-- `levels/base_level.tscn` — add `PlacementZone` here
-- `ui/hud.gd` — `start_character_setup()` is the PREPARE UI entry point
-- `ui/` — existing UI screens for reference on how screens are structured
-
----
-
-## Priority 2 — Level Variety via Obstacles and Stage Design
+Player drag-placement during PREPARE is now wired (single-player only — online still uses `StartingPositions`). Multiple disjoint `PlacementZone` children of `PlacementComponent` let stages restrict placement, so stage layout now has real strategic weight.
 
 Currently all main levels use a single stage (`forest_stage_right_side_open.tscn`) with trees scattered around an open area. Two levers available with no new infrastructure:
 
@@ -62,7 +43,7 @@ Ideas:
 
 ---
 
-## Priority 3 — Add Unused Enemies to Main Levels
+## Priority 2 — Add Unused Enemies to Main Levels
 
 Two fully implemented enemies are not used in any main level:
 
@@ -80,7 +61,7 @@ Add new spawner config scenes under `levels/main/` following the existing patter
 
 ---
 
-## Priority 4 — Run Variety via Environmental Effects (later)
+## Priority 3 — Run Variety via Environmental Effects (later)
 
 Infrastructure already exists: damage types and actor attributes support per-run modifiers (e.g. "Neverending Storm: fire damage halved, lightning doubled"). This layer is not yet wired to the run selection flow.
 

@@ -38,6 +38,7 @@ class_name Level
 @export var towers: Node2D
 @export var spawners: Node2D
 @export var starting_positions: Node
+@export var placement_component: PlacementComponent
 var selected_relics: Array[RelicDef]
 var ui_layer: GameplayUILayer
 
@@ -49,6 +50,10 @@ var DONE = state.add("done", true)
 
 var win: bool
 var is_paused = false
+
+# Pick radius (px) used to grab a character for drag-placement during PREPARE.
+const _drag_pick_radius := 20.0
+var _dragging_character: Character = null
 
 # Not constants so tests can speed them up.
 var ready_to_fight_wait = 1.0
@@ -104,6 +109,8 @@ func _on_prepare_entered():
 	var victory = Component.get_victory_loss_condition_component_or_die(self)
 	victory.level_failed.connect(_on_level_failed)
 	victory.level_finished.connect(_on_level_finished)
+	if placement_component and _placement_drag_enabled():
+		placement_component.set_zones_visible(true)
 	# TODO: Wrap this up inside ui_layer.prepare_level() or similar.
 	if ui_layer:
 		ui_layer.hud.show_play_controls(false)
@@ -119,6 +126,10 @@ func _on_prepare_entered():
 		ui_layer.play_controls_pause_pressed.connect(_on_pause_pressed)
 
 func _on_prepare_exited():
+	if placement_component:
+		placement_component.set_zones_visible(false)
+	_dragging_character = null
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	if ui_layer:
 		ui_layer.hud.show_character_buttons(false)
 		ui_layer.hud.show_victory_loss_text(false)
@@ -193,6 +204,41 @@ func _on_pause_pressed():
 
 func paused() -> bool:
 	return is_paused
+
+# Placement drag is local-only for now; online matches keep StartingPositions.
+func _placement_drag_enabled() -> bool:
+	return OnlineMatch.match_mode == OnlineMatch.MatchMode.NONE
+
+func _unhandled_input(event: InputEvent):
+	if not state.is_state(PREPARE):
+		return
+	if not placement_component or not _placement_drag_enabled():
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		var world := get_global_mouse_position()
+		if event.pressed:
+			_dragging_character = _character_at(world)
+		else:
+			_dragging_character = null
+			_update_hover_cursor(world)
+	elif event is InputEventMouseMotion:
+		var world := get_global_mouse_position()
+		if _dragging_character:
+			_dragging_character.position = placement_component.closest_valid_point(world)
+		else:
+			_update_hover_cursor(world)
+
+func _update_hover_cursor(world_point: Vector2) -> void:
+	var shape := Input.CURSOR_MOVE if _character_at(world_point) else Input.CURSOR_ARROW
+	Input.set_default_cursor_shape(shape)
+
+func _character_at(world_point: Vector2) -> Character:
+	var r2 := _drag_pick_radius * _drag_pick_radius
+	for child in characters.get_children():
+		var c := child as Character
+		if c and c.position.distance_squared_to(world_point) <= r2:
+			return c
+	return null
 
 func start():
 	var victory_loss = Component.get_victory_loss_condition_component_or_die(self)
