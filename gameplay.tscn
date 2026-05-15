@@ -31,7 +31,7 @@ transparent_bg = true
 handle_input_locally = false
 physics_object_picking = true
 size = Vector2i(1920, 1080)
-size_2d_override = Vector2i(1200, 675)
+size_2d_override = Vector2i(960, 540)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 

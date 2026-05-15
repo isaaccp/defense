@@ -20,7 +20,7 @@ initial_delay = 1.0
 [node name="Level" instance=ExtResource("1_phfdv")]
 
 [node name="OrcGruntSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_16vhn")]
-position = Vector2(851, 324)
+position = Vector2(680.8, 259.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcGruntSpawner" index="5" instance=ExtResource("3_fokjr")]

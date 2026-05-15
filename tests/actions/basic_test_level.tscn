@@ -8,10 +8,10 @@
 players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(129, 119)
+position = Vector2(103.2, 95.2)
 
 [node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(43, 203)
+position = Vector2(34.4, 162.4)
 
 [node name="Enemy" parent="YSorted/Enemies" index="0" instance=ExtResource("2_nbjkh")]
 config = ExtResource("3_ip8p8")

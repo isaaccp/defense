@@ -19,7 +19,7 @@ players = 2
 test_gameplay_characters = Array[ExtResource("2_t5orb")]([ExtResource("2_k5qbp"), ExtResource("3_hmgfa")])
 
 [node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_g8p3r")]
-position = Vector2(702, 324)
+position = Vector2(561.6, 259.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_gl8do")]

@@ -9,15 +9,15 @@
 players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(412, 306)
+position = Vector2(329.6, 244.8)
 
 [node name="Enemy" parent="YSorted/Enemies" index="0" instance=ExtResource("2_2aj1k")]
-position = Vector2(196, 267)
+position = Vector2(156.8, 213.6)
 config = ExtResource("4_j2if0")
 
 [node name="Enemy2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_2aj1k")]
-position = Vector2(196, 364)
+position = Vector2(156.8, 291.2)
 config = ExtResource("4_j2if0")
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_40aq8")]
-position = Vector2(555, 323)
+position = Vector2(444, 258.4)

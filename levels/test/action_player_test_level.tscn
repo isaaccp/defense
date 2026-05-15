@@ -11,13 +11,13 @@ players = 2
 test_gameplay_characters = Array[ExtResource("2_wscof")]([ExtResource("2_aeus3"), ExtResource("3_nxkkr")])
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(798, 206)
+position = Vector2(638.4, 164.8)
 
 [node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(684, 441)
+position = Vector2(547.2, 352.8)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("4_yvk5f")]
-position = Vector2(225, 316)
+position = Vector2(180, 252.8)
 
 [node name="VictoryLossConditionComponent" parent="." index="4"]
 victory = Array[int]([])

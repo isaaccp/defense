@@ -52,7 +52,7 @@ players = 2
 test_gameplay_characters = Array[ExtResource("2_2tya0")]([ExtResource("3_osmmu"), ExtResource("4_24acm")])
 
 [node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_qeg0y")]
-position = Vector2(560, 124)
+position = Vector2(448, 99.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("6_rqbd5")]
@@ -60,7 +60,7 @@ spawn_provider_config = SubResource("Resource_2tya0")
 spawn_placer_config = SubResource("Resource_dha63")
 
 [node name="OrcWarriorSpawner2" parent="YSorted/Spawners" index="1" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_qeg0y")]
-position = Vector2(560, 524)
+position = Vector2(448, 419.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("6_rqbd5")]
@@ -68,7 +68,7 @@ spawn_provider_config = SubResource("Resource_p55gh")
 spawn_placer_config = SubResource("Resource_swu1x")
 
 [node name="ArcherSpawner" parent="YSorted/Spawners" index="2" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_qeg0y")]
-position = Vector2(620, 74)
+position = Vector2(496, 59.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/ArcherSpawner" index="5" instance=ExtResource("6_rqbd5")]
@@ -76,7 +76,7 @@ spawn_provider_config = SubResource("Resource_5u5nr")
 spawn_placer_config = SubResource("Resource_r6bo1")
 
 [node name="ArcherSpawner2" parent="YSorted/Spawners" index="3" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_qeg0y")]
-position = Vector2(620, 574)
+position = Vector2(496, 459.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/ArcherSpawner2" index="5" instance=ExtResource("6_rqbd5")]

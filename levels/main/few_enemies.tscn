@@ -26,16 +26,16 @@ pattern = 1
 [node name="Level" instance=ExtResource("1_1wtxp")]
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(63, 53)
+position = Vector2(50.4, 42.4)
 
 [node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(86, 159)
+position = Vector2(68.8, 127.2)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_7r67v")]
-position = Vector2(203, 159)
+position = Vector2(162.4, 127.2)
 
 [node name="Spawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("5_nppvu")]
-position = Vector2(772, 332)
+position = Vector2(617.6, 265.6)
 placement_node = NodePath("../../Enemies")
 actor_name = ""
 

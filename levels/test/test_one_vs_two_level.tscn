@@ -6,10 +6,10 @@
 [node name="Level" instance=ExtResource("1_bqlpt")]
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("2_lvttu")]
-position = Vector2(376, 142)
+position = Vector2(300.8, 113.6)
 
 [node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_lvttu")]
-position = Vector2(288, 273)
+position = Vector2(230.4, 218.4)
 
 [node name="VictoryLossConditionComponent" parent="." index="4"]
 loss = Array[int]([2])

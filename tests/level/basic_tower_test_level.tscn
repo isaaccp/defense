@@ -8,20 +8,20 @@
 [node name="Level" instance=ExtResource("1_ey8bv")]
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(109, 62)
+position = Vector2(87.2, 49.6)
 
 [node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(513, 314)
+position = Vector2(410.4, 251.2)
 
 [node name="Enemy" parent="YSorted/Enemies" index="0" instance=ExtResource("2_27jc8")]
-position = Vector2(253, 159)
+position = Vector2(202.4, 127.2)
 config = ExtResource("3_ba1jo")
 
 [node name="Enemy2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_27jc8")]
-position = Vector2(338, 222)
+position = Vector2(270.4, 177.6)
 config = ExtResource("3_ba1jo")
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_psc1g")]
-position = Vector2(299, 199)
+position = Vector2(239.2, 159.2)
 
 [editable path="YSorted/Towers/Column"]

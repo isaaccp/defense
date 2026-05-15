@@ -60,18 +60,18 @@ test_gameplay_characters = Array[ExtResource("2_c8g10")]([ExtResource("3_mwhu2")
 test_behaviors = Array[ExtResource("4_tgq0t")]([SubResource("Resource_lp8ml")])
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(588, 154)
+position = Vector2(470.4, 123.2)
 
 [node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(297, 335)
+position = Vector2(237.6, 268)
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="0" instance=ExtResource("9_652d4")]
-position = Vector2(293, 269)
+position = Vector2(234.4, 215.2)
 actor_name = ""
 
 [node name="OrcWarrior2" parent="YSorted/Enemies" index="1" instance=ExtResource("9_652d4")]
-position = Vector2(312, 365)
+position = Vector2(249.6, 292)
 actor_name = ""
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("10_jaqgg")]
-position = Vector2(555, 323)
+position = Vector2(444, 258.4)

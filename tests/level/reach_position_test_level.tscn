@@ -6,13 +6,13 @@
 [node name="Level" instance=ExtResource("1_ohbh0")]
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(199, 145)
+position = Vector2(159.2, 116)
 
 [node name="Second" parent="StartingPositions" index="1"]
-position = Vector2(401, 274)
+position = Vector2(320.8, 219.2)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("3_obbgj")]
-position = Vector2(299, 199)
+position = Vector2(239.2, 159.2)
 
 [node name="AttributesComponent" parent="YSorted/Towers/Column" index="5"]
 health = 20

@@ -7,10 +7,10 @@
 players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(297, 299)
+position = Vector2(237.6, 239.2)
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("2_7ckkc")]
-position = Vector2(554, 304)
+position = Vector2(443.2, 243.2)
 
 [node name="VictoryLossConditionComponent" parent="." index="4" node_paths=PackedStringArray("position")]
 victory = Array[int]([3])

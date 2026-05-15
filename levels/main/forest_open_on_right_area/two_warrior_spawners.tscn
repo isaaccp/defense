@@ -29,7 +29,7 @@ players = 2
 test_gameplay_characters = Array[ExtResource("2_y5pxj")]([ExtResource("2_0k78r"), ExtResource("3_c524b")])
 
 [node name="OrcWarriorSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_i2ble")]
-position = Vector2(680, 224)
+position = Vector2(544, 179.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner" index="5" instance=ExtResource("11_xq6on")]
@@ -37,7 +37,7 @@ spawn_provider_config = SubResource("Resource_1kpyc")
 spawn_placer_config = SubResource("Resource_qq1dk")
 
 [node name="OrcWarriorSpawner2" parent="YSorted/Spawners" index="1" node_paths=PackedStringArray("placement_node") instance=ExtResource("10_i2ble")]
-position = Vector2(680, 424)
+position = Vector2(544, 339.2)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcWarriorSpawner2" index="5" instance=ExtResource("11_xq6on")]

@@ -73,10 +73,10 @@ players = 1
 test_behaviors = Array[ExtResource("6_nxkar")]([SubResource("Resource_xbjyc")])
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(158, 420)
+position = Vector2(126.4, 336)
 
 [node name="Barrel" parent="YSorted/Enemies" index="0" instance=ExtResource("2_al4rm")]
-position = Vector2(333, 410)
+position = Vector2(266.4, 328)
 
 [node name="VictoryLossConditionComponent" parent="." index="4"]
 loss = Array[int]([2])

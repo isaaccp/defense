@@ -10,25 +10,25 @@
 players = 1
 
 [node name="First" parent="StartingPositions" index="0"]
-position = Vector2(447, 319)
+position = Vector2(357.6, 255.2)
 
 [node name="OrcArcher" parent="YSorted/Enemies" index="0" instance=ExtResource("3_4w3np")]
-position = Vector2(233, 257)
+position = Vector2(186.4, 205.6)
 actor_name = ""
 
 [node name="OrcArcher2" parent="YSorted/Enemies" index="1" instance=ExtResource("3_4w3np")]
-position = Vector2(233, 371)
+position = Vector2(186.4, 296.8)
 actor_name = ""
 
 [node name="OrcWarrior" parent="YSorted/Enemies" index="2" instance=ExtResource("3_f8y7v")]
-position = Vector2(294, 320)
+position = Vector2(235.2, 256)
 config = ExtResource("4_qnl2f")
 actor_name = "Orc Warrior"
 
 [node name="OrcWarrior2" parent="YSorted/Enemies" index="3" instance=ExtResource("3_f8y7v")]
-position = Vector2(53, 320)
+position = Vector2(42.4, 256)
 config = ExtResource("4_qnl2f")
 actor_name = "Orc Warrior"
 
 [node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_ec0qd")]
-position = Vector2(555, 323)
+position = Vector2(444, 258.4)
