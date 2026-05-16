@@ -14,7 +14,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_simwv"]
 script = ExtResource("1_pwxcs")
 editor_string = "Self or Ally ({sort})"
-cmp = 0
 sort = SubResource("Resource_nc0kq")
 
 [resource]

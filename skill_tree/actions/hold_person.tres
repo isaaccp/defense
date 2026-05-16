@@ -6,8 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_f4mky"]
 script = ExtResource("1_jbfiu")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("2_suqtg")

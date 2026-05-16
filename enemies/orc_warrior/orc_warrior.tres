@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bcp7cxvu8wudt" path="res://enemies/orc_warrior/Idle.png" id="2_rteiu"]
 [ext_resource type="Texture2D" uid="uid://00ml4d5si8a1" path="res://enemies/orc_warrior/Run.png" id="3_vq0ws"]
 [ext_resource type="Script" uid="uid://yy5k82isui3p" path="res://components/data_types/animation_component_config.gd" id="4_68yto"]
+[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="5_6jncr"]
 [ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="6_ycn40"]
 [ext_resource type="Script" uid="uid://cl63s4u50ycq0" path="res://components/data_types/attributes_component_config.gd" id="7_lbgjt"]
 [ext_resource type="Script" uid="uid://hjciee5qns1e" path="res://components/data_types/behavior_component_config.gd" id="8_uejpe"]
@@ -286,8 +287,6 @@ metadata/_custom_type_script = "uid://cl63s4u50ycq0"
 
 [sub_resource type="Resource" id="Resource_aasvl"]
 script = ExtResource("11_xa04w")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_66dkm"]
 script = ExtResource("12_s52bc")
@@ -297,8 +296,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("11_xa04w")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_xuywd"]
 script = ExtResource("12_s52bc")
@@ -314,7 +311,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_1cy7g"]
 script = ExtResource("11_xa04w")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_rntke")
 
 [sub_resource type="Resource" id="Resource_n386v"]
@@ -331,8 +327,6 @@ condition = SubResource("Resource_xuywd")
 
 [sub_resource type="Resource" id="Resource_h5gff"]
 script = ExtResource("11_xa04w")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_sjvcg"]
 script = ExtResource("12_s52bc")

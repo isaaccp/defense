@@ -13,7 +13,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_xm5n1"]
 script = ExtResource("1_4ggyl")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_q3ocn")
 
 [resource]

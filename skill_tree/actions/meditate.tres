@@ -6,8 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_6smey"]
 script = ExtResource("2_a47r3")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("3_giysa")

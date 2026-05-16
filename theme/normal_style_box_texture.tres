@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://nc4pa2w33h54"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://nc4pa2w33h54"]
 
 [ext_resource type="Texture2D" uid="uid://di354xvqlehpt" path="res://assets/kenney_fantasy-ui-borders/Vector/fantasy-ui-borders.svg" id="1_f4uoh"]
 

@@ -7,8 +7,6 @@
 
 [sub_resource type="Resource" id="Resource_4nsng"]
 script = ExtResource("2_1xd86")
-editor_string = ""
-cmp = 0
 
 [resource]
 script = ExtResource("3_re265")

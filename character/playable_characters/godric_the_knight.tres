@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="GameplayCharacter" format=3 uid="uid://bix5m3wtgncj4"]
 
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_g060r"]
+[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="2_7tsqx"]
 [ext_resource type="Script" uid="uid://cjxs7ysk0yiya" path="res://skill_tree/skill_tree_state.gd" id="2_60gha"]
 [ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="2_bfkcj"]
 
