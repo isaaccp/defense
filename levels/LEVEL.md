@@ -93,6 +93,30 @@ Available decoration scenes in `levels/decorations/`:
 
 Add any of these as children of `YSorted/Decoration` in the stage scene. The NavMesh updates automatically.
 
+#### Scattering obstacles in bulk
+
+For stages with many obstacles, [`DecorationScatter`](decorations/decoration_scatter.gd) replaces 20-50 hand-placed decoration positions with a single configurable node. Add it as a child of `YSorted/Decoration` and set:
+
+| Property | Meaning |
+|---|---|
+| `decoration` | PackedScene to instantiate (e.g. `tree_green.tscn`) |
+| `count` | how many to place |
+| `area` | a `ScatterArea` resource defining where to scatter |
+| `rng_seed` | 0 = random each load, nonzero = deterministic |
+| `min_distance` | minimum spacing between instances, 0 = no constraint |
+
+Available area shapes (all in [`decorations/scatter_areas/`](decorations/scatter_areas/)):
+
+| Resource | Fields | Use for |
+|---|---|---|
+| `RectScatterArea` | `rect: Rect2` | rectangular patches, forest edges |
+| `CircleScatterArea` | `center`, `radius` | round clearings, blob clusters |
+| `AnnulusScatterArea` | `center`, `inner_radius`, `outer_radius` | ring around an open area |
+
+Add new shapes by extending `ScatterArea` and overriding `random_point(rng)`.
+
+Children are spawned at `_ready` and not serialized into the .tscn — only the scatter node and its config. In the editor, the scatter regenerates live as you tweak any property. The "Regenerate (new seed)" button rolls a fresh `rng_seed` — click until you like the layout, then save the scene with that seed locked in. The node shows an editor warning until `decoration` and `area` are both set. Multiple scatter nodes can coexist for layered patterns (e.g. dense forest edge + sparse interior).
+
 ### Spawners
 
 Spawners live in `YSorted/Spawners`. Each spawner is a `portal_spawner.tscn` or `spawner.tscn` instance with a `SpawnConfigComponent` child that carries three config resources:
