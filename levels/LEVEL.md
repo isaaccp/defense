@@ -110,6 +110,16 @@ The most common setup is `KILL_ALL_ENEMIES` + `ALL_CHARACTERS_DIED`.
 | < 60s | 1× |
 | > 60s | 0.5× |
 
+## Inspecting a Stage from the CLI
+
+[`tools/inspect_stage.gd`](../tools/inspect_stage.gd) dumps a one-screen summary of any level/stage scene — useful when working without the editor (e.g. from an AI agent). Run:
+
+```
+godot --headless -s tools/inspect_stage.gd -- res://levels/stages/forest_stage_right_side_open.tscn
+```
+
+Output shows starting positions, towers, decoration counts + bounding box, spawner configs (enemy/amount/interval), placement zone rectangles, and victory/loss conditions — all from the loaded scene, no `.tscn` parsing.
+
 ## Navigation and Obstacles
 
 All enemy and character movement uses Godot's `NavigationAgent2D`. The `NavigationRegion2D` in each level holds the navmesh polygon. **Any StaticBody2D placed in the scene is automatically baked into the navmesh**, so obstacles affect pathfinding for free — no extra setup needed.
