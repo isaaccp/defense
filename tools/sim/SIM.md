@@ -70,13 +70,15 @@ Invocation: `godot --headless -s tools/sim/sim.gd -- <config.json>`
       "starting_health": null,
       "starting_position": null
     }
-  ]
+  ],
+  "notes": "attempt 3: tried Charge instead of Move To"
 }
 ```
 
 - `acquired_skills`: list of skill `.tres` basenames (e.g. `"heal"` → looks up `res://skill_tree/actions/heal.tres` via SkillManager). Also supports literal string `"full"` for "all skills."
 - `starting_health` / `starting_position`: optional overrides; null = use defaults.
 - `seed`: nonzero for reproducibility; required for batch comparisons later.
+- `notes`: free-form string. Echoed at top level of summary for scanning. Use it to remember what each attempt was trying.
 
 ## Behavior schema (`tools/sim/behaviors/<name>.json`)
 

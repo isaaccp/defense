@@ -364,6 +364,7 @@ func _finish() -> void:
 
 	var summary := {
 		"config_path": _config_path,
+		"notes": _config.get("notes", ""),
 		"config": _config,
 		"outcome": _outcome,
 		"victory_type": _victory_type if _outcome == "victory" else null,
