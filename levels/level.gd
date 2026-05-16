@@ -54,6 +54,7 @@ var is_paused = false
 # Pick radius (px) used to grab a character for drag-placement during PREPARE.
 const _drag_pick_radius := 20.0
 var _dragging_character: Character = null
+var _drag_offset := Vector2.ZERO
 
 # Not constants so tests can speed them up.
 var ready_to_fight_wait = 1.0
@@ -218,13 +219,15 @@ func _unhandled_input(event: InputEvent):
 		var world := get_global_mouse_position()
 		if event.pressed:
 			_dragging_character = _character_at(world)
+			if _dragging_character:
+				_drag_offset = _dragging_character.position - world
 		else:
 			_dragging_character = null
 			_update_hover_cursor(world)
 	elif event is InputEventMouseMotion:
 		var world := get_global_mouse_position()
 		if _dragging_character:
-			_dragging_character.position = placement_component.closest_valid_point(world)
+			_dragging_character.position = placement_component.closest_valid_point(world + _drag_offset)
 		else:
 			_update_hover_cursor(world)
 
