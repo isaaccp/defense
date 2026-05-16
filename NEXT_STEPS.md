@@ -61,6 +61,47 @@ Add new spawner config scenes under `levels/main/` following the existing patter
 
 ---
 
+## Behavior System — Design Ideas (parking lot)
+
+Captured from sim sessions (see [`tools/sim/SIM_FINDINGS.md`](tools/sim/SIM_FINDINGS.md)) and design discussions. Not prioritized — these are pointers for future thinking, not specs.
+
+### Resource cost for skills (stamina pool?)
+
+**Problem:** skill cooldowns are per-skill and independent. A character with 5 skills can fire one cast every ~1s on average; a character with 10 skills can fire one cast every ~0.5s. **Adding skills passively increases throughput** — wider trees are strictly better than narrower trees, which makes balancing skill acquisition hard.
+
+**Idea:** a shared stamina pool per character. Each skill consumes stamina on use; stamina regenerates over time. Stamina caps throughput regardless of skill count.
+
+**Open question:** managing stamina under the "first-rule-matches-wins" model is awkward — the rule that wants to fire might not have enough stamina, and there's no obvious "wait until stamina is ready" pattern in the current rule grammar. Possible workarounds: a `Stamina >= N` condition, an implicit "skip if insufficient stamina" semantic, or pair with the tables-and-jumps idea below.
+
+### Richer target sorts and threat conditions
+
+Current sort orders are limited to `Closest First` / `Farthest First`. Sims showed this is too coarse — you can't say "kill the archer that's currently shooting the tower."
+
+Suggested additions (most are easy on top of existing per-actor stats):
+
+- **`Lowest Health First`** — finish wounded enemies efficiently.
+- **`Highest Threat`** — sort by DPS dealt to friendlies / tower, derived from existing stats tracking.
+- **`Highest Threat (ranged)`** / **`Highest Threat (melee)`** — same, filtered by attack type. There's already an `ActionTag` system and `AttackType` info, but it's hidden inside projectile definitions rather than surfaced on the action itself. Surfacing it on the action would let target sorts and conditions filter by it directly. Alternatively, derive from stats: "Highest ranged-damage dealer" is computable from damage logs without needing the tag to be on the action.
+- **Conditions like `Attacking Tower`** / **`Attacking Me`** — filter to enemies based on what they're currently doing.
+
+**Caveat:** even with these, behaviors can pick suboptimal targets (e.g. chasing a far ranged threat while the tower gets destroyed at home). Targeting alone doesn't solve positional strategy — that's a separate problem (movement / hold-position logic).
+
+### Multiple behavior tables with jumps (function-like)
+
+**Problem:** first-match-wins rule ordering is clean and predictable, but complex behaviors (defensive mode, aggro mode, retreat mode) all squeezed into one ordered list become brittle and hard to read.
+
+**Idea:** allow multiple named rule tables, plus a meta-skill that jumps to a different table, plus a condition to return to the main table. Effectively turns behaviors into a small state machine — each table is a "function" or "mode" the character is currently in.
+
+Example shape (sketch):
+- Main table: standard combat rules
+- `Defensive` table: triggered when HP < 30%, kites and heals
+- A `Switch to Defensive` rule in the main table jumps when the condition fires
+- A `Return to Main` rule in the Defensive table jumps back when HP > 60%
+
+This is more expressive than a flat priority list and composes well with the stamina idea (different tables = different rhythms).
+
+---
+
 ## Priority 3 — Run Variety via Environmental Effects (later)
 
 Infrastructure already exists: damage types and actor attributes support per-run modifiers (e.g. "Neverending Storm: fire damage halved, lightning doubled"). This layer is not yet wired to the run selection flow.

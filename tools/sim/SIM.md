@@ -4,6 +4,14 @@ A CLI tool for headless level simulation, designed for balance work and meta-pro
 
 This is the design we agreed on; status notes describe what's MVP vs. deferred.
 
+## Capture findings as you go
+
+**Whenever a sim session reveals something about the game's design** (a skill that's missing, a level that's unwinnable with the available skills, a behavior-system limitation, a balance issue), add it to [`SIM_FINDINGS.md`](SIM_FINDINGS.md) under a dated entry.
+
+This file is purely for *game-side* improvements — things the user might want to change in skills, levels, the behavior system, etc. Tooling improvements stay in this doc's "What's NOT in MVP" section.
+
+The point: the sim is a discovery tool. If you find something worth fixing in the game and don't write it down, the next session will rediscover it. Write it down even if you're not going to act on it now.
+
 ## Vision
 
 The dev wants to drive level/skill/meta-progression design with simulated runs:
@@ -169,3 +177,4 @@ Don't build (deferred):
 - **Spawner overrides** (`--spawner=<level>:<spawner>:<key>=<value>` or in config). Highest-leverage difficulty knob; add when we start tuning difficulty rather than just trying to beat levels.
 - **Event stream** (JSONL) separate from summary. Add when the AI needs cross-actor causal analysis ("which enemy killed which character at what time").
 - **Aggregator** (`tools/sim/aggregate.py`). Standalone Python script for post-hoc analysis. Add with batch mode.
+- **Loss-attribution stats in summary.** On a loss, the summary currently only says "TOWER_DIED at 17.5s" — it can't tell you how close the loss was (how much damage characters dealt before dying, how many seconds away from killing the next enemy, who delivered the killing blow on the tower). Tracking damage-dealt-per-character and last-hit attribution in the summary would make losses much more informative for iteration. Note: this is purely a sim-side concern — giving in-game XP on losses doesn't work (infinite retries × any-XP = infinite XP).
