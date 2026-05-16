@@ -38,6 +38,25 @@ These all point at the same design space — see [`NEXT_STEPS.md` "Behavior Syst
 
 ---
 
+## 2026-05-16 — re-run Knight + Cleric vs lvl1, lvl5 with new tooling
+
+Context: replay of the original session's setup, now with events digest + loss attribution + per-actor stats. Configs: `tools/sim/configs/lvl1_knight_cleric.json`, `lvl5_knight_cleric.json`, `lvl5_attempt2.json`. The richer summaries surfaced two new game-side observations beyond what the original session captured.
+
+### Skill design — Cleric self-preservation
+
+- **Cleric has zero self-preservation in her starting kit.** All her defensive skills (`Heal`, `Magic Armor`, `Projectile Ward`) target `Ally` — and the starting kit doesn't include `Self Or Ally`. So in any level where her starting position takes ranged fire, she can't ward / armor / heal *herself* — every buff goes onto the partner. In lvl5 she died at t=9.17 to archers, having never moved from her starting position, having dealt no damage, and having healed only 30 HP. Attempt 2 (stacking PW + Magic Armor before Heal) saved no one because both buffs landed on the Knight, not her.
+  - Possible fixes: (a) add `Self Or Ally` to cleric's starting kit; (b) make her buffs default to self-targetable; (c) ensure stages with ranged threats don't have line-of-sight to cleric starting positions.
+  - Related to the existing "Cleric has zero offensive options" entry above — together they show the cleric's starting kit is *fully* dependent on a partner being alive and nearby.
+
+### Behavior system — Closest First creates positional convergence bias
+
+- **Both characters with `Closest First` routed to the same cluster.** Knight + Cleric started at (331, 179) and (331, 339) respectively, but in lvl5 the Knight engaged ONLY upper-half enemies the entire run (every kill at y=99-135). The reason: the average distance from his starting position to "top spawn" was marginally shorter than to "bottom spawn", and once he moved up to attack, top became even closer. He never went south, leaving the bottom flank completely unanswered. The lower-cluster archers shot Puffin and the tower unopposed.
+  - This isn't a bug — it's the predictable outcome of "Closest First" with a slight positional bias. But for stage designs with symmetric flanks it means the team only ever clears half the field.
+  - Sort orders like `Highest Threat` (already in [`NEXT_STEPS.md` parking lot](../../NEXT_STEPS.md)) would help, but a simpler intermediate would be `Highest HP` or `Lowest HP` for finishing — still won't break the convergence though.
+  - The fundamental gap: behaviors have no notion of *spatial coverage* or *area assignment* — there's no "you take the bottom, I take the top." Possible additions: a `Position Zone` filter on targets ("only target enemies in the bottom half") or a self-relative position concept ("only target enemies on the side of map closer to MY starting position").
+
+---
+
 ## How to add entries
 
 When a sim session reveals something:
