@@ -9,6 +9,7 @@ func _init():
 	max_distance = 80
 	cooldown = 5.0
 	prepare_time = 0.5
+	focus_cost = 4
 
 func post_initialize():
 	attack_dir = attack_direction()

@@ -359,6 +359,8 @@ percentage = 50
 script = ExtResource("5_dwbkn")
 speed = 28.0
 health = 6
+focus = 100
+focus_regen = 10.0
 resistance = Array[ExtResource("4_wyw55")]([SubResource("Resource_5ntrg")])
 
 [node name="SkeletonMage" instance=ExtResource("1_l21nj")]

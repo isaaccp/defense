@@ -9,6 +9,7 @@ func _init():
 	# Needed as the homing behavior requiers target to be valid during run().
 	# Ideally this would be automatically set based on the type of target or similar.
 	need_valid_target_after_prepare = true
+	focus_cost = 2
 
 func post_prepare():
 	spawn_projectile()

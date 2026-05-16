@@ -9,6 +9,7 @@ func _init():
 	max_distance = 300
 	projectile_scene = preload("res://behavior/actions/scenes/arrow.tscn")
 	cooldown = 3.0
+	focus_cost = 4
 
 func post_initialize():
 	for i in range(shots):

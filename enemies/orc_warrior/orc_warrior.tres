@@ -278,6 +278,8 @@ metadata/_custom_type_script = "uid://yy5k82isui3p"
 script = ExtResource("6_ycn40")
 speed = 30.0
 health = 10
+focus = 100
+focus_regen = 10.0
 armor = 1
 
 [sub_resource type="Resource" id="Resource_wrmqo"]

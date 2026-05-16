@@ -4,6 +4,7 @@ const teleport_distance = 500
 
 func _init():
 	cooldown = 5.0
+	focus_cost = 4
 
 func update_position():
 	var dir = initial_target_pos.direction_to(body.global_position)

@@ -8,7 +8,7 @@ func _init():
 	duration = 0.5
 	cooldown = 5.0
 	max_distance = 200
-	focus_cost = 1
+	focus_cost = 2
 
 func description():
 	return "Grants 1 point of armor to the target"

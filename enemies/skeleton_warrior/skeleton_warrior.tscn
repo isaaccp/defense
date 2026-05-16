@@ -348,6 +348,8 @@ percentage = 50
 script = ExtResource("6_vuj23")
 speed = 30.0
 health = 8
+focus = 100
+focus_regen = 10.0
 armor = 2
 resistance = Array[ExtResource("5_eunku")]([SubResource("Resource_e6m2r")])
 

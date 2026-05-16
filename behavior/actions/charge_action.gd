@@ -11,6 +11,7 @@ var original_position: Vector2
 func _init():
 	cooldown = 4.0
 	min_distance = 50
+	focus_cost = 2
 
 func post_initialize():
 	super()

@@ -8,6 +8,7 @@ var attack_dir: Vector2
 func _init():
 	max_distance = 40
 	prepare_time = 0.2
+	focus_cost = 1
 
 func post_initialize():
 	attack_dir = attack_direction()

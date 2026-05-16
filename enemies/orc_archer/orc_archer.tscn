@@ -380,6 +380,8 @@ stored_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_861in"), Sub
 script = ExtResource("10_cxdft")
 speed = 30.0
 health = 5
+focus = 100
+focus_regen = 10.0
 
 [node name="OrcArcher" instance=ExtResource("1_rbnrp")]
 actor_name = "Orc Archer"

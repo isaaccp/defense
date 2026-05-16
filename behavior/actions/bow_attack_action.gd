@@ -6,6 +6,7 @@ func _init():
 	min_distance = 100
 	max_distance = 300
 	prepare_time = 0.3
+	focus_cost = 1
 
 func post_prepare():
 	spawn_projectile()

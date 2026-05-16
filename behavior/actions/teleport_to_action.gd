@@ -7,6 +7,7 @@ const teleport_distance = 300
 func _init():
 	cooldown = 5.0
 	min_distance = 120
+	focus_cost = 4
 
 func update_position():
 	# Intentionally using the target position when we started to cast.

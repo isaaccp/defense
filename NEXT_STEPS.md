@@ -102,6 +102,22 @@ This is more expressive than a flat priority list and composes well with the sta
 
 ---
 
+## Enemy Focus Tuning (parking lot)
+
+The Pass 1 focus rollout gave enemies `focus = 100` / `focus_regen = 10` as a "never a constraint" placeholder — player characters have focus as a meaningful resource (~30-60 max, 0.1-1.0 regen); enemies should eventually have **tighter, designed focus values** so high-cost enemy actions become a real pacing lever (e.g. "the boss can only Fire Burst every 8s because it runs out of focus"). Until then, enemy focus is effectively infinite and `focus_cost` on enemy-used actions (Sword Attack, Bow Attack, Seeking Bolt) doesn't gate anything for them.
+
+When designing tighter enemy focus: pick values per-enemy based on their primary action cost and how often they should be able to cast it. Example: Skeleton Mage with Seeking Bolt (focus_cost = 2) at focus_regen 0.5 → caps casting at every 4s.
+
+---
+
+## Class Identity — Starting Relics (parking lot)
+
+Each playable class gets a single class-specific starting relic to reinforce identity beyond skill kits (e.g. warrior's Regeneration Ring, priest's Hallowed Vestments). See [CAMPAIGN_DESIGN.md](levels/CAMPAIGN_DESIGN.md) for the design context.
+
+**Future extension: multiple starting relics per class.** Once we have more relic content, each class could have a pool of N possible starting relics, with the actual one chosen per run (player choice or randomized). This gives runs more variety and allows alternate "builds" (e.g. a rogue with Shadowstep Boots plays differently from a rogue with Poison Coating). Held off until we have enough relics per class that the pool is non-trivial.
+
+---
+
 ## Priority 3 — Run Variety via Environmental Effects (later)
 
 Infrastructure already exists: damage types and actor attributes support per-run modifiers (e.g. "Neverending Storm: fire damage halved, lightning doubled"). This layer is not yet wired to the run selection flow.

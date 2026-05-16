@@ -341,7 +341,8 @@ stored_rules = Array[ExtResource("7_l80cu")]([SubResource("Resource_hy3ka"), Sub
 script = ExtResource("3_chmqa")
 speed = 35.0
 health = 6
-focus = null
+focus = 100
+focus_regen = 10.0
 
 [node name="OrcGrunt" instance=ExtResource("1_ngdbc")]
 actor_name = "Orc Grunt"
