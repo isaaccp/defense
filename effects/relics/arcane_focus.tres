@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://bafc0class04"]
+
+[ext_resource type="Script" path="res://effects/relics/arcane_focus.gd" id="1_afoc"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "Focus regen +1.0/s. (Wizard class identity — defines slow steady casting as a focus mechanic.)"
+name = &"Arcane Focus"
+effect_types = Array[int]([1])
+effect_script = ExtResource("1_afoc")

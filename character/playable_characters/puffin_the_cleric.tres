@@ -25,3 +25,4 @@ scene_id = 4
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
 acquired_skills = SubResource("Resource_ha8jy")
 attributes = SubResource("Resource_x24g2")
+relics = Array[StringName]([&"Channeling"])

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://bbfury0class01"]
+
+[ext_resource type="Script" path="res://effects/relics/battle_fury.gd" id="1_bfury"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "Gain 1 focus per HP of damage taken. (Warrior class identity — defines rage as a focus mechanic.)"
+name = &"Battle Fury"
+effect_types = Array[int]([5])
+effect_script = ExtResource("1_bfury")

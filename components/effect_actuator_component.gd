@@ -89,6 +89,20 @@ func modified_cooldown(action: ActionDef, cooldown: float, effect_log: Array[Str
 		effective_cooldown = effect_script.modified_action_cooldown(action, effective_cooldown, logger)
 	return effective_cooldown
 
+## Dispatch hooks for event-triggered effects (relics, status effects that react to events).
+## Components call these from the relevant trigger sites.
+func notify_damage_taken(damage_taken: int, attacker_name: String) -> void:
+	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.ON_DAMAGE_TAKEN, []):
+		effect_script.on_damage_taken(damage_taken, attacker_name)
+
+func notify_heal_applied(amount_healed: int, target_name: String) -> void:
+	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.ON_HEAL_APPLIED, []):
+		effect_script.on_heal_applied(amount_healed, target_name)
+
+func notify_enemy_killed(victim_name: String) -> void:
+	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.ON_ENEMY_KILLED, []):
+		effect_script.on_enemy_killed(victim_name)
+
 func _on_status_added(status: StatusDef, status_params: EffectParams):
 	_add_effect(status, status_params)
 
@@ -98,6 +112,7 @@ func _on_status_removed(status_name: StringName):
 func _add_effect(effect: EffectDef, effect_params: EffectParams):
 	effect_by_name[effect.name] = effect
 	var script = effect.effect_script.new() as Effect
+	script.bearer = get_parent()
 	script.initialize(effect_params)
 	effect_script_by_name[effect.name] = script
 	# Some effect types may not require tracking like this, but unless it

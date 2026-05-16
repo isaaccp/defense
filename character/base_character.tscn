@@ -77,11 +77,12 @@ character_body_component = NodePath("../CharacterBodyComponent")
 persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 logging_component = NodePath("../LoggingComponent")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "status_component") instance=ExtResource("8_mrif0")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "status_component", "effect_actuator_component") instance=ExtResource("8_mrif0")]
 side_component = NodePath("../SideComponent")
 logging_component = NodePath("../LoggingComponent")
 damage_component = NodePath("../DamageComponent")
 status_component = NodePath("../StatusComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CapsuleShape2D_4y0tt")

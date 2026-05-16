@@ -118,6 +118,13 @@ func _process_hurtbox_hit(hurtbox: HurtboxComponent):
 
 	hit.emit(effective_hit_effect, hit_result)
 
+	if effect_actuator_component:
+		if hit_result.destroyed:
+			effect_actuator_component.notify_enemy_killed(hurtbox.get_parent().actor_name)
+		if hit_result.damage < 0:
+			# Heal hits land as negative damage; report the magnitude restored.
+			effect_actuator_component.notify_heal_applied(-hit_result.damage, hurtbox.get_parent().actor_name)
+
 	# TODO: Could update log to also include hit_result information, although alternatively we can
 	# not include it and make enemy logs viewable, in which case you could see it there.
 	var original_hit_text = hit_effect.log_text()

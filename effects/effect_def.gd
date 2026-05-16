@@ -12,6 +12,15 @@ enum EffectType {
 	ABLE_TO_ACT,
 	## Effects that modify action cooldown.
 	ACTION_COOLDOWN,
+	## Effects that react to the bearer taking damage. Fired AFTER damage is applied.
+	## Implementer overrides Effect.on_damage_taken(damage_taken: int, attacker_name: String).
+	ON_DAMAGE_TAKEN,
+	## Effects that react to the bearer healing an ally. Fired AFTER the heal is applied.
+	## Implementer overrides Effect.on_heal_applied(amount_healed: int, target_name: String).
+	ON_HEAL_APPLIED,
+	## Effects that react to the bearer killing an enemy. Fired when the kill is recorded.
+	## Implementer overrides Effect.on_enemy_killed(victim_name: String).
+	ON_ENEMY_KILLED,
 }
 
 @export var name: StringName

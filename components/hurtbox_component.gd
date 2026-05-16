@@ -17,6 +17,9 @@ signal hit(hit_effect: HitEffect)
 # for things that can't be killed. Same for status.
 @export var damage_component: DamageComponent
 @export var status_component: StatusComponent
+# Used to fire ON_DAMAGE_TAKEN effect hooks (e.g. Battle Fury). Optional —
+# towers and characters without relics don't need this wired.
+@export var effect_actuator_component: EffectActuatorComponent
 
 func _ready():
 	var config = get_parent().config
@@ -52,6 +55,8 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 				hit_result.status = hit_effect.status.name
 
 	_log("%s's %s %s. Result: %s" % [owner_name, hitbox_name, hit_effect.log_text(), hit_result.log_text()])
+	if effect_actuator_component and hit_result.damage > 0:
+		effect_actuator_component.notify_damage_taken(hit_result.damage, owner_name)
 	return hit_result
 
 func _log(message: String, tooltip: String = ""):

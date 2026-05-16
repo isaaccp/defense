@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://bked0class03"]
+
+[ext_resource type="Script" path="res://effects/relics/killers_edge.gd" id="1_kedg"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "Gain 2 focus per enemy killed. (Rogue class identity — defines combo finishing as a focus mechanic.)"
+name = &"Killer's Edge"
+effect_types = Array[int]([7])
+effect_script = ExtResource("1_kedg")
