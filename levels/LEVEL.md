@@ -1,5 +1,21 @@
 # Level System
 
+## Coordinate Reference
+
+| | Value |
+|---|---|
+| World canvas | **960 × 540** (set by [`gameplay.tscn`](../gameplay.tscn) `SubViewport.size_2d_override`; stretched to 1920×1080 at 2×) |
+| Tile size | 16 × 16 px |
+| Center | (480, 270) |
+| Corners | top-left (0, 0), bottom-right (960, 540) |
+| Character collision | CircleShape2D radius 10, offset (0, 5) from `position` (so `position` ≈ head, collision ≈ body) |
+| `tree_green` radius | 12 |
+| `big_tree_green` radius | 20 |
+| `small_tree_green` radius | 10 (default) |
+| Default `PlacementZone` | full canvas (0, 0) – (960, 540) |
+
+Use [`tools/inspect_stage.gd`](../tools/inspect_stage.gd) to dump positions/bounds of an existing stage when designing a new one.
+
 ## Scene Hierarchy
 
 All levels inherit from `base_level.tscn`. The full node structure:
