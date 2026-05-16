@@ -1,0 +1,121 @@
+{
+  "characters": [
+    {
+      "alive": false,
+      "hp_final": 0.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 493,
+        "y": 61
+      }
+    },
+    {
+      "alive": false,
+      "hp_final": 0.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 331,
+        "y": 339
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": [
+          "always",
+          "enemy",
+          "closest_first",
+          "move_to",
+          "sword_attack",
+          "charge",
+          "cleave",
+          "sweeping_attack"
+        ],
+        "behavior": "res://tools/sim/behaviors/knight_attack_closest.json",
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": [
+          "always",
+          "ally",
+          "move_to",
+          "heal",
+          "closest_first",
+          "target_distance",
+          "magic_armor",
+          "projectile_ward"
+        ],
+        "behavior": "res://tools/sim/behaviors/cleric_heal_always.json",
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_open_on_right_area/two_warrior_spawner_plus_two_archers.tscn",
+    "max_seconds": 90.0,
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/configs/lvl5_attempt_1.json",
+  "elapsed_seconds": 17.54,
+  "enemies": {
+    "alive_final": [
+      {
+        "name": "Orc Warrior",
+        "position": {
+          "x": 258,
+          "y": 291
+        }
+      },
+      {
+        "name": "Orc Archer",
+        "position": {
+          "x": 548,
+          "y": 20
+        }
+      },
+      {
+        "name": "Orc Archer",
+        "position": {
+          "x": 483,
+          "y": 426
+        }
+      },
+      {
+        "name": "Orc Warrior",
+        "position": {
+          "x": 270,
+          "y": 275
+        }
+      },
+      {
+        "name": "Orc Archer",
+        "position": {
+          "x": 568,
+          "y": 5
+        }
+      },
+      {
+        "name": "Orc Archer",
+        "position": {
+          "x": 470,
+          "y": 440
+        }
+      },
+      {
+        "name": "Orc Warrior",
+        "position": {
+          "x": 280,
+          "y": 291
+        }
+      }
+    ],
+    "killed": 3,
+    "spawned": 10
+  },
+  "loss_type": "TOWER_DIED",
+  "outcome": "loss",
+  "towers": [],
+  "victory_type": null,
+  "xp_gained": 0
+}
