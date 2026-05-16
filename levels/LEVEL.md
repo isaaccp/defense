@@ -152,13 +152,23 @@ The most common setup is `KILL_ALL_ENEMIES` + `ALL_CHARACTERS_DIED`.
 
 ## Inspecting a Stage from the CLI
 
-[`tools/inspect_stage.gd`](../tools/inspect_stage.gd) dumps a one-screen summary of any level/stage scene — useful when working without the editor (e.g. from an AI agent). Run:
+Two tools, both useful when working without the editor (e.g. from an AI agent):
+
+**[`tools/inspect_stage.gd`](../tools/inspect_stage.gd)** — text summary of any level/stage scene:
 
 ```
 godot --headless -s tools/inspect_stage.gd -- res://levels/stages/forest_stage_right_side_open.tscn
 ```
 
 Output shows starting positions, towers, decoration counts + bounding box, spawner configs (enemy/amount/interval), placement zone rectangles, and victory/loss conditions — all from the loaded scene, no `.tscn` parsing.
+
+**[`tools/render_stage.gd`](../tools/render_stage.gd)** — top-down PNG of the scene as it appears during PREPARE:
+
+```
+godot --path . -s tools/render_stage.gd -- res://levels/stages/forest_stage_right_side_open.tscn /tmp/stage.png
+```
+
+Saves a 960×540 image showing tilemap, decorations, towers, and placement zones (as a subtle tint). Requires a real rendering driver — `--headless` uses a null renderer that produces an empty image. If no display is attached, prefix with `xvfb-run -a`.
 
 ## Navigation and Obstacles
 
