@@ -9,3 +9,11 @@ webrtc/lib/~lib*
 .gut_editor_config.json
 # Output of deps.py
 Digraph.*
+# Sim session attempts — configs, behaviors, summaries from iteration runs.
+# Only files starting with "example" are tracked (as documentation).
+# Summary files (auto-generated) are always excluded.
+tools/sim/configs/*.json
+tools/sim/behaviors/*.json
+tools/sim/configs/*.summary.json
+!tools/sim/configs/example.json
+!tools/sim/behaviors/example*.json
