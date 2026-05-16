@@ -47,6 +47,13 @@ var _enemies_seen: Array[Enemy] = []
 var _outcome := "timeout"
 var _victory_type: String = ""
 var _loss_type: String = ""
+# actor_name (with idx suffix if duplicated) -> { killed_by: String, at: Vector2 }
+var _killed_by: Dictionary = {}
+# High-signal "story of the run" events for scanning before raw logs.
+# Each entry: {t: float, kind: String, ...payload}
+var _events: Array = []
+# Per-actor HP milestone tracking to avoid re-emitting the same threshold.
+var _hp_milestones_fired: Dictionary = {}
 
 func _ready() -> void:
 	if args.is_empty():
@@ -57,12 +64,11 @@ func _ready() -> void:
 		_config_path = ProjectSettings.globalize_path(_config_path)
 	if not _load_config():
 		return
+	if not _validate_config():
+		return
 	LoggingComponent.reset_origin()
 
 	var level_path: String = _config.get("level", "")
-	if level_path.is_empty():
-		_fail("config missing 'level' field")
-		return
 	var packed := load(level_path) as PackedScene
 	if not packed:
 		_fail("could not load level: %s" % level_path)
@@ -96,8 +102,12 @@ func _ready() -> void:
 	# Enable BEHAVIOR + HEALTH logging on all actors so the run is readable.
 	for actor in _level.characters.get_children():
 		_enable_logging(actor)
+		_hook_death_attribution(actor)
+		_hook_hp_milestones(actor)
 	for actor in _level.towers.get_children():
 		_enable_logging(actor)
+		_hook_death_attribution(actor)
+		_hook_hp_milestones(actor)
 
 	for spawner in _level.spawners.get_children():
 		if spawner.has_signal("enemy_spawned"):
@@ -133,6 +143,96 @@ func _process(delta: float) -> void:
 		_finish()
 
 # --- Config loading ---
+
+func _validate_config() -> bool:
+	# Pre-flight: walk the whole config and collect every issue, so the user
+	# sees all problems at once instead of fix-rerun-fix-rerun. Catches missing
+	# paths, unknown skill basenames, and behaviors that reference skills the
+	# character hasn't acquired.
+	var errors: PackedStringArray = []
+	var level: String = _config.get("level", "")
+	if level.is_empty():
+		errors.append("config missing 'level' field")
+	elif not ResourceLoader.exists(level):
+		errors.append("level not found: %s" % level)
+	var characters_cfg: Array = _config.get("characters", [])
+	if characters_cfg.is_empty():
+		errors.append("config has no characters")
+	for i in characters_cfg.size():
+		var cfg: Dictionary = characters_cfg[i]
+		var prefix := "characters[%d]" % i
+		var char_path: String = cfg.get("character", "")
+		if char_path.is_empty():
+			errors.append("%s missing 'character' field" % prefix)
+		elif not ResourceLoader.exists(char_path):
+			errors.append("%s: character not found: %s" % [prefix, char_path])
+		# Skills resolution + collect the resolved set for behavior cross-check.
+		var acquired = cfg.get("acquired_skills", [])
+		var acquired_set: Dictionary = {}
+		var has_all_skills := false
+		if typeof(acquired) == TYPE_STRING:
+			if acquired == "full":
+				has_all_skills = true
+			else:
+				errors.append("%s: acquired_skills must be array or 'full', got '%s'" % [prefix, acquired])
+		elif typeof(acquired) == TYPE_ARRAY:
+			for basename in acquired:
+				var skill_name := _resolve_skill_basename(basename)
+				if skill_name == &"":
+					errors.append("%s: skill basename '%s' not found in %s" % [prefix, basename, ", ".join(SKILL_TREE_DIRS)])
+				else:
+					acquired_set[skill_name] = true
+		else:
+			errors.append("%s: acquired_skills must be array or 'full'" % prefix)
+		# Behavior.
+		var behavior_path: String = cfg.get("behavior", "")
+		if not behavior_path.is_empty():
+			_validate_behavior_file(behavior_path, acquired_set, has_all_skills, prefix, errors)
+	if errors.is_empty():
+		return true
+	push_error("Config validation failed:\n  - %s" % "\n  - ".join(errors))
+	scene_tree.quit(1)
+	return false
+
+# Walks a behavior JSON file and records issues against `errors`. Resolves
+# every skill reference via SkillManager and checks it's in the character's
+# acquired set (or all_skills if "full").
+func _validate_behavior_file(path: String, acquired: Dictionary, full: bool, prefix: String, errors: PackedStringArray) -> void:
+	var abs := ProjectSettings.globalize_path(path) if path.begins_with("res://") else path
+	var f := FileAccess.open(abs, FileAccess.READ)
+	if not f:
+		errors.append("%s: behavior file not found: %s" % [prefix, path])
+		return
+	var text := f.get_as_text()
+	f.close()
+	var parsed = JSON.parse_string(text)
+	if typeof(parsed) != TYPE_DICTIONARY:
+		errors.append("%s: behavior is not a JSON object: %s" % [prefix, path])
+		return
+	var rules: Array = parsed.get("rules", [])
+	for i in rules.size():
+		var rule = rules[i]
+		var rule_prefix := "%s behavior %s rule[%d]" % [prefix, path.get_file(), i]
+		for field in ["action", "target", "condition"]:
+			_validate_skill_ref(rule.get(field), field, rule_prefix, acquired, full, errors)
+		# `sort` is optional; if present validate it.
+		if rule.has("sort") and rule.get("sort") != null:
+			_validate_skill_ref(rule.get("sort"), "sort", rule_prefix, acquired, full, errors)
+
+func _validate_skill_ref(ref: Variant, field: String, prefix: String, acquired: Dictionary, full: bool, errors: PackedStringArray) -> void:
+	if typeof(ref) != TYPE_DICTIONARY:
+		errors.append("%s.%s must be an object with 'name'" % [prefix, field])
+		return
+	var name = ref.get("name", "")
+	if typeof(name) != TYPE_STRING or name.is_empty():
+		errors.append("%s.%s missing 'name'" % [prefix, field])
+		return
+	var skill := SkillManager.lookup_skill(StringName(name))
+	if not skill:
+		errors.append("%s.%s: unknown skill '%s'" % [prefix, field, name])
+		return
+	if not full and not acquired.has(StringName(name)):
+		errors.append("%s.%s: skill '%s' is referenced but not in character's acquired_skills" % [prefix, field, name])
 
 func _load_config() -> bool:
 	var f := FileAccess.open(_config_path, FileAccess.READ)
@@ -342,18 +442,117 @@ func _enable_logging(actor: Node) -> void:
 
 # --- Outcome tracking ---
 
+# Connect to the actor's DeathHandlerComponent so we can snapshot the last
+# attacker before queue_free runs (towers free on death; chars don't, but we
+# use the same path for consistency).
+func _hook_death_attribution(actor: Node) -> void:
+	var dhc: DeathHandlerComponent = Component.get_or_null(actor, DeathHandlerComponent.component)
+	if not dhc:
+		return
+	dhc.died.connect(_on_actor_died.bind(actor))
+
+func _on_actor_died(actor: Node) -> void:
+	var log_comp: LoggingComponent = Component.get_or_null(actor, LoggingComponent.component)
+	var killer := ""
+	if log_comp:
+		# Last HURT entry's message format: "<attacker>'s <hitbox> ..."
+		for i in range(log_comp.entries.size() - 1, -1, -1):
+			var entry: LoggingComponent.LogEntry = log_comp.entries[i]
+			if entry.type == LoggingComponent.LogType.HURT:
+				var msg := entry.message as String
+				var split := msg.find("'s ")
+				if split > 0:
+					killer = msg.substr(0, split)
+				break
+	# Snapshot the full per-actor row here — for towers and any actor with
+	# free_on_death=true, this is the last chance to read its stats and
+	# vitals before queue_free runs.
+	var v: VitalsComponent = Component.get_or_null(actor, VitalsComponent.component)
+	var max_hp := v.get_vital_max(VitalsComponent.VitalType.HEALTH) if v else 0.0
+	_add_event("death", {
+		"actor": actor.actor_name,
+		"actor_key": _actor_key(actor),
+		"killed_by": killer,
+		"at": {"x": int(actor.position.x), "y": int(actor.position.y)},
+	})
+	_killed_by[_actor_key(actor)] = {
+		"killed_by": killer,
+		"at": {"x": int(actor.position.x), "y": int(actor.position.y)},
+		"container": actor.get_parent().name,
+		"snapshot": {
+			"name": actor.actor_name,
+			"hp_final": 0.0,
+			"hp_max": snappedf(max_hp, 0.1),
+			"alive": false,
+			"position": {"x": int(actor.position.x), "y": int(actor.position.y)},
+			"damage_dealt": int(log_comp.stats.get_value(Stat.DamageDealt)) if log_comp else 0,
+			"damage_healed": int(log_comp.stats.get_value(Stat.DamageHealed)) if log_comp else 0,
+			"enemies_killed": int(log_comp.stats.get_value(Stat.EnemiesDestroyed)) if log_comp else 0,
+			"killed_by": killer,
+			"death_position": {"x": int(actor.position.x), "y": int(actor.position.y)},
+		},
+	}
+
+func _actor_key(actor: Node) -> String:
+	# actor_name may collide (e.g. two Godricks). Suffix with the node path
+	# index under its parent so the key is unique within the summary.
+	var parent := actor.get_parent()
+	for i in parent.get_child_count():
+		if parent.get_child(i) == actor:
+			return "%s#%d" % [actor.actor_name, i]
+	return actor.actor_name
+
 func _on_enemy_spawned(enemy: Enemy) -> void:
 	_enemies_spawned += 1
 	_enemies_seen.append(enemy)
 	_enable_logging(enemy)
+	_hook_death_attribution(enemy)
+	_add_event("spawn", {
+		"actor": enemy.actor_name,
+		"actor_key": _actor_key(enemy),
+		"at": {"x": int(enemy.position.x), "y": int(enemy.position.y)},
+	})
 
 func _on_level_finished(v: int) -> void:
 	_outcome = "victory"
 	_victory_type = VictoryLossConditionComponent.VictoryType.keys()[v]
+	_add_event("victory", {"victory_type": _victory_type})
 
 func _on_level_failed(l: int) -> void:
 	_outcome = "loss"
 	_loss_type = VictoryLossConditionComponent.LossType.keys()[l]
+	_add_event("loss", {"loss_type": _loss_type})
+
+func _add_event(kind: String, payload: Dictionary = {}) -> void:
+	var ev := {"t": snappedf(_elapsed, 0.01), "kind": kind}
+	for k in payload:
+		ev[k] = payload[k]
+	_events.append(ev)
+
+func _hook_hp_milestones(actor: Node) -> void:
+	var v: VitalsComponent = Component.get_or_null(actor, VitalsComponent.component)
+	if not v:
+		return
+	v.vital_updated.connect(_on_vital_updated.bind(actor))
+
+func _on_vital_updated(update: VitalsComponent.VitalUpdate, actor: Node) -> void:
+	if update.type != VitalsComponent.VitalType.HEALTH:
+		return
+	if update.max_value <= 0:
+		return
+	var pct: float = update.current_value / update.max_value * 100.0
+	var key := _actor_key(actor)
+	var fired: Dictionary = _hp_milestones_fired.get(key, {})
+	for threshold in [50, 25]:
+		if pct <= threshold and not fired.has(threshold):
+			fired[threshold] = true
+			_add_event("low_hp", {
+				"actor": actor.actor_name,
+				"actor_key": key,
+				"hp_pct": threshold,
+				"at": {"x": int(actor.position.x), "y": int(actor.position.y)},
+			})
+	_hp_milestones_fired[key] = fired
 
 # --- Reporting ---
 
@@ -377,6 +576,7 @@ func _finish() -> void:
 		"towers": _summarize_actors(_level.towers),
 		"enemies": _summarize_enemies(),
 		"xp_gained": _xp_gained(),
+		"events": _events,
 	}
 
 	var summary_path := _summary_path_for(_config_path)
@@ -403,18 +603,42 @@ func _summary_path_for(config_path: String) -> String:
 	return config_path + ".summary.json"
 
 func _summarize_actors(container: Node) -> Array:
+	# Walks both alive actors (still in the container) AND dead actors that
+	# were free'd on death (their pre-death snapshot lives in _killed_by,
+	# tagged with the container name).
 	var out: Array = []
+	var seen_keys: Dictionary = {}
 	for actor in container.get_children():
+		var key := _actor_key(actor)
+		seen_keys[key] = true
 		var v: VitalsComponent = Component.get_or_null(actor, VitalsComponent.component)
 		var hp := v.get_vital_current(VitalsComponent.VitalType.HEALTH) if v else 0.0
 		var max_hp := v.get_vital_max(VitalsComponent.VitalType.HEALTH) if v else 0.0
-		out.append({
+		var log_comp: LoggingComponent = Component.get_or_null(actor, LoggingComponent.component)
+		var alive := is_instance_valid(actor) and not actor.is_queued_for_deletion() and hp > 0
+		var entry := {
 			"name": actor.actor_name,
 			"hp_final": snappedf(hp, 0.1),
 			"hp_max": snappedf(max_hp, 0.1),
-			"alive": is_instance_valid(actor) and not actor.is_queued_for_deletion() and hp > 0,
+			"alive": alive,
 			"position": {"x": int(actor.position.x), "y": int(actor.position.y)},
-		})
+			"damage_dealt": int(log_comp.stats.get_value(Stat.DamageDealt)) if log_comp else 0,
+			"damage_healed": int(log_comp.stats.get_value(Stat.DamageHealed)) if log_comp else 0,
+			"enemies_killed": int(log_comp.stats.get_value(Stat.EnemiesDestroyed)) if log_comp else 0,
+		}
+		if not alive:
+			var attrib = _killed_by.get(key)
+			if attrib:
+				entry["killed_by"] = attrib.killed_by
+				entry["death_position"] = attrib.at
+		out.append(entry)
+	# Append snapshots for actors that were free'd before we got here.
+	for key in _killed_by:
+		if seen_keys.has(key):
+			continue
+		var attrib = _killed_by[key]
+		if attrib.get("container") == container.name:
+			out.append(attrib.snapshot)
 	return out
 
 func _summarize_enemies() -> Dictionary:
