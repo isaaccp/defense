@@ -116,26 +116,63 @@ Every skill slot (`action`, `target`, `sort`, `condition`) is an object with `na
 
 ```json
 {
+  "config_path": "...",
+  "notes": "attempt 3: tried Charge instead of Move To",
   "config": { /* echoes the input config verbatim */ },
   "outcome": "victory",
   "victory_type": "KILL_ALL_ENEMIES",
   "loss_type": null,
   "elapsed_seconds": 23.5,
   "characters": [
-    {"name": "Puffin", "hp_final": 18, "hp_max": 30, "alive": true}
+    {
+      "name": "Puffin", "hp_final": 18, "hp_max": 30, "alive": true,
+      "position": {"x": 411, "y": 240},
+      "damage_dealt": 0, "damage_healed": 45, "enemies_killed": 0
+      // on death: also "killed_by": "...", "death_position": {...}
+    }
   ],
-  "enemies": {
-    "spawned": 12,
-    "killed": 12,
-    "alive_final": 0
-  },
-  "xp_gained": 50
+  "towers": [ /* same shape; included even if free'd on death */ ],
+  "enemies": {"spawned": 12, "killed": 12, "alive_final": []},
+  "xp_gained": 50,
+  "events": [ /* see "Events digest" below */ ]
 }
 ```
 
-Config is echoed inside summary so each summary is fully self-contained — you can diff just summaries between attempts to see what changed.
+Config is echoed inside summary so each summary is fully self-contained — you can diff just summaries between attempts.
 
-The live `LoggingComponent` stream (BEHAVIOR + HEALTH by default) goes to stdout during the run so the AI can scan for "what went wrong" between attempts.
+The live `LoggingComponent` stream (BEHAVIOR + HEALTH + DEATH by default, all with coordinate-tagged messages for rule transitions and deaths) goes to stdout during the run for scanning "what went wrong."
+
+## Events digest
+
+`summary.events` is a chronological list of high-signal events synthesized during the run — a "story of the run" you can scan before opening raw logs. Event kinds:
+
+- `spawn` — `{actor, actor_key, at: {x, y}}`
+- `death` — `{actor, actor_key, at: {x, y}, killed_by}`
+- `low_hp` — `{actor, actor_key, hp_pct: 50|25, at: {x, y}}` — fires once per threshold per actor
+- `victory` — `{victory_type}`
+- `loss` — `{loss_type}`
+
+Every event carries `t` (seconds since combat start) and `kind`. Same coordinate semantics as everywhere else (960×540 canvas).
+
+## Config validation
+
+Before running, the sim walks the config and reports every problem at once (instead of fail-rerun-fail-rerun):
+
+- Missing or non-existent paths (level, characters, behaviors)
+- Unknown skill basenames in `acquired_skills`
+- Behavior rules that reference skills the character doesn't have in `acquired_skills` (when `acquired_skills` is a list — `"full"` bypasses this check)
+
+If any error is found, the sim exits with code 1 and prints all errors.
+
+## Comparing attempts
+
+`tools/sim/diff.py` compares two summary JSONs side-by-side:
+
+```
+tools/sim/diff.py tools/sim/configs/lvl5_attempt_1.summary.json tools/sim/configs/lvl5_attempt_2.summary.json
+```
+
+Shows outcome delta, elapsed-time delta, per-character HP / damage_dealt / kills / killed_by deltas, enemy count deltas, and event-kind counts. Pairs actors by `name#index` so two `Godrick`s match correctly.
 
 ## Decisions locked in
 
@@ -172,6 +209,18 @@ Don't build (deferred):
 - `time_scale` for faster sims. Defer — playthrough runs near real-time and it's been fine.
 - `DecorationScatter.rng_seed=0` reproducibility. Audit on first use; for now accept that scatter-randomized stages produce slightly different obstacle layouts between sim runs.
 - Pre-summarized text view for the AI. Probably worth adding as a v2 feature when the volume of attempts justifies it.
+
+## What's in v1 (post-MVP)
+
+Added after the first iteration session surfaced gaps. All in service of the inner loop ("write config → run → diagnose → adjust"):
+
+- **`notes` field** in config, hoisted to top-level of summary for scanning.
+- **Coordinate-tagged behavior transitions** — `BehaviorComponent` rule-change logs now include `@(x, y)`.
+- **`DEATH` LogType** — `DeathHandlerComponent` logs a death event with position via the actor's `LoggingComponent`.
+- **Loss attribution** — per-character `damage_dealt`, `damage_healed`, `enemies_killed`, plus `killed_by` + `death_position` on dead actors. Tower data is snapshotted at death (it free's on death, so the read happens via the `died` signal).
+- **Config validation** — pre-flight walk reports every problem at once.
+- **Events digest** (see above).
+- **`tools/sim/diff.py`** for comparing two summaries.
 
 ## What's NOT in MVP but worth knowing
 
