@@ -54,8 +54,23 @@ var stats = Stats.new()
 var running = false
 var elapsed_time = 0.0
 
+# Shared wall-clock origin across all LoggingComponent instances. Set on the
+# first run() call; each component then records its own run_offset relative
+# to this origin. Used only for debug prints (log_all / print_logtypes) so
+# events across actors with different spawn times share a comparable
+# timeline. The in-game LogViewer continues to use the actor-relative
+# entry.time directly. Call reset_origin() between levels.
+static var _origin_msec: int = -1
+var run_offset: float = 0.0
+
 func run():
 	running = true
+	if _origin_msec < 0:
+		_origin_msec = Time.get_ticks_msec()
+	run_offset = (Time.get_ticks_msec() - _origin_msec) / 1000.0
+
+static func reset_origin() -> void:
+	_origin_msec = -1
 
 func _process(delta: float):
 	if not running:
@@ -78,7 +93,9 @@ func add_log_entry(type: LogType, message: String, tooltip: String = "", stats_u
 	if log_all or type in print_logtypes:
 		# For tests in which components are not added to an actor.
 		var actor_name = get_parent().actor_name if get_parent() is Actor else "unknown"
-		print("[%0.2f] %s(%s): %s, %s" % [time, actor_name, LoggingComponent.log_type_name(type), message, tooltip])
+		# Debug print uses the shared timeline (run_offset + entry.time) so
+		# events from actors with different spawn times stay comparable.
+		print("[%0.2f] %s(%s): %s, %s" % [run_offset + time, actor_name, LoggingComponent.log_type_name(type), message, tooltip])
 	if track_stats:
 		for stat in stats_updates:
 			stats.add_stat(stat)

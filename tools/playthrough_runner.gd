@@ -40,6 +40,8 @@ func _ready() -> void:
 		print("Usage: godot --headless --path . -s tools/playthrough.gd -- <level_path> [seconds=10] [log_types]")
 		scene_tree.quit(1)
 		return
+	# Reset the shared timeline so debug logs in this run start at 0.
+	LoggingComponent.reset_origin()
 	var path: String = args[0]
 	if not path.begins_with("res://"):
 		path = "res://" + path
