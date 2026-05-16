@@ -13,7 +13,6 @@ skills = Array[StringName]([&"Always", &"Enemy", &"Self", &"Closest First", &"Mo
 script = ExtResource("2_wmfby")
 speed = 30.0
 health = 35
-recovery = 0.15
 focus = 60
 focus_regen = 0.5
 

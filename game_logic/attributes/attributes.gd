@@ -7,8 +7,9 @@ class_name Attributes
 @export var speed: float
 ## Max health.
 @export var health: int
-## Fraction of health recovered at end of level.
-@export var recovery: float
+## Fraction of health recovered at end of level. Flat across all characters by design —
+## see BALANCE.md ("recovery" row) before adding per-character overrides.
+@export var recovery: float = 0.25
 ## Max focus.
 @export var focus: int
 ## Focus regen per second.
