@@ -16,6 +16,22 @@ This doc captures **how to design a new stage that forces interesting decisions*
 
 5. **What does the placement zone look like?** Restricting placement is the cheapest difficulty knob — a stage that forces you to start far from the tower changes the puzzle entirely. Decide if `PlacementComponent` should use the default full-map zone or restricted polygons.
 
+## Authoring `.tscn` ext_resources by hand (critical gotcha)
+
+When adding ext_resources to a `.tscn` (e.g. wiring up `DecorationScatter` with a `RectScatterArea` sub-resource), **omit the `uid="..."` field on script ext_resources**. Use path-only:
+
+```
+# Good (path-only — Godot resolves it):
+[ext_resource type="Script" path="res://levels/decorations/decoration_scatter.gd" id="3_scatter"]
+
+# Bad (UID + path — if the UID is wrong, Godot loads the WRONG script and tries
+# to attach it to your node, giving cryptic "Script inherits from native type
+# 'Resource', so it can't be assigned to an object of type 'Node2D'" errors):
+[ext_resource type="Script" uid="uid://qe1dsul2aje7" path="res://levels/decorations/decoration_scatter.gd" id="3_scatter"]
+```
+
+For `PackedScene` ext_resources (towers, decorations), look up the UID from the `.tscn` header (first line) — these are reliable. For `Script` ext_resources, looking up `.uid` files by name is error-prone; just skip the UID and Godot will resolve by path. The path fallback is robust and produces only a one-time warning that clears after the editor rescans.
+
 ## Building the stage
 
 ```bash
