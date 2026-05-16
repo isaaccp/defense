@@ -118,7 +118,7 @@ func _physics_process(delta: float):
 					rule = result.rule
 					target = result.target
 					action = result.action
-					_log("Rule #%d: %s" % [result.id, rule.string_with_target(target)])
+					_log("Rule #%d: %s @(%d, %d)" % [result.id, rule.string_with_target(target), actor.position.x, actor.position.y])
 					action.initialize(target, actor, navigation_agent, action_sprites, side_component, attributes_component, status_component, logging_component, effect_actuator_component, character_body_component)
 					if action.focus_cost > 0:
 						vitals_component.apply_vital_change(VitalsComponent.VitalType.FOCUS, -action.focus_cost, true)
