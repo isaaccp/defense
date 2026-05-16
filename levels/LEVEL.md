@@ -48,6 +48,27 @@ Level (level.gd)
 3. **SUMMARY** — Victory/loss screen, XP reward.
 4. **DONE** — Terminal state.
 
+## Scaffolding a New Stage or Level
+
+Two CLI tools produce minimal, valid scenes so you don't have to write `.tscn` boilerplate by hand:
+
+```
+godot --headless -s tools/new_stage.gd -- <stage_name>
+godot --headless -s tools/new_level.gd -- <stage_path> <level_name> [output_subdir]
+```
+
+Examples:
+
+```
+# Creates res://levels/stages/narrow_corridor.tscn (inherits base_level)
+godot --headless -s tools/new_stage.gd -- narrow_corridor
+
+# Creates res://levels/main/narrow_corridor/two_grunts.tscn (inherits the stage)
+godot --headless -s tools/new_level.gd -- res://levels/stages/narrow_corridor.tscn two_grunts
+```
+
+Stages get StartingPositions placed at sensible defaults; levels are bare inheritors of their stage ready for spawner children. Both tools register the new UID in `ResourceUID` so subsequent tool calls in the same shell resolve it; the editor picks up the new file on its next rescan. Reminder: a new level only appears in runs once it's added to [`levels/main/main_levels.tres`](main/main_levels.tres).
+
 ## Creating a New Level
 
 A **level** is what the player plays: a specific enemy wave on a specific map. A **terrain** is the reusable map base (layout, obstacles, starting positions). The typical pattern is two nested scenes:
