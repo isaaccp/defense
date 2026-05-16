@@ -191,6 +191,14 @@ godot --path . -s tools/render_stage.gd -- res://levels/stages/forest_stage_righ
 
 Saves a 960×540 image showing tilemap, decorations, towers, and placement zones (as a subtle tint). Requires a real rendering driver — `--headless` uses a null renderer that produces an empty image. If no display is attached, prefix with `xvfb-run -a`.
 
+**[`tools/playthrough.gd`](../tools/playthrough.gd)** — headlessly runs a level for N simulated seconds, streams [`LoggingComponent`](../components/logging_component.gd) output, and prints a summary (outcome, spawn count, surviving actors and positions):
+
+```
+godot --headless --path . -s tools/playthrough.gd -- res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn 10
+```
+
+Third arg is comma-separated LogType names enabled per-actor — defaults to `BEHAVIOR,HEALTH` (readable; shows what enemies decide and when things take damage). Use `all` for `log_all=true` (very verbose), `none` to silence. Useful for catching "enemies spawn but can't reach anything" without playing the level. Implementation note: a tiny SceneTree bootstrap loads `playthrough_runner.gd` at runtime so the runner can use full static typing (autoloads are registered by then).
+
 ## Navigation and Obstacles
 
 All enemy and character movement uses Godot's `NavigationAgent2D`. The `NavigationRegion2D` in each level holds the navmesh polygon. **Any StaticBody2D placed in the scene is automatically baked into the navmesh**, so obstacles affect pathfinding for free — no extra setup needed.
