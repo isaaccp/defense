@@ -15,7 +15,7 @@ speed = 40.0
 health = 45
 recovery = 0.2
 focus = 40
-focus_regen = 0.1
+focus_regen = 0.5
 damage_multiplier = 1.1
 
 [resource]
