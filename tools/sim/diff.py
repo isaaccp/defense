@@ -96,6 +96,68 @@ def diff_events(a_events, b_events):
             print(l)
 
 
+# Per-actor event timings — when did each actor first hit each milestone?
+# Useful for "did Puffin survive longer in attempt B?" without rereading
+# both events lists.
+TIMING_KINDS = ("spawn", "low_hp_50", "low_hp_25", "death")
+
+
+def actor_timings(events):
+    """Map actor_key -> {kind: first_t}. low_hp gets split by hp_pct."""
+    out = {}
+    for ev in events:
+        key = ev.get("actor_key")
+        if not key:
+            continue
+        kind = ev["kind"]
+        if kind == "low_hp":
+            kind = f"low_hp_{ev.get('hp_pct')}"
+        if kind not in TIMING_KINDS:
+            continue
+        slot = out.setdefault(key, {})
+        # Keep the FIRST occurrence per kind.
+        if kind not in slot:
+            slot[kind] = ev["t"]
+    return out
+
+
+# Suppress timing diffs smaller than this — engine frame jitter produces
+# ~0.01s differences run-to-run that drown the real signal.
+TIMING_NOISE_THRESHOLD = 0.1
+
+
+def diff_actor_timings(a_events, b_events):
+    a_t = actor_timings(a_events)
+    b_t = actor_timings(b_events)
+    keys = sorted(set(a_t) | set(b_t))
+    lines = []
+    for key in keys:
+        a_slot = a_t.get(key, {})
+        b_slot = b_t.get(key, {})
+        per_kind = []
+        for kind in TIMING_KINDS:
+            a_v = a_slot.get(kind)
+            b_v = b_slot.get(kind)
+            if a_v is None and b_v is None:
+                continue
+            if a_v is None:
+                per_kind.append(f"{kind} N/A -> {b_v:.2f}s")
+            elif b_v is None:
+                per_kind.append(f"{kind} {a_v:.2f}s -> N/A")
+            else:
+                d = b_v - a_v
+                if abs(d) < TIMING_NOISE_THRESHOLD:
+                    continue
+                sign = "+" if d > 0 else ""
+                per_kind.append(f"{kind} {a_v:.2f}s -> {b_v:.2f}s ({sign}{d:.2f}s)")
+        if per_kind:
+            lines.append(f"    {key}: " + ", ".join(per_kind))
+    if lines:
+        print("  event timings (deltas > %.2fs):" % TIMING_NOISE_THRESHOLD)
+        for l in lines:
+            print(l)
+
+
 def main():
     if len(sys.argv) != 3:
         print("Usage: diff.py <summary_a.json> <summary_b.json>", file=sys.stderr)
@@ -138,8 +200,9 @@ def main():
     diff_actors(a["characters"], b["characters"], "characters")
     diff_actors(a["towers"], b["towers"], "towers")
 
-    # Event counts
+    # Event counts + per-actor timing deltas
     diff_events(a.get("events", []), b.get("events", []))
+    diff_actor_timings(a.get("events", []), b.get("events", []))
 
 
 if __name__ == "__main__":

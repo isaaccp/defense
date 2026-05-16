@@ -220,7 +220,8 @@ Added after the first iteration session surfaced gaps. All in service of the inn
 - **Loss attribution** — per-character `damage_dealt`, `damage_healed`, `enemies_killed`, plus `killed_by` + `death_position` on dead actors. Tower data is snapshotted at death (it free's on death, so the read happens via the `died` signal).
 - **Config validation** — pre-flight walk reports every problem at once.
 - **Events digest** (see above).
-- **`tools/sim/diff.py`** for comparing two summaries.
+- **`tools/sim/diff.py`** for comparing two summaries — outcome, time, per-actor stat deltas, event counts, and per-actor event-timing deltas (spawn / low_hp_50 / low_hp_25 / death; deltas under 0.1s are suppressed as engine jitter).
+- **`tools/sim/events.py <summary>`** — terse one-line printer for the events digest. Use `--kind death,low_hp` to filter. Fastest "what happened" scan.
 
 ## What's NOT in MVP but worth knowing
 
@@ -229,5 +230,5 @@ Added after the first iteration session surfaced gaps. All in service of the inn
 - **Event stream** (JSONL) separate from summary. Add when the AI needs cross-actor causal analysis ("which enemy killed which character at what time").
 - **Aggregator** (`tools/sim/aggregate.py`). Standalone Python script for post-hoc analysis. Add with batch mode.
 - **Loss-attribution stats in summary.** Done in v1 (see "What's in v1" above).
-- **One-line events digest format.** The structured `events` array is great for tools but a bit chunky to eyeball — every entry has `actor_key`, `position` as dict, `kind`, etc. A `tools/sim/events.py <summary>` printer that emits one line per event (e.g. `t=9.17 death Puffin@(331,339) <- Orc Archer`) would be the fastest scan format for "what happened in this run." Same data, terser surface.
-- **Per-actor timing deltas in diff.** `diff.py` currently shows per-actor stat deltas (HP, damage, etc.) but not per-actor *event timing* deltas. "Puffin died 4s later in attempt 2" is a high-signal observation that requires reading both events arrays today. Cross-reference event timestamps by `actor_key` and surface key-event time deltas: spawn → first damage → low_hp(50) → low_hp(25) → death.
+- **One-line events digest format.** Done in v1 (`tools/sim/events.py`).
+- **Per-actor timing deltas in diff.** Done in v1 (`diff.py` now emits "event timings" section with per-actor spawn/low_hp/death deltas, thresholded at 0.1s).
