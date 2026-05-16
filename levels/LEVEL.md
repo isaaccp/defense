@@ -191,6 +191,14 @@ godot --path . -s tools/render_stage.gd -- res://levels/stages/forest_stage_righ
 
 Saves a 960×540 image showing tilemap, decorations, towers, and placement zones (as a subtle tint). Requires a real rendering driver — `--headless` uses a null renderer that produces an empty image. If no display is attached, prefix with `xvfb-run -a`.
 
+**[`tools/sim/sim.gd`](../tools/sim/sim.gd)** — JSON-config-driven headless level simulation. Designed for balance/design iteration; an AI assistant drafts behaviors, runs configs, reads structured summaries, and iterates. See [`tools/sim/SIM.md`](../tools/sim/SIM.md) for the full design, config schema, and behavior JSON schema.
+
+```
+godot --headless --path . -s tools/sim/sim.gd -- tools/sim/configs/example.json
+```
+
+Reads `<config>.json` (level + per-character behaviors + acquired skills), runs the level, writes `<config>.summary.json` alongside. Stateless per invocation; the AI tracks meta-progression across calls in conversation.
+
 **[`tools/playthrough.gd`](../tools/playthrough.gd)** — headlessly runs a level for N simulated seconds, streams [`LoggingComponent`](../components/logging_component.gd) output, and prints a summary (outcome, spawn count, surviving actors and positions):
 
 ```

@@ -1,0 +1,76 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "hp_final": 44.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 617,
+        "y": 248
+      }
+    },
+    {
+      "alive": true,
+      "hp_final": 32.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 613,
+        "y": 249
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": [
+          "sword_attack",
+          "move_to",
+          "enemy",
+          "closest_first",
+          "always"
+        ],
+        "behavior": "res://tools/sim/behaviors/example_move_and_attack.json",
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": [
+          "sword_attack",
+          "move_to",
+          "enemy",
+          "closest_first",
+          "always"
+        ],
+        "behavior": "res://tools/sim/behaviors/example_move_and_attack.json",
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn",
+    "max_seconds": 30.0,
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/configs/example.json",
+  "elapsed_seconds": 21.24,
+  "enemies": {
+    "alive_final": [],
+    "killed": 10,
+    "spawned": 10
+  },
+  "loss_type": null,
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "hp_final": 60.0,
+      "hp_max": 60.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

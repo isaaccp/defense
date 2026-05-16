@@ -1,0 +1,17 @@
+{
+  "level": "res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn",
+  "seed": 1,
+  "max_seconds": 30,
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/example_move_and_attack.json",
+      "acquired_skills": ["sword_attack", "move_to", "enemy", "closest_first", "always"]
+    },
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/example_move_and_attack.json",
+      "acquired_skills": ["sword_attack", "move_to", "enemy", "closest_first", "always"]
+    }
+  ]
+}
