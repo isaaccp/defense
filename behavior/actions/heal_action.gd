@@ -8,7 +8,7 @@ func _init():
 	spawn_scene = heal_effect_scene
 	duration = 0.5
 	prepare_time = 0.5
-	cooldown = 5.0
+	cooldown = 3.0
 	max_distance = 200
 	focus_cost = 1
 

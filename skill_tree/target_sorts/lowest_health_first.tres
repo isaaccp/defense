@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TargetSort" load_steps=3 format=3 uid="uid://b1lhf2sortr01"]
+
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="1_targs"]
+[ext_resource type="Script" path="res://behavior/target_sort/lowest_health_first_actor_target_sorter.gd" id="2_lhfsr"]
+
+[resource]
+script = ExtResource("1_targs")
+type = 1
+sorter_script = ExtResource("2_lhfsr")
+description_text = "Sorts by current HP, selecting the lowest-health target. Useful for finishing wounded enemies or healing the most-damaged ally."
+skill_name = &"Lowest Health First"
+skill_type = 4
+tree_type = 1
