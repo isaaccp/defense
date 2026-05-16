@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://djyvxv2chf3l1"]
+
+[ext_resource type="PackedScene" uid="uid://owy40g4k3lm0" path="res://levels/stages/forest_chokepoint.tscn" id="1_stage"]
+[ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="2_spawner"]
+[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="3_cfg"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="4_prov"]
+[ext_resource type="PackedScene" uid="uid://ck2tfnr0oy6s4" path="res://enemies/orc_grunt/orc_grunt.tscn" id="5_grunt"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="6_plac"]
+
+[sub_resource type="Resource" id="Resource_prov"]
+script = ExtResource("4_prov")
+spawn = ExtResource("5_grunt")
+
+[sub_resource type="Resource" id="Resource_plac"]
+script = ExtResource("6_plac")
+amount = 6
+interval = 2.0
+initial_delay = 1.0
+
+[node name="Level" instance=ExtResource("1_stage")]
+
+[node name="OrcGruntSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
+position = Vector2(900, 260)
+placement_node = NodePath("../../Enemies")
+
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/OrcGruntSpawner" index="5" instance=ExtResource("3_cfg")]
+spawn_provider_config = SubResource("Resource_prov")
+spawn_placer_config = SubResource("Resource_plac")
