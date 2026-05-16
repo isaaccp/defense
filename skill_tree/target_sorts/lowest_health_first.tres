@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TargetSort" load_steps=3 format=3 uid="uid://b1lhf2sortr01"]
+[gd_resource type="Resource" script_class="TargetSort" format=3 uid="uid://b1lhf2sortr01"]
 
 [ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="1_targs"]
 [ext_resource type="Script" path="res://behavior/target_sort/lowest_health_first_actor_target_sorter.gd" id="2_lhfsr"]

@@ -94,6 +94,18 @@ util/           StateMachine, TreePauser, Utils
 | 3 | Hurtbox |
 | 4 | Obstacles |
 
+## Designing Levels, Stages, Campaigns
+
+Three layered design docs in [`levels/`](levels/) — read the relevant one before authoring content:
+
+- **[CAMPAIGN_DESIGN.md](levels/CAMPAIGN_DESIGN.md)** — methodology for designing a SET of levels (the 10-fight backbone, the aspirational run shape, class-comp constraints, build-order strategy). Read first if you're planning more than one level at a time. Also contains the critical four-way distinction between *starting unlocked* / *current unlocked* (both global per-save) and *initial kit* / *current kit* (per-character per-run) skill sets — read that section before touching any code that says `skills`, `acquired_skills`, or "unlocked," and note the dual-duty quirk in `Constants.base_acquired_skills`.
+- **[STAGE_DESIGN.md](levels/STAGE_DESIGN.md)** — playbook for designing a new stage (terrain). 5 design questions + verification protocol + the `.tscn` script-UID gotcha that bites hand-authoring.
+- **[LEVEL_DESIGN.md](levels/LEVEL_DESIGN.md)** — playbook for designing a single level on top of an existing stage. 4 design questions + spawner `.tscn` pattern + the 3-mode sim verification (A feasibility, B robustness, C progression).
+
+Game-side findings from sim sessions live in [`tools/sim/SIM_FINDINGS.md`](tools/sim/SIM_FINDINGS.md); add new findings there as you discover them.
+
+The simulator itself: [`tools/sim/SIM.md`](tools/sim/SIM.md).
+
 ## Testing
 Uses [GUT](https://github.com/bitwes/Gut). Tests live in `tests/`. Run via the GUT panel in the Godot editor or `gut` CLI.
 
