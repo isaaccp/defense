@@ -31,6 +31,7 @@ enum LogType {
 	ACTION,
 	DAMAGE,
 	VITALS,
+	DEATH,
 }
 
 class LogEntry extends RefCounted:

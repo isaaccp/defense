@@ -55,11 +55,12 @@ shape = SubResource("CircleShape2D_7fvau")
 [node name="AttributesComponent" parent="." node_paths=PackedStringArray("effect_actuator_component") instance=ExtResource("4_r4r2v")]
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 
-[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape") instance=ExtResource("6_oxs12")]
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape", "logging_component") instance=ExtResource("6_oxs12")]
 vitals_component = NodePath("../VitalsComponent")
 animation_component = NodePath("../AnimationComponent")
 free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
+logging_component = NodePath("../LoggingComponent")
 
 [node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "vitals_component", "status_component", "effect_actuator_component", "character_body_component", "persistent_game_state_component", "logging_component") instance=ExtResource("7_01gwr")]
 actor = NodePath("..")

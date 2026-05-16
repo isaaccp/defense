@@ -9,6 +9,9 @@ const component: StringName = &"DeathHandlerComponent"
 @export var free_on_death: bool = true
 @export var collision_shape: CollisionShape2D
 
+@export_group("Optional")
+@export var logging_component: LoggingComponent
+
 signal died
 
 func _ready():
@@ -20,8 +23,18 @@ func _ready():
 func _on_vital_depleted(vital_type: VitalsComponent.VitalType):
 	if vital_type != VitalsComponent.VitalType.HEALTH:
 		return
+	_log_death()
 	died.emit()
 	_on_death.call_deferred()
+
+func _log_death():
+	if not logging_component:
+		return
+	var actor := get_parent()
+	logging_component.add_log_entry(
+		LoggingComponent.LogType.DEATH,
+		"died @(%d, %d)" % [actor.position.x, actor.position.y],
+	)
 	
 func _on_death():
 	if collision_shape:

@@ -75,10 +75,11 @@ effect_actuator_component = NodePath("../EffectActuatorComponent")
 character_body_component = NodePath("../CharacterBodyComponent")
 logging_component = NodePath("../LoggingComponent")
 
-[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape") instance=ExtResource("8_567i8")]
+[node name="DeathHandlerComponent" parent="." node_paths=PackedStringArray("vitals_component", "animation_component", "collision_shape", "logging_component") instance=ExtResource("8_567i8")]
 vitals_component = NodePath("../VitalsComponent")
 animation_component = NodePath("../AnimationComponent")
 collision_shape = NodePath("../CollisionShape2D")
+logging_component = NodePath("../LoggingComponent")
 
 [node name="SideComponent" parent="." instance=ExtResource("9_hnhby")]
 side = 2

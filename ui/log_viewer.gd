@@ -34,6 +34,8 @@ func _log_type_color(log_type: LoggingComponent.LogType) -> String:
 			return "firebrick"
 		LoggingComponent.LogType.ACTION:
 			return "lightgoldenrod"
+		LoggingComponent.LogType.DEATH:
+			return "crimson"
 	return "white"
 
 func _add_log_entry(log_entry: LoggingComponent.LogEntry):

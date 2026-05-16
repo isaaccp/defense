@@ -332,10 +332,13 @@ func _enable_logging(actor: Node) -> void:
 	var log_comp: LoggingComponent = Component.get_or_null(actor, LoggingComponent.component)
 	if not log_comp:
 		return
-	if LoggingComponent.LogType.BEHAVIOR not in log_comp.print_logtypes:
-		log_comp.print_logtypes.append(LoggingComponent.LogType.BEHAVIOR)
-	if LoggingComponent.LogType.HEALTH not in log_comp.print_logtypes:
-		log_comp.print_logtypes.append(LoggingComponent.LogType.HEALTH)
+	for t in [
+		LoggingComponent.LogType.BEHAVIOR,
+		LoggingComponent.LogType.HEALTH,
+		LoggingComponent.LogType.DEATH,
+	]:
+		if t not in log_comp.print_logtypes:
+			log_comp.print_logtypes.append(t)
 
 # --- Outcome tracking ---
 
