@@ -28,9 +28,11 @@ func modify_attributes(_base_attributes: Attributes) -> void:
 
 ## Modifies hit_effect in-place. Caller is responsible for ensuring they make a copy beforehand.
 ## Only called if HIT_EFFECT is set in effect_types.
+## `target` is the actor being hit (Node) — relics that need target state (e.g. current HP)
+## read from its components. May be null if caller doesn't have target context.
 ## logger should be used with a single-line of information describing the effect.
 ## If the method modifies the hit_effect, it *must* call the logger at least once.
-func modify_hit_effect(_hit_effect: HitEffect, logger: Callable = Callable()) -> void:
+func modify_hit_effect(_hit_effect: HitEffect, _target: Node, logger: Callable = Callable()) -> void:
 	assert(false, "Should be implemented in subclass if setting HIT_EFFECT")
 
 ## Returns a modified action cooldown. The action def is passed because some effects

@@ -41,7 +41,7 @@ func test_effect_actuator():
 	hit_effect.damage_type = slashing_damage_type
 	hit_effect.flat_armor_pen = 1
 	var effect_log: Array[String] = []
-	var effective_hit_effect = effect_actuator.modified_hit_effect(hit_effect, effect_log)
+	var effective_hit_effect = effect_actuator.modified_hit_effect(hit_effect, enemy, effect_log)
 	assert_eq(effective_hit_effect.flat_armor_pen, 2)
 	assert_eq(effect_log.size(), 1)
 

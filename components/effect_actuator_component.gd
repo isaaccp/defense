@@ -73,12 +73,13 @@ func modified_attributes(base_attributes: Attributes) -> Attributes:
 		effect_script.modify_attributes(attributes)
 	return attributes
 
-# logger takes a String as parameter.
-func modified_hit_effect(base_hit_effect: HitEffect, effect_log: Array[String]) -> HitEffect:
+# logger takes a String as parameter. target is the actor being hit (may be null
+# for callers that don't have target context — relics requiring it should guard).
+func modified_hit_effect(base_hit_effect: HitEffect, target: Node, effect_log: Array[String]) -> HitEffect:
 	var hit_effect = base_hit_effect.duplicate(true)
 	var logger = func(text: String): effect_log.append(text)
 	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.HIT_EFFECT, []):
-		effect_script.modify_hit_effect(hit_effect, logger)
+		effect_script.modify_hit_effect(hit_effect, target, logger)
 	return hit_effect
 
 # Log is an empty array in which to log messages from each effect that modifies the cooldown.

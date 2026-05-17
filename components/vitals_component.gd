@@ -116,6 +116,9 @@ func _process(delta: float) -> void:
 		var focus_regen = attributes_component.focus_regen
 		var focus_recovery = focus_regen * delta
 		apply_vital_change(VitalsComponent.VitalType.FOCUS, focus_recovery, false)
+		var health_regen = attributes_component.health_regen
+		if health_regen > 0:
+			apply_vital_change(VitalsComponent.VitalType.HEALTH, health_regen * delta, false)
 		
 func _log(message: String, tooltip: String = ""):
 	if not logging_component:

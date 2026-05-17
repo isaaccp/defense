@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://b4arcanebattry04"]
+
+[ext_resource type="Script" path="res://effects/relics/arcane_battery.gd" id="1_abatt"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "+30 max focus. (Wizard starting bonus — extra headroom for burst casts.)"
+name = &"Arcane Battery"
+effect_types = Array[int]([1])
+effect_script = ExtResource("1_abatt")

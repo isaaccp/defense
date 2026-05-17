@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://b1regenringbns01"]
+
+[ext_resource type="Script" path="res://effects/relics/regeneration_ring.gd" id="1_rring"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "Regenerate 1 HP/s in combat. (Warrior starting bonus — endurance to outlast attrition.)"
+name = &"Regeneration Ring"
+effect_types = Array[int]([1])
+effect_script = ExtResource("1_rring")

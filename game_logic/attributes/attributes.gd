@@ -14,6 +14,8 @@ class_name Attributes
 @export var focus: int
 ## Focus regen per second.
 @export var focus_regen: float
+## In-combat HP regen per second. Default 0; raised by relics like Regeneration Ring.
+@export var health_regen: float = 0.0
 ## Multiplier applied to damage.
 @export var damage_multiplier: float = 1.0
 ## Flat amount removed from physical attacks.

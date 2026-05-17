@@ -17,6 +17,7 @@ Defined on `Attributes` ([game_logic/attributes/attributes.gd](game_logic/attrib
 | `recovery` | Post-level heal as fraction of max HP | **Flat default on `Attributes`** (currently 0.25). Don't override per-char without explicit design reason — multiplies with `health` and produces silent imbalance. |
 | `focus` | Max focus | Caps the burst capacity of a class. |
 | `focus_regen` | Focus per second | Baseline floor 0.5 for non-Knight. Knight is fed by Battle Fury instead. |
+| `health_regen` | In-combat HP per second | **Default 0.** Raised by relics like Regeneration Ring (+1.0/s). Mirrors `focus_regen` pattern in VitalsComponent. |
 | `damage_multiplier` | Flat multiplier on all damage dealt | **Default 1.0 — do not override per-character.** Reserved for runtime effects (e.g. Strength Surge status, future damage-buff relics). Static per-class damage should be done via action damage values or a HIT_EFFECT relic, both visible to the player. |
 | `armor` | Flat damage reduction (physical) | Knight 1. |
 | `resistance` | Per-attack/damage-type % | Mostly relics raise this. |
@@ -26,6 +27,14 @@ Defined on `Attributes` ([game_logic/attributes/attributes.gd](game_logic/attrib
 - Cleric: **Channeling** — +50% of HP healed → focus ([effects/relics/channeling.gd](effects/relics/channeling.gd))
 - Rogue: **Killer's Edge** — +2 focus per kill ([effects/relics/killers_edge.gd](effects/relics/killers_edge.gd))
 - Wizard: **Arcane Focus** — +1.0/s focus_regen ([effects/relics/arcane_focus.gd](effects/relics/arcane_focus.gd))
+
+**Starting bonus relics** (one per class, permanent, secondary identity — durability/capacity, separate from focus management):
+- Knight: **Regeneration Ring** — +1 HP/s in combat ([effects/relics/regeneration_ring.gd](effects/relics/regeneration_ring.gd))
+- Cleric: **Hallowed Vestments** — -50% damage from ranged attacks ([effects/relics/hallowed_vestments.gd](effects/relics/hallowed_vestments.gd))
+- Rogue: **Killer's Insight** — +50% damage vs enemies <30% HP ([effects/relics/killers_insight.gd](effects/relics/killers_insight.gd))
+- Wizard: **Arcane Battery** — +30 max focus ([effects/relics/arcane_battery.gd](effects/relics/arcane_battery.gd))
+
+Future extension (per [NEXT_STEPS.md](NEXT_STEPS.md)): multiple starting bonus relics per class, with player choice at run start.
 
 ---
 
