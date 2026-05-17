@@ -31,8 +31,10 @@ func stop():
 func process_hit(hit_effect: HitEffect) -> HitResult:
 	hit.emit(hit_effect)
 	if not running:
-		print("Ignoring hit received while not running")
-		return null
+		# Hit arrived after the component was stopped (e.g. level ended in the
+		# same physics frame as an in-flight enemy melee). Return a no-op
+		# result rather than null so callers don't have to special-case shutdown.
+		return HitResult.new()
 	var hit_result = HitResult.new()
 	var adjusted_damage = hit_effect.adjusted_damage()
 	# Check if it's a heal.
