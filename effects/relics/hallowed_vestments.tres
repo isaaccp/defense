@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://b2hallowedvest02"]
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://c0n5a2yio3v0d"]
 
 [ext_resource type="Script" path="res://effects/relics/hallowed_vestments.gd" id="1_hvest"]
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]

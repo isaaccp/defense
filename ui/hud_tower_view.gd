@@ -19,8 +19,11 @@ func initialize(tower_: Node2D) -> void:
 	%Title.text = tower.name.capitalize()
 
 func _set_health(health: int, max_health: int):
-	%HealthBar.value = health
+	# max_value before value: ProgressBar clamps value to the current max on
+	# assignment, so setting value first while max is still the scene default
+	# silently truncates it.
 	%HealthBar.max_value = max_health
+	%HealthBar.value = health
 	%HealthLabel.text = "%d / %d" % [health, max_health]
 
 func _on_vital_updated(vital_update: VitalsComponent.VitalUpdate):

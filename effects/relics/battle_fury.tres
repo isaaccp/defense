@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://bbfury0class01"]
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://m6xoh2b6yw65"]
 
 [ext_resource type="Script" path="res://effects/relics/battle_fury.gd" id="1_bfury"]
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]

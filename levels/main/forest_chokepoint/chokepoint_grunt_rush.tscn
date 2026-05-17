@@ -13,7 +13,7 @@ spawn = ExtResource("5_grunt")
 
 [sub_resource type="Resource" id="Resource_plac"]
 script = ExtResource("6_plac")
-amount = 6
+amount = 8
 interval = 2.0
 initial_delay = 1.0
 

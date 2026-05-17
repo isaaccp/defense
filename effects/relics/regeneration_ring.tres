@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3 uid="uid://b1regenringbns01"]
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://ch4u02ax7fn4w"]
 
 [ext_resource type="Script" path="res://effects/relics/regeneration_ring.gd" id="1_rring"]
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
