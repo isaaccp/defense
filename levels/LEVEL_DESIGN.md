@@ -4,6 +4,16 @@ A level = a stage (terrain) + spawner configuration (which enemies, how many, wh
 
 This doc captures **how to design a balanced level**. Follow it before opening the editor or running `tools/new_level.gd`. Each new level should produce a `LEVEL_NOTES_<name>.md` (or comment block) answering the questions below.
 
+## Pre-design checklist (read before answering the 4 questions)
+
+These catch the most common class of mismatch — designing a fight whose tactical intent the chosen stage can't physically deliver. All three are cheap; do them in order.
+
+1. **Read the campaign plan.** [CAMPAIGN_DESIGN.md](CAMPAIGN_DESIGN.md) may already route specific tactical demands to specific stages (e.g. "true two-flank pressure → stage 2"). If your demand is claimed by a future stage, pick a different demand or build that stage first.
+2. **Read the chosen stage's `STAGE_NOTES_*.md` → "Supports / Does NOT support" section.** If your demand isn't listed under "Supports", treat it as "Does NOT support" until you've added it (with the geometry math) to the stage notes.
+3. **Verify with numbers, not renders.** If you're unsure whether the stage hosts your intent, do the arithmetic from the numeric geometry in STAGE_NOTES (corridor width, spawn anchor spread, starting position spread, tower distance). Renders are useful for *narrow* checks — decoration density, NavMesh sanity — but pixel-counting from a PNG is noisier than reading numbers from the stage file. Do the math.
+
+If any of these three flags a problem, **stop** and resolve before continuing to the 4 questions. The cost of catching a stage/demand mismatch here is one re-pitch; the cost of catching it after building + sim'ing + playtesting is hours.
+
 ## The 4 questions (answer before building)
 
 1. **What is the level's intent in one sentence?** Examples: "force the team to split focus between flanks", "punish ignoring ranged threats", "test cooldown management under sustained pressure", "showcase AoE skills against a tight enemy cluster." If the intent overlaps an existing level, sharpen it or skip — don't ship a level whose problem is already solved.
