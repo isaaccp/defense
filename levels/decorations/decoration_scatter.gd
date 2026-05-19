@@ -14,7 +14,12 @@ class_name DecorationScatter
 # The "Regenerate" inspector button rolls a fresh random seed and writes it
 # to rng_seed — click until you like the layout, then save the scene.
 
+# Single decoration to scatter. Kept for back-compat with stages that set one
+# decoration. If `decorations` is non-empty, that array is used instead.
 @export var decoration: PackedScene: set = _set_decoration
+# Multiple decoration variants to pick from uniformly at random. If non-empty,
+# overrides `decoration`. Use this for visual variety (e.g. 3 tree sizes).
+@export var decorations: Array[PackedScene] = []: set = _set_decorations
 @export var count: int = 10: set = _set_count
 # Shape to scatter within. Use RectScatterArea, CircleScatterArea, or
 # AnnulusScatterArea (or write your own).
@@ -26,11 +31,23 @@ class_name DecorationScatter
 @export_tool_button("Regenerate (new seed)") var _regen_button = _regenerate_with_new_seed
 
 func _ready() -> void:
+	# Enable y-sorting so scattered decorations sort correctly against each
+	# other AND against units/trees in sibling subtrees (since YSorted and
+	# YSorted/Decoration are y_sort_enabled, this lets that propagate through).
+	y_sort_enabled = true
 	scatter()
+
+func _decoration_pool() -> Array:
+	if decorations.size() > 0:
+		return decorations
+	if decoration:
+		return [decoration]
+	return []
 
 func scatter() -> void:
 	_clear()
-	if not decoration or not area:
+	var pool := _decoration_pool()
+	if pool.is_empty() or not area:
 		return
 	var rng := RandomNumberGenerator.new()
 	if rng_seed != 0:
@@ -52,7 +69,8 @@ func scatter() -> void:
 			if too_close:
 				continue
 		placed.append(p)
-		var instance: Node2D = decoration.instantiate()
+		var picked: PackedScene = pool[rng.randi() % pool.size()]
+		var instance: Node2D = picked.instantiate()
 		instance.position = p
 		add_child(instance)
 
@@ -69,14 +87,18 @@ func _regenerate_with_new_seed() -> void:
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings := PackedStringArray()
-	if not decoration:
-		warnings.append("decoration is not set — nothing will be scattered.")
+	if _decoration_pool().is_empty():
+		warnings.append("decoration / decorations is not set — nothing will be scattered.")
 	if not area:
 		warnings.append("area is not set — assign a RectScatterArea, CircleScatterArea, or AnnulusScatterArea.")
 	return warnings
 
 func _set_decoration(v: PackedScene) -> void:
 	decoration = v
+	_on_property_changed()
+
+func _set_decorations(v: Array[PackedScene]) -> void:
+	decorations = v
 	_on_property_changed()
 
 func _set_count(v: int) -> void:
