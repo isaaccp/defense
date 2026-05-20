@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="1_3fywk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_infmt"]
+atlas = ExtResource("1_3fywk")
+region = Rect2(112, 64, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r7t8y"]
+radius = 6.4
+
+[node name="CrateSmashed" type="StaticBody2D" unique_id=126583584]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1947046029]
+texture = SubResource("AtlasTexture_infmt")
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1457274654]
+shape = SubResource("CircleShape2D_r7t8y")

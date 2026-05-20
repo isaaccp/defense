@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="1_p6twu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t58ew"]
+atlas = ExtResource("1_p6twu")
+region = Rect2(32, 48, 16, 16)
+
+[node name="TinyPlantYellow" type="Sprite2D" unique_id=1745655293]
+texture = SubResource("AtlasTexture_t58ew")
+offset = Vector2(0, -8)

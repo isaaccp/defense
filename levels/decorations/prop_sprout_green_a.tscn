@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="1_8qsly"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgqws"]
+atlas = ExtResource("1_8qsly")
+region = Rect2(16, 0, 16, 16)
+
+[node name="SproutGreenA" type="Sprite2D" unique_id=1215743685]
+texture = SubResource("AtlasTexture_bgqws")
+offset = Vector2(0, -8)

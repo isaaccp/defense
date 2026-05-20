@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="1_6v3q4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2eyd"]
+atlas = ExtResource("1_6v3q4")
+region = Rect2(16, 16, 16, 16)
+
+[node name="MushroomRed" type="Sprite2D" unique_id=38335080]
+texture = SubResource("AtlasTexture_a2eyd")
+offset = Vector2(0, -8)

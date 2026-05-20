@@ -1,0 +1,42 @@
+{
+  "atlas": "res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png",
+  "_comment": "Phase A: proposed tiling of Props.png. All sizes are multiples of 16.",
+  "props": [
+    { "name": "sprout_brown",        "rect": [0, 0, 16, 16],    "obstacle": false },
+    { "name": "sprout_green_a",      "rect": [16, 0, 16, 16],   "obstacle": false },
+    { "name": "sprout_green_b",      "rect": [32, 0, 16, 16],   "obstacle": false },
+    { "name": "rock_1",              "rect": [48, 0, 16, 16],   "obstacle": false },
+    { "name": "rock_2",              "rect": [64, 0, 16, 16],   "obstacle": false },
+
+    { "name": "tiny_plant_green",    "rect": [0, 16, 16, 16],   "obstacle": false },
+    { "name": "mushroom_red",        "rect": [16, 16, 16, 16],  "obstacle": false },
+    { "name": "mushroom_blue",       "rect": [32, 16, 16, 16],  "obstacle": false },
+    { "name": "rock_3",              "rect": [48, 16, 16, 16],  "obstacle": false },
+    { "name": "rock_4",              "rect": [64, 16, 16, 16],  "obstacle": false },
+
+    { "name": "small_plant_green",   "rect": [32, 32, 16, 16],  "obstacle": false },
+    { "name": "tiny_rocks_cluster",  "rect": [48, 32, 16, 16],  "obstacle": false },
+    { "name": "tiny_rock",           "rect": [64, 32, 16, 16],  "obstacle": false },
+
+    { "name": "plant_green_2x2",     "rect": [0, 32, 32, 32],   "obstacle": true  },
+    { "name": "plant_yellow_2x2",    "rect": [0, 64, 32, 32],   "obstacle": true  },
+    { "name": "tiny_plant_yellow",   "rect": [32, 48, 16, 16],  "obstacle": false },
+    { "name": "small_plant_yellow",  "rect": [32, 64, 16, 16],  "obstacle": false },
+
+    { "name": "stone_medium",        "rect": [80, 0, 32, 32],   "obstacle": true  },
+    { "name": "stone_large",         "rect": [80, 32, 32, 48],  "obstacle": true  },
+
+    { "name": "crate_small",         "rect": [112, 0, 16, 32],  "obstacle": true  },
+    { "name": "bucket",              "rect": [128, 0, 16, 32],  "obstacle": true  },
+    { "name": "crate_small_broken",  "rect": [112, 32, 16, 32], "obstacle": true  },
+    { "name": "bucket_broken",       "rect": [128, 32, 16, 32], "obstacle": true  },
+    { "name": "crate_smashed",       "rect": [112, 64, 16, 16], "obstacle": true  },
+    { "name": "bucket_smashed",      "rect": [128, 64, 16, 16], "obstacle": true  },
+
+    { "name": "flowers_white",       "rect": [144, 0, 48, 48],  "obstacle": false, "flat": true },
+    { "name": "flowers_orange",      "rect": [144, 48, 48, 48], "obstacle": false, "flat": true },
+
+    { "name": "bush_green",          "rect": [0, 96, 48, 48],   "obstacle": true  },
+    { "name": "bush_yellow",         "rect": [0, 144, 48, 48],  "obstacle": true  }
+  ]
+}

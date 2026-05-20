@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="1_xr31j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7wvq"]
+atlas = ExtResource("1_xr31j")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_453it"]
+radius = 19.2
+
+[node name="BushYellow" type="StaticBody2D" unique_id=235949623]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=64937586]
+texture = SubResource("AtlasTexture_i7wvq")
+offset = Vector2(0, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=307743504]
+shape = SubResource("CircleShape2D_453it")
