@@ -7,6 +7,8 @@ const component: StringName = &"BehaviorComponent"
 
 signal behavior_updated(action_name: StringName, target: Target)
 signal action_finished(action_name: StringName)
+## Emitted when the committed preferred target changes (null when cleared).
+signal preferred_target_changed(preferred: Actor)
 
 @export_group("Required")
 @export var actor: Actor
@@ -51,6 +53,16 @@ var able_to_act = true
 
 var behavior: Behavior
 
+# A committed target. Rules using the "Preferred Target" selector act on this;
+# rules that would otherwise re-pick greedily can be made to see a threat
+# through. Set / cleared via the Set/Clear Preferred Target actions, and
+# auto-cleared when the target dies or is freed.
+var preferred_target: Actor
+
+const PreferredTargetMarker = preload("res://ui/preferred_target_marker.tscn")
+# World marker shown on the current preferred target (a child of that enemy).
+var _preferred_target_marker: Node2D
+
 func _ready():
 	if Engine.is_editor_hint():
 		return
@@ -60,6 +72,7 @@ func _ready():
 		if behavior_component_config:
 			stored_behavior = behavior_component_config.stored_behavior
 	effect_actuator_component.able_to_act_changed.connect(_on_able_to_act_changed)
+	preferred_target_changed.connect(_on_preferred_target_changed)
 
 func run():
 	behavior = Behavior.restore(stored_behavior)
@@ -68,6 +81,7 @@ func run():
 
 func stop():
 	_interrupt()
+	clear_preferred_target("stopped")
 	running = false
 
 func _on_able_to_act_changed(can_act: bool):
@@ -90,6 +104,10 @@ func _physics_process(delta: float):
 
 	if get_parent().destroyed:
 		return
+
+	# Drop a preferred target that has died or been freed.
+	if preferred_target != null and (not is_instance_valid(preferred_target) or preferred_target.destroyed):
+		clear_preferred_target("target gone")
 
 	elapsed_time += delta
 
@@ -179,6 +197,31 @@ func _log(message: String, tooltip: String = ""):
 	if not logging_component:
 		return
 	logging_component.add_log_entry(LoggingComponent.LogType.BEHAVIOR, message, tooltip)
+
+func set_preferred_target(new_target: Actor) -> void:
+	# Idempotent: the Set Preferred Target rule may re-fire every frame while
+	# the slot already holds this actor — don't re-log or churn the marker.
+	if new_target == preferred_target:
+		return
+	preferred_target = new_target
+	if new_target:
+		_log("preferred target set: %s" % new_target.actor_name)
+	preferred_target_changed.emit(preferred_target)
+
+func clear_preferred_target(reason: String) -> void:
+	if preferred_target == null:
+		return
+	_log("preferred target cleared (%s)" % reason)
+	preferred_target = null
+	preferred_target_changed.emit(null)
+
+func _on_preferred_target_changed(preferred: Actor) -> void:
+	if is_instance_valid(_preferred_target_marker):
+		_preferred_target_marker.queue_free()
+	_preferred_target_marker = null
+	if preferred and is_instance_valid(preferred) and not preferred.destroyed:
+		_preferred_target_marker = PreferredTargetMarker.instantiate()
+		preferred.add_child(_preferred_target_marker)
 
 static func get_or_null(node) -> BehaviorComponent:
 	return Component.get_or_null(node, component) as BehaviorComponent

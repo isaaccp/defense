@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="TargetSelectionDef" format=3 uid="uid://bprgtgt0sel01"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_params"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_tsdef"]
+[ext_resource type="Script" path="res://behavior/target_selection/preferred_target_selector.gd" id="3_ptsel"]
+
+[sub_resource type="Resource" id="Resource_params"]
+script = ExtResource("1_params")
+
+[resource]
+script = ExtResource("2_tsdef")
+type = 1
+description_text = "Targets the committed preferred target. Rules using it are skipped while nothing is committed."
+selector_script = ExtResource("3_ptsel")
+sortable = false
+params = SubResource("Resource_params")
+skill_name = &"Preferred Target"
+skill_type = 2
+tree_type = 1

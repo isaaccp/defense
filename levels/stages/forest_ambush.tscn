@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://bfambsh0stg01"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_base"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="2_column"]
+[ext_resource type="Script" uid="uid://c1itsluobi4an" path="res://levels/decorations/decoration_scatter.gd" id="3_scatter"]
+[ext_resource type="Script" path="res://levels/zones/zone.gd" id="4_zone"]
+[ext_resource type="Script" uid="uid://qe1dsul2aje7" path="res://levels/decorations/scatter_areas/rect_scatter_area.gd" id="5_rectarea"]
+[ext_resource type="Script" path="res://levels/ground/ground_painter.gd" id="6_groundp"]
+[ext_resource type="Script" path="res://levels/ground/terrain_region.gd" id="7_terrreg"]
+[ext_resource type="PackedScene" uid="uid://bpb88hbwflw3h" path="res://levels/decorations/big_tree_green.tscn" id="10_btg"]
+[ext_resource type="PackedScene" uid="uid://beiqqepnyv85l" path="res://levels/decorations/tree_green.tscn" id="11_tg"]
+[ext_resource type="PackedScene" uid="uid://bmvitvwf5poa1" path="res://levels/decorations/small_tree_green.tscn" id="12_stg"]
+[ext_resource type="PackedScene" uid="uid://b8c1ytreeyel02" path="res://levels/decorations/big_tree_yellow.tscn" id="13_bty"]
+[ext_resource type="PackedScene" uid="uid://b8c1ytreeyel01" path="res://levels/decorations/tree_yellow.tscn" id="14_ty"]
+[ext_resource type="PackedScene" uid="uid://b8c1ytreesml01" path="res://levels/decorations/small_tree_yellow.tscn" id="15_sty"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_mushroom_red.tscn" id="20_mushR"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_mushroom_blue.tscn" id="21_mushB"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_rock_3.tscn" id="22_rock3"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_stone_medium.tscn" id="23_stoneM"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_bush_yellow.tscn" id="24_bushY"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_bush_green.tscn" id="25_bushG"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_flowers_white.tscn" id="26_floww"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_flowers_orange.tscn" id="27_flowo"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_sprout_green_a.tscn" id="28_sprout"]
+[ext_resource type="PackedScene" path="res://levels/decorations/prop_tiny_plant_green.tscn" id="29_tinyp"]
+
+[sub_resource type="Resource" id="Resource_pathH"]
+script = ExtResource("7_terrreg")
+terrain = 1
+rect = Rect2i(0, 13, 60, 7)
+
+[sub_resource type="Resource" id="Resource_pathV"]
+script = ExtResource("7_terrreg")
+terrain = 1
+rect = Rect2i(13, 0, 4, 19)
+
+[sub_resource type="Resource" id="Resource_tfl"]
+script = ExtResource("5_rectarea")
+rect = Rect2(0, 0, 180, 195)
+
+[sub_resource type="Resource" id="Resource_pocket"]
+script = ExtResource("5_rectarea")
+rect = Rect2(180, 0, 140, 195)
+
+[sub_resource type="Resource" id="Resource_tfr"]
+script = ExtResource("5_rectarea")
+rect = Rect2(320, 0, 640, 195)
+
+[sub_resource type="Resource" id="Resource_corridor"]
+script = ExtResource("5_rectarea")
+rect = Rect2(0, 195, 960, 130)
+
+[sub_resource type="Resource" id="Resource_bf"]
+script = ExtResource("5_rectarea")
+rect = Rect2(0, 325, 960, 215)
+
+[sub_resource type="Resource" id="Resource_bfInset"]
+script = ExtResource("5_rectarea")
+rect = Rect2(0, 440, 960, 100)
+
+[node name="Level" instance=ExtResource("1_base")]
+
+[node name="GroundPainter" type="Node2D" parent="." node_paths=PackedStringArray("tile_map")]
+script = ExtResource("6_groundp")
+tile_map = NodePath("../TileMap")
+regions = Array[TerrainRegion]([SubResource("Resource_pathH"), SubResource("Resource_pathV")])
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(310, 215)
+
+[node name="Second" parent="StartingPositions" index="1"]
+position = Vector2(310, 300)
+
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("2_column")]
+position = Vector2(235, 259)
+
+[node name="TopForestLeftZone" type="Node2D" parent="YSorted/Decoration"]
+script = ExtResource("4_zone")
+kind = 1
+area = SubResource("Resource_tfl")
+
+[node name="Trees" type="Node2D" parent="YSorted/Decoration/TopForestLeftZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("10_btg"), ExtResource("11_tg"), ExtResource("12_stg"), ExtResource("13_bty"), ExtResource("14_ty"), ExtResource("15_sty")])
+count = 6
+rng_seed = 11
+companions = Array[PackedScene]([ExtResource("20_mushR"), ExtResource("21_mushB"), ExtResource("28_sprout"), ExtResource("29_tinyp")])
+companion_chance = 0.5
+companion_count = Vector2i(2, 4)
+companion_radius = 34.0
+
+[node name="PocketZone" type="Node2D" parent="YSorted/Decoration"]
+script = ExtResource("4_zone")
+kind = 0
+area = SubResource("Resource_pocket")
+
+[node name="Scatter" type="Node2D" parent="YSorted/Decoration/PocketZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("26_floww"), ExtResource("27_flowo"), ExtResource("20_mushR"), ExtResource("21_mushB"), ExtResource("28_sprout"), ExtResource("29_tinyp"), ExtResource("22_rock3")])
+count = 5
+rng_seed = 22
+
+[node name="TopForestRightZone" type="Node2D" parent="YSorted/Decoration"]
+script = ExtResource("4_zone")
+kind = 1
+area = SubResource("Resource_tfr")
+
+[node name="Trees" type="Node2D" parent="YSorted/Decoration/TopForestRightZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("10_btg"), ExtResource("11_tg"), ExtResource("12_stg"), ExtResource("13_bty"), ExtResource("14_ty"), ExtResource("15_sty")])
+count = 16
+rng_seed = 33
+companions = Array[PackedScene]([ExtResource("20_mushR"), ExtResource("21_mushB"), ExtResource("28_sprout"), ExtResource("29_tinyp")])
+companion_chance = 0.5
+companion_count = Vector2i(2, 4)
+companion_radius = 34.0
+
+[node name="Obstacles" type="Node2D" parent="YSorted/Decoration/TopForestRightZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("23_stoneM"), ExtResource("24_bushY"), ExtResource("25_bushG")])
+count = 5
+rng_seed = 34
+
+[node name="Flowers" type="Node2D" parent="YSorted/Decoration/TopForestRightZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("26_floww"), ExtResource("27_flowo"), ExtResource("22_rock3")])
+count = 8
+rng_seed = 35
+
+[node name="CorridorZone" type="Node2D" parent="YSorted/Decoration"]
+script = ExtResource("4_zone")
+kind = 0
+area = SubResource("Resource_corridor")
+deliberately_bare = true
+
+[node name="BottomForestZone" type="Node2D" parent="YSorted/Decoration"]
+script = ExtResource("4_zone")
+kind = 1
+area = SubResource("Resource_bf")
+
+[node name="Trees" type="Node2D" parent="YSorted/Decoration/BottomForestZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("10_btg"), ExtResource("11_tg"), ExtResource("12_stg"), ExtResource("13_bty"), ExtResource("14_ty"), ExtResource("15_sty")])
+count = 22
+area = SubResource("Resource_bfInset")
+rng_seed = 41
+companions = Array[PackedScene]([ExtResource("20_mushR"), ExtResource("21_mushB"), ExtResource("28_sprout"), ExtResource("29_tinyp")])
+companion_chance = 0.5
+companion_count = Vector2i(2, 4)
+companion_radius = 34.0
+
+[node name="Obstacles" type="Node2D" parent="YSorted/Decoration/BottomForestZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("23_stoneM"), ExtResource("24_bushY"), ExtResource("25_bushG")])
+count = 7
+area = SubResource("Resource_bfInset")
+rng_seed = 42
+
+[node name="Flowers" type="Node2D" parent="YSorted/Decoration/BottomForestZone"]
+script = ExtResource("3_scatter")
+decorations = Array[PackedScene]([ExtResource("26_floww"), ExtResource("27_flowo"), ExtResource("22_rock3")])
+count = 10
+rng_seed = 43

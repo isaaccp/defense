@@ -112,6 +112,13 @@ text = "Idle"
 layout_mode = 2
 text = "Log"
 
+[node name="PreferredTargetLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.25, 1)
+theme_override_font_sizes/font_size = 12
+text = "Target: -"
+
 [node name="ConfigContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2

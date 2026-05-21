@@ -11,6 +11,7 @@ signal upgrade_window_requested(character: Character)
 
 func _ready():
 	%ConfigContainer.hide()
+	%PreferredTargetLabel.hide()
 	%HudStatusDisplay.clear()
 
 func initialize(character_: Character) -> void:
@@ -27,6 +28,7 @@ func initialize(character_: Character) -> void:
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = character.get_component_or_die(BehaviorComponent)
 	behavior.behavior_updated.connect(_on_behavior_updated)
+	behavior.preferred_target_changed.connect(_on_preferred_target_changed)
 	var state = Component.get_persistent_game_state_component_or_die(character).state
 	%Title.text = state.name
 	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
@@ -91,6 +93,13 @@ func _on_behavior_updated(action_name: StringName, _target: Target):
 	# TODO: Do something with target, e.g. hovering could highlight the
 	# target in the level. Or at least add target description.
 	%ActionLabel.text = str(action_name) if action_name != ActionDef.NoAction else "Idle"
+
+func _on_preferred_target_changed(preferred: Actor):
+	if preferred:
+		%PreferredTargetLabel.text = "Target: %s" % preferred.actor_name
+		%PreferredTargetLabel.show()
+	else:
+		%PreferredTargetLabel.hide()
 
 func _on_config_button_pressed():
 	config_button_pressed.emit()

@@ -85,6 +85,19 @@ Decoration density guidance: open fields sparse (leave breathing room), wall
 zones denser. Uniform random placement of loud props reads as noise — prefer
 clustering (companions) and sparse placement.
 
+### Tall props below a path/objective — inset the scatter
+
+y-sort draws a prop in front of anything with a smaller Y. A **tall prop in a
+zone *below* a path or the tower** therefore y-sorts *in front* of it — and a
+tree's canopy extends ~110px *upward* from its base, so that canopy is drawn
+over the path/tower and hides them.
+
+Fix: give that zone's tall-prop scatter its own `area`, **inset from the top
+edge** by roughly the prop height — ~110px for trees, ~50px for bushes. The
+canopies still fill the visual gap (they reach up); only the bases move down.
+Flat props (flowers, anchored at their top edge — they draw *downward*) don't
+need this. A zone *above* a path is fine — its props y-sort behind it.
+
 ## Verification
 
 | Tool | Checks |

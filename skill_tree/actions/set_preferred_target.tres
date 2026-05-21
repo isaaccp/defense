@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://bsetprftgt0a01"]
+
+[ext_resource type="Script" path="res://behavior/actions/set_preferred_target_action.gd" id="1_setpt"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_adef"]
+
+[sub_resource type="Resource" id="Resource_params"]
+script = ExtResource("2_params")
+
+[resource]
+script = ExtResource("3_adef")
+action_script = ExtResource("1_setpt")
+supported_target_types = Array[int]([1])
+params = SubResource("Resource_params")
+skill_name = &"Set Preferred Target"
+skill_type = 1
+tree_type = 1
