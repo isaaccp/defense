@@ -11,5 +11,11 @@ func random_point(rng: RandomNumberGenerator) -> Vector2:
 		rng.randf_range(rect.position.y, rect.end.y),
 	)
 
+func bounds() -> Rect2:
+	return rect
+
+func contains(point: Vector2) -> bool:
+	return rect.has_point(point)
+
 func draw_boundary(canvas: CanvasItem) -> void:
 	canvas.draw_rect(rect, BOUNDARY_COLOR, false, BOUNDARY_WIDTH)

@@ -46,16 +46,21 @@ class TestRectArea extends TestBase:
 			second.append(child.position)
 		assert_eq(first, second)
 
-	func test_min_distance_respected():
-		scatter.count = 8
-		scatter.min_distance = 50.0
+	func test_spacing_keeps_points_apart():
+		# Low count + moderate spacing + roomy area: the Poisson-disk radius
+		# won't need to relax, so every pair stays at least
+		# `spacing * natural-spacing` apart.
+		scatter.area = _rect_area(0, 0, 400, 400)
+		scatter.count = 6
+		scatter.spacing = 0.6
 		scatter.scatter()
 		var positions: Array[Vector2] = []
 		for child in scatter.get_children():
 			positions.append(child.position)
+		var radius: float = 0.6 * sqrt((400.0 * 400.0) / 6.0)
 		for i in positions.size():
 			for j in range(i + 1, positions.size()):
-				assert_gte(positions[i].distance_to(positions[j]), 50.0)
+				assert_gte(positions[i].distance_to(positions[j]), radius - 0.001)
 
 	func test_no_decoration_scene_is_safe():
 		scatter.decoration = null

@@ -102,6 +102,11 @@ Three layered design docs in [`levels/`](levels/) — read the relevant one befo
 - **[STAGE_DESIGN.md](levels/STAGE_DESIGN.md)** — playbook for designing a new stage (terrain). 5 design questions + verification protocol + the `.tscn` script-UID gotcha that bites hand-authoring.
 - **[LEVEL_DESIGN.md](levels/LEVEL_DESIGN.md)** — playbook for designing a single level on top of an existing stage. 4 design questions + spawner `.tscn` pattern + the 3-mode sim verification (A feasibility, B robustness, C progression).
 
+Two more docs cover building a stage's **visuals** (terrain + decoration), distinct from its gameplay design:
+
+- **[SPRITESHEET_WORKFLOW.md](levels/SPRITESHEET_WORKFLOW.md)** — turning a raw art spritesheet into usable assets (prop scenes / registered TileSet terrains). Phase A tiling → Phase B preview verify → ToC → generate. Work from JSON, not eyeballing.
+- **[STAGE_BUILDING.md](levels/STAGE_BUILDING.md)** — assembling a stage's ground + zones + decoration. The `Zone` model (OPEN/ENCLOSED/SOLID), `GroundPainter`, `DecorationScatter`, and the `audit_zones.gd` coverage check.
+
 Game-side findings from sim sessions live in [`tools/sim/SIM_FINDINGS.md`](tools/sim/SIM_FINDINGS.md); add new findings there as you discover them.
 
 The simulator itself: [`tools/sim/SIM.md`](tools/sim/SIM.md).

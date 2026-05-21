@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TargetSort" load_steps=3 format=3 uid="uid://b1cttf2sortr01"]
+
+[ext_resource type="Script" path="res://behavior/target_sort/target_sort.gd" id="1_fy5qd"]
+[ext_resource type="Script" path="res://behavior/target_sort/closest_to_tower_first_position_target_sorter.gd" id="2_cttf"]
+
+[resource]
+script = ExtResource("1_fy5qd")
+type = 2
+sorter_script = ExtResource("2_cttf")
+description_text = "Sorts by distance to the tower, selecting the enemy nearest the objective. Holds the tower's front line instead of chasing."
+skill_name = &"Closest To Tower First"
+skill_type = 4
+tree_type = 1

@@ -15,6 +15,16 @@ func random_point(_rng: RandomNumberGenerator) -> Vector2:
 	push_error("ScatterArea.random_point() not implemented by %s" % get_class())
 	return Vector2.ZERO
 
+# Axis-aligned bounding box of the shape. Used by jittered-grid placement.
+func bounds() -> Rect2:
+	push_error("ScatterArea.bounds() not implemented by %s" % get_class())
+	return Rect2()
+
+# Whether a point lies inside the shape.
+func contains(_point: Vector2) -> bool:
+	push_error("ScatterArea.contains() not implemented by %s" % get_class())
+	return false
+
 # Draws the area's boundary in the editor for visual feedback. Subclasses
 # override to render their shape; canvas is a CanvasItem (typically the
 # DecorationScatter node) in whose local space the area is defined.

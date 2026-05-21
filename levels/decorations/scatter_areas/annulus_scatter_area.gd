@@ -17,6 +17,13 @@ func random_point(rng: RandomNumberGenerator) -> Vector2:
 	var theta := rng.randf() * TAU
 	return center + Vector2(cos(theta), sin(theta)) * r
 
+func bounds() -> Rect2:
+	return Rect2(center - Vector2(outer_radius, outer_radius), Vector2(outer_radius, outer_radius) * 2.0)
+
+func contains(point: Vector2) -> bool:
+	var d := center.distance_to(point)
+	return d >= inner_radius and d <= outer_radius
+
 func draw_boundary(canvas: CanvasItem) -> void:
 	canvas.draw_arc(center, inner_radius, 0.0, TAU, 64, BOUNDARY_COLOR, BOUNDARY_WIDTH)
 	canvas.draw_arc(center, outer_radius, 0.0, TAU, 64, BOUNDARY_COLOR, BOUNDARY_WIDTH)
