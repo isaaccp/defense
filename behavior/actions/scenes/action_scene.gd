@@ -48,6 +48,14 @@ func initialize(owner_name: String, action_def: ActionDef, target: Target, attri
 	if target_component:
 		target_component.action_target = ActionTarget.new(target, target_position_type)
 	if hitbox_component:
+		# Single source of truth: when the action's def declares an aoe_shape,
+		# it overrides whatever shape resource the .tscn shipped with. The
+		# scene's CollisionShape2D acts as a placeholder.
+		if action_def.aoe_shape:
+			var cs = hitbox_component.get_node_or_null("CollisionShape2D") as CollisionShape2D
+			assert(cs, "Action %s declares aoe_shape but its scene has no HitboxComponent/CollisionShape2D" % action_def.name())
+			if cs:
+				cs.shape = action_def.aoe_shape
 		hitbox_component.initialize(owner_name, action_def, attributes, side_component, logging_component, effect_actuator_component)
 		hitbox_component.hit.connect(_on_hit)
 

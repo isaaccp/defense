@@ -16,7 +16,7 @@ func _init():
 func post_initialize():
 	super()
 	original_position = body.global_position
-	status_component.set_status(def.skill_name, swiftness, SwiftnessParams.make(1.5), -1)
+	status_component.set_status(def.skill_name, swiftness, SwiftnessParams.make(2.0), -1)
 
 func action_finished():
 	super()

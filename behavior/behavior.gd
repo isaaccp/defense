@@ -70,13 +70,18 @@ func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 			var can_run_after = action_cooldowns[rule.action.skill_name]
 			if elapsed_time < can_run_after:
 				continue
-		if condition_evaluators[i]:
-			if not condition_evaluators[i].evaluate():
-				continue
+		# Instantiate the action first so conditions (and the selector below)
+		# can read action-level params like max_distance / aoe_shape. Action
+		# instantiation is a single script .new() — sub-microsecond.
 		var action = Action.make_runnable_action(rule.action)
 		if action.focus_cost > 0:
 			var current_focus = vitals_component.get_vital_current(VitalsComponent.VitalType.FOCUS)
 			if action.focus_cost > current_focus:
+				continue
+		if condition_evaluators[i]:
+			condition_evaluators[i].action = action
+			condition_evaluators[i].side_component = side_component
+			if not condition_evaluators[i].evaluate():
 				continue
 		var target = target_selectors[i].select_target(action, actor, side_component)
 		if target.valid():

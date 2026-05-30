@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://btgtnrtower001"]
+
+[ext_resource type="Script" path="res://behavior/conditions/distance_to_tower_target_actor_condition_evaluator.gd" id="1_tnt"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Resource" uid="uid://dn1xlxn35k6ub" path="res://skill_tree/conditions/target_distance.tres" id="3_parent"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_cdef"]
+
+[sub_resource type="Resource" id="Resource_tnt_params"]
+script = ExtResource("2_params")
+editor_string = "distance to tower {cmp} {float_value}"
+
+[resource]
+script = ExtResource("4_cdef")
+type = 2
+evaluator_script = ExtResource("1_tnt")
+description_text = "Checks the distance from the candidate target to the nearest tower. Useful for gating defensive commitments on an enemy actually being a threat to the objective."
+params = SubResource("Resource_tnt_params")
+skill_name = &"Target Near Tower"
+skill_type = 3
+parent = ExtResource("3_parent")
+tree_type = 1

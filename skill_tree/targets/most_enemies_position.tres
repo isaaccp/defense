@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="TargetSelectionDef" format=3 uid="uid://bmostenemiesp01"]
+
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_params"]
+[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_tsdef"]
+[ext_resource type="Script" path="res://behavior/target_selection/most_enemies_position_target_selector.gd" id="3_mep"]
+[ext_resource type="Resource" uid="uid://dnt0l5kgxcoq1" path="res://skill_tree/targets/center.tres" id="4_parent"]
+
+[sub_resource type="Resource" id="Resource_mep_params"]
+script = ExtResource("1_params")
+
+[resource]
+script = ExtResource("2_tsdef")
+type = 3
+description_text = "Targets the in-range position where the action's AoE shape catches the most enemies."
+selector_script = ExtResource("3_mep")
+sortable = false
+params = SubResource("Resource_mep_params")
+skill_name = &"Most Enemies Position"
+skill_type = 2
+parent = ExtResource("4_parent")
+tree_type = 1

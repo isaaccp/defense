@@ -13,15 +13,15 @@ spawn = ExtResource("5_grunt")
 
 [sub_resource type="Resource" id="Resource_placMain"]
 script = ExtResource("6_plac")
-amount = 12
-interval = 2.0
+amount = 10
+interval = 2.5
 initial_delay = 1.0
 
 [sub_resource type="Resource" id="Resource_placPocket"]
 script = ExtResource("6_plac")
-amount = 6
-interval = 0.7
-initial_delay = 11.0
+amount = 3
+interval = 1.5
+initial_delay = 15.0
 
 [node name="Level" instance=ExtResource("1_stage")]
 
