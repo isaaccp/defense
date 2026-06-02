@@ -60,7 +60,7 @@ Invocation: `godot --headless -s tools/sim/sim.gd -- <config.json>`
 
 ```json
 {
-  "level": "res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn",
+  "level": "res://levels/main/forest_ambush/ambush_corridor_pocket.tscn",
   "seed": 1,
   "max_seconds": 30,
   "characters": [

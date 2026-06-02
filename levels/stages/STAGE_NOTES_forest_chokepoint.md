@@ -1,11 +1,11 @@
 # STAGE_NOTES: forest_chokepoint
 
-**Intent:** Force enemies through a narrow central corridor; reward AoE skills (Cleave, Sweeping Attack, Fire Burst) which have no good level on the open stage; explicitly break the "archers shred tower from flanks" failure mode that plagues every level on `forest_stage_right_side_open`.
+**Intent:** Force enemies through a narrow central corridor; reward AoE skills (Cleave, Sweeping Attack, Fire Burst); block the "archers shred the tower from open flanks" failure mode by removing the flanks entirely.
 
 ## Geometry (960×540)
 
 - **Tower:** Column @ (235, 259), inherited convention.
-- **StartingPositions:** First @ (300, 200), Second @ (300, 320). Closer together than `forest_open` (which used y=179 / y=339) — fits the corridor mouth.
+- **StartingPositions:** First @ (300, 200), Second @ (300, 320). Tightly spaced to fit the corridor mouth.
 - **Decoration walls** (dense scatter, blocks LoS from upper/lower right to tower):
   - Top wall: rect (400, 0) to (920, 195), ~18 trees mixed sizes
   - Bottom wall: rect (400, 325) to (920, 540), ~18 trees mixed sizes

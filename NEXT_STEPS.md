@@ -14,36 +14,7 @@ The core problem is that levels feel samey: a plain field, identical enemy behav
 
 ---
 
-## Priority 1 — Level Variety via Obstacles and Stage Design
-
-Player drag-placement during PREPARE is now wired (single-player only — online still uses `StartingPositions`). Multiple disjoint `PlacementZone` children of `PlacementComponent` let stages restrict placement, so stage layout now has real strategic weight.
-
-Currently all main levels use a single stage (`forest_stage_right_side_open.tscn`) with trees scattered around an open area. Two levers available with no new infrastructure:
-
-**A. More obstacle layouts within the existing stage**
-Trees are `StaticBody2D` scenes in `YSorted/Decoration` — they automatically bake into the NavigationPolygon and block pathfinding. Rearranging them creates chokepoints, corridors, and cover with no code changes.
-
-Ideas worth trying:
-- A corridor down the middle with open flanks (rewards AoE characters)
-- A cluster of trees blocking the direct path from one spawn point (forces enemies to path around)
-- Sparse obstacles in the center (open field but with a few pillars breaking sightlines)
-
-**B. New stage shapes**
-A new stage is a scene extending `base_level.tscn` with a different NavigationPolygon, different tile layout, and different obstacle arrangement. See `levels/LEVEL.md` for the creation pattern.
-
-Ideas:
-- Narrow horizontal corridor (very different from the current open field)
-- Two chokepoints with open flanks
-- Enemies spawning from multiple sides
-
-**Relevant files:**
-- `levels/stages/forest_stage_right_side_open.tscn` — current only stage
-- `levels/decorations/` — available obstacle scenes (tree_green, big_tree_green, small_tree_green)
-- `levels/LEVEL.md` — full documentation of level structure and how NavMesh/obstacles work
-
----
-
-## Priority 2 — Add Unused Enemies to Main Levels
+## Priority 1 — Add Unused Enemies to Main Levels
 
 Two fully implemented enemies are not used in any main level:
 

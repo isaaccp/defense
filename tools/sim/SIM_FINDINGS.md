@@ -30,7 +30,6 @@ These all point at the same design space — see [`NEXT_STEPS.md` "Behavior Syst
   - Cover decoration on the right half to break archer line-of-sight
   - Reduce archer count (currently 2 spawners × 5 = 10 archers, which is most of the enemy pool)
   - Document this level as "requires relics or specific team comps"
-- **All current stages use the same `forest_open_on_right_area` layout.** Already noted in [`NEXT_STEPS.md` Priority 1](../../NEXT_STEPS.md).
 
 ### Meta-progression / balance
 

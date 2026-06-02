@@ -79,7 +79,7 @@ A **level** is what the player plays: a specific enemy wave on a specific map. A
 
 This lets multiple levels share the same terrain with different waves.
 
-Example: `stages/forest_stage_right_side_open.tscn` (terrain) → `main/forest_open_on_right_area/one_grunt_spawner.tscn` (level).
+Example: `stages/forest_ambush.tscn` (terrain) → `main/forest_ambush/ambush_corridor_pocket.tscn` (level).
 
 ### Registering a Level in the Game
 
@@ -178,7 +178,7 @@ Two tools, both useful when working without the editor (e.g. from an AI agent):
 **[`tools/inspect_stage.gd`](../tools/inspect_stage.gd)** — text summary of any level/stage scene:
 
 ```
-godot --headless -s tools/inspect_stage.gd -- res://levels/stages/forest_stage_right_side_open.tscn
+godot --headless -s tools/inspect_stage.gd -- res://levels/stages/forest_ambush.tscn
 ```
 
 Output shows starting positions, towers, decoration counts + bounding box, spawner configs (enemy/amount/interval), placement zone rectangles, and victory/loss conditions — all from the loaded scene, no `.tscn` parsing.
@@ -186,7 +186,7 @@ Output shows starting positions, towers, decoration counts + bounding box, spawn
 **[`tools/render_stage.gd`](../tools/render_stage.gd)** — top-down PNG of the scene as it appears during PREPARE:
 
 ```
-godot --path . -s tools/render_stage.gd -- res://levels/stages/forest_stage_right_side_open.tscn /tmp/stage.png
+godot --path . -s tools/render_stage.gd -- res://levels/stages/forest_ambush.tscn /tmp/stage.png
 ```
 
 Saves a 960×540 image showing tilemap, decorations, towers, and placement zones (as a subtle tint). Requires a real rendering driver — `--headless` uses a null renderer that produces an empty image. If no display is attached, prefix with `xvfb-run -a`.
@@ -194,7 +194,7 @@ Saves a 960×540 image showing tilemap, decorations, towers, and placement zones
 **[`tools/sim/sim.gd`](../tools/sim/sim.gd)** — JSON-config-driven headless level simulation. Designed for balance/design iteration; an AI assistant drafts behaviors, runs configs, reads structured summaries, and iterates. See [`tools/sim/SIM.md`](../tools/sim/SIM.md) for the full design, config schema, and behavior JSON schema.
 
 ```
-godot --headless --path . -s tools/sim/sim.gd -- tools/sim/configs/example.json
+godot --headless --path . -s tools/sim/sim.gd -- tools/sim/configs/ambush_preferred.json
 ```
 
 Reads `<config>.json` (level + per-character behaviors + acquired skills), runs the level, writes `<config>.summary.json` alongside. Stateless per invocation; the AI tracks meta-progression across calls in conversation.
@@ -202,7 +202,7 @@ Reads `<config>.json` (level + per-character behaviors + acquired skills), runs 
 **[`tools/playthrough.gd`](../tools/playthrough.gd)** — headlessly runs a level for N simulated seconds, streams [`LoggingComponent`](../components/logging_component.gd) output, and prints a summary (outcome, spawn count, surviving actors and positions):
 
 ```
-godot --headless --path . -s tools/playthrough.gd -- res://levels/main/forest_open_on_right_area/one_grunt_spawner.tscn 10
+godot --headless --path . -s tools/playthrough.gd -- res://levels/main/forest_ambush/ambush_corridor_pocket.tscn 10
 ```
 
 Third arg is comma-separated LogType names enabled per-actor — defaults to `BEHAVIOR,HEALTH` (readable; shows what enemies decide and when things take damage). Use `all` for `log_all=true` (very verbose), `none` to silence. Useful for catching "enemies spawn but can't reach anything" without playing the level. Implementation note: a tiny SceneTree bootstrap loads `playthrough_runner.gd` at runtime so the runner can use full static typing (autoloads are registered by then).

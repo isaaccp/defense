@@ -78,7 +78,7 @@ Substrate work **likely needed** but not yet built:
 ## Build order: by stage, ship as we go
 
 - **Round 1**: 3 fights on `forest_chokepoint` (existing) for difficulty positions 1-3.
-- **Round 2**: design + build stage 2 (likely "two-flank symmetric" — the failure mode `forest_open_on_right_area` couldn't handle well). 3 fights on it (positions 4-6). At this point sim positions 1-6 sequentially with deterministic skill-pick plans, spot cliffs.
+- **Round 2**: 3 fights on `forest_ambush` (positions 4-6 — the existing ambush variants test close-pocket commitment + AoE thresholds). At this point sim positions 1-6 sequentially with deterministic skill-pick plans, spot cliffs.
 - **Round 3**: design + build stage 3. 3 fights on it (positions 7-9). Design fight 10 as a culmination ("everything you've learned") — possibly on its own special arena.
 - **Round 4**: only if rounds 1-3 surfaced "campaign mode would save us" — build run-sequence sim + batch aggregator + better diff.
 

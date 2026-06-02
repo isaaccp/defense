@@ -11,7 +11,7 @@ func _initialize():
 	var args := OS.get_cmdline_user_args()
 	if args.is_empty():
 		print("Usage: godot --headless -s tools/inspect_stage.gd -- <scene_path>")
-		print("  e.g. tools/inspect_stage.gd -- res://levels/stages/forest_stage_right_side_open.tscn")
+		print("  e.g. tools/inspect_stage.gd -- res://levels/stages/forest_ambush.tscn")
 		quit(1)
 		return
 	var path := args[0] as String

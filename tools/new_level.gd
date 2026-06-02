@@ -5,7 +5,7 @@ extends SceneTree
 #
 # Example:
 #   godot --headless -s tools/new_level.gd -- \
-#     res://levels/stages/forest_stage_right_side_open.tscn one_test_spawner
+#     res://levels/stages/forest_ambush.tscn one_test_spawner
 #
 # Default output path: res://levels/main/<stage_basename>/<level_name>.tscn
 # Override the subdir under levels/main/ by passing a third argument.
