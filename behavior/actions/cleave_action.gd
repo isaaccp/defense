@@ -7,7 +7,7 @@ var cleave: ActionScene
 func _init():
 	max_distance = 40
 	cooldown = 4.0
-	focus_cost = 3
+	focus_cost = 4
 
 func post_initialize():
 	_swing_sword.call_deferred()

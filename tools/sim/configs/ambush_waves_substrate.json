@@ -12,7 +12,7 @@
     {
       "character": "res://character/playable_characters/puffin_the_cleric.tres",
       "behavior": "res://tools/sim/behaviors/cleric_consecrate.json",
-      "acquired_skills": ["always", "ally", "self", "self_or_ally", "enemy", "tower", "move_to", "heal", "consecrate", "can_hit_enemies", "sword_attack", "closest_first", "lowest_health_first", "target_distance", "target_health", "magic_armor", "projectile_ward"]
+      "acquired_skills": ["always", "ally", "self", "self_or_ally", "enemy", "tower", "move_to", "follow", "heal", "consecrate", "can_hit_enemies", "sword_attack", "closest_first", "lowest_health_first", "target_distance", "target_health", "magic_armor", "projectile_ward"]
     }
   ]
 }
