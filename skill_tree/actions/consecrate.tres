@@ -8,7 +8,7 @@
 script = ExtResource("2_params")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_acsc_aoe"]
-radius = 40.0
+radius = 60.0
 
 [resource]
 script = ExtResource("3_adef")

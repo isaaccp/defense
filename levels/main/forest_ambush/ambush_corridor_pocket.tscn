@@ -26,7 +26,7 @@ initial_delay = 15.0
 [node name="Level" instance=ExtResource("1_stage")]
 
 [node name="MainSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
-position = Vector2(900, 260)
+position = Vector2(650, 260)
 placement_node = NodePath("../../Enemies")
 
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/MainSpawner" index="5" instance=ExtResource("3_cfg")]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://qmjj1eacb88f"]
+[gd_resource type="Resource" script_class="ActionDef" load_steps=8 format=3 uid="uid://qmjj1eacb88f"]
 
 [ext_resource type="Script" uid="uid://u6fxxcjs0i8w" path="res://behavior/actions/sweeping_attack_action.gd" id="1_45fmj"]
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_autku"]
@@ -9,11 +9,18 @@
 [sub_resource type="Resource" id="Resource_08m3r"]
 script = ExtResource("2_autku")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sa_aoe"]
+radius = 30.0
+height = 60.0
+
 [resource]
 script = ExtResource("3_808y2")
 action_script = ExtResource("1_45fmj")
 supported_target_types = Array[int]([1, 3])
 attack_type = ExtResource("2_i24wi")
+aoe_shape = SubResource("CapsuleShape2D_sa_aoe")
+aoe_placement = 1
+aoe_offset = Vector2(25, 0)
 params = SubResource("Resource_08m3r")
 skill_name = &"Sweeping Attack"
 skill_type = 1
