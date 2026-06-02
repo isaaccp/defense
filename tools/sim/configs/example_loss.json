@@ -1,0 +1,18 @@
+{
+  "level": "res://levels/main/forest_open_on_right_area/two_warrior_spawner_plus_two_archers.tscn",
+  "seed": 1,
+  "max_seconds": 30,
+  "notes": "Verify killed_by attribution on a loss scenario",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/example_move_and_attack.json",
+      "acquired_skills": ["always", "enemy", "closest_first", "move_to", "sword_attack"]
+    },
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/example_move_and_attack.json",
+      "acquired_skills": ["always", "enemy", "closest_first", "move_to", "sword_attack"]
+    }
+  ]
+}

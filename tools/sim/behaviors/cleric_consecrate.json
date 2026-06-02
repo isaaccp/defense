@@ -1,0 +1,19 @@
+{
+  "name": "cleric_consecrate",
+  "rules": [
+    {
+      "action": {"name": "Consecrate"},
+      "target": {"name": "Self"},
+      "condition": {
+        "name": "Can Hit Enemies",
+        "params": {"cmp": ">=", "int_value": 2}
+      }
+    },
+    {
+      "action": {"name": "Heal"},
+      "target": {"name": "Self Or Ally"},
+      "sort": {"name": "Lowest Health First"},
+      "condition": {"name": "Always"}
+    }
+  ]
+}

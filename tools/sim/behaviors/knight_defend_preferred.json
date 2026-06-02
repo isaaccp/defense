@@ -1,0 +1,55 @@
+{
+  "name": "knight_defend_preferred",
+  "rules": [
+    {
+      "action": {"name": "Sweeping Attack"},
+      "target": {"name": "Most Enemies Position"},
+      "condition": {
+        "name": "Can Hit Enemies",
+        "params": {"cmp": ">=", "int_value": 2}
+      }
+    },
+    {
+      "action": {"name": "Sword Attack"},
+      "target": {"name": "Preferred Target"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Charge"},
+      "target": {"name": "Preferred Target"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Move To"},
+      "target": {"name": "Preferred Target"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Set Preferred Target"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest To Tower First"},
+      "condition": {
+        "name": "Target Near Tower",
+        "params": {"cmp": "<=", "float_value": 100}
+      }
+    },
+    {
+      "action": {"name": "Cleave"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Sword Attack"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Move To"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    }
+  ]
+}

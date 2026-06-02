@@ -1,0 +1,20 @@
+{
+  "level": "res://levels/main/forest_open_on_right_area/two_warrior_spawner_plus_two_archers.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "lvl5 attempt 7: Knight uses full offensive kit (Sweeping Attack + Cleave + Charge + Sword Attack + Move To). Forward-positioned at (490, 100) near top archer spawn. Cleric back at (300, 260).",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/knight_full_offense.json",
+      "acquired_skills": ["always", "enemy", "closest_first", "move_to", "sword_attack", "charge", "cleave", "sweeping_attack"],
+      "starting_position": {"x": 490, "y": 100}
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": "res://tools/sim/behaviors/cleric_heal_first_then_buffs.json",
+      "acquired_skills": ["always", "ally", "self", "move_to", "heal", "closest_first", "target_distance", "magic_armor", "projectile_ward"],
+      "starting_position": {"x": 300, "y": 260}
+    }
+  ]
+}

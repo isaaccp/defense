@@ -1,0 +1,18 @@
+{
+  "level": "res://levels/main/forest_ambush/ambush_corridor_pocket.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "forest_ambush A/B re-run — knight uses preferred-target commitment: Set Preferred Target on closest-to-tower enemy, then Sword/Move toward that committed enemy. Compare against ambush_defend.json (plain Closest To Tower First sort, which can't override Sword Attack's in-range filter).",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/knight_defend_preferred.json",
+      "acquired_skills": ["always", "enemy", "ally", "preferred_target", "most_enemies_position", "closest_first", "closest_to_tower_first", "target_near_tower", "can_hit_enemies", "set_preferred_target", "move_to", "sword_attack", "charge", "cleave", "sweeping_attack"]
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": "res://tools/sim/behaviors/cleric_consecrate.json",
+      "acquired_skills": ["always", "ally", "self", "self_or_ally", "enemy", "tower", "move_to", "heal", "consecrate", "can_hit_enemies", "sword_attack", "closest_first", "lowest_health_first", "target_distance", "target_health", "magic_armor", "projectile_ward"]
+    }
+  ]
+}

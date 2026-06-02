@@ -1,0 +1,35 @@
+{
+  "name": "knight_full_offense",
+  "rules": [
+    {
+      "action": {"name": "Sweeping Attack"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Cleave"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Charge"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Sword Attack"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Move To"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    }
+  ]
+}

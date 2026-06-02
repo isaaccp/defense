@@ -1,0 +1,18 @@
+{
+  "level": "res://levels/main/forest_open_on_right_area/two_warrior_spawner_plus_two_archers.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "lvl5 attempt 3: give cleric `Self` target so she can ward+armor herself before healing the knight. Testing whether self-preservation lets her live long enough to keep the knight up.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/knight_attack_closest.json",
+      "acquired_skills": ["always", "enemy", "closest_first", "move_to", "sword_attack", "charge", "cleave", "sweeping_attack"]
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": "res://tools/sim/behaviors/cleric_self_buff.json",
+      "acquired_skills": ["always", "ally", "self", "move_to", "heal", "closest_first", "target_distance", "magic_armor", "projectile_ward"]
+    }
+  ]
+}

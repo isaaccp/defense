@@ -27,7 +27,7 @@ The dev is a strong programmer but finds *balancing* hard. The sim is the tool t
 **Stateless per-level engine.** Each invocation:
 - Reads one JSON config (level + characters + behaviors + acquired skills)
 - Runs that level once
-- Writes one JSON summary next to the config
+- Writes one JSON summary into `tools/sim/results/` (gitignored)
 
 **The AI handles orchestration in conversation.** No persistent run state across invocations, no PickPolicy abstraction, no headless Run state machine driving. Meta-progression is reasoned about by the AI between tool calls.
 
@@ -45,12 +45,13 @@ tools/sim/
                                   levels/main/main_levels.tres — keep sim and live game
                                   isolated).
   configs/
-    <name>.json                   Per-attempt configs. AI authors these.
-    <name>.summary.json           Auto-written alongside each config after a run.
+    <name>.json                   Per-attempt configs. AI authors these. Tracked.
   behaviors/
-    <name>.json                   Transient behavior specs (JSON, see schema below).
-                                  AI authors freely; these are throwaway experiments.
-                                  Production behaviors stay in behavior/resources/.
+    <name>.json                   Behavior specs (JSON, see schema below). AI authors
+                                  these; production behaviors stay in
+                                  behavior/resources/. Tracked.
+  results/
+    <name>.json                   Auto-written summary per config run. Gitignored.
 ```
 
 Invocation: `godot --headless -s tools/sim/sim.gd -- <config.json>`
@@ -112,7 +113,7 @@ Every skill slot (`action`, `target`, `sort`, `condition`) is an object with `na
 
 **Why JSON not `.tres`:** `.tres` behavior files have many cross-referenced sub_resource IDs, ext_resource ordering, etc. — hand-authoring them produces syntax-error churn. JSON is grep-friendly, diff-friendly, easy for the AI to author. If a sim experiment produces a behavior worth keeping in production, the user recreates it as a proper `.tres` in the editor.
 
-## Summary schema (`<config>.summary.json`)
+## Summary schema (`tools/sim/results/<config>.json`)
 
 ```json
 {
@@ -169,7 +170,7 @@ If any error is found, the sim exits with code 1 and prints all errors.
 `tools/sim/diff.py` compares two summary JSONs side-by-side:
 
 ```
-tools/sim/diff.py tools/sim/configs/lvl5_attempt_1.summary.json tools/sim/configs/lvl5_attempt_2.summary.json
+tools/sim/diff.py tools/sim/results/lvl5_attempt_1.json tools/sim/results/lvl5_attempt_2.json
 ```
 
 Shows outcome delta, elapsed-time delta, per-character HP / damage_dealt / kills / killed_by deltas, enemy count deltas, and event-kind counts. Pairs actors by `name#index` so two `Godrick`s match correctly.
@@ -179,7 +180,7 @@ Shows outcome delta, elapsed-time delta, per-character HP / damage_dealt / kills
 - Separate `tools/sim/sim_levels.tres` (does not touch live `main_levels.tres`)
 - Retry-with-same-behavior up to a cap (number TBD — propose 3)
 - Per-character behavior assignment (each character object has its own `behavior` field)
-- Summary written next to config (`<basename>.summary.json`)
+- Summary written to `tools/sim/results/<basename>.json`
 - Skills specified as basenames (with `"full"` shortcut)
 - Config echoed inside summary
 - Behaviors as JSON specs under `tools/sim/behaviors/` (not `.tres`)

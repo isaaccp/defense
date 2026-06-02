@@ -1,0 +1,23 @@
+{
+  "name": "cleric_self_buff",
+  "rules": [
+    {
+      "action": {"name": "Projectile Ward"},
+      "target": {"name": "Self"},
+      "sort": null,
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Magic Armor"},
+      "target": {"name": "Self"},
+      "sort": null,
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Heal"},
+      "target": {"name": "Ally"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    }
+  ]
+}

@@ -2,7 +2,7 @@ extends Node
 
 # Headless single-level simulator. Reads a JSON config, builds characters
 # with specified skills + behaviors, runs the level for up to N seconds,
-# and writes a JSON summary next to the config.
+# and writes a JSON summary into tools/sim/results/ (gitignored).
 #
 # See tools/sim/SIM.md for the full design, config/behavior/summary schemas,
 # and rationale. Invoked by tools/sim/sim.gd (bootstrap).
@@ -595,12 +595,16 @@ func _finish() -> void:
 
 	scene_tree.quit(0)
 
+const RESULTS_DIR := "tools/sim/results"
+
 func _summary_path_for(config_path: String) -> String:
-	# Strip the trailing .json extension if present so we get
-	# foo.summary.json from foo.json.
-	if config_path.ends_with(".json"):
-		return config_path.substr(0, config_path.length() - 5) + ".summary.json"
-	return config_path + ".summary.json"
+	# Write summaries to a dedicated results/ directory (gitignored) so the
+	# configs/ and behaviors/ directories stay clean of auto-generated output.
+	DirAccess.make_dir_recursive_absolute(RESULTS_DIR)
+	var basename := config_path.get_file()
+	if basename.ends_with(".json"):
+		basename = basename.substr(0, basename.length() - 5)
+	return "%s/%s.json" % [RESULTS_DIR, basename]
 
 func _summarize_actors(container: Node) -> Array:
 	# Walks both alive actors (still in the container) AND dead actors that

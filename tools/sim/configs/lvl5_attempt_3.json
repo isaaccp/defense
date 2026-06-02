@@ -1,0 +1,17 @@
+{
+  "level": "res://levels/main/forest_open_on_right_area/two_warrior_spawner_plus_two_archers.tscn",
+  "seed": 1,
+  "max_seconds": 90,
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/knight_charge_attack.json",
+      "acquired_skills": "full"
+    },
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "behavior": "res://tools/sim/behaviors/rogue_bow_farthest.json",
+      "acquired_skills": "full"
+    }
+  ]
+}

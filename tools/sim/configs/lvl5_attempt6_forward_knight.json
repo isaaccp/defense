@@ -1,0 +1,20 @@
+{
+  "level": "res://levels/main/forest_open_on_right_area/two_warrior_spawner_plus_two_archers.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "lvl5 attempt 6: forward-position Knight near the enemy spawn lane (500,260) so he engages right away. Cleric back at (300,260) near tower, in healing range. Same heal-first behavior.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/knight_attack_closest.json",
+      "acquired_skills": ["always", "enemy", "closest_first", "move_to", "sword_attack", "charge", "cleave", "sweeping_attack"],
+      "starting_position": {"x": 500, "y": 260}
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": "res://tools/sim/behaviors/cleric_heal_first_then_buffs.json",
+      "acquired_skills": ["always", "ally", "self", "move_to", "heal", "closest_first", "target_distance", "magic_armor", "projectile_ward"],
+      "starting_position": {"x": 300, "y": 260}
+    }
+  ]
+}
