@@ -22,7 +22,7 @@ signal enemy_spawned(enemy: Enemy)
 signal finished_spawning
 
 func run():
-	assert(config.interval > 0.5, "Minimum spawn interval")
+	assert(config.interval > 0.3, "Minimum spawn interval")
 	_place_loop.call_deferred()
 
 func _place_loop():
