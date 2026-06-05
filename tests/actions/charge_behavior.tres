@@ -8,8 +8,6 @@
 
 [sub_resource type="Resource" id="Resource_c573f"]
 script = ExtResource("1_7delc")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_7bstj"]
 script = ExtResource("2_modbu")
@@ -19,8 +17,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("1_7delc")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_rxe1k"]
 script = ExtResource("2_modbu")
@@ -36,7 +32,6 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_720n7"]
 script = ExtResource("1_7delc")
 editor_string = "Enemy ({sort})"
-cmp = 0
 sort = SubResource("Resource_2c0om")
 
 [sub_resource type="Resource" id="Resource_d5ivs"]
@@ -53,8 +48,6 @@ condition = SubResource("Resource_rxe1k")
 
 [sub_resource type="Resource" id="Resource_e5wsl"]
 script = ExtResource("1_7delc")
-editor_string = ""
-cmp = 0
 
 [sub_resource type="Resource" id="Resource_3fnr4"]
 script = ExtResource("2_modbu")

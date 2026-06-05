@@ -1,8 +1,8 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://qrbe2vsqk1ri"]
 
-[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Tiles.png" id="1_sl2ql"]
-[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="2_cys74"]
-[ext_resource type="Texture2D" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Trees.png" id="2_ssj5a"]
+[ext_resource type="Texture2D" uid="uid://f6hsa63eojc" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Tiles.png" id="1_sl2ql"]
+[ext_resource type="Texture2D" uid="uid://b5kje386yugxs" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Props.png" id="2_cys74"]
+[ext_resource type="Texture2D" uid="uid://dvldyi637e3tm" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/Trees.png" id="2_ssj5a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1t4ka"]
 resource_name = "Tiles"

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="TargetSelectionDef" format=3 uid="uid://bprgtgt0sel01"]
 
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="1_params"]
-[ext_resource type="Script" path="res://behavior/target_selection/target_selection_def.gd" id="2_tsdef"]
-[ext_resource type="Script" path="res://behavior/target_selection/preferred_target_selector.gd" id="3_ptsel"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_params"]
+[ext_resource type="Script" uid="uid://x4kkgscrakhi" path="res://behavior/target_selection/target_selection_def.gd" id="2_tsdef"]
+[ext_resource type="Script" uid="uid://b0fag1g28lyto" path="res://behavior/target_selection/preferred_target_selector.gd" id="3_ptsel"]
 
 [sub_resource type="Resource" id="Resource_params"]
 script = ExtResource("1_params")

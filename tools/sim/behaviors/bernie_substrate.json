@@ -1,0 +1,59 @@
+{
+  "name": "bernie_substrate",
+  "rules": [
+    {
+      "action": {"name": "Fire Burst"},
+      "target": {"name": "Preferred Target"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Hold Person"},
+      "target": {"name": "Preferred Target"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Seeking Bolt"},
+      "target": {"name": "Preferred Target"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Set Preferred Target"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest To Tower First"},
+      "condition": {"name": "Targeting Tower"}
+    },
+    {
+      "action": {"name": "Fire Burst"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Hold Person"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Seeking Bolt"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {
+        "name": "Move Away",
+        "params": {"float_value": 100}
+      },
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Move To"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    }
+  ]
+}
