@@ -1,6 +1,15 @@
 {
-  "name": "bernie_substrate",
+  "name": "bernie_with_armor_support",
   "rules": [
+    {
+      "action": {"name": "Magic Armor"},
+      "target": {"name": "Ally"},
+      "sort": {"name": "Closest First"},
+      "condition": {
+        "name": "Targeted By Enemies",
+        "params": {"cmp": ">=", "int_value": 2}
+      }
+    },
     {
       "action": {"name": "Fire Burst"},
       "target": {"name": "Preferred Target"},

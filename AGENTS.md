@@ -32,6 +32,22 @@ Behaviors are serialized as `StoredBehavior` resources (`.tres`) and restored at
 
 See `behavior/BEHAVIOR.md` for a full walkthrough of the stored-vs-runtime split, the param system, action lifecycle, and how to add new skills or configurable params to existing actions.
 
+#### Core design intent: behaviors are *player-authored, per-situation*
+
+This is the heart of the game and easy to get wrong: **there is no single "correct" behavior per character.** The player is expected to tweak their hero behaviors based on:
+- **Party composition** — a Knight + Priest run wants different behaviors than Wizard + Priest.
+- **Level / stage** — corridor levels reward different priorities than open arenas; ranged-enemy levels need different positioning than melee-only.
+- **Relics & acquired skills** — a hero with Hallowed Vestments or a new AoE skill rewrites the optimal rule set.
+
+The **substrate** (conditions, targets, sorts, actions, primitives like `Targeting Tower` / `Can Hit Enemies` / `Targeted By Enemies` / `Preferred Target`) is the player's *toolkit*. The job of design work is to **make the substrate rich and composable enough** that for any reasonable party + level + relic combination, there exists *some* set of rules the player can author that beats it.
+
+What this means in practice when working on this codebase:
+
+- **Don't try to write one canonical behavior per character** and make it work everywhere. That's the wrong goal — and over-investing in it actively harms design (you'll start building anti-features to compensate for cases that should just need different rules).
+- **Behaviors in `tools/sim/behaviors/`** are *test fixtures*, not products. They demonstrate "here's one set of rules that beats this scenario with this party." Naming them after what they *do mechanically* (`bernie_kite_and_commit`, `knight_commit_and_charge`, `cleric_aoe_heal_follow`, `bernie_with_armor_support`) is correct; naming them as "the" or "default" or "substrate" behavior is wrong.
+- **When a level + party feels impossible**, the first question is "does the substrate let the player express a rule structure that would beat it?" — not "let's bake the solution into a behavior file." If the answer is no, the substrate is incomplete; build the missing primitive (a new condition, a new sort, a new action property). If the answer is yes, the level is correctly hard.
+- **Sim configs** prove specific (party, level, behavior) combinations work. Use them as design regression tests, not as definitive AI files.
+
 ### Skill & Effect System
 - Skills are `Resource` subclasses with a `SkillType` enum: `ACTION`, `TARGET`, `CONDITION`, `TARGET_SORT`, `META_SKILL`.
 - Relics / statuses live in `effects/` as `.tres` files registered in `relic_library.tres` / `status_library.tres`.

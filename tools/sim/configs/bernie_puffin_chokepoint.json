@@ -6,7 +6,7 @@
   "characters": [
     {
       "character": "res://character/playable_characters/bernie_the_wizard.tres",
-      "behavior": "res://tools/sim/behaviors/bernie_substrate.json",
+      "behavior": "res://tools/sim/behaviors/bernie_kite_and_commit.json",
       "acquired_skills": [
         "always",
         "enemy",
@@ -19,12 +19,15 @@
         "hold_person",
         "seeking_bolt",
         "move_to",
-        "move_away"
+        "move_away",
+        "ally",
+        "magic_armor",
+        "targeted_by_enemies"
       ]
     },
     {
       "character": "res://character/playable_characters/puffin_the_cleric.tres",
-      "behavior": "res://tools/sim/behaviors/cleric_consecrate.json",
+      "behavior": "res://tools/sim/behaviors/cleric_aoe_heal_follow.json",
       "acquired_skills": [
         "always",
         "ally",

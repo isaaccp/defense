@@ -2,7 +2,7 @@
   "level": "res://levels/main/forest_ambush/ambush_waves.tscn",
   "seed": 1,
   "max_seconds": 60,
-  "notes": "ambush_waves substrate \u2014 knight uses preferred-target commitment + Sweeping Attack on Most Enemies Position + Charge; cleric uses Consecrate when 2+ enemies near + heals lowest HP. Tests AoE-trigger frequency under wave spawn pattern (should be much higher than trickle).",
+  "notes": "godrick_bernie_waves \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Battle Fury refills focus from damage but HP is permanent loss).",
   "characters": [
     {
       "character": "res://character/playable_characters/godric_the_knight.tres",
@@ -27,27 +27,24 @@
       ]
     },
     {
-      "character": "res://character/playable_characters/puffin_the_cleric.tres",
-      "behavior": "res://tools/sim/behaviors/cleric_aoe_heal_follow.json",
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "behavior": "res://tools/sim/behaviors/bernie_with_armor_support.json",
       "acquired_skills": [
         "always",
-        "ally",
-        "self",
-        "self_or_ally",
         "enemy",
-        "tower",
-        "move_to",
-        "follow",
-        "heal",
-        "consecrate",
-        "can_hit_enemies",
-        "sword_attack",
         "closest_first",
-        "lowest_health_first",
-        "target_distance",
-        "target_health",
+        "closest_to_tower_first",
+        "preferred_target",
+        "set_preferred_target",
+        "targeting_tower",
+        "fire_burst",
+        "hold_person",
+        "seeking_bolt",
+        "move_to",
+        "move_away",
+        "ally",
         "magic_armor",
-        "projectile_ward"
+        "targeted_by_enemies"
       ]
     }
   ]

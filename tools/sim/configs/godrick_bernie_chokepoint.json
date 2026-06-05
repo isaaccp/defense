@@ -1,0 +1,51 @@
+{
+  "level": "res://levels/main/forest_chokepoint/chokepoint_grunt_rush.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "godrick_bernie_chokepoint \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Battle Fury refills focus from damage but HP is permanent loss).",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": "res://tools/sim/behaviors/knight_commit_and_charge.json",
+      "acquired_skills": [
+        "always",
+        "enemy",
+        "ally",
+        "preferred_target",
+        "most_enemies_position",
+        "closest_first",
+        "closest_to_tower_first",
+        "target_near_tower",
+        "targeting_tower",
+        "can_hit_enemies",
+        "set_preferred_target",
+        "move_to",
+        "sword_attack",
+        "charge",
+        "cleave",
+        "sweeping_attack"
+      ]
+    },
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "behavior": "res://tools/sim/behaviors/bernie_with_armor_support.json",
+      "acquired_skills": [
+        "always",
+        "enemy",
+        "closest_first",
+        "closest_to_tower_first",
+        "preferred_target",
+        "set_preferred_target",
+        "targeting_tower",
+        "fire_burst",
+        "hold_person",
+        "seeking_bolt",
+        "move_to",
+        "move_away",
+        "ally",
+        "magic_armor",
+        "targeted_by_enemies"
+      ]
+    }
+  ]
+}
