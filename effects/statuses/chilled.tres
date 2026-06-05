@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StatusDef" load_steps=4 format=3 uid="uid://bchilledstat01"]
+
+[ext_resource type="Script" path="res://effects/statuses/chilled.gd" id="1_chld"]
+[ext_resource type="Texture2D" path="res://assets/status/debuffs/slowed.png" id="2_icon"]
+[ext_resource type="Script" path="res://effects/status_def.gd" id="3_sdef"]
+
+[resource]
+script = ExtResource("3_sdef")
+description = "Movement speed halved"
+icon = ExtResource("2_icon")
+name = &"Chilled"
+effect_types = Array[int]([1])
+effect_script = ExtResource("1_chld")

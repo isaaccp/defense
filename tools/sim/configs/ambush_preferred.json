@@ -46,7 +46,6 @@
         "lowest_health_first",
         "target_distance",
         "target_health",
-        "magic_armor",
         "projectile_ward"
       ]
     }

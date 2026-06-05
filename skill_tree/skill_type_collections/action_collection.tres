@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=26 format=3 uid="uid://d33nhlf0klhr6"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=27 format=3 uid="uid://d33nhlf0klhr6"]
 
 [ext_resource type="Script" uid="uid://d00bswdbygg4y" path="res://skill_type_collection.gd" id="1_d2onc"]
 [ext_resource type="Resource" uid="uid://hvp25ge7lmq6" path="res://skill_tree/actions/blink_away.tres" id="2_3eeij"]
@@ -25,7 +25,8 @@
 [ext_resource type="Resource" uid="uid://bclrprftgt0a01" path="res://skill_tree/actions/clear_preferred_target.tres" id="16_clrpt"]
 [ext_resource type="Resource" uid="uid://bconsecratesk1" path="res://skill_tree/actions/consecrate.tres" id="17_acsc"]
 [ext_resource type="Resource" uid="uid://bfollowact001" path="res://skill_tree/actions/follow.tres" id="18_follow"]
+[ext_resource type="Resource" uid="uid://bchillingsk01" path="res://skill_tree/actions/chilling_sphere.tres" id="19_csph"]
 
 [resource]
 script = ExtResource("1_d2onc")
-skills = Array[ExtResource("2_5v1h6")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("6_v7bs0"), ExtResource("6_1re0o"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("11_cdk3c"), ExtResource("12_shjem"), ExtResource("13_oudcj"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("14_66rlg"), ExtResource("11_prk8f"), ExtResource("14_nqsc2"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8"), ExtResource("15_setpt"), ExtResource("16_clrpt"), ExtResource("17_acsc"), ExtResource("18_follow")])
+skills = Array[ExtResource("2_5v1h6")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("6_v7bs0"), ExtResource("6_1re0o"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("11_cdk3c"), ExtResource("12_shjem"), ExtResource("13_oudcj"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("14_66rlg"), ExtResource("11_prk8f"), ExtResource("14_nqsc2"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8"), ExtResource("15_setpt"), ExtResource("16_clrpt"), ExtResource("17_acsc"), ExtResource("18_follow"), ExtResource("19_csph")])

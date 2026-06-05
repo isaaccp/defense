@@ -22,7 +22,11 @@
         "move_away",
         "ally",
         "magic_armor",
-        "targeted_by_enemies"
+        "targeted_by_enemies",
+        "most_enemies_position",
+        "can_hit_enemies",
+        "self",
+        "chilling_sphere"
       ]
     },
     {
@@ -45,7 +49,6 @@
         "lowest_health_first",
         "target_distance",
         "target_health",
-        "magic_armor",
         "projectile_ward"
       ]
     }

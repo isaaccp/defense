@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://bchillingsk01"]
+
+[ext_resource type="Script" path="res://behavior/actions/chilling_sphere_action.gd" id="1_csph"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_adef"]
+
+[sub_resource type="Resource" id="Resource_params"]
+script = ExtResource("2_params")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_csph_aoe"]
+radius = 30.0
+
+[resource]
+script = ExtResource("3_adef")
+action_script = ExtResource("1_csph")
+supported_target_types = Array[int]([1, 3])
+aoe_shape = SubResource("CircleShape2D_csph_aoe")
+aoe_placement = 2
+params = SubResource("Resource_params")
+skill_name = &"Chilling Sphere"
+skill_type = 1
+tree_type = 5

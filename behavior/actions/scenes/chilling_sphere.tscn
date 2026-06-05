@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://bchilling0001"]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_csph"]
+[ext_resource type="Texture2D" uid="uid://dwxn6iingnvfv" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 C.png" id="2_tex"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_anim"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="4_hit"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="5_he"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="6_af"]
+[ext_resource type="Resource" uid="uid://bchilledstat01" path="res://effects/statuses/chilled.tres" id="7_chld"]
+[ext_resource type="Resource" path="res://game_logic/damage_types/arcane.tres" id="8_dmg"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_auto"]
+resource_name = "auto"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 25), Vector2i(1, 25), Vector2i(2, 25), Vector2i(3, 25), Vector2i(4, 25), Vector2i(5, 25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lib"]
+_data = {
+"RESET": SubResource("Animation_reset"),
+"auto": SubResource("Animation_auto")
+}
+
+[sub_resource type="Resource" id="Resource_hit"]
+script = ExtResource("5_he")
+damage = 3
+damage_type = ExtResource("8_dmg")
+status = ExtResource("7_chld")
+status_duration = 3.0
+status_on_damage_only = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_csph"]
+radius = 1.0
+
+[node name="ChillingSphere" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_csph")
+hitbox_component = NodePath("HitboxComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.55, 0.78, 1.0, 1)
+scale = Vector2(6, 6)
+texture = ExtResource("2_tex")
+hframes = 6
+vframes = 30
+frame = 150
+
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_anim")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_lib")
+}
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_hit")]
+hit_effect = SubResource("Resource_hit")
+max_hits_per_target = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_csph")
+
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("6_af")]
+animation_component = NodePath("../AnimationComponent")
