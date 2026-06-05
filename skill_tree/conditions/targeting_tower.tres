@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://btargettwr001"]
+
+[ext_resource type="Script" path="res://behavior/conditions/targeting_tower_target_actor_condition_evaluator.gd" id="1_tt"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="3_parent"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_cdef"]
+
+[sub_resource type="Resource" id="Resource_tt_params"]
+script = ExtResource("2_params")
+
+[resource]
+script = ExtResource("4_cdef")
+type = 2
+evaluator_script = ExtResource("1_tt")
+description_text = "Checks whether the candidate is currently targeting a tower. Useful for committing to enemies that have decided to go for the objective (predictive, no damage required yet)."
+params = SubResource("Resource_tt_params")
+skill_name = &"Targeting Tower"
+skill_type = 3
+parent = ExtResource("3_parent")
+tree_type = 1

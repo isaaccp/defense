@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://barchpocket001"]
+
+[ext_resource type="PackedScene" uid="uid://bfambsh0stg01" path="res://levels/stages/forest_ambush.tscn" id="1_stage"]
+[ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="2_spawner"]
+[ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="3_cfg"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="4_prov"]
+[ext_resource type="PackedScene" uid="uid://ck2tfnr0oy6s4" path="res://enemies/orc_grunt/orc_grunt.tscn" id="5_grunt"]
+[ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="6_archer"]
+[ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="7_plac"]
+
+[sub_resource type="Resource" id="Resource_provGrunt"]
+script = ExtResource("4_prov")
+spawn = ExtResource("5_grunt")
+
+[sub_resource type="Resource" id="Resource_provArcher"]
+script = ExtResource("4_prov")
+spawn = ExtResource("6_archer")
+
+[sub_resource type="Resource" id="Resource_placMain"]
+script = ExtResource("7_plac")
+amount = 8
+interval = 2.5
+initial_delay = 1.0
+
+[sub_resource type="Resource" id="Resource_placPocket"]
+script = ExtResource("7_plac")
+amount = 3
+interval = 1.5
+initial_delay = 12.0
+
+[node name="Level" instance=ExtResource("1_stage")]
+
+[node name="MainSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
+position = Vector2(650, 260)
+placement_node = NodePath("../../Enemies")
+
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/MainSpawner" index="5" instance=ExtResource("3_cfg")]
+spawn_provider_config = SubResource("Resource_provGrunt")
+spawn_placer_config = SubResource("Resource_placMain")
+
+[node name="ArcherPocket" parent="YSorted/Spawners" index="1" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
+position = Vector2(250, 100)
+placement_node = NodePath("../../Enemies")
+
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/ArcherPocket" index="5" instance=ExtResource("3_cfg")]
+spawn_provider_config = SubResource("Resource_provArcher")
+spawn_placer_config = SubResource("Resource_placPocket")

@@ -28,10 +28,7 @@
       "action": {"name": "Set Preferred Target"},
       "target": {"name": "Enemy"},
       "sort": {"name": "Closest To Tower First"},
-      "condition": {
-        "name": "Target Near Tower",
-        "params": {"cmp": "<=", "float_value": 100}
-      }
+      "condition": {"name": "Targeting Tower"}
     },
     {
       "action": {"name": "Cleave"},

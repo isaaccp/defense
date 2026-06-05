@@ -1,8 +1,8 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_corridor_pocket.tscn",
+  "level": "res://levels/main/forest_ambush/ambush_archer_pocket.tscn",
   "seed": 1,
   "max_seconds": 60,
-  "notes": "forest_ambush A/B re-run \u2014 knight uses preferred-target commitment: Set Preferred Target on closest-to-tower enemy, then Sword/Move toward that committed enemy. Compare against ambush_defend.json (plain Closest To Tower First sort, which can't override Sword Attack's in-range filter).",
+  "notes": "ambush_archer_pocket substrate \u2014 knight uses preferred-target + Charge to chase kiting archers; cleric uses Consecrate + Follow at 150 + heal lowest HP. Tests whether the substrate handles a ranged-pocket threat and whether Hallowed Vestments meaningfully reduces damage on Puffin.",
   "characters": [
     {
       "character": "res://character/playable_characters/godric_the_knight.tres",
