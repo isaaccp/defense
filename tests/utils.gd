@@ -12,6 +12,16 @@ static func rule_def(target: TargetSelectionDef, action: ActionDef, condition: C
 		StoredParamSkill.from_skill(condition),
 	)
 
+static func rule_def_with_conditions(target: TargetSelectionDef, action: ActionDef, conditions: Array[ConditionDef]) -> RuleDef:
+	var stored_conds: Array[StoredParamSkill] = []
+	for c in conditions:
+		stored_conds.append(StoredParamSkill.from_skill(c))
+	return RuleDef.make_with_conditions(
+		StoredParamSkill.from_skill(target),
+		StoredParamSkill.from_skill(action),
+		stored_conds,
+	)
+
 static func set_character_behavior(character: Node2D, behavior: StoredBehavior):
 	var persistent_state = Component.get_persistent_game_state_component_or_die(character)
 	persistent_state.state.behavior = behavior

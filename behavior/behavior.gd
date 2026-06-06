@@ -14,7 +14,10 @@ var vitals_component: VitalsComponent
 # actions we would like to share across rules, unlike for the other ones,
 # i.e., instead of an Array a Dictionary by action.id.
 var target_selectors: Array[TargetSelector] = []
-var condition_evaluators: Array[ConditionEvaluator] = []
+# Per-rule list of ANY/SELF/GLOBAL condition evaluators (each rule may have
+# multiple, all ANDed). TARGET_ACTOR/TARGET_POSITION conditions are handled
+# by the target selector itself, not here.
+var pre_selection_evaluators: Array = []
 
 static func restore(stored_behavior: StoredBehavior) -> Behavior:
 	var behavior = Behavior.new()
@@ -28,31 +31,44 @@ func prepare(actor_: Actor, side_component_: SideComponent, vitals_component_: V
 	side_component = side_component_
 	vitals_component = vitals_component_
 	target_selectors.clear()
-	condition_evaluators.clear()
+	pre_selection_evaluators.clear()
 	for rule in rules:
-		var evaluator: ConditionEvaluator = null
+		var conds = rule.effective_conditions()
+		# Bucket conditions by type. ANY/SELF/GLOBAL gate the rule before
+		# target selection; TARGET_ACTOR/TARGET_POSITION are handed to the
+		# target selector to filter candidates with.
+		var pre_sel: Array[ConditionEvaluator] = []
+		var target_actor_evals: Array[TargetActorConditionEvaluator] = []
+		var target_pos_evals: Array[PositionConditionEvaluator] = []
+		for cond in conds:
+			match cond.type:
+				ConditionDef.Type.ANY:
+					pre_sel.append(ConditionEvaluatorFactory.make_any_condition_evaluator(cond))
+				ConditionDef.Type.SELF:
+					pre_sel.append(ConditionEvaluatorFactory.make_self_condition_evaluator(cond, actor))
+				ConditionDef.Type.GLOBAL:
+					# TODO: Implement.
+					pass
+				ConditionDef.Type.TARGET_ACTOR, ConditionDef.Type.TARGET_POSITION:
+					match rule.target_selection.type:
+						Target.Type.SELF, Target.Type.ACTOR:
+							target_actor_evals.append(ConditionEvaluatorFactory.make_target_actor_condition_evaluator(cond, actor))
+						Target.Type.POSITION:
+							if cond.type == ConditionDef.Type.TARGET_POSITION:
+								target_pos_evals.append(ConditionEvaluatorFactory.make_position_condition_evaluator(cond, actor))
+							else:
+								push_error("Rule with POSITION target has TARGET_ACTOR condition '%s' — incompatible" % cond.name())
 		var target_selector: TargetSelector = null
-		# Create evaluators that are not target related.
-		match rule.condition.type:
-			ConditionDef.Type.ANY:
-				evaluator = ConditionEvaluatorFactory.make_any_condition_evaluator(rule.condition)
-			ConditionDef.Type.SELF:
-				evaluator = ConditionEvaluatorFactory.make_self_condition_evaluator(rule.condition, actor)
-			ConditionDef.Type.GLOBAL:
-				# TODO: Implement.
-				pass
 		match rule.target_selection.type:
 			Target.Type.SELF, Target.Type.ACTOR:
-				var target_evaluator = ConditionEvaluatorFactory.make_target_actor_condition_evaluator(rule.condition, actor)
-				target_selector = TargetSelectorFactory.make_actor_target_selector(rule.target_selection, target_evaluator)
+				target_selector = TargetSelectorFactory.make_actor_target_selector(rule.target_selection, target_actor_evals)
 			Target.Type.POSITION:
-				var position_evaluator = ConditionEvaluatorFactory.make_position_condition_evaluator(rule.condition, actor)
-				target_selector = TargetSelectorFactory.make_position_target_selector(rule.target_selection, position_evaluator)
+				target_selector = TargetSelectorFactory.make_position_target_selector(rule.target_selection, target_pos_evals)
 		target_selectors.append(target_selector)
-		condition_evaluators.append(evaluator)
-	if rules.size() != target_selectors.size() or rules.size() != condition_evaluators.size():
-		push_error("Behavior array size mismatch: rules=%d selectors=%d evaluators=%d" % [
-			rules.size(), target_selectors.size(), condition_evaluators.size()
+		pre_selection_evaluators.append(pre_sel)
+	if rules.size() != target_selectors.size() or rules.size() != pre_selection_evaluators.size():
+		push_error("Behavior array size mismatch: rules=%d selectors=%d pre_sel=%d" % [
+			rules.size(), target_selectors.size(), pre_selection_evaluators.size()
 		])
 		return
 
@@ -78,11 +94,15 @@ func choose(action_cooldowns: Dictionary, elapsed_time: float) -> Dictionary:
 			var current_focus = vitals_component.get_vital_current(VitalsComponent.VitalType.FOCUS)
 			if action.focus_cost > current_focus:
 				continue
-		if condition_evaluators[i]:
-			condition_evaluators[i].action = action
-			condition_evaluators[i].side_component = side_component
-			if not condition_evaluators[i].evaluate():
-				continue
+		var all_pass = true
+		for evaluator in pre_selection_evaluators[i]:
+			evaluator.action = action
+			evaluator.side_component = side_component
+			if not evaluator.evaluate():
+				all_pass = false
+				break
+		if not all_pass:
+			continue
 		var target = target_selectors[i].select_target(action, actor, side_component)
 		if target.valid():
 			return {"id": i, "rule": rule, "target": target, "action": action}

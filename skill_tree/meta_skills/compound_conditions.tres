@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MetaSkill" format=3 uid="uid://bcompconds001"]
+
+[ext_resource type="Script" path="res://meta/meta_skill.gd" id="1_cc"]
+
+[resource]
+script = ExtResource("1_cc")
+description_text = "Lets you AND together two conditions on a single rule, for more precise rule firing."
+skill_name = &"Compound Conditions"
+skill_type = 5
+tree_type = 6

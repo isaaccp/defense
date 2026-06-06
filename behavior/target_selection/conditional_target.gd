@@ -2,40 +2,47 @@ extends Target
 
 class_name ConditionalTarget
 
-# Populated by factory methods, needs to match target Type.
-var condition_evaluator: ConditionEvaluator
+# Stored ANDed condition evaluators that get re-checked via
+# meets_condition() while the action is in progress.
+var condition_evaluators: Array = []
 
-## Whether the target still meets the initial condition.
+## Whether the target still meets all initial conditions.
 func meets_condition() -> bool:
-	if not condition_evaluator:
+	if condition_evaluators.is_empty():
 		return true
 	match type:
 		Type.ACTOR:
-			var actor_condition_evaluator = condition_evaluator as TargetActorConditionEvaluator
-			assert(actor_condition_evaluator, "Actor target unexpectedly got wrong evaluator type")
-			return actor_condition_evaluator.evaluate(actor)
+			for ev in condition_evaluators:
+				var actor_eval = ev as TargetActorConditionEvaluator
+				assert(actor_eval, "Actor target unexpectedly got wrong evaluator type")
+				if not actor_eval.evaluate(actor):
+					return false
+			return true
 		Type.POSITION:
-			var position_condition_evaluator = condition_evaluator as PositionConditionEvaluator
-			assert(position_condition_evaluator, "Position target unexpectedly got wrong evaluator type")
-			return position_condition_evaluator.evaluate(pos)
+			for ev in condition_evaluators:
+				var pos_eval = ev as PositionConditionEvaluator
+				assert(pos_eval, "Position target unexpectedly got wrong evaluator type")
+				if not pos_eval.evaluate(pos):
+					return false
+			return true
 		Type.ACTORS:
 			assert(false, "Implement me when there are Actors targets")
 	return false
 
-static func make_actor_conditional_target(actor_: Actor, condition_evaluator: TargetActorConditionEvaluator) -> ConditionalTarget:
+static func make_actor_conditional_target(actor_: Actor, evaluators: Array[TargetActorConditionEvaluator]) -> ConditionalTarget:
 	var target = ConditionalTarget.new()
 	target.type = Type.ACTOR
 	target.actor = actor_
-	target.condition_evaluator = condition_evaluator
+	target.condition_evaluators = evaluators
 	return target
 
 # Implement
 static func make_actors_conditional_target(_actors: Array[Actor]) -> ConditionalTarget:
 	return null
 
-static func make_position_conditional_target(position: Vector2, condition_evaluator: PositionConditionEvaluator) -> ConditionalTarget:
+static func make_position_conditional_target(position: Vector2, evaluators: Array[PositionConditionEvaluator]) -> ConditionalTarget:
 	var target = ConditionalTarget.new()
 	target.type = Type.POSITION
 	target.pos = position
-	target.condition_evaluator = condition_evaluator
+	target.condition_evaluators = evaluators
 	return target

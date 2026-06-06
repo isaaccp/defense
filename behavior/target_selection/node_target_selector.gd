@@ -2,7 +2,9 @@ extends TargetSelector
 
 class_name NodeTargetSelector
 
-var condition_evaluator: TargetActorConditionEvaluator
+# Conditions are ANDed: a candidate must pass all of them. Empty array = no
+# per-candidate filtering.
+var condition_evaluators: Array[TargetActorConditionEvaluator] = []
 
 func select_target(action: Action, actor: Actor, side_component: SideComponent) -> Target:
 	var targets = select_targets(action, actor, side_component)
@@ -10,8 +12,13 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 		var sorter = TargetSorterFactory.make_actor_target_sorter(def.sort())
 		sorter.sort(actor, targets)
 	for target in targets:
-		# Verify condition.
-		if condition_evaluator and not condition_evaluator.evaluate(target):
+		# Verify all conditions pass.
+		var all_pass := true
+		for evaluator in condition_evaluators:
+			if not evaluator.evaluate(target):
+				all_pass = false
+				break
+		if not all_pass:
 			continue
 		# Verify in range.
 		if action.filter_with_distance:
@@ -26,7 +33,7 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 		if not action.filter_with_distance:
 			if not _check_distance(actor, target, action):
 				return Target.make_invalid()
-		return ConditionalTarget.make_actor_conditional_target(target, condition_evaluator)
+		return ConditionalTarget.make_actor_conditional_target(target, condition_evaluators)
 	# If we didn't find a target, return invalid.
 	return Target.make_invalid()
 

@@ -155,6 +155,21 @@ func _validate_config() -> bool:
 		errors.append("config missing 'level' field")
 	elif not ResourceLoader.exists(level):
 		errors.append("level not found: %s" % level)
+	# Top-level meta_skills represent the player's meta-progression, which is
+	# global (not per-character). Defaults to empty if absent → cap stays at
+	# 1 condition per rule. Drives MaxConditions and any future meta-gated
+	# behavior expressiveness.
+	var meta_skill_set: Dictionary = {}
+	var meta_cfg = _config.get("meta_skills", [])
+	if typeof(meta_cfg) == TYPE_ARRAY:
+		for basename in meta_cfg:
+			var meta_name := _resolve_skill_basename(basename)
+			if meta_name == &"":
+				errors.append("meta_skills: skill basename '%s' not found in %s" % [basename, ", ".join(SKILL_TREE_DIRS)])
+			else:
+				meta_skill_set[meta_name] = true
+	elif meta_cfg != null:
+		errors.append("config 'meta_skills' must be an array of basenames")
 	var characters_cfg: Array = _config.get("characters", [])
 	if characters_cfg.is_empty():
 		errors.append("config has no characters")
@@ -187,7 +202,7 @@ func _validate_config() -> bool:
 		# Behavior.
 		var behavior_path: String = cfg.get("behavior", "")
 		if not behavior_path.is_empty():
-			_validate_behavior_file(behavior_path, acquired_set, has_all_skills, prefix, errors)
+			_validate_behavior_file(behavior_path, acquired_set, has_all_skills, meta_skill_set, prefix, errors)
 	if errors.is_empty():
 		return true
 	push_error("Config validation failed:\n  - %s" % "\n  - ".join(errors))
@@ -197,7 +212,7 @@ func _validate_config() -> bool:
 # Walks a behavior JSON file and records issues against `errors`. Resolves
 # every skill reference via SkillManager and checks it's in the character's
 # acquired set (or all_skills if "full").
-func _validate_behavior_file(path: String, acquired: Dictionary, full: bool, prefix: String, errors: PackedStringArray) -> void:
+func _validate_behavior_file(path: String, acquired: Dictionary, full: bool, meta_skill_set: Dictionary, prefix: String, errors: PackedStringArray) -> void:
 	var abs := ProjectSettings.globalize_path(path) if path.begins_with("res://") else path
 	var f := FileAccess.open(abs, FileAccess.READ)
 	if not f:
@@ -213,8 +228,30 @@ func _validate_behavior_file(path: String, acquired: Dictionary, full: bool, pre
 	for i in rules.size():
 		var rule = rules[i]
 		var rule_prefix := "%s behavior %s rule[%d]" % [prefix, path.get_file(), i]
-		for field in ["action", "target", "condition"]:
+		for field in ["action", "target"]:
 			_validate_skill_ref(rule.get(field), field, rule_prefix, acquired, full, errors)
+		# `condition` (singular, legacy) and/or `conditions` (array). Both
+		# may be present; both get validated.
+		if rule.has("condition") and rule.get("condition") != null:
+			_validate_skill_ref(rule.get("condition"), "condition", rule_prefix, acquired, full, errors)
+		if rule.has("conditions") and rule.get("conditions") != null:
+			var conds = rule.get("conditions")
+			if typeof(conds) != TYPE_ARRAY:
+				errors.append("%s.conditions must be an array" % rule_prefix)
+			else:
+				for ci in conds.size():
+					_validate_skill_ref(conds[ci], "conditions[%d]" % ci, rule_prefix, acquired, full, errors)
+		# Enforce the meta-skill-gated cap on conditions per rule.
+		var cond_count := 0
+		if rule.has("conditions") and typeof(rule.get("conditions")) == TYPE_ARRAY:
+			cond_count = (rule.get("conditions") as Array).size()
+		elif rule.has("condition") and rule.get("condition") != null:
+			cond_count = 1
+		# Cap is gated by GLOBAL meta-skills (`config.meta_skills`), not the
+		# per-character `acquired_skills` — meta progression is run-wide.
+		var cap := MaxConditions.cap_for_set(meta_skill_set, full)
+		if cond_count > cap:
+			errors.append("%s has %d conditions but the run's cap is %d (unlock 'Compound Conditions' for 2, 'Triple Conditions' for 3 via config.meta_skills)" % [rule_prefix, cond_count, cap])
 		# `sort` is optional; if present validate it.
 		if rule.has("sort") and rule.get("sort") != null:
 			_validate_skill_ref(rule.get("sort"), "sort", rule_prefix, acquired, full, errors)
@@ -351,10 +388,29 @@ func _build_rule(cfg: Dictionary, idx: int, path: String) -> RuleDef:
 		if not sort_skill:
 			return null
 		target_sps.params.sort = StoredSkill.from_skill(sort_skill)
-	var condition_sps := _build_stored_param_skill(cfg.get("condition"), Skill.SkillType.CONDITION, "condition", idx, path)
-	if not condition_sps:
+	# Build the rule's conditions. Accept either `conditions` (array) — new
+	# canonical form — or `condition` (single) for backward compatibility.
+	# `conditions` takes precedence if both are present.
+	var conditions_arr: Array[StoredParamSkill] = []
+	var conds_cfg = cfg.get("conditions")
+	if conds_cfg != null:
+		if typeof(conds_cfg) != TYPE_ARRAY:
+			_fail("%s rule #%d.conditions must be an array" % [path, idx])
+			return null
+		for ci in conds_cfg.size():
+			var c := _build_stored_param_skill(conds_cfg[ci], Skill.SkillType.CONDITION, "conditions[%d]" % ci, idx, path)
+			if not c:
+				return null
+			conditions_arr.append(c)
+	elif cfg.has("condition") and cfg.get("condition") != null:
+		var c := _build_stored_param_skill(cfg.get("condition"), Skill.SkillType.CONDITION, "condition", idx, path)
+		if not c:
+			return null
+		conditions_arr.append(c)
+	if conditions_arr.is_empty():
+		_fail("%s rule #%d: at least one condition required (use 'condition' or 'conditions')" % [path, idx])
 		return null
-	return RuleDef.make(target_sps, action_sps, condition_sps)
+	return RuleDef.make_with_conditions(target_sps, action_sps, conditions_arr)
 
 func _build_stored_param_skill(cfg: Variant, expected_type: int, field: String, rule_idx: int, path: String) -> StoredParamSkill:
 	if typeof(cfg) != TYPE_DICTIONARY:

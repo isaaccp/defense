@@ -53,8 +53,11 @@ func lookup_skill(name: StringName) -> Skill:
 func restore_rule(stored_rule: RuleDef) -> Rule:
 	var rule = Rule.new()
 	rule.target_selection = restore_skill(stored_rule.target_selection) as TargetSelectionDef
-	rule.condition = restore_skill(stored_rule.condition) as ConditionDef
 	rule.action = restore_skill(stored_rule.action) as ActionDef
+	var conds: Array[ConditionDef] = []
+	for stored in stored_rule.effective_conditions():
+		conds.append(restore_skill(stored) as ConditionDef)
+	rule.conditions = conds
 	return rule
 
 func restore_skill(stored_skill: StoredSkill) -> Skill:
