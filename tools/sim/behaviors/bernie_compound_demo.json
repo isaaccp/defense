@@ -1,0 +1,60 @@
+{
+  "name": "bernie_compound_demo",
+  "rules": [
+    {
+      "action": {"name": "Magic Armor"},
+      "target": {"name": "Self"},
+      "conditions": [
+        {
+          "name": "Targeted By Enemies",
+          "params": {"cmp": ">=", "int_value": 1}
+        },
+        {
+          "name": "Target Health",
+          "params": {"cmp": "<", "int_value": 30}
+        }
+      ]
+    },
+    {
+      "action": {"name": "Chilling Sphere"},
+      "target": {"name": "Most Enemies Position"},
+      "condition": {
+        "name": "Can Hit Enemies",
+        "params": {"cmp": ">=", "int_value": 2}
+      }
+    },
+    {
+      "action": {"name": "Chilling Sphere"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Fire Burst"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Seeking Bolt"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {
+        "name": "Move Away",
+        "params": {"float_value": 100}
+      },
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    },
+    {
+      "action": {"name": "Move To"},
+      "target": {"name": "Enemy"},
+      "sort": {"name": "Closest First"},
+      "condition": {"name": "Always"}
+    }
+  ]
+}
