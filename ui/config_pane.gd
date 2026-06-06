@@ -1,24 +1,20 @@
 @tool
 extends PopupPanel
 
-var _item: TreeItem
-var _col: int
 var _params: SkillParams
 var _acquired_skills: SkillTreeState
+var _on_confirm: Callable
 
 @onready var input = %Input
-
-signal config_confirmed(item: TreeItem, col: int, result: String)
 
 # NOTE: Just for testing the scene quickly, could be removed.
 func _ready():
 	%OK.disabled = true
 
-func setup(item: TreeItem, col: int, acquired_skills: SkillTreeState) -> void:
-	_item = item
-	_col = col
-	_params = item.get_metadata(col).params as SkillParams
+func setup(params: SkillParams, acquired_skills: SkillTreeState, on_confirm: Callable) -> void:
+	_params = params
 	_acquired_skills = acquired_skills
+	_on_confirm = on_confirm
 
 	for c in input.get_children():
 		input.remove_child(c)
@@ -120,7 +116,8 @@ func results() -> SkillParams:
 	return _params
 
 func _on_ok_pressed():
-	config_confirmed.emit(_item, _col, results())
+	if _on_confirm.is_valid():
+		_on_confirm.call(results())
 	hide()
 
 func _on_cancel_pressed():

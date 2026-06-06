@@ -407,9 +407,8 @@ func _build_rule(cfg: Dictionary, idx: int, path: String) -> RuleDef:
 		if not c:
 			return null
 		conditions_arr.append(c)
-	if conditions_arr.is_empty():
-		_fail("%s rule #%d: at least one condition required (use 'condition' or 'conditions')" % [path, idx])
-		return null
+	# An empty conditions list is allowed and means "Always" — the rule fires
+	# whenever target/action constraints permit.
 	return RuleDef.make_with_conditions(target_sps, action_sps, conditions_arr)
 
 func _build_stored_param_skill(cfg: Variant, expected_type: int, field: String, rule_idx: int, path: String) -> StoredParamSkill:

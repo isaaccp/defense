@@ -18,6 +18,11 @@ func initialize(title: String, behavior: StoredBehavior, acquired_skills: SkillT
 	%BehaviorLibraryContainer.visible = behavior_library != null
 	%BehaviorEditor.initialize(behavior, acquired_skills, is_editor)
 	%Toolbox.initialize(acquired_skills)
+	if not %Toolbox.drag_started.is_connected(_on_toolbox_drag_started):
+		%Toolbox.drag_started.connect(_on_toolbox_drag_started)
+
+func _on_toolbox_drag_started(drag_type: int) -> void:
+	(%BehaviorEditor as BehaviorEditor).highlight_drop_targets(drag_type)
 
 func editor_initialize(b: StoredBehavior):
 	if not b:

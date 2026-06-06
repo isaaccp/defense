@@ -2,130 +2,88 @@ extends GutTest
 
 const _ui_scene = preload("res://ui/programming_ui.tscn")
 
-var _sender = InputSender.new(Input)
+# Earlier InputSender-based drag/drop tests were removed: _can_drop_data fires
+# with real mouse coordinates rather than InputSender coordinates, so the drops
+# never succeeded (gut issue 646). Tests below exercise the editor's data model
+# and widget transitions directly, which doesn't require simulated input.
 
-func after_each():
-	_sender.release_all()
-	_sender.clear()
-
-func test_last_empty():
+func test_last_empty_placeholder_present():
 	var ui = _ui_scene.instantiate() as ProgrammingUI
-	ui._initialize_from_test_character()
+	# Add to tree first so _ready cascades fire before initialize touches
+	# the widgets; otherwise RuleWidget._target_cell is nil during setup.
 	add_child_autoqfree(ui)
-
-	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
-	var behavior_editor_view = behavior_editor.get_node("%BehaviorEditorView") as BehaviorEditorView
-	var last_rule = _last_rule_line(behavior_editor_view)
-	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
-
-# Test disabled as now _can_drop_data gets invoked with real mouse coordinates
-# instead of with inputsender coordinates.
-# See https://github.com/bitwes/Gut/issues/646#issuecomment-2888592657
-func _test_empty_after_new_drop():
-	var ui = _ui_scene.instantiate() as ProgrammingUI
 	ui._initialize_from_test_character()
-	add_child_autoqfree(ui)
-	ui.show()
-	await wait_frames(1)
 
-	var toolbox = ui.get_node("%Toolbox") as Tree
-	var src = _find_toolbox_item(toolbox, "Once")
-	assert_not_null(src, "Could not find Once")
-	var src_rect = toolbox.get_item_area_rect(src, 0)
+	var view = _view_from_ui(ui)
+	var rules = view._list.get_children()
+	assert_gt(rules.size(), 0, "some rule widgets must be present")
+	assert_true(rules[-1].is_empty(), "last rule should be an empty placeholder")
 
-	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
-	var behavior_editor_view = behavior_editor.get_node("%BehaviorEditorView") as BehaviorEditorView
-	var start_count = behavior_editor_view.get_root().get_child_count()
-	var last_rule = _last_rule_line(behavior_editor_view)
-	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
-	var dest_rect = behavior_editor_view.get_item_area_rect(last_rule, BehaviorEditorView.Column.CONDITION)
+func test_conditions_cap_with_full_skills():
+	var view = _make_view(true)
+	assert_eq(view.conditions_cap, 3, "full skill access = cap of 3 conditions per rule")
 
-	await _drag_drop(toolbox.global_position + src_rect.get_center(),
-		behavior_editor_view.global_position + dest_rect.get_center())
+func test_conditions_cap_with_no_meta_skills():
+	var view = _make_view(false)
+	assert_eq(view.conditions_cap, 1, "no meta skills = cap of 1 condition per rule")
 
-	assert_gt(behavior_editor_view.get_root().get_child_count(), start_count)
+func test_rule_summary_empty():
+	var view = _make_view(true)
+	var rule = view._list.get_children()[0]
+	assert_eq(rule.rule_summary(), "", "empty placeholder has no summary")
 
-	var new_last_rule = _last_rule_line(behavior_editor_view)
-	assert_true(behavior_editor_view._is_empty(new_last_rule), "new last rule should be an empty placeholder")
-	assert_not_same(new_last_rule, last_rule)
+func test_rule_summary_complete_no_conditions():
+	var view = _make_view(true)
+	var rule = view._list.get_children()[0]
+	_fill_rule(rule, &"Enemy", &"Move To")
+	var summary = rule.rule_summary()
+	assert_string_contains(summary, "Action: ")
+	assert_string_contains(summary, "Target: ")
+	assert_string_contains(summary, "When: always")
 
-	if is_failing(): # TODO: Only if !gut.add_children_to._cmdln_mode?
-		pause_before_teardown()
+func test_rule_summary_with_condition():
+	var view = _make_view(true)
+	var rule = view._list.get_children()[0]
+	_fill_rule(rule, &"Enemy", &"Move To")
+	rule._add_condition_row(SkillManager.make_condition_instance(&"Once"))
+	var summary = rule.rule_summary()
+	assert_string_contains(summary, "When: ")
+	assert_true(not summary.contains("always"), "summary should drop 'always' once a condition is present")
 
-# Test disabled as now _can_drop_data gets invoked with real mouse coordinates
-# instead of with inputsender coordinates.
-# See https://github.com/bitwes/Gut/issues/646#issuecomment-2888592657
-func _test_noop_always_drop():
-	# FIXME: Deal with orphans
-	var ui = _ui_scene.instantiate() as ProgrammingUI
-	ui._initialize_from_test_character()
-	add_child_autoqfree(ui)
-	ui.show()
-	await wait_frames(1)
+func test_filling_placeholder_appends_new_placeholder():
+	var view = _make_view(true)
+	assert_eq(view._list.get_child_count(), 1, "starts with single placeholder")
+	_fill_rule(view._list.get_children()[0], &"Enemy", &"Move To")
+	assert_eq(view._list.get_child_count(), 2, "new placeholder appended after first rule is filled")
+	assert_false(view._list.get_children()[0].is_empty())
+	assert_true(view._list.get_children()[1].is_empty())
 
-	var toolbox = ui.get_node("%Toolbox") as Tree
-	var src = _find_toolbox_item(toolbox, "Always")
-	assert_not_null(src, "Could not find Always")
-	var src_rect = toolbox.get_item_area_rect(src, 0)
+func test_get_behavior_excludes_placeholder():
+	var view = _make_view(true)
+	_fill_rule(view._list.get_children()[0], &"Enemy", &"Move To")
+	var behavior = view.get_behavior()
+	assert_not_null(behavior)
+	assert_eq(behavior.stored_rules.size(), 1, "trailing placeholder excluded from saved behavior")
+	var stored = behavior.stored_rules[0]
+	assert_eq(stored.target_selection.name, &"Enemy")
+	assert_eq(stored.action.name, &"Move To")
 
-	var behavior_editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
-	var behavior_editor_view = behavior_editor.get_node("%BehaviorEditorView") as BehaviorEditorView
-	var start_count = behavior_editor_view.get_root().get_child_count()
-	var last_rule = _last_rule_line(behavior_editor_view)
-	assert_true(behavior_editor_view._is_empty(last_rule), "last rule should be an empty placeholder")
-	var dest_rect = behavior_editor_view.get_item_area_rect(last_rule, BehaviorEditorView.Column.CONDITION)
+# --- Helpers ---
 
-	await _drag_drop(toolbox.global_position + src_rect.get_center(),
-		behavior_editor_view.global_position + dest_rect.get_center())
+func _view_from_ui(ui: ProgrammingUI) -> BehaviorEditorView:
+	var editor = ui.get_node("%BehaviorEditor") as BehaviorEditor
+	return editor.get_node("%BehaviorEditorView") as BehaviorEditorView
 
-	assert_eq(behavior_editor_view.get_root().get_child_count(), start_count)
+func _make_view(full: bool) -> BehaviorEditorView:
+	var view = BehaviorEditorView.new()
+	add_child_autoqfree(view)
+	var skills = SkillTreeState.new()
+	skills.full = full
+	view.initialize(skills)
+	view.load_behavior(null)
+	return view
 
-	var new_last_rule = _last_rule_line(behavior_editor_view)
-	assert_true(behavior_editor_view._is_empty(new_last_rule), "last rule should still be an empty placeholder")
-	assert_same(new_last_rule, last_rule)
-
-	if is_failing(): # TODO: Only if !gut.add_children_to._cmdln_mode?
-		pause_before_teardown()
-
-func _drag_drop(start_pos: Vector2, end_pos: Vector2):
-	# FIXME: Stupid hack to avoid the large overlay taking input :-/
-	gut.add_children_to._gui.hide()
-
-	_sender.mouse_motion(start_pos)
-	_sender.mouse_left_button_down(start_pos)
-
-	# Start the drag.
-	_sender.mouse_relative_motion(Vector2(10, 10))
-	await wait_for_signal(self.drag_start, 1)
-	assert_signal_emitted(self, 'drag_start')
-
-	_sender.mouse_motion(end_pos)
-	_sender.mouse_left_button_up(end_pos)
-
-	# Make sure the reaction has been processed.
-	await wait_for_signal(self.drag_stop, 1)
-	assert_signal_emitted(self, 'drag_stop')
-	assert_true(get_viewport().gui_is_drag_successful(), "drop should be successful")
-	gut.add_children_to._gui.show()
-
-signal drag_start
-signal drag_stop
-
-func _notification(what):
-	if what == NOTIFICATION_DRAG_BEGIN:
-		get_logger().info("Notification: DRAG_BEGIN")
-		drag_start.emit()
-	elif what == NOTIFICATION_DRAG_END:
-		get_logger().info("Notification: DRAG_END")
-		drag_stop.emit()
-
-func _last_rule_line(behavior_editor_view: BehaviorEditorView) -> TreeItem:
-	assert_gt(behavior_editor_view.get_root().get_child_count(), 0, "some rule lines must be present in behavior list")
-	return behavior_editor_view.get_root().get_children()[-1]
-
-func _find_toolbox_item(toolbox: Tree, text: String) -> TreeItem:
-	for header in toolbox.get_root().get_children():
-		for c in header.get_children():
-			if c.get_text(0) == text:
-				return c
-	return null
+func _fill_rule(rule, target_name: StringName, action_name: StringName) -> void:
+	rule._target_cell.set_skill(SkillManager.make_target_selection_instance(target_name))
+	rule._action_cell.set_skill(SkillManager.make_action_instance(action_name))
+	rule.on_cell_changed()

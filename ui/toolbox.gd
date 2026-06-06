@@ -1,6 +1,10 @@
 @tool
 class_name Toolbox extends Tree
 
+# Emitted when the user starts dragging a skill from the toolbox. Listeners
+# (e.g. the behavior editor) use it to highlight valid drop targets.
+signal drag_started(drag_type: int)
+
 var _root: TreeItem
 var _targets: TreeItem
 var _triggers: TreeItem
@@ -74,4 +78,5 @@ func _get_drag_data(at_position: Vector2):
 	if metadata.has("params") and not metadata.params.placeholders.is_empty():
 		preview.text = metadata.params.interpolated_text()
 
+	drag_started.emit(metadata.column)
 	return {"type": metadata.column, "text": preview.text, "name": metadata.name, "params": metadata.get("params")}
