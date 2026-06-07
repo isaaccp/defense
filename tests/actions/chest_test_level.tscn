@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bchesttest001"]
+
+[ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_basel"]
+[ext_resource type="PackedScene" uid="uid://bchestscn001" path="res://interactables/chest/chest.tscn" id="2_chest"]
+
+[node name="Level" instance=ExtResource("1_basel")]
+players = 1
+
+[node name="First" parent="StartingPositions" index="0"]
+position = Vector2(100, 100)
+
+[node name="Chest" parent="YSorted/Interactables" index="0" instance=ExtResource("2_chest")]
+position = Vector2(160, 100)
+
+[node name="VictoryLossConditionComponent" parent="." index="4"]
+loss = Array[int]([2])

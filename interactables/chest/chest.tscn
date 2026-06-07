@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bchestscn001"]
+
+[ext_resource type="Script" path="res://interactables/chest/chest.gd" id="1_chest"]
+[ext_resource type="Texture2D" uid="uid://kydsbc6g3737" path="res://assets/pixel-crawler/Environment/Green Woods/Assets/barrel_full.tres" id="2_chestv"]
+
+[node name="Chest" type="Node2D" groups=["interactables"]]
+script = ExtResource("1_chest")
+actor_name = "Chest"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_chestv")
+offset = Vector2(0, -8)

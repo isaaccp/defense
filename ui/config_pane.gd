@@ -78,6 +78,23 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 					opt.select(idx+1)
 			opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))
 			input.add_child(opt)
+		SkillParams.PlaceholderId.INTERACTABLE_KIND:
+			var opt = OptionButton.new()
+			opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+			opt.set_item_disabled(0, true)
+			opt.fit_to_longest_item = false
+
+			var current_kind: Interactable.Kind = _params.get_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND)
+			var values: Array[Interactable.Kind] = []
+			for v in Interactable.Kind.values():
+				if v == Interactable.Kind.UNSPECIFIED:
+					continue
+				values.append(v)
+				opt.add_item(Interactable.Kind.keys()[v])
+				if current_kind == v:
+					opt.select(values.size())
+			opt.item_selected.connect(_on_interactable_kind_selected.bind(placeholder_id, values))
+			input.add_child(opt)
 
 func _populate():
 	for part in _params.parts:
@@ -110,6 +127,10 @@ func _on_sort_selected(selection: int, placeholder: SkillParams.PlaceholderId, o
 	var sort = SkillManager.lookup_target_sort(name)
 	assert(sort)
 	_params.set_placeholder_value(placeholder, sort)
+	_check_ok()
+
+func _on_interactable_kind_selected(selection: int, placeholder: SkillParams.PlaceholderId, values: Array[Interactable.Kind]):
+	_params.set_placeholder_value(placeholder, values[selection-1])
 	_check_ok()
 
 func results() -> SkillParams:

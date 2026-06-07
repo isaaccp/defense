@@ -67,6 +67,9 @@ func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
 	ui_layer.behavior_modified.connect(_on_behavior_modified)
 	ui_layer.relic_selected.connect(_on_relic_selected)
 
+func _on_gold_earned(amount: int) -> void:
+	run_save_state.gold += amount
+
 func _on_character_selection_entered():
 	ui_layer.start_character_selection(level_provider)
 	ui_layer.character_selection_screen_selection_ready.connect(_on_character_selection_finished, CONNECT_ONE_SHOT)
@@ -106,6 +109,7 @@ func _on_within_level_entered(save_snapshot: bool = true):
 		level.selected_relics = []
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
+	level.gold_earned.connect(_on_gold_earned)
 	# TODO: Add a MultiplayerSpawner here so scenes get spawned.
 	%StateParent.add_child(level, true)
 

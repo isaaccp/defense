@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=18 format=3 uid="uid://4qkxww5nsquv"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=20 format=3 uid="uid://4qkxww5nsquv"]
 
 [ext_resource type="Script" uid="uid://c1djrnxq4hwmu" path="res://skill_tree/skill_tree.gd" id="1_sstov"]
 [ext_resource type="Resource" uid="uid://bvxe5mref8kvh" path="res://skill_tree/actions/move_away.tres" id="2_5jsag"]
@@ -17,8 +17,10 @@
 [ext_resource type="Resource" uid="uid://xun2hm81rhd1" path="res://skill_tree/conditions/times.tres" id="12_rhord"]
 [ext_resource type="Resource" uid="uid://dqatlurvqnehm" path="res://skill_tree/target_sorts/closest_first.tres" id="13_tdsq7"]
 [ext_resource type="Resource" uid="uid://bh04aym60yde5" path="res://skill_tree/target_sorts/farthest_first.tres" id="14_ee58q"]
+[ext_resource type="Resource" uid="uid://bopenact001" path="res://skill_tree/actions/open.tres" id="15_open"]
+[ext_resource type="Resource" uid="uid://dinteractable01" path="res://skill_tree/targets/interactable.tres" id="16_intr"]
 
 [resource]
 script = ExtResource("1_sstov")
 tree_type = 1
-skills = Array[ExtResource("2_i8foi")]([ExtResource("2_5jsag"), ExtResource("3_kquhl"), ExtResource("2_vu0ia"), ExtResource("3_n3lg8"), ExtResource("3_lulvd"), ExtResource("3_oj4av"), ExtResource("5_jcphg"), ExtResource("4_efvur"), ExtResource("5_axcoh"), ExtResource("6_ya2sl"), ExtResource("10_jp7jp"), ExtResource("6_g73vn"), ExtResource("12_rhord"), ExtResource("13_tdsq7"), ExtResource("14_ee58q")])
+skills = Array[ExtResource("2_i8foi")]([ExtResource("2_5jsag"), ExtResource("3_kquhl"), ExtResource("2_vu0ia"), ExtResource("3_n3lg8"), ExtResource("3_lulvd"), ExtResource("3_oj4av"), ExtResource("5_jcphg"), ExtResource("4_efvur"), ExtResource("5_axcoh"), ExtResource("6_ya2sl"), ExtResource("10_jp7jp"), ExtResource("6_g73vn"), ExtResource("12_rhord"), ExtResource("13_tdsq7"), ExtResource("14_ee58q"), ExtResource("15_open"), ExtResource("16_intr")])

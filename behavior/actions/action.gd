@@ -191,6 +191,19 @@ func target_position(position_type: Target.PositionType = Target.PositionType.DE
 	var action_target = ActionTarget.new(target, position_type)
 	return action_target.target_position()
 
+# True if the current target is still within this action's [min_distance,
+# max_distance] from the actor. Handy for channeled / multi-tick actions
+# that need to verify the target hasn't drifted out of range between checks.
+# Selectors do their own range filtering at selection time via
+# NodeTargetSelector._check_distance.
+func in_range() -> bool:
+	if not is_instance_valid(actor):
+		return false
+	if not target or not target.valid():
+		return false
+	var distance = target_position().distance_to(actor.global_position)
+	return min_distance <= distance and distance <= max_distance
+
 func attributes():
 	var attrs = ""
 	attrs += _range_str() + "\n"

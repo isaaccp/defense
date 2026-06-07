@@ -9,6 +9,8 @@ class_name RunSaveState
 @export var current_level: int
 @export var relic_library_state: RelicLibraryState
 @export var stats: Stats
+## Shared between all characters. Earned from chests, spent at shops.
+@export var gold: int = 0
 
 static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider) -> RunSaveState:
 	var run_save_state = RunSaveState.new()

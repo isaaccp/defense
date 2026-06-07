@@ -16,7 +16,8 @@
       "Bash(xvfb-run -a /data/godot/bin/Godot_* --path . -s tools/*)",
       "Bash(/data/godot/bin/Godot_* --headless --path . -s tools/*)",
       "Bash(xargs ls)",
-      "Bash(xvfb-run -a /data/godot/bin/Godot_* --headless --editor --quit)"
+      "Bash(xvfb-run -a /data/godot/bin/Godot_* --headless --editor --quit)",
+      "Bash(xvfb-run -a /data/godot/bin/Godot_* --headless -s addons/gut/gut_cmdln.gd -gexit)"
     ]
   }
 }

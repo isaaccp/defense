@@ -13,12 +13,13 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 960, 0, 960, 540, 0, 540)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("characters", "enemies", "towers", "spawners", "starting_positions", "placement_component")]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("characters", "enemies", "towers", "spawners", "interactables", "starting_positions", "placement_component")]
 script = ExtResource("1_7c17s")
 characters = NodePath("YSorted/Characters")
 enemies = NodePath("YSorted/Enemies")
 towers = NodePath("YSorted/Towers")
 spawners = NodePath("YSorted/Spawners")
+interactables = NodePath("YSorted/Interactables")
 starting_positions = NodePath("StartingPositions")
 placement_component = NodePath("PlacementComponent")
 
@@ -56,6 +57,9 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Spawners" type="Node2D" parent="YSorted"]
+
+[node name="Interactables" type="Node2D" parent="YSorted"]
+y_sort_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_ga831")

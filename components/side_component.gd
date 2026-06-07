@@ -57,3 +57,12 @@ func enemies() -> Array:
 	for group in enemy_groups:
 		nodes.append_array(get_tree().get_nodes_in_group(group))
 	return nodes
+
+# Side-independent world queries. They live here so target selectors don't
+# have to reach into the scene tree themselves, even though "side" isn't
+# meaningful for these.
+func towers() -> Array:
+	return get_tree().get_nodes_in_group(Groups.TOWERS)
+
+func interactables() -> Array:
+	return get_tree().get_nodes_in_group(Groups.INTERACTABLES)

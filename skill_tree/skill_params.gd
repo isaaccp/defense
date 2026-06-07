@@ -9,6 +9,7 @@ enum PlaceholderId {
 	INT_VALUE,
 	FLOAT_VALUE,
 	SORT,
+	INTERACTABLE_KIND,
 }
 
 enum CmpOp {
@@ -33,6 +34,7 @@ enum CmpOp {
 @export var int_value: IntValue
 @export var float_value: FloatValue
 @export var sort: StoredSkill
+@export var interactable_kind: Interactable.Kind
 
 # Don't want those to end up saved in resources.
 # @export_group("Debug")
@@ -58,6 +60,9 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 		PlaceholderId.SORT:
 			assert(value is TargetSort)
 			sort = StoredSkill.from_skill(value)
+		PlaceholderId.INTERACTABLE_KIND:
+			assert(typeof(value) == TYPE_INT)
+			interactable_kind = value as Interactable.Kind
 
 func get_placeholder_string(placeholder: PlaceholderId) -> String:
 	match placeholder:
@@ -69,6 +74,8 @@ func get_placeholder_string(placeholder: PlaceholderId) -> String:
 			return "%0.1f" % float_value.value
 		PlaceholderId.SORT:
 			return str(sort)
+		PlaceholderId.INTERACTABLE_KIND:
+			return Interactable.Kind.keys()[interactable_kind]
 
 	assert(false, "Unreachable")
 	return "<bug>"
@@ -84,8 +91,12 @@ func get_placeholder_value(placeholder: PlaceholderId) -> Variant:
 			return float_value.value
 		PlaceholderId.SORT:
 			return sort
+		PlaceholderId.INTERACTABLE_KIND:
+			return interactable_kind
 	assert(false, "Unreachable")
 	return null
+
+
 
 func all_set() -> bool:
 	if not valid:
@@ -123,6 +134,8 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 			return float_value and float_value.defined
 		PlaceholderId.SORT:
 			return sort != null
+		PlaceholderId.INTERACTABLE_KIND:
+			return interactable_kind != Interactable.Kind.UNSPECIFIED
 	assert(false, "unreachable")
 	return false
 

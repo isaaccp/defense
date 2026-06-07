@@ -37,6 +37,7 @@ class_name Level
 @export var enemies: Node2D
 @export var towers: Node2D
 @export var spawners: Node2D
+@export var interactables: Node2D
 @export var starting_positions: Node
 @export var placement_component: PlacementComponent
 var selected_relics: Array[RelicDef]
@@ -65,6 +66,9 @@ signal level_failed
 signal level_pause_requested
 signal level_resume_requested
 
+## Aggregated from Chest.gold_earned for every chest in the level.
+signal gold_earned(amount: int)
+
 func _ready():
 	# Only when launched with F6.
 	if get_parent() == get_tree().root:
@@ -92,6 +96,14 @@ func exit():
 
 func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
 	self.ui_layer = ui_layer
+	# Forward each chest's gold reward to the level-level signal so Run
+	# (which already connects to level signals) can aggregate onto
+	# RunSaveState. Chests are placed under YSorted/Interactables.
+	if interactables:
+		for child in interactables.get_children():
+			var chest := child as Chest
+			if chest and not chest.gold_earned.is_connected(_on_chest_gold_earned):
+				chest.gold_earned.connect(_on_chest_gold_earned)
 	for i in gameplay_characters.size():
 		var gc = gameplay_characters[i]
 		if acquired_skills_override_add:
@@ -105,6 +117,9 @@ func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: Gamepla
 		character.peer_id = gc.peer_id
 		character.position = starting_positions.get_child(i).position
 		characters.add_child(character)
+
+func _on_chest_gold_earned(amount: int) -> void:
+	gold_earned.emit(amount)
 
 func _on_prepare_entered():
 	var victory = Component.get_victory_loss_condition_component_or_die(self)
