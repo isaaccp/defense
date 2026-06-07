@@ -84,15 +84,23 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 			opt.set_item_disabled(0, true)
 			opt.fit_to_longest_item = false
 
-			var current_kind: Interactable.Kind = _params.get_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND)
 			var values: Array[Interactable.Kind] = []
 			for v in Interactable.Kind.values():
 				if v == Interactable.Kind.UNSPECIFIED:
 					continue
 				values.append(v)
 				opt.add_item(Interactable.Kind.keys()[v])
-				if current_kind == v:
-					opt.select(values.size())
+			# Match the CMP pattern: if no value is set yet, show the
+			# disabled placeholder header (otherwise OptionButton silently
+			# falls through to the first selectable item, which makes the
+			# slot look filled even though params is still UNSPECIFIED — so
+			# the user's click on the visible item fires no signal and OK
+			# never enables).
+			if _params.placeholder_set(SkillParams.PlaceholderId.INTERACTABLE_KIND):
+				var current_kind: Interactable.Kind = _params.get_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND)
+				opt.select(values.find(current_kind) + 1)
+			else:
+				opt.select(0)
 			opt.item_selected.connect(_on_interactable_kind_selected.bind(placeholder_id, values))
 			input.add_child(opt)
 
