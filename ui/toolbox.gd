@@ -6,62 +6,67 @@ class_name Toolbox extends Tree
 signal drag_started(drag_type: int)
 
 var _root: TreeItem
-var _targets: TreeItem
-var _triggers: TreeItem
-var _actions: TreeItem
+var _skills: SkillTreeState
+var _filter: String = ""
 
-func _init_tree():
-	var tree = self
-	_root = tree.create_item()
-	tree.hide_root = true
-
-	_targets = tree.create_item(_root)
-	_targets.set_text(0, "Target Selection Types")
-	_targets.set_selectable(0, false)
-
-	_triggers = tree.create_item(_root)
-	_triggers.set_text(0, "Conditions")
-	_triggers.set_selectable(0, false)
-
-	_actions = tree.create_item(_root)
-	_actions.set_text(0, "Actions")
-	_actions.set_selectable(0, false)
+func _init_root():
+	_root = create_item()
+	hide_root = true
 
 func _clear_tree():
-	for header in [_targets, _triggers, _actions]:
-		for c in header.get_children():
-			header.remove_child(c)
+	if not _root:
+		return
+	for c in _root.get_children():
+		_root.remove_child(c)
 
 func initialize(skills: SkillTreeState):
-	var tree = self
+	_skills = skills
+	_filter = ""
+	_rebuild()
+
+# Case-insensitive substring filter on skill names. Empty string = show all.
+func set_filter(text: String) -> void:
+	var normalized = text.strip_edges().to_lower()
+	if normalized == _filter:
+		return
+	_filter = normalized
+	_rebuild()
+
+func _matches(name: StringName) -> bool:
+	if _filter.is_empty():
+		return true
+	return String(name).to_lower().contains(_filter)
+
+func _rebuild():
 	if not _root:
-		_init_tree()
-
+		_init_root()
 	_clear_tree()
-
-	if not skills:
+	if not _skills:
 		return
 
-	for target_type in skills.target_selections:
-		var target_item = tree.create_item(_targets)
-		var target = SkillManager.make_target_selection_instance(target_type)
-		target_item.set_text(0, target_type)
-		target_item.set_tooltip_text(0, target.description())
-		target_item.set_metadata(0, metadata(0, target_type, target.params))
+	_add_section("Target Selection Types", _skills.target_selections, 0,
+		func(n): return SkillManager.make_target_selection_instance(n))
+	_add_section("Conditions", _skills.conditions, 1,
+		func(n): return SkillManager.make_condition_instance(n))
+	_add_section("Actions", _skills.actions, 2,
+		func(n): return SkillManager.make_action_instance(n))
 
-	for condition_type in skills.conditions:
-		var condition_item = tree.create_item(_triggers)
-		var condition = SkillManager.make_condition_instance(condition_type)
-		condition_item.set_text(0, condition_type)
-		condition_item.set_tooltip_text(0, condition.description())
-		condition_item.set_metadata(0, metadata(1, condition_type, condition.params))
-
-	for action_type in skills.actions:
-		var action_item = tree.create_item(_actions)
-		var action_def = SkillManager.make_action_instance(action_type)
-		action_item.set_text(0, action_type)
-		action_item.set_tooltip_text(0, action_def.description())
-		action_item.set_metadata(0, metadata(2, action_type, action_def.params))
+func _add_section(title: String, names: Array, column: int, factory: Callable):
+	var matching: Array = []
+	for n in names:
+		if _matches(n):
+			matching.append(n)
+	if matching.is_empty():
+		return
+	var header = create_item(_root)
+	header.set_text(0, title)
+	header.set_selectable(0, false)
+	for n in matching:
+		var item = create_item(header)
+		var skill = factory.call(n)
+		item.set_text(0, n)
+		item.set_tooltip_text(0, skill.description())
+		item.set_metadata(0, metadata(column, n, skill.params))
 
 func metadata(column: int, name: StringName, params: SkillParams) -> Dictionary:
 	return {"column": column, "name": name, "params": params}

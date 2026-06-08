@@ -105,6 +105,12 @@ layout_mode = 2
 layout_mode = 2
 text = "Components"
 
+[node name="ToolboxFilter" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Filter..."
+clear_button_enabled = true
+
 [node name="Toolbox" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -112,6 +118,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 hide_root = true
 script = ExtResource("2_pkup4")
+
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer/ToolboxFilter" to="." method="_on_toolbox_filter_text_changed"]
 
 [connection signal="behavior_saved" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer/BehaviorEditor" to="." method="_on_behavior_editor_behavior_saved"]
 [connection signal="canceled" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer/BehaviorEditor" to="." method="_on_behavior_editor_canceled"]
