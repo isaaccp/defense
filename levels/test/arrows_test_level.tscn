@@ -13,8 +13,8 @@
 
 [sub_resource type="Resource" id="Resource_ewa5g"]
 script = ExtResource("2_y0hr6")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
+acquired_skills = Array[StringName]([])
+unlocked_skills = Array[StringName]([])
 full_acquired = false
 full_unlocked = false
 
@@ -33,12 +33,6 @@ params = SubResource("Resource_2q8c4")
 script = ExtResource("5_hex2m")
 editor_string = ""
 cmp = 0
-
-[sub_resource type="Resource" id="Resource_gcoon"]
-script = ExtResource("6_m8yb4")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
 
 [sub_resource type="GDScript" id="GDScript_muo0b"]
 script/source = "extends PositionTargetSorter
@@ -72,8 +66,6 @@ params = SubResource("Resource_iwcqr")
 script = ExtResource("7_k3m0c")
 target_selection = SubResource("Resource_r565m")
 action = SubResource("Resource_3gtb5")
-condition = SubResource("Resource_gcoon")
-
 [sub_resource type="Resource" id="Resource_3b2ql"]
 script = ExtResource("4_4d7lq")
 stored_rules = Array[ExtResource("7_k3m0c")]([SubResource("Resource_2525f")])

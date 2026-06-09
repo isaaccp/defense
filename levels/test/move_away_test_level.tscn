@@ -16,8 +16,8 @@
 
 [sub_resource type="Resource" id="Resource_ewa5g"]
 script = ExtResource("2_i7sf1")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
+acquired_skills = Array[StringName]([])
+unlocked_skills = Array[StringName]([])
 full_acquired = false
 full_unlocked = false
 
@@ -36,12 +36,6 @@ params = SubResource("Resource_qn50n")
 script = ExtResource("4_60r1h")
 editor_string = ""
 cmp = 0
-
-[sub_resource type="Resource" id="Resource_ysoja"]
-script = ExtResource("5_mm07s")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
 
 [sub_resource type="GDScript" id="GDScript_1v0cu"]
 script/source = "extends PositionTargetSorter
@@ -75,8 +69,6 @@ params = SubResource("Resource_womxi")
 script = ExtResource("6_btg8e")
 target_selection = SubResource("Resource_gajmh")
 action = SubResource("Resource_n5od6")
-condition = SubResource("Resource_ysoja")
-
 [sub_resource type="Resource" id="Resource_a4nba"]
 script = ExtResource("4_60r1h")
 editor_string = ""
@@ -88,12 +80,6 @@ name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_a4nba")
 
-[sub_resource type="Resource" id="Resource_vudwb"]
-script = ExtResource("5_mm07s")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
-
 [sub_resource type="Resource" id="Resource_sexqg"]
 script = ExtResource("5_mm07s")
 name = &"Enemy"
@@ -104,8 +90,6 @@ params = SubResource("Resource_womxi")
 script = ExtResource("6_btg8e")
 target_selection = SubResource("Resource_sexqg")
 action = SubResource("Resource_lsbvp")
-condition = SubResource("Resource_vudwb")
-
 [sub_resource type="Resource" id="Resource_g8jdi"]
 script = ExtResource("8_46tcw")
 saved_rules = Array[ExtResource("6_btg8e")]([SubResource("Resource_gviwp"), SubResource("Resource_71eyu")])
@@ -166,12 +150,6 @@ name = &"Bow Attack"
 skill_type = 1
 params = SubResource("Resource_unrdm")
 
-[sub_resource type="Resource" id="Resource_0chn0"]
-script = ExtResource("5_mm07s")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
-
 [sub_resource type="Resource" id="Resource_ufi61"]
 script = ExtResource("4_60r1h")
 editor_string = "Enemy ({sort})"
@@ -187,8 +165,6 @@ params = SubResource("Resource_ufi61")
 script = ExtResource("6_btg8e")
 target_selection = SubResource("Resource_peoiw")
 action = SubResource("Resource_rwyxj")
-condition = SubResource("Resource_0chn0")
-
 [sub_resource type="Resource" id="Resource_kedu6"]
 script = ExtResource("4_60r1h")
 editor_string = ""
@@ -200,12 +176,6 @@ name = &"Move To"
 skill_type = 1
 params = SubResource("Resource_kedu6")
 
-[sub_resource type="Resource" id="Resource_a7kv2"]
-script = ExtResource("5_mm07s")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
-
 [sub_resource type="Resource" id="Resource_pdmd1"]
 script = ExtResource("5_mm07s")
 name = &"Enemy"
@@ -216,8 +186,6 @@ params = SubResource("Resource_ufi61")
 script = ExtResource("6_btg8e")
 target_selection = SubResource("Resource_pdmd1")
 action = SubResource("Resource_yncsj")
-condition = SubResource("Resource_a7kv2")
-
 [sub_resource type="Resource" id="Resource_k3t3e"]
 script = ExtResource("8_46tcw")
 saved_rules = Array[ExtResource("6_btg8e")]([SubResource("Resource_c8etu"), SubResource("Resource_wbfoi"), SubResource("Resource_teswt")])

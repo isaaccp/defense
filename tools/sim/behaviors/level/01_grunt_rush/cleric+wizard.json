@@ -2,7 +2,7 @@
   "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
   "seed": 1,
   "max_seconds": 90,
-  "notes": "Cleric+Wizard pair for 01_grunt_rush. Cleric heals closest ally, wizard self-armors then ranged-attacks closest enemy. No frontliner — wizard takes hits when grunts close.",
+  "notes": "Cleric+Wizard pair for 01_grunt_rush. Cleric heals closest ally, wizard self-armors then ranged-attacks closest enemy. No frontliner \u2014 wizard takes hits when grunts close.",
   "characters": [
     {
       "character": "res://character/playable_characters/puffin_the_cleric.tres",
@@ -11,10 +11,15 @@
         "name": "cleric_heal_closest",
         "rules": [
           {
-            "action": {"name": "Heal"},
-            "target": {"name": "Ally"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }
@@ -26,27 +31,45 @@
         "name": "wizard_attack_closest",
         "rules": [
           {
-            "action": {"name": "Magic Armor"},
-            "target": {"name": "Self"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self"
+            }
           },
           {
-            "action": {"name": "Fire Burst"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Seeking Bolt"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }

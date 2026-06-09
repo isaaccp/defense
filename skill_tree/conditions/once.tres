@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_14i36"]
 [ext_resource type="Script" uid="uid://br651if1rrpnl" path="res://behavior/conditions/condition_once.gd" id="1_nkc6u"]
 [ext_resource type="Script" uid="uid://dcyviw8nie5gy" path="res://behavior/conditions/condition_def.gd" id="2_hcgbt"]
-[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="2_vmrnn"]
-
 [sub_resource type="Resource" id="Resource_opf8v"]
 script = ExtResource("1_14i36")
 
@@ -15,5 +13,4 @@ evaluator_script = ExtResource("1_nkc6u")
 params = SubResource("Resource_opf8v")
 skill_name = &"Once"
 skill_type = 3
-parent = ExtResource("2_vmrnn")
 tree_type = 1

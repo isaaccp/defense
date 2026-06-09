@@ -2,7 +2,7 @@
   "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
   "seed": 1,
   "max_seconds": 90,
-  "notes": "Warrior+Wizard pair for 01_grunt_rush. Knight tanks the corridor, wizard self-armors and ranges down enemies. No healer — knight HP is the resource budget.",
+  "notes": "Warrior+Wizard pair for 01_grunt_rush. Knight tanks the corridor, wizard self-armors and ranges down enemies. No healer \u2014 knight HP is the resource budget.",
   "characters": [
     {
       "character": "res://character/playable_characters/bernie_the_wizard.tres",
@@ -11,27 +11,45 @@
         "name": "wizard_attack_closest",
         "rules": [
           {
-            "action": {"name": "Magic Armor"},
-            "target": {"name": "Self"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self"
+            }
           },
           {
-            "action": {"name": "Fire Burst"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Seeking Bolt"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }
@@ -43,16 +61,26 @@
         "name": "knight_attack_closest",
         "rules": [
           {
-            "action": {"name": "Sword Attack"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }

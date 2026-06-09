@@ -2,7 +2,7 @@
   "level": "res://levels/main/forest_ambush/01_archer_rush.tscn",
   "seed": 1,
   "max_seconds": 90,
-  "notes": "Proven-beatable pair for 01_archer_rush. Same baseline as 01_grunt_rush_baseline — d=1 siblings should fall to the same minimum-complexity comp. Caveat: sim is not bit-reproducible (same seed produced 34s / 48s / timeout-at-60 across runs); max_seconds bumped to 90 to absorb variance. Investigate seed-determinism upstream — likely worth recording in SIM_FINDINGS.",
+  "notes": "Proven-beatable pair for 01_archer_rush. Same baseline as 01_grunt_rush_baseline \u2014 d=1 siblings should fall to the same minimum-complexity comp. Caveat: sim is not bit-reproducible (same seed produced 34s / 48s / timeout-at-60 across runs); max_seconds bumped to 90 to absorb variance. Investigate seed-determinism upstream \u2014 likely worth recording in SIM_FINDINGS.",
   "characters": [
     {
       "character": "res://character/playable_characters/godric_the_knight.tres",
@@ -11,16 +11,26 @@
         "name": "knight_attack_closest",
         "rules": [
           {
-            "action": {"name": "Sword Attack"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }
@@ -32,10 +42,15 @@
         "name": "cleric_heal_always",
         "rules": [
           {
-            "action": {"name": "Heal"},
-            "target": {"name": "Ally"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }

@@ -7,7 +7,6 @@ class_name BehaviorEditorView
 @export var edit_icon: Texture2D
 @export var drag_icon: Texture2D
 
-const always = preload("res://skill_tree/conditions/always.tres")
 
 # Toolbox encodes drag-data 'type' as column-positional ints (not Skill.SkillType).
 const DRAG_TYPE_TARGET := 0
@@ -179,10 +178,7 @@ class RuleWidget extends PanelContainer:
 			return
 		_target_cell.set_skill(rule.target_selection)
 		_action_cell.set_skill(rule.action)
-		var conds := rule.effective_conditions()
-		if conds.size() == 1 and conds[0].skill_name == BehaviorEditorView.always.skill_name:
-			conds = []
-		for cond in conds:
+		for cond in rule.effective_conditions():
 			_add_condition_row(cond)
 		_enable_buttons()
 

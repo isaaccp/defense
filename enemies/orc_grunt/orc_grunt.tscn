@@ -278,12 +278,6 @@ skill_type = 1
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("5_oh1pa")
 
-[sub_resource type="Resource" id="Resource_mm64d"]
-script = ExtResource("6_2h085")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_k8l3g"]
 script = ExtResource("8_qd5rs")
 name = &"Closest First"
@@ -304,8 +298,6 @@ skill_type = 2
 script = ExtResource("7_l80cu")
 target_selection = SubResource("Resource_wdbpm")
 action = SubResource("Resource_tvq5k")
-condition = SubResource("Resource_mm64d")
-
 [sub_resource type="Resource" id="Resource_ovn8s"]
 script = ExtResource("5_oh1pa")
 
@@ -314,12 +306,6 @@ script = ExtResource("6_2h085")
 params = SubResource("Resource_ovn8s")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_by8p0"]
-script = ExtResource("6_2h085")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_xhcmg"]
 script = ExtResource("6_2h085")
@@ -331,8 +317,6 @@ skill_type = 2
 script = ExtResource("7_l80cu")
 target_selection = SubResource("Resource_xhcmg")
 action = SubResource("Resource_8u7ej")
-condition = SubResource("Resource_by8p0")
-
 [sub_resource type="Resource" id="Resource_qefch"]
 script = ExtResource("4_ra0qe")
 stored_rules = Array[ExtResource("7_l80cu")]([SubResource("Resource_hy3ka"), SubResource("Resource_aquot")])

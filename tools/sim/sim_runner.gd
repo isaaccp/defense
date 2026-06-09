@@ -438,8 +438,8 @@ func _build_rule(cfg: Dictionary, idx: int, path: String) -> RuleDef:
 		if not c:
 			return null
 		conditions_arr.append(c)
-	# An empty conditions list is allowed and means "Always" — the rule fires
-	# whenever target/action constraints permit.
+	# An empty conditions list is allowed — the rule fires whenever
+	# target/action constraints permit.
 	return RuleDef.make_with_conditions(target_sps, action_sps, conditions_arr)
 
 func _build_stored_param_skill(cfg: Variant, expected_type: int, field: String, rule_idx: int, path: String) -> StoredParamSkill:

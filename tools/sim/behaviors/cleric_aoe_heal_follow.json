@@ -25,9 +25,6 @@
       },
       "sort": {
         "name": "Lowest Health First"
-      },
-      "condition": {
-        "name": "Always"
       }
     },
     {
@@ -42,9 +39,6 @@
       },
       "sort": {
         "name": "Closest First"
-      },
-      "condition": {
-        "name": "Always"
       }
     }
   ]

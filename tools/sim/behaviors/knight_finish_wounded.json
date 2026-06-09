@@ -2,16 +2,26 @@
   "name": "knight_finish_wounded",
   "rules": [
     {
-      "action": {"name": "Sword Attack"},
-      "target": {"name": "Enemy"},
-      "sort": {"name": "Lowest Health First"},
-      "condition": {"name": "Always"}
+      "action": {
+        "name": "Sword Attack"
+      },
+      "target": {
+        "name": "Enemy"
+      },
+      "sort": {
+        "name": "Lowest Health First"
+      }
     },
     {
-      "action": {"name": "Move To"},
-      "target": {"name": "Enemy"},
-      "sort": {"name": "Lowest Health First"},
-      "condition": {"name": "Always"}
+      "action": {
+        "name": "Move To"
+      },
+      "target": {
+        "name": "Enemy"
+      },
+      "sort": {
+        "name": "Lowest Health First"
+      }
     }
   ]
 }

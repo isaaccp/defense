@@ -3,7 +3,6 @@ extends GutTest
 const test_enemy_scene = preload("res://enemies/test_enemy.tscn")
 const heal = preload("res://skill_tree/actions/heal.tres")
 const target_self = preload("res://skill_tree/targets/self.tres")
-const always = preload("res://skill_tree/conditions/always.tres")
 
 var enemy: Enemy
 var behavior_component: BehaviorComponent
@@ -24,7 +23,7 @@ func before_each():
 	add_child_autoqfree(enemy)
 
 func test_basic_behavior():
-	behavior_component.stored_behavior = make_behavior(always)
+	behavior_component.stored_behavior = make_behavior(null)
 	watch_signals(behavior_component)
 	await wait_seconds(0.1, "Waiting to ensure nothing happens before we do run()")
 	assert_signal_not_emitted(behavior_component, "behavior_updated")
@@ -42,7 +41,7 @@ func test_basic_behavior():
 	assert_eq(TestUtils.count_action_triggered(self, behavior_component, heal.skill_name), 2)
 
 func test_basic_behavior_no_focus():
-	behavior_component.stored_behavior = make_behavior(always)
+	behavior_component.stored_behavior = make_behavior(null)
 	watch_signals(behavior_component)
 	await wait_seconds(0.1, "Waiting to ensure nothing happens before we do run()")
 	assert_signal_not_emitted(behavior_component, "behavior_updated")

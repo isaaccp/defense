@@ -45,7 +45,7 @@ func _to_string() -> String:
 		", ".join(names),
 	]
 
-static func make(target_selection: StoredParamSkill, action: StoredParamSkill, condition: StoredParamSkill) -> RuleDef:
+static func make(target_selection: StoredParamSkill, action: StoredParamSkill, condition: StoredParamSkill = null) -> RuleDef:
 	var rule = RuleDef.new()
 	rule.target_selection = target_selection
 	rule.action = action

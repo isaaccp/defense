@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dpv08uqnny4ft" path="res://behavior/conditions/targeting_tower_target_actor_condition_evaluator.gd" id="1_tt"]
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_params"]
-[ext_resource type="Resource" uid="uid://b65olkildkp1d" path="res://skill_tree/conditions/always.tres" id="3_parent"]
 [ext_resource type="Script" uid="uid://dcyviw8nie5gy" path="res://behavior/conditions/condition_def.gd" id="4_cdef"]
 
 [sub_resource type="Resource" id="Resource_tt_params"]
@@ -16,5 +15,4 @@ description_text = "Checks whether the candidate is currently targeting a tower.
 params = SubResource("Resource_tt_params")
 skill_name = &"Targeting Tower"
 skill_type = 3
-parent = ExtResource("3_parent")
 tree_type = 1

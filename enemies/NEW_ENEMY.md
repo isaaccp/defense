@@ -62,12 +62,6 @@ params = SubResource("Resource_my_params")
 name = &"Sword Attack"                 # must match skill_name in the .tres
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_my_cond"]
-script = ExtResource("7_spskill")
-params = SubResource("Resource_my_params")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_cf"]
 script = ExtResource("9_sskill")       # stored_skill.gd
 name = &"Closest First"
@@ -88,7 +82,7 @@ skill_type = 2
 script = ExtResource("8_ruledef")      # rule_def.gd
 target_selection = SubResource("Resource_my_target")
 action = SubResource("Resource_my_action")
-condition = SubResource("Resource_my_cond")
+# Omit `condition` (or use an empty `conditions` array) for rules that fire unconditionally.
 ```
 
 You can share `params` and `sort` sub_resources across multiple rules (orc_berserker.tscn does this).

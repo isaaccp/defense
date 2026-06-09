@@ -20,12 +20,6 @@ skill_type = 1
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("2_v57ou")
 
-[sub_resource type="Resource" id="Resource_x0vsb"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_fsnpx"]
 script = ExtResource("5_7yy3c")
 name = &"Closest First"
@@ -46,8 +40,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_m2als")
 action = SubResource("Resource_yxxnc")
-condition = SubResource("Resource_x0vsb")
-
 [sub_resource type="Resource" id="Resource_c24jc"]
 script = ExtResource("2_v57ou")
 
@@ -56,12 +48,6 @@ script = ExtResource("3_6wex8")
 params = SubResource("Resource_c24jc")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_ew5x5"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_32l1c"]
 script = ExtResource("3_6wex8")
@@ -73,8 +59,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_32l1c")
 action = SubResource("Resource_q12nn")
-condition = SubResource("Resource_ew5x5")
-
 [sub_resource type="Resource" id="Resource_ma4ch"]
 script = ExtResource("1_enl0e")
 name = "sword_and_move"
@@ -89,12 +73,6 @@ params = SubResource("Resource_4l6vi")
 name = &"Bow Attack"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_hsux6"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_6vkkg"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_jdioy")
@@ -105,19 +83,11 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_6vkkg")
 action = SubResource("Resource_n5s7j")
-condition = SubResource("Resource_hsux6")
-
 [sub_resource type="Resource" id="Resource_uwqnb"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_c24jc")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_su4f8"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_uqf3a"]
 script = ExtResource("3_6wex8")
@@ -129,8 +99,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_uqf3a")
 action = SubResource("Resource_uwqnb")
-condition = SubResource("Resource_su4f8")
-
 [sub_resource type="Resource" id="Resource_iyf1j"]
 script = ExtResource("1_enl0e")
 name = "bow_and_move"
@@ -147,12 +115,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_pxhu5"]
 script = ExtResource("2_v57ou")
-
-[sub_resource type="Resource" id="Resource_p54ri"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_pxhu5")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_pacl1"]
 script = ExtResource("5_7yy3c")
@@ -174,8 +136,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_37dhc")
 action = SubResource("Resource_gdwx7")
-condition = SubResource("Resource_p54ri")
-
 [sub_resource type="Resource" id="Resource_4d74m"]
 script = ExtResource("2_v57ou")
 
@@ -238,12 +198,6 @@ params = SubResource("Resource_piy75")
 name = &"Seeking Bolt"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_7o8bt"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_pxhu5")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_dyfks"]
 script = ExtResource("5_7yy3c")
 name = &"Closest First"
@@ -264,8 +218,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_cs6o4")
 action = SubResource("Resource_qpdx4")
-condition = SubResource("Resource_7o8bt")
-
 [sub_resource type="Resource" id="Resource_p4bk4"]
 script = ExtResource("2_v57ou")
 
@@ -274,12 +226,6 @@ script = ExtResource("3_6wex8")
 params = SubResource("Resource_p4bk4")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_1rxec"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_pxhu5")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_gcwxl"]
 script = ExtResource("5_7yy3c")
@@ -301,8 +247,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_tnfp3")
 action = SubResource("Resource_j12j0")
-condition = SubResource("Resource_1rxec")
-
 [sub_resource type="Resource" id="Resource_055hc"]
 script = ExtResource("1_enl0e")
 name = "seeking_bolt_and_move"
@@ -319,12 +263,6 @@ skill_type = 1
 
 [sub_resource type="Resource" id="Resource_rks6q"]
 script = ExtResource("2_v57ou")
-
-[sub_resource type="Resource" id="Resource_spaho"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_rks6q")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_ys4s4"]
 script = ExtResource("5_7yy3c")
@@ -346,19 +284,11 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_tktto")
 action = SubResource("Resource_c3120")
-condition = SubResource("Resource_spaho")
-
 [sub_resource type="Resource" id="Resource_dvd82"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_ms6fv")
 name = &"Heal"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_ok2e6"]
-script = ExtResource("3_6wex8")
-params = SubResource("Resource_pxhu5")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_0x18r"]
 script = ExtResource("3_6wex8")
@@ -370,8 +300,6 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_0x18r")
 action = SubResource("Resource_dvd82")
-condition = SubResource("Resource_ok2e6")
-
 [sub_resource type="Resource" id="Resource_q37ct"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_4d74m")

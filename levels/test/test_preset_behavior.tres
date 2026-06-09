@@ -21,12 +21,6 @@ skill_type = 1
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("3_4yb6m")
 
-[sub_resource type="Resource" id="Resource_00wv8"]
-script = ExtResource("4_tpntf")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_g68vo"]
 script = ExtResource("3_4yb6m")
 editor_string = "Enemy ({sort})"
@@ -41,8 +35,6 @@ skill_type = 2
 script = ExtResource("5_6s65h")
 target_selection = SubResource("Resource_lg6ku")
 action = SubResource("Resource_y6qno")
-condition = SubResource("Resource_00wv8")
-
 [sub_resource type="Resource" id="Resource_d580u"]
 script = ExtResource("3_4yb6m")
 
@@ -51,12 +43,6 @@ script = ExtResource("4_tpntf")
 params = SubResource("Resource_d580u")
 name = &"Sword Attack"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_duvtq"]
-script = ExtResource("4_tpntf")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_0vf4w"]
 script = ExtResource("4_tpntf")
@@ -68,8 +54,6 @@ skill_type = 2
 script = ExtResource("5_6s65h")
 target_selection = SubResource("Resource_0vf4w")
 action = SubResource("Resource_1l77o")
-condition = SubResource("Resource_duvtq")
-
 [sub_resource type="Resource" id="Resource_cn1r5"]
 script = ExtResource("3_4yb6m")
 
@@ -78,12 +62,6 @@ script = ExtResource("4_tpntf")
 params = SubResource("Resource_cn1r5")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_go54w"]
-script = ExtResource("4_tpntf")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_s7xoq"]
 script = ExtResource("4_tpntf")
@@ -95,8 +73,6 @@ skill_type = 2
 script = ExtResource("5_6s65h")
 target_selection = SubResource("Resource_s7xoq")
 action = SubResource("Resource_k7jyb")
-condition = SubResource("Resource_go54w")
-
 [sub_resource type="Resource" id="Resource_4lrpe"]
 script = ExtResource("2_cwces")
 stored_rules = Array[ExtResource("5_6s65h")]([SubResource("Resource_66hom"), SubResource("Resource_0vv00"), SubResource("Resource_8cr5j")])

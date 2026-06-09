@@ -288,12 +288,6 @@ params = SubResource("Resource_empty_params")
 name = &"Charge"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_charge_c"]
-script = ExtResource("7_spskill")
-params = SubResource("Resource_empty_params")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_charge_t"]
 script = ExtResource("7_spskill")
 params = SubResource("Resource_enemy_params")
@@ -304,19 +298,11 @@ skill_type = 2
 script = ExtResource("8_ruledef")
 target_selection = SubResource("Resource_charge_t")
 action = SubResource("Resource_charge_a")
-condition = SubResource("Resource_charge_c")
-
 [sub_resource type="Resource" id="Resource_sword_a"]
 script = ExtResource("7_spskill")
 params = SubResource("Resource_empty_params")
 name = &"Sword Attack"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_sword_c"]
-script = ExtResource("7_spskill")
-params = SubResource("Resource_empty_params")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_sword_t"]
 script = ExtResource("7_spskill")
@@ -328,19 +314,11 @@ skill_type = 2
 script = ExtResource("8_ruledef")
 target_selection = SubResource("Resource_sword_t")
 action = SubResource("Resource_sword_a")
-condition = SubResource("Resource_sword_c")
-
 [sub_resource type="Resource" id="Resource_moveto_a"]
 script = ExtResource("7_spskill")
 params = SubResource("Resource_empty_params")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_moveto_c"]
-script = ExtResource("7_spskill")
-params = SubResource("Resource_empty_params")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_moveto_t"]
 script = ExtResource("7_spskill")
@@ -352,8 +330,6 @@ skill_type = 2
 script = ExtResource("8_ruledef")
 target_selection = SubResource("Resource_moveto_t")
 action = SubResource("Resource_moveto_a")
-condition = SubResource("Resource_moveto_c")
-
 [sub_resource type="Resource" id="Resource_behavior"]
 script = ExtResource("5_behav")
 stored_rules = Array[ExtResource("8_ruledef")]([SubResource("Resource_charge_r"), SubResource("Resource_sword_r"), SubResource("Resource_moveto_r")])

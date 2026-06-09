@@ -2,14 +2,13 @@ extends RefCounted
 
 class_name TestUtils
 
-const always = preload("res://skill_tree/conditions/always.tres")
 const barrel_scene = preload("res://enemies/barrel/barrel.tscn")
 
-static func rule_def(target: TargetSelectionDef, action: ActionDef, condition: ConditionDef = always) -> RuleDef:
+static func rule_def(target: TargetSelectionDef, action: ActionDef, condition: ConditionDef = null) -> RuleDef:
 	return RuleDef.make(
 		StoredParamSkill.from_skill(target),
 		StoredParamSkill.from_skill(action),
-		StoredParamSkill.from_skill(condition),
+		StoredParamSkill.from_skill(condition) if condition else null,
 	)
 
 static func rule_def_with_conditions(target: TargetSelectionDef, action: ActionDef, conditions: Array[ConditionDef]) -> RuleDef:

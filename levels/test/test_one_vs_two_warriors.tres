@@ -87,8 +87,8 @@ saved_rules = Array[ExtResource("3_dkr0d")]([SubResource("Resource_x4kr3"), SubR
 
 [sub_resource type="Resource" id="Resource_dk353"]
 script = ExtResource("3_apwm0")
-acquired_skills = Array[StringName]([&"Always"])
-unlocked_skills = Array[StringName]([&"Always"])
+acquired_skills = Array[StringName]([])
+unlocked_skills = Array[StringName]([])
 full_acquired = false
 full_unlocked = false
 

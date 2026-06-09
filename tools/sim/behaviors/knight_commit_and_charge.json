@@ -22,9 +22,6 @@
       },
       "target": {
         "name": "Preferred Target"
-      },
-      "condition": {
-        "name": "Always"
       }
     },
     {
@@ -33,9 +30,6 @@
       },
       "target": {
         "name": "Preferred Target"
-      },
-      "condition": {
-        "name": "Always"
       }
     },
     {
@@ -44,9 +38,6 @@
       },
       "target": {
         "name": "Preferred Target"
-      },
-      "condition": {
-        "name": "Always"
       }
     },
     {
@@ -72,9 +63,6 @@
       },
       "sort": {
         "name": "Closest First"
-      },
-      "condition": {
-        "name": "Always"
       }
     },
     {
@@ -86,9 +74,6 @@
       },
       "sort": {
         "name": "Closest First"
-      },
-      "condition": {
-        "name": "Always"
       }
     },
     {
@@ -100,9 +85,6 @@
       },
       "sort": {
         "name": "Closest First"
-      },
-      "condition": {
-        "name": "Always"
       }
     }
   ]

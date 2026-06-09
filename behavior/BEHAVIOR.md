@@ -99,7 +99,7 @@ action_finished()            # marks finished=true; cooldown recorded by Behavio
 
 `ConditionDef.Type` controls what the condition can be checked against:
 
-- `ANY` — no target needed (e.g. "Always", "Once")
+- `ANY` — no target needed (e.g. "Once")
 - `SELF` — checked against the actor itself (e.g. "self HP < 50%")
 - `TARGET_ACTOR` — filters actor targets (e.g. "target HP < 50%")
 - `TARGET_POSITION` — applies to position or actor targets
@@ -111,7 +111,7 @@ action_finished()            # marks finished=true; cooldown recorded by Behavio
 
 **Actions:** Blink Away, Blink To, Bow Attack, Charge, Cleave, Fire Burst, Heal, Hold Person, Magic Armor, Meditate, Move Away, Move To, Multi Shot, Projectile Ward, Seeking Bolt, Sweeping Attack, Sword Attack, Teleport Away, Teleport To
 
-**Conditions:** Always, Once, Self, Target Distance, Target Health, Times
+**Conditions:** Once, Self, Target Distance, Target Health, Times. A rule with no conditions fires unconditionally — there is no longer a separate "Always" skill.
 
 **Targets:** Ally, Center, Enemy, Self Or Ally, Tower
 

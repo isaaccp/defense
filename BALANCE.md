@@ -113,7 +113,7 @@ Levels are validated via Mode A/B/C sim runs (see [LEVEL_DESIGN.md](levels/LEVEL
 ## 6. Global constants
 
 [constants.gd](constants.gd):
-- `base_acquired_skills` — universal starting skills (Always, Enemy, Ally, Tower, Move To, Closest First)
+- `base_acquired_skills` — universal starting skills (Enemy, Ally, Tower, Move To, Closest First)
 
 [run/run.gd](run/run.gd):
 - `meta_xp_per_level = 50`

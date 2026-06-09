@@ -24,12 +24,6 @@ script = ExtResource("2_7k77e")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_kha3w"]
-script = ExtResource("3_f1wt6")
-name = &"Always"
-skill_type = 3
-params = SubResource("Resource_8lwyn")
-
 [sub_resource type="GDScript" id="GDScript_ql371"]
 script/source = "extends PositionTargetSorter
 
@@ -62,8 +56,6 @@ params = SubResource("Resource_xc2xu")
 script = ExtResource("4_tkvsd")
 target_selection = SubResource("Resource_p7mkl")
 action = SubResource("Resource_sa0vh")
-condition = SubResource("Resource_kha3w")
-
 [sub_resource type="Resource" id="Resource_xbjyc"]
 script = ExtResource("6_nxkar")
 saved_rules = Array[ExtResource("4_tkvsd")]([SubResource("Resource_4045v")])

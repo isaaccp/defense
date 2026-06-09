@@ -11,16 +11,26 @@
         "name": "knight_defend_tower",
         "rules": [
           {
-            "action": {"name": "Sword Attack"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest To Tower First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest To Tower First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            }
           }
         ]
       }
@@ -32,21 +42,44 @@
         "name": "cleric_aoe_heal_follow",
         "rules": [
           {
-            "action": {"name": "Consecrate"},
-            "target": {"name": "Self"},
-            "condition": {"name": "Can Hit Enemies", "params": {"cmp": ">=", "int_value": 2}}
+            "action": {
+              "name": "Consecrate"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
           },
           {
-            "action": {"name": "Heal"},
-            "target": {"name": "Self Or Ally"},
-            "sort": {"name": "Lowest Health First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            }
           },
           {
-            "action": {"name": "Follow", "params": {"float_value": 150}},
-            "target": {"name": "Ally"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 150
+              }
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }

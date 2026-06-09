@@ -100,8 +100,7 @@ Every skill slot (`action`, `target`, `sort`, `condition`) is an object with `na
     {
       "action": {"name": "Sword Attack"},
       "target": {"name": "Enemy"},
-      "sort": {"name": "Closest First"},
-      "condition": {"name": "Always"}
+      "sort": {"name": "Closest First"}
     }
   ]
 }
@@ -109,6 +108,8 @@ Every skill slot (`action`, `target`, `sort`, `condition`) is an object with `na
 
 - `params` is omitted (or `{}`) when the skill takes none.
 - `sort` is `null` when not applicable (e.g. for self-targeted actions).
+- `condition` is omitted when the rule should fire unconditionally. (There is no longer a separate "Always" condition skill — an absent condition means always.)
+- `conditions` (array, ANDed) can be used instead of `condition` for compound rules.
 - Skill `name` values match the in-game skill name (`Heal`, `Sword Attack`, etc.) — same identifiers the editor uses, resolved via `SkillManager`.
 
 **Why JSON not `.tres`:** `.tres` behavior files have many cross-referenced sub_resource IDs, ext_resource ordering, etc. — hand-authoring them produces syntax-error churn. JSON is grep-friendly, diff-friendly, easy for the AI to author. If a sim experiment produces a behavior worth keeping in production, the user recreates it as a proper `.tres` in the editor.

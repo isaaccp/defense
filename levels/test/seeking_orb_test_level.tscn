@@ -26,12 +26,6 @@ script = ExtResource("5_gp48s")
 editor_string = ""
 cmp = 0
 
-[sub_resource type="Resource" id="Resource_riwri"]
-script = ExtResource("6_q6t6v")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_ti1h7"]
 script = ExtResource("5_gp48s")
 editor_string = "Enemy ({sort})"
@@ -47,8 +41,6 @@ skill_type = 2
 script = ExtResource("7_k2205")
 target_selection = SubResource("Resource_jpx2r")
 action = SubResource("Resource_pxnul")
-condition = SubResource("Resource_riwri")
-
 [sub_resource type="Resource" id="Resource_lp8ml"]
 script = ExtResource("4_tgq0t")
 name = ""

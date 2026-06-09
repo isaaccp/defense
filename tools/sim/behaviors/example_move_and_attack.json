@@ -2,16 +2,26 @@
   "name": "example_move_and_attack",
   "rules": [
     {
-      "action": {"name": "Sword Attack"},
-      "target": {"name": "Enemy"},
-      "sort": {"name": "Closest First"},
-      "condition": {"name": "Always"}
+      "action": {
+        "name": "Sword Attack"
+      },
+      "target": {
+        "name": "Enemy"
+      },
+      "sort": {
+        "name": "Closest First"
+      }
     },
     {
-      "action": {"name": "Move To"},
-      "target": {"name": "Enemy"},
-      "sort": {"name": "Closest First"},
-      "condition": {"name": "Always"}
+      "action": {
+        "name": "Move To"
+      },
+      "target": {
+        "name": "Enemy"
+      },
+      "sort": {
+        "name": "Closest First"
+      }
     }
   ]
 }

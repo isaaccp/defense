@@ -2,7 +2,7 @@
   "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
   "seed": 1,
   "max_seconds": 90,
-  "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s — pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
+  "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s \u2014 pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
   "characters": [
     {
       "character": "res://character/playable_characters/puffin_the_cleric.tres",
@@ -11,28 +11,55 @@
         "name": "cleric_ward_and_heal",
         "rules": [
           {
-            "action": {"name": "Projectile Ward"},
-            "target": {"name": "Ally"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Projectile Ward"
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Heal"},
-            "target": {"name": "Self Or Ally"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Target Health", "params": {"cmp": "<=", "int_value": 70}}
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Health",
+              "params": {
+                "cmp": "<=",
+                "int_value": 70
+              }
+            }
           },
           {
-            "action": {"name": "Sword Attack"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }
@@ -44,39 +71,67 @@
         "name": "wizard_control_and_burn",
         "rules": [
           {
-            "action": {"name": "Magic Armor"},
-            "target": {"name": "Self"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self"
+            }
           },
           {
-            "action": {"name": "Hold Person"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Chilling Sphere"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Chilling Sphere"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Fire Burst"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Seeking Bolt"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           },
           {
-            "action": {"name": "Move To"},
-            "target": {"name": "Enemy"},
-            "sort": {"name": "Closest First"},
-            "condition": {"name": "Always"}
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
           }
         ]
       }

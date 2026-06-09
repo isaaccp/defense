@@ -283,12 +283,6 @@ skill_type = 1
 [sub_resource type="Resource" id="Resource_8lwyn"]
 script = ExtResource("6_2kkh2")
 
-[sub_resource type="Resource" id="Resource_rpt6l"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_i8xrd"]
 script = ExtResource("9_17oqu")
 name = &"Closest First"
@@ -309,8 +303,6 @@ skill_type = 2
 script = ExtResource("7_174ti")
 target_selection = SubResource("Resource_fhy25")
 action = SubResource("Resource_v6m3v")
-condition = SubResource("Resource_rpt6l")
-
 [sub_resource type="Resource" id="Resource_78hjn"]
 script = ExtResource("6_2kkh2")
 
@@ -319,12 +311,6 @@ script = ExtResource("6_ae2gu")
 params = SubResource("Resource_78hjn")
 name = &"Move To"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_582ig"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
 
 [sub_resource type="Resource" id="Resource_wrai3"]
 script = ExtResource("6_ae2gu")
@@ -336,8 +322,6 @@ skill_type = 2
 script = ExtResource("7_174ti")
 target_selection = SubResource("Resource_wrai3")
 action = SubResource("Resource_14hje")
-condition = SubResource("Resource_582ig")
-
 [sub_resource type="Resource" id="Resource_fv120"]
 script = ExtResource("11_fv1")
 defined = true
@@ -354,12 +338,6 @@ params = SubResource("Resource_maway_p")
 name = &"Move Away"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_maway_c"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_8lwyn")
-name = &"Always"
-skill_type = 3
-
 [sub_resource type="Resource" id="Resource_maway_t"]
 script = ExtResource("6_ae2gu")
 params = SubResource("Resource_km7cd")
@@ -370,8 +348,6 @@ skill_type = 2
 script = ExtResource("7_174ti")
 target_selection = SubResource("Resource_maway_t")
 action = SubResource("Resource_maway_a")
-condition = SubResource("Resource_maway_c")
-
 [sub_resource type="Resource" id="Resource_g1623"]
 script = ExtResource("5_ppmrm")
 stored_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_861in"), SubResource("Resource_maway_r"), SubResource("Resource_yx63r")])
