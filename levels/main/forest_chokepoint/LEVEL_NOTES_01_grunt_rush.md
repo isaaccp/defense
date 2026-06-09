@@ -1,4 +1,4 @@
-# LEVEL_NOTES: chokepoint_grunt_rush
+# LEVEL_NOTES: 01_grunt_rush
 
 **Position in campaign:** fight 1 (of planned 10).
 

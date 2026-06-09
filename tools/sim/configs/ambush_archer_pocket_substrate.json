@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_archer_pocket.tscn",
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "ambush_archer_pocket substrate \u2014 knight uses preferred-target + Charge to chase kiting archers; cleric uses Consecrate + Follow at 150 + heal lowest HP. Tests whether the substrate handles a ranged-pocket threat and whether Hallowed Vestments meaningfully reduces damage on Puffin.",

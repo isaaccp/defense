@@ -29,6 +29,7 @@ interval = 1.5
 initial_delay = 12.0
 
 [node name="Level" instance=ExtResource("1_stage")]
+difficulty = 3
 
 [node name="MainSpawner" parent="YSorted/Spawners" index="0" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
 position = Vector2(650, 260)

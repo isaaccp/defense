@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_chokepoint/chokepoint_grunt_rush.tscn",
+  "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "bernie_puffin_chokepoint \u2014 Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",

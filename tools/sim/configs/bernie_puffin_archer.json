@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_archer_pocket.tscn",
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "bernie_puffin_archer \u2014 Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",

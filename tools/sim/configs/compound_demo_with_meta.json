@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_archer_pocket.tscn",
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "Demo: bernie_compound_demo uses a 2-condition rule (Targeted By Enemies >= 1 AND Target Health < 30) to gate Magic Armor self-cast. Requires Compound Conditions meta-skill (declared below). Should validate cleanly and run to completion.",

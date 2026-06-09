@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_chokepoint/chokepoint_grunt_rush.tscn",
+  "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "Mode A (feasibility) for fight 1. Knight + Cleric starting kits (no acquired-skill picks). Basic 'attack closest' / 'heal ally' behaviors. Expect easy win.",

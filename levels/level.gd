@@ -2,6 +2,11 @@ extends Actor
 
 class_name Level
 
+@export_group("Metadata")
+# Relative difficulty band, used by the map system to slot levels into nodes
+# of comparable challenge.
+@export var difficulty: int = 1
+
 @export_group("Tutorial")
 # To be used for e.g. tutorial levels in which we may
 # want a particular set of skills acquired.

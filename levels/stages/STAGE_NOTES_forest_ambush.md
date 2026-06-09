@@ -45,7 +45,7 @@ same lesson (pocket forces a pivot) at two intensities. Both verified via
 `tools/sim/` (baseline = no-substrate behaviors, substrate =
 preferred-target commitment + AoE + Charge).
 
-### `ambush_corridor_pocket.tscn` — trickle pattern
+### `02_corridor_pocket.tscn` — trickle pattern
 - Main corridor: 10 grunts @ 2.5s interval, delay 1.0s
 - Pocket: 3 grunts @ 1.5s interval, delay 15.0s
 - **Baseline (simple behavior)**: scrapes a win (~42s), tower nearly dead
@@ -53,7 +53,7 @@ preferred-target commitment + AoE + Charge).
 - **Tests**: "the trickle is survivable but punishing; substrate buys you
   margin." Designed as the first place the player meets a near-tower pocket.
 
-### `ambush_waves.tscn` — burst pattern
+### `03_waves.tscn` — burst pattern
 - Three corridor waves of 4 grunts each (interval 0.4s) at delays 1, 10, 20
 - One pocket burst of 3 grunts (interval 0.4s) at delay 15
 - **Baseline (simple behavior)**: loses — knight holds the corridor but pocket

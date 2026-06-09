@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_corridor_pocket.tscn",
+  "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "forest_ambush A/B test \u2014 knight uses 'Closest To Tower First' (holds the tower's front line). Pair with ambush_closest.json which uses 'Closest First'.",

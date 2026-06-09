@@ -79,7 +79,7 @@ A **level** is what the player plays: a specific enemy wave on a specific map. A
 
 This lets multiple levels share the same terrain with different waves.
 
-Example: `stages/forest_ambush.tscn` (terrain) → `main/forest_ambush/ambush_corridor_pocket.tscn` (level).
+Example: `stages/forest_ambush.tscn` (terrain) → `main/forest_ambush/02_corridor_pocket.tscn` (level).
 
 ### Registering a Level in the Game
 
@@ -202,7 +202,7 @@ Reads `<config>.json` (level + per-character behaviors + acquired skills), runs 
 **[`tools/playthrough.gd`](../tools/playthrough.gd)** — headlessly runs a level for N simulated seconds, streams [`LoggingComponent`](../components/logging_component.gd) output, and prints a summary (outcome, spawn count, surviving actors and positions):
 
 ```
-godot --headless --path . -s tools/playthrough.gd -- res://levels/main/forest_ambush/ambush_corridor_pocket.tscn 10
+godot --headless --path . -s tools/playthrough.gd -- res://levels/main/forest_ambush/02_corridor_pocket.tscn 10
 ```
 
 Third arg is comma-separated LogType names enabled per-actor — defaults to `BEHAVIOR,HEALTH` (readable; shows what enemies decide and when things take damage). Use `all` for `log_all=true` (very verbose), `none` to silence. Useful for catching "enemies spawn but can't reach anything" without playing the level. Implementation note: a tiny SceneTree bootstrap loads `playthrough_runner.gd` at runtime so the runner can use full static typing (autoloads are registered by then).

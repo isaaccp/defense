@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_waves.tscn",
+  "level": "res://levels/main/forest_ambush/03_waves.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "godrick_bernie_waves \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Battle Fury refills focus from damage but HP is permanent loss).",

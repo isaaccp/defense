@@ -1,5 +1,5 @@
 {
-  "level": "res://levels/main/forest_ambush/ambush_archer_pocket.tscn",
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
   "seed": 1,
   "max_seconds": 60,
   "notes": "Negative test: same as compound_demo_with_meta.json but WITHOUT the meta_skills field. Should fail validation because the behavior has a rule with 2 conditions while the run's cap is 1 (no Compound Conditions meta-skill).",
