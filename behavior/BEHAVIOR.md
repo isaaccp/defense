@@ -75,7 +75,10 @@ RuleDef
 make_runnable_action(def)   # creates instance, sets action.def, calls post_make()
     ↓
 post_make()                  # override to apply param-driven properties (e.g. max_distance
-    ↓                        # from float_value) — def is set, but no actor/target yet
+    ↓                        # from float_value) — def is set, but no actor/target yet.
+                             # MUST be done here, NOT in post_initialize(): the target
+                             # selector reads max_distance/min_distance during
+                             # behavior.choose(), which runs BEFORE initialize().
 initialize(target, actor, …) # sets all deps; calls post_initialize() deferred
     ↓
 post_initialize()            # start async work, set up navigation, etc.

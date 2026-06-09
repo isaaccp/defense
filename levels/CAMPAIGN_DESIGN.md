@@ -1,8 +1,43 @@
 # Campaign Design Methodology
 
-How we're approaching the design of a coherent **set of levels** (a run, eventually a Slay-the-Spire-style branching campaign). Built around what's currently achievable + what we're aspirationally targeting.
+How we're approaching the design of a coherent **set of levels** (a run, eventually a Monster-Train-style map). Built around what's currently achievable + what we're aspirationally targeting.
 
 For per-level design see [LEVEL_DESIGN.md](LEVEL_DESIGN.md); for stage geometry see [STAGE_DESIGN.md](STAGE_DESIGN.md). This doc is the **tier above** those — it answers "how do these levels relate to each other?"
+
+## Map format: Monster Train, not Slay the Spire
+
+**Decision (2026-06-08)**: the run map follows Monster Train, not Slay the Spire.
+
+Shape: alternating phases. Every **fight stage is forced** (no skipping). Between fights, a **reward stage** offers a menu of non-fight nodes — events, chests, trainers, shops, rests, etc. The player picks one.
+
+**Fight pick mechanic**: at each fight stage, the level is drawn at random from the pool of registered levels at the current difficulty band (see "Level.difficulty meaning" below). The sibling-pool authoring pattern in `main_levels.tres` (multiple levels per `difficulty = N`) exists to support this.
+
+**Why MT, not STS, for this game:**
+- Forced fight cadence pairs with the behavior-writing loop — every other stage is dedicated rule-tuning time, players can't dodge into a long non-combat lull and have their behavior go stale.
+- Tight control over the difficulty curve since players can't skip fights.
+- Centralized reward economy — all reward-types compete in one slot, so balancing them against each other happens in one place.
+- Lower multiplayer friction — fewer total decision points than STS pathing.
+
+**Explicitly not doing**: elite fights, branching paths between fight-vs-non-fight nodes.
+
+**Deferred**: MT-style per-stage difficulty modifiers ("opt in to a harder version of this fight for a better reward"). This is the closest analog to STS's elective-risk-reward knob that fits the MT structure and is worth revisiting once the basic map ships.
+
+## Level.difficulty meaning
+
+`Level.difficulty` (`int`, exported on Level) is **calibrated against the player's expected skill access**, not raw enemy count or DPS budget.
+
+The game loop drives the calibration: start with a tight starter skill set → unlock new skills via trainers/chests/shops between fights → meet harder levels that *need* those new skills. Difficulty therefore encodes "how much skill access is the player expected to have here," not "how many HP of enemies show up."
+
+Concrete banding:
+- **d1–~d3**: beatable with the starting kit. Each step demands more *behavioral* sophistication on the same toolkit.
+  - d1: "attack closest" suffices.
+  - d2: target prioritization required (e.g. Closest To Tower First, preferred targets).
+  - d3: tight rule composition required (AoE positioning, kiting counterplay).
+- **d4+ (future)**: assumes the player has acquired new skills via trainers/chests/shops/relics. Expected to be very hard or unwinnable with starting kit only.
+
+When proposing a new level: pick the difficulty band first by asking "what skill access does this assume?", *then* compose enemies to land at that band. Don't pick enemies first and back into the number.
+
+Multiple levels can (and should) share a difficulty band — that's the sibling pool the MT fight-pick draws from.
 
 ## Vocabulary: the four skill sets
 
@@ -40,11 +75,13 @@ Path A is sufficient for the near-term work — bumping starting kits naturally 
 
 ## Target run shape (aspirational)
 
-- **3 maps × ~15 min ≈ 45 min per run.** A map is ~15 min of play (3-5 fights + non-combat nodes).
-- **Slay-the-Spire-style branching maps:** fight nodes + rest points + chests (relics) + events. Player chooses path through the map.
+- **3 maps × ~15 min ≈ 45 min per run.** A map is ~15 min of play (3–5 fights + reward stages between them).
+- **Monster-Train-style map** (see "Map format" above): forced fight stages alternating with reward-choice stages (events, chests, trainers, shops, rests).
+- **Target fight length: 60–90 seconds.** Game is **deterministic by design — no mid-combat player actions**; the rules the player wrote before "Fight!" are the rules they get. Long fights are usually a sign of underspecified rules or an over-tuned level.
 - **Linear ramp difficulty** within and across maps; later maps harder than earlier.
 - **Always able to retry** a fight; "Abandon Run" lets the player exit a doomed run.
 - **Roguelike meta-progression** — between runs, players unlock new skills, new starting kits, possibly new mechanics (e.g. Behavior Library, enemy log inspection as meta-skill unlocks). Bigger "unlocked but not acquired" pool means experienced players can theoretically beat the game on first try, but extra unlocks make it easier.
+- **Run variety** layered on top of the level pool: environmental effects per run (e.g. "Neverending Storm" halves fire damage, doubles lightning). Infrastructure (damage types, attributes) already supports this; activation is deferred.
 
 ## Current scope (what we're actually building)
 
