@@ -19,7 +19,7 @@ var gameplay_characters: Array[GameplayCharacter]:
 var state = StateMachine.new(Constants.RunStateMachineName)
 var CHARACTER_SELECTION = state.add("character_selection")
 var WITHIN_LEVEL = state.add("within_level")
-var BETWEEN_LEVELS = state.add("between_levels")
+var REWARD_STAGE = state.add("reward_stage")
 var RUN_SUMMARY = state.add("run_summary")
 
 # TODO: Make this configurale, or move full meta_xp calculation
@@ -30,8 +30,11 @@ const meta_xp_per_level = 50
 # If in WITHIN_LEVEL, current level being played.
 var level: Level
 var level_scene: PackedScene
-# Saved in WITHIN_LEVEL, to be used during BETWEEN_LEVELS.
+# Saved in WITHIN_LEVEL, to be used during REWARD_STAGE.
 var level_xp: int
+# The reward chosen for the current REWARD_STAGE (held so retries / UI
+# refreshes don't reroll).
+var _current_reward: RewardDef
 
 # A copy of run_save_state when level is entered for first time.
 # Allows to reset state.
@@ -100,13 +103,14 @@ func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 func _on_within_level_entered(save_snapshot: bool = true):
 	if save_snapshot:
 		_snapshot_run_save_state()
-	level_scene = level_provider.load_level(run_save_state.current_level)
+	level_scene = _pick_fight_level(run_save_state.current_stage)
+	if not level_scene:
+		# No levels at this difficulty — the run is over.
+		state.change_state.call_deferred(RUN_SUMMARY)
+		return
 	level = level_scene.instantiate()
 	level.initialize(gameplay_characters, ui_layer)
-	if level_provider.are_relics_available(run_save_state.current_level):
-		level.selected_relics = level_provider.relic_library.lookup_relics(run_save_state.relic_library_state.selected_relics())
-	else:
-		level.selected_relics = []
+	level.selected_relics = []
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
 	level.gold_earned.connect(_on_gold_earned)
@@ -120,24 +124,14 @@ func _on_level_failed():
 	_on_within_level_entered(false)
 
 func _on_level_finished():
-	# Record xp gains here but apply and show them visually in BETWEEN_LEVELS.
+	# Record xp gains here but apply and show them visually in REWARD_STAGE.
 	level_xp = level.granted_xp()
 	# Needs to be recorded here in case it's the last level.
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
-	# Need to advance level_provider at the same time, so that if
-	# we save at this point, the stats and next level match.
-	if level_provider.is_last_level(run_save_state.current_level):
-		state.change_state.call_deferred(RUN_SUMMARY)
-	else:
-		run_save_state.current_level += 1
-		# If the next level has relics available, they need to be selected
-		# here so when we snapshot on entering the next level the relics are
-		# already chosen and user can't save-scum.
-		if level_provider.are_relics_available(run_save_state.current_level):
-			run_save_state.relic_library_state.select_relics(3)
-		# Call this in the same frame explicitly so we update all the
-		# bits of the RunSaveState in the same frame.
-		state.change_state(BETWEEN_LEVELS, false)
+	run_save_state.current_phase = RunSaveState.Phase.REWARD
+	# Call this in the same frame explicitly so we update all the
+	# bits of the RunSaveState in the same frame.
+	state.change_state(REWARD_STAGE, false)
 
 func _on_within_level_exited():
 	level.exit()
@@ -150,28 +144,34 @@ func _on_relic_selected(relic_name: String, gc: GameplayCharacter):
 	run_save_state.relic_library_state.clear_relic_selection()
 	gc.add_relic(relic_name)
 
-func _on_between_levels_entered():
-	# TODO: Do something fancy with animations and what not.
-	var text = ""
+func _on_reward_stage_entered():
+	_current_reward = _pick_reward(run_save_state.current_stage)
+	var outcome := ""
+	if _current_reward:
+		outcome = _current_reward.apply(run_save_state)
+	# Always grant pending XP regardless of reward type.
 	for character in gameplay_characters:
-		var prev_health = character.health
-		character.after_level_heal()
-		var prev_xp = character.xp
 		character.grant_xp(level_xp)
-		text += "%s\n" % character.name
-		text += "  XP: %d -> %d\n" % [prev_xp, character.xp]
-		text += "  HP: %d -> %d\n" % [prev_health, character.health]
-		text += "\n"
 	level_xp = 0
 	save_requested.emit()
-	ui_layer.show_between_levels_screen(text)
-	ui_layer.between_levels_continue_selected.connect(_on_between_levels_continue_selected, CONNECT_ONE_SHOT)
+	var title := _current_reward.display_name if _current_reward else "Brief Respite"
+	var description := _current_reward.description if _current_reward else ""
+	var body := description
+	if outcome:
+		body += "\n\n" + outcome if body else outcome
+	ui_layer.show_between_levels_screen(title, body)
+	ui_layer.between_levels_continue_selected.connect(_on_reward_stage_continue_selected, CONNECT_ONE_SHOT)
 
-func _on_between_levels_continue_selected():
-	state.change_state.call_deferred(WITHIN_LEVEL)
+func _on_reward_stage_continue_selected():
+	run_save_state.current_stage += 1
+	run_save_state.current_phase = RunSaveState.Phase.FIGHT
+	if level_provider.has_levels_at_difficulty(run_save_state.current_stage):
+		state.change_state.call_deferred(WITHIN_LEVEL)
+	else:
+		state.change_state.call_deferred(RUN_SUMMARY)
 
-func _on_between_levels_exited():
-	pass
+func _on_reward_stage_exited():
+	_current_reward = null
 
 func _on_run_summary_entered():
 	ui_layer.show_run_summary_screen(_meta_xp_text())
@@ -193,17 +193,9 @@ func _on_restart_requested():
 	_on_level_failed()
 
 func _snapshot_run_save_state():
-	print("Saving run save state snapshot")
-	print("Relic library state on current state: %s" % [run_save_state.relic_library_state.available_relics])
-	print("Relics on GC0 current state: %s" % [run_save_state.gameplay_characters[0].relics])
 	run_save_state_snapshot = run_save_state.clone()
 
 func _restore_run_save_state_snapshot():
-	print("Restoring run save state snapshot")
-	print("Relic library state on current state: %s" % [run_save_state.relic_library_state.available_relics])
-	print("Relics on GC0 current state: %s" % [run_save_state.gameplay_characters[0].relics])
-	print("Relic library state on snapshot: %s" % [run_save_state_snapshot.relic_library_state.available_relics])
-	print("Relics on GC0 snapshot: %s" % [run_save_state_snapshot.gameplay_characters[0].relics])
 	run_save_state = run_save_state_snapshot
 
 func _on_reset_requested():
@@ -226,3 +218,28 @@ func meta_xp() -> int:
 
 func paused():
 	return state.is_state(WITHIN_LEVEL) and level.paused()
+
+# --- Pool picks ---
+
+# Seed is hashed with the stage index so each stage's pick is deterministic
+# (and surviving the same stage twice via retry picks the same level).
+func _stage_rng(stage: int) -> RandomNumberGenerator:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash("%d:%d" % [run_save_state.get_instance_id(), stage])
+	return rng
+
+func _pick_fight_level(stage: int) -> PackedScene:
+	var pool := level_provider.levels_at_difficulty(stage)
+	if pool.is_empty():
+		return null
+	return pool[_stage_rng(stage).randi() % pool.size()]
+
+func _pick_reward(stage: int) -> RewardDef:
+	var pool := level_provider.available_rewards
+	if pool.is_empty():
+		return null
+	# Mix in a salt so the reward pick and the fight pick at the same stage
+	# don't covary visibly.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash("%d:%d:reward" % [run_save_state.get_instance_id(), stage])
+	return pool[rng.randi() % pool.size()]

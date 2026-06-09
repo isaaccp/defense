@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dinstwind2001"]
+
+[ext_resource type="PackedScene" uid="uid://2oo81t37blhq" path="res://levels/test/instant_win.tscn" id="1_inst"]
+
+[node name="Level" instance=ExtResource("1_inst")]
+difficulty = 2

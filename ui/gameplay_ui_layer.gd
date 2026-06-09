@@ -119,8 +119,8 @@ func show_pre_run_screen():
 func show_run_summary_screen(text: String):
 	show_screen(%RunSummaryScreen, {"text": text})
 
-func show_between_levels_screen(text: String):
-	show_screen(%BetweenLevelsScreen, {"text": text})
+func show_between_levels_screen(title: String, text: String):
+	show_screen(%BetweenLevelsScreen, {"title": title, "text": text})
 
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
 	%LevelEnd.prepare(win, character_node, granted_xp_text)

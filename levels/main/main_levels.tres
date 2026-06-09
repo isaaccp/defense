@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=13 format=3 uid="uid://d1ix5kyitpnfk"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=15 format=3 uid="uid://d1ix5kyitpnfk"]
 
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_rhg10"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_ug4xc"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bambushwave001" path="res://levels/main/forest_ambush/03_waves.tscn" id="9_waves"]
 [ext_resource type="PackedScene" uid="uid://barchpocket001" path="res://levels/main/forest_ambush/03_archer_pocket.tscn" id="10_archers"]
 [ext_resource type="Resource" uid="uid://ic0hy7kikmrw" path="res://effects/relics/relic_library.tres" id="15_0q7yn"]
+[ext_resource type="Script" path="res://run/rewards/reward_def.gd" id="16_rwdef"]
+[ext_resource type="Resource" uid="uid://drestreward01" path="res://run/rewards/rest.tres" id="17_rest"]
 
 [resource]
 script = ExtResource("2_3n011")
@@ -20,3 +22,4 @@ players = 2
 levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"), ExtResource("7_ambush"), ExtResource("8_warpress"), ExtResource("9_waves"), ExtResource("10_archers")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 relic_library = ExtResource("15_0q7yn")
+available_rewards = Array[ExtResource("16_rwdef")]([ExtResource("17_rest")])

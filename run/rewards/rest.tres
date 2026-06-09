@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RestRewardDef" load_steps=2 format=3 uid="uid://drestreward01"]
+
+[ext_resource type="Script" path="res://run/rewards/rest_reward_def.gd" id="1_rest"]
+
+[resource]
+script = ExtResource("1_rest")
+display_name = "Rest"
+description = "Your party takes a moment to recover."
+heal_fraction = 0.3

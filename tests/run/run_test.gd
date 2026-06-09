@@ -9,21 +9,15 @@ var expected_characters: int
 var level_provider: LevelProvider
 var ui_layer: GameplayUILayer
 
-# Consider mocking fully instead?
-func double_level_provider(level_provider: LevelProvider):
-	var d = partial_double(LevelProvider).new()
-	d.set_from(level_provider)
-	return d
-
 func before_all():
 	expected_characters = instant_win_level_provider.players
 
 func before_each():
 	ui_layer = gameplay_ui_layer_scene.instantiate()
 	ui_layer.initialize_state_machine_stack(StateMachine.new("test_sm"))
-	# If we don't create a copy, level_provider would be shared
-	# across tests.
-	level_provider = double_level_provider(instant_win_level_provider)
+	# Duplicate so tests don't share mutable state on the provider.
+	level_provider = LevelProvider.new()
+	level_provider.set_from(instant_win_level_provider)
 	run = run_scene.instantiate()
 	run.initialize(RunSaveState.make([], level_provider), ui_layer)
 	add_child_autoqfree(run)
@@ -44,31 +38,35 @@ func test_end_to_end():
 	assert_eq(expected_characters, selection_screen.character_selector_count())
 	assert_eq(expected_characters, selection_screen.selections_wanted)
 	assert(run.state.is_state(run.CHARACTER_SELECTION))
-	assert_call_count(level_provider, "load_level", 0)
 
 	gut.p("Character Selection Screen")
 	var selection: Array[int] = [0, 0]
 	ui_layer.character_selection_screen_selection_ready.emit(selection)
 
 	await wait_frames(1, "Waiting for level load")
-	assert_eq(run.run_save_state.current_level, 0)
+	assert_eq(run.run_save_state.current_stage, 1)
+	assert_eq(run.run_save_state.current_phase, RunSaveState.Phase.FIGHT)
 	assert(run.state.is_state(run.WITHIN_LEVEL))
 	assert_not_null(run.level)
+	assert_eq(run.level.difficulty, 1, "Stage 1 should load a d=1 level")
 	assert_eq(hud.character_view_count(), expected_characters)
-	assert_call_count(level_provider, "load_level", 1)
 
 	run.level.level_finished.emit()
 	await wait_frames(2)
 
-	gut.p("Between Levels")
-	assert_eq(run.run_save_state.current_level, 1)
-	assert(run.state.is_state(run.BETWEEN_LEVELS))
+	gut.p("Reward Stage")
+	assert_eq(run.run_save_state.current_stage, 1, "Stage doesn't advance until reward continue")
+	assert_eq(run.run_save_state.current_phase, RunSaveState.Phase.REWARD)
+	assert(run.state.is_state(run.REWARD_STAGE))
 	ui_layer.between_levels_continue_selected.emit()
 
 	await wait_frames(2)
 
-	gut.p("Loading next level")
-	assert_call_count(level_provider, "load_level", 2)
+	gut.p("Loading next stage")
+	assert_eq(run.run_save_state.current_stage, 2)
+	assert_eq(run.run_save_state.current_phase, RunSaveState.Phase.FIGHT)
+	assert(run.state.is_state(run.WITHIN_LEVEL))
+	assert_eq(run.level.difficulty, 2, "Stage 2 should load a d=2 level")
 
+	# TODO: Test end-of-run (no levels at stage 3 → RUN_SUMMARY).
 	# TODO: Test failure condition.
-	# TODO: Test end game.
