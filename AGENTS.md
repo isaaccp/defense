@@ -3,6 +3,31 @@
 ## Project Overview
 A roguelike tower-defense game in **Godot 4.7**. Players select heroes, place them in levels, and survive enemy waves. Between levels, they unlock skills that modify hero behaviors. Supports local and online (Nakama) multiplayer.
 
+## Read directory docs before reading code
+
+Many subsystems have their own markdown docs that explain how things work without making you re-derive them from source. **Read the relevant doc first**, then dive into code only for the details the doc doesn't cover.
+
+Subsystem docs:
+- **`behavior/BEHAVIOR.md`** — rule-based AI: stored vs runtime split, param system, action lifecycle, adding new skills/params.
+- **`enemies/ENEMIES.md`** — current roster + per-enemy stats + behavior.
+- **`enemies/NEW_ENEMY.md`** — how to add a new enemy type.
+- **`levels/LEVEL.md`** — stage-vs-level split and level registration.
+- **`levels/CAMPAIGN_DESIGN.md`** — designing a set of levels (read first when planning >1 level).
+- **`levels/STAGE_DESIGN.md`** — designing a new stage (terrain).
+- **`levels/STAGE_BUILDING.md`** — assembling a stage's ground/zones/decoration.
+- **`levels/SPRITESHEET_WORKFLOW.md`** — turning art into usable props/tiles.
+- **`levels/LEVEL_DESIGN.md`** — designing a level on top of an existing stage; the 3-mode sim protocol.
+- **`tools/sim/SIM.md`** — headless sim runner: config schema, behavior schema, summary schema, `diff.py` / `events.py` helpers.
+- **`tools/sim/SIM_FINDINGS.md`** — game-side findings from sim sessions; add to it as you discover.
+- **`BALANCE.md`** — global balance notes.
+- **`game_logic/README.md`** — damage types, attack types, attributes.
+
+Per-stage and per-level notes are colocated with the scenes:
+- **`levels/stages/STAGE_NOTES_*.md`** — geometry, supports/does-not-support, tactical demands, quirks.
+- **`levels/main/<stage>/LEVEL_NOTES_*.md`** — per-level intent, composition, verification status, quirks.
+
+Convention: when you create a new stage or level, write a sibling `STAGE_NOTES_*.md` / `LEVEL_NOTES_*.md`.
+
 ## Key Architecture Patterns
 
 ### Component System

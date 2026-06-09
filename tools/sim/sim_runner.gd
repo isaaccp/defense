@@ -199,15 +199,32 @@ func _validate_config() -> bool:
 					acquired_set[skill_name] = true
 		else:
 			errors.append("%s: acquired_skills must be array or 'full'" % prefix)
-		# Behavior.
-		var behavior_path: String = cfg.get("behavior", "")
-		if not behavior_path.is_empty():
-			_validate_behavior_file(behavior_path, acquired_set, has_all_skills, meta_skill_set, prefix, errors)
+		# Behavior. Accepts either a path string (load from file) or an
+		# inline dict — the latter is used by per-level "pair" configs that
+		# embed both characters' rules in one file.
+		var behavior_cfg: Variant = cfg.get("behavior")
+		_validate_behavior_cfg(behavior_cfg, acquired_set, has_all_skills, meta_skill_set, prefix, errors)
 	if errors.is_empty():
 		return true
 	push_error("Config validation failed:\n  - %s" % "\n  - ".join(errors))
 	scene_tree.quit(1)
 	return false
+
+# Dispatches behavior validation based on whether the cfg is a path or inline.
+# Empty/missing behavior is allowed (character gets an empty StoredBehavior).
+func _validate_behavior_cfg(behavior_cfg: Variant, acquired: Dictionary, full: bool, meta_skill_set: Dictionary, prefix: String, errors: PackedStringArray) -> void:
+	var t := typeof(behavior_cfg)
+	if t == TYPE_NIL:
+		return
+	if t == TYPE_STRING:
+		if behavior_cfg == "":
+			return
+		_validate_behavior_file(behavior_cfg, acquired, full, meta_skill_set, prefix, errors)
+		return
+	if t == TYPE_DICTIONARY:
+		_validate_behavior_rules(behavior_cfg.get("rules", []), "inline", acquired, full, meta_skill_set, prefix, errors)
+		return
+	errors.append("%s: behavior must be a path string or an inline dict, got %s" % [prefix, type_string(t)])
 
 # Walks a behavior JSON file and records issues against `errors`. Resolves
 # every skill reference via SkillManager and checks it's in the character's
@@ -224,10 +241,12 @@ func _validate_behavior_file(path: String, acquired: Dictionary, full: bool, met
 	if typeof(parsed) != TYPE_DICTIONARY:
 		errors.append("%s: behavior is not a JSON object: %s" % [prefix, path])
 		return
-	var rules: Array = parsed.get("rules", [])
+	_validate_behavior_rules(parsed.get("rules", []), path.get_file(), acquired, full, meta_skill_set, prefix, errors)
+
+func _validate_behavior_rules(rules: Array, source_name: String, acquired: Dictionary, full: bool, meta_skill_set: Dictionary, prefix: String, errors: PackedStringArray) -> void:
 	for i in rules.size():
 		var rule = rules[i]
-		var rule_prefix := "%s behavior %s rule[%d]" % [prefix, path.get_file(), i]
+		var rule_prefix := "%s behavior %s rule[%d]" % [prefix, source_name, i]
 		for field in ["action", "target"]:
 			_validate_skill_ref(rule.get(field), field, rule_prefix, acquired, full, errors)
 		# `condition` (singular, legacy) and/or `conditions` (array). Both
@@ -302,14 +321,11 @@ func _build_character(cfg: Dictionary, idx: int) -> GameplayCharacter:
 	if not gc.acquired_skills:
 		return null
 
-	var behavior_path: String = cfg.get("behavior", "")
-	if behavior_path.is_empty():
-		gc.behavior = StoredBehavior.new()
-	else:
-		var behavior := _load_behavior_json(behavior_path)
-		if not behavior:
-			return null  # _fail already called
-		gc.behavior = behavior
+	var behavior_cfg: Variant = cfg.get("behavior")
+	var behavior := _load_behavior_cfg(behavior_cfg)
+	if not behavior:
+		return null  # _fail already called (or empty cfg returned an empty behavior)
+	gc.behavior = behavior
 
 	var starting_health = cfg.get("starting_health")
 	if starting_health != null:
@@ -350,6 +366,17 @@ func _resolve_skill_basename(basename: String) -> StringName:
 
 # --- Behavior JSON translation ---
 
+func _load_behavior_cfg(behavior_cfg: Variant) -> StoredBehavior:
+	var t := typeof(behavior_cfg)
+	if t == TYPE_NIL or (t == TYPE_STRING and behavior_cfg == ""):
+		return StoredBehavior.new()
+	if t == TYPE_STRING:
+		return _load_behavior_json(behavior_cfg)
+	if t == TYPE_DICTIONARY:
+		return _build_behavior_from_dict(behavior_cfg, "inline")
+	_fail("behavior must be a path string or an inline dict, got %s" % type_string(t))
+	return null
+
 func _load_behavior_json(path: String) -> StoredBehavior:
 	var abs_path := path
 	if path.begins_with("res://"):
@@ -364,11 +391,15 @@ func _load_behavior_json(path: String) -> StoredBehavior:
 	if typeof(parsed) != TYPE_DICTIONARY:
 		_fail("behavior is not a JSON object: %s" % path)
 		return null
+	var fallback_name := path.get_file().get_basename()
+	return _build_behavior_from_dict(parsed, fallback_name, path)
+
+func _build_behavior_from_dict(parsed: Dictionary, fallback_name: String, source: String = "inline") -> StoredBehavior:
 	var rules_cfg: Array = parsed.get("rules", [])
 	var behavior := StoredBehavior.new()
-	behavior.name = parsed.get("name", path.get_file().get_basename())
+	behavior.name = parsed.get("name", fallback_name)
 	for i in rules_cfg.size():
-		var rule := _build_rule(rules_cfg[i], i, path)
+		var rule := _build_rule(rules_cfg[i], i, source)
 		if not rule:
 			return null
 		behavior.stored_rules.append(rule)

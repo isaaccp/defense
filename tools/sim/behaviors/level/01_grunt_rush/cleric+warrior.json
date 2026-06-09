@@ -1,0 +1,44 @@
+{
+  "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "Proven-beatable pair for 01_grunt_rush. Baseline 'attack closest / heal closest' — the simplest comp on the starting kit. Represents the d=1 floor: if this stops winning, the level has been pushed out of band.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "knight_attack_closest",
+        "rules": [
+          {
+            "action": {"name": "Sword Attack"},
+            "target": {"name": "Enemy"},
+            "sort": {"name": "Closest First"},
+            "condition": {"name": "Always"}
+          },
+          {
+            "action": {"name": "Move To"},
+            "target": {"name": "Enemy"},
+            "sort": {"name": "Closest First"},
+            "condition": {"name": "Always"}
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "cleric_heal_always",
+        "rules": [
+          {
+            "action": {"name": "Heal"},
+            "target": {"name": "Ally"},
+            "sort": {"name": "Closest First"},
+            "condition": {"name": "Always"}
+          }
+        ]
+      }
+    }
+  ]
+}

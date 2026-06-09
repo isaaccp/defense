@@ -1,0 +1,44 @@
+{
+  "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
+  "seed": 1,
+  "max_seconds": 90,
+  "notes": "Proven-beatable pair for 02_corridor_pocket. Baseline 'attack closest / heal closest' wins — notable because this is supposed to be d=2 ('needs tighter rules to beat'). Open question: is this level currently too easy for its band, or is the baseline already enough?",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "knight_attack_closest",
+        "rules": [
+          {
+            "action": {"name": "Sword Attack"},
+            "target": {"name": "Enemy"},
+            "sort": {"name": "Closest First"},
+            "condition": {"name": "Always"}
+          },
+          {
+            "action": {"name": "Move To"},
+            "target": {"name": "Enemy"},
+            "sort": {"name": "Closest First"},
+            "condition": {"name": "Always"}
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "cleric_heal_always",
+        "rules": [
+          {
+            "action": {"name": "Heal"},
+            "target": {"name": "Ally"},
+            "sort": {"name": "Closest First"},
+            "condition": {"name": "Always"}
+          }
+        ]
+      }
+    }
+  ]
+}

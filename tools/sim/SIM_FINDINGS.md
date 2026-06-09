@@ -6,6 +6,28 @@ Each entry: brief observation + what motivated it. Cross-reference [`NEXT_STEPS.
 
 ---
 
+## 2026-06-08 — sim is not bit-reproducible when archers (Move Away) are present
+
+Context: validating d=1 and d=2 sibling levels with proven-beatable pair files. Three back-to-back runs of the same seeded config produced wildly different outcomes only on `01_archer_rush`:
+
+| Level | run1 | run2 | run3 |
+|---|---|---|---|
+| 01_grunt_rush (baseline) | 25.7s | 25.7s | 25.7s |
+| 01_archer_rush (baseline) | 49.6s | 34.3s | 83.8s |
+| 02_corridor_pocket (baseline) | 42.5s | 42.5s | 42.5s |
+| 02_warrior_press (tight) | 29.6s | 29.5s | 29.4s |
+
+The non-archer levels are deterministic to within 0.2s. Archer level varies by 50+s — and in one earlier run timed out at 60s. Almost certainly comes from `Move Away` using `NavigationAgent2D.velocity_computed` (RVO avoidance), which depends on per-tick float timing that isn't replayed identically across runs. Any level using archers (or any actor with `Move Away`) inherits this variance.
+
+Implications:
+- Single-run sim verdicts on archer-containing levels are unreliable. Need either: (a) larger `max_seconds` headroom, (b) batch runs with majority verdict, or (c) determinism fix at the engine level.
+- For "is this level beatable" the practical workaround is to bump `max_seconds` generously. The level files for `01_archer_rush_baseline.json` use 90s for this reason.
+- For comparing sibling levels' "feel," archer levels can't be compared on elapsed-time alone — use damage taken / HP-at-end / events instead.
+
+This isn't blocking but worth fixing before any batch-mode work.
+
+---
+
 ## 2026-05-15 — first iteration loop on Knight + Cleric vs levels 1–5
 
 Context: 5 attempts across levels 1, 2, 5 (the largest). Levels 1–2 won easily, level 5 (two_warrior_spawner_plus_two_archers) was lost in all 3 attempts at 16–18s with TOWER_DIED. See `tools/sim/configs/lvl1_attempt_1.json` etc. for raw runs.

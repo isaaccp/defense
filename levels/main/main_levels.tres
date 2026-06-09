@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=11 format=3 uid="uid://d1ix5kyitpnfk"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=13 format=3 uid="uid://d1ix5kyitpnfk"]
 
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_rhg10"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_ug4xc"]
@@ -7,14 +7,16 @@
 [ext_resource type="Resource" uid="uid://ckoq3vmb76jcy" path="res://character/playable_characters/larian_the_rogue.tres" id="3_fnt7r"]
 [ext_resource type="Resource" uid="uid://g1au3en4bc7j" path="res://character/playable_characters/bernie_the_wizard.tres" id="4_muu8k"]
 [ext_resource type="PackedScene" uid="uid://djyvxv2chf3l1" path="res://levels/main/forest_chokepoint/01_grunt_rush.tscn" id="5_chrush"]
-[ext_resource type="PackedScene" uid="uid://bambushlvl0001" path="res://levels/main/forest_ambush/02_corridor_pocket.tscn" id="6_ambush"]
-[ext_resource type="PackedScene" uid="uid://bambushwave001" path="res://levels/main/forest_ambush/03_waves.tscn" id="7_waves"]
-[ext_resource type="PackedScene" uid="uid://barchpocket001" path="res://levels/main/forest_ambush/03_archer_pocket.tscn" id="8_archers"]
+[ext_resource type="PackedScene" uid="uid://barchrush01" path="res://levels/main/forest_ambush/01_archer_rush.tscn" id="6_archrush"]
+[ext_resource type="PackedScene" uid="uid://bambushlvl0001" path="res://levels/main/forest_ambush/02_corridor_pocket.tscn" id="7_ambush"]
+[ext_resource type="PackedScene" uid="uid://bwarpress02" path="res://levels/main/forest_chokepoint/02_warrior_press.tscn" id="8_warpress"]
+[ext_resource type="PackedScene" uid="uid://bambushwave001" path="res://levels/main/forest_ambush/03_waves.tscn" id="9_waves"]
+[ext_resource type="PackedScene" uid="uid://barchpocket001" path="res://levels/main/forest_ambush/03_archer_pocket.tscn" id="10_archers"]
 [ext_resource type="Resource" uid="uid://ic0hy7kikmrw" path="res://effects/relics/relic_library.tres" id="15_0q7yn"]
 
 [resource]
 script = ExtResource("2_3n011")
 players = 2
-levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_ambush"), ExtResource("7_waves"), ExtResource("8_archers")])
+levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"), ExtResource("7_ambush"), ExtResource("8_warpress"), ExtResource("9_waves"), ExtResource("10_archers")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 relic_library = ExtResource("15_0q7yn")

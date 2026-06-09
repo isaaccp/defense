@@ -21,9 +21,9 @@ None new — uses only what's already shipped post-Phase 1. Fight is designed fo
 
 ## Verification
 
-- **Mode A** (2026-05-16, seed=1): victory KILL_ALL_ENEMIES in 21.6s. Knight ended at 12/60 HP (20%). Cleric untouched at 50/50, healed 30 total. Tower untouched at 200/200. Summary: `tools/sim/configs/chokepoint_grunt_rush_mode_a.summary.json`.
-- **Mode B**: pending — defer until at least 3 fights exist.
-- **Mode C**: N/A for a single fight.
+Proven beatable by the pair in `tools/sim/behaviors/level/01_grunt_rush_baseline.json` (baseline "attack closest / heal closest" comp). Deterministic at ~25.7s.
+
+Mode B / Mode C deferred until more fights exist.
 
 ### Difficulty observation
 
