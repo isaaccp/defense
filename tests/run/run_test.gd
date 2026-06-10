@@ -58,7 +58,7 @@ func test_end_to_end():
 	assert_eq(run.run_save_state.current_stage, 1, "Stage doesn't advance until reward continue")
 	assert_eq(run.run_save_state.current_phase, RunSaveState.Phase.REWARD)
 	assert(run.state.is_state(run.REWARD_STAGE))
-	ui_layer.between_levels_continue_selected.emit()
+	ui_layer.reward_stage_continue_selected.emit()
 
 	await wait_frames(2)
 

@@ -3,16 +3,73 @@ extends Control
 class_name HudCharacterView
 
 var character: Character
+# Set when the view is driven by a GameplayCharacter directly (reward stage,
+# etc.) instead of a runtime Character node + components.
+var gameplay_character: GameplayCharacter
 
 signal config_button_pressed
 signal readiness_updated(ready: bool)
 signal view_log_requested(character: Character)
 signal upgrade_window_requested(character: Character)
+signal card_clicked(gameplay_character: GameplayCharacter)
 
 func _ready():
 	%ConfigContainer.hide()
 	%PreferredTargetLabel.hide()
 	%HudStatusDisplay.clear()
+
+## Reward-stage / non-combat init. Reads HP/XP/relics directly from the
+## GameplayCharacter resource — no Character node or components required.
+## Hides in-combat-only widgets (focus bar, action, preferred target,
+## config buttons, status display).
+func initialize_from_gameplay_character(gc: GameplayCharacter, relic_library: RelicLibrary) -> void:
+	gameplay_character = gc
+	%Title.text = gc.name
+	# HP bar.
+	%HealthBar.max_value = gc.attributes.health
+	%HealthBar.value = gc.health
+	%HealthBar.get_child(0).text = "%d / %d" % [gc.health, gc.attributes.health]
+	# Hide combat-only stuff.
+	%FocusBar.hide()
+	%ActionLabel.hide()
+	%PreferredTargetLabel.hide()
+	%ConfigContainer.hide()
+	%HudStatusDisplay.clear()
+	%HudStatusDisplay.hide()
+	# XP.
+	%XPLabel.text = "XP: %d" % gc.xp
+	%XPLabel.show()
+	# Relics.
+	%HudRelicDisplay.clear()
+	if relic_library:
+		for relic_name in gc.relics:
+			var relic := relic_library.get_relic(relic_name)
+			if relic:
+				%HudRelicDisplay.add_relic(relic)
+	# Forwarded click for character pickers (relic recipient, trainer
+	# character pick). Disabled by default; the host screen toggles it.
+	if not gui_input.is_connected(_on_card_gui_input):
+		gui_input.connect(_on_card_gui_input)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+
+## Toggle whether this card emits `card_clicked` on press. Reward stage
+## flips this on for "pick a character" sub-flows.
+func set_pickable(on: bool, highlight_color: Color = Color(1, 0.9, 0.4, 0.4)) -> void:
+	_pickable = on
+	if on:
+		modulate = Color(1, 1, 1, 1)
+		self_modulate = highlight_color
+	else:
+		self_modulate = Color.WHITE
+
+var _pickable: bool = false
+
+func _on_card_gui_input(event: InputEvent) -> void:
+	if not _pickable:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if gameplay_character:
+			card_clicked.emit(gameplay_character)
 
 func initialize(character_: Character) -> void:
 	character = character_

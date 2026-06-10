@@ -152,6 +152,10 @@ Game-side findings from sim sessions live in [`tools/sim/SIM_FINDINGS.md`](tools
 
 The simulator itself: [`tools/sim/SIM.md`](tools/sim/SIM.md).
 
+## Godot binary
+
+`/data/godot/bin/` contains the available Godot versions. In general there will be only one available — invoke it directly (no `godot` on `$PATH` by default). If there is more than one, ask the user which to use and commit that choice to memory so future sessions don't keep asking.
+
 ## Testing
 Uses [GUT](https://github.com/bitwes/Gut). Tests live in `tests/`. Run via the GUT panel in the Godot editor or `gut` CLI.
 

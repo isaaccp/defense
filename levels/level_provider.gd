@@ -4,13 +4,16 @@ class_name LevelProvider
 
 @export_group("Required")
 @export var players: int
+## How many fight stages this run has. Each stage's difficulty equals its
+## index (stage 1 → d=1). Validated against `levels` at run start.
+@export var total_stages: int = 1
 ## The level catalog. Grouped by `Level.difficulty` into a difficulty-band
 ## pool at load time; the run picks one from the matching pool per stage.
 @export var levels: Array[PackedScene]
 @export var available_characters: Array[GameplayCharacter]
 @export var relic_library: RelicLibrary
-## Reward types available at reward stages. The run picks one per stage
-## (currently uniformly at random from the pool).
+## Reward types available at reward stages. The run picks 2 different
+## types per stage (currently uniformly at random from the pool).
 @export var available_rewards: Array[RewardDef]
 
 @export_group("Testing")
@@ -20,6 +23,11 @@ class_name LevelProvider
 @export var unlocked_skills: SkillTreeState
 # Initial behavior for characters.
 @export var behavior: StoredBehavior = StoredBehavior.new()
+
+# How many distinct reward types we offer at each stage. Currently fixed,
+# but lifted out as a constant so the schedule generation doesn't have a
+# magic number sprinkled through it.
+const SETS_PER_STAGE: int = 2
 
 var _levels_by_difficulty: Dictionary = {}
 var _index_built: bool = false
@@ -46,9 +54,22 @@ func levels_at_difficulty(d: int) -> Array[PackedScene]:
 func has_levels_at_difficulty(d: int) -> bool:
 	return not levels_at_difficulty(d).is_empty()
 
+## Returns "" if the provider can support a full run, or a human-readable
+## error describing the first problem found. Hard-asserted by RunSaveState.make.
+func validate_runnable() -> String:
+	if total_stages < 1:
+		return "total_stages must be >= 1 (got %d)" % total_stages
+	for stage in range(1, total_stages + 1):
+		if not has_levels_at_difficulty(stage):
+			return "no level registered at difficulty %d" % stage
+	if available_rewards.is_empty():
+		return "available_rewards is empty"
+	return ""
+
 # For testing.
 func set_from(other: LevelProvider):
 	players = other.players
+	total_stages = other.total_stages
 	levels = other.levels
 	available_characters = other.available_characters
 	available_rewards = other.available_rewards

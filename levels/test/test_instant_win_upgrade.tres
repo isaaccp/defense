@@ -1,13 +1,17 @@
-[gd_resource type="Resource" script_class="LevelProvider" load_steps=6 format=3 uid="uid://bcc8y2omvq0ou"]
+[gd_resource type="Resource" script_class="LevelProvider" load_steps=7 format=3 uid="uid://bcc8y2omvq0ou"]
 
 [ext_resource type="Script" path="res://gameplay_character.gd" id="1_d8pux"]
 [ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="1_gnsko"]
 [ext_resource type="PackedScene" uid="uid://2oo81t37blhq" path="res://levels/test/instant_win.tscn" id="1_iqt4n"]
 [ext_resource type="PackedScene" uid="uid://dinstwind2001" path="res://levels/test/instant_win_d2.tscn" id="1_iqt4d2"]
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_glaws"]
+[ext_resource type="Script" path="res://run/rewards/reward_def.gd" id="3_rwdef"]
+[ext_resource type="Resource" uid="uid://drestreward01" path="res://run/rewards/rest.tres" id="4_rest"]
 
 [resource]
 script = ExtResource("2_glaws")
 players = 2
+total_stages = 2
 levels = Array[PackedScene]([ExtResource("1_iqt4n"), ExtResource("1_iqt4d2")])
 available_characters = Array[ExtResource("1_d8pux")]([ExtResource("1_gnsko")])
+available_rewards = Array[ExtResource("3_rwdef")]([ExtResource("4_rest")])

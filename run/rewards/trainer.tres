@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TrainerRewardDef" load_steps=2 format=3 uid="uid://dtrainerrward01"]
+
+[ext_resource type="Script" path="res://run/rewards/trainer_reward_def.gd" id="1_train"]
+
+[resource]
+script = ExtResource("1_train")
+display_name = "Trainer"
+description = "Spend XP to acquire new skills for your party."

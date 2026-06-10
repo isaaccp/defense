@@ -48,6 +48,7 @@ signal pre_run_continue_pressed
 signal run_summary_continue_selected
 ## Continue pressed on between levels screen.
 signal between_levels_continue_selected
+signal reward_stage_continue_selected
 
 func _ready():
 	super()
@@ -121,6 +122,16 @@ func show_run_summary_screen(text: String):
 
 func show_between_levels_screen(title: String, text: String):
 	show_screen(%BetweenLevelsScreen, {"title": title, "text": text})
+
+func show_reward_choice_screen(stage_rewards: StageRewards, run_save_state: RunSaveState):
+	show_screen(%RewardChoiceScreen, {
+		"save_state": save_state,
+		"run_save_state": run_save_state,
+		"stage_rewards": stage_rewards,
+	})
+
+func _on_reward_choice_screen_continue_pressed():
+	reward_stage_continue_selected.emit()
 
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
 	%LevelEnd.prepare(win, character_node, granted_xp_text)

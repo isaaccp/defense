@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3 uid="uid://drewardtest001"]
+
+[ext_resource type="Script" path="res://tools/dev/reward_stage_test.gd" id="1_test"]
+[ext_resource type="Script" path="res://gameplay_character.gd" id="2_gc"]
+[ext_resource type="Resource" uid="uid://bix5m3wtgncj4" path="res://character/playable_characters/godric_the_knight.tres" id="3_knight"]
+[ext_resource type="Resource" uid="uid://dyrr5aucf70fk" path="res://character/playable_characters/puffin_the_cleric.tres" id="4_cleric"]
+[ext_resource type="Script" path="res://run/rewards/reward_def.gd" id="5_rwdef"]
+[ext_resource type="Resource" uid="uid://drestreward01" path="res://run/rewards/rest.tres" id="6_rest"]
+[ext_resource type="Resource" uid="uid://dtrainerrward01" path="res://run/rewards/trainer.tres" id="7_train"]
+[ext_resource type="Resource" uid="uid://ic0hy7kikmrw" path="res://effects/relics/relic_library.tres" id="8_lib"]
+
+[node name="RewardStageTest" type="Node"]
+script = ExtResource("1_test")
+characters = Array[ExtResource("2_gc")]([ExtResource("3_knight"), ExtResource("4_cleric")])
+initial_xp_per_character = 500
+damage_each_character = 20
+set_a = Array[ExtResource("5_rwdef")]([ExtResource("6_rest")])
+set_b = Array[ExtResource("5_rwdef")]([ExtResource("7_train")])
+relic_library = ExtResource("8_lib")

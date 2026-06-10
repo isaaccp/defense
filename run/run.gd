@@ -32,9 +32,6 @@ var level: Level
 var level_scene: PackedScene
 # Saved in WITHIN_LEVEL, to be used during REWARD_STAGE.
 var level_xp: int
-# The reward chosen for the current REWARD_STAGE (held so retries / UI
-# refreshes don't reroll).
-var _current_reward: RewardDef
 
 # A copy of run_save_state when level is entered for first time.
 # Allows to reset state.
@@ -145,22 +142,15 @@ func _on_relic_selected(relic_name: String, gc: GameplayCharacter):
 	gc.add_relic(relic_name)
 
 func _on_reward_stage_entered():
-	_current_reward = _pick_reward(run_save_state.current_stage)
-	var outcome := ""
-	if _current_reward:
-		outcome = _current_reward.apply(run_save_state)
-	# Always grant pending XP regardless of reward type.
+	# Grant any pending XP from the level we just finished — happens before
+	# the reward stage shows so the trainer reward sees up-to-date XP.
 	for character in gameplay_characters:
 		character.grant_xp(level_xp)
 	level_xp = 0
 	save_requested.emit()
-	var title := _current_reward.display_name if _current_reward else "Brief Respite"
-	var description := _current_reward.description if _current_reward else ""
-	var body := description
-	if outcome:
-		body += "\n\n" + outcome if body else outcome
-	ui_layer.show_between_levels_screen(title, body)
-	ui_layer.between_levels_continue_selected.connect(_on_reward_stage_continue_selected, CONNECT_ONE_SHOT)
+	var stage_rewards: StageRewards = run_save_state.reward_schedule[run_save_state.current_stage - 1]
+	ui_layer.show_reward_choice_screen(stage_rewards, run_save_state)
+	ui_layer.reward_stage_continue_selected.connect(_on_reward_stage_continue_selected, CONNECT_ONE_SHOT)
 
 func _on_reward_stage_continue_selected():
 	run_save_state.current_stage += 1
@@ -171,7 +161,7 @@ func _on_reward_stage_continue_selected():
 		state.change_state.call_deferred(RUN_SUMMARY)
 
 func _on_reward_stage_exited():
-	_current_reward = null
+	pass
 
 func _on_run_summary_entered():
 	ui_layer.show_run_summary_screen(_meta_xp_text())
@@ -225,7 +215,7 @@ func paused():
 # (and surviving the same stage twice via retry picks the same level).
 func _stage_rng(stage: int) -> RandomNumberGenerator:
 	var rng := RandomNumberGenerator.new()
-	rng.seed = hash("%d:%d" % [run_save_state.get_instance_id(), stage])
+	rng.seed = hash("%d:%d:fight" % [run_save_state.seed, stage])
 	return rng
 
 func _pick_fight_level(stage: int) -> PackedScene:
@@ -233,13 +223,3 @@ func _pick_fight_level(stage: int) -> PackedScene:
 	if pool.is_empty():
 		return null
 	return pool[_stage_rng(stage).randi() % pool.size()]
-
-func _pick_reward(stage: int) -> RewardDef:
-	var pool := level_provider.available_rewards
-	if pool.is_empty():
-		return null
-	# Mix in a salt so the reward pick and the fight pick at the same stage
-	# don't covary visibly.
-	var rng := RandomNumberGenerator.new()
-	rng.seed = hash("%d:%d:reward" % [run_save_state.get_instance_id(), stage])
-	return pool[rng.randi() % pool.size()]

@@ -8,8 +8,23 @@ class_name RewardDef
 ## Short description shown alongside the outcome.
 @export var description: String = ""
 
-## Applies the reward to the run state. Returns an outcome string suitable
-## for display (e.g. "Knight healed 30 → 48"). Subclasses override.
-func apply(_run_save_state: RunSaveState) -> String:
-	push_error("RewardDef.apply must be overridden")
+## Returns a per-slot instance of this reward, with any random data already
+## rolled (e.g. the specific relic). Subclasses that need per-slot data
+## should override and return a `duplicate(true)`. Default returns self,
+## which is correct for stateless rewards (Rest, Trainer).
+##
+## Called once per slot at schedule generation time. Anything that should
+## be reserved upfront (e.g. relic uniqueness) is mutated on `rss` here.
+func roll(_rng: RandomNumberGenerator, _rss: RunSaveState) -> RewardDef:
+	return self
+
+## Applies the reward to the run state and returns a short outcome string.
+## May `await` UI signals for interactive rewards (Relic, Trainer). For
+## non-interactive rewards this returns synchronously.
+##
+## `screen` is the RewardChoiceScreen driving the apply — interactive
+## rewards use it to make character cards clickable, to host the trainer
+## overlay, etc.
+func apply_and_get_outcome(_run_save_state: RunSaveState, _screen) -> String:
+	push_error("RewardDef.apply_and_get_outcome must be overridden")
 	return ""

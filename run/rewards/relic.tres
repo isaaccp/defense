@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RelicRewardDef" load_steps=2 format=3 uid="uid://drelicreward01"]
+
+[ext_resource type="Script" path="res://run/rewards/relic_reward_def.gd" id="1_relic"]
+
+[resource]
+script = ExtResource("1_relic")
+display_name = "Sacred Chest"
+description = "Inside waits a relic of forgotten power."
