@@ -17,9 +17,6 @@ params = SubResource("Resource_ojvym")
 name = &"Sword Attack"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_8lwyn"]
-script = ExtResource("2_v57ou")
-
 [sub_resource type="Resource" id="Resource_fsnpx"]
 script = ExtResource("5_7yy3c")
 name = &"Closest First"
@@ -40,6 +37,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_m2als")
 action = SubResource("Resource_yxxnc")
+
 [sub_resource type="Resource" id="Resource_c24jc"]
 script = ExtResource("2_v57ou")
 
@@ -59,6 +57,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_32l1c")
 action = SubResource("Resource_q12nn")
+
 [sub_resource type="Resource" id="Resource_ma4ch"]
 script = ExtResource("1_enl0e")
 name = "sword_and_move"
@@ -83,6 +82,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_6vkkg")
 action = SubResource("Resource_n5s7j")
+
 [sub_resource type="Resource" id="Resource_uwqnb"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_c24jc")
@@ -99,6 +99,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_uqf3a")
 action = SubResource("Resource_uwqnb")
+
 [sub_resource type="Resource" id="Resource_iyf1j"]
 script = ExtResource("1_enl0e")
 name = "bow_and_move"
@@ -112,9 +113,6 @@ script = ExtResource("3_6wex8")
 params = SubResource("Resource_ms6fv")
 name = &"Heal"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_pxhu5"]
-script = ExtResource("2_v57ou")
 
 [sub_resource type="Resource" id="Resource_pacl1"]
 script = ExtResource("5_7yy3c")
@@ -136,6 +134,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_37dhc")
 action = SubResource("Resource_gdwx7")
+
 [sub_resource type="Resource" id="Resource_4d74m"]
 script = ExtResource("2_v57ou")
 
@@ -218,6 +217,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_cs6o4")
 action = SubResource("Resource_qpdx4")
+
 [sub_resource type="Resource" id="Resource_p4bk4"]
 script = ExtResource("2_v57ou")
 
@@ -247,6 +247,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_tnfp3")
 action = SubResource("Resource_j12j0")
+
 [sub_resource type="Resource" id="Resource_055hc"]
 script = ExtResource("1_enl0e")
 name = "seeking_bolt_and_move"
@@ -260,9 +261,6 @@ script = ExtResource("3_6wex8")
 params = SubResource("Resource_gqyyd")
 name = &"Magic Armor"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_rks6q"]
-script = ExtResource("2_v57ou")
 
 [sub_resource type="Resource" id="Resource_ys4s4"]
 script = ExtResource("5_7yy3c")
@@ -284,6 +282,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_tktto")
 action = SubResource("Resource_c3120")
+
 [sub_resource type="Resource" id="Resource_dvd82"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_ms6fv")
@@ -300,6 +299,7 @@ skill_type = 2
 script = ExtResource("4_7mu3l")
 target_selection = SubResource("Resource_0x18r")
 action = SubResource("Resource_dvd82")
+
 [sub_resource type="Resource" id="Resource_q37ct"]
 script = ExtResource("3_6wex8")
 params = SubResource("Resource_4d74m")

@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=4 format=3 uid="uid://bopenact001"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://bopenact001"]
 
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_open"]
-[ext_resource type="Script" path="res://behavior/actions/open_action.gd" id="2_openact"]
+[ext_resource type="Script" uid="uid://d3ceudf6pl51a" path="res://behavior/actions/open_action.gd" id="2_openact"]
 [ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="3_actdf"]
 
 [sub_resource type="Resource" id="Resource_openp"]

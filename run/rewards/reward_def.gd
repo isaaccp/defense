@@ -19,12 +19,8 @@ func roll(_rng: RandomNumberGenerator, _rss: RunSaveState) -> RewardDef:
 	return self
 
 ## Applies the reward to the run state and returns a short outcome string.
-## May `await` UI signals for interactive rewards (Relic, Trainer). For
-## non-interactive rewards this returns synchronously.
-##
-## `screen` is the RewardChoiceScreen driving the apply — interactive
-## rewards use it to make character cards clickable, to host the trainer
-## overlay, etc.
-func apply_and_get_outcome(_run_save_state: RunSaveState, _screen) -> String:
+## May `await` UI signals via `ctx` for interactive rewards (Relic,
+## Trainer); non-interactive rewards return synchronously.
+func apply_and_get_outcome(_run_save_state: RunSaveState, _ctx: RewardApplyContext) -> String:
 	push_error("RewardDef.apply_and_get_outcome must be overridden")
 	return ""

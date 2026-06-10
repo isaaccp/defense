@@ -23,19 +23,15 @@ func roll(rng: RandomNumberGenerator, rss: RunSaveState) -> RewardDef:
 	rolled.rolled_relic = relic_name
 	return rolled
 
-func apply_and_get_outcome(run_save_state: RunSaveState, screen) -> String:
-	# Ask the screen to prompt the player for a recipient via clickable
-	# character cards. Returns the chosen GameplayCharacter.
-	var gc: GameplayCharacter = await screen.prompt_pick_character(
-		"Choose who receives the relic"
+func apply_and_get_outcome(run_save_state: RunSaveState, ctx: RewardApplyContext) -> String:
+	# Reveal the rolled relic to the player BEFORE asking for a recipient,
+	# so they can choose with full info.
+	var library := run_save_state.level_provider.relic_library
+	var relic_def: RelicDef = library.get_relic(rolled_relic) if library else null
+	var relic_display: String = relic_def.name if relic_def else String(rolled_relic)
+	var relic_desc: String = relic_def.description if relic_def else ""
+	var gc: GameplayCharacter = await ctx.prompt_pick_character_for_relic(
+		relic_display, relic_desc
 	)
 	gc.add_relic(rolled_relic)
-	if screen.has_method("refresh_character_cards"):
-		screen.refresh_character_cards()
-	var library := run_save_state.level_provider.relic_library
-	var relic_display: String = String(rolled_relic)
-	if library:
-		var relic := library.get_relic(rolled_relic)
-		if relic:
-			relic_display = relic.name
 	return "%s received %s" % [gc.name, relic_display]

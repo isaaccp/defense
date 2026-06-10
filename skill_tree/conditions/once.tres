@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="1_14i36"]
 [ext_resource type="Script" uid="uid://br651if1rrpnl" path="res://behavior/conditions/condition_once.gd" id="1_nkc6u"]
 [ext_resource type="Script" uid="uid://dcyviw8nie5gy" path="res://behavior/conditions/condition_def.gd" id="2_hcgbt"]
+
 [sub_resource type="Resource" id="Resource_opf8v"]
 script = ExtResource("1_14i36")
 

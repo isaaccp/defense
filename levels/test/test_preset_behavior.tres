@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="1_jouxj"]
 [ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="2_cwces"]
 [ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="3_4yb6m"]
+[ext_resource type="Script" uid="uid://qvh6tevlfnch" path="res://run/rewards/reward_def.gd" id="3_bgyny"]
 [ext_resource type="Script" uid="uid://c2obyw4bqtprd" path="res://behavior/stored_param_skill.gd" id="4_tpntf"]
 [ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="5_6s65h"]
 [ext_resource type="Script" uid="uid://c8dvjpcaa6dpo" path="res://levels/level_provider.gd" id="7_4xswo"]
@@ -17,9 +18,6 @@ script = ExtResource("4_tpntf")
 params = SubResource("Resource_h13ej")
 name = &"Hold Person"
 skill_type = 1
-
-[sub_resource type="Resource" id="Resource_8lwyn"]
-script = ExtResource("3_4yb6m")
 
 [sub_resource type="Resource" id="Resource_g68vo"]
 script = ExtResource("3_4yb6m")
@@ -35,6 +33,7 @@ skill_type = 2
 script = ExtResource("5_6s65h")
 target_selection = SubResource("Resource_lg6ku")
 action = SubResource("Resource_y6qno")
+
 [sub_resource type="Resource" id="Resource_d580u"]
 script = ExtResource("3_4yb6m")
 
@@ -54,6 +53,7 @@ skill_type = 2
 script = ExtResource("5_6s65h")
 target_selection = SubResource("Resource_0vf4w")
 action = SubResource("Resource_1l77o")
+
 [sub_resource type="Resource" id="Resource_cn1r5"]
 script = ExtResource("3_4yb6m")
 
@@ -73,6 +73,7 @@ skill_type = 2
 script = ExtResource("5_6s65h")
 target_selection = SubResource("Resource_s7xoq")
 action = SubResource("Resource_k7jyb")
+
 [sub_resource type="Resource" id="Resource_4lrpe"]
 script = ExtResource("2_cwces")
 stored_rules = Array[ExtResource("5_6s65h")]([SubResource("Resource_66hom"), SubResource("Resource_0vv00"), SubResource("Resource_8cr5j")])

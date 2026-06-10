@@ -38,44 +38,79 @@ horizontal_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HSplit" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Main" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 18
 
-[node name="CharacterCards" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplit"]
+[node name="LeftColumn" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="CharactersHeader" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn"]
+layout_mode = 2
+text = "Party"
+
+[node name="CharacterScroll" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+custom_minimum_size = Vector2(220, 0)
+
+[node name="CharacterCards" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn/CharacterScroll"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="RewardSide" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplit"]
+[node name="RightColumn" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 8
+size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="Prompt" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HSplit/RewardSide"]
+[node name="Prompt" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
 horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="SetButtons" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplit/RewardSide"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="Outcome" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HSplit/RewardSide"]
+[node name="SetPanels" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="RelicReveal" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+custom_minimum_size = Vector2(0, 60)
+text = ""
+
+[node name="Outcome" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TrainerControls" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+visible = false
+
+[node name="TrainerFinish" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/TrainerControls"]
+layout_mode = 2
+text = "Finish trainer"
 
 [node name="Continue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Continue"
 
-[node name="TrainerOverlay" type="PanelContainer" parent="."]
+[node name="SkillTreeOverlay" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -84,40 +119,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"OverlayPanel"
+visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="TrainerOverlay"]
+[node name="MarginContainer" type="MarginContainer" parent="SkillTreeOverlay"]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TrainerOverlay/MarginContainer"]
-layout_mode = 2
-
-[node name="TrainerTitle" type="Label" parent="TrainerOverlay/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Trainer — Choose a character to upgrade"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="TrainerOverlay/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TrainerCharacterList" type="VBoxContainer" parent="TrainerOverlay/MarginContainer/VBoxContainer"]
+[node name="SkillTreeSlot" type="Control" parent="SkillTreeOverlay/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 8
 
-[node name="TrainerSkillTreeSlot" type="Control" parent="TrainerOverlay/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-visible = false
-
-[node name="TrainerDone" type="Button" parent="TrainerOverlay/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Done"
-
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/TrainerControls/TrainerFinish" to="." method="_on_trainer_finish_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="TrainerOverlay/MarginContainer/VBoxContainer/TrainerDone" to="." method="_on_trainer_done_pressed"]

@@ -1,14 +1,14 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=6 format=3 uid="uid://bchillingsk01"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://bchillingsk01"]
 
-[ext_resource type="Script" path="res://behavior/actions/chilling_sphere_action.gd" id="1_csph"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_adef"]
-
-[sub_resource type="Resource" id="Resource_params"]
-script = ExtResource("2_params")
+[ext_resource type="Script" uid="uid://bid5ejyqs5snx" path="res://behavior/actions/chilling_sphere_action.gd" id="1_csph"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="3_adef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_csph_aoe"]
 radius = 30.0
+
+[sub_resource type="Resource" id="Resource_params"]
+script = ExtResource("2_params")
 
 [resource]
 script = ExtResource("3_adef")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ActionDef" load_steps=8 format=3 uid="uid://bcfnql2jmatdi"]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://bcfnql2jmatdi"]
 
 [ext_resource type="Script" uid="uid://bx3m68b2sx8n2" path="res://behavior/actions/fire_burst_action.gd" id="1_iy3ja"]
 [ext_resource type="Resource" uid="uid://dmi8jfkld1td3" path="res://game_logic/attack_types/magical.tres" id="2_r805t"]
@@ -6,12 +6,12 @@
 [ext_resource type="Resource" uid="uid://crd5cdw57rf3c" path="res://skill_tree/actions/seeking_bolt.tres" id="4_prks1"]
 [ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="5_tegaq"]
 
-[sub_resource type="Resource" id="Resource_xrcsq"]
-script = ExtResource("3_xkl34")
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fb_aoe"]
 radius = 20.0
 height = 56.0
+
+[sub_resource type="Resource" id="Resource_xrcsq"]
+script = ExtResource("3_xkl34")
 
 [resource]
 script = ExtResource("5_tegaq")
