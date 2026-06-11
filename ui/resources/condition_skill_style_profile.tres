@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/skill_style_profile.gd" id="1_style"]
+
+[resource]
+script = ExtResource("1_style")
+color_theme = Color(0.75, 0.35, 0.9, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 1
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 1

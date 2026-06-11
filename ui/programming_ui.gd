@@ -22,7 +22,7 @@ func initialize(title: String, behavior: StoredBehavior, acquired_skills: SkillT
 	if not %Toolbox.drag_started.is_connected(_on_toolbox_drag_started):
 		%Toolbox.drag_started.connect(_on_toolbox_drag_started)
 
-func _on_toolbox_drag_started(drag_type: int) -> void:
+func _on_toolbox_drag_started(drag_type: BehaviorEditorTypes.SlotType) -> void:
 	(%BehaviorEditor as BehaviorEditor).highlight_drop_targets(drag_type)
 
 func _on_toolbox_filter_text_changed(text: String) -> void:

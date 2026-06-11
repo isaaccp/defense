@@ -3,7 +3,7 @@ class_name Toolbox extends Tree
 
 # Emitted when the user starts dragging a skill from the toolbox. Listeners
 # (e.g. the behavior editor) use it to highlight valid drop targets.
-signal drag_started(drag_type: int)
+signal drag_started(drag_type: BehaviorEditorTypes.SlotType)
 
 var _root: TreeItem
 var _skills: SkillTreeState
@@ -44,14 +44,14 @@ func _rebuild():
 	if not _skills:
 		return
 
-	_add_section("Target Selection Types", _skills.target_selections, 0,
+	_add_section("Target Selection Types", _skills.target_selections, BehaviorEditorTypes.SlotType.TARGET,
 		func(n): return SkillManager.make_target_selection_instance(n))
-	_add_section("Conditions", _skills.conditions, 1,
+	_add_section("Conditions", _skills.conditions, BehaviorEditorTypes.SlotType.CONDITION,
 		func(n): return SkillManager.make_condition_instance(n))
-	_add_section("Actions", _skills.actions, 2,
+	_add_section("Actions", _skills.actions, BehaviorEditorTypes.SlotType.ACTION,
 		func(n): return SkillManager.make_action_instance(n))
 
-func _add_section(title: String, names: Array, column: int, factory: Callable):
+func _add_section(title: String, names: Array, column: BehaviorEditorTypes.SlotType, factory: Callable):
 	var matching: Array = []
 	for n in names:
 		if _matches(n):
@@ -61,14 +61,19 @@ func _add_section(title: String, names: Array, column: int, factory: Callable):
 	var header = create_item(_root)
 	header.set_text(0, title)
 	header.set_selectable(0, false)
+	header.set_custom_color(0, Color(0.8, 0.8, 0.8))
 	for n in matching:
 		var item = create_item(header)
 		var skill = factory.call(n)
 		item.set_text(0, n)
 		item.set_tooltip_text(0, skill.description())
 		item.set_metadata(0, metadata(column, n, skill.params))
+		
+		# Set custom colors for items based on column type
+		var profile = SkillStyles.profile_for_slot(column)
+		item.set_custom_color(0, profile.color_theme)
 
-func metadata(column: int, name: StringName, params: SkillParams) -> Dictionary:
+func metadata(column: BehaviorEditorTypes.SlotType, name: StringName, params: SkillParams) -> Dictionary:
 	return {"column": column, "name": name, "params": params}
 
 func _get_drag_data(at_position: Vector2):
@@ -76,12 +81,34 @@ func _get_drag_data(at_position: Vector2):
 	if not item or item.get_parent() == _root: # header
 		return null
 
-	var preview = Label.new()
-	preview.text = item.get_text(0)
-	set_drag_preview(preview)
 	var metadata = item.get_metadata(0)
+	var drag_type: BehaviorEditorTypes.SlotType = metadata.column
+	var text = item.get_text(0)
 	if metadata.has("params") and not metadata.params.placeholders.is_empty():
-		preview.text = metadata.params.interpolated_text()
+		text = metadata.params.interpolated_text()
 
-	drag_started.emit(metadata.column)
-	return {"type": metadata.column, "text": preview.text, "name": metadata.name, "params": metadata.get("params")}
+	var preview := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	
+	var profile = SkillStyles.profile_for_slot(drag_type)
+	
+	# Apply matching shapes and colors
+	style.corner_radius_top_left = profile.corner_radius_top_left
+	style.corner_radius_top_right = profile.corner_radius_top_right
+	style.corner_radius_bottom_right = profile.corner_radius_bottom_right
+	style.corner_radius_bottom_left = profile.corner_radius_bottom_left
+	
+	style.bg_color = profile.bg_color_highlight()
+	style.border_color = profile.border_color_highlight()
+	style.set_border_width_all(1)
+	style.set_content_margin_all(8)
+	preview.add_theme_stylebox_override("panel", style)
+
+	var label := Label.new()
+	label.text = text
+	label.add_theme_color_override("font_color", Color.WHITE)
+	preview.add_child(label)
+
+	set_drag_preview(preview)
+	drag_started.emit(drag_type)
+	return {"type": drag_type, "text": text, "name": metadata.name, "params": metadata.get("params")}

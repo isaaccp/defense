@@ -8,10 +8,7 @@ class_name BehaviorEditorView
 @export var drag_icon: Texture2D
 
 
-# Toolbox encodes drag-data 'type' as column-positional ints (not Skill.SkillType).
-const DRAG_TYPE_TARGET := 0
-const DRAG_TYPE_CONDITION := 1
-const DRAG_TYPE_ACTION := 2
+# Toolbox encodes drag-data 'type' as SlotType.
 
 signal can_save_to_behavior_updated(can_save: bool)
 signal can_save_to_behavior_library_updated(can_save: bool)
@@ -79,7 +76,7 @@ func expand_all_conditions() -> void:
 # Called by the surrounding UI when a drag from the toolbox starts. Highlights
 # every valid drop target for the given drag type. NOTIFICATION_DRAG_END fires
 # globally on every Control when the drag ends, which we use to un-highlight.
-func highlight_drop_targets(drag_type: int) -> void:
+func highlight_drop_targets(drag_type: BehaviorEditorTypes.SlotType) -> void:
 	for c in _list.get_children():
 		(c as RuleWidget).set_highlight_for_drag(drag_type)
 
@@ -249,10 +246,10 @@ class RuleWidget extends PanelContainer:
 		_delete_button.disabled = true
 		_delete_button.pressed.connect(_on_delete)
 		
-		_target_cell = SkillCell.new(editor, SkillCell.SLOT_TARGET, self)
+		_target_cell = SkillCell.new(editor, BehaviorEditorTypes.SlotType.TARGET, self)
 		_target_cell.size_flags_horizontal = SIZE_EXPAND_FILL
 		
-		_action_cell = SkillCell.new(editor, SkillCell.SLOT_ACTION, self)
+		_action_cell = SkillCell.new(editor, BehaviorEditorTypes.SlotType.ACTION, self)
 		_action_cell.size_flags_horizontal = SIZE_EXPAND_FILL
 		
 		_conditions_vbox = VBoxContainer.new()
@@ -408,13 +405,13 @@ class RuleWidget extends PanelContainer:
 		_conditions_vbox.visible = not collapsed
 
 	# Highlight all slots that would accept the current drag type.
-	func set_highlight_for_drag(drag_type: int) -> void:
+	func set_highlight_for_drag(drag_type: BehaviorEditorTypes.SlotType) -> void:
 		match drag_type:
-			BehaviorEditorView.DRAG_TYPE_TARGET:
+			BehaviorEditorTypes.SlotType.TARGET:
 				_target_cell.set_highlighted(true)
-			BehaviorEditorView.DRAG_TYPE_ACTION:
+			BehaviorEditorTypes.SlotType.ACTION:
 				_action_cell.set_highlighted(true)
-			BehaviorEditorView.DRAG_TYPE_CONDITION:
+			BehaviorEditorTypes.SlotType.CONDITION:
 				# Highlight every cell on this rule (since a condition can
 				# drop anywhere on the rule via forwarding), as long as there
 				# is room for another condition.
@@ -471,7 +468,7 @@ class RuleWidget extends PanelContainer:
 			return dragged != self
 		if not data.has("type"):
 			return false
-		if data.type != BehaviorEditorView.DRAG_TYPE_CONDITION:
+		if data.type != BehaviorEditorTypes.SlotType.CONDITION:
 			return false
 		if _condition_count() >= editor.conditions_cap:
 			return false
@@ -495,7 +492,7 @@ class RuleWidget extends PanelContainer:
 			if dragged:
 				editor.reorder_rule(dragged, self, at_position.y)
 			return
-		if data.type != BehaviorEditorView.DRAG_TYPE_CONDITION:
+		if data.type != BehaviorEditorTypes.SlotType.CONDITION:
 			return
 		var cond := SkillManager.make_condition_instance(data.name)
 		cond.params = data.params
@@ -545,7 +542,7 @@ class ConditionRow extends HBoxContainer:
 		_delete_button.icon = editor.delete_icon
 		_delete_button.tooltip_text = "Delete condition"
 		_delete_button.pressed.connect(_on_delete)
-		_cell = SkillCell.new(editor, SkillCell.SLOT_CONDITION, rule_widget)
+		_cell = SkillCell.new(editor, BehaviorEditorTypes.SlotType.CONDITION, rule_widget)
 		_cell.size_flags_horizontal = SIZE_EXPAND_FILL
 
 	func _ready():
@@ -579,19 +576,15 @@ class ConditionRow extends HBoxContainer:
 # ============================================================================
 
 class SkillCell extends PanelContainer:
-	const SLOT_TARGET := 0
-	const SLOT_CONDITION := 1
-	const SLOT_ACTION := 2
-
 	var editor: BehaviorEditorView
-	var slot_type: int
+	var slot_type: BehaviorEditorTypes.SlotType
 	var rule_widget: RuleWidget
 
 	var _skill: ParamSkill
 	var _label: Label
 	var _edit_button: Button
 
-	func _init(editor_: BehaviorEditorView, slot_type_: int, rule_widget_: RuleWidget):
+	func _init(editor_: BehaviorEditorView, slot_type_: BehaviorEditorTypes.SlotType, rule_widget_: RuleWidget):
 		editor = editor_
 		slot_type = slot_type_
 		rule_widget = rule_widget_
@@ -619,18 +612,38 @@ class SkillCell extends PanelContainer:
 	# stronger border once filled to make occupied cells obvious.
 	func _apply_style(filled: bool) -> void:
 		var style := StyleBoxFlat.new()
+		var profile = SkillStyles.profile_for_slot(slot_type)
+		
+		# Apply corner radius from profile
+		style.corner_radius_top_left = profile.corner_radius_top_left
+		style.corner_radius_top_right = profile.corner_radius_top_right
+		style.corner_radius_bottom_right = profile.corner_radius_bottom_right
+		style.corner_radius_bottom_left = profile.corner_radius_bottom_left
+		
+		var bg_color: Color
+		var border_color: Color
+		var border_width := 1
+		
 		if _highlighted:
-			# Highlighted (drag in progress, this slot is a valid target).
-			style.bg_color = Color(0.4, 0.9, 0.4, 0.18)
-			style.border_color = Color(0.5, 1.0, 0.5, 0.9)
-			style.set_border_width_all(2)
+			bg_color = profile.bg_color_highlight()
+			border_color = profile.border_color_highlight()
+			border_width = 2
+		elif filled:
+			bg_color = profile.bg_color_filled()
+			border_color = profile.border_color_filled()
 		else:
-			style.bg_color = Color(1.0, 1.0, 1.0, 0.06 if filled else 0.02)
-			style.border_color = Color(1.0, 1.0, 1.0, 0.35 if filled else 0.18)
-			style.set_border_width_all(1)
-		style.set_corner_radius_all(4)
+			bg_color = profile.bg_color_empty()
+			border_color = profile.border_color_empty()
+			
+		style.bg_color = bg_color
+		style.border_color = border_color
+		style.set_border_width_all(border_width)
 		style.set_content_margin_all(6)
 		add_theme_stylebox_override("panel", style)
+		
+		if _label:
+			var text_color: Color = profile.text_color_filled() if filled else profile.text_color_empty()
+			_label.add_theme_color_override("font_color", text_color)
 
 	func set_highlighted(on: bool) -> void:
 		_highlighted = on
@@ -665,26 +678,26 @@ class SkillCell extends PanelContainer:
 		if _skill:
 			_label.text = str(_skill)
 			_edit_button.visible = _skill.params != null and _skill.params.placeholders.size() > 0
-			modulate = Color.WHITE if is_acquired() else Color(1.0, 0.6, 0.6)
+			_label.self_modulate = Color.WHITE if is_acquired() else Color(1.0, 0.6, 0.6)
 			_apply_style(true)
 		else:
 			_label.text = _placeholder_text()
 			_edit_button.visible = false
-			modulate = Color(0.7, 0.7, 0.7)
+			_label.self_modulate = Color.WHITE
 			_apply_style(false)
 
 	func _placeholder_text() -> String:
 		match slot_type:
-			SLOT_TARGET: return "[Target]"
-			SLOT_CONDITION: return "[Condition]"
-			SLOT_ACTION: return "[Action]"
+			BehaviorEditorTypes.SlotType.TARGET: return "[Target]"
+			BehaviorEditorTypes.SlotType.CONDITION: return "[Condition]"
+			BehaviorEditorTypes.SlotType.ACTION: return "[Action]"
 		return ""
 
 	func _slot_name() -> String:
 		match slot_type:
-			SLOT_TARGET: return "target"
-			SLOT_CONDITION: return "condition"
-			SLOT_ACTION: return "action"
+			BehaviorEditorTypes.SlotType.TARGET: return "target"
+			BehaviorEditorTypes.SlotType.CONDITION: return "condition"
+			BehaviorEditorTypes.SlotType.ACTION: return "action"
 		return ""
 
 	func _can_drop_data(at_position: Vector2, data) -> bool:
@@ -694,7 +707,7 @@ class SkillCell extends PanelContainer:
 			return _check_compatibility(data)
 		# Forward condition drops to the rule widget so the user can drop a
 		# condition anywhere on the rule without hunting for empty space.
-		if data.type == BehaviorEditorView.DRAG_TYPE_CONDITION:
+		if data.type == BehaviorEditorTypes.SlotType.CONDITION:
 			return rule_widget._can_drop_data(at_position, data)
 		return false
 
@@ -707,19 +720,19 @@ class SkillCell extends PanelContainer:
 				set_skill(skill)
 				rule_widget.on_cell_changed()
 			return
-		if data.type == BehaviorEditorView.DRAG_TYPE_CONDITION:
+		if data.type == BehaviorEditorTypes.SlotType.CONDITION:
 			rule_widget._drop_data(at_position, data)
 
 	func _check_compatibility(data) -> bool:
 		match slot_type:
-			SLOT_TARGET:
+			BehaviorEditorTypes.SlotType.TARGET:
 				var new_target = SkillManager.make_target_selection_instance(data.name)
 				return rule_widget._target_change_compatible(new_target)
-			SLOT_CONDITION:
+			BehaviorEditorTypes.SlotType.CONDITION:
 				var new_cond = SkillManager.make_condition_instance(data.name)
 				var target = rule_widget.get_target_def()
 				return target == null or new_cond.compatible_with_target(target.type)
-			SLOT_ACTION:
+			BehaviorEditorTypes.SlotType.ACTION:
 				var new_action = SkillManager.make_action_instance(data.name)
 				var target = rule_widget.get_target_def()
 				return target == null or new_action.compatible_with_target(target.type)
@@ -727,15 +740,15 @@ class SkillCell extends PanelContainer:
 
 	func _create_skill_from_data(data):
 		match slot_type:
-			SLOT_TARGET:
+			BehaviorEditorTypes.SlotType.TARGET:
 				var t = SkillManager.make_target_selection_instance(data.name)
 				t.params = data.params
 				return t
-			SLOT_CONDITION:
+			BehaviorEditorTypes.SlotType.CONDITION:
 				var c = SkillManager.make_condition_instance(data.name)
 				c.params = data.params
 				return c
-			SLOT_ACTION:
+			BehaviorEditorTypes.SlotType.ACTION:
 				var a = SkillManager.make_action_instance(data.name)
 				a.params = data.params
 				return a

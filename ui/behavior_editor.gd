@@ -42,5 +42,5 @@ func _on_behavior_editor_view_can_save_to_behavior_updated(can_save: bool):
 func _on_behavior_editor_view_can_save_to_behavior_library_updated(can_save: bool):
 	can_save_to_behavior_library_updated.emit(can_save)
 
-func highlight_drop_targets(drag_type: int) -> void:
+func highlight_drop_targets(drag_type: BehaviorEditorTypes.SlotType) -> void:
 	%BehaviorEditorView.highlight_drop_targets(drag_type)

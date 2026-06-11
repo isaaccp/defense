@@ -38,13 +38,7 @@ const STATE_COLORS := {
 	SkillState.SHROUDED: Color(0.10, 0.10, 0.12, 1.0),
 }
 
-const TYPE_BORDER_COLORS := {
-	Skill.SkillType.ACTION: Color(0.85, 0.30, 0.30, 1.0),
-	Skill.SkillType.CONDITION: Color(0.65, 0.40, 0.85, 1.0),
-	Skill.SkillType.TARGET: Color(0.55, 0.80, 0.30, 1.0),
-	Skill.SkillType.TARGET_SORT: Color(0.85, 0.70, 0.30, 1.0),
-	Skill.SkillType.META_SKILL: Color(0.45, 0.65, 0.85, 1.0),
-}
+
 
 enum Mode { ACQUIRE, UNLOCK }
 
@@ -229,7 +223,10 @@ func _state_color(s: Skill) -> Color:
 	return STATE_COLORS.get(_state(s), Color.WHITE)
 
 func _type_border_color(s: Skill) -> Color:
-	return TYPE_BORDER_COLORS.get(s.skill_type, Color(0.4, 0.4, 0.4, 1.0))
+	var profile = SkillStyles.profile_for_skill_type(s.skill_type)
+	if profile:
+		return profile.color_theme
+	return Color(0.4, 0.4, 0.4, 1.0)
 
 # ============================================================================
 # Purchase
@@ -388,6 +385,7 @@ class TreeCanvas extends Control:
 class SkillCard extends PanelContainer:
 	var ui: SkillTreeUI
 	var skill: Skill
+	var _name_chip: PanelContainer
 	var _name_label: Label
 	var _status_label: Label
 	var _cost_label: Label
@@ -417,10 +415,17 @@ class SkillCard extends PanelContainer:
 		_content_vb = VBoxContainer.new()
 		_content_vb.add_theme_constant_override("separation", 1)
 		margin.add_child(_content_vb)
+		
+		# Name chip container for type-specific styling
+		_name_chip = PanelContainer.new()
+		_content_vb.add_child(_name_chip)
+		
 		_name_label = Label.new()
-		_name_label.add_theme_font_size_override("font_size", 12)
+		_name_label.add_theme_font_size_override("font_size", 10)
 		_name_label.clip_text = true
-		_content_vb.add_child(_name_label)
+		_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_name_chip.add_child(_name_label)
+		
 		# Bottom row: status text on the left, buy button on the right.
 		# When not buyable the button is hidden and the status takes the
 		# whole row.
@@ -478,6 +483,23 @@ class SkillCard extends PanelContainer:
 		_status_label.text = ui._state_label(skill)
 		_buy_button.text = "Buy %d" % ui.purchase_cost
 		_buy_button.visible = (state == SkillTreeUI.SkillState.BUYABLE)
+		
+		# Style the name chip dynamically based on type
+		var profile = SkillStyles.profile_for_skill_type(skill.skill_type)
+		var chip_style := StyleBoxFlat.new()
+		
+		chip_style.corner_radius_top_left = profile.corner_radius_top_left
+		chip_style.corner_radius_top_right = profile.corner_radius_top_right
+		chip_style.corner_radius_bottom_right = profile.corner_radius_bottom_right
+		chip_style.corner_radius_bottom_left = profile.corner_radius_bottom_left
+		
+		var theme_color = profile.color_theme
+		chip_style.bg_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.15)
+		chip_style.border_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.4)
+		chip_style.set_border_width_all(1)
+		chip_style.set_content_margin_individual(6, 2, 6, 2)
+		_name_chip.add_theme_stylebox_override("panel", chip_style)
+		_name_label.add_theme_color_override("font_color", profile.text_color_filled())
 
 	func _on_hover_in() -> void:
 		ui.hover_skill(skill)
