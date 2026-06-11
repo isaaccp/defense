@@ -1,5 +1,46 @@
 # Next Steps — Making the Game Fun
 
+## Backlog (as of 2026-06-11)
+
+Active backburner from the reward-stage + relic batch sessions. Older notes below this section predate the reward/relic/map work and may be stale.
+
+### Reward stage UX
+
+- **Set reversibility before first claim.** No commit dialog — instead, until the player claims the *first* reward in a set, they can go back and pick the other set. Once one reward is claimed, that's the lock-in point and the other set fades for good.
+- **Continue with unclaimed rewards = confirmation dialog.** If the player hits Continue while their chosen set still has unclaimed rewards, pop a "you're leaving rewards behind — proceed?" confirmation. Replaces the earlier "skip" idea.
+- **Stage X of N indicator** in the screen title.
+- **Trainer overlay still full-screen.** Loses reward-stage context (party cards, set panels) when SkillTreeUI opens. Embed it differently — maybe replacing only the right column.
+- **Polish pass**: icons on reward cards, sounds, transition animations beyond the existing HP floaters and pulse.
+
+### Bugs
+
+- **Drag-to-reorder on the behavior editor doesn't work.** Drag button is present but rules don't reorder. Must-fix.
+
+### Relics
+
+- **`relic_state: Dictionary[StringName, Dictionary]` on `GameplayCharacter`** — persistent per-character relic state across stages. Unblocks counter-based relics.
+- **Healer's Joy** — designed (+1 max HP per 100 healed, per-character counter). Ships once relic_state lands.
+- **Echoing Ward** — wards/protections received by this character last 50% longer. Needs a new Effect hook for modifying *incoming* status durations.
+- **Spectral Echo** — Charge bonus damage doubles if charge >1s. Needs runtime introspection of Charge's prepare state. Defer until at least one more action-specific relic ships so we know the right shape.
+- **"Dozens of relics" goal**: 10 non-class shipped (8 universal + 2 gated). Ongoing.
+
+### Map / campaign
+
+- **MT-style per-stage difficulty modifiers** — opt-in harder version of a fight for a better reward (Monster Train banner/covenant analog). The closest fit to STS's elective-risk-reward knob inside the MT structure we chose. Worth designing once the map basics are in.
+- **Map UI rendering** — the actual on-screen map (current node, future nodes, branching if any). User has built similar before; treat as a self-contained task on the to-do list for Claude.
+- **More reward types** — Rest / Relic / Trainer is the shipped set. Likely additions: events, shops, others. Each is just a new `RewardDef` subclass; no "node" concept to add since rewards aren't nodes in this design.
+
+### Content + tooling gaps
+
+- **Chest substrate is built but unused in any main_levels level.** Drop a chest into a real campaign level so the Interactable/Open/Gold flow gets exercised in actual play.
+- **Gold has no UI.** Accumulates from chests into RunSaveState; never shown to the player.
+- **Sim non-determinism on archer levels** (Move Away + NavigationAgent2D RVO). Documented in `tools/sim/SIM_FINDINGS.md`. Blocks batch-mode work.
+- **d=3 levels lack recorded sim pair files** — only the d=1/d=2 levels have them in `tools/sim/behaviors/level/`. Catalog incomplete.
+- **Class-relic vs earned-relic distinction on the character card** — they're now excluded from rewards but still rendered inline with earned relics on the HUD. Cosmetic.
+- **Smoke-test the new relics in actual play** — they pass tests but haven't been exercised in a fight via the sim or F6.
+
+---
+
 ## Context
 
 The core problem is that levels feel samey: a plain field, identical enemy behavior, and no meaningful player decisions during setup. The infrastructure for fixing all of this exists — it mainly needs content and one missing UI feature.
