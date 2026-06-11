@@ -6,9 +6,6 @@ Active backburner from the reward-stage + relic batch sessions. Older notes belo
 
 ### Reward stage UX
 
-- **Set reversibility before first claim.** No commit dialog — instead, until the player claims the *first* reward in a set, they can go back and pick the other set. Once one reward is claimed, that's the lock-in point and the other set fades for good.
-- **Continue with unclaimed rewards = confirmation dialog.** If the player hits Continue while their chosen set still has unclaimed rewards, pop a "you're leaving rewards behind — proceed?" confirmation. Replaces the earlier "skip" idea.
-- **Stage X of N indicator** in the screen title.
 - **Trainer overlay still full-screen.** Loses reward-stage context (party cards, set panels) when SkillTreeUI opens. Embed it differently — maybe replacing only the right column.
 - **Polish pass**: icons on reward cards, sounds, transition animations beyond the existing HP floaters and pulse.
 
