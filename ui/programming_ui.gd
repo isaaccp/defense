@@ -72,9 +72,9 @@ func _standalone_ready_next_frame(parent: Node):
 	var node = Node.new()
 	parent.add_child(node)
 	var programming_ui = load(scene_file_path).instantiate()
+	node.add_child(programming_ui)
 	programming_ui._initialize_from_test_character()
 	programming_ui.canceled.connect(parent.get_tree().quit)
-	node.add_child(programming_ui)
 
 func _initialize_from_test_character():
 	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, test_behavior_library)

@@ -87,3 +87,44 @@ func _fill_rule(rule, target_name: StringName, action_name: StringName) -> void:
 	rule._target_cell.set_skill(SkillManager.make_target_selection_instance(target_name))
 	rule._action_cell.set_skill(SkillManager.make_action_instance(action_name))
 	rule.on_cell_changed()
+
+func test_drag_to_reorder_rules():
+	var view = _make_view(true)
+	# 1. Fill first rule
+	var rule_a = view._list.get_children()[0]
+	_fill_rule(rule_a, &"Enemy", &"Move To")
+	
+	# 2. Fill second rule
+	var rule_b = view._list.get_children()[1]
+	_fill_rule(rule_b, &"Enemy", &"Sword Attack")
+	
+	var rules = view._list.get_children()
+	assert_eq(rules.size(), 3, "should have Rule A, Rule B, and trailing placeholder")
+	assert_eq(str(rules[0]._action_cell.get_skill()), "Move To")
+	assert_eq(str(rules[1]._action_cell.get_skill()), "Sword Attack")
+	assert_true(rules[2].is_empty(), "last child is placeholder")
+	
+	# 3. Simulate dragging Rule B (index 1)
+	var drag_data = rules[1]._drag_button._get_drag_data(Vector2.ZERO)
+	assert_true(drag_data.get("is_reorder_rule"))
+	assert_eq(drag_data.rule_widget, rules[1])
+	
+	# 4. Simulate dropping Rule B on top half of Rule A (index 0, relative_y = 0)
+	rules[0]._drop_data(Vector2(0, 0), drag_data)
+	
+	var reordered_rules = view._list.get_children()
+	assert_eq(str(reordered_rules[0]._action_cell.get_skill()), "Sword Attack")
+	assert_eq(str(reordered_rules[1]._action_cell.get_skill()), "Move To")
+	assert_true(reordered_rules[2].is_empty())
+	
+	# 5. Drag Rule B (now index 0) and drop on bottom half of Rule A (now index 1, relative_y = 100)
+	# Target rule size.y is typically around 30, so Y=100 is definitely the bottom half.
+	reordered_rules[1].size.y = 30
+	var new_drag_data = reordered_rules[0]._drag_button._get_drag_data(Vector2.ZERO)
+	reordered_rules[1]._drop_data(Vector2(0, 100), new_drag_data)
+	
+	var reordered_rules_2 = view._list.get_children()
+	assert_eq(str(reordered_rules_2[0]._action_cell.get_skill()), "Move To")
+	assert_eq(str(reordered_rules_2[1]._action_cell.get_skill()), "Sword Attack")
+	assert_true(reordered_rules_2[2].is_empty())
+

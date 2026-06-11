@@ -119,6 +119,83 @@ func _check_can_save() -> void:
 	can_save_to_behavior_updated.emit(can_save_to_behavior)
 	can_save_to_behavior_library_updated.emit(can_save_to_behavior_library)
 
+func reorder_rule(dragged_rule: RuleWidget, target_rule: RuleWidget, relative_y: float) -> void:
+	if dragged_rule == target_rule:
+		return
+	var target_idx := target_rule.get_index()
+	var dragged_idx := dragged_rule.get_index()
+	
+	var drop_after := relative_y >= target_rule.size.y / 2.0
+	
+	var new_idx := target_idx
+	if drop_after:
+		new_idx += 1
+	
+	if dragged_idx < new_idx:
+		new_idx -= 1
+		
+	var max_idx := _list.get_child_count() - 2
+	new_idx = clamp(new_idx, 0, max_idx)
+	
+	_list.move_child(dragged_rule, new_idx)
+	notify_changed()
+
+func _can_drop_data(_at_position: Vector2, data) -> bool:
+	if typeof(data) == TYPE_DICTIONARY and data.has("is_reorder_rule"):
+		return true
+	return false
+
+func _drop_data(_at_position: Vector2, data) -> void:
+	if typeof(data) == TYPE_DICTIONARY and data.has("is_reorder_rule"):
+		var dragged = data.get("rule_widget") as RuleWidget
+		if dragged:
+			var max_idx := _list.get_child_count() - 2
+			if max_idx >= 0:
+				_list.move_child(dragged, max_idx)
+				notify_changed()
+
+# ============================================================================
+# DragHandle — button that supports drag-to-reorder rules
+# ============================================================================
+class DragHandle extends Button:
+	var rule_widget: PanelContainer
+
+	func _init(rule_widget_: PanelContainer):
+		rule_widget = rule_widget_
+		mouse_default_cursor_shape = Control.CURSOR_DRAG
+
+	func _get_drag_data(_at_position: Vector2) -> Variant:
+		var preview := PanelContainer.new()
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color(0.15, 0.15, 0.2, 0.9)
+		style.border_color = Color(0.4, 0.4, 0.5, 0.9)
+		style.set_border_width_all(1)
+		style.set_corner_radius_all(4)
+		style.set_content_margin_all(8)
+		preview.add_theme_stylebox_override("panel", style)
+		
+		var label := Label.new()
+		var skill_name = ""
+		if rule_widget._action_cell.has_skill():
+			skill_name = str(rule_widget._action_cell.get_skill())
+		elif rule_widget._target_cell.has_skill():
+			skill_name = str(rule_widget._target_cell.get_skill())
+			
+		if skill_name != "":
+			label.text = "Move: " + skill_name
+		else:
+			label.text = "Move Rule"
+		preview.add_child(label)
+		
+		if get_viewport().gui_is_dragging():
+			set_drag_preview(preview)
+		else:
+			preview.queue_free()
+		return {
+			"is_reorder_rule": true,
+			"rule_widget": rule_widget
+		}
+
 # ============================================================================
 # RuleWidget — one rule (header with target/action + indented conditions list)
 # ============================================================================
@@ -133,6 +210,26 @@ class RuleWidget extends PanelContainer:
 
 	func _init(editor_: BehaviorEditorView):
 		editor = editor_
+		_drag_button = DragHandle.new(self)
+		_drag_button.icon = editor.drag_icon
+		_drag_button.tooltip_text = "Drag to reorder"
+		_drag_button.disabled = true
+		
+		_delete_button = Button.new()
+		_delete_button.icon = editor.delete_icon
+		_delete_button.tooltip_text = "Delete rule"
+		_delete_button.disabled = true
+		_delete_button.pressed.connect(_on_delete)
+		
+		_target_cell = SkillCell.new(editor, SkillCell.SLOT_TARGET, self)
+		_target_cell.size_flags_horizontal = SIZE_EXPAND_FILL
+		
+		_action_cell = SkillCell.new(editor, SkillCell.SLOT_ACTION, self)
+		_action_cell.size_flags_horizontal = SIZE_EXPAND_FILL
+		
+		_conditions_vbox = VBoxContainer.new()
+		_conditions_vbox.size_flags_horizontal = SIZE_EXPAND_FILL
+		_conditions_vbox.add_theme_constant_override("separation", 2)
 
 	func _ready():
 		size_flags_horizontal = SIZE_EXPAND_FILL
@@ -143,22 +240,9 @@ class RuleWidget extends PanelContainer:
 		var header = HBoxContainer.new()
 		header.size_flags_horizontal = SIZE_EXPAND_FILL
 		outer.add_child(header)
-		_drag_button = Button.new()
-		_drag_button.icon = editor.drag_icon
-		_drag_button.tooltip_text = "Drag to reorder"
-		_drag_button.disabled = true
 		header.add_child(_drag_button)
-		_delete_button = Button.new()
-		_delete_button.icon = editor.delete_icon
-		_delete_button.tooltip_text = "Delete rule"
-		_delete_button.disabled = true
-		_delete_button.pressed.connect(_on_delete)
 		header.add_child(_delete_button)
-		_target_cell = SkillCell.new(editor, SkillCell.SLOT_TARGET, self)
-		_target_cell.size_flags_horizontal = SIZE_EXPAND_FILL
 		header.add_child(_target_cell)
-		_action_cell = SkillCell.new(editor, SkillCell.SLOT_ACTION, self)
-		_action_cell.size_flags_horizontal = SIZE_EXPAND_FILL
 		header.add_child(_action_cell)
 		# --- conditions (indented) ---
 		var indented = HBoxContainer.new()
@@ -167,9 +251,6 @@ class RuleWidget extends PanelContainer:
 		var spacer = Control.new()
 		spacer.custom_minimum_size = Vector2(40, 0)
 		indented.add_child(spacer)
-		_conditions_vbox = VBoxContainer.new()
-		_conditions_vbox.size_flags_horizontal = SIZE_EXPAND_FILL
-		_conditions_vbox.add_theme_constant_override("separation", 2)
 		indented.add_child(_conditions_vbox)
 		_refresh_tooltip()
 
@@ -331,9 +412,13 @@ class RuleWidget extends PanelContainer:
 		_refresh_tooltip()
 		editor.notify_changed()
 
-	# Accept condition drops anywhere on the rule widget.
-	func _can_drop_data(_at_position: Vector2, data) -> bool:
-		if typeof(data) != TYPE_DICTIONARY or not data.has("type"):
+	# Accept condition drops anywhere on the rule widget, or rule reordering.
+	func _can_drop_data(at_position: Vector2, data) -> bool:
+		if typeof(data) != TYPE_DICTIONARY:
+			return false
+		if data.has("is_reorder_rule"):
+			return data.get("rule_widget") != self
+		if not data.has("type"):
 			return false
 		if data.type != BehaviorEditorView.DRAG_TYPE_CONDITION:
 			return false
@@ -353,7 +438,12 @@ class RuleWidget extends PanelContainer:
 				n += 1
 		return n
 
-	func _drop_data(_at_position: Vector2, data) -> void:
+	func _drop_data(at_position: Vector2, data) -> void:
+		if typeof(data) == TYPE_DICTIONARY and data.has("is_reorder_rule"):
+			var dragged = data.get("rule_widget") as RuleWidget
+			if dragged:
+				editor.reorder_rule(dragged, self, at_position.y)
+			return
 		if data.type != BehaviorEditorView.DRAG_TYPE_CONDITION:
 			return
 		var cond := SkillManager.make_condition_instance(data.name)
@@ -374,16 +464,16 @@ class ConditionRow extends HBoxContainer:
 	func _init(editor_: BehaviorEditorView, rule_widget_: RuleWidget):
 		editor = editor_
 		rule_widget = rule_widget_
-
-	func _ready():
-		size_flags_horizontal = SIZE_EXPAND_FILL
 		_delete_button = Button.new()
 		_delete_button.icon = editor.delete_icon
 		_delete_button.tooltip_text = "Delete condition"
 		_delete_button.pressed.connect(_on_delete)
-		add_child(_delete_button)
 		_cell = SkillCell.new(editor, SkillCell.SLOT_CONDITION, rule_widget)
 		_cell.size_flags_horizontal = SIZE_EXPAND_FILL
+
+	func _ready():
+		size_flags_horizontal = SIZE_EXPAND_FILL
+		add_child(_delete_button)
 		add_child(_cell)
 
 	func set_condition(cond: ConditionDef) -> void:
@@ -493,6 +583,8 @@ class SkillCell extends PanelContainer:
 		tooltip_text = t
 
 	func _update_display() -> void:
+		if not _label:
+			return
 		if _skill:
 			_label.text = str(_skill)
 			_edit_button.visible = _skill.params != null and _skill.params.placeholders.size() > 0
@@ -519,7 +611,11 @@ class SkillCell extends PanelContainer:
 		return ""
 
 	func _can_drop_data(at_position: Vector2, data) -> bool:
-		if typeof(data) != TYPE_DICTIONARY or not data.has("type"):
+		if typeof(data) != TYPE_DICTIONARY:
+			return false
+		if data.has("is_reorder_rule"):
+			return rule_widget._can_drop_data(at_position, data)
+		if not data.has("type"):
 			return false
 		if data.type == slot_type:
 			return _check_compatibility(data)
@@ -530,6 +626,9 @@ class SkillCell extends PanelContainer:
 		return false
 
 	func _drop_data(at_position: Vector2, data) -> void:
+		if typeof(data) == TYPE_DICTIONARY and data.has("is_reorder_rule"):
+			rule_widget._drop_data(at_position, data)
+			return
 		if data.type == slot_type:
 			var skill = _create_skill_from_data(data)
 			if skill:
