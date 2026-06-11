@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://cemberbrand01"]
+
+[ext_resource type="Script" path="res://effects/relics/ember_brand.gd" id="1_eb"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+[ext_resource type="Texture2D" uid="uid://bdsafnmyyktvt" path="res://assets/kyrises_rpg_icon_pack/icons/48x48/sword_01b.png" id="3_icon"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "Your Sword Attack deals fire damage instead of slashing."
+icon = ExtResource("3_icon")
+name = &"Ember Brand"
+effect_types = Array[int]([2])
+required_actions = Array[StringName]([&"Sword Attack"])
+effect_script = ExtResource("1_eb")

@@ -127,6 +127,36 @@ util/           StateMachine, TreePauser, Utils
 1. Create scene extending `ui/screen.gd`
 2. Register transitions in `ui/ui_layer.gd`
 
+## Coding conventions
+
+**Compare resources by reference, not by name.** When checking what a Resource IS (a damage type, status, skill, relic, etc.), `preload` the canonical `.tres` and compare by identity:
+
+```gdscript
+const fire_damage_type = preload("res://game_logic/damage_types/fire.tres")
+
+func modify_hit_effect(hit_effect: HitEffect, _target: Node, _logger: Callable) -> void:
+    if hit_effect.damage_type == fire_damage_type:   # ✓ identity
+        ...
+```
+
+Not:
+
+```gdscript
+const FIRE_NAME: StringName = &"Fire"
+if hit_effect.damage_type.name == FIRE_NAME:        # ✗ stringly-typed; renames break silently
+    ...
+```
+
+This applies even when the field on hand is *just* a `StringName` — preload the canonical resource and pull the name off it. E.g. `HitEffect.action_name` is a `StringName` with no `ActionDef` reference attached, but you can still do:
+
+```gdscript
+const sword_attack_def = preload("res://skill_tree/actions/sword_attack.tres")
+if hit_effect.action_name != sword_attack_def.skill_name:
+    return
+```
+
+A renamed skill flows through the def automatically; nothing in your relic needs an update.
+
 ## Physics Layers
 | Layer | Name |
 |-------|------|

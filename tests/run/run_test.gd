@@ -19,7 +19,7 @@ func before_each():
 	level_provider = LevelProvider.new()
 	level_provider.set_from(instant_win_level_provider)
 	run = run_scene.instantiate()
-	run.initialize(RunSaveState.make([], level_provider), ui_layer)
+	run.initialize(RunSaveState.make([], level_provider, SkillTreeState.new()), ui_layer)
 	add_child_autoqfree(run)
 	add_child_autoqfree(ui_layer)
 	await wait_frames(1)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://ccollect01"]
+
+[ext_resource type="Script" path="res://effects/relics/collector.gd" id="1_col"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+[ext_resource type="Texture2D" uid="uid://cxc88urndfu41" path="res://assets/kyrises_rpg_icon_pack/icons/48x48/gem_01b.png" id="3_icon"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "+1% damage for every other relic you own."
+icon = ExtResource("3_icon")
+name = &"Collector"
+effect_types = Array[int]([2])
+effect_script = ExtResource("1_col")

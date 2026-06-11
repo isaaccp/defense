@@ -15,7 +15,10 @@ class_name RewardDef
 ##
 ## Called once per slot at schedule generation time. Anything that should
 ## be reserved upfront (e.g. relic uniqueness) is mutated on `rss` here.
-func roll(_rng: RandomNumberGenerator, _rss: RunSaveState) -> RewardDef:
+## `unlocked_skills` is the run-start snapshot of `SaveState.unlocked_skills`,
+## available so rewards (e.g. relic) can filter based on what the party
+## could plausibly use.
+func roll(_rng: RandomNumberGenerator, _rss: RunSaveState, _unlocked_skills: SkillTreeState) -> RewardDef:
 	return self
 
 ## Applies the reward to the run state and returns a short outcome string.

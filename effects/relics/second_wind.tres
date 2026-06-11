@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://csndwinda001"]
+
+[ext_resource type="Script" path="res://effects/relics/second_wind.gd" id="1_sw"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
+[ext_resource type="Texture2D" uid="uid://brlur6w67p4v3" path="res://assets/kyrises_rpg_icon_pack/icons/48x48/potion_02a.png" id="3_icon"]
+
+[resource]
+script = ExtResource("2_rdef")
+description = "First time you drop below 30% HP, instantly heal to 50%."
+icon = ExtResource("3_icon")
+name = &"Second Wind"
+effect_types = Array[int]([5])
+effect_script = ExtResource("1_sw")

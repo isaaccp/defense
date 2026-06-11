@@ -50,8 +50,8 @@ func _ready() -> void:
 		push_error("reward_stage_test: configure set_a and/or set_b")
 		return
 	var rss := _build_run_save_state()
-	var stage_rewards := _build_stage_rewards(rss)
 	var save_state := _build_save_state()
+	var stage_rewards := _build_stage_rewards(rss, save_state.unlocked_skills)
 	var screen_scene := preload("res://ui/reward_choice_screen.tscn")
 	var screen = screen_scene.instantiate()
 	add_child(screen)
@@ -81,18 +81,18 @@ func _build_run_save_state() -> RunSaveState:
 	rss.current_phase = RunSaveState.Phase.REWARD
 	return rss
 
-func _build_stage_rewards(rss: RunSaveState) -> StageRewards:
+func _build_stage_rewards(rss: RunSaveState, unlocked_skills: SkillTreeState) -> StageRewards:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = rss.seed
 	var stage_rewards := StageRewards.new()
-	stage_rewards.sets.append(_roll_set(set_a, rng, rss))
-	stage_rewards.sets.append(_roll_set(set_b, rng, rss))
+	stage_rewards.sets.append(_roll_set(set_a, rng, rss, unlocked_skills))
+	stage_rewards.sets.append(_roll_set(set_b, rng, rss, unlocked_skills))
 	return stage_rewards
 
-func _roll_set(templates: Array[RewardDef], rng: RandomNumberGenerator, rss: RunSaveState) -> RewardSet:
+func _roll_set(templates: Array[RewardDef], rng: RandomNumberGenerator, rss: RunSaveState, unlocked_skills: SkillTreeState) -> RewardSet:
 	var rolled: Array[RewardDef] = []
 	for tmpl in templates:
-		rolled.append(tmpl.roll(rng, rss))
+		rolled.append(tmpl.roll(rng, rss, unlocked_skills))
 	var s := RewardSet.new()
 	s.rewards = rolled
 	return s

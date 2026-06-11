@@ -25,7 +25,7 @@ enum Phase {
 ## `make()` time so saves restore the exact same offers.
 @export var reward_schedule: Array[StageRewards]
 
-static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider) -> RunSaveState:
+static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider, unlocked_skills: SkillTreeState) -> RunSaveState:
 	var err := level_provider.validate_runnable()
 	if not err.is_empty():
 		push_error("LevelProvider is not runnable: %s" % err)
@@ -38,14 +38,14 @@ static func make(gameplay_characters: Array[GameplayCharacter], level_provider: 
 	run_save_state.relic_library_state = RelicLibraryState.from_relic_library(level_provider.relic_library)
 	run_save_state.stats = Stats.new()
 	run_save_state.seed = _make_seed()
-	run_save_state.reward_schedule = _generate_schedule(run_save_state, level_provider)
+	run_save_state.reward_schedule = _generate_schedule(run_save_state, level_provider, unlocked_skills)
 	return run_save_state
 
 static func _make_seed() -> int:
 	# Non-cryptographic but distinct per run.
 	return Time.get_ticks_usec() ^ (randi() << 16)
 
-static func _generate_schedule(rss: RunSaveState, level_provider: LevelProvider) -> Array[StageRewards]:
+static func _generate_schedule(rss: RunSaveState, level_provider: LevelProvider, unlocked_skills: SkillTreeState) -> Array[StageRewards]:
 	var schedule: Array[StageRewards] = []
 	for stage in range(1, level_provider.total_stages + 1):
 		var rng := RandomNumberGenerator.new()
@@ -61,7 +61,7 @@ static func _generate_schedule(rss: RunSaveState, level_provider: LevelProvider)
 				pool = level_provider.available_rewards.duplicate()
 				pool.shuffle()
 			var template: RewardDef = pool.pop_front()
-			var rolled := template.roll(rng, rss)
+			var rolled := template.roll(rng, rss, unlocked_skills)
 			var reward_set := RewardSet.new()
 			var rewards: Array[RewardDef] = [rolled]
 			reward_set.rewards = rewards

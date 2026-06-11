@@ -92,7 +92,7 @@ func _on_gameplay_ui_layer_save_and_quit_requested():
 	save_and_quit_requested.emit(save_state)
 
 func _on_gameplay_ui_layer_new_run():
-	save_state.run_save_state = RunSaveState.make([], level_provider)
+	save_state.run_save_state = RunSaveState.make([], level_provider, save_state.unlocked_skills)
 	if save_state.first_run:
 		save_state.first_run = false
 		state.change_state.call_deferred(RUN)

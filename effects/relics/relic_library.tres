@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicLibrary" load_steps=13 format=3 uid="uid://ic0hy7kikmrw"]
+[gd_resource type="Resource" script_class="RelicLibrary" load_steps=23 format=3 uid="uid://ic0hy7kikmrw"]
 
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="1_wxb7g"]
 [ext_resource type="Resource" uid="uid://dwg70jy7rj4cx" path="res://effects/relics/vorpal_blade.tres" id="2_6b71a"]
@@ -12,7 +12,17 @@
 [ext_resource type="Resource" path="res://effects/relics/hallowed_vestments.tres" id="9_hvest"]
 [ext_resource type="Resource" path="res://effects/relics/killers_insight.tres" id="10_kinst"]
 [ext_resource type="Resource" path="res://effects/relics/arcane_battery.tres" id="11_abatt"]
+[ext_resource type="Resource" uid="uid://csndwinda001" path="res://effects/relics/second_wind.tres" id="12_sw"]
+[ext_resource type="Resource" uid="uid://cbrkmarka001" path="res://effects/relics/berserkers_mark.tres" id="13_bm"]
+[ext_resource type="Resource" uid="uid://copporta001" path="res://effects/relics/opportunist.tres" id="14_op"]
+[ext_resource type="Resource" uid="uid://carcanecond01" path="res://effects/relics/arcane_conduit.tres" id="15_ac"]
+[ext_resource type="Resource" uid="uid://ccollect01" path="res://effects/relics/collector.tres" id="16_col"]
+[ext_resource type="Resource" uid="uid://creagent01" path="res://effects/relics/reagent_pouch.tres" id="17_rp"]
+[ext_resource type="Resource" uid="uid://cwellspring01" path="res://effects/relics/wellspring.tres" id="18_ws"]
+[ext_resource type="Resource" uid="uid://cpyromark01" path="res://effects/relics/pyromancers_mark.tres" id="19_pm"]
+[ext_resource type="Resource" uid="uid://cemberbrand01" path="res://effects/relics/ember_brand.tres" id="20_eb"]
+[ext_resource type="Resource" uid="uid://cigniterquv01" path="res://effects/relics/igniter_quiver.tres" id="21_iq"]
 
 [resource]
 script = ExtResource("3_g7pc6")
-relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt")])
+relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq")])
