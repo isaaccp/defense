@@ -24,6 +24,8 @@ var original_behavior: StoredBehavior
 
 # Container of RuleWidgets. Set up in _ready.
 var _list: VBoxContainer
+var dragged_rule: RuleWidget = null
+var drag_click_offset_y: float = 0.0
 
 func _ready():
 	_ensure_setup()
@@ -84,12 +86,23 @@ func highlight_drop_targets(drag_type: int) -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_DRAG_END:
 		_clear_drop_highlights()
+		set_rule_dragging(false)
 
 func _clear_drop_highlights() -> void:
 	if not _list:
 		return
 	for c in _list.get_children():
 		(c as RuleWidget).clear_highlight()
+
+func set_rule_dragging(active: bool, rule: RuleWidget = null, click_offset_y: float = 0.0) -> void:
+	dragged_rule = rule if active else null
+	drag_click_offset_y = click_offset_y if active else 0.0
+	if not _list:
+		return
+	for r in _list.get_children():
+		if r is RuleWidget:
+			r.set_children_mouse_filter_ignore(active)
+			r.update_drag_highlight()
 
 func _add_rule_widget(rule: Rule = null) -> RuleWidget:
 	var w = RuleWidget.new(self)
@@ -125,7 +138,7 @@ func reorder_rule(dragged_rule: RuleWidget, target_rule: RuleWidget, relative_y:
 	var target_idx := target_rule.get_index()
 	var dragged_idx := dragged_rule.get_index()
 	
-	var drop_after := relative_y >= target_rule.size.y / 2.0
+	var drop_after: bool = relative_y >= target_rule.size.y / 2.0
 	
 	var new_idx := target_idx
 	if drop_after:
@@ -137,11 +150,19 @@ func reorder_rule(dragged_rule: RuleWidget, target_rule: RuleWidget, relative_y:
 	var max_idx := _list.get_child_count() - 2
 	new_idx = clamp(new_idx, 0, max_idx)
 	
+	print("--- REORDER RULE ---")
+	print("Dragged Rule: idx=%d, action=%s, size_y=%.1f" % [dragged_idx, str(dragged_rule._action_cell.get_skill()), dragged_rule.size.y])
+	print("Target Rule: idx=%d, action=%s, size_y=%.1f" % [target_idx, str(target_rule._action_cell.get_skill()), target_rule.size.y])
+	print("relative_y=%.1f vs target_center_y=%.1f (threshold)" % [relative_y, target_rule.size.y / 2.0])
+	print("drop_after=%s, final new_idx=%d" % [str(drop_after), new_idx])
+	
 	_list.move_child(dragged_rule, new_idx)
 	notify_changed()
 
 func _can_drop_data(_at_position: Vector2, data) -> bool:
 	if typeof(data) == TYPE_DICTIONARY and data.has("is_reorder_rule"):
+		var dragged = data.get("rule_widget") as RuleWidget
+		print("BehaviorEditorView._can_drop_data: dragged_idx=%d (no-op hover)" % [dragged.get_index() if dragged else -1])
 		return true
 	return false
 
@@ -164,7 +185,7 @@ class DragHandle extends Button:
 		rule_widget = rule_widget_
 		mouse_default_cursor_shape = Control.CURSOR_DRAG
 
-	func _get_drag_data(_at_position: Vector2) -> Variant:
+	func _get_drag_data(at_position: Vector2) -> Variant:
 		var preview := PanelContainer.new()
 		var style := StyleBoxFlat.new()
 		style.bg_color = Color(0.15, 0.15, 0.2, 0.9)
@@ -191,6 +212,13 @@ class DragHandle extends Button:
 			set_drag_preview(preview)
 		else:
 			preview.queue_free()
+		var click_offset_y = at_position.y
+		var curr: Control = self
+		while curr and curr != rule_widget:
+			click_offset_y += curr.position.y
+			curr = curr.get_parent() as Control
+		print("DragHandle._get_drag_data: rule_idx=%d, click_offset_y=%.1f" % [rule_widget.get_index(), click_offset_y])
+		rule_widget.editor.set_rule_dragging(true, rule_widget, click_offset_y)
 		return {
 			"is_reorder_rule": true,
 			"rule_widget": rule_widget
@@ -305,13 +333,27 @@ class RuleWidget extends PanelContainer:
 		_delete_button.disabled = false
 		_apply_style(true)
 
+	func update_drag_highlight() -> void:
+		var has_dragged := (editor.dragged_rule != null)
+		var is_this_dragged := (editor.dragged_rule == self)
+		_apply_style(not is_empty(), is_this_dragged)
+		if has_dragged and not is_this_dragged:
+			modulate.a = 0.5
+		else:
+			modulate.a = 1.0
+
 	# Styling: filled rules get a solid panel; the trailing empty placeholder
 	# gets a dashed/faint look so it reads as "drop here to start a new rule."
-	func _apply_style(filled: bool) -> void:
+	func _apply_style(filled: bool, being_dragged: bool = false) -> void:
 		var style := StyleBoxFlat.new()
-		style.bg_color = Color(1.0, 1.0, 1.0, 0.04 if filled else 0.0)
-		style.border_color = Color(1.0, 1.0, 1.0, 0.25 if filled else 0.12)
-		style.set_border_width_all(1)
+		if being_dragged:
+			style.bg_color = Color(0.2, 0.6, 1.0, 0.15)
+			style.border_color = Color(0.2, 0.6, 1.0, 0.8)
+			style.set_border_width_all(2)
+		else:
+			style.bg_color = Color(1.0, 1.0, 1.0, 0.04 if filled else 0.0)
+			style.border_color = Color(1.0, 1.0, 1.0, 0.25 if filled else 0.12)
+			style.set_border_width_all(1)
 		style.set_corner_radius_all(6)
 		style.set_content_margin_all(4)
 		add_theme_stylebox_override("panel", style)
@@ -417,7 +459,16 @@ class RuleWidget extends PanelContainer:
 		if typeof(data) != TYPE_DICTIONARY:
 			return false
 		if data.has("is_reorder_rule"):
-			return data.get("rule_widget") != self
+			var dragged = data.get("rule_widget") as RuleWidget
+			print("RuleWidget._can_drop_data: target_idx=%d, target_action=%s, dragged_idx=%d, dragged_action=%s, at_position.y=%.1f" % [
+				get_index(), str(_action_cell.get_skill()),
+				dragged.get_index() if dragged else -1,
+				str(dragged._action_cell.get_skill()) if dragged else "none",
+				at_position.y
+			])
+			if dragged and dragged != self:
+				editor.reorder_rule(dragged, self, at_position.y)
+			return dragged != self
 		if not data.has("type"):
 			return false
 		if data.type != BehaviorEditorView.DRAG_TYPE_CONDITION:
@@ -450,6 +501,32 @@ class RuleWidget extends PanelContainer:
 		cond.params = data.params
 		_add_condition_row(cond.clone())
 		on_cell_changed()
+
+	var _original_mouse_filters := {}
+
+	func set_children_mouse_filter_ignore(ignore: bool) -> void:
+		if ignore:
+			_original_mouse_filters.clear()
+			_set_mouse_filter_recursive(self, true)
+			# Ensure the RuleWidget itself does NOT ignore mouse events!
+			mouse_filter = Control.MOUSE_FILTER_STOP
+		else:
+			_restore_mouse_filter_recursive(self)
+
+	func _set_mouse_filter_recursive(node: Node, root: bool) -> void:
+		if node is Control:
+			if not root:
+				_original_mouse_filters[node] = node.mouse_filter
+				node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		for child in node.get_children():
+			_set_mouse_filter_recursive(child, false)
+
+	func _restore_mouse_filter_recursive(node: Node) -> void:
+		if node is Control:
+			if _original_mouse_filters.has(node):
+				node.mouse_filter = _original_mouse_filters[node]
+		for child in node.get_children():
+			_restore_mouse_filter_recursive(child)
 
 # ============================================================================
 # ConditionRow — single condition under a rule
@@ -611,11 +688,7 @@ class SkillCell extends PanelContainer:
 		return ""
 
 	func _can_drop_data(at_position: Vector2, data) -> bool:
-		if typeof(data) != TYPE_DICTIONARY:
-			return false
-		if data.has("is_reorder_rule"):
-			return rule_widget._can_drop_data(at_position, data)
-		if not data.has("type"):
+		if typeof(data) != TYPE_DICTIONARY or not data.has("type"):
 			return false
 		if data.type == slot_type:
 			return _check_compatibility(data)
@@ -626,8 +699,7 @@ class SkillCell extends PanelContainer:
 		return false
 
 	func _drop_data(at_position: Vector2, data) -> void:
-		if typeof(data) == TYPE_DICTIONARY and data.has("is_reorder_rule"):
-			rule_widget._drop_data(at_position, data)
+		if typeof(data) != TYPE_DICTIONARY or not data.has("type"):
 			return
 		if data.type == slot_type:
 			var skill = _create_skill_from_data(data)

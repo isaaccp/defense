@@ -109,8 +109,8 @@ func test_drag_to_reorder_rules():
 	assert_true(drag_data.get("is_reorder_rule"))
 	assert_eq(drag_data.rule_widget, rules[1])
 	
-	# 4. Simulate dropping Rule B on top half of Rule A (index 0, relative_y = 0)
-	rules[0]._drop_data(Vector2(0, 0), drag_data)
+	# 4. Simulate dropping Rule B on top half of Rule A (index 0, relative_y = -10)
+	rules[0]._drop_data(Vector2(0, -10), drag_data)
 	
 	var reordered_rules = view._list.get_children()
 	assert_eq(str(reordered_rules[0]._action_cell.get_skill()), "Sword Attack")
@@ -127,4 +127,28 @@ func test_drag_to_reorder_rules():
 	assert_eq(str(reordered_rules_2[0]._action_cell.get_skill()), "Move To")
 	assert_eq(str(reordered_rules_2[1]._action_cell.get_skill()), "Sword Attack")
 	assert_true(reordered_rules_2[2].is_empty())
+
+func test_live_reorder_on_hover():
+	var view = _make_view(true)
+	# 1. Fill first rule
+	var rule_a = view._list.get_children()[0]
+	_fill_rule(rule_a, &"Enemy", &"Move To")
+	
+	# 2. Fill second rule
+	var rule_b = view._list.get_children()[1]
+	_fill_rule(rule_b, &"Enemy", &"Sword Attack")
+	
+	var rules = view._list.get_children()
+	var drag_data = rules[1]._drag_button._get_drag_data(Vector2.ZERO)
+	
+	# Simulate hovering over top half of Rule A (relative_y = -10)
+	var can_drop = rules[0]._can_drop_data(Vector2(0, -10), drag_data)
+	assert_true(can_drop)
+	
+	# Verify it reordered live before drop!
+	var reordered = view._list.get_children()
+	assert_eq(str(reordered[0]._action_cell.get_skill()), "Sword Attack")
+	assert_eq(str(reordered[1]._action_cell.get_skill()), "Move To")
+	assert_true(reordered[2].is_empty())
+
 

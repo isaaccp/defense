@@ -77,4 +77,30 @@ func _standalone_ready_next_frame(parent: Node):
 	programming_ui.canceled.connect(parent.get_tree().quit)
 
 func _initialize_from_test_character():
+	var populate = false
+	for arg in OS.get_cmdline_args():
+		if arg == "--populate_behavior":
+			populate = true
+			break
+	if populate:
+		_populate_test_behavior(test_character.behavior)
 	initialize(test_character.name, test_character.behavior, test_character.acquired_skills, test_behavior_library)
+
+func _populate_test_behavior(behavior: StoredBehavior):
+	behavior.stored_rules.clear()
+	
+	# Rule 1: Target "Enemy" -> Action "Move To"
+	var t1 = StoredParamSkill.from_skill(SkillManager.make_target_selection_instance(&"Enemy"))
+	var a1 = StoredParamSkill.from_skill(SkillManager.make_action_instance(&"Move To"))
+	behavior.stored_rules.append(RuleDef.make(t1, a1))
+
+	# Rule 2: Target "Enemy" -> Action "Sword Attack"
+	var t2 = StoredParamSkill.from_skill(SkillManager.make_target_selection_instance(&"Enemy"))
+	var a2 = StoredParamSkill.from_skill(SkillManager.make_action_instance(&"Sword Attack"))
+	behavior.stored_rules.append(RuleDef.make(t2, a2))
+
+	# Rule 3: Target "Enemy" -> Action "Bow Attack" -> Condition "Once"
+	var t3 = StoredParamSkill.from_skill(SkillManager.make_target_selection_instance(&"Enemy"))
+	var a3 = StoredParamSkill.from_skill(SkillManager.make_action_instance(&"Bow Attack"))
+	var c3 = StoredParamSkill.from_skill(SkillManager.make_condition_instance(&"Once"))
+	behavior.stored_rules.append(RuleDef.make(t3, a3, c3))
