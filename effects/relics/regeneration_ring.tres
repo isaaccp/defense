@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_rdef")
 description = "Regenerate 1 HP/s in combat. (Warrior starting bonus — endurance to outlast attrition.)"
+class_relic = true
 name = &"Regeneration Ring"
 effect_types = Array[int]([1])
 effect_script = ExtResource("1_rring")

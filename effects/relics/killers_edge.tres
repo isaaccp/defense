@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_rdef")
 description = "Gain 2 focus per enemy killed. (Rogue class identity — defines combo finishing as a focus mechanic.)"
+class_relic = true
 name = &"Killer's Edge"
 effect_types = Array[int]([7])
 effect_script = ExtResource("1_kedg")

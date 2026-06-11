@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_rdef")
 description = "Gain focus equal to 50% of HP healed. (Priest class identity — defines faith as a focus mechanic.)"
+class_relic = true
 name = &"Channeling"
 effect_types = Array[int]([6])
 effect_script = ExtResource("1_chan")

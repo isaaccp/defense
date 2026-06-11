@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_rdef")
 description = "Gain 1 focus per HP of damage taken. (Warrior class identity — defines rage as a focus mechanic.)"
+class_relic = true
 name = &"Battle Fury"
 effect_types = Array[int]([5])
 effect_script = ExtResource("1_bfury")

@@ -53,16 +53,34 @@ func initialize_from_gameplay_character(gc: GameplayCharacter, relic_library: Re
 	mouse_filter = Control.MOUSE_FILTER_STOP
 
 ## Toggle whether this card emits `card_clicked` on press. Reward stage
-## flips this on for "pick a character" sub-flows.
-func set_pickable(on: bool, highlight_color: Color = Color(1, 0.9, 0.4, 0.4)) -> void:
+## flips this on for "pick a character" sub-flows. Adds a bright pulsing
+## border so the player can see what's expected of them.
+func set_pickable(on: bool) -> void:
 	_pickable = on
 	if on:
-		modulate = Color(1, 1, 1, 1)
-		self_modulate = highlight_color
+		add_theme_stylebox_override("panel", _pickable_stylebox())
+		if _pulse_tween and _pulse_tween.is_valid():
+			_pulse_tween.kill()
+		_pulse_tween = create_tween().set_loops()
+		_pulse_tween.tween_property(self, "modulate", Color(1.18, 1.15, 0.95, 1), 0.55)
+		_pulse_tween.tween_property(self, "modulate", Color.WHITE, 0.55)
 	else:
-		self_modulate = Color.WHITE
+		remove_theme_stylebox_override("panel")
+		if _pulse_tween and _pulse_tween.is_valid():
+			_pulse_tween.kill()
+		_pulse_tween = null
+		modulate = Color.WHITE
+
+func _pickable_stylebox() -> StyleBoxFlat:
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(0.13, 0.14, 0.17, 1.0)
+	sb.border_color = Color(1.0, 0.85, 0.30, 1.0)
+	sb.set_border_width_all(3)
+	sb.set_corner_radius_all(6)
+	return sb
 
 var _pickable: bool = false
+var _pulse_tween: Tween
 
 func _on_card_gui_input(event: InputEvent) -> void:
 	if not _pickable:

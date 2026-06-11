@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_rdef")
 description = "+50% damage vs enemies below 30% HP. (Rogue starting bonus — execute wounded targets; pairs with Lowest Health First.)"
+class_relic = true
 name = &"Killer's Insight"
 effect_types = Array[int]([2])
 effect_script = ExtResource("1_kinst")

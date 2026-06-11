@@ -64,6 +64,17 @@ func validate_runnable() -> String:
 			return "no level registered at difficulty %d" % stage
 	if available_rewards.is_empty():
 		return "available_rewards is empty"
+	# Starting-kit relics on each character must be class_relic so they
+	# don't also appear in the random draft pool. Catches the easy mistake
+	# of giving a class a "general" relic at run start.
+	if relic_library:
+		for gc in available_characters:
+			for relic_name in gc.relics:
+				var relic := relic_library.get_relic(relic_name)
+				if relic == null:
+					return "%s starts with unknown relic %s" % [gc.name, relic_name]
+				if not relic.class_relic:
+					return "%s starts with %s, which is not marked class_relic" % [gc.name, relic_name]
 	return ""
 
 # For testing.

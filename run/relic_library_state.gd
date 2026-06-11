@@ -16,7 +16,12 @@ static func from_relic_library(relic_library: RelicLibrary):
 	return relic_library_state
 
 func initialize(relic_library: RelicLibrary):
+	# `class_relic`s are class identity (e.g. Battle Fury for the Knight)
+	# and are NOT in the random draft pool — characters get them via
+	# their starting kit, not via relic rewards.
 	for relic in relic_library.relics:
+		if relic.class_relic:
+			continue
 		available_relics.append(relic.name)
 
 func select_relics(number: int):

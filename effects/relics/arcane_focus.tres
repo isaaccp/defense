@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("2_rdef")
 description = "Focus regen +1.0/s. (Wizard class identity — defines slow steady casting as a focus mechanic.)"
+class_relic = true
 name = &"Arcane Focus"
 effect_types = Array[int]([1])
 effect_script = ExtResource("1_afoc")
