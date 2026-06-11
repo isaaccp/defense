@@ -19,6 +19,7 @@ var _stage_rewards: StageRewards
 var _character_cards: Array[HudCharacterView] = []
 var _set_panels: Array[RewardSetPanel] = []
 var _chosen_set_idx: int = -1
+var _has_claimed_any_reward: bool = false
 # Used during a relic recipient prompt — when null no pick is in progress.
 var _picking_for_card: RewardCard
 # Adapter passed to reward defs so they don't see this Control directly.
@@ -29,11 +30,23 @@ func _on_show(info: Dictionary):
 	_run_save_state = info.run_save_state
 	_stage_rewards = info.stage_rewards
 	_chosen_set_idx = -1
+	_has_claimed_any_reward = false
 	_apply_context = _ScreenApplyContext.new(self)
-	%Title.text = info.get("title", "Choose Your Reward")
+	
+	var base_title: String = info.get("title", "Choose Your Reward")
+	if _run_save_state and _run_save_state.level_provider:
+		%Title.text = "Stage %d of %d: %s" % [
+			_run_save_state.current_stage,
+			_run_save_state.level_provider.total_stages,
+			base_title
+		]
+	else:
+		%Title.text = base_title
+
 	%Prompt.text = "Click a reward set to commit. You can claim its rewards in any order."
 	%RelicReveal.text = ""
 	%Continue.hide()
+	%Continue.disabled = false
 	%SkillTreeOverlay.hide()
 	%TrainerControls.hide()
 	_build_character_cards()
@@ -73,21 +86,28 @@ func _build_set_panels() -> void:
 
 # Called by a RewardSetPanel when the player clicks one of its set buttons.
 func on_set_chosen(set_idx: int) -> void:
-	if _chosen_set_idx != -1:
-		return  # already chosen
+	if _has_claimed_any_reward:
+		return  # already locked in
 	_chosen_set_idx = set_idx
 	for i in _set_panels.size():
 		_set_panels[i].set_chosen(i == set_idx)
 	%Prompt.text = "Claim each reward by clicking it. Order doesn't matter."
+	%Continue.show()
 	_check_all_done()
 
 # Called by a RewardCard when the player clicks it.
 func on_reward_card_clicked(card: RewardCard) -> void:
 	if _chosen_set_idx == -1:
 		return
+	if not _has_claimed_any_reward:
+		_has_claimed_any_reward = true
+		for i in _set_panels.size():
+			_set_panels[i].lock_in(i == _chosen_set_idx)
 	card.set_state(RewardCard.State.IN_PROGRESS)
+	%Continue.disabled = true
 	var outcome: String = await card.reward.apply_and_get_outcome(_run_save_state, _apply_context)
 	card.set_state(RewardCard.State.DONE)
+	%Continue.disabled = false
 	refresh_character_cards()
 	if not outcome.is_empty():
 		%Outcome.text = outcome
@@ -225,7 +245,31 @@ func _on_trainer_finish_pressed() -> void:
 	_trainer_outcome.emit(null)
 
 func _on_continue_pressed() -> void:
+	if _chosen_set_idx != -1:
+		var has_unclaimed := false
+		for card in _set_panels[_chosen_set_idx].cards:
+			if card.state != RewardCard.State.DONE:
+				has_unclaimed = true
+				break
+		if has_unclaimed:
+			_show_continue_confirmation()
+			return
 	continue_pressed.emit()
+
+func _show_continue_confirmation() -> void:
+	var confirm_dialog := ConfirmationDialog.new()
+	confirm_dialog.title = "Unclaimed Rewards"
+	confirm_dialog.dialog_text = "You are leaving rewards behind — proceed?"
+	confirm_dialog.get_ok_button().text = "Proceed"
+	confirm_dialog.confirmed.connect(func():
+		continue_pressed.emit()
+		confirm_dialog.queue_free()
+	)
+	confirm_dialog.canceled.connect(func():
+		confirm_dialog.queue_free()
+	)
+	add_child(confirm_dialog)
+	confirm_dialog.popup_centered()
 
 # ============================================================================
 # RewardSetPanel — one of the choice columns; holds its reward cards.
@@ -274,17 +318,27 @@ class RewardSetPanel extends PanelContainer:
 		_apply_style(false)
 
 	func set_chosen(chosen: bool) -> void:
-		_choose_button.visible = false
+		_choose_button.visible = not chosen
 		if chosen:
 			_apply_style(true)
 			for c in cards:
 				c.set_state(RewardCard.State.PENDING)
+		else:
+			_apply_style(false)
+			for c in cards:
+				c.set_state(RewardCard.State.PRECHOICE)
+
+	func lock_in(chosen: bool) -> void:
+		_choose_button.visible = false
+		if chosen:
+			_apply_style(true)
 		else:
 			_apply_style_greyed()
 			for c in cards:
 				c.set_state(RewardCard.State.GREYED)
 
 	func _apply_style(chosen: bool) -> void:
+		modulate = Color.WHITE
 		var sb := StyleBoxFlat.new()
 		sb.bg_color = Color(0.14, 0.16, 0.22, 1.0) if not chosen else Color(0.16, 0.22, 0.18, 1.0)
 		sb.border_color = Color(0.55, 0.55, 0.65, 1.0) if not chosen else Color(0.50, 0.85, 0.50, 1.0)

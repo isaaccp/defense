@@ -12,3 +12,4 @@ Digraph.*
 # Sim run outputs (auto-generated summaries). Configs and behaviors live in
 # tools/sim/{configs,behaviors}/ and are tracked as design references.
 tools/sim/results/
+.antigravitycli/
