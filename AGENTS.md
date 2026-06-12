@@ -39,6 +39,12 @@ var vitals = Component.get_or_die(actor, VitalsComponent.component)
 ```
 Components have `run()` / `stop()` lifecycle methods. Never call component logic before `run()`.
 
+### State Persistence (Unpack/Repack)
+Avoid using stateful, persistent components attached to actors during gameplay. Instead, enforce clean boundaries between runs and levels:
+- **Before a level (Unpack):** Create the `Character` scenes from the `GameplayCharacter` resource (via `CharacterSceneManager`), unpacking necessary persistent state (like health and relic state) into local runtime components (e.g., `EffectActuatorComponent`, `AttributesComponent`).
+- **During a level:** All state mutations happen on the local runtime components of the `Character`.
+- **After a level (Repack):** The `Level` script queries the local components (`extract_relic_state()`, `get_health()`) and writes the updated values back into the persistent `GameplayCharacter` resource before proceeding to the next stage.
+
 ### State Machines
 Three nested state machines:
 - **Gameplay** (`gameplay.gd`): `MENU → PRE_RUN → RUN`
@@ -137,6 +143,15 @@ const fire_damage_type = preload("res://game_logic/damage_types/fire.tres")
 func modify_hit_effect(hit_effect: HitEffect, _target: Node, _logger: Callable) -> void:
     if hit_effect.damage_type == fire_damage_type:   # ✓ identity
         ...
+```
+
+**Deep-Copying Dictionaries:** When deep-copying complex dictionaries (especially those that might hold Resources), always use Godot's native `duplicate_deep()` method.
+```gdscript
+# Correct:
+var cloned_state = state.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+
+# Incorrect (Does not deep-copy resources properly):
+var cloned_state = state.duplicate(true)
 ```
 
 Not:
