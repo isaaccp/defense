@@ -18,12 +18,12 @@ class_name RewardDef
 ## `unlocked_skills` is the run-start snapshot of `SaveState.unlocked_skills`,
 ## available so rewards (e.g. relic) can filter based on what the party
 ## could plausibly use.
-func roll(_rng: RandomNumberGenerator, _rss: RunSaveState, _unlocked_skills: SkillTreeState) -> RewardDef:
+func roll(_rng: RandomNumberGenerator, _relic_library_state: RelicLibraryState, _relic_library: RelicLibrary, _unlocked_skills: SkillTreeState) -> RewardDef:
 	return self
 
 ## Applies the reward to the run state and returns a short outcome string.
 ## May `await` UI signals via `ctx` for interactive rewards (Relic,
 ## Trainer); non-interactive rewards return synchronously.
-func apply_and_get_outcome(_run_save_state: RunSaveState, _ctx: RewardApplyContext) -> String:
+func apply_and_get_outcome(_relic_library: RelicLibrary, _gameplay_characters: Array[GameplayCharacter], _ctx: RewardApplyContext) -> String:
 	push_error("RewardDef.apply_and_get_outcome must be overridden")
 	return ""

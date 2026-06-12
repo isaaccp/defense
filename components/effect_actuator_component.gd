@@ -19,7 +19,6 @@ signal able_to_act_changed(can_act: bool)
 signal attribute_effects_changed
 signal relics_changed(relics: Array[RelicDef])
 
-const relic_library = preload("res://effects/relics/relic_library.tres")
 
 # TODO: Move to a single place if https://github.com/godotengine/godot-proposals/issues/6416 is implemented.
 var running = false
@@ -40,10 +39,6 @@ var unable_to_act_count = 0:
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	if persistent_game_state_component:
-		var gameplay_character = persistent_game_state_component.state as GameplayCharacter
-		for relic_name in gameplay_character.relics:
-			load_relic(relic_name)
 
 func run():
 	if running:
@@ -58,14 +53,10 @@ func stop():
 	status_component.status_added.disconnect(_on_status_added)
 	status_component.status_removed.disconnect(_on_status_removed)
 
-func load_relic(relic_name: StringName):
-	var relic = relic_library.get_relic(relic_name)
+func add_relic(relic: RelicDef):
 	relics.append(relic)
 	_add_effect(relic, null)
 	relics_changed.emit(relics)
-
-func add_relic(relic_name: StringName):
-	load_relic(relic_name)
 
 func modified_attributes(base_attributes: Attributes) -> Attributes:
 	var attributes = base_attributes.duplicate(true)
@@ -114,6 +105,12 @@ func _add_effect(effect: EffectDef, effect_params: EffectParams):
 	effect_by_name[effect.name] = effect
 	var script = effect.effect_script.new() as Effect
 	script.bearer = get_parent()
+	script.effect_name = effect.name
+	if persistent_game_state_component:
+		var state = persistent_game_state_component.state
+		if not state.relic_state.has(effect.name):
+			state.relic_state[effect.name] = {}
+		script.persistent_state = state.relic_state[effect.name]
 	script.initialize(effect_params)
 	effect_script_by_name[effect.name] = script
 	# Some effect types may not require tracking like this, but unless it

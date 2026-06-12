@@ -46,7 +46,13 @@ class_name Level
 @export var starting_positions: Node
 @export var placement_component: PlacementComponent
 var selected_relics: Array[RelicDef]
-var ui_layer: GameplayUILayer
+
+signal prepare_started(characters: Node2D, towers: Node2D, selected_relics: Array[RelicDef], victory: Node)
+signal prepare_exited()
+signal combat_started(ready_to_fight_wait: float)
+signal combat_exited()
+signal summary_started(win: bool, characters: Node2D, xp_text: String)
+signal enemy_selected(enemy: Enemy)
 
 var state = StateMachine.new(Constants.LevelStateMachineName)
 var PREPARE = state.add("prepare")
@@ -80,15 +86,9 @@ func _ready():
 		_standalone_ready.call_deferred()
 	state.connect_signals(self)
 	state.change_state.call_deferred(PREPARE)
-	if ui_layer:
-		ui_layer.state_machine_stack.add_state_machine(state)
-		ui_layer.show()
-		ui_layer.hud.show()
 
 func _exit_tree():
-	if ui_layer:
-			ui_layer.state_machine_stack.remove_state_machine(state)
-			ui_layer.hud.hide()
+	pass
 
 func exit():
 	# Sometimes level pauses the tree, make sure to unpause.
@@ -99,8 +99,7 @@ func exit():
 	get_tree().paused = false
 	queue_free()
 
-func initialize(gameplay_characters: Array[GameplayCharacter], ui_layer: GameplayUILayer = null):
-	self.ui_layer = ui_layer
+func initialize(gameplay_characters: Array[GameplayCharacter]):
 	# Forward each chest's gold reward to the level-level signal so Run
 	# (which already connects to level signals) can aggregate onto
 	# RunSaveState. Chests are placed under YSorted/Interactables.
@@ -132,56 +131,44 @@ func _on_prepare_entered():
 	victory.level_finished.connect(_on_level_finished)
 	if placement_component and _placement_drag_enabled():
 		placement_component.set_zones_visible(true)
-	# TODO: Wrap this up inside ui_layer.prepare_level() or similar.
-	if ui_layer:
-		ui_layer.hud.show_play_controls(false)
-		ui_layer.hud.show_level_options(true)
-		ui_layer.hud.set_victory_loss(victory)
-		ui_layer.hud.set_characters(characters)
-		ui_layer.hud.set_towers(towers)
-		ui_layer.hud.clear_enemy_hud()
-		ui_layer.hud.set_level_options(selected_relics)
-		ui_layer.hud.start_character_setup(_on_all_ready)
-		ui_layer.hud.show_main_message("Prepare", 2.0)
-		ui_layer.play_controls_play_pressed.connect(_on_play_pressed)
-		ui_layer.play_controls_pause_pressed.connect(_on_pause_pressed)
+	prepare_started.emit(characters, towers, selected_relics, victory)
 
 func _on_prepare_exited():
 	if placement_component:
 		placement_component.set_zones_visible(false)
 	_dragging_character = null
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-	if ui_layer:
-		ui_layer.hud.show_character_buttons(false)
-		ui_layer.hud.show_victory_loss_text(false)
+	prepare_exited.emit()
 
 func _on_all_ready():
 	state.change_state.call_deferred(COMBAT)
 
 func _on_combat_entered():
-	if ui_layer:
-		ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
-		ui_layer.hud.show_level_options(false)
+	combat_started.emit(ready_to_fight_wait)
 	await get_tree().create_timer(ready_to_fight_wait).timeout
-	if ui_layer:
-		ui_layer.hud.show_play_controls()
 	start()
 
 func _on_combat_exited():
-	if ui_layer:
-		ui_layer.hud.show_play_controls(false)
-		ui_layer.play_controls_play_pressed.disconnect(_on_play_pressed)
-		ui_layer.play_controls_pause_pressed.disconnect(_on_pause_pressed)
+	combat_exited.emit()
 
 func _on_summary_entered():
-	if ui_layer:
-		ui_layer.hud.show_victory_loss_text(true)
-		ui_layer.hud.show_victory_loss(false)
-		ui_layer.hide_log_viewer()
-		var xp = XPComponent.get_or_die(self).xp()
-		ui_layer.show_level_end(win, characters, xp.text if win else "")
-		ui_layer.play_next_selected.connect(_on_play_next_selected, CONNECT_ONE_SHOT)
-		ui_layer.try_again_selected.connect(_on_try_again_selected, CONNECT_ONE_SHOT)
+	var xp = XPComponent.get_or_die(self).xp()
+	summary_started.emit(win, characters, xp.text if win else "")
+
+func play_combat() -> void:
+	_on_play_pressed()
+
+func pause_combat() -> void:
+	_on_pause_pressed()
+
+func complete_character_setup() -> void:
+	_on_all_ready()
+
+func play_next() -> void:
+	_on_play_next_selected()
+
+func try_again() -> void:
+	_on_try_again_selected()
 
 func _on_play_next_selected():
 	# Save health into persistent state and move on.
@@ -298,7 +285,7 @@ func _on_enemy_spawned(enemy: Enemy):
 	enemy.selected.connect(_on_enemy_selected)
 
 func _on_enemy_selected(enemy: Enemy):
-	ui_layer.hud.set_selected_enemy(enemy)
+	enemy_selected.emit(enemy)
 
 func _standalone_ready():
 	# Immediately remove self, we'll test with a copy. Keep parent ref.
@@ -307,16 +294,16 @@ func _standalone_ready():
 	_standalone_ready_next_frame.call_deferred(parent)
 
 func _standalone_ready_next_frame(parent: Node):
-	var game_mode = GameMode.new()
-	game_mode.level_provider = LevelProvider.new()
+	var game_mode = GameMode.new() # ignore-dep
+	game_mode.level_provider = LevelProvider.new() # ignore-dep
 	game_mode.level_provider.levels.append(load(scene_file_path))
 	game_mode.dev_behavior_library = load("res://behavior/resources/dev_behavior_library.tres")
 	prepare_test_gameplay_characters()
 
 	# No type to prevent pulling in deps.
 	var gameplay = load("res://gameplay.tscn").instantiate()
-	var save_state = SaveState.make_new()
-	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider, save_state.unlocked_skills)
+	var save_state = SaveState.make_new() # ignore-dep
+	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider, save_state.unlocked_skills) # ignore-dep
 	gameplay.initialize(game_mode, save_state)
 	parent.add_child(gameplay)
 	# initialize() calls deferred to set state to MENU, so need

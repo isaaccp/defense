@@ -61,7 +61,7 @@ static func _generate_schedule(rss: RunSaveState, level_provider: LevelProvider,
 				pool = level_provider.available_rewards.duplicate()
 				pool.shuffle()
 			var template: RewardDef = pool.pop_front()
-			var rolled := template.roll(rng, rss, unlocked_skills)
+			var rolled := template.roll(rng, rss.relic_library_state, level_provider.relic_library, unlocked_skills)
 			var reward_set := RewardSet.new()
 			var rewards: Array[RewardDef] = [rolled]
 			reward_set.rewards = rewards

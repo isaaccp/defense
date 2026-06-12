@@ -23,6 +23,8 @@
 [ext_resource type="Resource" uid="uid://cemberbrand01" path="res://effects/relics/ember_brand.tres" id="20_eb"]
 [ext_resource type="Resource" uid="uid://cigniterquv01" path="res://effects/relics/igniter_quiver.tres" id="21_iq"]
 
+[ext_resource type="Resource" path="res://effects/relics/healers_joy.tres" id="22_hjoy"]
+
 [resource]
 script = ExtResource("3_g7pc6")
-relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq")])
+relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq"), ExtResource("22_hjoy")])

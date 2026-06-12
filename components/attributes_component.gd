@@ -3,6 +3,8 @@ extends Node
 
 class_name AttributesComponent
 
+signal attributes_changed
+
 const component = &"AttributesComponent"
 
 @export_group("Optional")
@@ -62,6 +64,7 @@ func resistance_multiplier_for(attack_type: AttackType, damage_type: DamageType)
 
 func _on_attribute_effects_changed():
 	attributes = effect_actuator_component.modified_attributes(base_attributes)
+	attributes_changed.emit()
 
 static func get_or_null(node) -> AttributesComponent:
 	return Component.get_or_null(node, component) as AttributesComponent

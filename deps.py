@@ -46,6 +46,8 @@ def process_dir(directory):
         elif file == "online.gd":
             name = "Online"
         for line in f.readlines():
+            if "ignore-dep" in line:
+                continue
             if line.startswith("class_name"):
                 name = line.split(' ')[1].strip()
                 continue

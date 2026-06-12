@@ -105,7 +105,11 @@ func on_reward_card_clicked(card: RewardCard) -> void:
 			_set_panels[i].lock_in(i == _chosen_set_idx)
 	card.set_state(RewardCard.State.IN_PROGRESS)
 	%Continue.disabled = true
-	var outcome: String = await card.reward.apply_and_get_outcome(_run_save_state, _apply_context)
+	var outcome: String = await card.reward.apply_and_get_outcome(
+		_run_save_state.level_provider.relic_library,
+		_run_save_state.gameplay_characters,
+		_apply_context
+	)
 	card.set_state(RewardCard.State.DONE)
 	%Continue.disabled = false
 	refresh_character_cards()

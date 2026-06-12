@@ -11,6 +11,15 @@ signal able_to_act(can_act: bool)
 ## that need to read/modify the bearer's components.
 var bearer: Node
 
+## The name of the effect/relic, populated by EffectActuatorComponent on creation.
+var effect_name: StringName
+
+## Persistent state dictionary for this effect, managed by EffectActuatorComponent.
+## For characters with PersistentGameStateComponent, this is a reference to the
+## entry in GameplayCharacter.relic_state[effect_name], so mutations persist
+## across stages automatically. Empty dict for effects without persistent state.
+var persistent_state: Dictionary
+
 func initialize(params: EffectParams) -> void:
 	pass
 

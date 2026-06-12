@@ -56,6 +56,9 @@ func _initialize() -> void:
 	if max_focus > 0:
 		apply_vital_change(VitalType.FOCUS, max_focus, false)
 
+	if attributes_component and not attributes_component.attributes_changed.is_connected(_on_attributes_changed):
+		attributes_component.attributes_changed.connect(_on_attributes_changed)
+
 	_is_initialized = true
 
 # The primary method for changing a vital's value.
@@ -124,3 +127,47 @@ func _log(message: String, tooltip: String = ""):
 	if not logging_component:
 		return
 	logging_component.add_log_entry(LoggingComponent.LogType.VITALS, message, tooltip)
+
+func _on_attributes_changed() -> void:
+	if not _is_initialized:
+		return
+	
+	var health_vital = _vitals_data[VitalType.HEALTH]
+	var new_max_health = float(attributes_component.health)
+	if not is_equal_approx(health_vital.max, new_max_health):
+		var old_max = health_vital.max
+		var old_current = health_vital.current
+		var diff = new_max_health - old_max
+		health_vital.max = new_max_health
+		if diff > 0:
+			health_vital.current = clampf(health_vital.current + diff, 0, new_max_health)
+		else:
+			health_vital.current = clampf(health_vital.current, 0, new_max_health)
+		
+		var update = VitalUpdate.new()
+		update.type = VitalType.HEALTH
+		update.current_value = health_vital.current
+		update.prev_value = old_current
+		update.max_value = new_max_health
+		update.is_increase = new_max_health > old_max
+		vital_updated.emit(update)
+
+	var focus_vital = _vitals_data[VitalType.FOCUS]
+	var new_max_focus = float(attributes_component.focus)
+	if not is_equal_approx(focus_vital.max, new_max_focus):
+		var old_max = focus_vital.max
+		var old_current = focus_vital.current
+		var diff = new_max_focus - old_max
+		focus_vital.max = new_max_focus
+		if diff > 0:
+			focus_vital.current = clampf(focus_vital.current + diff, 0, new_max_focus)
+		else:
+			focus_vital.current = clampf(focus_vital.current, 0, new_max_focus)
+		
+		var update = VitalUpdate.new()
+		update.type = VitalType.FOCUS
+		update.current_value = focus_vital.current
+		update.prev_value = old_current
+		update.max_value = new_max_focus
+		update.is_increase = new_max_focus > old_max
+		vital_updated.emit(update)

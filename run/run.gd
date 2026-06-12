@@ -106,15 +106,32 @@ func _on_within_level_entered(save_snapshot: bool = true):
 		state.change_state.call_deferred(RUN_SUMMARY)
 		return
 	level = level_scene.instantiate()
-	level.initialize(gameplay_characters, ui_layer)
+	level.initialize(gameplay_characters)
 	level.selected_relics = []
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
 	level.gold_earned.connect(_on_gold_earned)
+	
+	level.prepare_started.connect(_on_level_prepare_started)
+	level.prepare_exited.connect(_on_level_prepare_exited)
+	level.combat_started.connect(_on_level_combat_started)
+	level.combat_exited.connect(_on_level_combat_exited)
+	level.summary_started.connect(_on_level_summary_started)
+	level.enemy_selected.connect(_on_level_enemy_selected)
+	
+	ui_layer.play_controls_play_pressed.connect(level.play_combat)
+	ui_layer.play_controls_pause_pressed.connect(level.pause_combat)
+	ui_layer.play_next_selected.connect(level.play_next)
+	ui_layer.try_again_selected.connect(level.try_again)
+	
+	ui_layer.state_machine_stack.add_state_machine(level.state)
+	ui_layer.show()
+	ui_layer.hud.show()
 	# TODO: Add a MultiplayerSpawner here so scenes get spawned.
 	%StateParent.add_child(level, true)
 
 func _on_level_failed():
+	_cleanup_level_connections()
 	level.exit()
 	%StateParent.remove_child(level)
 	# Run _on_within_level_entered but don't save snapshot.
@@ -131,10 +148,38 @@ func _on_level_finished():
 	state.change_state(REWARD_STAGE, false)
 
 func _on_within_level_exited():
-	level.exit()
+	_cleanup_level_connections()
+	if is_instance_valid(level):
+		ui_layer.state_machine_stack.remove_state_machine(level.state)
+		ui_layer.hud.hide()
+		level.exit()
 	%StateParent.remove_child(level)
 	level = null
 	level_scene = null
+
+func _cleanup_level_connections():
+	if is_instance_valid(level):
+		if level.prepare_started.is_connected(_on_level_prepare_started):
+			level.prepare_started.disconnect(_on_level_prepare_started)
+		if level.prepare_exited.is_connected(_on_level_prepare_exited):
+			level.prepare_exited.disconnect(_on_level_prepare_exited)
+		if level.combat_started.is_connected(_on_level_combat_started):
+			level.combat_started.disconnect(_on_level_combat_started)
+		if level.combat_exited.is_connected(_on_level_combat_exited):
+			level.combat_exited.disconnect(_on_level_combat_exited)
+		if level.summary_started.is_connected(_on_level_summary_started):
+			level.summary_started.disconnect(_on_level_summary_started)
+		if level.enemy_selected.is_connected(_on_level_enemy_selected):
+			level.enemy_selected.disconnect(_on_level_enemy_selected)
+		
+		if ui_layer.play_controls_play_pressed.is_connected(level.play_combat):
+			ui_layer.play_controls_play_pressed.disconnect(level.play_combat)
+		if ui_layer.play_controls_pause_pressed.is_connected(level.pause_combat):
+			ui_layer.play_controls_pause_pressed.disconnect(level.pause_combat)
+		if ui_layer.play_next_selected.is_connected(level.play_next):
+			ui_layer.play_next_selected.disconnect(level.play_next)
+		if ui_layer.try_again_selected.is_connected(level.try_again):
+			ui_layer.try_again_selected.disconnect(level.try_again)
 
 func _on_relic_selected(relic_name: String, gc: GameplayCharacter):
 	run_save_state.relic_library_state.mark_relic_used(relic_name)
@@ -223,3 +268,35 @@ func _pick_fight_level(stage: int) -> PackedScene:
 	if pool.is_empty():
 		return null
 	return pool[_stage_rng(stage).randi() % pool.size()]
+
+func _on_level_prepare_started(characters: Node2D, towers: Node2D, selected_relics: Array[RelicDef], victory: Node):
+	ui_layer.hud.show_play_controls(false)
+	ui_layer.hud.show_level_options(true)
+	ui_layer.hud.set_victory_loss(victory)
+	ui_layer.hud.set_characters(characters)
+	ui_layer.hud.set_towers(towers)
+	ui_layer.hud.clear_enemy_hud()
+	ui_layer.hud.set_level_options(selected_relics)
+	ui_layer.hud.start_character_setup(level.complete_character_setup)
+	ui_layer.hud.show_main_message("Prepare", 2.0)
+
+func _on_level_prepare_exited():
+	ui_layer.hud.show_character_buttons(false)
+	ui_layer.hud.show_victory_loss_text(false)
+
+func _on_level_combat_started(ready_to_fight_wait: float):
+	ui_layer.hud.show_main_message("Fight!", ready_to_fight_wait)
+	ui_layer.hud.show_level_options(false)
+	ui_layer.hud.show_play_controls()
+
+func _on_level_combat_exited():
+	ui_layer.hud.show_play_controls(false)
+
+func _on_level_summary_started(win: bool, characters: Node2D, xp_text: String):
+	ui_layer.hud.show_victory_loss_text(true)
+	ui_layer.hud.show_victory_loss(false)
+	ui_layer.hide_log_viewer()
+	ui_layer.show_level_end(win, characters, xp_text)
+
+func _on_level_enemy_selected(enemy: Enemy):
+	ui_layer.hud.set_selected_enemy(enemy)

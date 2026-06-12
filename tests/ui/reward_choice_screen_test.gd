@@ -6,7 +6,7 @@ class AsyncMockReward extends RewardDef:
 	var screen_node: Node
 	func _init(node: Node):
 		screen_node = node
-	func apply_and_get_outcome(run_save_state: RunSaveState, ctx: RewardApplyContext) -> String:
+	func apply_and_get_outcome(_relic_library: RelicLibrary, _gameplay_characters: Array[GameplayCharacter], ctx: RewardApplyContext) -> String:
 		if screen_node:
 			await screen_node.get_tree().process_frame
 		return "Async Done"

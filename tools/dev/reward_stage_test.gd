@@ -92,7 +92,7 @@ func _build_stage_rewards(rss: RunSaveState, unlocked_skills: SkillTreeState) ->
 func _roll_set(templates: Array[RewardDef], rng: RandomNumberGenerator, rss: RunSaveState, unlocked_skills: SkillTreeState) -> RewardSet:
 	var rolled: Array[RewardDef] = []
 	for tmpl in templates:
-		rolled.append(tmpl.roll(rng, rss, unlocked_skills))
+		rolled.append(tmpl.roll(rng, rss.relic_library_state, rss.level_provider.relic_library if rss.level_provider else null, unlocked_skills))
 	var s := RewardSet.new()
 	s.rewards = rolled
 	return s

@@ -189,6 +189,22 @@ The simulator itself: [`tools/sim/SIM.md`](tools/sim/SIM.md).
 ## Testing
 Uses [GUT](https://github.com/bitwes/Gut). Tests live in `tests/`. Run via the GUT panel in the Godot editor or `gut` CLI.
 
+## Dependency Cycle Check
+Circular dependencies in Godot can lead to compilation issues and hard-to-debug runtime crashes. A Python tool set is provided in the project root to detect cycles.
+
+**Before declaring any job done, you MUST run this check to ensure you haven't introduced any cycles:**
+```bash
+python3 deps.py . && python3 dot_find_cycles.py Digraph.gv
+```
+- `deps.py` parses class references and outputs `Digraph.gv`.
+- `dot_find_cycles.py` reads `Digraph.gv` and prints all detected cycles.
+
+### Rules for Cycle Resolution:
+1. **NO type weakening/removal**: Do not remove type annotations or replace concrete class types with generic types (like `Resource` or `Node`) solely to bypass the dependency checker. Type annotations must remain strong and accurate.
+2. **NO load-based hacks**: Do not replace static `preload` references with runtime `load` calls just to evade detection, unless there is a clear, explicit gameplay/architectural requirement for dynamic runtime loading.
+3. **Use Event-driven architecture / Signals**: Decouple components using signals and events so caller scripts do not need static type annotations for concrete callee types.
+4. **Ignored sections for standalone/debug code**: Explicitly mark standalone editor/debug code sections with `# ignore-dep` (which the updated `deps.py` will skip).
+
 ## Autoloads (always available)
 - `Global` — minimal globals (subviewport ref)
 - `SkillManager` — skill lookup and restoration

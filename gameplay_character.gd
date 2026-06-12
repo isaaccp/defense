@@ -27,6 +27,8 @@ class_name GameplayCharacter
 @export var xp: int
 ## List of relics the character has.
 @export var relics: Array[StringName]
+## Persistent per-character relic state across stages.
+@export var relic_state: Dictionary[StringName, Dictionary] = {}
 
 var peer_id: int
 
