@@ -10,7 +10,7 @@ var gameplay_character: GameplayCharacter
 signal config_button_pressed
 signal readiness_updated(ready: bool)
 signal view_log_requested(character: Character)
-signal upgrade_window_requested(character: Character)
+
 signal card_clicked(gameplay_character: GameplayCharacter)
 
 func _ready():
@@ -104,8 +104,7 @@ func initialize(character_: Character) -> void:
 	var behavior = character.get_component_or_die(BehaviorComponent)
 	behavior.behavior_updated.connect(_on_behavior_updated)
 	behavior.preferred_target_changed.connect(_on_preferred_target_changed)
-	var state = Component.get_persistent_game_state_component_or_die(character).state
-	%Title.text = state.name
+	%Title.text = character.actor_name
 	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
 	effect_actuator_component.relics_changed.connect(_on_relics_changed)
 	# One-off call to add existing relics.
@@ -193,6 +192,3 @@ func _ready_button_toggled(toggled_on: bool):
 
 func _on_view_log_button_pressed():
 	view_log_requested.emit(character)
-
-func _on_upgrade_button_pressed():
-	upgrade_window_requested.emit(character)

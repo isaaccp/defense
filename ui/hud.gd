@@ -7,9 +7,9 @@ class_name Hud
 @export var time: Label
 
 var characters: Array[Character]
+var gameplay_characters: Array[GameplayCharacter]
 var characters_ready: Dictionary
 var behavior_library: BehaviorLibrary
-var relic_choices: Array[RelicDef]
 
 enum MessageType {
 	MAIN,
@@ -43,7 +43,7 @@ signal relic_selected(relic_name: StringName, gc: GameplayCharacter)
 signal restart_requested
 signal end_level_confirmed
 signal view_log_requested(actor: Actor)
-signal upgrade_window_requested(character: Character)
+
 signal play_controls_play_pressed
 signal play_controls_pause_pressed
 
@@ -54,6 +54,9 @@ func _ready():
 
 func set_behavior_library(behavior_library: BehaviorLibrary):
 	self.behavior_library = behavior_library
+
+func set_gameplay_characters(gcs: Array[GameplayCharacter]) -> void:
+	gameplay_characters = gcs
 
 func set_characters(character_node: Node) -> void:
 	characters.clear()
@@ -70,7 +73,7 @@ func set_characters(character_node: Node) -> void:
 		view.config_button_pressed.connect(_on_configure_behavior_pressed.bind(i))
 		view.readiness_updated.connect(_on_readiness_updated.bind(i))
 		view.view_log_requested.connect(_on_view_log_requested)
-		view.upgrade_window_requested.connect(_on_upgrade_window_requested)
+
 		%CharacterViews.add_child(view)
 
 func set_towers(towers: Node) -> void:
@@ -101,7 +104,7 @@ func set_selected_enemy(enemy: Enemy):
 func set_level_options(selected_relics: Array[RelicDef]):
 	var has_relics = len(selected_relics) > 0
 	%SelectRelicButton.visible = has_relics
-	relic_choices = selected_relics
+
 
 func show_play_controls(show: bool = true):
 	%PlayControls.visible = show
@@ -146,7 +149,7 @@ func _on_configure_behavior_pressed(character_idx: int):
 	for child in %ProgrammingUIParent.get_children():
 		child.queue_free()
 	var programming_ui = programming_ui_scene.instantiate() as ProgrammingUI
-	var gameplay_character = Component.get_persistent_game_state_component_or_die(character).state
+	var gameplay_character = gameplay_characters[character_idx]
 	# Add to tree BEFORE initialize so descendant _ready() callbacks (e.g.
 	# RuleWidget._ready in the behavior editor) have fired by the time
 	# initialize touches them.
@@ -245,8 +248,7 @@ func _on_play_controls_restart_pressed():
 func _on_view_log_requested(actor: Actor):
 	view_log_requested.emit(actor)
 
-func _on_upgrade_window_requested(character: Character):
-	upgrade_window_requested.emit(character)
+
 
 func _on_play_controls_play_pressed():
 	play_controls_play_pressed.emit()
@@ -254,24 +256,3 @@ func _on_play_controls_play_pressed():
 func _on_play_controls_pause_pressed():
 	play_controls_pause_pressed.emit()
 
-func _on_select_relic_button_pressed():
-	var relic_window = relic_choice_window_scene.instantiate() as RelicChoiceWindow
-	%LevelOptionsParent.add_child(relic_window)
-	relic_window.initialize(relic_choices, characters)
-	relic_window.relic_selected.connect(_on_relic_selected)
-	relic_window.relic_selection_canceled.connect(_on_relic_selection_canceled)
-	relic_window.popup()
-
-func _on_relic_selected(relic_name: StringName, character: Character):
-	# Adds relic to Character in Level. Emits signal so run_save_state
-	# and gameplay_character can be updated.
-	var effect_actuator_component = character.get_component_or_die(EffectActuatorComponent)
-	effect_actuator_component.add_relic(relic_name)
-
-	var gameplay_character = character.get_component_or_die(PersistentGameStateComponent).state as GameplayCharacter
-	relic_selected.emit(relic_name, gameplay_character)
-
-	%SelectRelicButton.visible = false
-
-func _on_relic_selection_canceled():
-	pass

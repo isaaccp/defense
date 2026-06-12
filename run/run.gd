@@ -273,6 +273,7 @@ func _on_level_prepare_started(characters: Node2D, towers: Node2D, selected_reli
 	ui_layer.hud.show_play_controls(false)
 	ui_layer.hud.show_level_options(true)
 	ui_layer.hud.set_victory_loss(victory)
+	ui_layer.hud.set_gameplay_characters(gameplay_characters)
 	ui_layer.hud.set_characters(characters)
 	ui_layer.hud.set_towers(towers)
 	ui_layer.hud.clear_enemy_hud()

@@ -140,10 +140,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Set Behavior"
 
-[node name="UpgradeButton" type="Button" parent="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Upgrade"
 
 [node name="ReadyButton" type="CheckButton" parent="MarginContainer/VBoxContainer/ConfigContainer"]
 unique_name_in_owner = true
@@ -169,5 +165,5 @@ layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ViewLogButton" to="." method="_on_view_log_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons/ConfigButton" to="." method="_on_config_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/ConfigContainer/ConfigButtons/UpgradeButton" to="." method="_on_upgrade_button_pressed"]
+
 [connection signal="toggled" from="MarginContainer/VBoxContainer/ConfigContainer/ReadyButton" to="." method="_on_ready_button_toggled"]

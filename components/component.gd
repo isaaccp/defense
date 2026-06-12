@@ -21,8 +21,6 @@ static func get_sibling_component(node: Node, component_class: Object) -> Node:
 	return sibling
 
 # TODO: Move all those inside the components as already done for most.
-static func get_persistent_game_state_component_or_die(node: Node) -> PersistentGameStateComponent:
-	return get_or_die(node, PersistentGameStateComponent.component) as PersistentGameStateComponent
 
 # Level components.
 static func get_victory_loss_condition_component_or_die(node: Node) -> VictoryLossConditionComponent:

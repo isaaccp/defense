@@ -15,9 +15,8 @@ var bearer: Node
 var effect_name: StringName
 
 ## Persistent state dictionary for this effect, managed by EffectActuatorComponent.
-## For characters with PersistentGameStateComponent, this is a reference to the
-## entry in GameplayCharacter.relic_state[effect_name], so mutations persist
-## across stages automatically. Empty dict for effects without persistent state.
+## A reference to the local relic_state dictionary in EffectActuatorComponent,
+## which will be extracted and saved to GameplayCharacter.relic_state between levels.
 var persistent_state: Dictionary
 
 func initialize(params: EffectParams) -> void:

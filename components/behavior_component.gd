@@ -24,18 +24,9 @@ signal preferred_target_changed(preferred: Actor)
 @export var character_body_component: CharacterBodyComponent
 
 @export_group("Optional")
-# If set, behavior is obtained through there.
-@export var persistent_game_state_component: PersistentGameStateComponent
 @export var logging_component: LoggingComponent
 
-@export var stored_behavior: StoredBehavior:
-	get:
-		if Engine.is_editor_hint():
-			return stored_behavior
-		if persistent_game_state_component:
-			var gameplay_character = persistent_game_state_component.state as GameplayCharacter
-			return gameplay_character.behavior
-		return stored_behavior
+@export var stored_behavior: StoredBehavior
 
 var rule: Rule
 var target: Target

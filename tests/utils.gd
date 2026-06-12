@@ -22,8 +22,9 @@ static func rule_def_with_conditions(target: TargetSelectionDef, action: ActionD
 	)
 
 static func set_character_behavior(character: Node2D, behavior: StoredBehavior):
-	var persistent_state = Component.get_persistent_game_state_component_or_die(character)
-	persistent_state.state.behavior = behavior
+	var behavior_component = Component.get_or_null(character, BehaviorComponent.component) as BehaviorComponent
+	if behavior_component:
+		behavior_component.stored_behavior = behavior
 
 static func count_action_triggered(test: GutTest, behavior: BehaviorComponent, action_name: StringName):
 	var count = 0

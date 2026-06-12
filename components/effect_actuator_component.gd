@@ -8,12 +8,7 @@ const component = &"EffectActuatorComponent"
 @export_group("Required")
 @export var status_component: StatusComponent
 
-@export_group("Optional")
-# Should be set for characters for relic management. If we want enemies to have relics in the
-# future the best option would likely be to have a RelicComponent that manages relics
-# and can rely on persistent GameplayCharacter for characters and manage the relics
-# itself for enemies.
-@export var persistent_game_state_component: PersistentGameStateComponent
+
 
 signal able_to_act_changed(can_act: bool)
 signal attribute_effects_changed
@@ -23,10 +18,18 @@ signal relics_changed(relics: Array[RelicDef])
 # TODO: Move to a single place if https://github.com/godotengine/godot-proposals/issues/6416 is implemented.
 var running = false
 
-var effect_by_name: Dictionary
-var effect_script_by_name: Dictionary
-var effect_script_by_effect_type: Dictionary
+var effect_by_name: Dictionary[StringName, EffectDef] = {}
+var effect_script_by_name: Dictionary[StringName, Effect] = {}
+var effect_script_by_effect_type: Dictionary[int, Array] = {}
 var relics: Array[RelicDef]
+
+var local_relic_state: Dictionary[StringName, Dictionary] = {}
+
+func inject_relic_state(state: Dictionary[StringName, Dictionary]):
+	local_relic_state = state.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
+
+func extract_relic_state() -> Dictionary[StringName, Dictionary]:
+	return local_relic_state.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
 
 var unable_to_act_count = 0:
 	set(value):
@@ -106,11 +109,9 @@ func _add_effect(effect: EffectDef, effect_params: EffectParams):
 	var script = effect.effect_script.new() as Effect
 	script.bearer = get_parent()
 	script.effect_name = effect.name
-	if persistent_game_state_component:
-		var state = persistent_game_state_component.state
-		if not state.relic_state.has(effect.name):
-			state.relic_state[effect.name] = {}
-		script.persistent_state = state.relic_state[effect.name]
+	if not local_relic_state.has(effect.name):
+		local_relic_state[effect.name] = {}
+	script.persistent_state = local_relic_state[effect.name]
 	script.initialize(effect_params)
 	effect_script_by_name[effect.name] = script
 	# Some effect types may not require tracking like this, but unless it

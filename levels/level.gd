@@ -37,6 +37,8 @@ class_name Level
 # their scenes.
 @export var test_behaviors: Array[StoredBehavior]
 
+var source_gameplay_characters: Array[GameplayCharacter]
+
 @export_group("Internal")
 @export var characters: Node2D
 @export var enemies: Node2D
@@ -100,6 +102,7 @@ func exit():
 	queue_free()
 
 func initialize(gameplay_characters: Array[GameplayCharacter]):
+	source_gameplay_characters = gameplay_characters
 	# Forward each chest's gold reward to the level-level signal so Run
 	# (which already connects to level signals) can aggregate onto
 	# RunSaveState. Chests are placed under YSorted/Interactables.
@@ -171,11 +174,17 @@ func try_again() -> void:
 	_on_try_again_selected()
 
 func _on_play_next_selected():
-	# Save health into persistent state and move on.
-	for character in characters.get_children():
-		var persistent_state = Component.get_persistent_game_state_component_or_die(character)
+	# Save health and relics into persistent state and move on.
+	for i in characters.get_child_count():
+		var character = characters.get_child(i)
+		var gc = source_gameplay_characters[i]
 		var vitals_component = character.get_component_or_die(VitalsComponent) as VitalsComponent
-		persistent_state.state.health = vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH)
+		gc.health = vitals_component.get_vital_current(VitalsComponent.VitalType.HEALTH)
+		
+		var effect_actuator = Component.get_or_null(character, EffectActuatorComponent.component) as EffectActuatorComponent
+		if effect_actuator:
+			gc.relic_state = effect_actuator.extract_relic_state()
+			
 	level_finished.emit()
 	state.change_state.call_deferred(DONE)
 

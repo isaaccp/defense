@@ -40,10 +40,9 @@ func test_healers_joy_tracks_healing_and_increases_max_hp():
 	# Apply some healing that is under the threshold
 	actuator.notify_heal_applied(40, "TestAlly")
 	
-	# Verify relic state is updated on the GameplayCharacter
-	var gc: GameplayCharacter = actuator.persistent_game_state_component.state as GameplayCharacter
-	var state = gc.relic_state.get(&"Healer's Joy", {})
-	assert_eq(state.get("healed_so_far", 0), 40, "Total healed so far should be 40")
+	# Verify relic state is updated locally
+	var state = actuator.extract_relic_state()
+	assert_eq(state[&"Healer's Joy"].get("healed_so_far", 0), 40, "Total healed so far should be 40")
 	
 	# Verify HP hasn't increased yet (threshold is 100)
 	assert_eq(attribs.health, base_hp, "HP should not increase before threshold")
@@ -52,7 +51,8 @@ func test_healers_joy_tracks_healing_and_increases_max_hp():
 	actuator.notify_heal_applied(80, "TestAlly")
 	
 	# Verify relic state updated
-	assert_eq(state.get("healed_so_far", 0), 120, "Total healed so far should be 120")
+	state = actuator.extract_relic_state()
+	assert_eq(state[&"Healer's Joy"].get("healed_so_far", 0), 120, "Total healed so far should be 120")
 	
 	# Verify HP increased by 1 (120 / 100 = 1)
 	assert_eq(attribs.health, base_hp + 1, "Max HP should increase by 1")

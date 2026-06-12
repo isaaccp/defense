@@ -104,15 +104,7 @@ func hide_log_viewer():
 	%LogViewer.reset()
 	%LogViewer.hide()
 
-func _on_hud_upgrade_window_requested(character):
-	show_upgrade_window(character)
 
-func show_upgrade_window(character: Character):
-	show_screen(%UpgradeCharacterScreen, {
-		"save_state": save_state,
-		"character": character,
-	})
-	hud.hide()
 
 func show_pre_run_screen():
 	show_screen(%PreRunScreen, {"save_state": save_state})

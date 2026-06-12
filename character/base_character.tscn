@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dmfx1i0r4kkta" path="res://components/behavior_component.tscn" id="7_01gwr"]
 [ext_resource type="PackedScene" uid="uid://bvgd41lggmctd" path="res://components/hurtbox_component.tscn" id="8_mrif0"]
 [ext_resource type="PackedScene" uid="uid://dsdk1y14j0cry" path="res://components/side_component.tscn" id="9_4wyt1"]
-[ext_resource type="PackedScene" uid="uid://dqq1u1lvtpoqe" path="res://components/persistent_game_state_component.tscn" id="9_ql6uj"]
+
 [ext_resource type="PackedScene" uid="uid://dmkit8mj702l7" path="res://components/status_component.tscn" id="10_lydou"]
 [ext_resource type="PackedScene" uid="uid://chbu3m21rtq58" path="res://components/logging_component.tscn" id="11_0ewa0"]
 [ext_resource type="PackedScene" uid="uid://cb375t3hs8tcw" path="res://components/effect_actuator_component.tscn" id="12_o0jr4"]
@@ -62,7 +62,7 @@ free_on_death = false
 collision_shape = NodePath("../CollisionShape2D")
 logging_component = NodePath("../LoggingComponent")
 
-[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "vitals_component", "status_component", "effect_actuator_component", "character_body_component", "persistent_game_state_component", "logging_component") instance=ExtResource("7_01gwr")]
+[node name="BehaviorComponent" parent="." node_paths=PackedStringArray("actor", "navigation_agent", "action_sprites", "sprite", "animation_component", "side_component", "attributes_component", "vitals_component", "status_component", "effect_actuator_component", "character_body_component", "logging_component") instance=ExtResource("7_01gwr")]
 actor = NodePath("..")
 navigation_agent = NodePath("../NavigationAgent2D")
 action_sprites = NodePath("../ActionSprites")
@@ -74,7 +74,6 @@ vitals_component = NodePath("../VitalsComponent")
 status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 character_body_component = NodePath("../CharacterBodyComponent")
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 logging_component = NodePath("../LoggingComponent")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("side_component", "logging_component", "damage_component", "status_component", "effect_actuator_component") instance=ExtResource("8_mrif0")]
@@ -93,13 +92,11 @@ side = 1
 [node name="StatusComponent" parent="." node_paths=PackedStringArray("logging_component") instance=ExtResource("10_lydou")]
 logging_component = NodePath("../LoggingComponent")
 
-[node name="PersistentGameStateComponent" parent="." instance=ExtResource("9_ql6uj")]
 
 [node name="LoggingComponent" parent="." instance=ExtResource("11_0ewa0")]
 
-[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component", "persistent_game_state_component") instance=ExtResource("12_o0jr4")]
+[node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("12_o0jr4")]
 status_component = NodePath("../StatusComponent")
-persistent_game_state_component = NodePath("../PersistentGameStateComponent")
 
 [node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component") instance=ExtResource("14_osyen")]
 attributes_component = NodePath("../AttributesComponent")

@@ -20,13 +20,17 @@ static func make(gameplay_character: GameplayCharacter) -> Character:
 	var scene = CharacterSceneManager.get_character_scene(gameplay_character.scene_id)
 	var character = scene.instantiate() as Character
 	character.actor_name = gameplay_character.name
-	var persistent_game_state = Component.get_persistent_game_state_component_or_die(character)
-	persistent_game_state.state = gameplay_character
+
 	var attributes_component = character.get_component_or_die(AttributesComponent)
 	attributes_component.base_attributes = gameplay_character.attributes
 	
+	var behavior_component = Component.get_or_null(character, BehaviorComponent.component) as BehaviorComponent
+	if behavior_component:
+		behavior_component.stored_behavior = gameplay_character.behavior
+		
 	var effect_actuator = Component.get_or_null(character, EffectActuatorComponent.component) as EffectActuatorComponent
 	if effect_actuator:
+		effect_actuator.inject_relic_state(gameplay_character.relic_state.duplicate(true))
 		for relic_name in gameplay_character.relics:
 			var relic_def = relic_library.get_relic(relic_name)
 			if relic_def:
