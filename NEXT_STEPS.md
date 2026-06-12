@@ -11,12 +11,9 @@ Active backburner from the reward-stage + relic batch sessions. Older notes belo
 
 ### Bugs
 
-- **Drag-to-reorder on the behavior editor doesn't work.** Drag button is present but rules don't reorder. Must-fix.
 
 ### Relics
 
-- **`relic_state: Dictionary[StringName, Dictionary]` on `GameplayCharacter`** — persistent per-character relic state across stages. Unblocks counter-based relics.
-- **Healer's Joy** — designed (+1 max HP per 100 healed, per-character counter). Ships once relic_state lands.
 - **Echoing Ward** — wards/protections received by this character last 50% longer. Needs a new Effect hook for modifying *incoming* status durations.
 - **Spectral Echo** — Charge bonus damage doubles if charge >1s. Needs runtime introspection of Charge's prepare state. Defer until at least one more action-specific relic ships so we know the right shape.
 - **"Dozens of relics" goal**: 10 non-class shipped (8 universal + 2 gated). Ongoing.
