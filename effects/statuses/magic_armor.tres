@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("2_b07bb")
+status_type = 1
 description = "Grants 1 armor"
 icon = ExtResource("2_51a4c")
 name = &"Magic Armor"

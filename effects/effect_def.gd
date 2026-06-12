@@ -21,6 +21,9 @@ enum EffectType {
 	## Effects that react to the bearer killing an enemy. Fired when the kill is recorded.
 	## Implementer overrides Effect.on_enemy_killed(victim_name: String).
 	ON_ENEMY_KILLED,
+	## Effects that modify the duration of incoming statuses.
+	## Implementer overrides Effect.modified_incoming_status_duration(status_def: StatusDef, duration: float).
+	MODIFIED_INCOMING_STATUS_DURATION,
 }
 
 @export var name: StringName

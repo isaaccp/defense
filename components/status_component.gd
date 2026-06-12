@@ -40,7 +40,12 @@ func _process(delta: float):
 	_expire_statuses()
 	elapsed_time += delta
 
+# Optional callable to modify duration before application. Set by EffectActuatorComponent.
+var duration_modifier: Callable
+
 func set_status(action_name: StringName, status: StatusDef, params: EffectParams, time: float):
+	if time > 0 and duration_modifier.is_valid():
+		time = duration_modifier.call(status, time)
 	var time_str = "%0.1fs" % time if time > 0 else "during action"
 	_log("%s provided by %s (%s)" % [status.name, action_name, time_str])
 	var changed = false

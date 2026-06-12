@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_duxap")
+status_type = 1
 description = "Increases ranged damage resistance by 50%"
 icon = ExtResource("2_iusji")
 name = &"Projectile Ward"

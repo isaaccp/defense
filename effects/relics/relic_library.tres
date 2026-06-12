@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicLibrary" load_steps=23 format=3 uid="uid://ic0hy7kikmrw"]
+[gd_resource type="Resource" script_class="RelicLibrary" load_steps=24 format=3 uid="uid://ic0hy7kikmrw"]
 
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="1_wxb7g"]
 [ext_resource type="Resource" uid="uid://dwg70jy7rj4cx" path="res://effects/relics/vorpal_blade.tres" id="2_6b71a"]
@@ -24,7 +24,7 @@
 [ext_resource type="Resource" uid="uid://cigniterquv01" path="res://effects/relics/igniter_quiver.tres" id="21_iq"]
 
 [ext_resource type="Resource" path="res://effects/relics/healers_joy.tres" id="22_hjoy"]
-
+[ext_resource type="Resource" uid="uid://cechoingward01" path="res://effects/relics/echoing_ward.tres" id="23_ew"]
 [resource]
 script = ExtResource("3_g7pc6")
-relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq"), ExtResource("22_hjoy")])
+relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq"), ExtResource("22_hjoy"), ExtResource("23_ew")])

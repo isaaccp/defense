@@ -66,5 +66,11 @@ func on_heal_applied(_amount_healed: int, _target_name: String) -> void:
 func on_enemy_killed(_victim_name: String) -> void:
 	assert(false, "Should be implemented in subclass if setting ON_ENEMY_KILLED")
 
+## Modifies the duration of an incoming status.
+## Implementer overrides this and returns the modified duration.
+func modified_incoming_status_duration(_status_def: StatusDef, duration: float) -> float:
+	assert(false, "Should be implemented in subclass if setting MODIFIED_INCOMING_STATUS_DURATION")
+	return duration
+
 func on_effect_removed():
 	pass

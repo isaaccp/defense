@@ -50,11 +50,13 @@ func run():
 	running = true
 	status_component.status_added.connect(_on_status_added)
 	status_component.status_removed.connect(_on_status_removed)
+	status_component.duration_modifier = self.modified_incoming_status_duration
 
 func stop():
 	running = false
 	status_component.status_added.disconnect(_on_status_added)
 	status_component.status_removed.disconnect(_on_status_removed)
+	status_component.duration_modifier = Callable()
 
 func add_relic(relic: RelicDef):
 	relics.append(relic)
@@ -97,6 +99,12 @@ func notify_heal_applied(amount_healed: int, target_name: String) -> void:
 func notify_enemy_killed(victim_name: String) -> void:
 	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.ON_ENEMY_KILLED, []):
 		effect_script.on_enemy_killed(victim_name)
+
+func modified_incoming_status_duration(status_def: StatusDef, duration: float) -> float:
+	var effective_duration = duration
+	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.MODIFIED_INCOMING_STATUS_DURATION, []):
+		effective_duration = effect_script.modified_incoming_status_duration(status_def, effective_duration)
+	return effective_duration
 
 func _on_status_added(status: StatusDef, status_params: EffectParams):
 	_add_effect(status, status_params)
