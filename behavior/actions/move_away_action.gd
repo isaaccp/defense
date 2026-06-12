@@ -14,9 +14,7 @@ func post_make():
 		max_distance = def.params.float_value.value
 
 func post_initialize():
-	navigation_agent.velocity_computed.connect(_on_velocity_computed)
-	# Single-shot activation. There's no 'arriving' at running away.
-	navigation_agent.target_position = _nav_dest()
+	super.post_initialize()
 
 func _nav_dest() -> Vector2:
 	var dir = target_position().direction_to(body.global_position)

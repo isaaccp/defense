@@ -43,7 +43,7 @@ func _nav_dest() -> Vector2:
 func _start_target_position_refresh():
 	while target.valid() and not finished:
 		navigation_agent.target_position = _nav_dest()
-		await Global.get_tree().create_timer(0.5, false).timeout
+		await Global.get_tree().create_timer(0.5, false, true).timeout
 
 func action_finished():
 	super()
