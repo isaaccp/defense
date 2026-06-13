@@ -6,6 +6,11 @@ Please always ask the user before:
 * writing code they didn't explicitly ask you to write
 * calling a significant number of tools to perform research they haven't explicitly asked for
 
+**Communication & Architectural Principles:**
+* **Don't patch symptoms with architectural hacks:** If a test or edge case fails, do not add hacks to core logic just to make it pass. Analyze the root cause and respect established architectural boundaries (e.g., layer responsibilities and lifecycles).
+* **Don't act unilaterally when corrected:** If the user points out a mistake, stop and discuss the problem. Do not silently run commands (like `git restore`) or modify files to fix it before getting explicit alignment.
+* **Prioritize alignment over velocity:** It is always better to pause and discuss an analysis than to rush an incorrect implementation.
+
 ## Project Overview
 A roguelike tower-defense game in **Godot 4.7**. Players select heroes, place them in levels, and survive enemy waves. Between levels, they unlock skills that modify hero behaviors. Supports local and online (Nakama) multiplayer.
 
