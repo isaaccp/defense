@@ -1,7 +1,7 @@
 extends GutTest
 
 # Level has 1 enemy.
-const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
+const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 const hold_person = preload("res://skill_tree/actions/hold_person.tres")
 const enemy_target = preload("res://skill_tree/targets/enemy.tres")

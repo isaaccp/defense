@@ -4,7 +4,7 @@ extends GutTest
 # the Set / Clear Preferred Target actions, the Preferred Target selector and
 # the world marker.
 
-const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
+const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 
 const enemy_target = preload("res://skill_tree/targets/enemy.tres")

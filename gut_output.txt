@@ -1,0 +1,556 @@
+Godot Engine v4.7.rc1.official.a4f5e8cdd - https://godotengine.org
+
+---  GUT  ---
+[1m[INFO]:  [0musing [/home/isaac/.local/share/godot/app_userdata/defense] for temporary output.
+Godot version:  4.7.0
+GUT version:  9.6.0
+[4m
+
+res://tests/integration/actions/bow_attack_test.gd
+[0m* test_bow_attack_fires_at_valid_range
+State: level: none -> prepare
+* test_move_away_fires_when_enemy_too_close_for_bow
+State: level: none -> prepare
+* test_move_to_fires_when_enemy_out_of_bow_range
+State: level: none -> prepare
+[1m3/3 passed.
+[0m[4m
+
+res://tests/integration/actions/charge_test.gd
+[0m* test_charge_short_distance
+State: level: none -> prepare
+[33m    --- Awaiting signal vital_updated or 3s Waiting for enemy to be hit ---
+[0m[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+* test_charge_long_distance
+State: level: none -> prepare
+[33m    --- Awaiting signal vital_updated or 3s Waiting for enemy to be hit ---
+[0m    Emits for statuses_changed
+Emits for statuses_changed
+    [[&"Swiftness"]]
+[[&"Swiftness"]]
+    [[]]
+[[]]
+    [[&"Strength Surge"]]
+[[&"Strength Surge"]]
+    Emits for vital_updated
+Emits for vital_updated
+    [[HEALTH: 10.00 -> 1.00 (max: 10.00)]]
+[[HEALTH: 10.00 -> 1.00 (max: 10.00)]]
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+* test_charge_cooldown
+State: level: none -> prepare
+[33m    --- Awaiting signal behavior_updated or 2.0s Wait for next action ---
+[0m[33m    --- Awaiting 3.9 seconds Waiting for cooldown to almost expire ---
+[0m[1m3/3 passed.
+[0m[4m
+
+res://tests/integration/actions/cleave_test.gd
+[0m* test_cleave_cooldown_reset_on_destroy
+State: level: none -> prepare
+[33m    --- Awaiting signal behavior_updated or 1.1s Wait for next action ---
+[0m* test_cleave_cooldown_no_reset_on_no_destroy
+State: level: none -> prepare
+[33m    --- Awaiting signal behavior_updated or 1.1s Wait for next action ---
+[0m[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/actions/heal_test.gd
+[0m* test_heal_works
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+[33m    --- Awaiting 0.6 seconds Waiting for heal ---
+[0m[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/actions/hold_person_test.gd
+[0m* test_hold_person_works
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+[33m    --- Awaiting signal status_added or 1.0s  ---
+[0m    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    --- Awaiting signal status_removed or 5.5s  ---
+[0m    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    Emits for behavior_updated
+Emits for behavior_updated
+    [&"Hold Person", Orc Warrior]
+[&"Hold Person", Orc Warrior]
+    [&"__no_action__", <null>]
+[&"__no_action__", <null>]
+    Emits for status_added
+Emits for status_added
+    [Paralyzed
+    [Able To Act], <null>]
+[Paralyzed
+[Able To Act], <null>]
+    Emits for able_to_act_changed
+Emits for able_to_act_changed
+    [false]
+[false]
+    [true]
+[true]
+    Emits for behavior_updated
+Emits for behavior_updated
+    [&"Move To", test_character]
+[&"Move To", test_character]
+    [&"__no_action__", <null>]
+[&"__no_action__", <null>]
+    [&"Move To", test_character]
+[&"Move To", test_character]
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/actions/move_away_test.gd
+[0m* test_triggers_when_enemy_within_max_distance
+State: level: none -> prepare
+* test_does_not_trigger_beyond_max_distance
+State: level: none -> prepare
+[33m    --- Awaiting 0.5 seconds Confirming Move Away does not trigger ---
+[0m* test_triggers_for_distant_enemy_when_no_max_distance_set
+State: level: none -> prepare
+[1m3/3 passed.
+[0m[4m
+
+res://tests/integration/actions/open_test.gd
+[0m* test_character_opens_chest_and_gold_is_emitted
+State: level: none -> prepare
+[33m    --- Awaiting signal gold_earned or 6s Waiting for chest to be opened ---
+[0m[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/actions/seeking_bolt_test.gd
+[0m* test_seeking_bolt_with_one_actor
+State: level: none -> prepare
+[33m    --- Awaiting signal died or 3s Waiting for enemy to die ---
+[0m* test_seeking_bolt_through_other_actor
+State: level: none -> prepare
+[33m    --- Awaiting signal died or 3s Waiting for enemy to die ---
+[0m* test_seeking_bolt_target_disappears
+State: level: none -> prepare
+[33m    --- Awaiting 0.6 seconds  ---
+[0m[1m3/3 passed.
+[0m[4m
+
+res://tests/integration/actions/sweeping_attack_test.gd
+[0m* test_sweeping_attack_one_enemy
+State: level: none -> prepare
+[33m    --- Awaiting 1.0 seconds  ---
+[0m* test_sweeping_attack_multiple_enemies
+State: level: none -> prepare
+[33m    --- Awaiting 1.0 seconds  ---
+[0m[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/actions/sword_attack_test.gd
+[0m* test_sword_works_within_distance_from_left
+State: level: none -> prepare
+* test_sword_doesnt_work_out_of_distance
+State: level: none -> prepare
+[33m    --- Awaiting 3 seconds Waiting to confirm enemy isn't hit, behavior doesn't change ---
+[0m* test_move_and_sword_works_out_of_distance
+State: level: none -> prepare
+[33m    --- Awaiting signal hit or 5s Waiting for enemy to be hit ---
+[0m* test_move_and_sword_works_out_of_distance_from_bottom_right
+State: level: none -> prepare
+[33m    --- Awaiting signal hit or 5s Waiting for enemy to be hit ---
+[0m[1m4/4 passed.
+[0m[4m
+
+res://tests/integration/behavior/closest_to_tower_sort_test.gd
+[0m* test_sorts_by_distance_to_tower
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/components/behavior_test.gd
+[0m* test_basic_behavior
+[33m    --- Awaiting signal behavior_updated or 2.0s  ---
+[0m[33m    --- Awaiting signal behavior_updated or 10.0s  ---
+[0m* test_basic_behavior_no_focus
+* test_persistent_condition_instance
+[33m    --- Awaiting signal behavior_updated or 2.0s  ---
+[0m[33m    --- Awaiting signal behavior_updated or 10.0s  ---
+[0m[1m3/3 passed.
+[0m[4m
+
+res://tests/integration/components/damage_test.gd
+[0m* test_initial_health
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+* test_hit_no_armor
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 28.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 28.00 (max: 40.00)]]
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+* test_physical_hit_armor_damage
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 30.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 30.00 (max: 40.00)]]
+* test_physical_hit_armor_no_damage
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+* test_physical_hit_flat_armor_pen
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 39.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 39.00 (max: 40.00)]]
+* test_physical_hit_fraction_armor_pen
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 39.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 39.00 (max: 40.00)]]
+* test_physical_hit_both_armor_pen
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 38.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 38.00 (max: 40.00)]]
+* test_non_physical_hit_ignores_armor
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 38.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 38.00 (max: 40.00)]]
+* test_resistance_plus_armor
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 32.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 32.00 (max: 40.00)]]
+* test_vulnerability
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 20.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 20.00 (max: 40.00)]]
+* test_heal
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 20.00 -> 30.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 20.00 -> 30.00 (max: 40.00)]]
+* test_health_depleted
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[33m    [WARNING]:  [0mWarn:  Float/Int comparison.  Got FLOAT but expected INT
+    Emits for log_entry_added
+Emits for log_entry_added
+    [0.00: [VITALS] [HEALTH: 40.00 -> 0.00 (max: 40.00)]]
+[0.00: [VITALS] [HEALTH: 40.00 -> 0.00 (max: 40.00)]]
+[1m12/12 passed.
+[0m[4m
+
+res://tests/integration/components/effect_actuator_component_test.gd
+[0m* test_status_duration_modifier
+* test_modified_attributes
+* test_modified_hit_effect
+* test_modified_cooldown
+[1m4/4 passed.
+[0m[4m
+
+res://tests/integration/components/preferred_target_test.gd
+[0m* test_set_and_clear_slot
+State: level: none -> prepare
+* test_set_is_idempotent
+* test_marker_spawns_on_preferred_and_despawns
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_auto_clears_when_target_destroyed
+State: level: none -> prepare
+* test_set_action_commits_enemy
+State: level: none -> prepare
+* test_clear_action_drops_target
+State: level: none -> prepare
+[33m    --- Awaiting 0.5 seconds Waiting for Clear Preferred Target to fire ---
+[0m* test_sword_to_preferred_skipped_when_uncommitted
+State: level: none -> prepare
+[33m    --- Awaiting 2 seconds No commitment -> rule is skipped, no attack ---
+[0m* test_sword_to_preferred_works_when_committed
+State: level: none -> prepare
+[1m8/8 passed.
+[0m[4m
+
+res://tests/integration/conditions/target_health_condition_test.gd
+[0m* test_no_heal_if_over_20
+State: level: none -> prepare
+* test_heal_if_under_20
+State: level: none -> prepare
+[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/enemies/enemy_smoke_test.gd
+[0m* test_enemy_smoke<parameterized>
+    - params[0](["res://enemies/skeleton_mage/skeleton_mage.tscn"])
+State: level: none -> prepare
+    - params[1](["res://enemies/orc_berserker/orc_berserker.tscn"])
+State: level: none -> prepare
+    - params[2](["res://enemies/orc_grunt/orc_grunt.tscn"])
+State: level: none -> prepare
+    - params[3](["res://enemies/barrel/barrel.tscn"])
+    - params[4](["res://enemies/orc_archer/orc_archer.tscn"])
+State: level: none -> prepare
+    - params[5](["res://enemies/skeleton_warrior/skeleton_warrior.tscn"])
+State: level: none -> prepare
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/level/decoration_scatter_test.gd.TestRectArea
+[0m* test_count_matches_export
+* test_positions_within_rect
+* test_deterministic_with_seed
+* test_spacing_keeps_points_apart
+* test_no_decoration_scene_is_safe
+* test_no_area_is_safe
+* test_rescatter_clears_previous
+[1m7/7 passed.
+[0m[4m
+
+res://tests/integration/level/decoration_scatter_test.gd.TestCircleArea
+[0m* test_positions_within_circle
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/level/decoration_scatter_test.gd.TestAnnulusArea
+[0m* test_positions_within_annulus
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/level/level_test.gd.TestTowerEnemyDestructionConditions
+[0m* test_tower_destruction_fails_level
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+State: level: prepare -> summary
+* test_enemy_destruction_finishes_level
+State: level: none -> prepare
+[33m    --- Awaiting signal level_finished or 5s Waiting for level to finish ---
+[0mState: level: prepare -> summary
+[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/level/level_test.gd.TestPositionReachedConditions
+[0m* test_one_reach_position_victory
+State: level: none -> prepare
+[33m    --- Awaiting signal level_finished or 3s Waiting for level to finish ---
+[0mState: level: prepare -> summary
+* test_all_reach_position_fail
+State: level: none -> prepare
+[33m    --- Awaiting signal level_finished or 3s Waiting for level to NOT finish ---
+[0m* test_all_reach_position_victory
+State: level: none -> prepare
+[33m    --- Awaiting signal level_finished or 3s Waiting for level to NOT finish ---
+[0mState: level: prepare -> summary
+[1m3/3 passed.
+[0m[4m
+
+res://tests/integration/level/level_test.gd.TestTimeConditions
+[0m* test_time_victory
+State: level: none -> prepare
+[33m    --- Awaiting signal level_finished or 2s Waiting for victory ---
+[0mState: level: prepare -> summary
+* test_time_loss
+State: level: none -> prepare
+[33m    --- Awaiting signal level_failed or 2s Waiting for loss ---
+[0mState: level: prepare -> summary
+[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/level/placement_component_test.gd.TestDisjointZones
+[0m* test_contains_inside_first_zone
+* test_contains_inside_second_zone
+* test_contains_in_gap_between_zones
+* test_contains_outside_all_zones
+* test_closest_valid_point_inside_returns_input
+* test_closest_valid_point_clamps_to_nearest_edge
+* test_closest_valid_point_picks_nearest_zone
+* test_closest_valid_point_respects_zone_transform
+[1m8/8 passed.
+[0m[4m
+
+res://tests/integration/relics/bonus_relics_test.gd
+[0m* test_regeneration_ring_boosts_health_regen
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_hallowed_vestments_adds_ranged_resistance
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_hallowed_vestments_does_not_affect_melee
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_killers_insight_boosts_damage_against_wounded_target
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_killers_insight_no_op_against_healthy_target
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_arcane_battery_raises_max_focus
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+[1m6/6 passed.
+[0m[4m
+
+res://tests/integration/relics/bracelet_of_focus_test.gd
+[0m* test_effect_actuator
+State: level: none -> prepare
+* test_in_level
+State: level: none -> prepare
+[33m    --- Awaiting signal action_finished or 2s Waiting for heal to finish ---
+[0m[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/relics/class_relics_test.gd
+[0m* test_battle_fury_grants_focus_on_damage_taken
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_battle_fury_caps_at_max_focus
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_channeling_grants_focus_on_heal
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_killers_edge_grants_focus_on_kill
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_arcane_focus_boosts_focus_regen
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_battle_fury_doesnt_fire_on_heal
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+* test_channeling_doesnt_fire_on_kill
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+[1m7/7 passed.
+[0m[4m
+
+res://tests/integration/relics/healers_joy_test.gd
+[0m* test_healers_joy_tracks_healing_and_increases_max_hp
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: level: none -> prepare
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/relics/vorpal_blade_test.gd
+[0m* test_effect_actuator
+State: level: none -> prepare
+* test_attack_in_level
+State: level: none -> prepare
+[1m2/2 passed.
+[0m[4m
+
+res://tests/integration/run/run_test.gd
+[0m* test_end_to_end
+State: run: none -> character_selection
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    Start
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    Character Selection Screen
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: run: character_selection -> within_level
+State: level: none -> prepare
+State: run: within_level -> reward_stage
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    Reward Stage
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+State: run: reward_stage -> within_level
+State: level: none -> prepare
+    Loading next stage
+State: run: within_level -> run_summary
+[1m1/1 passed.
+[0m[4m
+
+res://tests/integration/ui/programming_ui_test.gd
+[0m* test_last_empty_placeholder_present
+* test_conditions_cap_with_full_skills
+* test_conditions_cap_with_no_meta_skills
+* test_rule_summary_empty
+* test_rule_summary_complete_no_conditions
+* test_rule_summary_with_condition
+* test_filling_placeholder_appends_new_placeholder
+* test_get_behavior_excludes_placeholder
+* test_drag_to_reorder_rules
+DragHandle._get_drag_data: rule_idx=1, click_offset_y=0.0
+--- REORDER RULE ---
+Dragged Rule: idx=1, action=Sword Attack, size_y=47.0
+Target Rule: idx=0, action=Move To, size_y=47.0
+relative_y=-10.0 vs target_center_y=23.5 (threshold)
+drop_after=false, final new_idx=0
+DragHandle._get_drag_data: rule_idx=0, click_offset_y=0.0
+--- REORDER RULE ---
+Dragged Rule: idx=0, action=Sword Attack, size_y=47.0
+Target Rule: idx=1, action=Move To, size_y=47.0
+relative_y=100.0 vs target_center_y=23.5 (threshold)
+drop_after=true, final new_idx=1
+* test_live_reorder_on_hover
+DragHandle._get_drag_data: rule_idx=1, click_offset_y=0.0
+RuleWidget._can_drop_data: target_idx=0, target_action=Move To, dragged_idx=1, dragged_action=Sword Attack, at_position.y=-10.0
+--- REORDER RULE ---
+Dragged Rule: idx=1, action=Sword Attack, size_y=47.0
+Target Rule: idx=0, action=Move To, size_y=47.0
+relative_y=-10.0 vs target_center_y=23.5 (threshold)
+drop_after=false, final new_idx=0
+[1m10/10 passed.
+[0m[4m
+
+res://tests/integration/ui/reward_choice_screen_test.gd
+[0m* test_reversibility_and_confirmation
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+    [DEPRECATED]:  wait_frames has been replaced with wait_physics_frames which is counted in _physics_process.  wait_process_frames has also been added which is counted in _process.
+[1m1/1 passed.
+[0m
+
+
+
+[33m==============================================
+[0m[33m= Run Summary
+[0m[33m==============================================
+[0m
+Totals
+------
+Warnings             34
+Deprecated           42
+
+Scripts              36
+Tests               108
+Passing Tests       108
+Asserts             466
+Time              40.149s
+
+
+[32m---- All tests passed! ----
+[0m

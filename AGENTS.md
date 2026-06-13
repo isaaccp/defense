@@ -213,7 +213,8 @@ The simulator itself: [`tools/sim/SIM.md`](tools/sim/SIM.md).
 `/data/godot/bin/` contains the available Godot versions. In general there will be only one available — invoke it directly (no `godot` on `$PATH` by default). If there is more than one, ask the user which to use and commit that choice to memory so future sessions don't keep asking.
 
 ## Testing
-Uses [GUT](https://github.com/bitwes/Gut). Tests live in `tests/`. Run via the GUT panel in the Godot editor or `gut` CLI.
+Uses [GUT](https://github.com/bitwes/Gut). Tests live in `tests/`. Run via the GUT panel in the Godot editor or `gut` CLI. 
+**Read [`tests/TESTING.md`](tests/TESTING.md)** for details on the fast unit testing loop vs the slower integration testing loop.
 
 ## Dependency Cycle Check
 Circular dependencies in Godot can lead to compilation issues and hard-to-debug runtime crashes. A Python tool set is provided in the project root to detect cycles.

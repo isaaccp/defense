@@ -1,7 +1,7 @@
 extends GutTest
 
 # Level has 1 enemy.
-const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
+const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const cleave_scene = preload("res://behavior/actions/scenes/cleave.tscn")
 const cleave_action = preload("res://skill_tree/actions/cleave.tres")
 const move_to = preload("res://skill_tree/actions/move_to.tres")

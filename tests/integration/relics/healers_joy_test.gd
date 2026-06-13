@@ -1,6 +1,6 @@
 extends GutTest
 
-const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
+const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 
 func _make_character_with_relic(relic_name: StringName) -> Level:

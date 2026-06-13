@@ -1,12 +1,12 @@
 extends GutTest
 
 # Level has 1 enemy.
-const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
+const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const sword_attack_action = preload("res://skill_tree/actions/sword_attack.tres")
 const charge_action = preload("res://skill_tree/actions/charge.tres")
 const enemy_scene = preload("res://enemies/enemy.tscn")
 const orc_warrior_config = preload("res://enemies/orc_warrior/orc_warrior.tres")
-const charge_behavior = preload("res://tests/actions/charge_behavior.tres")
+const charge_behavior = preload("res://tests/integration/actions/charge_behavior.tres")
 var test_character = preload("res://character/playable_characters/test_character.tres")
 
 var level: Level

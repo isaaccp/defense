@@ -1,7 +1,7 @@
 extends GutTest
 
-const basic_tower_test_level_scene = preload("res://tests/level/basic_tower_test_level.tscn")
-const reach_position_scene = preload("res://tests/level/reach_position_test_level.tscn")
+const basic_tower_test_level_scene = preload("res://tests/integration/level/basic_tower_test_level.tscn")
+const reach_position_scene = preload("res://tests/integration/level/reach_position_test_level.tscn")
 const move_sword_behavior = preload("res://behavior/resources/basic_move_plus_sword_attack.tres")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 const move_to = preload("res://skill_tree/actions/move_to.tres")

@@ -1,7 +1,7 @@
 {
   "background_color": "262626ff",
   "compact_mode": false,
-  "dirs": ["res://tests/unit/"],
+  "dirs": ["res://tests/integration/"],
   "disable_colors": false,
   "double_strategy": "SCRIPT_ONLY",
   "errors_do_not_cause_failure": false,
@@ -29,4 +29,3 @@
   "tests": [],
   "unit_test_name": ""
 }
-

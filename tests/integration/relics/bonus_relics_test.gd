@@ -4,7 +4,7 @@ extends GutTest
 # Regeneration Ring (Warrior), Hallowed Vestments (Priest),
 # Killer's Insight (Rogue), Arcane Battery (Wizard).
 
-const basic_test_level_scene = preload("res://tests/actions/basic_test_level.tscn")
+const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 const ranged_attack = preload("res://game_logic/attack_types/ranged.tres")
 const melee_attack = preload("res://game_logic/attack_types/melee.tres")

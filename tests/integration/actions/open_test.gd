@@ -2,7 +2,7 @@ extends GutTest
 
 # Level has 1 chest at (160, 100); character spawns at (100, 100). The chest
 # yields the default 25 gold when opened.
-const chest_test_level_scene = preload("res://tests/actions/chest_test_level.tscn")
+const chest_test_level_scene = preload("res://tests/integration/actions/chest_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 const open_action = preload("res://skill_tree/actions/open.tres")
 const move_to = preload("res://skill_tree/actions/move_to.tres")
