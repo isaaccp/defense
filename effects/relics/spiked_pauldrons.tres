@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=4 format=3 uid="uid://wk8pzrrur3n9"]
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://wk8p0rrur3oa"]
 
 [ext_resource type="Script" path="res://effects/relics/spiked_pauldrons.gd" id="1_ew"]
 [ext_resource type="Texture2D" uid="uid://wsvx7u74dfl4" path="res://assets/status/buffs/defense_boost.png" id="2_ew"]

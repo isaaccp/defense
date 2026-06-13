@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicDef" load_steps=4 format=3 uid="uid://nb2bprojikfc"]
+[gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://nb2bprojikfc"]
 
 [ext_resource type="Script" path="res://effects/relics/focused_mind.gd" id="1_ew"]
 [ext_resource type="Texture2D" uid="uid://wsvx7u74dfl4" path="res://assets/status/buffs/defense_boost.png" id="2_ew"]
