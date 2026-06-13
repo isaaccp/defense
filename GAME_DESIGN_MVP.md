@@ -22,11 +22,13 @@ A run is played with exactly **2 heroes**, chosen from the 4 available classes (
 Classes possess rigid identities enforced by:
 1. **Starting Kits:** The class defines the initial set of acquired skills, heavily dictating how the run begins.
 2. **Skill Pools:** Skill acquisition is restricted to class-specific abilities. A Knight cannot learn Wizard spells.
-3. **Focus Generation & Relics:** A class's identity determines how they generate **Focus** (e.g., Knights gain Focus by taking damage, Rogues by getting kills). 
+3. **The Shared Focus Pool:** Instead of individual mana bars, the 2-hero party shares a single **Party Focus Pool** (e.g., 0/100) that generates at a flat, universal rate (e.g., 10 per second). 
+   * **[DESIGN NOTE - Economy over Spam]:** This perfectly solves the "more skills = more spam" problem, as total party output is strictly bottlenecked by the shared generation rate. More importantly, it turns resource management into a cooperative programming puzzle. Players must write "budgeting" logic (e.g., *Knight casts Heavy Slam ONLY IF Party Focus > 60*, leaving a reserve for the Cleric's emergency heals) or "contextual carry" logic (e.g., *Wizard drains Focus on swarms, Rogue drains Focus on bosses*). The fun shifts from *generating* individual resources to *allocating* a shared party economy.
 
 ### The Tower (The Aegis Core)
-The heroes are escorting the **Aegis Core**—a massive magical payload that must be dragged to the epicenter of the blight (Stage 15).
+The heroes are escorting the **Aegis Core**—a massive magical payload that must be dragged to the epicenter of the blight (Stage 15). Note that the Core is a **static defense point** during combat; it only moves narratively between stages.
 If the Tower's HP reaches 0, the stage is failed (though the player can retry indefinitely). 
+   * **[DESIGN NOTE - Iteration vs Attrition]:** We intentionally allow infinite retries so players can debug and tweak their AI without losing a run, while maintaining persistent HP across stages. We accept that players might retry a stage repeatedly to minimize damage taken (optimizing their HP economy), relying on the player's real-world wall-time to naturally limit extreme save-scumming behavior.
 
 To prevent the Tower from making every run feel identical, it is **not** a fully complex 3rd party member. Instead, it provides a minor, synergistic foundation (similar to *Monster Train*'s Pyres):
 - **Starting Chassis:** At run start, the player picks a "Core Chassis" granting it a basic, minor skill (e.g., a slow pulse heal or a minor knockback). 
@@ -37,7 +39,8 @@ To prevent the Tower from making every run feel identical, it is **not** a fully
 ### In-Combat Constraints
 While the player's goal is to acquire skills to write wider, more complex behaviors, combat pacing is strictly gated:
 1. **Focus & Cooldowns:** High-tier skills require careful resource pacing. A poorly programmed behavior might drain a hero's Focus, leaving them defenseless.
-2. **Speed is Rewarded:** XP yields are tied to **Time-Bonus Multipliers** (2x XP for fast clears, 0.5x for slow clears). This creates a soft enrage and actively punishes passive, "turtle" behavior scripts.
+2. **Flat Progression:** XP and gold rewards are fixed per stage to prevent "rich get richer" snowballing or punishing defensive "turtle" behavior scripts. 
+3. **Speed is for Prestige:** Fast clears are tracked locally for leaderboards. There are also meta-achievements for clearing a full run under a specific aggregate time threshold, which may unlock new content.
 
 ### Meta-Progression (The Roguelite Loop)
 The MVP utilizes a **Milestone & Condition-based System** rather than a generic currency shop. This prevents players from hoarding currency to buy only "safe" power upgrades while avoiding difficulty-enhancing variety mechanics.
@@ -61,7 +64,9 @@ Between mandatory fights, the player must navigate the run's economy and attriti
 ## 5. Run Variety
 The game guarantees that no two runs feel identical through systemic shuffling and compounding modifiers:
 1. **Randomized Stages:** Every Fight Stage is randomly drawn from a pool of authored levels calibrated to the current difficulty band. 
-2. **Accumulating Mutators:** Once unlocked via meta-progression, players will be offered a choice of 2-3 Environmental Mutators at the start of each Act (e.g. "Neverending Storm: Halve Fire damage, Double Lightning"). These mutators **accumulate** as the run progresses (Act 3 will have Act 1, 2, and 3 mutators active simultaneously), heavily warping the viable strategies for that specific run.
+2. **Run and Act Mutators:** Once unlocked via meta-progression, runs feature modifiers to guarantee variety.
+   - **Single-Run Mutators:** At the start of a run, a global mutator may apply (e.g., "Fire is stronger, Lightning is weaker"), allowing the player to draft their party around it.
+   - **Accumulating Act Mutators:** At the start of each Act, players are offered a choice between 3 negative mutators (e.g., "Monsters get +10% damage" or "Monsters get +1 Armor"). These mutators **accumulate** as the run progresses, steadily increasing the difficulty without abruptly hard-countering a specific player class element halfway through.
 
 ---
 
