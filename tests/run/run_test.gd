@@ -12,6 +12,12 @@ var ui_layer: GameplayUILayer
 func before_all():
 	expected_characters = instant_win_level_provider.players
 
+func after_each():
+	if is_instance_valid(run) and run.state != null:
+		# Cleanly exit whatever state we're in so that stacked state machines (like level)
+		# are popped properly before GUT automatically frees the run node.
+		run.state.change_state(run.RUN_SUMMARY, false)
+
 func before_each():
 	ui_layer = gameplay_ui_layer_scene.instantiate()
 	ui_layer.initialize_state_machine_stack(StateMachine.new("test_sm"))
