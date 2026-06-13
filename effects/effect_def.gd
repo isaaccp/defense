@@ -24,6 +24,9 @@ enum EffectType {
 	## Effects that modify the duration of incoming statuses.
 	## Implementer overrides Effect.modified_incoming_status_duration(status_def: StatusDef, duration: float).
 	MODIFIED_INCOMING_STATUS_DURATION,
+	## Effects that modify incoming hit effects before damage calculation.
+	## Implementer overrides Effect.modify_incoming_hit_effect(hit_effect: HitEffect, logger: Callable).
+	MODIFIED_INCOMING_HIT_EFFECT,
 }
 
 @export var name: StringName

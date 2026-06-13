@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RelicLibrary" load_steps=24 format=3 uid="uid://ic0hy7kikmrw"]
+[gd_resource type="Resource" script_class="RelicLibrary" load_steps=32 format=3 uid="uid://ic0hy7kikmrw"]
 
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="1_wxb7g"]
 [ext_resource type="Resource" uid="uid://dwg70jy7rj4cx" path="res://effects/relics/vorpal_blade.tres" id="2_6b71a"]
@@ -25,6 +25,14 @@
 
 [ext_resource type="Resource" path="res://effects/relics/healers_joy.tres" id="22_hjoy"]
 [ext_resource type="Resource" uid="uid://cechoingward01" path="res://effects/relics/echoing_ward.tres" id="23_ew"]
+[ext_resource type="Resource" uid="uid://yv0iv5jbtauj" path="res://effects/relics/blood_frenzy.tres" id="24_bf"]
+[ext_resource type="Resource" uid="uid://nb2bprojikfc" path="res://effects/relics/focused_mind.tres" id="26_fm"]
+[ext_resource type="Resource" uid="uid://el4kg38e419g" path="res://effects/relics/giants_belt.tres" id="27_gb"]
+[ext_resource type="Resource" uid="uid://08bu2x1ibd6h" path="res://effects/relics/momentum_crystal.tres" id="28_mc"]
+[ext_resource type="Resource" uid="uid://dkfkjsmzhq9w" path="res://effects/relics/overflowing_chalice.tres" id="29_oc"]
+[ext_resource type="Resource" uid="uid://wk8pzrrur3n9" path="res://effects/relics/spiked_pauldrons.tres" id="30_sp"]
+[ext_resource type="Resource" uid="uid://6p8bh68nobdk" path="res://effects/relics/vampires_tooth.tres" id="31_vt"]
+
 [resource]
 script = ExtResource("3_g7pc6")
-relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq"), ExtResource("22_hjoy"), ExtResource("23_ew")])
+relics = Array[ExtResource("1_wxb7g")]([ExtResource("2_6b71a"), ExtResource("3_cmev5"), ExtResource("4_bfury"), ExtResource("5_chan"), ExtResource("6_kedg"), ExtResource("7_afoc"), ExtResource("8_rring"), ExtResource("9_hvest"), ExtResource("10_kinst"), ExtResource("11_abatt"), ExtResource("12_sw"), ExtResource("13_bm"), ExtResource("14_op"), ExtResource("15_ac"), ExtResource("16_col"), ExtResource("17_rp"), ExtResource("18_ws"), ExtResource("19_pm"), ExtResource("20_eb"), ExtResource("21_iq"), ExtResource("22_hjoy"), ExtResource("23_ew"), ExtResource("24_bf"), ExtResource("26_fm"), ExtResource("27_gb"), ExtResource("28_mc"), ExtResource("29_oc"), ExtResource("30_sp"), ExtResource("31_vt")])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=4 format=3 uid="uid://wk8pzrrur3n9"]
+
+[ext_resource type="Script" path="res://effects/relics/spiked_pauldrons.gd" id="1_ew"]
+[ext_resource type="Texture2D" uid="uid://wsvx7u74dfl4" path="res://assets/status/buffs/defense_boost.png" id="2_ew"]
+[ext_resource type="Script" path="res://effects/relic_def.gd" id="3_ew"]
+
+[resource]
+script = ExtResource("3_ew")
+description = "Whenever this character takes damage, deal 2 flat Physical damage back to the attacker."
+icon = ExtResource("2_ew")
+class_relic = false
+required_actions = Array[StringName]([])
+name = &"Spiked Pauldrons"
+effect_types = Array[int]([5])
+effect_script = ExtResource("1_ew")

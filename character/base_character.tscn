@@ -98,10 +98,11 @@ logging_component = NodePath("../LoggingComponent")
 [node name="EffectActuatorComponent" parent="." node_paths=PackedStringArray("status_component") instance=ExtResource("12_o0jr4")]
 status_component = NodePath("../StatusComponent")
 
-[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component") instance=ExtResource("14_osyen")]
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component", "effect_actuator_component") instance=ExtResource("14_osyen")]
 attributes_component = NodePath("../AttributesComponent")
 vitals_component = NodePath("../VitalsComponent")
 logging_component = NodePath("../LoggingComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("15_sf42f")]
 attributes_component = NodePath("../AttributesComponent")

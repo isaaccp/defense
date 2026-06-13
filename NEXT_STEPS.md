@@ -14,9 +14,18 @@ Active backburner from the reward-stage + relic batch sessions. Older notes belo
 
 ### Relics
 
-- **Echoing Ward** — wards/protections received by this character last 50% longer. Needs a new Effect hook for modifying *incoming* status durations.
-- **Spectral Echo** — Charge bonus damage doubles if charge >1s. Needs runtime introspection of Charge's prepare state. Defer until at least one more action-specific relic ships so we know the right shape.
-- **"Dozens of relics" goal**: 10 non-class shipped (8 universal + 2 gated). Ongoing.
+- ~~**Echoing Ward**~~ — Implemented.
+- ~~**Spectral Echo**~~ — Dropped (too much action-specific coupling).
+- ~~**Vampire's Tooth**~~ — Implemented.
+- ~~**Spiked Pauldrons**~~ — Implemented.
+- ~~**Executioner's Axe**~~ — Dropped (thematic mismatch).
+- ~~**Overflowing Chalice**~~ — Implemented.
+- ~~**Blood Frenzy**~~ — Implemented.
+- ~~**Giant's Belt**~~ — Implemented.
+- ~~**Focused Mind**~~ — Implemented (reworked to Juggler approach).
+- ~~**Momentum Crystal**~~ — Implemented.
+
+- **"Dozens of relics" goal**: Ongoing.
 
 ### Map / campaign
 

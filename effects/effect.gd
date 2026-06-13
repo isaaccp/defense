@@ -72,5 +72,11 @@ func modified_incoming_status_duration(_status_def: StatusDef, duration: float) 
 	assert(false, "Should be implemented in subclass if setting MODIFIED_INCOMING_STATUS_DURATION")
 	return duration
 
+## Modifies incoming hit_effect in-place before armor/resistance.
+## Only called if MODIFIED_INCOMING_HIT_EFFECT is set in effect_types.
+## logger should be used with a single-line of information describing the effect.
+func modify_incoming_hit_effect(_hit_effect: HitEffect, logger: Callable = Callable()) -> void:
+	assert(false, "Should be implemented in subclass if setting MODIFIED_INCOMING_HIT_EFFECT")
+
 func on_effect_removed():
 	pass

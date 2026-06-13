@@ -78,6 +78,13 @@ func modified_hit_effect(base_hit_effect: HitEffect, target: Node, effect_log: A
 		effect_script.modify_hit_effect(hit_effect, target, logger)
 	return hit_effect
 
+func modified_incoming_hit_effect(base_hit_effect: HitEffect, effect_log: Array[String]) -> HitEffect:
+	var hit_effect = base_hit_effect.duplicate(true)
+	var logger = func(text: String): effect_log.append(text)
+	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.MODIFIED_INCOMING_HIT_EFFECT, []):
+		effect_script.modify_incoming_hit_effect(hit_effect, logger)
+	return hit_effect
+
 # Log is an empty array in which to log messages from each effect that modifies the cooldown.
 func modified_cooldown(action: ActionDef, cooldown: float, effect_log: Array[String]) -> float:
 	var effective_cooldown = cooldown

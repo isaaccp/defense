@@ -98,10 +98,11 @@ status_component = NodePath("../StatusComponent")
 [node name="PickableComponent" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("13_dlre1")]
 collision_shape = NodePath("../CollisionShape2D")
 
-[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component") instance=ExtResource("14_7on22")]
+[node name="DamageComponent" parent="." node_paths=PackedStringArray("attributes_component", "vitals_component", "logging_component", "effect_actuator_component") instance=ExtResource("14_7on22")]
 attributes_component = NodePath("../AttributesComponent")
 vitals_component = NodePath("../VitalsComponent")
 logging_component = NodePath("../LoggingComponent")
+effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("15_katke")]
 attributes_component = NodePath("../AttributesComponent")
