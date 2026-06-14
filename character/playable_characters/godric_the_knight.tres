@@ -24,4 +24,4 @@ scene_id = 1
 description = "A young knight who had to flee the city guard after a sad misunderstanding"
 acquired_skills = SubResource("Resource_7laic")
 attributes = SubResource("Resource_qd6ek")
-relics = Array[StringName]([&"Battle Fury", &"Regeneration Ring"])
+relics = Array[StringName]([&"Defiance", &"Regeneration Ring"])

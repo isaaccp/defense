@@ -27,6 +27,9 @@ enum EffectType {
 	## Effects that modify incoming hit effects before damage calculation.
 	## Implementer overrides Effect.modify_incoming_hit_effect(hit_effect: HitEffect, logger: Callable).
 	MODIFIED_INCOMING_HIT_EFFECT,
+	## Effects that tick every frame (useful for passive generation).
+	## Implementer overrides Effect.on_process(delta: float).
+	ON_PROCESS,
 }
 
 @export var name: StringName

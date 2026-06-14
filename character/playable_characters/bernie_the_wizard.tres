@@ -24,4 +24,4 @@ scene_id = 2
 description = "An aspiring wizard on its way to the Wizard's College in the capital"
 acquired_skills = SubResource("Resource_1uxd1")
 attributes = SubResource("Resource_101em")
-relics = Array[StringName]([&"Arcane Focus", &"Arcane Battery"])
+relics = Array[StringName]([&"Meditation", &"Arcane Battery"])

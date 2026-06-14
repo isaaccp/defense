@@ -80,3 +80,7 @@ func modify_incoming_hit_effect(_hit_effect: HitEffect, logger: Callable = Calla
 
 func on_effect_removed():
 	pass
+
+## Called every frame if ON_PROCESS is set in effect_types.
+func on_process(_delta: float) -> void:
+	assert(false, "Should be implemented in subclass if setting ON_PROCESS")

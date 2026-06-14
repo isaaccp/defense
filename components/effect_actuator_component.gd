@@ -160,6 +160,12 @@ func _on_able_to_act_changed(can_act: bool):
 	else:
 		unable_to_act_count += 1
 
+func _process(delta: float) -> void:
+	if not running:
+		return
+	for effect_script in effect_script_by_effect_type.get(EffectDef.EffectType.ON_PROCESS, []):
+		effect_script.on_process(delta)
+
 func _get_configuration_warnings():
 	var warnings = PackedStringArray()
 	if not status_component:

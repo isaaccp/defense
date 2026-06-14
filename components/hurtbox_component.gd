@@ -17,7 +17,7 @@ signal hit(hit_effect: HitEffect)
 # for things that can't be killed. Same for status.
 @export var damage_component: DamageComponent
 @export var status_component: StatusComponent
-# Used to fire ON_DAMAGE_TAKEN effect hooks (e.g. Battle Fury). Optional —
+# Used to fire ON_DAMAGE_TAKEN effect hooks (e.g. Defiance). Optional —
 # towers and characters without relics don't need this wired.
 @export var effect_actuator_component: EffectActuatorComponent
 

@@ -2,7 +2,7 @@
   "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
   "seed": 1,
   "max_seconds": 60,
-  "notes": "godrick_bernie_chokepoint \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Battle Fury refills focus from damage but HP is permanent loss).",
+  "notes": "godrick_bernie_chokepoint \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
   "characters": [
     {
       "character": "res://character/playable_characters/godric_the_knight.tres",

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://bchan0class02"]
 
-[ext_resource type="Script" path="res://effects/relics/channeling.gd" id="1_chan"]
+[ext_resource type="Script" path="res://effects/relics/unyielding_hope.gd" id="1_chan"]
 [ext_resource type="Script" path="res://effects/relic_def.gd" id="2_rdef"]
 
 [resource]
 script = ExtResource("2_rdef")
-description = "Gain focus equal to 50% of HP healed. (Priest class identity — defines faith as a focus mechanic.)"
+description = "Gain passive Focus per second based on the percentage of missing HP across the party."
 class_relic = true
-name = &"Channeling"
-effect_types = Array[int]([6])
+name = &"Unyielding Hope"
+effect_types = Array[int]([10])
 effect_script = ExtResource("1_chan")

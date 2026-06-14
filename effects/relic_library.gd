@@ -14,7 +14,10 @@ func _index():
 		relic_by_name[relic.name] = relic
 
 func get_relic(relic: StringName) -> RelicDef:
-	return relic_by_name[relic] as RelicDef
+	if not relic_by_name.has(relic):
+		push_warning("Relic not found in library: ", relic)
+		return null
+	return relic_by_name.get(relic) as RelicDef
 
 func lookup_relics(relic_names: Array[StringName]) -> Array[RelicDef]:
 	var found_relics: Array[RelicDef] = []

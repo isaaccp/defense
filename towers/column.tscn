@@ -69,7 +69,7 @@ radius = 15.0
 script = ExtResource("7_v2vco")
 health = 200
 focus = 100
-focus_regen = 2.0
+focus_regen = 1.0
 
 [node name="Column" type="StaticBody2D" groups=["towers"]]
 y_sort_enabled = true
