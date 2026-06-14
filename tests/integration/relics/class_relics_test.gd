@@ -44,7 +44,6 @@ func test_unyielding_hope_grants_focus_on_missing_hp():
 	var vitals: VitalsComponent = Component.get_or_die(actor, VitalsComponent.component)
 	vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, vitals.get_vital_max(VitalsComponent.VitalType.HEALTH) * 0.5)
 	
-	actor.add_to_group("heroes")
 	actuator._process(1.0)
 	assert_gt(_focus(actor), 0.0, "Should gain focus when party has missing HP")
 

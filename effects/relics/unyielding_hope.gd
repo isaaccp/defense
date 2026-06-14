@@ -6,15 +6,18 @@ extends Effect
 const BASE_REGEN_PER_SECOND: float = 2.0
 
 func on_process(delta: float) -> void:
-	var heroes = Global.get_tree().get_nodes_in_group("heroes")
-	if heroes.is_empty():
+	var side = Component.get_or_null(bearer, SideComponent.component) as SideComponent
+	if not side:
+		return
+	var allies = side.allies()
+	if allies.is_empty():
 		return
 	
 	var total_max_hp: float = 0.0
 	var total_current_hp: float = 0.0
 	
-	for hero in heroes:
-		var vitals := Component.get_or_null(hero, VitalsComponent.component) as VitalsComponent
+	for ally in allies:
+		var vitals := Component.get_or_null(ally, VitalsComponent.component) as VitalsComponent
 		if vitals:
 			total_max_hp += vitals.get_vital_max(VitalsComponent.VitalType.HEALTH)
 			total_current_hp += vitals.get_vital_current(VitalsComponent.VitalType.HEALTH)
