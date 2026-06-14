@@ -35,13 +35,20 @@ func initialize(behavior_library: BehaviorLibrary, acquired_skills: SkillTreeSta
 	self.behavior_editor = behavior_editor
 	self.acquired_skills = acquired_skills
 	behavior_editor.can_save_to_behavior_library_updated.connect(_on_can_save_to_behavior_library_updated)
+	if is_node_ready():
+		_populate()
 
 func _ready():
 	behavior_list = %Behaviors
 	root = behavior_list.create_item()
 	behavior_list.set_column_expand(Column.BUTTONS, false)
 	save_to_library_dialog.register_text_enter(behavior_name_line_edit)
+	_populate()
+
+func _populate():
 	item_by_name = {}
+	for child in root.get_children():
+		child.free()
 	if not behavior_library:
 		return
 	for behavior in behavior_library.behaviors:
