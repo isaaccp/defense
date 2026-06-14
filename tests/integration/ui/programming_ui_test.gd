@@ -50,6 +50,16 @@ func test_rule_summary_with_condition():
 	assert_string_contains(summary, "When: ")
 	assert_true(not summary.contains("always"), "summary should drop 'always' once a condition is present")
 
+func test_rule_validation_with_condition():
+	var view = _make_view(true)
+	var rule = view._list.get_children()[0]
+	_fill_rule(rule, &"Enemy", &"Move To")
+	var cond = SkillManager.make_condition_instance(&"Has Status")
+	rule._add_condition_row(cond)
+	# This should not crash!
+	var is_valid = rule.is_valid_rule()
+	assert_false(is_valid, "Rule should be invalid because 'Has Status' is missing a status")
+
 func test_filling_placeholder_appends_new_placeholder():
 	var view = _make_view(true)
 	assert_eq(view._list.get_child_count(), 1, "starts with single placeholder")

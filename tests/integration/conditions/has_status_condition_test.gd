@@ -54,7 +54,7 @@ func before_each():
 	enemy_hurtbox = Component.get_or_die(enemy, HurtboxComponent.component) as HurtboxComponent
 
 func test_fails_when_missing_status():
-	TestUtils.set_character_behavior(character, make_behavior(false))
+	TestUtils.set_character_behavior(character, make_behavior(true))
 	enemy.position = character.position + Vector2.RIGHT * 40
 	level.start()
 
@@ -66,7 +66,7 @@ func test_fails_when_missing_status():
 	assert_signal_not_emitted(enemy_hurtbox, "hit")
 
 func test_passes_when_has_status():
-	TestUtils.set_character_behavior(character, make_behavior(false))
+	TestUtils.set_character_behavior(character, make_behavior(true))
 	enemy.position = character.position + Vector2.RIGHT * 40
 	level.start()
 
@@ -80,7 +80,7 @@ func test_passes_when_has_status():
 	assert_signal_emitted(enemy_hurtbox, "hit")
 
 func test_passes_when_inverted_and_missing():
-	TestUtils.set_character_behavior(character, make_behavior(true))
+	TestUtils.set_character_behavior(character, make_behavior(false))
 	enemy.position = character.position + Vector2.RIGHT * 40
 	level.start()
 

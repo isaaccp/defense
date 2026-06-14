@@ -6,6 +6,7 @@ class_name BehaviorEditorView
 @export var delete_icon: Texture2D
 @export var edit_icon: Texture2D
 @export var drag_icon: Texture2D
+@export var status_library: StatusLibrary
 
 
 # Toolbox encodes drag-data 'type' as SlotType.
@@ -106,9 +107,6 @@ func _add_rule_widget(rule: Rule = null) -> RuleWidget:
 	_list.add_child(w)
 	w.load_rule(rule)
 	return w
-
-func open_config_pane(params: SkillParams, on_confirm: Callable) -> void:
-	%ConfigPane.setup(params, acquired_skills, on_confirm)
 
 func notify_changed() -> void:
 	_check_can_save()
@@ -361,7 +359,24 @@ class RuleWidget extends PanelContainer:
 			and _condition_count() == 0
 
 	func is_valid_rule() -> bool:
-		return _target_cell.has_skill() and _action_cell.has_skill()
+		if not _target_cell.has_skill() or not _action_cell.has_skill():
+			return false
+			
+		var target = _target_cell.get_skill()
+		if target.params and not target.params.all_set():
+			return false
+			
+		var action = _action_cell.get_skill()
+		if action.params and not action.params.all_set():
+			return false
+			
+		for row in _conditions_vbox.get_children():
+			if row is ConditionRow:
+				var cond = row.get_condition()
+				if cond and cond.params and not cond.params.all_set():
+					return false
+					
+		return true
 
 	func is_all_acquired() -> bool:
 		if not _target_cell.is_acquired():
@@ -581,8 +596,7 @@ class SkillCell extends PanelContainer:
 	var rule_widget: RuleWidget
 
 	var _skill: ParamSkill
-	var _label: Label
-	var _edit_button: Button
+	var _flow: HFlowContainer
 
 	func _init(editor_: BehaviorEditorView, slot_type_: BehaviorEditorTypes.SlotType, rule_widget_: RuleWidget):
 		editor = editor_
@@ -591,19 +605,9 @@ class SkillCell extends PanelContainer:
 
 	func _ready():
 		custom_minimum_size = Vector2(120, 0)
+		_flow = HFlowContainer.new()
+		add_child(_flow)
 		_apply_style(false)
-		var hbox = HBoxContainer.new()
-		add_child(hbox)
-		_label = Label.new()
-		_label.size_flags_horizontal = SIZE_EXPAND_FILL
-		_label.mouse_filter = MOUSE_FILTER_IGNORE
-		hbox.add_child(_label)
-		_edit_button = Button.new()
-		_edit_button.icon = editor.edit_icon
-		_edit_button.tooltip_text = "Configure"
-		_edit_button.visible = false
-		_edit_button.pressed.connect(_on_edit)
-		hbox.add_child(_edit_button)
 		_update_display()
 
 	var _highlighted: bool = false
@@ -641,9 +645,12 @@ class SkillCell extends PanelContainer:
 		style.set_content_margin_all(6)
 		add_theme_stylebox_override("panel", style)
 		
-		if _label:
-			var text_color: Color = profile.text_color_filled() if filled else profile.text_color_empty()
-			_label.add_theme_color_override("font_color", text_color)
+		
+		# For controls inside the flow container
+		for c in _flow.get_children():
+			if c is Label:
+				var text_color: Color = profile.text_color_filled() if filled else profile.text_color_empty()
+				c.add_theme_color_override("font_color", text_color)
 
 	func set_highlighted(on: bool) -> void:
 		_highlighted = on
@@ -673,18 +680,172 @@ class SkillCell extends PanelContainer:
 		tooltip_text = t
 
 	func _update_display() -> void:
-		if not _label:
+		if not _flow:
 			return
+		
+		# Clear existing children
+		for c in _flow.get_children():
+			_flow.remove_child(c)
+			c.queue_free()
+
 		if _skill:
-			_label.text = str(_skill)
-			_edit_button.visible = _skill.params != null and _skill.params.placeholders.size() > 0
-			_label.self_modulate = Color.WHITE if is_acquired() else Color(1.0, 0.6, 0.6)
+			if _skill.params and _skill.params.placeholders.size() > 0:
+				# Use controls for parameters
+				for part in _skill.params.parts:
+					if part is String:
+						var l = Label.new()
+						l.text = part
+						_flow.add_child(l)
+					elif part is SkillParams.PlaceholderId:
+						_add_placeholder_control(part)
+			else:
+				# Just plain text
+				var l = Label.new()
+				l.text = str(_skill)
+				_flow.add_child(l)
+				
+			self_modulate = Color.WHITE if is_acquired() else Color(1.0, 0.6, 0.6)
 			_apply_style(true)
 		else:
-			_label.text = _placeholder_text()
-			_edit_button.visible = false
-			_label.self_modulate = Color.WHITE
+			var l = Label.new()
+			l.text = _placeholder_text()
+			_flow.add_child(l)
+			self_modulate = Color.WHITE
 			_apply_style(false)
+
+	func _add_placeholder_control(placeholder_id: SkillParams.PlaceholderId):
+		match placeholder_id:
+			SkillParams.PlaceholderId.CMP:
+				var opt = OptionButton.new()
+				opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+				opt.set_item_disabled(0, true)
+				opt.fit_to_longest_item = false
+				for op in SkillParams.CmpOp.values():
+					if op == SkillParams.CmpOp.UNSPECIFIED:
+						continue
+					opt.add_item(SkillParams.cmp_op_text(op), op)
+				if _skill.params.placeholder_set(SkillParams.PlaceholderId.CMP):
+					opt.select(_skill.params.get_placeholder_value(SkillParams.PlaceholderId.CMP))
+				else:
+					opt.select(0)
+				opt.item_selected.connect(_on_cmp_op_selected.bind(placeholder_id))
+				_flow.add_child(opt)
+			SkillParams.PlaceholderId.INT_VALUE:
+				var spin_box = SpinBox.new()
+				spin_box.max_value = 999
+				spin_box.set_update_on_text_changed(true)
+				spin_box.set_select_all_on_focus(true)
+				if _skill.params.placeholder_set(SkillParams.PlaceholderId.INT_VALUE):
+					spin_box.set_value(_skill.params.get_placeholder_value(SkillParams.PlaceholderId.INT_VALUE))
+				spin_box.value_changed.connect(_on_int_value_updated.bind(placeholder_id, spin_box))
+				_flow.add_child(spin_box)
+			SkillParams.PlaceholderId.FLOAT_VALUE:
+				var spin_box = SpinBox.new()
+				spin_box.max_value = 999
+				spin_box.step = 0.1
+				spin_box.set_update_on_text_changed(true)
+				spin_box.set_select_all_on_focus(true)
+				if _skill.params.placeholder_set(SkillParams.PlaceholderId.FLOAT_VALUE):
+					spin_box.set_value(_skill.params.get_placeholder_value(SkillParams.PlaceholderId.FLOAT_VALUE))
+				spin_box.value_changed.connect(_on_float_value_updated.bind(placeholder_id))
+				_flow.add_child(spin_box)
+			SkillParams.PlaceholderId.SORT:
+				var opt = OptionButton.new()
+				opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+				opt.set_item_disabled(0, true)
+				opt.fit_to_longest_item = false
+
+				var sort = _skill.params.get_placeholder_value(SkillParams.PlaceholderId.SORT)
+				var options = editor.acquired_skills.target_sorts
+				for idx in range(options.size()):
+					var sort_name = options[idx]
+					opt.add_item(sort_name)
+					if sort and sort.name == sort_name:
+						opt.select(idx+1)
+				opt.item_selected.connect(_on_sort_selected.bind(placeholder_id, options))
+				_flow.add_child(opt)
+			SkillParams.PlaceholderId.INTERACTABLE_KIND:
+				var opt = OptionButton.new()
+				opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+				opt.set_item_disabled(0, true)
+				opt.fit_to_longest_item = false
+
+				var values: Array[Interactable.Kind] = []
+				for v in Interactable.Kind.values():
+					if v == Interactable.Kind.UNSPECIFIED:
+						continue
+					values.append(v)
+					opt.add_item(Interactable.Kind.keys()[v])
+				if _skill.params.placeholder_set(SkillParams.PlaceholderId.INTERACTABLE_KIND):
+					var current_kind: Interactable.Kind = _skill.params.get_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND)
+					opt.select(values.find(current_kind) + 1)
+				else:
+					opt.select(0)
+				opt.item_selected.connect(_on_interactable_kind_selected.bind(placeholder_id, values))
+				_flow.add_child(opt)
+			SkillParams.PlaceholderId.BOOL_VALUE:
+				var chk = CheckButton.new()
+				if not _skill.params.placeholder_set(SkillParams.PlaceholderId.BOOL_VALUE):
+					_skill.params.set_placeholder_value(placeholder_id, true)
+				
+				chk.button_pressed = _skill.params.get_placeholder_value(SkillParams.PlaceholderId.BOOL_VALUE)
+				chk.text = "Is" if chk.button_pressed else "Is not"
+				chk.toggled.connect(_on_bool_value_updated.bind(placeholder_id, chk))
+				_flow.add_child(chk)
+			SkillParams.PlaceholderId.STATUS:
+				var opt = OptionButton.new()
+				opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+				opt.set_item_disabled(0, true)
+				opt.fit_to_longest_item = false
+
+				var options: Array[StatusDef] = []
+				if editor.status_library:
+					for effect in editor.status_library.statuses:
+						if effect is StatusDef:
+							options.append(effect)
+							opt.add_item(effect.name)
+				
+				if _skill.params.placeholder_set(SkillParams.PlaceholderId.STATUS):
+					var current_status: StatusDef = _skill.params.get_placeholder_value(SkillParams.PlaceholderId.STATUS)
+					opt.select(options.find(current_status) + 1)
+				else:
+					opt.select(0)
+				opt.item_selected.connect(_on_status_selected.bind(placeholder_id, options))
+				_flow.add_child(opt)
+
+	func _on_cmp_op_selected(selection: int, placeholder: SkillParams.PlaceholderId):
+		_skill.params.set_placeholder_value(placeholder, selection)
+		rule_widget.on_cell_changed()
+
+	func _on_int_value_updated(value: float, placeholder: SkillParams.PlaceholderId, spin_box: SpinBox):
+		var int_value = int(value)
+		spin_box.set_value_no_signal(int_value)
+		_skill.params.set_placeholder_value(placeholder, int_value)
+		rule_widget.on_cell_changed()
+
+	func _on_float_value_updated(value: float, placeholder: SkillParams.PlaceholderId):
+		_skill.params.set_placeholder_value(placeholder, value)
+		rule_widget.on_cell_changed()
+
+	func _on_sort_selected(selection: int, placeholder: SkillParams.PlaceholderId, options: Array[StringName]):
+		var name = options[selection-1]
+		var sort = SkillManager.lookup_target_sort(name)
+		assert(sort)
+		_skill.params.set_placeholder_value(placeholder, sort)
+		rule_widget.on_cell_changed()
+
+	func _on_interactable_kind_selected(selection: int, placeholder: SkillParams.PlaceholderId, values: Array[Interactable.Kind]):
+		_skill.params.set_placeholder_value(placeholder, values[selection-1])
+		rule_widget.on_cell_changed()
+
+	func _on_bool_value_updated(toggled_on: bool, placeholder: SkillParams.PlaceholderId, chk: CheckButton):
+		chk.text = "Is" if toggled_on else "Is not"
+		_skill.params.set_placeholder_value(placeholder, toggled_on)
+		rule_widget.on_cell_changed()
+
+	func _on_status_selected(selection: int, placeholder: SkillParams.PlaceholderId, options: Array[StatusDef]):
+		_skill.params.set_placeholder_value(placeholder, options[selection-1])
+		rule_widget.on_cell_changed()
 
 	func _placeholder_text() -> String:
 		match slot_type:
@@ -753,11 +914,3 @@ class SkillCell extends PanelContainer:
 				a.params = data.params
 				return a
 		return null
-
-	func _on_edit() -> void:
-		editor.open_config_pane(_skill.params, _on_config_confirmed)
-
-	func _on_config_confirmed(params: SkillParams) -> void:
-		_skill.params = params
-		_update_display()
-		rule_widget.on_cell_changed()

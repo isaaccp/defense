@@ -15,6 +15,8 @@ func select_target(action: Action, actor: Actor, side_component: SideComponent) 
 		# Verify all conditions pass.
 		var all_pass := true
 		for evaluator in condition_evaluators:
+			evaluator.action = action
+			evaluator.side_component = side_component
 			if not evaluator.evaluate(target):
 				all_pass = false
 				break

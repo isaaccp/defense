@@ -12,7 +12,7 @@ func evaluate(target: Actor) -> bool:
 	
 	var invert = false
 	if def.params.placeholder_set(SkillParams.PlaceholderId.BOOL_VALUE):
-		invert = def.params.bool_value.value
+		invert = not def.params.bool_value.value
 		
 	if invert:
 		return not has

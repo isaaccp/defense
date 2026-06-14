@@ -1,14 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://25gbhyy7yo58"]
 
-[ext_resource type="PackedScene" uid="uid://c3oy80g32pyjn" path="res://ui/config_pane.tscn" id="1_o0o61"]
-[ext_resource type="Script" uid="uid://e851a3tmdwb1" path="res://ui/behavior_editor_view.gd" id="1_xjfhe"]
+[ext_resource type="Resource" uid="uid://dlkrl1i2r8pii" path="res://effects/statuses/status_library.tres" id="1_status_lib"]
+[ext_resource type="Script" uid="uid://e851a3tmdwb1" path="res://ui/behavior_editor_view.gd" id="2_script"]
 
 [node name="BehaviorEditorView" type="ScrollContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
-script = ExtResource("1_xjfhe")
-
-[node name="ConfigPane" parent="." instance=ExtResource("1_o0o61")]
-unique_name_in_owner = true
-visible = false
+script = ExtResource("2_script")
+status_library = ExtResource("1_status_lib")

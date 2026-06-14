@@ -87,7 +87,7 @@ func get_placeholder_string(placeholder: PlaceholderId) -> String:
 		PlaceholderId.INTERACTABLE_KIND:
 			return Interactable.Kind.keys()[interactable_kind]
 		PlaceholderId.BOOL_VALUE:
-			return "Is not" if bool_value.value else "Is"
+			return "Is" if bool_value.value else "Is not"
 		PlaceholderId.STATUS:
 			return status.name if status else "<None>"
 
