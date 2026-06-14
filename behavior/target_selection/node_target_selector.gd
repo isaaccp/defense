@@ -2,12 +2,32 @@ extends TargetSelector
 
 class_name NodeTargetSelector
 
+const TAUNTED_DEF = preload("res://effects/statuses/taunted.tres")
+
 # Conditions are ANDed: a candidate must pass all of them. Empty array = no
 # per-candidate filtering.
 var condition_evaluators: Array[TargetActorConditionEvaluator] = []
 
 func select_target(action: Action, actor: Actor, side_component: SideComponent) -> Target:
 	var targets = select_targets(action, actor, side_component)
+
+	# Taunt intercept.
+	var status_comp = Component.get_or_null(actor, StatusComponent.component) as StatusComponent
+	if status_comp and status_comp.has_status(TAUNTED_DEF.name):
+		var taunt_params = status_comp.get_status_params(TAUNTED_DEF.name) as TauntedParams
+		if taunt_params and is_instance_valid(taunt_params.source_actor) and not taunt_params.source_actor.destroyed:
+			if targets.has(taunt_params.source_actor):
+				var taunt_target = taunt_params.source_actor
+				var all_pass := true
+				for evaluator in condition_evaluators:
+					if not evaluator.evaluate(taunt_target):
+						all_pass = false
+						break
+				if all_pass and _check_distance(actor, taunt_target, action):
+					return ConditionalTarget.make_actor_conditional_target(taunt_target, condition_evaluators)
+				# If we must target the taunter but they fail conditions or distance, we fail this rule entirely.
+				return Target.make_invalid()
+	
 	if def.sortable:
 		var sorter = TargetSorterFactory.make_actor_target_sorter(def.sort())
 		sorter.sort(actor, targets)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ConditionDef" load_steps=3 format=3 uid="uid://targeting_other_ally_123"]
+
+[ext_resource type="Script" path="res://behavior/conditions/targeting_other_ally_target_actor_condition_evaluator.gd" id="1_eval"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_def"]
+
+[resource]
+script = ExtResource("2_def")
+type = 2
+evaluator_script = ExtResource("1_eval")
+description_text = "Target's behavior is currently targeting an ally (Hero or Tower) other than yourself"
+skill_name = &"Targeting Other Ally"

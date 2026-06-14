@@ -1,6 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c3oy80g32pyjn"]
 
 [ext_resource type="Script" path="res://ui/config_pane.gd" id="1_07o2i"]
+[ext_resource type="Resource" uid="uid://dlkrl1i2r8pii" path="res://effects/statuses/status_library.tres" id="2_status_lib"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m262d"]
 content_margin_left = 4.0
@@ -29,6 +30,7 @@ size = Vector2i(600, 200)
 visible = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_m262d")
 script = ExtResource("1_07o2i")
+status_library = ExtResource("2_status_lib")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 4.0

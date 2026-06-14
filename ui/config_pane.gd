@@ -1,6 +1,8 @@
 @tool
 extends PopupPanel
 
+@export var status_library: StatusLibrary
+
 var _params: SkillParams
 var _acquired_skills: SkillTreeState
 var _on_confirm: Callable
@@ -103,6 +105,36 @@ func _add_placeholder(placeholder_id: SkillParams.PlaceholderId):
 				opt.select(0)
 			opt.item_selected.connect(_on_interactable_kind_selected.bind(placeholder_id, values))
 			input.add_child(opt)
+		SkillParams.PlaceholderId.BOOL_VALUE:
+			var chk = CheckButton.new()
+			# If the value is true, it means "Is not". If false, it means "Is".
+			if _params.placeholder_set(SkillParams.PlaceholderId.BOOL_VALUE):
+				chk.button_pressed = _params.get_placeholder_value(SkillParams.PlaceholderId.BOOL_VALUE)
+			
+			# Initialize text
+			chk.text = "Is not" if chk.button_pressed else "Is"
+			chk.toggled.connect(_on_bool_value_updated.bind(placeholder_id, chk))
+			input.add_child(chk)
+		SkillParams.PlaceholderId.STATUS:
+			var opt = OptionButton.new()
+			opt.add_item(SkillParams.placeholder_name(placeholder_id), 0)
+			opt.set_item_disabled(0, true)
+			opt.fit_to_longest_item = false
+
+			var options: Array[StatusDef] = []
+			if status_library:
+				for effect in status_library.statuses:
+					if effect is StatusDef:
+						options.append(effect)
+						opt.add_item(effect.name)
+			
+			if _params.placeholder_set(SkillParams.PlaceholderId.STATUS):
+				var current_status: StatusDef = _params.get_placeholder_value(SkillParams.PlaceholderId.STATUS)
+				opt.select(options.find(current_status) + 1)
+			else:
+				opt.select(0)
+			opt.item_selected.connect(_on_status_selected.bind(placeholder_id, options))
+			input.add_child(opt)
 
 func _populate():
 	for part in _params.parts:
@@ -139,6 +171,15 @@ func _on_sort_selected(selection: int, placeholder: SkillParams.PlaceholderId, o
 
 func _on_interactable_kind_selected(selection: int, placeholder: SkillParams.PlaceholderId, values: Array[Interactable.Kind]):
 	_params.set_placeholder_value(placeholder, values[selection-1])
+	_check_ok()
+
+func _on_bool_value_updated(toggled_on: bool, placeholder: SkillParams.PlaceholderId, chk: CheckButton):
+	chk.text = "Is not" if toggled_on else "Is"
+	_params.set_placeholder_value(placeholder, toggled_on)
+	_check_ok()
+
+func _on_status_selected(selection: int, placeholder: SkillParams.PlaceholderId, options: Array[StatusDef]):
+	_params.set_placeholder_value(placeholder, options[selection-1])
 	_check_ok()
 
 func results() -> SkillParams:

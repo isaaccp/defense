@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://83u7mdp8066u"]
+
+[ext_resource type="Script" uid="uid://bac3oggj2c8bo" path="res://behavior/conditions/targeting_ally_target_actor_condition_evaluator.gd" id="1_eval"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_c0lmx"]
+[ext_resource type="Script" uid="uid://dcyviw8nie5gy" path="res://behavior/conditions/condition_def.gd" id="2_def"]
+
+[sub_resource type="Resource" id="Resource_26na8"]
+script = ExtResource("2_c0lmx")
+
+[resource]
+script = ExtResource("2_def")
+type = 2
+evaluator_script = ExtResource("1_eval")
+description_text = "Target's behavior is currently targeting an ally (Hero or Tower)"
+params = SubResource("Resource_26na8")
+skill_name = &"Targeting Any Ally"
+skill_type = 3

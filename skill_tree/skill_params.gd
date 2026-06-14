@@ -10,6 +10,8 @@ enum PlaceholderId {
 	FLOAT_VALUE,
 	SORT,
 	INTERACTABLE_KIND,
+	BOOL_VALUE,
+	STATUS,
 }
 
 enum CmpOp {
@@ -35,6 +37,8 @@ enum CmpOp {
 @export var float_value: FloatValue
 @export var sort: StoredSkill
 @export var interactable_kind: Interactable.Kind
+@export var bool_value: BoolValue
+@export var status: StatusDef
 
 # Don't want those to end up saved in resources.
 # @export_group("Debug")
@@ -63,6 +67,12 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 		PlaceholderId.INTERACTABLE_KIND:
 			assert(typeof(value) == TYPE_INT)
 			interactable_kind = value as Interactable.Kind
+		PlaceholderId.BOOL_VALUE:
+			assert(typeof(value) == TYPE_BOOL)
+			bool_value = BoolValue.make(value)
+		PlaceholderId.STATUS:
+			assert(value is StatusDef)
+			status = value as StatusDef
 
 func get_placeholder_string(placeholder: PlaceholderId) -> String:
 	match placeholder:
@@ -76,6 +86,10 @@ func get_placeholder_string(placeholder: PlaceholderId) -> String:
 			return str(sort)
 		PlaceholderId.INTERACTABLE_KIND:
 			return Interactable.Kind.keys()[interactable_kind]
+		PlaceholderId.BOOL_VALUE:
+			return "Is not" if bool_value.value else "Is"
+		PlaceholderId.STATUS:
+			return status.name if status else "<None>"
 
 	assert(false, "Unreachable")
 	return "<bug>"
@@ -93,6 +107,10 @@ func get_placeholder_value(placeholder: PlaceholderId) -> Variant:
 			return sort
 		PlaceholderId.INTERACTABLE_KIND:
 			return interactable_kind
+		PlaceholderId.BOOL_VALUE:
+			return bool_value.value
+		PlaceholderId.STATUS:
+			return status
 	assert(false, "Unreachable")
 	return null
 
@@ -136,6 +154,10 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 			return sort != null
 		PlaceholderId.INTERACTABLE_KIND:
 			return interactable_kind != Interactable.Kind.UNSPECIFIED
+		PlaceholderId.BOOL_VALUE:
+			return bool_value and bool_value.defined
+		PlaceholderId.STATUS:
+			return status != null
 	assert(false, "unreachable")
 	return false
 

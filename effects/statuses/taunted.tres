@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StatusDef" format=3 uid="uid://c1kc5nfjhng53"]
+
+[ext_resource type="Script" uid="uid://dxikeytqfbhwq" path="res://effects/statuses/taunted.gd" id="1_taunt"]
+[ext_resource type="Script" uid="uid://tkomisxfxh3a" path="res://effects/status_def.gd" id="2_6320i"]
+
+[resource]
+script = ExtResource("2_6320i")
+status_type = 3
+description = "Forced to target the taunter"
+name = &"Taunted"
+effect_script = ExtResource("1_taunt")

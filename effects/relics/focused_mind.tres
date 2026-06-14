@@ -1,15 +1,13 @@
 [gd_resource type="Resource" script_class="RelicDef" format=3 uid="uid://nb2bprojikfc"]
 
-[ext_resource type="Script" path="res://effects/relics/focused_mind.gd" id="1_ew"]
+[ext_resource type="Script" uid="uid://dl1db05rrttax" path="res://effects/relics/focused_mind.gd" id="1_ew"]
 [ext_resource type="Texture2D" uid="uid://wsvx7u74dfl4" path="res://assets/status/buffs/defense_boost.png" id="2_ew"]
-[ext_resource type="Script" path="res://effects/relic_def.gd" id="3_ew"]
+[ext_resource type="Script" uid="uid://ca5ita8l5brcm" path="res://effects/relic_def.gd" id="3_ew"]
 
 [resource]
 script = ExtResource("3_ew")
 description = "Reduces incoming damage by 25% as long as Focus is above 75%."
 icon = ExtResource("2_ew")
-class_relic = false
-required_actions = Array[StringName]([])
 name = &"Focused Mind"
 effect_types = Array[int]([9])
 effect_script = ExtResource("1_ew")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTypeCollection" load_steps=11 format=3 uid="uid://b4vmqt403v6hl"]
+[gd_resource type="Resource" script_class="SkillTypeCollection" format=3 uid="uid://b4vmqt403v6hl"]
 
 [ext_resource type="Script" uid="uid://d00bswdbygg4y" path="res://skill_type_collection.gd" id="1_hdnwx"]
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_uo1qx"]
@@ -6,11 +6,14 @@
 [ext_resource type="Resource" uid="uid://bp783ayeoq184" path="res://skill_tree/conditions/once.tres" id="3_x5n64"]
 [ext_resource type="Resource" uid="uid://dn1xlxn35k6ub" path="res://skill_tree/conditions/target_distance.tres" id="4_f555q"]
 [ext_resource type="Resource" uid="uid://xun2hm81rhd1" path="res://skill_tree/conditions/times.tres" id="6_xwgin"]
-[ext_resource type="Resource" uid="uid://bcanhitenemy01" path="res://skill_tree/conditions/can_hit_enemies.tres" id="7_chec"]
-[ext_resource type="Resource" uid="uid://btgtnrtower001" path="res://skill_tree/conditions/target_near_tower.tres" id="8_tnt"]
+[ext_resource type="Resource" uid="uid://bhym7b4ebs365" path="res://skill_tree/conditions/can_hit_enemies.tres" id="7_chec"]
+[ext_resource type="Resource" uid="uid://c7jc33qm15m53" path="res://skill_tree/conditions/target_near_tower.tres" id="8_tnt"]
 [ext_resource type="Resource" uid="uid://btargettwr001" path="res://skill_tree/conditions/targeting_tower.tres" id="9_tt"]
-[ext_resource type="Resource" uid="uid://btargetedbyen1" path="res://skill_tree/conditions/targeted_by_enemies.tres" id="10_tbe"]
+[ext_resource type="Resource" uid="uid://c1g4p3f2yc0s3" path="res://skill_tree/conditions/targeted_by_enemies.tres" id="10_tbe"]
+[ext_resource type="Resource" path="res://skill_tree/conditions/has_status.tres" id="11_hs"]
+[ext_resource type="Resource" path="res://skill_tree/conditions/targeting_ally.tres" id="13_ta"]
+[ext_resource type="Resource" path="res://skill_tree/conditions/targeting_other_ally.tres" id="14_toa"]
 
 [resource]
 script = ExtResource("1_hdnwx")
-skills = Array[ExtResource("2_uo1qx")]([ExtResource("3_x5n64"), ExtResource("4_f555q"), ExtResource("3_qoy4s"), ExtResource("6_xwgin"), ExtResource("7_chec"), ExtResource("8_tnt"), ExtResource("9_tt"), ExtResource("10_tbe")])
+skills = Array[ExtResource("2_uo1qx")]([ExtResource("3_x5n64"), ExtResource("4_f555q"), ExtResource("3_qoy4s"), ExtResource("6_xwgin"), ExtResource("7_chec"), ExtResource("8_tnt"), ExtResource("9_tt"), ExtResource("10_tbe"), ExtResource("11_hs"), ExtResource("13_ta"), ExtResource("14_toa")])

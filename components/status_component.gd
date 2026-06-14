@@ -21,14 +21,16 @@ signal status_removed(status_name: StringName)
 signal statuses_changed(statuses: Array[StringName])
 
 class StatusState extends RefCounted:
+	var params: EffectParams
 	# Remains until explicitly removed.
 	var permanent: bool
 	# Gets removed after this time.
 	var expiration_time: float
 
-	func _init(permanent_: bool, expiration_time_: float):
+	func _init(permanent_: bool, expiration_time_: float, params_: EffectParams):
 		permanent = permanent_
 		expiration_time = expiration_time_
+		params = params_
 
 	func is_expired(elapsed_time: float):
 		return not permanent and expiration_time < elapsed_time
@@ -53,9 +55,9 @@ func set_status(action_name: StringName, status: StatusDef, params: EffectParams
 	var key = _key(action_name, status.name)
 	var new_status_state: StatusState
 	if time < 0:
-		new_status_state = StatusState.new(true, -1)
+		new_status_state = StatusState.new(true, -1, params)
 	else:
-		new_status_state = StatusState.new(false, elapsed_time + time)
+		new_status_state = StatusState.new(false, elapsed_time + time, params)
 	status_metadata[key] = new_status_state
 	# Update current statuses.
 	if not current_statuses.has(status.name):
@@ -87,6 +89,15 @@ func get_statuses() -> Array[StringName]:
 	var statuses: Array[StringName] = []
 	statuses.assign(current_statuses.keys())
 	return statuses
+
+func has_status(status_name: StringName) -> bool:
+	return current_statuses.has(status_name)
+
+func get_status_params(status_name: StringName) -> EffectParams:
+	for key in status_metadata.keys():
+		if key.status == status_name:
+			return status_metadata[key].params
+	return null
 
 func _expire_statuses():
 	for key in status_metadata.keys():

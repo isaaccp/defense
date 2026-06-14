@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7bsv7cscwbmr"]
+[gd_scene format=3 uid="uid://c7bsv7cscwbmr"]
 
 [ext_resource type="Script" uid="uid://bxgcffjhvq2l" path="res://ui/programming_ui.gd" id="1_xf4ix"]
 [ext_resource type="Script" uid="uid://evbqbits23bc" path="res://ui/toolbox.gd" id="2_pkup4"]
@@ -12,7 +12,7 @@ MarginContainer/constants/margin_left = 4
 MarginContainer/constants/margin_right = 4
 MarginContainer/constants/margin_top = 4
 
-[node name="ProgrammingUI" type="Control"]
+[node name="ProgrammingUI" type="Control" unique_id=2017960437]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_xf4ix")
 test_character = ExtResource("2_wilel")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1390760550]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,88 +30,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=899844973]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1360353377]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=687479982]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer" unique_id=1826982415]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=715581246]
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_8i0e7")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=448628890]
 layout_mode = 2
 
-[node name="BehaviorLibraryContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
+[node name="BehaviorLibraryContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer" unique_id=1606098127]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer" unique_id=1704745886]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer" unique_id=1404424369]
 layout_mode = 2
 text = "Behavior Library"
 
-[node name="BehaviorLibraryUI" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer" instance=ExtResource("3_dopn3")]
+[node name="BehaviorLibraryUI" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/BehaviorLibraryContainer/VBoxContainer" unique_id=711773073 instance=ExtResource("3_dopn3")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer" unique_id=1046468784]
 layout_mode = 2
 size_flags_horizontal = 3
+split_offsets = PackedInt32Array(150)
 split_offset = 150
 
-[node name="BehaviorEditorMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer"]
+[node name="BehaviorEditorMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer" unique_id=556381967]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin" unique_id=63529218]
 layout_mode = 2
 
-[node name="BehaviorEditorLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer"]
+[node name="BehaviorEditorLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer" unique_id=363397545]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Script"
 
-[node name="BehaviorEditor" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer" instance=ExtResource("4_rs50h")]
+[node name="BehaviorEditor" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer" unique_id=949269294 instance=ExtResource("4_rs50h")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ToolsMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer"]
+[node name="ToolsMargin" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer" unique_id=710570028]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin" unique_id=1370442869]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer" unique_id=1754883286]
 layout_mode = 2
 text = "Components"
 
-[node name="ToolboxFilter" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="ToolboxFilter" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer" unique_id=614413494]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Filter..."
 clear_button_enabled = true
 
-[node name="Toolbox" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer"]
+[node name="Toolbox" type="Tree" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer" unique_id=1109174661]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -119,7 +120,6 @@ size_flags_vertical = 3
 hide_root = true
 script = ExtResource("2_pkup4")
 
-[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer/ToolboxFilter" to="." method="_on_toolbox_filter_text_changed"]
-
 [connection signal="behavior_saved" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer/BehaviorEditor" to="." method="_on_behavior_editor_behavior_saved"]
 [connection signal="canceled" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/BehaviorEditorMargin/VBoxContainer/BehaviorEditor" to="." method="_on_behavior_editor_canceled"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/HSplitContainer/HSplitContainer/ToolsMargin/VBoxContainer/ToolboxFilter" to="." method="_on_toolbox_filter_text_changed"]

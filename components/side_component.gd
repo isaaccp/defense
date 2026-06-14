@@ -3,6 +3,8 @@ extends Node
 
 class_name SideComponent
 
+const component: StringName = &"SideComponent"
+
 @export_group("Required")
 @export var side: Groups.GroupType
 
