@@ -151,3 +151,19 @@ Hold off until levels have interesting compositions — the variety layer only m
 | `behavior/BEHAVIOR.md` | Behavior system: available skills, params, action lifecycle |
 | `AGENTS.md` | Project overview, component system, directory map |
 | `tests/enemies/enemy_smoke_test.gd` | Auto-discovering smoke tests for all enemy scenes |
+
+---
+
+## Focus Generation Balancing (2026-06-14)
+
+### Goal
+The overarching goal is to balance the rate of Focus Generation across the different player classes (via their specific class relics) and the Tower's native regeneration. The aim is to ensure that focus generation mechanics feel fair, distinct to each class's playstyle, and statistically balanced when encountering various enemy waves and compositions.
+
+### Action Plan
+1. **Accurate Tracking (Implement, may not be working correctly)**: Ensure the simulation accurately logs any attempt by characters or the Tower to generate focus. This separates the inherent `max_focus` loading from active mid-run generation.
+2. **Resolve Missing Data (Pending)**: Investigate why certain characters (e.g., Puffin with `Unyielding Hope`) are currently logging 0 focus generation in the simulation runs, despite performing actions (like healing) that should trigger generation. (Initial hypothesis: missing `heroes` group assignment during simulation loading).
+3. **Execute Full Simulation Suite (TBD when 2 is fixed)**: Re-run all existing, proven-beatable simulation configurations (`won_configs`) using the headless Godot runner.
+4. **Generate Comprehensive Report (TBD when 2 is fixed)**: Produce a detailed breakdown (`sim_report.md`) of Focus Generated per run, segmented by:
+   - Native Tower generation
+   - Individual Character (Relic) generation
+5. **Analyze and Tweak (Pending)**: Review the generated report to identify under-performing or over-performing class relics. Iterate on the focus generation formulas until the metrics reflect the desired balance.
