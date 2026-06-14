@@ -269,6 +269,16 @@ func start():
 	for spawner in spawners.get_children():
 		spawner.enemy_spawned.connect(_on_enemy_spawned)
 
+	# Wire up shared focus to characters
+	if towers.get_child_count() > 0:
+		var tower = towers.get_child(0)
+		var tower_vitals = Component.get_or_null(tower, VitalsComponent.component) as VitalsComponent
+		if tower_vitals:
+			for child in characters.get_children():
+				var vitals = Component.get_or_null(child, VitalsComponent.component) as VitalsComponent
+				if vitals:
+					vitals.shared_focus_vitals = tower_vitals
+
 	# Runs all components.
 	run()
 	_run_nodes(characters.get_children())

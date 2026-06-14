@@ -13,8 +13,8 @@ skills = Array[StringName]([&"Ally", &"Self Or Ally", &"Enemy", &"Tower", &"Move
 script = ExtResource("2_xm6an")
 speed = 30.0
 health = 50
-focus = 60
-focus_regen = 0.5
+focus = 0
+focus_regen = 0.0
 
 [resource]
 script = ExtResource("2_wv48f")

@@ -22,8 +22,10 @@ A run is played with exactly **2 heroes**, chosen from the 4 available classes (
 Classes possess rigid identities enforced by:
 1. **Starting Kits:** The class defines the initial set of acquired skills, heavily dictating how the run begins.
 2. **Skill Pools:** Skill acquisition is restricted to class-specific abilities. A Knight cannot learn Wizard spells.
-3. **The Shared Focus Pool:** Instead of individual mana bars, the 2-hero party shares a single **Party Focus Pool** (e.g., 0/100) that generates at a flat, universal rate (e.g., 10 per second). 
-   * **[DESIGN NOTE - Economy over Spam]:** This perfectly solves the "more skills = more spam" problem, as total party output is strictly bottlenecked by the shared generation rate. More importantly, it turns resource management into a cooperative programming puzzle. Players must write "budgeting" logic (e.g., *Knight casts Heavy Slam ONLY IF Party Focus > 60*, leaving a reserve for the Cleric's emergency heals) or "contextual carry" logic (e.g., *Wizard drains Focus on swarms, Rogue drains Focus on bosses*). The fun shifts from *generating* individual resources to *allocating* a shared party economy.
+3. **The Shared Focus Pool:** Instead of individual mana bars, the 2-hero party shares a single **Party Focus Pool**. 
+   - **Active Generation:** Individual heroes do *not* have passive focus or focus_regen attributes. Instead, they can only generate focus *actively* via specific skills or conditional relics (e.g., Knight taking hits, Cleric healing). 
+   - **Death Handling:** Because heroes only generate focus actively, a hero dying does not instantly shrink the party's Max Focus pool or cripple the baseline regen. The surviving hero simply loses the active generation the dead hero was providing.
+   * **[DESIGN NOTE - Economy over Spam]:** This perfectly solves the "more skills = more spam" problem, as total party output is heavily bottlenecked by the shared pool. More importantly, it turns resource management into a cooperative programming puzzle. Players must write "budgeting" logic (e.g., *Knight casts Heavy Slam ONLY IF Party Focus > 60*, leaving a reserve for the Cleric's emergency heals) or "contextual carry" logic (e.g., *Wizard drains Focus on swarms, Rogue drains Focus on bosses*). The fun shifts from *generating* individual resources to *allocating* a shared party economy.
 
 ### The Tower (The Aegis Core)
 The heroes are escorting the **Aegis Core**—a massive magical payload that must be dragged to the epicenter of the blight (Stage 15). Note that the Core is a **static defense point** during combat; it only moves narratively between stages.
@@ -31,7 +33,7 @@ If the Tower's HP reaches 0, the stage is failed (though the player can retry in
    * **[DESIGN NOTE - Iteration vs Attrition]:** We intentionally allow infinite retries so players can debug and tweak their AI without losing a run, while maintaining persistent HP across stages. We accept that players might retry a stage repeatedly to minimize damage taken (optimizing their HP economy), relying on the player's real-world wall-time to naturally limit extreme save-scumming behavior.
 
 To prevent the Tower from making every run feel identical, it is **not** a fully complex 3rd party member. Instead, it provides a minor, synergistic foundation (similar to *Monster Train*'s Pyres):
-- **Starting Chassis:** At run start, the player picks a "Core Chassis" granting it a basic, minor skill (e.g., a slow pulse heal or a minor knockback). 
+- **Starting Chassis:** At run start, the player picks a "Core Chassis". Crucially, the Tower acts as the party's "battery" by providing the baseline **Max Focus and passive Focus Regen** for the entire shared pool. Different chassis offer different tradeoffs (e.g., high focus regen vs. high defense). It may also grant a basic, minor skill (e.g., a slow pulse heal).
 - **Upgrades:** *[TBD - We need to decide exactly how/when the tower gets upgraded across the run, ensuring it remains a supporting element rather than dominating the strategy.]*
 
 ## 3. Pacing & Meta-Progression

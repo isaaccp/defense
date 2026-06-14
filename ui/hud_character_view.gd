@@ -30,7 +30,6 @@ func initialize_from_gameplay_character(gc: GameplayCharacter, relic_library: Re
 	%HealthBar.value = gc.health
 	%HealthBar.get_child(0).text = "%d / %d" % [gc.health, gc.attributes.health]
 	# Hide combat-only stuff.
-	%FocusBar.hide()
 	%ActionLabel.hide()
 	%PreferredTargetLabel.hide()
 	%ConfigContainer.hide()
@@ -98,7 +97,6 @@ func initialize(character_: Character) -> void:
 	# we missed the signal, otherwise both updates happen in the same frame
 	# and the progress bar seems confused.
 	_update_vital(vitals, VitalsComponent.VitalType.HEALTH)
-	_update_vital(vitals, VitalsComponent.VitalType.FOCUS)
 	var status = character.get_component_or_die(StatusComponent) as StatusComponent
 	status.statuses_changed.connect(_on_statuses_changed)
 	var behavior = character.get_component_or_die(BehaviorComponent)
@@ -113,8 +111,6 @@ func initialize(character_: Character) -> void:
 func _vital_bar(vital_type: VitalsComponent.VitalType) -> ProgressBar:
 	if vital_type == VitalsComponent.VitalType.HEALTH:
 		return %HealthBar
-	elif vital_type == VitalsComponent.VitalType.FOCUS:
-		return %FocusBar
 	else:
 		assert(false)
 		return null

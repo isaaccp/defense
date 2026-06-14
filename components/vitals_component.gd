@@ -37,6 +37,7 @@ var _vitals_data: Dictionary[VitalType, Dictionary] = {}
 var _is_initialized: bool = false
 
 var running = false
+var shared_focus_vitals: VitalsComponent = null
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -44,6 +45,7 @@ func _ready():
 	_initialize.call_deferred()
 
 func _initialize() -> void:
+	_is_initialized = true
 	var max_health = float(attributes_component.health)
 	_vitals_data[VitalType.HEALTH] = {"current": 0.0, "max": max_health}
 	
@@ -59,14 +61,24 @@ func _initialize() -> void:
 	if attributes_component and not attributes_component.attributes_changed.is_connected(_on_attributes_changed):
 		attributes_component.attributes_changed.connect(_on_attributes_changed)
 
-	_is_initialized = true
-
 # The primary method for changing a vital's value.
 # Use positive delta for healing/gaining, negative for damage/spending.
-func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) -> void:
+func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) -> VitalUpdate:
+	if not _is_initialized:
+		return null
+	if type == VitalType.FOCUS and shared_focus_vitals:
+		var update = shared_focus_vitals.apply_vital_change(VitalType.FOCUS, delta, false)
+		if update and should_log:
+			_log(str(update))
+		# vital_updated signal will be emitted by the shared_focus_vitals,
+		# but if we want the hero's listeners to know? The hero's UI doesn't show focus anymore, 
+		# so it's fine. Wait, maybe some skills listen to focus_depleted?
+		# For now, just return it.
+		return update
+
 	if not _vitals_data.has(type):
 		push_error("apply_vital_change called with unknown VitalType: %s" % type)
-		return
+		return null
 
 	var vital = _vitals_data[type]
 	var prev_value = vital.current
@@ -76,7 +88,7 @@ func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) 
 
 	# If there was no actual change, do nothing further.
 	if is_equal_approx(vital.current, prev_value):
-		return
+		return null
 
 	# Create and emit the update signal.
 	var update = VitalUpdate.new()
@@ -92,19 +104,28 @@ func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) 
 
 	if is_equal_approx(vital.current, 0):
 		vital_depleted.emit(type)
+		
+	return update
 
 func get_vital_current(type: VitalType) -> float:
+	if type == VitalType.FOCUS and shared_focus_vitals:
+		return shared_focus_vitals.get_vital_current(VitalType.FOCUS)
 	if _vitals_data.has(type):
 		return _vitals_data[type].current
 	return 0.0
 
 func get_vital_max(type: VitalType) -> float:
+	if type == VitalType.FOCUS and shared_focus_vitals:
+		return shared_focus_vitals.get_vital_max(VitalType.FOCUS)
 	if _vitals_data.has(type):
 		return _vitals_data[type].max
 	return 0.0
 	
 # Just for testing, set's vital current.
 func test_set_vital_current(type: VitalType, new_value: float) -> void:
+	if type == VitalType.FOCUS and shared_focus_vitals:
+		shared_focus_vitals.test_set_vital_current(VitalType.FOCUS, new_value)
+		return
 	assert(_vitals_data.has(type))
 	_vitals_data[type].current = new_value
 	
@@ -115,10 +136,13 @@ func stop():
 	running = false
 
 func _process(delta: float) -> void:
+	if not _is_initialized:
+		return
 	if running:
 		var focus_regen = attributes_component.focus_regen
-		var focus_recovery = focus_regen * delta
-		apply_vital_change(VitalsComponent.VitalType.FOCUS, focus_recovery, false)
+		if focus_regen > 0 and not shared_focus_vitals:
+			var focus_recovery = focus_regen * delta
+			apply_vital_change(VitalsComponent.VitalType.FOCUS, focus_recovery, false)
 		var health_regen = attributes_component.health_regen
 		if health_regen > 0:
 			apply_vital_change(VitalsComponent.VitalType.HEALTH, health_regen * delta, false)

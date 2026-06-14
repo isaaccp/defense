@@ -16,6 +16,9 @@ func initialize(tower_: Node2D) -> void:
 	if vitals.get_vital_current(VitalsComponent.VitalType.HEALTH) > 0:
 		_set_health(vitals.get_vital_current(VitalsComponent.VitalType.HEALTH),
 					vitals.get_vital_max(VitalsComponent.VitalType.HEALTH))
+	if vitals.get_vital_max(VitalsComponent.VitalType.FOCUS) > 0:
+		_set_focus(vitals.get_vital_current(VitalsComponent.VitalType.FOCUS),
+					vitals.get_vital_max(VitalsComponent.VitalType.FOCUS))
 	%Title.text = tower.name.capitalize()
 
 func _set_health(health: int, max_health: int):
@@ -26,7 +29,13 @@ func _set_health(health: int, max_health: int):
 	%HealthBar.value = health
 	%HealthLabel.text = "%d / %d" % [health, max_health]
 
+func _set_focus(focus: int, max_focus: int):
+	%FocusBar.max_value = max_focus
+	%FocusBar.value = focus
+	%FocusLabel.text = "%d / %d" % [focus, max_focus]
+
 func _on_vital_updated(vital_update: VitalsComponent.VitalUpdate):
-	if vital_update.type != VitalsComponent.VitalType.HEALTH:
-		return
-	_set_health(vital_update.current_value, vital_update.max_value)
+	if vital_update.type == VitalsComponent.VitalType.HEALTH:
+		_set_health(vital_update.current_value, vital_update.max_value)
+	elif vital_update.type == VitalsComponent.VitalType.FOCUS:
+		_set_focus(vital_update.current_value, vital_update.max_value)
