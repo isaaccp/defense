@@ -61,19 +61,15 @@ func _initialize() -> void:
 	if attributes_component and not attributes_component.attributes_changed.is_connected(_on_attributes_changed):
 		attributes_component.attributes_changed.connect(_on_attributes_changed)
 
-# The primary method for changing a vital's value.
-# Use positive delta for healing/gaining, negative for damage/spending.
 func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) -> VitalUpdate:
 	if not _is_initialized:
 		return null
 	if type == VitalType.FOCUS and shared_focus_vitals:
+		if delta > 0 and logging_component and logging_component.track_stats:
+			logging_component.stats.add_stat(Stat.make(Stat.FocusGenerated, delta))
 		var update = shared_focus_vitals.apply_vital_change(VitalType.FOCUS, delta, false)
 		if update and should_log:
 			_log(str(update))
-		# vital_updated signal will be emitted by the shared_focus_vitals,
-		# but if we want the hero's listeners to know? The hero's UI doesn't show focus anymore, 
-		# so it's fine. Wait, maybe some skills listen to focus_depleted?
-		# For now, just return it.
 		return update
 
 	if not _vitals_data.has(type):
@@ -101,6 +97,8 @@ func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) 
 
 	if should_log:
 		_log(str(update))
+
+
 
 	if is_equal_approx(vital.current, 0):
 		vital_depleted.emit(type)
@@ -142,7 +140,10 @@ func _process(delta: float) -> void:
 		var focus_regen = attributes_component.focus_regen
 		if focus_regen > 0 and not shared_focus_vitals:
 			var focus_recovery = focus_regen * delta
-			apply_vital_change(VitalsComponent.VitalType.FOCUS, focus_recovery, false)
+			if focus_recovery > 0:
+				if logging_component and logging_component.track_stats:
+					logging_component.stats.add_stat(Stat.make(Stat.FocusGenerated, focus_recovery))
+				apply_vital_change(VitalsComponent.VitalType.FOCUS, focus_recovery, false)
 		var health_regen = attributes_component.health_regen
 		if health_regen > 0:
 			apply_vital_change(VitalsComponent.VitalType.HEALTH, health_regen * delta, false)

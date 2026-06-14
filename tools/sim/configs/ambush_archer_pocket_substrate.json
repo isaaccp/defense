@@ -8,7 +8,7 @@
       "character": "res://character/playable_characters/godric_the_knight.tres",
       "behavior": "res://tools/sim/behaviors/knight_commit_and_charge.json",
       "acquired_skills": [
-        "always",
+        
         "enemy",
         "ally",
         "preferred_target",
@@ -30,7 +30,7 @@
       "character": "res://character/playable_characters/puffin_the_cleric.tres",
       "behavior": "res://tools/sim/behaviors/cleric_aoe_heal_follow.json",
       "acquired_skills": [
-        "always",
+        
         "ally",
         "self",
         "self_or_ally",

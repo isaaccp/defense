@@ -121,7 +121,6 @@ logging_component = NodePath("../LoggingComponent")
 metadata/_custom_type_script = "uid://c68o4e3q55mv2"
 
 [node name="LoggingComponent" parent="." instance=ExtResource("10_kgr8j")]
-track_stats = false
 
 [node name="VitalsComponent" parent="." node_paths=PackedStringArray("attributes_component", "logging_component") instance=ExtResource("11_8sdqq")]
 attributes_component = NodePath("../AttributesComponent")

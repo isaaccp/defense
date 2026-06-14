@@ -574,6 +574,7 @@ func _on_actor_died(actor: Node) -> void:
 			"damage_dealt": int(log_comp.stats.get_value(Stat.DamageDealt)) if log_comp else 0,
 			"damage_healed": int(log_comp.stats.get_value(Stat.DamageHealed)) if log_comp else 0,
 			"enemies_killed": int(log_comp.stats.get_value(Stat.EnemiesDestroyed)) if log_comp else 0,
+			"focus_generated": int(log_comp.stats.get_value(Stat.FocusGenerated)) if log_comp else 0,
 			"killed_by": killer,
 			"death_position": {"x": int(actor.position.x), "y": int(actor.position.y)},
 		},
@@ -715,6 +716,7 @@ func _summarize_actors(container: Node) -> Array:
 			"damage_dealt": int(log_comp.stats.get_value(Stat.DamageDealt)) if log_comp else 0,
 			"damage_healed": int(log_comp.stats.get_value(Stat.DamageHealed)) if log_comp else 0,
 			"enemies_killed": int(log_comp.stats.get_value(Stat.EnemiesDestroyed)) if log_comp else 0,
+			"focus_generated": int(log_comp.stats.get_value(Stat.FocusGenerated)) if log_comp else 0,
 		}
 		if not alive:
 			var attrib = _killed_by.get(key)

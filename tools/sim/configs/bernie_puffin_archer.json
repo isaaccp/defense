@@ -8,7 +8,7 @@
       "character": "res://character/playable_characters/bernie_the_wizard.tres",
       "behavior": "res://tools/sim/behaviors/bernie_kite_and_commit.json",
       "acquired_skills": [
-        "always",
+        
         "enemy",
         "closest_first",
         "closest_to_tower_first",
@@ -33,7 +33,7 @@
       "character": "res://character/playable_characters/puffin_the_cleric.tres",
       "behavior": "res://tools/sim/behaviors/cleric_aoe_heal_follow.json",
       "acquired_skills": [
-        "always",
+        
         "ally",
         "self",
         "self_or_ally",
