@@ -8,19 +8,8 @@
       "character": "res://character/playable_characters/larian_the_rogue.tres",
       "acquired_skills": "full",
       "behavior": {
-        "name": "rogue_snipe_and_stab",
+        "name": "rogue_snipe_closest",
         "rules": [
-          {
-            "action": {
-              "name": "Sword Attack"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          },
           {
             "action": {
               "name": "Bow Attack"
