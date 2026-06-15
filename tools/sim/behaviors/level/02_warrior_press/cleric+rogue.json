@@ -1,0 +1,99 @@
+{
+  "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+  "seed": 1,
+  "max_seconds": 90,
+  "notes": "Proven-beatable pair for 02_warrior_press. Tighter starting-kit comp: knight uses 'Closest To Tower First' to gate enemies before they hit the column; cleric uses Consecrate when 2+ enemies can be hit, heals lowest-HP ally, and Follows the knight at 150. Baseline 'attack closest / heal closest' LOSES the tower around t=65s, so this is the minimum complexity that beats the level.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "rogue_snipe_and_stab",
+        "rules": [
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "cleric_aoe_heal_follow",
+        "rules": [
+          {
+            "action": {
+              "name": "Consecrate"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 150
+              }
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

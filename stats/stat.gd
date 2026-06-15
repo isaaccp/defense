@@ -11,6 +11,7 @@ const EnemiesDestroyed: StringName = &"enemies_destroyed"
 const DamageDealt: StringName = &"damage_dealt"
 const DamageHealed: StringName = &"damage_healed"
 const FocusGenerated: StringName = &"focus_generated"
+const FocusSpent: StringName = &"focus_spent"
 
 # Run Stats.
 const LevelsBeaten: StringName = &"levels_beaten"

@@ -42,6 +42,8 @@ var _elapsed := 0.0
 var _started := false
 var _finished := false
 
+var _min_focus := 9999.0
+
 var _enemies_spawned := 0
 var _enemies_seen: Array[Enemy] = []
 var _outcome := "timeout"
@@ -136,6 +138,15 @@ func _process(delta: float) -> void:
 			_started = true
 		return
 	_elapsed += delta
+	
+	if _level and is_instance_valid(_level) and _level.towers.get_child_count() > 0:
+		var t = _level.towers.get_child(0)
+		var v = Component.get_or_null(t, VitalsComponent.component)
+		if v:
+			var f = v.get_vital_current(VitalsComponent.VitalType.FOCUS)
+			if f < _min_focus:
+				_min_focus = f
+				
 	if _elapsed >= _max_seconds:
 		_finish()
 		return
@@ -575,6 +586,7 @@ func _on_actor_died(actor: Node) -> void:
 			"damage_healed": int(log_comp.stats.get_value(Stat.DamageHealed)) if log_comp else 0,
 			"enemies_killed": int(log_comp.stats.get_value(Stat.EnemiesDestroyed)) if log_comp else 0,
 			"focus_generated": int(log_comp.stats.get_value(Stat.FocusGenerated)) if log_comp else 0,
+			"focus_spent": int(log_comp.stats.get_value(Stat.FocusSpent)) if log_comp else 0,
 			"killed_by": killer,
 			"death_position": {"x": int(actor.position.x), "y": int(actor.position.y)},
 		},
@@ -659,6 +671,7 @@ func _finish() -> void:
 		"victory_type": _victory_type if _outcome == "victory" else null,
 		"loss_type": _loss_type if _outcome == "loss" else null,
 		"elapsed_seconds": snappedf(_elapsed, 0.01),
+		"min_focus": snappedf(_min_focus, 0.1) if _min_focus != 9999.0 else 0.0,
 		"characters": _summarize_actors(_level.characters),
 		"towers": _summarize_actors(_level.towers),
 		"enemies": _summarize_enemies(),
@@ -720,6 +733,7 @@ func _summarize_actors(container: Node) -> Array:
 			"damage_healed": int(log_comp.stats.get_value(Stat.DamageHealed)) if log_comp else 0,
 			"enemies_killed": int(log_comp.stats.get_value(Stat.EnemiesDestroyed)) if log_comp else 0,
 			"focus_generated": int(log_comp.stats.get_value(Stat.FocusGenerated)) if log_comp else 0,
+			"focus_spent": int(log_comp.stats.get_value(Stat.FocusSpent)) if log_comp else 0,
 		}
 		if not alive:
 			var attrib = _killed_by.get(key)

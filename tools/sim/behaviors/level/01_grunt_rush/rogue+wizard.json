@@ -1,0 +1,89 @@
+{
+  "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
+  "seed": 1,
+  "max_seconds": 90,
+  "notes": "Cleric+Wizard pair for 01_grunt_rush. Cleric heals closest ally, wizard self-armors then ranged-attacks closest enemy. No frontliner \u2014 wizard takes hits when grunts close.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "rogue_snipe_closest",
+        "rules": [
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "wizard_attack_closest",
+        "rules": [
+          {
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self"
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -67,6 +67,8 @@ func apply_vital_change(type: VitalType, delta: float, should_log: bool = true) 
 	if type == VitalType.FOCUS and shared_focus_vitals:
 		if delta > 0 and logging_component and logging_component.track_stats:
 			logging_component.stats.add_stat(Stat.make(Stat.FocusGenerated, delta))
+		elif delta < 0 and logging_component and logging_component.track_stats:
+			logging_component.stats.add_stat(Stat.make(Stat.FocusSpent, -delta))
 		var update = shared_focus_vitals.apply_vital_change(VitalType.FOCUS, delta, false)
 		if update and should_log:
 			_log(str(update))

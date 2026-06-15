@@ -1,0 +1,122 @@
+{
+  "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
+  "seed": 1,
+  "max_seconds": 90,
+  "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s \u2014 pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "rogue_snipe_and_stab",
+        "rules": [
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "wizard_control_and_burn",
+        "rules": [
+          {
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self"
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Chilling Sphere"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

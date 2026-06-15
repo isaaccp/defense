@@ -1,23 +1,34 @@
-# Focus Generation Report
+# Simulation Report
 
 ## Overview
-| Run Config | Outcome | Duration (s) | Tower Focus | Character Focus |
-|------------|---------|--------------|-------------|-----------------|
-| 01_archer_rush_cleric+warrior | victory | 78.02 | 78 | Godrick: 111, Puffin: 13 |
-| 01_archer_rush_cleric+wizard | victory | 13.83 | 13 | Puffin: 0, Bernie: 0 |
-| 01_archer_rush_warrior+wizard | victory | 12.99 | 12 | Bernie: 0, Godrick: 33 |
-| 01_grunt_rush_cleric+warrior | victory | 25.72 | 25 | Godrick: 80, Puffin: 6 |
-| 01_grunt_rush_cleric+wizard | victory | 34.37 | 34 | Puffin: 4, Bernie: 5 |
-| 01_grunt_rush_warrior+wizard | victory | 22.84 | 22 | Bernie: 0, Godrick: 45 |
-| 02_corridor_pocket_cleric+warrior | victory | 42.49 | 42 | Godrick: 105, Puffin: 2 |
-| 02_corridor_pocket_cleric+wizard | victory | 27.16 | 27 | Puffin: 3, Bernie: 0 |
-| 02_corridor_pocket_warrior+wizard | victory | 25.63 | 25 | Bernie: 3, Godrick: 60 |
-| 02_warrior_press_cleric+warrior | victory | 29.5 | 29 | Godrick: 105, Puffin: 4 |
-| 02_warrior_press_cleric+wizard | victory | 29.47 | 29 | Puffin: 1, Bernie: 1 |
-| 02_warrior_press_warrior+wizard | victory | 24.08 | 24 | Bernie: 0, Godrick: 50 |
-| 03_archer_pocket_cleric+warrior | victory | 28.23 | 28 | Godrick: 29, Puffin: 2 |
-| 03_archer_pocket_cleric+wizard | victory | 27.4 | 27 | Bernie: 1, Puffin: 4 |
-| 03_archer_pocket_warrior+wizard | victory | 24.68 | 24 | Godrick: 34, Bernie: 1 |
-| 03_waves_cleric+warrior | victory | 31.32 | 31 | Godrick: 100, Puffin: 4 |
-| 03_waves_cleric+wizard | loss | 51.64 | 51 | Bernie: 3, Puffin: 4 |
-| 03_waves_warrior+wizard | victory | 31.27 | 31 | Godrick: 70, Bernie: 2 |
+| Run Config | Result | Time | Min Focus | Tower | Character 1 | Character 2 |
+|------------|--------|------|-----------|-------|-------------|-------------|
+| 01_archer_rush_cleric+rogue | victory | 13.63s | 97.1 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 13/0 | **Larian** (Alive)<br>HP: 42.0/45.0<br>Dmg: 30<br>Heal: 0<br>Focus: 12/11 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 60<br>Focus: 0/8 |
+| 01_archer_rush_cleric+warrior | victory | 88.8s | 98.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 88/0 | **Godrick** (Alive)<br>HP: 45.8/60.0<br>Dmg: 25<br>Heal: 0<br>Focus: 153/5 | **Puffin** (Alive)<br>HP: 24.0/50.0<br>Dmg: 0<br>Heal: 30<br>Focus: 39/4 |
+| 01_archer_rush_cleric+wizard | victory | 13.86s | 84.6 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 13/0 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 60<br>Focus: 0/8 | **Bernie** (Alive)<br>HP: 30.0/35.0<br>Dmg: 25<br>Heal: 0<br>Focus: 0/22 |
+| 01_archer_rush_rogue+warrior | victory | 13.08s | 99.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 13/0 | **Larian** (Alive)<br>HP: 42.0/45.0<br>Dmg: 27<br>Heal: 0<br>Focus: 10/10 | **Godrick** (Alive)<br>HP: 48.9/60.0<br>Dmg: 5<br>Heal: 0<br>Focus: 30/1 |
+| 01_archer_rush_rogue+wizard | victory | 13.85s | 88.5 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 13/0 | **Larian** (Alive)<br>HP: 27.0/45.0<br>Dmg: 21<br>Heal: 0<br>Focus: 5/10 | **Bernie** (Alive)<br>HP: 31.0/35.0<br>Dmg: 15<br>Heal: 0<br>Focus: 1/20 |
+| 01_archer_rush_warrior+wizard | victory | 12.99s | 96.8 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 12/0 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 20<br>Heal: 0<br>Focus: 0/20 | **Godrick** (Alive)<br>HP: 47.6/60.0<br>Dmg: 5<br>Heal: 0<br>Focus: 33/1 |
+| 01_grunt_rush_cleric+rogue | victory | 21.77s | 97.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 21/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 48<br>Heal: 0<br>Focus: 16/16 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 90<br>Focus: 0/12 |
+| 01_grunt_rush_cleric+warrior | victory | 25.72s | 98.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 25/0 | **Godrick** (Alive)<br>HP: 11.3/60.0<br>Dmg: 80<br>Heal: 0<br>Focus: 80/16 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 30<br>Focus: 6/4 |
+| 01_grunt_rush_cleric+wizard | victory | 28.84s | 73.4 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 28/0 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 120<br>Focus: 1/16 | **Bernie** (Alive)<br>HP: 21.0/35.0<br>Dmg: 87<br>Heal: 0<br>Focus: 1/40 |
+| 01_grunt_rush_rogue+warrior | victory | 20.08s | 97.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 20/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 42<br>Heal: 0<br>Focus: 15/15 | **Godrick** (Alive)<br>HP: 51.2/60.0<br>Dmg: 20<br>Heal: 0<br>Focus: 15/5 |
+| 01_grunt_rush_rogue+wizard | victory | 20.77s | 89.2 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 20/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 42<br>Heal: 0<br>Focus: 12/15 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 10<br>Heal: 0<br>Focus: 0/24 |
+| 01_grunt_rush_warrior+wizard | victory | 22.36s | 91.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 22/0 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 35<br>Heal: 0<br>Focus: 0/30 | **Godrick** (Alive)<br>HP: 37.2/60.0<br>Dmg: 45<br>Heal: 0<br>Focus: 40/9 |
+| 02_corridor_pocket_cleric+rogue | victory | 29.75s | 97.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 29/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 78<br>Heal: 0<br>Focus: 26/26 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 120<br>Focus: 0/16 |
+| 02_corridor_pocket_cleric+warrior | victory | 42.49s | 97.0 | **Column** (Alive)<br>HP: 5.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 42/0 | **Godrick** (Alive)<br>HP: 60.0/60.0<br>Dmg: 130<br>Heal: 0<br>Focus: 105/26 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 150<br>Focus: 2/20 |
+| 02_corridor_pocket_cleric+wizard | victory | 27.09s | 46.8 | **Column** (Alive)<br>HP: 190.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 27/0 | **Puffin** (Alive)<br>HP: 35.0/50.0<br>Dmg: 50<br>Heal: 105<br>Focus: 3/33 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 68<br>Heal: 0<br>Focus: 0/51 |
+| 02_corridor_pocket_rogue+warrior | victory | 25.28s | 97.5 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 25/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 54<br>Heal: 0<br>Focus: 19/21 | **Godrick** (Alive)<br>HP: 48.7/60.0<br>Dmg: 50<br>Heal: 0<br>Focus: 30/10 |
+| 02_corridor_pocket_warrior+wizard | victory | 25.68s | 94.3 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 25/0 | **Bernie** (Alive)<br>HP: 26.0/35.0<br>Dmg: 69<br>Heal: 0<br>Focus: 3/38 | **Godrick** (Alive)<br>HP: 33.9/60.0<br>Dmg: 65<br>Heal: 0<br>Focus: 55/14 |
+| 02_warrior_press_cleric+rogue | victory | 29.29s | 97.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 29/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 67<br>Heal: 0<br>Focus: 18/23 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 120<br>Focus: 0/16 |
+| 02_warrior_press_cleric+warrior | victory | 29.62s | 97.2 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 29/0 | **Godrick** (Alive)<br>HP: 55.2/60.0<br>Dmg: 86<br>Heal: 0<br>Focus: 105/19 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 120<br>Focus: 3/16 |
+| 02_warrior_press_cleric+wizard | victory | 29.47s | 71.2 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 29/0 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 120<br>Focus: 1/16 | **Bernie** (Alive)<br>HP: 33.0/35.0<br>Dmg: 92<br>Heal: 0<br>Focus: 1/42 |
+| 02_warrior_press_rogue+warrior | victory | 22.49s | 98.2 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 22/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 37<br>Heal: 0<br>Focus: 11/16 | **Godrick** (Alive)<br>HP: 39.2/60.0<br>Dmg: 29<br>Heal: 0<br>Focus: 35/8 |
+| 02_warrior_press_rogue+wizard | victory | 22.39s | 84.4 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 22/0 | **Larian** (Alive)<br>HP: 45.0/45.0<br>Dmg: 45<br>Heal: 0<br>Focus: 13/16 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 20<br>Heal: 0<br>Focus: 1/28 |
+| 02_warrior_press_warrior+wizard | victory | 24.2s | 91.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 24/0 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 45<br>Heal: 0<br>Focus: 0/32 | **Godrick** (Alive)<br>HP: 31.0/60.0<br>Dmg: 44<br>Heal: 0<br>Focus: 50/11 |
+| 03_archer_pocket_cleric+warrior | victory | 28.22s | 72.4 | **Column** (Alive)<br>HP: 170.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 28/0 | **Godrick** (Alive)<br>HP: 60.0/60.0<br>Dmg: 109<br>Heal: 0<br>Focus: 24/40 | **Puffin** (Alive)<br>HP: 35.0/50.0<br>Dmg: 0<br>Heal: 105<br>Focus: 2/28 |
+| 03_archer_pocket_cleric+wizard | victory | 27.44s | 56.0 | **Column** (Alive)<br>HP: 200.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 27/0 | **Bernie** (Alive)<br>HP: 30.0/35.0<br>Dmg: 96<br>Heal: 0<br>Focus: 1/61 | **Puffin** (Alive)<br>HP: 50.0/50.0<br>Dmg: 0<br>Heal: 105<br>Focus: 4/14 |
+| 03_archer_pocket_warrior+wizard | victory | 24.82s | 80.5 | **Column** (Alive)<br>HP: 173.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 24/0 | **Godrick** (Alive)<br>HP: 53.7/60.0<br>Dmg: 56<br>Heal: 0<br>Focus: 39/32 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 45<br>Heal: 0<br>Focus: 1/44 |
+| 03_waves_cleric+warrior | victory | 32.44s | 79.2 | **Column** (Alive)<br>HP: 185.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 32/0 | **Godrick** (Alive)<br>HP: 46.5/60.0<br>Dmg: 168<br>Heal: 0<br>Focus: 85/58 | **Puffin** (Alive)<br>HP: 35.0/50.0<br>Dmg: 0<br>Heal: 120<br>Focus: 5/36 |
+| 03_waves_cleric+wizard | timeout | 60.0s | 72.1 | **Column** (Alive)<br>HP: 40.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 59/0 | **Bernie** (Dead)<br>HP: 0.0/35.0<br>Dmg: 76<br>Heal: 0<br>Focus: 3/40 | **Puffin** (Alive)<br>HP: 10.0/50.0<br>Dmg: 0<br>Heal: 225<br>Focus: 19/42 |
+| 03_waves_warrior+wizard | victory | 30.69s | 72.6 | **Column** (Alive)<br>HP: 190.0/200.0<br>Dmg: 0<br>Heal: 0<br>Focus: 30/0 | **Godrick** (Alive)<br>HP: 58.1/60.0<br>Dmg: 91<br>Heal: 0<br>Focus: 35/36 | **Bernie** (Alive)<br>HP: 35.0/35.0<br>Dmg: 60<br>Heal: 0<br>Focus: 2/52 |
