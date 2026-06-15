@@ -28,7 +28,9 @@
 [ext_resource type="Resource" uid="uid://bchillingsk01" path="res://skill_tree/actions/chilling_sphere.tres" id="19_csph"]
 [ext_resource type="Resource" uid="uid://bopenact001" path="res://skill_tree/actions/open.tres" id="20_open"]
 [ext_resource type="Resource" path="res://skill_tree/actions/taunt_action.tres" id="21_taunt"]
+[ext_resource type="Resource" path="res://skill_tree/actions/mace_attack.tres" id="100_mace"]
+[ext_resource type="Resource" path="res://skill_tree/actions/dagger_attack.tres" id="100_dagger"]
 
 [resource]
 script = ExtResource("1_d2onc")
-skills = Array[ExtResource("2_5v1h6")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("6_v7bs0"), ExtResource("6_1re0o"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("11_cdk3c"), ExtResource("12_shjem"), ExtResource("13_oudcj"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("14_66rlg"), ExtResource("11_prk8f"), ExtResource("14_nqsc2"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8"), ExtResource("15_setpt"), ExtResource("16_clrpt"), ExtResource("17_acsc"), ExtResource("18_follow"), ExtResource("19_csph"), ExtResource("20_open"), ExtResource("21_taunt")])
+skills = Array[ExtResource("2_5v1h6")]([ExtResource("2_3eeij"), ExtResource("3_3py5b"), ExtResource("2_3gemq"), ExtResource("3_38kwv"), ExtResource("6_v7bs0"), ExtResource("6_1re0o"), ExtResource("4_lxlyn"), ExtResource("5_dcl3j"), ExtResource("11_cdk3c"), ExtResource("12_shjem"), ExtResource("13_oudcj"), ExtResource("5_vteby"), ExtResource("6_cjodw"), ExtResource("14_66rlg"), ExtResource("11_prk8f"), ExtResource("14_nqsc2"), ExtResource("7_ytxd6"), ExtResource("11_lktpk"), ExtResource("12_tpax8"), ExtResource("15_setpt"), ExtResource("16_clrpt"), ExtResource("17_acsc"), ExtResource("18_follow"), ExtResource("19_csph"), ExtResource("20_open"), ExtResource("21_taunt"), ExtResource("100_mace"), ExtResource("100_dagger")])

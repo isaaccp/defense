@@ -178,6 +178,13 @@
 
 ## 03_archer_pocket
 
+### cleric+rogue
+**Result:** victory (25.1s) | **Min Focus:** 93.3
+
+* **Column (Alive)** — HP: 176.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 25 (gen) / 0 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 66 | Heal: 0 | Focus: 23 (gen) / 33 (spent)
+* **Puffin (Alive)** — HP: 50.0/50.0 | Dmg: 0 | Heal: 105 | Focus: 0 (gen) / 14 (spent)
+
 ### cleric+warrior
 **Result:** victory (28.22s) | **Min Focus:** 72.4
 
@@ -192,6 +199,20 @@
 * **Bernie (Alive)** — HP: 30.0/35.0 | Dmg: 96 | Heal: 0 | Focus: 1 (gen) / 61 (spent)
 * **Puffin (Alive)** — HP: 50.0/50.0 | Dmg: 0 | Heal: 105 | Focus: 4 (gen) / 14 (spent)
 
+### rogue+warrior
+**Result:** victory (25.57s) | **Min Focus:** 92.0
+
+* **Column (Alive)** — HP: 179.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 25 (gen) / 0 (spent)
+* **Godrick (Alive)** — HP: 51.5/60.0 | Dmg: 48 | Heal: 0 | Focus: 34 (gen) / 26 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 36 | Heal: 0 | Focus: 11 (gen) / 39 (spent)
+
+### rogue+wizard
+**Result:** victory (21.23s) | **Min Focus:** 76.0
+
+* **Column (Alive)** — HP: 182.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 21 (gen) / 0 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 54 | Heal: 0 | Focus: 15 (gen) / 30 (spent)
+* **Bernie (Alive)** — HP: 35.0/35.0 | Dmg: 20 | Heal: 0 | Focus: 4 (gen) / 28 (spent)
+
 ### warrior+wizard
 **Result:** victory (24.82s) | **Min Focus:** 80.5
 
@@ -200,6 +221,13 @@
 * **Bernie (Alive)** — HP: 35.0/35.0 | Dmg: 45 | Heal: 0 | Focus: 1 (gen) / 44 (spent)
 
 ## 03_waves
+
+### cleric+rogue
+**Result:** victory (33.52s) | **Min Focus:** 82.3
+
+* **Column (Alive)** — HP: 190.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 33 (gen) / 0 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 90 | Heal: 0 | Focus: 30 (gen) / 52 (spent)
+* **Puffin (Alive)** — HP: 35.0/50.0 | Dmg: 0 | Heal: 135 | Focus: 0 (gen) / 24 (spent)
 
 ### cleric+warrior
 **Result:** victory (32.44s) | **Min Focus:** 79.2
@@ -214,6 +242,20 @@
 * **Column (Alive)** — HP: 40.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 59 (gen) / 0 (spent)
 * **Bernie (Dead)** — HP: 0.0/35.0 | Dmg: 76 | Heal: 0 | Focus: 3 (gen) / 40 (spent)
 * **Puffin (Alive)** — HP: 10.0/50.0 | Dmg: 0 | Heal: 225 | Focus: 19 (gen) / 42 (spent)
+
+### rogue+warrior
+**Result:** victory (24.82s) | **Min Focus:** 91.4
+
+* **Column (Alive)** — HP: 200.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 24 (gen) / 0 (spent)
+* **Godrick (Alive)** — HP: 56.9/60.0 | Dmg: 34 | Heal: 0 | Focus: 15 (gen) / 21 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 74 | Heal: 0 | Focus: 22 (gen) / 32 (spent)
+
+### rogue+wizard
+**Result:** victory (32.81s) | **Min Focus:** 59.7
+
+* **Column (Alive)** — HP: 195.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 32 (gen) / 0 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 65 | Heal: 0 | Focus: 18 (gen) / 48 (spent)
+* **Bernie (Alive)** — HP: 35.0/35.0 | Dmg: 45 | Heal: 0 | Focus: 5 (gen) / 42 (spent)
 
 ### warrior+wizard
 **Result:** victory (30.69s) | **Min Focus:** 72.6

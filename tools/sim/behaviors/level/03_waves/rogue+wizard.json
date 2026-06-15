@@ -1,88 +1,216 @@
 {
-  "level": "res://levels/main/forest_ambush/03_waves.tscn",
-  "seed": 1,
-  "max_seconds": 60,
-  "notes": "bernie_puffin_waves \u2014 Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",
-  "characters": [
-    {
-      "character": "res://character/playable_characters/larian_the_rogue.tres",
-      "acquired_skills": "full",
-      "behavior": {
-        "name": "rogue_snipe_closest",
-        "rules": [
-          {
-            "action": {
-              "name": "Bow Attack"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
+    "level": "res://levels/main/forest_ambush/03_waves.tscn",
+    "seed": 1,
+    "max_seconds": 60,
+    "notes": "godrick_bernie_waves \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
+    "characters": [
+        {
+            "character": "res://character/playable_characters/larian_the_rogue.tres",
+            "acquired_skills": "full",
+            "behavior": {
+                "name": "rogue_fancy_kite",
+                "rules": [
+                    {
+                        "action": {
+                            "name": "Blink Away"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Target Distance",
+                            "params": {
+                                "cmp": "<",
+                                "float_value": 150.0
+                            }
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Multi Shot"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Lowest Health First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Bow Attack"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Lowest Health First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Dagger Attack"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Lowest Health First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move Away",
+                            "params": {
+                                "float_value": 150.0
+                            }
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move To"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    }
+                ]
             }
-          },
-          {
-            "action": {
-              "name": "Move To"
+        },
+        {
+            "character": "res://character/playable_characters/bernie_the_wizard.tres",
+            "behavior": {
+                "name": "bernie_with_armor_support",
+                "rules": [
+                    {
+                        "action": {
+                            "name": "Magic Armor"
+                        },
+                        "target": {
+                            "name": "Ally"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Targeted By Enemies",
+                            "params": {
+                                "cmp": ">=",
+                                "int_value": 2
+                            }
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Fire Burst"
+                        },
+                        "target": {
+                            "name": "Preferred Target"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Hold Person"
+                        },
+                        "target": {
+                            "name": "Preferred Target"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Seeking Bolt"
+                        },
+                        "target": {
+                            "name": "Preferred Target"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Set Preferred Target"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest To Tower First"
+                        },
+                        "condition": {
+                            "name": "Targeting Tower"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Fire Burst"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Hold Person"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Seeking Bolt"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move Away",
+                            "params": {
+                                "float_value": 100
+                            }
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move To"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    }
+                ]
             },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "character": "res://character/playable_characters/puffin_the_cleric.tres",
-      "behavior": {
-        "name": "cleric_aoe_heal_follow",
-        "rules": [
-          {
-            "action": {
-              "name": "Consecrate"
-            },
-            "target": {
-              "name": "Self"
-            },
-            "condition": {
-              "name": "Can Hit Enemies",
-              "params": {
-                "cmp": ">=",
-                "int_value": 2
-              }
-            }
-          },
-          {
-            "action": {
-              "name": "Heal"
-            },
-            "target": {
-              "name": "Self Or Ally"
-            },
-            "sort": {
-              "name": "Lowest Health First"
-            }
-          },
-          {
-            "action": {
-              "name": "Follow",
-              "params": {
-                "float_value": 150
-              }
-            },
-            "target": {
-              "name": "Ally"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          }
-        ]
-      },
-      "acquired_skills": "full"
-    }
-  ]
+            "acquired_skills": "full"
+        }
+    ]
 }
