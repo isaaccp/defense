@@ -1,0 +1,152 @@
+{
+  "level": "res://levels/main/forest_ambush/03_waves.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "ambush_waves substrate \u2014 knight uses preferred-target commitment + Sweeping Attack on Most Enemies Position + Charge; cleric uses Consecrate when 2+ enemies near + heals lowest HP. Tests AoE-trigger frequency under wave spawn pattern (should be much higher than trickle).",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": {
+        "name": "knight_commit_and_charge",
+        "rules": [
+          {
+            "action": {
+              "name": "Sweeping Attack"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Charge"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Set Preferred Target"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Targeting Tower"
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": {
+        "name": "cleric_aoe_heal_follow",
+        "rules": [
+          {
+            "action": {
+              "name": "Consecrate"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 150
+              }
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    }
+  ]
+}

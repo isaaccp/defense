@@ -1,0 +1,218 @@
+{
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "bernie_puffin_archer \u2014 Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "behavior": {
+        "name": "bernie_kite_and_commit",
+        "rules": [
+          {
+            "action": {
+              "name": "Chilling Sphere"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Chilling Sphere"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Targeted By Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 1
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Set Preferred Target"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Targeting Tower"
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move Away",
+              "params": {
+                "float_value": 100
+              }
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": {
+        "name": "cleric_aoe_heal_follow",
+        "rules": [
+          {
+            "action": {
+              "name": "Consecrate"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 150
+              }
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    }
+  ]
+}

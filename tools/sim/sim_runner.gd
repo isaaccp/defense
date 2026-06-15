@@ -688,7 +688,10 @@ func _summary_path_for(config_path: String) -> String:
 	# Write summaries to a dedicated results/ directory (gitignored) so the
 	# configs/ and behaviors/ directories stay clean of auto-generated output.
 	DirAccess.make_dir_recursive_absolute(RESULTS_DIR)
-	var basename := config_path.get_file()
+	var parts = config_path.split("/")
+	var basename = parts[parts.size() - 1]
+	if parts.size() >= 2 and parts[parts.size() - 2] != "configs" and parts[parts.size() - 2] != "behaviors":
+		basename = parts[parts.size() - 2] + "_" + basename
 	if basename.ends_with(".json"):
 		basename = basename.substr(0, basename.length() - 5)
 	return "%s/%s.json" % [RESULTS_DIR, basename]

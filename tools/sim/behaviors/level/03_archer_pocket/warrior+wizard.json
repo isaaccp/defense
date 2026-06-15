@@ -1,0 +1,226 @@
+{
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "godrick_bernie_archer \u2014 Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "behavior": {
+        "name": "knight_commit_and_charge",
+        "rules": [
+          {
+            "action": {
+              "name": "Sweeping Attack"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Charge"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Set Preferred Target"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Targeting Tower"
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    },
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "behavior": {
+        "name": "bernie_with_armor_support",
+        "rules": [
+          {
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Targeted By Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Preferred Target"
+            }
+          },
+          {
+            "action": {
+              "name": "Set Preferred Target"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Targeting Tower"
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move Away",
+              "params": {
+                "float_value": 100
+              }
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    }
+  ]
+}
