@@ -1,7 +1,7 @@
 import os
 import json
 import glob
-
+from collections import defaultdict
 RESULTS_DIR = "tools/sim/results"
 REPORTS_DIR = "tools/sim/reports"
 OUTPUT_FILE = os.path.join(REPORTS_DIR, "sim_report.md")
@@ -14,42 +14,55 @@ def main():
         
     os.makedirs(REPORTS_DIR, exist_ok=True)
     
+    # Group files by level prefix
+    levels = defaultdict(list)
+    for jf in sorted(json_files):
+        name = os.path.basename(jf).replace(".json", "")
+        # The naming scheme seems to be level_name_pair.json
+        # e.g., 01_archer_rush_cleric+rogue -> level_name = "01_archer_rush", pair = "cleric+rogue"
+        parts = name.split("_")
+        # We assume the last part is the pair
+        pair = parts[-1]
+        level_name = "_".join(parts[:-1])
+        levels[level_name].append((pair, jf))
+        
     with open(OUTPUT_FILE, "w") as out:
         out.write("# Simulation Report\n\n")
-        out.write("## Overview\n")
-        out.write("| Run Config | Result | Time | Min Focus | Tower | Character 1 | Character 2 |\n")
-        out.write("|------------|--------|------|-----------|-------|-------------|-------------|\n")
         
-        for jf in sorted(json_files):
-            with open(jf, "r") as f:
-                data = json.load(f)
+        for level_name, runs in levels.items():
+            out.write(f"## {level_name}\n\n")
             
-            name = os.path.basename(jf).replace(".json", "")
-            outcome = data.get("outcome", "unknown")
-            duration = data.get("elapsed_seconds", 0)
-            min_focus = data.get("min_focus", 0.0)
-            
-            def format_actor(c):
-                cname = c.get("name", "Unknown")
-                hp_final = c.get("hp_final", 0)
-                hp_max = c.get("hp_max", 0)
-                dmg = c.get("damage_dealt", 0)
-                heal = c.get("damage_healed", 0)
-                fgen = c.get("focus_generated", 0)
-                fspent = c.get("focus_spent", 0)
-                status = "Alive" if c.get("alive", False) else "Dead"
-                return f"**{cname}** ({status})<br>HP: {hp_final}/{hp_max}<br>Dmg: {dmg}<br>Heal: {heal}<br>Focus: {fgen}/{fspent}"
-
-            towers = data.get("towers", [])
-            tower_str = format_actor(towers[0]) if towers else "-"
-            
-            chars = data.get("characters", [])
-            char_strs = [format_actor(c) for c in chars]
+            for pair, jf in runs:
+                with open(jf, "r") as f:
+                    data = json.load(f)
                 
-            c1 = char_strs[0] if len(char_strs) > 0 else "-"
-            c2 = char_strs[1] if len(char_strs) > 1 else "-"
-            
-            out.write(f"| {name} | {outcome} | {duration}s | {min_focus} | {tower_str} | {c1} | {c2} |\n")
+                outcome = data.get("outcome", "unknown")
+                duration = data.get("elapsed_seconds", 0)
+                min_focus = data.get("min_focus", 0.0)
+                
+                out.write(f"### {pair}\n")
+                out.write(f"**Result:** {outcome} ({duration}s) | **Min Focus:** {min_focus}\n\n")
+                
+                def write_actor(c):
+                    cname = c.get("name", "Unknown")
+                    hp_final = c.get("hp_final", 0)
+                    hp_max = c.get("hp_max", 0)
+                    dmg = c.get("damage_dealt", 0)
+                    heal = c.get("damage_healed", 0)
+                    fgen = c.get("focus_generated", 0)
+                    fspent = c.get("focus_spent", 0)
+                    status = "Alive" if c.get("alive", False) else "Dead"
+                    out.write(f"* **{cname} ({status})** — HP: {hp_final}/{hp_max} | Dmg: {dmg} | Heal: {heal} | Focus: {fgen} (gen) / {fspent} (spent)\n")
+
+                towers = data.get("towers", [])
+                if towers:
+                    write_actor(towers[0])
+                    
+                chars = data.get("characters", [])
+                for c in chars:
+                    write_actor(c)
+                    
+                out.write("\n")
             
     print(f"Report generated at: {OUTPUT_FILE}")
 

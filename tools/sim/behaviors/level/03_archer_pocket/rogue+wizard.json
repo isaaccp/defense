@@ -1,0 +1,88 @@
+{
+  "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "bernie_puffin_archer \u2014 Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "rogue_snipe_closest",
+        "rules": [
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "behavior": {
+        "name": "cleric_aoe_heal_follow",
+        "rules": [
+          {
+            "action": {
+              "name": "Consecrate"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 150
+              }
+            },
+            "target": {
+              "name": "Ally"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          }
+        ]
+      },
+      "acquired_skills": "full"
+    }
+  ]
+}
