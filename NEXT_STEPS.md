@@ -154,16 +154,21 @@ Hold off until levels have interesting compositions — the variety layer only m
 
 ---
 
-## Focus Generation Balancing (2026-06-14)
+## Focus Generation Balancing & Substrate Stress-Testing (2026-06-14)
 
 ### Goal
-The overarching goal is to balance the rate of Focus Generation across the different player classes (via their specific class relics) and the Tower's native regeneration. The aim is to ensure that focus generation mechanics feel fair, distinct to each class's playstyle, and statistically balanced when encountering various enemy waves and compositions.
+Balance the rate of Focus Generation across the player classes and the Tower, ensuring each class has a distinct but fair focus economy. Concurrently, stress-test the behavior "substrate" to ensure every class (especially the Rogue) has the necessary logic primitives to beat the canonical levels.
 
 ### Action Plan
-1. **Accurate Tracking (Implement, may not be working correctly)**: Ensure the simulation accurately logs any attempt by characters or the Tower to generate focus. This separates the inherent `max_focus` loading from active mid-run generation.
-2. **Resolve Missing Data (Pending)**: Investigate why certain characters (e.g., Puffin with `Unyielding Hope`) are currently logging 0 focus generation in the simulation runs, despite performing actions (like healing) that should trigger generation. (Initial hypothesis: missing `heroes` group assignment during simulation loading).
-3. **Execute Full Simulation Suite (TBD when 2 is fixed)**: Re-run all existing, proven-beatable simulation configurations (`won_configs`) using the headless Godot runner.
-4. **Generate Comprehensive Report (TBD when 2 is fixed)**: Produce a detailed breakdown (`sim_report.md`) of Focus Generated per run, segmented by:
-   - Native Tower generation
-   - Individual Character (Relic) generation
-5. **Analyze and Tweak (Pending)**: Review the generated report to identify under-performing or over-performing class relics. Iterate on the focus generation formulas until the metrics reflect the desired balance.
+1. **Stress-Test the Rogue Substrate**:
+   - Author canonical pair solutions for Elara the Rogue (`cleric+rogue.json`, `warrior+rogue.json`, `wizard+rogue.json`) across the 6 main levels (`01_archer_rush` through `03_waves`).
+   - If the Rogue cannot beat the levels, identify why and build the missing substrate (e.g., new target sorts like `Farthest First`, new conditions, or escape actions).
+2. **Enhance Focus Economy Telemetry**:
+   - Update `sim_runner.gd`, `LoggingComponent`, and `generate_report.py` to track and report two new metrics:
+     - **Lowest Focus Reached** (the minimum value the shared focus pool hits during a run).
+     - **Aggregate Focus Spent** (the total amount of focus consumed by character skills).
+   - *Rationale*: We currently only track "gross income" (Focus Generated). We need to see the "expenses" to know if Focus is actually acting as a limiting resource.
+3. **Re-evaluate and Tweak Generation Rates**:
+   - **Godrick (*Defiance*)**: Dial down his focus-per-damage-taken ratio if he is vastly outpacing the Tower's native generation (e.g., currently generating ~1.4 focus/sec in some runs).
+   - **Bernie (*Meditation*)**: Investigate why his relic generates ~0 focus. Does he ever hit the `Idle` state? Do we need an explicit `Idle` rule (e.g., "Idle if Focus < 20") or a different trigger?
+   - **Puffin (*Unyielding Hope*)**: Since this acts as a catch-up mechanic (scales with missing HP), we need to analyze its performance under the harder "struggle" runs (like the upcoming Rogue tests) rather than the current stomps where it naturally generates ~0.
