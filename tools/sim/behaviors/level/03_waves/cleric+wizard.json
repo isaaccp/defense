@@ -41,6 +41,24 @@
                     },
                     {
                         "action": {
+                            "name": "Hold Person"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Target Distance",
+                            "params": {
+                                "cmp": "<",
+                                "float_value": 120.0
+                            }
+                        }
+                    },
+                    {
+                        "action": {
                             "name": "Move Away",
                             "params": {
                                 "float_value": 100
@@ -51,6 +69,13 @@
                         },
                         "sort": {
                             "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Target Distance",
+                            "params": {
+                                "cmp": "<",
+                                "float_value": 100.0
+                            }
                         }
                     },
                     {
@@ -111,17 +136,6 @@
                         },
                         "condition": {
                             "name": "Targeting Tower"
-                        }
-                    },
-                    {
-                        "action": {
-                            "name": "Hold Person"
-                        },
-                        "target": {
-                            "name": "Enemy"
-                        },
-                        "sort": {
-                            "name": "Closest First"
                         }
                     },
                     {

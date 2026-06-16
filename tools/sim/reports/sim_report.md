@@ -61,11 +61,11 @@
 * **Puffin (Alive)** — HP: 50.0/50.0 | Dmg: 0 | Heal: 30 | Focus: 6 (gen) / 4 (spent)
 
 ### cleric+wizard
-**Result:** <span style="color:red">loss</span> (58.07s) | **Min Focus:** 90.5
+**Result:** victory (31.07s) | **Min Focus:** 89.2
 
-* **<span style="color:red">Column</span> (<span style="color:red">Dead</span>)** — HP: 0.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 58 (gen) / 0 (spent)
-* **<span style="color:red">Puffin</span> (<span style="color:red">Dead</span>)** — HP: 0.0/50.0 | Dmg: 0 | Heal: 105 | Focus: 56 (gen) / 14 (spent)
-* **<span style="color:red">Bernie</span> (<span style="color:red">Dead</span>)** — HP: 0.0/35.0 | Dmg: 62 | Heal: 0 | Focus: 11 (gen) / 28 (spent)
+* **Column (Alive)** — HP: 200.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 31 (gen) / 0 (spent)
+* **Puffin (Alive)** — HP: 50.0/50.0 | Dmg: 0 | Heal: 120 | Focus: 3 (gen) / 16 (spent)
+* **Bernie (Alive)** — HP: 10.0/35.0 | Dmg: 84 | Heal: 0 | Focus: 13 (gen) / 35 (spent)
 
 ### rogue+warrior
 **Result:** victory (20.08s) | **Min Focus:** 97.0
@@ -135,11 +135,11 @@
 ## 02_warrior_press
 
 ### cleric+rogue
-**Result:** <span style="color:red">timeout</span> (90.0s) | **Min Focus:** 97.0
+**Result:** victory (24.97s) | **Min Focus:** 91.6
 
-* **Column (Alive)** — HP: 200.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 89 (gen) / 0 (spent)
-* **<span style="color:red">Larian</span> (<span style="color:red">Dead</span>)** — HP: 0.0/45.0 | Dmg: 54 | Heal: 0 | Focus: 16 (gen) / 20 (spent)
-* **<span style="color:red">Puffin</span> (<span style="color:red">Dead</span>)** — HP: 0.0/50.0 | Dmg: 0 | Heal: 300 | Focus: 66 (gen) / 44 (spent)
+* **Column (Alive)** — HP: 200.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 24 (gen) / 0 (spent)
+* **Larian (Alive)** — HP: 45.0/45.0 | Dmg: 66 | Heal: 0 | Focus: 19 (gen) / 32 (spent)
+* **Puffin (Alive)** — HP: 50.0/50.0 | Dmg: 0 | Heal: 105 | Focus: 0 (gen) / 14 (spent)
 
 ### cleric+warrior
 **Result:** victory (29.62s) | **Min Focus:** 97.2
@@ -237,11 +237,11 @@
 * **Puffin (Alive)** — HP: 35.0/50.0 | Dmg: 0 | Heal: 120 | Focus: 5 (gen) / 36 (spent)
 
 ### cleric+wizard
-**Result:** <span style="color:red">timeout</span> (60.0s) | **Min Focus:** 72.1
+**Result:** victory (36.64s) | **Min Focus:** 75.0
 
-* **Column (Alive)** — HP: 40.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 59 (gen) / 0 (spent)
-* **<span style="color:red">Bernie</span> (<span style="color:red">Dead</span>)** — HP: 0.0/35.0 | Dmg: 76 | Heal: 0 | Focus: 3 (gen) / 40 (spent)
-* **Puffin (Alive)** — HP: 10.0/50.0 | Dmg: 0 | Heal: 225 | Focus: 19 (gen) / 42 (spent)
+* **Column (Alive)** — HP: 200.0/200.0 | Dmg: 0 | Heal: 0 | Focus: 36 (gen) / 0 (spent)
+* **Bernie (Alive)** — HP: 35.0/35.0 | Dmg: 118 | Heal: 0 | Focus: 11 (gen) / 42 (spent)
+* **Puffin (Alive)** — HP: 10.0/50.0 | Dmg: 0 | Heal: 135 | Focus: 8 (gen) / 32 (spent)
 
 ### rogue+warrior
 **Result:** victory (24.82s) | **Min Focus:** 91.4

@@ -1,43 +1,33 @@
 {
   "characters": [
     {
-      "alive": false,
-      "damage_dealt": 45,
+      "alive": true,
+      "damage_dealt": 118,
       "damage_healed": 0,
-      "death_position": {
-        "x": 693,
-        "y": 518
-      },
-      "enemies_killed": 5,
-      "focus_generated": 8,
-      "focus_spent": 19,
-      "hp_final": 0.0,
+      "enemies_killed": 15,
+      "focus_generated": 11,
+      "focus_spent": 42,
+      "hp_final": 35.0,
       "hp_max": 35.0,
-      "killed_by": "Orc Grunt",
       "name": "Bernie",
       "position": {
-        "x": 693,
-        "y": 518
+        "x": 233,
+        "y": 231
       }
     },
     {
-      "alive": false,
+      "alive": true,
       "damage_dealt": 0,
       "damage_healed": 135,
-      "death_position": {
-        "x": 463,
-        "y": 386
-      },
       "enemies_killed": 0,
-      "focus_generated": 50,
-      "focus_spent": 38,
-      "hp_final": 0.0,
+      "focus_generated": 8,
+      "focus_spent": 32,
+      "hp_final": 10.0,
       "hp_max": 50.0,
-      "killed_by": "Orc Grunt",
       "name": "Puffin",
       "position": {
-        "x": 463,
-        "y": 386
+        "x": 310,
+        "y": 300
       }
     }
   ],
@@ -80,8 +70,33 @@
             },
             {
               "action": {
+                "name": "Hold Person"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
                 "name": "Move Away",
                 "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
                   "float_value": 100.0
                 }
               },
@@ -147,17 +162,6 @@
               },
               "sort": {
                 "name": "Closest To Tower First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
-                "name": "Hold Person"
-              },
-              "sort": {
-                "name": "Closest First"
               },
               "target": {
                 "name": "Enemy"
@@ -252,81 +256,10 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/03_waves/cleric+wizard.json",
-  "elapsed_seconds": 54.07,
+  "elapsed_seconds": 36.64,
   "enemies": {
-    "alive_final": [
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 263,
-          "y": 312
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 238,
-          "y": 313
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 273,
-          "y": 247
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 263,
-          "y": 232
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 271,
-          "y": 275
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 258,
-          "y": 290
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 305,
-          "y": 268
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 269,
-          "y": 216
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 298,
-          "y": 249
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 284,
-          "y": 232
-        }
-      }
-    ],
-    "killed": 5,
+    "alive_final": [],
+    "killed": 15,
     "spawned": 15
   },
   "events": [
@@ -374,19 +307,19 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 545,
-        "y": 248
+        "x": 546,
+        "y": 247
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 5.29
+      "t": 5.32
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
         "x": 505,
-        "y": 238
+        "y": 235
       },
       "killed_by": "Bernie",
       "kind": "death",
@@ -396,23 +329,23 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 522,
-        "y": 243
+        "x": 520,
+        "y": 242
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 8.36
+      "t": 8.37
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 500,
+        "x": 498,
         "y": 240
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 8.36
+      "t": 8.37
     },
     {
       "actor": "Orc Grunt",
@@ -422,7 +355,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 10.51
+      "t": 10.5
     },
     {
       "actor": "Orc Grunt",
@@ -432,7 +365,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 11.02
+      "t": 11.01
     },
     {
       "actor": "Orc Grunt",
@@ -442,7 +375,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 11.53
+      "t": 11.52
     },
     {
       "actor": "Orc Grunt",
@@ -452,14 +385,14 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 12.04
+      "t": 12.03
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 531,
-        "y": 244
+        "x": 529,
+        "y": 245
       },
       "killed_by": "Bernie",
       "kind": "death",
@@ -473,7 +406,7 @@
         "y": 100
       },
       "kind": "spawn",
-      "t": 15.51
+      "t": 15.5
     },
     {
       "actor": "Orc Grunt",
@@ -483,21 +416,32 @@
         "y": 100
       },
       "kind": "spawn",
-      "t": 16.02
+      "t": 16.01
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#5",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 503,
+        "y": 239
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 16.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
       "at": {
         "x": 250,
         "y": 100
       },
       "kind": "spawn",
-      "t": 16.53
+      "t": 16.52
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#6",
+      "actor_key": "Orc Grunt#5",
       "at": {
         "x": 650,
         "y": 260
@@ -507,7 +451,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#7",
+      "actor_key": "Orc Grunt#6",
       "at": {
         "x": 650,
         "y": 260
@@ -517,7 +461,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#8",
+      "actor_key": "Orc Grunt#7",
       "at": {
         "x": 650,
         "y": 260
@@ -527,7 +471,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#9",
+      "actor_key": "Orc Grunt#8",
       "at": {
         "x": 650,
         "y": 260
@@ -536,129 +480,157 @@
       "t": 22.04
     },
     {
-      "actor": "Puffin",
-      "actor_key": "Puffin#1",
-      "at": {
-        "x": 330,
-        "y": 308
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 25.11
-    },
-    {
       "actor": "Bernie",
       "actor_key": "Bernie#0",
       "at": {
-        "x": 568,
-        "y": 445
+        "x": 247,
+        "y": 236
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 28.27
+      "t": 23.76
     },
     {
-      "actor": "Bernie",
-      "actor_key": "Bernie#0",
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 685,
-        "y": 515
+        "x": 341,
+        "y": 253
       },
-      "hp_pct": 25,
-      "kind": "low_hp",
-      "t": 32.83
-    },
-    {
-      "actor": "Bernie",
-      "actor_key": "Bernie#0",
-      "at": {
-        "x": 693,
-        "y": 518
-      },
-      "killed_by": "Orc Grunt",
+      "killed_by": "Puffin",
       "kind": "death",
-      "t": 33.13
+      "t": 24.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 331,
+        "y": 268
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 24.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 270,
+        "y": 237
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 25.73
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 277,
+        "y": 222
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 25.83
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 265,
+        "y": 208
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 26.03
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 347,
+        "y": 294
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 30.08
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 358,
+        "y": 293
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 31.58
     },
     {
       "actor": "Puffin",
       "actor_key": "Puffin#1",
       "at": {
-        "x": 463,
-        "y": 386
+        "x": 310,
+        "y": 300
       },
-      "hp_pct": 25,
+      "hp_pct": 50,
       "kind": "low_hp",
-      "t": 35.35
+      "t": 33.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 349,
+        "y": 291
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 34.05
     },
     {
       "actor": "Puffin",
       "actor_key": "Puffin#1",
       "at": {
-        "x": 463,
-        "y": 386
-      },
-      "killed_by": "Orc Grunt",
-      "kind": "death",
-      "t": 36.36
-    },
-    {
-      "actor": "Column",
-      "actor_key": "Column#0",
-      "at": {
-        "x": 235,
-        "y": 259
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 48.98
-    },
-    {
-      "actor": "Column",
-      "actor_key": "Column#0",
-      "at": {
-        "x": 235,
-        "y": 259
+        "x": 310,
+        "y": 300
       },
       "hp_pct": 25,
       "kind": "low_hp",
-      "t": 51.62
+      "t": 36.0
     },
     {
-      "kind": "loss",
-      "loss_type": "TOWER_DIED",
-      "t": 54.06
-    },
-    {
-      "actor": "Column",
-      "actor_key": "Column#0",
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 235,
-        "y": 259
+        "x": 348,
+        "y": 311
       },
-      "killed_by": "Orc Grunt",
+      "killed_by": "Bernie",
       "kind": "death",
-      "t": 54.06
+      "t": 36.63
+    },
+    {
+      "kind": "victory",
+      "t": 36.63,
+      "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
-  "loss_type": "TOWER_DIED",
-  "min_focus": 87.9,
+  "loss_type": null,
+  "min_focus": 75.0,
   "notes": "bernie_puffin_waves — Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",
-  "outcome": "loss",
+  "outcome": "victory",
   "towers": [
     {
-      "alive": false,
+      "alive": true,
       "damage_dealt": 0,
       "damage_healed": 0,
-      "death_position": {
-        "x": 235,
-        "y": 259
-      },
       "enemies_killed": 0,
-      "focus_generated": 54,
+      "focus_generated": 36,
       "focus_spent": 0,
-      "hp_final": 0.0,
+      "hp_final": 200.0,
       "hp_max": 200.0,
-      "killed_by": "Orc Grunt",
       "name": "Column",
       "position": {
         "x": 235,
@@ -666,6 +638,6 @@
       }
     }
   ],
-  "victory_type": null,
-  "xp_gained": 0
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
 }
