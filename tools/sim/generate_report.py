@@ -35,13 +35,17 @@ def main():
             for pair, jf in runs:
                 with open(jf, "r") as f:
                     data = json.load(f)
-                
                 outcome = data.get("outcome", "unknown")
+                if "loss" in outcome.lower() or "timeout" in outcome.lower():
+                    outcome_str = f'<span style="color:red">{outcome}</span>'
+                else:
+                    outcome_str = outcome
+                
                 duration = data.get("elapsed_seconds", 0)
                 min_focus = data.get("min_focus", 0.0)
                 
                 out.write(f"### {pair}\n")
-                out.write(f"**Result:** {outcome} ({duration}s) | **Min Focus:** {min_focus}\n\n")
+                out.write(f"**Result:** {outcome_str} ({duration}s) | **Min Focus:** {min_focus}\n\n")
                 
                 def write_actor(c):
                     cname = c.get("name", "Unknown")
@@ -52,7 +56,14 @@ def main():
                     fgen = c.get("focus_generated", 0)
                     fspent = c.get("focus_spent", 0)
                     status = "Alive" if c.get("alive", False) else "Dead"
-                    out.write(f"* **{cname} ({status})** — HP: {hp_final}/{hp_max} | Dmg: {dmg} | Heal: {heal} | Focus: {fgen} (gen) / {fspent} (spent)\n")
+                    if status == "Dead":
+                        status_str = f'<span style="color:red">{status}</span>'
+                        cname_str = f'<span style="color:red">{cname}</span>'
+                    else:
+                        status_str = status
+                        cname_str = cname
+                        
+                    out.write(f"* **{cname_str} ({status_str})** — HP: {hp_final}/{hp_max} | Dmg: {dmg} | Heal: {heal} | Focus: {fgen} (gen) / {fspent} (spent)\n")
 
                 towers = data.get("towers", [])
                 if towers:

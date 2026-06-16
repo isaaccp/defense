@@ -1,89 +1,108 @@
 {
-  "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
-  "seed": 1,
-  "max_seconds": 90,
-  "notes": "Warrior+Wizard pair for 02_corridor_pocket. Same simple behaviors as on 01_grunt_rush \u2014 testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
-  "characters": [
-    {
-      "character": "res://character/playable_characters/bernie_the_wizard.tres",
-      "acquired_skills": "full",
-      "behavior": {
-        "name": "wizard_attack_closest",
-        "rules": [
-          {
-            "action": {
-              "name": "Magic Armor"
-            },
-            "target": {
-              "name": "Self"
+    "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
+    "seed": 1,
+    "max_seconds": 90,
+    "notes": "Warrior+Wizard pair for 02_corridor_pocket. Same simple behaviors as on 01_grunt_rush \u2014 testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "characters": [
+        {
+            "character": "res://character/playable_characters/bernie_the_wizard.tres",
+            "acquired_skills": "full",
+            "behavior": {
+                "name": "wizard_attack_closest",
+                "rules": [
+                    {
+                        "action": {
+                            "name": "Idle"
+                        },
+                        "condition": {
+                            "name": "Focus",
+                            "params": {
+                                "cmp": "<",
+                                "int_value": 15
+                            }
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Magic Armor"
+                        },
+                        "target": {
+                            "name": "Self"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Fire Burst"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Seeking Bolt"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move To"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Target Distance",
+                            "params": {
+                                "cmp": ">",
+                                "float_value": 250.0
+                            }
+                        }
+                    }
+                ]
             }
-          },
-          {
-            "action": {
-              "name": "Fire Burst"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
+        },
+        {
+            "character": "res://character/playable_characters/godric_the_knight.tres",
+            "acquired_skills": "full",
+            "behavior": {
+                "name": "knight_attack_closest",
+                "rules": [
+                    {
+                        "action": {
+                            "name": "Sword Attack"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move To"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    }
+                ]
             }
-          },
-          {
-            "action": {
-              "name": "Seeking Bolt"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          },
-          {
-            "action": {
-              "name": "Move To"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "character": "res://character/playable_characters/godric_the_knight.tres",
-      "acquired_skills": "full",
-      "behavior": {
-        "name": "knight_attack_closest",
-        "rules": [
-          {
-            "action": {
-              "name": "Sword Attack"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          },
-          {
-            "action": {
-              "name": "Move To"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          }
-        ]
-      }
-    }
-  ]
+        }
+    ]
 }

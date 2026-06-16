@@ -1,89 +1,108 @@
 {
-  "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
-  "seed": 1,
-  "max_seconds": 90,
-  "notes": "Cleric+wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush \u2014 testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
-  "characters": [
-    {
-      "character": "res://character/playable_characters/larian_the_rogue.tres",
-      "acquired_skills": "full",
-      "behavior": {
-        "name": "rogue_snipe_closest",
-        "rules": [
-          {
-            "action": {
-              "name": "Bow Attack"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
+    "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+    "seed": 1,
+    "max_seconds": 90,
+    "notes": "Cleric+wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush \u2014 testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "characters": [
+        {
+            "character": "res://character/playable_characters/larian_the_rogue.tres",
+            "acquired_skills": "full",
+            "behavior": {
+                "name": "rogue_snipe_closest",
+                "rules": [
+                    {
+                        "action": {
+                            "name": "Bow Attack"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move To"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    }
+                ]
             }
-          },
-          {
-            "action": {
-              "name": "Move To"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
+        },
+        {
+            "character": "res://character/playable_characters/bernie_the_wizard.tres",
+            "acquired_skills": "full",
+            "behavior": {
+                "name": "wizard_attack_closest",
+                "rules": [
+                    {
+                        "action": {
+                            "name": "Idle"
+                        },
+                        "condition": {
+                            "name": "Focus",
+                            "params": {
+                                "cmp": "<",
+                                "int_value": 15
+                            }
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Magic Armor"
+                        },
+                        "target": {
+                            "name": "Self"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Fire Burst"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Seeking Bolt"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        }
+                    },
+                    {
+                        "action": {
+                            "name": "Move To"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Target Distance",
+                            "params": {
+                                "cmp": ">",
+                                "float_value": 250.0
+                            }
+                        }
+                    }
+                ]
             }
-          }
-        ]
-      }
-    },
-    {
-      "character": "res://character/playable_characters/bernie_the_wizard.tres",
-      "acquired_skills": "full",
-      "behavior": {
-        "name": "wizard_attack_closest",
-        "rules": [
-          {
-            "action": {
-              "name": "Magic Armor"
-            },
-            "target": {
-              "name": "Self"
-            }
-          },
-          {
-            "action": {
-              "name": "Fire Burst"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          },
-          {
-            "action": {
-              "name": "Seeking Bolt"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          },
-          {
-            "action": {
-              "name": "Move To"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            }
-          }
-        ]
-      }
-    }
-  ]
+        }
+    ]
 }

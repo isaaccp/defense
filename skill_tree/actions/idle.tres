@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/idle_action.gd" id="1_gd"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_gd"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_gd"]
+
+[sub_resource type="Resource" id="Resource_params"]
+script = ExtResource("3_gd")
+
+[resource]
+script = ExtResource("2_gd")
+action_script = ExtResource("1_gd")
+supported_target_types = Array[int]([1, 2, 3, 4])
+params = SubResource("Resource_params")
+skill_name = &"Idle"
+skill_type = 1
+tree_type = 1

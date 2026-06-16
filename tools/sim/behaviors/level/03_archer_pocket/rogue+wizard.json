@@ -96,6 +96,18 @@
                 "rules": [
                     {
                         "action": {
+                            "name": "Idle"
+                        },
+                        "condition": {
+                            "name": "Focus",
+                            "params": {
+                                "cmp": "<",
+                                "int_value": 15
+                            }
+                        }
+                    },
+                    {
+                        "action": {
                             "name": "Magic Armor"
                         },
                         "target": {
@@ -206,6 +218,13 @@
                         },
                         "sort": {
                             "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Target Distance",
+                            "params": {
+                                "cmp": ">",
+                                "float_value": 250.0
+                            }
                         }
                     }
                 ]
