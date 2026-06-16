@@ -13,5 +13,18 @@ func evaluate(target: Actor) -> bool:
 		return false
 	if bc.target.type != Target.Type.ACTOR:
 		return false
+		
+	if not bc.action or not bc.action.def:
+		return false
+	var tags = bc.action.def.tags
+	var is_attack = ActionTag.Tag.ATTACK in tags
+	var is_debuff = ActionTag.Tag.DEBUFF in tags
+	if not (is_attack or is_debuff):
+		return false
+		
 	var their_target := bc.target.actor
-	return their_target != null and their_target.is_in_group(Groups.TOWERS)
+	if their_target == null:
+		return false
+	if not SideComponent.is_tower_node(their_target):
+		return false
+	return true

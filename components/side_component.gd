@@ -66,5 +66,8 @@ func enemies() -> Array:
 func towers() -> Array:
 	return get_tree().get_nodes_in_group(Groups.TOWERS)
 
+static func is_tower_node(node: Node) -> bool:
+	return node.is_in_group(Groups.TOWERS)
+
 func interactables() -> Array:
 	return get_tree().get_nodes_in_group(Groups.INTERACTABLES)

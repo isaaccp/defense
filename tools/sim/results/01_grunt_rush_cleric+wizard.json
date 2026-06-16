@@ -22,7 +22,7 @@
       "enemies_killed": 8,
       "focus_generated": 13,
       "focus_spent": 35,
-      "hp_final": 5.0,
+      "hp_final": 10.0,
       "hp_max": 35.0,
       "name": "Bernie",
       "position": {
@@ -150,7 +150,7 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/01_grunt_rush/cleric+wizard.json",
-  "elapsed_seconds": 31.27,
+  "elapsed_seconds": 31.07,
   "enemies": {
     "alive_final": [],
     "killed": 8,
@@ -221,12 +221,12 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 546,
+        "x": 544,
         "y": 294
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 11.7
+      "t": 11.73
     },
     {
       "actor": "Orc Grunt",
@@ -252,12 +252,12 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 424,
+        "x": 423,
         "y": 307
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 17.19
+      "t": 17.21
     },
     {
       "actor": "Bernie",
@@ -268,29 +268,18 @@
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 23.34
+      "t": 23.35
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 410,
-        "y": 325
+        "x": 413,
+        "y": 324
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 24.26
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
-      "at": {
-        "x": 424,
-        "y": 321
-      },
-      "killed_by": "",
-      "kind": "death",
-      "t": 24.46
+      "t": 24.28
     },
     {
       "actor": "Orc Grunt",
@@ -301,40 +290,29 @@
       },
       "killed_by": "",
       "kind": "death",
-      "t": 24.66
+      "t": 24.38
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
+      "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 411,
-        "y": 325
-      },
-      "killed_by": "Bernie",
-      "kind": "death",
-      "t": 30.86
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
-      "at": {
-        "x": 424,
-        "y": 320
+        "x": 425,
+        "y": 318
       },
       "killed_by": "",
       "kind": "death",
-      "t": 31.1
+      "t": 24.46
     },
     {
-      "actor": "Bernie",
-      "actor_key": "Bernie#1",
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 376,
-        "y": 312
+        "x": 413,
+        "y": 325
       },
-      "hp_pct": 25,
-      "kind": "low_hp",
-      "t": 31.12
+      "killed_by": "",
+      "kind": "death",
+      "t": 30.88
     },
     {
       "actor": "Orc Grunt",
@@ -345,11 +323,22 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 31.26
+      "t": 30.98
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 424,
+        "y": 316
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 31.06
     },
     {
       "kind": "victory",
-      "t": 31.26,
+      "t": 31.06,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],

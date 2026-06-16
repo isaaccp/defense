@@ -11,21 +11,6 @@
                 "rules": [
                     {
                         "action": {
-                            "name": "Idle"
-                        },
-                        "target": {
-                            "name": "Self"
-                        },
-                        "condition": {
-                            "name": "Focus",
-                            "params": {
-                                "cmp": "<",
-                                "int_value": 15
-                            }
-                        }
-                    },
-                    {
-                        "action": {
                             "name": "Chilling Sphere"
                         },
                         "target": {
@@ -56,7 +41,10 @@
                     },
                     {
                         "action": {
-                            "name": "Chilling Sphere"
+                            "name": "Move Away",
+                            "params": {
+                                "float_value": 100
+                            }
                         },
                         "target": {
                             "name": "Enemy"
@@ -82,10 +70,17 @@
                     },
                     {
                         "action": {
-                            "name": "Fire Burst"
+                            "name": "Idle"
                         },
                         "target": {
-                            "name": "Preferred Target"
+                            "name": "Self"
+                        },
+                        "condition": {
+                            "name": "Focus",
+                            "params": {
+                                "cmp": "<",
+                                "int_value": 15
+                            }
                         }
                     },
                     {
@@ -120,17 +115,6 @@
                     },
                     {
                         "action": {
-                            "name": "Fire Burst"
-                        },
-                        "target": {
-                            "name": "Enemy"
-                        },
-                        "sort": {
-                            "name": "Closest First"
-                        }
-                    },
-                    {
-                        "action": {
                             "name": "Hold Person"
                         },
                         "target": {
@@ -143,20 +127,6 @@
                     {
                         "action": {
                             "name": "Seeking Bolt"
-                        },
-                        "target": {
-                            "name": "Enemy"
-                        },
-                        "sort": {
-                            "name": "Closest First"
-                        }
-                    },
-                    {
-                        "action": {
-                            "name": "Move Away",
-                            "params": {
-                                "float_value": 100
-                            }
                         },
                         "target": {
                             "name": "Enemy"
