@@ -13,6 +13,7 @@ script = ExtResource("3_4v3yi")
 action_script = ExtResource("1_ut5i0")
 supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_cxw7u")
+tags = Array[int]([1, 2])
 skill_name = &"Teleport Away"
 skill_type = 1
 parent = ExtResource("2_j76ty")

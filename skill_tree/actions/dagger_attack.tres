@@ -14,6 +14,7 @@ action_script = ExtResource("1_c6hd2")
 supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_jbjy1")
 params = SubResource("Resource_t8063")
+tags = Array[int]([0])
 skill_name = &"Dagger Attack"
 skill_type = 1
 tree_type = 3

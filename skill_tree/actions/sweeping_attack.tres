@@ -22,6 +22,7 @@ aoe_shape = SubResource("CapsuleShape2D_sa_aoe")
 aoe_placement = 1
 aoe_offset = Vector2(25, 0)
 params = SubResource("Resource_08m3r")
+tags = Array[int]([0])
 skill_name = &"Sweeping Attack"
 skill_type = 1
 parent = ExtResource("4_xu5e0")

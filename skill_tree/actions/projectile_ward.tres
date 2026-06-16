@@ -13,6 +13,7 @@ script = ExtResource("3_re265")
 action_script = ExtResource("1_1gaxn")
 supported_target_types = Array[int]([1])
 params = SubResource("Resource_4nsng")
+tags = Array[int]([1, 4])
 skill_name = &"Projectile Ward"
 skill_type = 1
 parent = ExtResource("3_5owi0")

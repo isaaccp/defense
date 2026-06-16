@@ -12,6 +12,7 @@ script = ExtResource("1_70syy")
 action_script = ExtResource("1_1tnha")
 supported_target_types = Array[int]([1])
 params = SubResource("Resource_tabkk")
+tags = Array[int]([1, 4])
 skill_name = &"Heal"
 skill_type = 1
 tree_type = 4

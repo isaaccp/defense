@@ -8,8 +8,37 @@
       "character": "res://character/playable_characters/larian_the_rogue.tres",
       "acquired_skills": "full",
       "behavior": {
-        "name": "rogue_snipe_closest",
+        "name": "rogue_kite_and_burst",
         "rules": [
+          {
+            "action": {
+              "name": "Blink Away"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Targeted By Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 1
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Multi Shot"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
           {
             "action": {
               "name": "Bow Attack"

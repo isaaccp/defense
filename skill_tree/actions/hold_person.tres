@@ -12,6 +12,7 @@ script = ExtResource("2_suqtg")
 action_script = ExtResource("1_mh4xt")
 supported_target_types = Array[int]([1])
 params = SubResource("Resource_f4mky")
+tags = Array[int]([1, 3])
 skill_name = &"Hold Person"
 skill_type = 1
 tree_type = 4

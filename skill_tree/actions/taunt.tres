@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ActionDef" load_steps=3 format=3 uid="uid://taunt_action_123"]
 
-[ext_resource type="Script" path="res://behavior/actions/taunt_action.gd" id="1_act"]
+[ext_resource type="Script" path="res://behavior/actions/taunt.gd" id="1_act"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_def"]
 
 [resource]
@@ -8,4 +8,5 @@ script = ExtResource("2_def")
 supported_target_types = Array[int]([1])
 action_script = ExtResource("1_act")
 description_text = "Taunt an enemy"
+tags = Array[int]([3])
 skill_name = &"Taunt"

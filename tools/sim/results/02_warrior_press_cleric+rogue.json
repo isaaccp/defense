@@ -1,43 +1,33 @@
 {
   "characters": [
     {
-      "alive": false,
-      "damage_dealt": 54,
+      "alive": true,
+      "damage_dealt": 66,
       "damage_healed": 0,
-      "death_position": {
-        "x": 524,
-        "y": 222
-      },
-      "enemies_killed": 7,
-      "focus_generated": 16,
-      "focus_spent": 20,
-      "hp_final": 0.0,
+      "enemies_killed": 8,
+      "focus_generated": 19,
+      "focus_spent": 32,
+      "hp_final": 45.0,
       "hp_max": 45.0,
-      "killed_by": "Orc Warrior",
       "name": "Larian",
       "position": {
-        "x": 524,
-        "y": 222
+        "x": 504,
+        "y": 220
       }
     },
     {
-      "alive": false,
+      "alive": true,
       "damage_dealt": 0,
-      "damage_healed": 300,
-      "death_position": {
-        "x": 384,
-        "y": 273
-      },
+      "damage_healed": 105,
       "enemies_killed": 0,
-      "focus_generated": 66,
-      "focus_spent": 44,
-      "hp_final": 0.0,
+      "focus_generated": 0,
+      "focus_spent": 14,
+      "hp_final": 50.0,
       "hp_max": 50.0,
-      "killed_by": "Orc Warrior",
       "name": "Puffin",
       "position": {
-        "x": 384,
-        "y": 273
+        "x": 366,
+        "y": 280
       }
     }
   ],
@@ -46,8 +36,37 @@
       {
         "acquired_skills": "full",
         "behavior": {
-          "name": "rogue_snipe_closest",
+          "name": "rogue_kite_and_burst",
           "rules": [
+            {
+              "action": {
+                "name": "Blink Away"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Multi Shot"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
             {
               "action": {
                 "name": "Bow Attack"
@@ -130,18 +149,10 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/02_warrior_press/cleric+rogue.json",
-  "elapsed_seconds": 90.0,
+  "elapsed_seconds": 24.97,
   "enemies": {
-    "alive_final": [
-      {
-        "name": "Orc Warrior",
-        "position": {
-          "x": 290,
-          "y": 259
-        }
-      }
-    ],
-    "killed": 7,
+    "alive_final": [],
+    "killed": 8,
     "spawned": 8
   },
   "events": [
@@ -173,11 +184,22 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 5.53
+      "t": 5.52
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#3",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 720,
+        "y": 242
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
       "at": {
         "x": 900,
         "y": 260
@@ -189,26 +211,26 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 690,
-        "y": 239
+        "x": 732,
+        "y": 243
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 7.55
+      "t": 8.33
     },
     {
       "actor": "Orc Warrior",
-      "actor_key": "Orc Warrior#3",
+      "actor_key": "Orc Warrior#2",
       "at": {
         "x": 900,
         "y": 260
       },
       "kind": "spawn",
-      "t": 9.51
+      "t": 9.5
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#4",
+      "actor_key": "Orc Grunt#3",
       "at": {
         "x": 900,
         "y": 260
@@ -220,23 +242,33 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 690,
-        "y": 239
+        "x": 732,
+        "y": 243
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 9.56
+      "t": 10.35
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 689,
-        "y": 238
+        "x": 760,
+        "y": 246
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 11.6
+      "t": 11.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.01
     },
     {
       "actor": "Orc Warrior",
@@ -246,140 +278,69 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 12.02
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
-      "at": {
-        "x": 686,
-        "y": 238
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 13.64
-    },
-    {
-      "actor": "Orc Warrior",
-      "actor_key": "Orc Warrior#3",
-      "at": {
-        "x": 900,
-        "y": 260
-      },
-      "kind": "spawn",
-      "t": 14.53
+      "t": 14.52
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 590,
-        "y": 229
+        "x": 676,
+        "y": 237
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 18.33
+      "t": 15.83
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 544,
-        "y": 224
+        "x": 673,
+        "y": 237
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 20.23
+      "t": 16.48
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 506,
-        "y": 220
+        "x": 649,
+        "y": 234
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 25.23
+      "t": 20.43
     },
     {
-      "actor": "Larian",
-      "actor_key": "Larian#0",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 524,
-        "y": 222
+        "x": 607,
+        "y": 230
       },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 36.18
-    },
-    {
-      "actor": "Larian",
-      "actor_key": "Larian#0",
-      "at": {
-        "x": 524,
-        "y": 222
-      },
-      "hp_pct": 25,
-      "kind": "low_hp",
-      "t": 44.3
-    },
-    {
-      "actor": "Larian",
-      "actor_key": "Larian#0",
-      "at": {
-        "x": 524,
-        "y": 222
-      },
-      "killed_by": "Orc Warrior",
+      "killed_by": "Larian",
       "kind": "death",
-      "t": 52.45
+      "t": 24.34
     },
     {
-      "actor": "Puffin",
-      "actor_key": "Puffin#1",
-      "at": {
-        "x": 384,
-        "y": 273
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 64.54
-    },
-    {
-      "actor": "Puffin",
-      "actor_key": "Puffin#1",
-      "at": {
-        "x": 384,
-        "y": 273
-      },
-      "hp_pct": 25,
-      "kind": "low_hp",
-      "t": 76.73
-    },
-    {
-      "actor": "Puffin",
-      "actor_key": "Puffin#1",
-      "at": {
-        "x": 384,
-        "y": 273
-      },
-      "killed_by": "Orc Warrior",
-      "kind": "death",
-      "t": 84.87
+      "kind": "victory",
+      "t": 24.96,
+      "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 97.0,
+  "min_focus": 91.6,
   "notes": "Proven-beatable pair for 02_warrior_press. Tighter starting-kit comp: knight uses 'Closest To Tower First' to gate enemies before they hit the column; cleric uses Consecrate when 2+ enemies can be hit, heals lowest-HP ally, and Follows the knight at 150. Baseline 'attack closest / heal closest' LOSES the tower around t=65s, so this is the minimum complexity that beats the level.",
-  "outcome": "timeout",
+  "outcome": "victory",
   "towers": [
     {
       "alive": true,
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 89,
+      "focus_generated": 24,
       "focus_spent": 0,
       "hp_final": 200.0,
       "hp_max": 200.0,
@@ -390,6 +351,6 @@
       }
     }
   ],
-  "victory_type": null,
-  "xp_gained": 0
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
 }

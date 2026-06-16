@@ -18,6 +18,15 @@ func get_value(target: Actor) -> int:
 			continue
 		if bc.target.type != Target.Type.ACTOR:
 			continue
+		if not bc.action or not bc.action.def:
+			continue
+			
+		var tags = bc.action.def.tags
+		var is_attack = ActionTag.Tag.ATTACK in tags
+		var is_debuff = ActionTag.Tag.DEBUFF in tags
+		
+		if not (is_attack or is_debuff):
+			continue
 		if bc.target.actor == target:
 			count += 1
 	return count

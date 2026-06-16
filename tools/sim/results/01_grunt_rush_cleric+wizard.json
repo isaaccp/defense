@@ -1,19 +1,14 @@
 {
   "characters": [
     {
-      "alive": false,
+      "alive": true,
       "damage_dealt": 0,
-      "damage_healed": 105,
-      "death_position": {
-        "x": 300,
-        "y": 200
-      },
+      "damage_healed": 120,
       "enemies_killed": 0,
-      "focus_generated": 56,
-      "focus_spent": 14,
-      "hp_final": 0.0,
+      "focus_generated": 3,
+      "focus_spent": 16,
+      "hp_final": 50.0,
       "hp_max": 50.0,
-      "killed_by": "Orc Grunt",
       "name": "Puffin",
       "position": {
         "x": 300,
@@ -21,19 +16,14 @@
       }
     },
     {
-      "alive": false,
-      "damage_dealt": 62,
+      "alive": true,
+      "damage_dealt": 84,
       "damage_healed": 0,
-      "death_position": {
-        "x": 376,
-        "y": 312
-      },
-      "enemies_killed": 5,
-      "focus_generated": 11,
-      "focus_spent": 28,
-      "hp_final": 0.0,
+      "enemies_killed": 8,
+      "focus_generated": 13,
+      "focus_spent": 35,
+      "hp_final": 5.0,
       "hp_max": 35.0,
-      "killed_by": "Orc Grunt",
       "name": "Bernie",
       "position": {
         "x": 376,
@@ -93,6 +83,24 @@
             },
             {
               "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
                 "name": "Fire Burst"
               },
               "sort": {
@@ -142,32 +150,10 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/01_grunt_rush/cleric+wizard.json",
-  "elapsed_seconds": 58.07,
+  "elapsed_seconds": 31.27,
   "enemies": {
-    "alive_final": [
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 284,
-          "y": 245
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 274,
-          "y": 261
-        }
-      },
-      {
-        "name": "Orc Grunt",
-        "position": {
-          "x": 268,
-          "y": 237
-        }
-      }
-    ],
-    "killed": 5,
+    "alive_final": [],
+    "killed": 8,
     "spawned": 8
   },
   "events": [
@@ -199,7 +185,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 5.53
+      "t": 5.52
     },
     {
       "actor": "Orc Grunt",
@@ -235,12 +221,12 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 545,
+        "x": 546,
         "y": 294
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 11.71
+      "t": 11.7
     },
     {
       "actor": "Orc Grunt",
@@ -250,7 +236,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 13.56
+      "t": 13.55
     },
     {
       "actor": "Orc Grunt",
@@ -271,7 +257,7 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 17.21
+      "t": 17.19
     },
     {
       "actor": "Bernie",
@@ -282,29 +268,29 @@
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 23.36
-    },
-    {
-      "actor": "Bernie",
-      "actor_key": "Bernie#1",
-      "at": {
-        "x": 376,
-        "y": 312
-      },
-      "hp_pct": 25,
-      "kind": "low_hp",
-      "t": 24.38
+      "t": 23.34
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 411,
+        "x": 410,
         "y": 325
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 24.88
+      "t": 24.26
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 424,
+        "y": 321
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 24.46
     },
     {
       "actor": "Orc Grunt",
@@ -315,18 +301,29 @@
       },
       "killed_by": "",
       "kind": "death",
-      "t": 25.28
+      "t": 24.66
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 430,
-        "y": 305
+        "x": 411,
+        "y": 325
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 25.38
+      "t": 30.86
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 424,
+        "y": 320
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 31.1
     },
     {
       "actor": "Bernie",
@@ -335,101 +332,41 @@
         "x": 376,
         "y": 312
       },
-      "killed_by": "Orc Grunt",
-      "kind": "death",
-      "t": 27.76
-    },
-    {
-      "actor": "Puffin",
-      "actor_key": "Puffin#0",
-      "at": {
-        "x": 300,
-        "y": 200
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 33.64
-    },
-    {
-      "actor": "Puffin",
-      "actor_key": "Puffin#0",
-      "at": {
-        "x": 300,
-        "y": 200
-      },
       "hp_pct": 25,
       "kind": "low_hp",
-      "t": 34.66
+      "t": 31.12
     },
     {
-      "actor": "Puffin",
-      "actor_key": "Puffin#0",
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 300,
-        "y": 200
+        "x": 413,
+        "y": 308
       },
-      "killed_by": "Orc Grunt",
+      "killed_by": "Bernie",
       "kind": "death",
-      "t": 35.43
+      "t": 31.26
     },
     {
-      "actor": "Column",
-      "actor_key": "Column#0",
-      "at": {
-        "x": 235,
-        "y": 259
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 47.9
-    },
-    {
-      "actor": "Column",
-      "actor_key": "Column#0",
-      "at": {
-        "x": 235,
-        "y": 259
-      },
-      "hp_pct": 25,
-      "kind": "low_hp",
-      "t": 52.98
-    },
-    {
-      "kind": "loss",
-      "loss_type": "TOWER_DIED",
-      "t": 58.06
-    },
-    {
-      "actor": "Column",
-      "actor_key": "Column#0",
-      "at": {
-        "x": 235,
-        "y": 259
-      },
-      "killed_by": "Orc Grunt",
-      "kind": "death",
-      "t": 58.06
+      "kind": "victory",
+      "t": 31.26,
+      "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
-  "loss_type": "TOWER_DIED",
-  "min_focus": 90.5,
+  "loss_type": null,
+  "min_focus": 89.2,
   "notes": "Cleric+Wizard pair for 01_grunt_rush. Cleric heals closest ally, wizard self-armors then ranged-attacks closest enemy. No frontliner — wizard takes hits when grunts close.",
-  "outcome": "loss",
+  "outcome": "victory",
   "towers": [
     {
-      "alive": false,
+      "alive": true,
       "damage_dealt": 0,
       "damage_healed": 0,
-      "death_position": {
-        "x": 235,
-        "y": 259
-      },
       "enemies_killed": 0,
-      "focus_generated": 58,
+      "focus_generated": 31,
       "focus_spent": 0,
-      "hp_final": 0.0,
+      "hp_final": 200.0,
       "hp_max": 200.0,
-      "killed_by": "Orc Grunt",
       "name": "Column",
       "position": {
         "x": 235,
@@ -437,6 +374,6 @@
       }
     }
   ],
-  "victory_type": null,
-  "xp_gained": 0
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
 }

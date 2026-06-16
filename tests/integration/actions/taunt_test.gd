@@ -2,7 +2,7 @@ extends GutTest
 
 const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
-const taunt_action = preload("res://skill_tree/actions/taunt_action.tres")
+const taunt_action = preload("res://skill_tree/actions/taunt.tres")
 const enemy_target = preload("res://skill_tree/targets/enemy.tres")
 const taunted_status = preload("res://effects/statuses/taunted.tres")
 

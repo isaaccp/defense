@@ -55,6 +55,24 @@
                     },
                     {
                         "action": {
+                            "name": "Chilling Sphere"
+                        },
+                        "target": {
+                            "name": "Enemy"
+                        },
+                        "sort": {
+                            "name": "Closest First"
+                        },
+                        "condition": {
+                            "name": "Can Hit Enemies",
+                            "params": {
+                                "cmp": ">=",
+                                "int_value": 2
+                            }
+                        }
+                    },
+                    {
+                        "action": {
                             "name": "Fire Burst"
                         },
                         "target": {

@@ -13,6 +13,7 @@ script = ExtResource("3_lasih")
 action_script = ExtResource("1_sbvu5")
 supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_cxw7u")
+tags = Array[int]([1, 2])
 skill_name = &"Blink To"
 skill_type = 1
 parent = ExtResource("2_yu2jp")

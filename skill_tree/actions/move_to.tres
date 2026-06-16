@@ -12,6 +12,7 @@ script = ExtResource("1_7nxwc")
 action_script = ExtResource("1_ki1ft")
 supported_target_types = Array[int]([1, 3])
 params = SubResource("Resource_6kuty")
+tags = Array[int]([2])
 skill_name = &"Move To"
 skill_type = 1
 tree_type = 1

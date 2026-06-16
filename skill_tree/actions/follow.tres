@@ -14,6 +14,7 @@ script = ExtResource("1_adef")
 action_script = ExtResource("3_follow")
 supported_target_types = Array[int]([1])
 params = SubResource("Resource_follow_params")
+tags = Array[int]([2])
 skill_name = &"Follow"
 skill_type = 1
 parent = ExtResource("4_parent")

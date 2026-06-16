@@ -6,4 +6,6 @@ enum Tag {
 	ATTACK,
 	SPELL,
 	MOVE,
+	DEBUFF,
+	BUFF,
 }
