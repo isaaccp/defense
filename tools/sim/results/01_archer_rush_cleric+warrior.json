@@ -1,0 +1,257 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 25,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 153,
+      "focus_spent": 5,
+      "hp_final": 45.8,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 478,
+        "y": 514
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 30,
+      "enemies_killed": 0,
+      "focus_generated": 39,
+      "focus_spent": 4,
+      "hp_final": 24.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 310,
+        "y": 300
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_heal_always",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/01_archer_rush.tscn",
+    "max_seconds": 90.0,
+    "notes": "Proven-beatable pair for 01_archer_rush. Same baseline as 01_grunt_rush_baseline — d=1 siblings should fall to the same minimum-complexity comp. Caveat: sim is not bit-reproducible (same seed produced 34s / 48s / timeout-at-60 across runs); max_seconds bumped to 90 to absorb variance. Investigate seed-determinism upstream — likely worth recording in SIM_FINDINGS.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/01_archer_rush/cleric+warrior.json",
+  "elapsed_seconds": 88.8,
+  "enemies": {
+    "alive_final": [],
+    "killed": 5,
+    "spawned": 5
+  },
+  "events": [
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.01
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 656,
+        "y": 263
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 11.86
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 940,
+        "y": 243
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 22.6
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 957,
+        "y": 19
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 30.03
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 948,
+        "y": 231
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 36.61
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 19,
+        "y": 539
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 73.16
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 517,
+        "y": 512
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 88.18
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 310,
+        "y": 300
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 88.46
+    },
+    {
+      "kind": "victory",
+      "t": 88.79,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 98.0,
+  "notes": "Proven-beatable pair for 01_archer_rush. Same baseline as 01_grunt_rush_baseline — d=1 siblings should fall to the same minimum-complexity comp. Caveat: sim is not bit-reproducible (same seed produced 34s / 48s / timeout-at-60 across runs); max_seconds bumped to 90 to absorb variance. Investigate seed-determinism upstream — likely worth recording in SIM_FINDINGS.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 88,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 50
+}

@@ -1,0 +1,531 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 96,
+      "damage_healed": 0,
+      "enemies_killed": 11,
+      "focus_generated": 1,
+      "focus_spent": 61,
+      "hp_final": 30.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 320,
+        "y": 216
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 105,
+      "enemies_killed": 0,
+      "focus_generated": 4,
+      "focus_spent": 14,
+      "hp_final": 50.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 310,
+        "y": 300
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "bernie_kite_and_commit",
+          "rules": [
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Set Preferred Target"
+              },
+              "condition": {
+                "name": "Targeting Tower"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_aoe_heal_follow",
+          "rules": [
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
+    "max_seconds": 60.0,
+    "notes": "bernie_puffin_archer — Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/03_archer_pocket/cleric+wizard.json",
+  "elapsed_seconds": 27.44,
+  "enemies": {
+    "alive_final": [],
+    "killed": 11,
+    "spawned": 11
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 550,
+        "y": 247
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 5.8
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 497,
+        "y": 239
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 8.42
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 12.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 466,
+        "y": 235
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 13.23
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.04
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#5",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.52
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#0",
+      "at": {
+        "x": 320,
+        "y": 216
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 16.1
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#6",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 16.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 356,
+        "y": 221
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 17.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#6",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.06
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.38
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.38
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.4
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 358,
+        "y": 213
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 24.4
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 373,
+        "y": 223
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 24.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 386,
+        "y": 221
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 24.73
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 421,
+        "y": 229
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 27.43
+    },
+    {
+      "kind": "victory",
+      "t": 27.43,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 56.0,
+  "notes": "bernie_puffin_archer — Wizard + Priest team comp test. Bernie uses substrate ranged behavior with preferred-target + Targeting Tower. Tests whether the no-tank pairing can hold up.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 27,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

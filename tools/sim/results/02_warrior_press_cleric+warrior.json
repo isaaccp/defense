@@ -1,0 +1,327 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 86,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 105,
+      "focus_spent": 19,
+      "hp_final": 55.2,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 567,
+        "y": 225
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 120,
+      "enemies_killed": 0,
+      "focus_generated": 3,
+      "focus_spent": 16,
+      "hp_final": 50.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 422,
+        "y": 262
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_defend_tower",
+          "rules": [
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_aoe_heal_follow",
+          "rules": [
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+    "max_seconds": 90.0,
+    "notes": "Proven-beatable pair for 02_warrior_press. Tighter starting-kit comp: knight uses 'Closest To Tower First' to gate enemies before they hit the column; cleric uses Consecrate when 2+ enemies can be hit, heals lowest-HP ally, and Follows the knight at 150. Baseline 'attack closest / heal closest' LOSES the tower around t=65s, so this is the minimum complexity that beats the level.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_warrior_press/cleric+warrior.json",
+  "elapsed_seconds": 29.62,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 11.48
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 13.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 15.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 597,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 17.58
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 597,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 20.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 595,
+        "y": 212
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 23.68
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 597,
+        "y": 230
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 25.71
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 603,
+        "y": 223
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 29.0
+    },
+    {
+      "kind": "victory",
+      "t": 29.61,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 97.2,
+  "notes": "Proven-beatable pair for 02_warrior_press. Tighter starting-kit comp: knight uses 'Closest To Tower First' to gate enemies before they hit the column; cleric uses Consecrate when 2+ enemies can be hit, heals lowest-HP ally, and Follows the knight at 150. Baseline 'attack closest / heal closest' LOSES the tower around t=65s, so this is the minimum complexity that beats the level.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 29,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

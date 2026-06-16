@@ -1,0 +1,298 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 48,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 16,
+      "focus_spent": 16,
+      "hp_final": 45.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 462,
+        "y": 216
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 90,
+      "enemies_killed": 0,
+      "focus_generated": 0,
+      "focus_spent": 12,
+      "hp_final": 50.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 300,
+        "y": 320
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_snipe_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_heal_always",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
+    "max_seconds": 60.0,
+    "notes": "Proven-beatable pair for 01_grunt_rush. Baseline 'attack closest / heal closest' — the simplest comp on the starting kit. Represents the d=1 floor: if this stops winning, the level has been pushed out of band.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/01_grunt_rush/cleric+rogue.json",
+  "elapsed_seconds": 21.77,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 690,
+        "y": 239
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 7.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 689,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 9.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 689,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.6
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 13.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 687,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.65
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 686,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 15.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 686,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.7
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 685,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.73
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 684,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 21.77
+    },
+    {
+      "kind": "victory",
+      "t": 21.77,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 97.0,
+  "notes": "Proven-beatable pair for 01_grunt_rush. Baseline 'attack closest / heal closest' — the simplest comp on the starting kit. Represents the d=1 floor: if this stops winning, the level has been pushed out of band.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 21,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

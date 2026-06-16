@@ -1,0 +1,539 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 90,
+      "damage_healed": 0,
+      "enemies_killed": 15,
+      "focus_generated": 30,
+      "focus_spent": 52,
+      "hp_final": 45.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 300,
+        "y": 483
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 135,
+      "enemies_killed": 0,
+      "focus_generated": 0,
+      "focus_spent": 24,
+      "hp_final": 35.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 329,
+        "y": 336
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_fancy_kite",
+          "rules": [
+            {
+              "action": {
+                "name": "Blink Away"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Multi Shot"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Dagger Attack"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_aoe_heal_follow",
+          "rules": [
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/03_waves.tscn",
+    "max_seconds": 60.0,
+    "notes": "ambush_waves substrate — knight uses preferred-target commitment + Sweeping Attack on Most Enemies Position + Charge; cleric uses Consecrate when 2+ enemies near + heals lowest HP. Tests AoE-trigger frequency under wave spawn pattern (should be much higher than trickle).",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/03_waves/cleric+rogue.json",
+  "elapsed_seconds": 33.52,
+  "enemies": {
+    "alive_final": [],
+    "killed": 15,
+    "spawned": 15
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 2.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 2.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.05
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 588,
+        "y": 251
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 3.16
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 566,
+        "y": 250
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 4.4
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 523,
+        "y": 243
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.25
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 510,
+        "y": 241
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 7.25
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 600,
+        "y": 253
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.88
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 577,
+        "y": 251
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.08
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 534,
+        "y": 244
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 14.94
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 521,
+        "y": 242
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 15.94
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 262,
+        "y": 229
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 258,
+        "y": 227
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 20.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 22.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 240,
+        "y": 219
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 22.08
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 443,
+        "y": 314
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 28.26
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 386,
+        "y": 326
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 30.44
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 329,
+        "y": 336
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 32.29
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 367,
+        "y": 334
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 32.43
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 363,
+        "y": 317
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 33.51
+    },
+    {
+      "kind": "victory",
+      "t": 33.51,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 82.3,
+  "notes": "ambush_waves substrate — knight uses preferred-target commitment + Sweeping Attack on Most Enemies Position + Charge; cleric uses Consecrate when 2+ enemies near + heals lowest HP. Tests AoE-trigger frequency under wave spawn pattern (should be much higher than trickle).",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 33,
+      "focus_spent": 0,
+      "hp_final": 190.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

@@ -1,0 +1,361 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 15,
+      "damage_healed": 0,
+      "enemies_killed": 2,
+      "focus_generated": 10,
+      "focus_spent": 24,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 378,
+        "y": 211
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 65,
+      "damage_healed": 0,
+      "enemies_killed": 6,
+      "focus_generated": 65,
+      "focus_spent": 14,
+      "hp_final": 22.4,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 593,
+        "y": 290
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Idle"
+              },
+              "condition": {
+                "name": "Focus",
+                "params": {
+                  "cmp": "<",
+                  "int_value": 15.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": ">",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
+    "max_seconds": 90.0,
+    "notes": "Warrior+Wizard pair for 01_grunt_rush. Knight tanks the corridor, wizard self-armors and ranges down enemies. No healer — knight HP is the resource budget.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/01_grunt_rush/warrior+wizard.json",
+  "elapsed_seconds": 24.79,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 290
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 10.46
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 612,
+        "y": 288
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 12.18
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 13.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 627,
+        "y": 287
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 14.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 631,
+        "y": 286
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 16.65
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 631,
+        "y": 286
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 18.6
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 631,
+        "y": 286
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 20.7
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#1",
+      "at": {
+        "x": 593,
+        "y": 290
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 22.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 631,
+        "y": 286
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 22.75
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 631,
+        "y": 286
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 24.79
+    },
+    {
+      "kind": "victory",
+      "t": 24.79,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 95.9,
+  "notes": "Warrior+Wizard pair for 01_grunt_rush. Knight tanks the corridor, wizard self-armors and ranges down enemies. No healer — knight HP is the resource budget.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 24,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

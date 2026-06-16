@@ -1,0 +1,395 @@
+{
+  "characters": [
+    {
+      "alive": false,
+      "damage_dealt": 54,
+      "damage_healed": 0,
+      "death_position": {
+        "x": 524,
+        "y": 222
+      },
+      "enemies_killed": 7,
+      "focus_generated": 16,
+      "focus_spent": 20,
+      "hp_final": 0.0,
+      "hp_max": 45.0,
+      "killed_by": "Orc Warrior",
+      "name": "Larian",
+      "position": {
+        "x": 524,
+        "y": 222
+      }
+    },
+    {
+      "alive": false,
+      "damage_dealt": 0,
+      "damage_healed": 300,
+      "death_position": {
+        "x": 384,
+        "y": 273
+      },
+      "enemies_killed": 0,
+      "focus_generated": 66,
+      "focus_spent": 44,
+      "hp_final": 0.0,
+      "hp_max": 50.0,
+      "killed_by": "Orc Warrior",
+      "name": "Puffin",
+      "position": {
+        "x": 384,
+        "y": 273
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_snipe_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_aoe_heal_follow",
+          "rules": [
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+    "max_seconds": 90.0,
+    "notes": "Proven-beatable pair for 02_warrior_press. Tighter starting-kit comp: knight uses 'Closest To Tower First' to gate enemies before they hit the column; cleric uses Consecrate when 2+ enemies can be hit, heals lowest-HP ally, and Follows the knight at 150. Baseline 'attack closest / heal closest' LOSES the tower around t=65s, so this is the minimum complexity that beats the level.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_warrior_press/cleric+rogue.json",
+  "elapsed_seconds": 90.0,
+  "enemies": {
+    "alive_final": [
+      {
+        "name": "Orc Warrior",
+        "position": {
+          "x": 290,
+          "y": 259
+        }
+      }
+    ],
+    "killed": 7,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 690,
+        "y": 239
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 7.55
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 690,
+        "y": 239
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 9.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 689,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.6
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 686,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.64
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 590,
+        "y": 229
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 18.33
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 544,
+        "y": 224
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 20.23
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 506,
+        "y": 220
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 25.23
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 524,
+        "y": 222
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 36.18
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 524,
+        "y": 222
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 44.3
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 524,
+        "y": 222
+      },
+      "killed_by": "Orc Warrior",
+      "kind": "death",
+      "t": 52.45
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 384,
+        "y": 273
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 64.54
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 384,
+        "y": 273
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 76.73
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 384,
+        "y": 273
+      },
+      "killed_by": "Orc Warrior",
+      "kind": "death",
+      "t": 84.87
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 97.0,
+  "notes": "Proven-beatable pair for 02_warrior_press. Tighter starting-kit comp: knight uses 'Closest To Tower First' to gate enemies before they hit the column; cleric uses Consecrate when 2+ enemies can be hit, heals lowest-HP ally, and Follows the knight at 150. Baseline 'attack closest / heal closest' LOSES the tower around t=65s, so this is the minimum complexity that beats the level.",
+  "outcome": "timeout",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 89,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": null,
+  "xp_gained": 0
+}

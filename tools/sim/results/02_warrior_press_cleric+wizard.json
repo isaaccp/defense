@@ -1,0 +1,317 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 120,
+      "enemies_killed": 0,
+      "focus_generated": 1,
+      "focus_spent": 16,
+      "hp_final": 50.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 300,
+        "y": 200
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 92,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 1,
+      "focus_spent": 42,
+      "hp_final": 33.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 428,
+        "y": 307
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_heal_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+    "max_seconds": 90.0,
+    "notes": "Cleric+wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_warrior_press/cleric+wizard.json",
+  "elapsed_seconds": 29.47,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 628,
+        "y": 287
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 9.33
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 290
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 12.21
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 544,
+        "y": 295
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 15.74
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 513,
+        "y": 298
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 18.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 483,
+        "y": 301
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 514,
+        "y": 298
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 24.96
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 465,
+        "y": 303
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 28.75
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 482,
+        "y": 301
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 28.85
+    },
+    {
+      "kind": "victory",
+      "t": 29.46,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 71.2,
+  "notes": "Cleric+wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 29,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

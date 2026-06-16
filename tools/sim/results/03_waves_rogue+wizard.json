@@ -1,0 +1,602 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 65,
+      "damage_healed": 0,
+      "enemies_killed": 9,
+      "focus_generated": 18,
+      "focus_spent": 48,
+      "hp_final": 45.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 292,
+        "y": 462
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 45,
+      "damage_healed": 0,
+      "enemies_killed": 6,
+      "focus_generated": 5,
+      "focus_spent": 42,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 215,
+        "y": 301
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_fancy_kite",
+          "rules": [
+            {
+              "action": {
+                "name": "Blink Away"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Multi Shot"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Dagger Attack"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "bernie_with_armor_support",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Set Preferred Target"
+              },
+              "condition": {
+                "name": "Targeting Tower"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/03_waves.tscn",
+    "max_seconds": 60.0,
+    "notes": "godrick_bernie_waves — Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/03_waves/rogue+wizard.json",
+  "elapsed_seconds": 32.81,
+  "enemies": {
+    "alive_final": [],
+    "killed": 15,
+    "spawned": 15
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 2.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 2.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 588,
+        "y": 253
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 3.16
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 553,
+        "y": 243
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 4.76
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 552,
+        "y": 248
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 5.34
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 527,
+        "y": 243
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.66
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 600,
+        "y": 253
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.88
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 575,
+        "y": 248
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.08
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 547,
+        "y": 247
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 14.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 527,
+        "y": 243
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 15.66
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 242,
+        "y": 203
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 278,
+        "y": 136
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 20.77
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 252,
+        "y": 224
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 21.11
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 22.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 578,
+        "y": 301
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 22.74
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 514,
+        "y": 307
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 25.81
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 433,
+        "y": 292
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 27.86
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 283,
+        "y": 295
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 32.8
+    },
+    {
+      "kind": "victory",
+      "t": 32.8,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 59.7,
+  "notes": "godrick_bernie_waves — Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 32,
+      "focus_spent": 0,
+      "hp_final": 195.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

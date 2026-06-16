@@ -1,0 +1,528 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 56,
+      "damage_healed": 0,
+      "enemies_killed": 7,
+      "focus_generated": 39,
+      "focus_spent": 32,
+      "hp_final": 53.7,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 437,
+        "y": 183
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 45,
+      "damage_healed": 0,
+      "enemies_killed": 4,
+      "focus_generated": 1,
+      "focus_spent": 44,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 342,
+        "y": 296
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_commit_and_charge",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Set Preferred Target"
+              },
+              "condition": {
+                "name": "Targeting Tower"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "bernie_with_armor_support",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Set Preferred Target"
+              },
+              "condition": {
+                "name": "Targeting Tower"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
+    "max_seconds": 60.0,
+    "notes": "godrick_bernie_archer — Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/03_archer_pocket/warrior+wizard.json",
+  "elapsed_seconds": 24.82,
+  "enemies": {
+    "alive_final": [],
+    "killed": 11,
+    "spawned": 11
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 530,
+        "y": 248
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 4.98
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 527,
+        "y": 244
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 7.78
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.03
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 552,
+        "y": 247
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 9.6
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 576,
+        "y": 250
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 11.41
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.54
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 12.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.05
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 14.85
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 16.56
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 17.13
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 442,
+        "y": 192
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 18.78
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.07
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 20.21
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 426,
+        "y": 181
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 21.15
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 449,
+        "y": 188
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 22.98
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 468,
+        "y": 195
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 24.81
+    },
+    {
+      "kind": "victory",
+      "t": 24.81,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 80.5,
+  "notes": "godrick_bernie_archer — Warrior + Wizard team comp. No healer. Godrick uses preferred-target substrate; Bernie uses ranged substrate. Tests no-heal sustain (Godrick's Defiance refills focus from damage but HP is permanent loss).",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 24,
+      "focus_spent": 0,
+      "hp_final": 173.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

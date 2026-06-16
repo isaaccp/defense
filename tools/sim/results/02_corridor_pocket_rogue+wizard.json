@@ -1,0 +1,455 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 53,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 16,
+      "focus_spent": 21,
+      "hp_final": 45.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 355,
+        "y": 221
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 35,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 3,
+      "focus_spent": 49,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 354,
+        "y": 294
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_snipe_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_control_and_burn",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
+    "max_seconds": 90.0,
+    "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s — pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_corridor_pocket/rogue+wizard.json",
+  "elapsed_seconds": 25.87,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 603,
+        "y": 254
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 3.19
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 601,
+        "y": 255
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 5.43
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 606,
+        "y": 254
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 7.8
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 636,
+        "y": 258
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 9.44
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 583,
+        "y": 251
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.48
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 625,
+        "y": 256
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 15.15
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 16.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 246,
+        "y": 140
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 16.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 17.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 246,
+        "y": 140
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 18.2
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.06
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 245,
+        "y": 144
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 20.74
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 489,
+        "y": 238
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 21.73
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 518,
+        "y": 242
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.86
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 24.08
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 548,
+        "y": 246
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 24.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 589,
+        "y": 251
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 25.86
+    },
+    {
+      "kind": "victory",
+      "t": 25.86,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 74.6,
+  "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s — pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 25,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

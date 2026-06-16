@@ -1,0 +1,495 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 50,
+      "damage_healed": 105,
+      "enemies_killed": 6,
+      "focus_generated": 3,
+      "focus_spent": 33,
+      "hp_final": 35.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 553,
+        "y": 248
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 68,
+      "damage_healed": 0,
+      "enemies_killed": 7,
+      "focus_generated": 0,
+      "focus_spent": 51,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 334,
+        "y": 297
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_ward_and_heal",
+          "rules": [
+            {
+              "action": {
+                "name": "Projectile Ward"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "condition": {
+                "name": "Target Health",
+                "params": {
+                  "cmp": "<=",
+                  "int_value": 70.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_control_and_burn",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
+    "max_seconds": 90.0,
+    "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s — pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_corridor_pocket/cleric+wizard.json",
+  "elapsed_seconds": 27.09,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 578,
+        "y": 258
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 4.62
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 506,
+        "y": 242
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 8.16
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 536,
+        "y": 245
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 10.73
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 556,
+        "y": 248
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 12.65
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.05
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 556,
+        "y": 248
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 14.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 16.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 588,
+        "y": 252
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 16.78
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 17.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.07
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 242,
+        "y": 176
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.23
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 588,
+        "y": 252
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 19.83
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.58
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 245,
+        "y": 221
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.24
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 592,
+        "y": 252
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 23.0
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 237,
+        "y": 220
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 23.81
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 24.09
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 593,
+        "y": 252
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 25.03
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 553,
+        "y": 248
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 26.0
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 592,
+        "y": 252
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 27.08
+    },
+    {
+      "kind": "victory",
+      "t": 27.08,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 46.8,
+  "notes": "Cleric+Wizard pair for 02_corridor_pocket. SIMPLE 'attack closest / heal closest' LOSES tower at 45.7s — pocket grunts get past while the wizard's single-target damage can't keep up. This tightened version adds: cleric proactively Projectile-Wards the wizard, chips in with Sword Attack, and heals on Target Health threshold; wizard leads with Hold Person and Chilling Sphere to slow/stop the closest threat. Both still starting-kit-only.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 27,
+      "focus_spent": 0,
+      "hp_final": 190.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

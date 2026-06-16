@@ -1,0 +1,414 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 54,
+      "damage_healed": 0,
+      "enemies_killed": 9,
+      "focus_generated": 19,
+      "focus_spent": 21,
+      "hp_final": 45.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 355,
+        "y": 221
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 50,
+      "damage_healed": 0,
+      "enemies_killed": 4,
+      "focus_generated": 25,
+      "focus_spent": 10,
+      "hp_final": 50.5,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 608,
+        "y": 256
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_snipe_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/02_corridor_pocket.tscn",
+    "max_seconds": 90.0,
+    "notes": "Warrior+Wizard pair for 02_corridor_pocket. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_corridor_pocket/rogue+warrior.json",
+  "elapsed_seconds": 25.27,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 562,
+        "y": 265
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 4.06
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 571,
+        "y": 268
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.3
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 575,
+        "y": 268
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 8.7
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 596,
+        "y": 266
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 10.77
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 620,
+        "y": 263
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 12.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 634,
+        "y": 261
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 15.19
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 16.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 17.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 243,
+        "y": 173
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.63
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 18.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 623,
+        "y": 257
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 18.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.06
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 241,
+        "y": 191
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.65
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 630,
+        "y": 258
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 20.83
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 21.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 239,
+        "y": 206
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 21.68
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 638,
+        "y": 258
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 23.1
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 24.08
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 642,
+        "y": 259
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 25.26
+    },
+    {
+      "kind": "victory",
+      "t": 25.26,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 97.4,
+  "notes": "Warrior+Wizard pair for 02_corridor_pocket. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 25,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

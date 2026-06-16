@@ -1,0 +1,328 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 45,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 0,
+      "focus_spent": 32,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 428,
+        "y": 212
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 44,
+      "damage_healed": 0,
+      "enemies_killed": 3,
+      "focus_generated": 50,
+      "focus_spent": 11,
+      "hp_final": 31.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 646,
+        "y": 273
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+    "max_seconds": 90.0,
+    "notes": "Warrior+Wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_warrior_press/warrior+wizard.json",
+  "elapsed_seconds": 24.2,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 629,
+        "y": 265
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 9.33
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 627,
+        "y": 274
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 11.56
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 642,
+        "y": 275
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 13.73
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 657,
+        "y": 274
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 15.31
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 674,
+        "y": 273
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 17.13
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 674,
+        "y": 259
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 19.68
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 679,
+        "y": 277
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 21.25
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 682,
+        "y": 268
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 23.58
+    },
+    {
+      "kind": "victory",
+      "t": 24.19,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 91.0,
+  "notes": "Warrior+Wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 24,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

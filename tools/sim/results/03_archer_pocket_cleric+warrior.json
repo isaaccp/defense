@@ -1,0 +1,454 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 109,
+      "damage_healed": 0,
+      "enemies_killed": 11,
+      "focus_generated": 24,
+      "focus_spent": 40,
+      "hp_final": 60.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 365,
+        "y": 213
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 105,
+      "enemies_killed": 0,
+      "focus_generated": 2,
+      "focus_spent": 28,
+      "hp_final": 35.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 344,
+        "y": 227
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_commit_and_charge",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "target": {
+                "name": "Preferred Target"
+              }
+            },
+            {
+              "action": {
+                "name": "Set Preferred Target"
+              },
+              "condition": {
+                "name": "Targeting Tower"
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_aoe_heal_follow",
+          "rules": [
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/03_archer_pocket.tscn",
+    "max_seconds": 60.0,
+    "notes": "ambush_archer_pocket substrate — knight uses preferred-target + Charge to chase kiting archers; cleric uses Consecrate + Follow at 150 + heal lowest HP. Tests whether the substrate handles a ranged-pocket threat and whether Hallowed Vestments meaningfully reduces damage on Puffin.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/03_archer_pocket/cleric+warrior.json",
+  "elapsed_seconds": 28.22,
+  "enemies": {
+    "alive_final": [],
+    "killed": 11,
+    "spawned": 11
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 487,
+        "y": 239
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 6.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 511,
+        "y": 241
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 8.22
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 536,
+        "y": 245
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 10.15
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 560,
+        "y": 248
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 11.96
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 12.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.04
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 15.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#5",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 16.55
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 17.99
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 17.99
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 17.99
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.06
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 379,
+        "y": 243
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 24.7
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 384,
+        "y": 227
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 25.7
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 388,
+        "y": 211
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 26.73
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 401,
+        "y": 224
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 28.21
+    },
+    {
+      "kind": "victory",
+      "t": 28.21,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 72.4,
+  "notes": "ambush_archer_pocket substrate — knight uses preferred-target + Charge to chase kiting archers; cleric uses Consecrate + Follow at 150 + heal lowest HP. Tests whether the substrate handles a ranged-pocket threat and whether Hallowed Vestments meaningfully reduces damage on Puffin.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 28,
+      "focus_spent": 0,
+      "hp_final": 170.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

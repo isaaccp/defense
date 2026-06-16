@@ -1,0 +1,442 @@
+{
+  "characters": [
+    {
+      "alive": false,
+      "damage_dealt": 0,
+      "damage_healed": 105,
+      "death_position": {
+        "x": 300,
+        "y": 200
+      },
+      "enemies_killed": 0,
+      "focus_generated": 56,
+      "focus_spent": 14,
+      "hp_final": 0.0,
+      "hp_max": 50.0,
+      "killed_by": "Orc Grunt",
+      "name": "Puffin",
+      "position": {
+        "x": 300,
+        "y": 200
+      }
+    },
+    {
+      "alive": false,
+      "damage_dealt": 62,
+      "damage_healed": 0,
+      "death_position": {
+        "x": 376,
+        "y": 312
+      },
+      "enemies_killed": 5,
+      "focus_generated": 11,
+      "focus_spent": 28,
+      "hp_final": 0.0,
+      "hp_max": 35.0,
+      "killed_by": "Orc Grunt",
+      "name": "Bernie",
+      "position": {
+        "x": 376,
+        "y": 312
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_heal_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Idle"
+              },
+              "condition": {
+                "name": "Focus",
+                "params": {
+                  "cmp": "<",
+                  "int_value": 15.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": ">",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
+    "max_seconds": 90.0,
+    "notes": "Cleric+Wizard pair for 01_grunt_rush. Cleric heals closest ally, wizard self-armors then ranged-attacks closest enemy. No frontliner — wizard takes hits when grunts close.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/01_grunt_rush/cleric+wizard.json",
+  "elapsed_seconds": 58.07,
+  "enemies": {
+    "alive_final": [
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 284,
+          "y": 245
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 274,
+          "y": 261
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 268,
+          "y": 237
+        }
+      }
+    ],
+    "killed": 5,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 545,
+        "y": 294
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 11.71
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 13.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#6",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 424,
+        "y": 307
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 17.21
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 376,
+        "y": 312
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 23.36
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 376,
+        "y": 312
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 24.38
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 411,
+        "y": 325
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 24.88
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 414,
+        "y": 308
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 25.28
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 430,
+        "y": 305
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 25.38
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 376,
+        "y": 312
+      },
+      "killed_by": "Orc Grunt",
+      "kind": "death",
+      "t": 27.76
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 300,
+        "y": 200
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 33.64
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 300,
+        "y": 200
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 34.66
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 300,
+        "y": 200
+      },
+      "killed_by": "Orc Grunt",
+      "kind": "death",
+      "t": 35.43
+    },
+    {
+      "actor": "Column",
+      "actor_key": "Column#0",
+      "at": {
+        "x": 235,
+        "y": 259
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 47.9
+    },
+    {
+      "actor": "Column",
+      "actor_key": "Column#0",
+      "at": {
+        "x": 235,
+        "y": 259
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 52.98
+    },
+    {
+      "kind": "loss",
+      "loss_type": "TOWER_DIED",
+      "t": 58.06
+    },
+    {
+      "actor": "Column",
+      "actor_key": "Column#0",
+      "at": {
+        "x": 235,
+        "y": 259
+      },
+      "killed_by": "Orc Grunt",
+      "kind": "death",
+      "t": 58.06
+    }
+  ],
+  "loss_type": "TOWER_DIED",
+  "min_focus": 90.5,
+  "notes": "Cleric+Wizard pair for 01_grunt_rush. Cleric heals closest ally, wizard self-armors then ranged-attacks closest enemy. No frontliner — wizard takes hits when grunts close.",
+  "outcome": "loss",
+  "towers": [
+    {
+      "alive": false,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "death_position": {
+        "x": 235,
+        "y": 259
+      },
+      "enemies_killed": 0,
+      "focus_generated": 58,
+      "focus_spent": 0,
+      "hp_final": 0.0,
+      "hp_max": 200.0,
+      "killed_by": "Orc Grunt",
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": null,
+  "xp_gained": 0
+}

@@ -1,0 +1,320 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 80,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 80,
+      "focus_spent": 16,
+      "hp_final": 11.3,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 560,
+        "y": 226
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 30,
+      "enemies_killed": 0,
+      "focus_generated": 6,
+      "focus_spent": 4,
+      "hp_final": 50.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 300,
+        "y": 320
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_heal_always",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Ally"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/01_grunt_rush.tscn",
+    "max_seconds": 60.0,
+    "notes": "Proven-beatable pair for 01_grunt_rush. Baseline 'attack closest / heal closest' — the simplest comp on the starting kit. Represents the d=1 floor: if this stops winning, the level has been pushed out of band.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/01_grunt_rush/cleric+warrior.json",
+  "elapsed_seconds": 25.72,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 11.48
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 13.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 13.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 15.55
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.56
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 17.58
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 560,
+        "y": 226
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 19.46
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 19.61
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 21.65
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 23.68
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 560,
+        "y": 226
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 24.46
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 598,
+        "y": 229
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 25.71
+    },
+    {
+      "kind": "victory",
+      "t": 25.71,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 98.0,
+  "notes": "Proven-beatable pair for 01_grunt_rush. Baseline 'attack closest / heal closest' — the simplest comp on the starting kit. Represents the d=1 floor: if this stops winning, the level has been pushed out of band.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 25,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

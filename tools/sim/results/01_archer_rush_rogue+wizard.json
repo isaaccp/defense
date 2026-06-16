@@ -1,0 +1,287 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 30,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 12,
+      "focus_spent": 11,
+      "hp_final": 33.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 358,
+        "y": 221
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 5,
+      "focus_spent": 12,
+      "hp_final": 30.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 359,
+        "y": 293
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_snipe_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Idle"
+              },
+              "condition": {
+                "name": "Focus",
+                "params": {
+                  "cmp": "<",
+                  "int_value": 15.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": ">",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/01_archer_rush.tscn",
+    "max_seconds": 90.0,
+    "notes": "Cleric+wizard pair for 01_archer_rush. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/01_archer_rush/rogue+wizard.json",
+  "elapsed_seconds": 13.71,
+  "enemies": {
+    "alive_final": [],
+    "killed": 5,
+    "spawned": 5
+  },
+  "events": [
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.01
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 630,
+        "y": 257
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 4.43
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.52
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 636,
+        "y": 258
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.6
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 641,
+        "y": 258
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 8.73
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.02
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 653,
+        "y": 263
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.07
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.53
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.08
+    },
+    {
+      "kind": "victory",
+      "t": 13.7,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 97.0,
+  "notes": "Cleric+wizard pair for 01_archer_rush. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 13,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

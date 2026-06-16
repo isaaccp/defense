@@ -1,0 +1,328 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 45,
+      "damage_healed": 0,
+      "enemies_killed": 6,
+      "focus_generated": 13,
+      "focus_spent": 16,
+      "hp_final": 45.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 462,
+        "y": 216
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 20,
+      "damage_healed": 0,
+      "enemies_killed": 2,
+      "focus_generated": 1,
+      "focus_spent": 28,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 446,
+        "y": 299
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_snipe_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_attack_closest",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/02_warrior_press.tscn",
+    "max_seconds": 90.0,
+    "notes": "Cleric+wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/02_warrior_press/rogue+wizard.json",
+  "elapsed_seconds": 22.37,
+  "enemies": {
+    "alive_final": [],
+    "killed": 8,
+    "spawned": 8
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 691,
+        "y": 239
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 7.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 689,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 9.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 688,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.61
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 686,
+        "y": 238
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.64
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 680,
+        "y": 238
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 15.65
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 642,
+        "y": 234
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.33
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 669,
+        "y": 236
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.75
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 685,
+        "y": 238
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 21.75
+    },
+    {
+      "kind": "victory",
+      "t": 22.37,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 84.3,
+  "notes": "Cleric+wizard pair for 02_warrior_press. Same simple behaviors as on 01_grunt_rush — testing whether this comp wins with the d=1/d=2 minimum-complexity baseline before any composition-specific tuning.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 22,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}
