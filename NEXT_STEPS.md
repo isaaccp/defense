@@ -36,6 +36,9 @@ Active backburner from the reward-stage + relic batch sessions. Older notes belo
 ### Content + tooling gaps
 
 - **Chest substrate is built but unused in any main_levels level.** Drop a chest into a real campaign level so the Interactable/Open/Gold flow gets exercised in actual play.
+  - **Design Decision (2026-06-17):** Chests should be placed on *fixed, predictable stages* (e.g., Stage 3 of every run) to remove RNG and allow players to program behaviors for them.
+  - **Meta-Unlock:** They will be locked behind an early meta-progression milestone (e.g., accumulating total account XP) to avoid overwhelming new players on Run 1, acting as a "fail-forward" mechanic that opens up the economy.
+  - **Interaction with MT-style Difficulty Modifiers:** Chests interact perfectly with the planned opt-in difficulty modifiers. Modifiers test *combat efficiency*, while chests test *logic priority/multitasking*. Offering both on a fixed stage creates an ultimate "Greed Check" where players with flawless AI can opt into the difficulty modifier *and* loot the chest for massive rewards, while punishing overly-defensive "turtle" scripts.
 - **Gold has no UI.** Accumulates from chests into RunSaveState; never shown to the player.
 - **Sim non-determinism on archer levels** (Move Away + NavigationAgent2D RVO). Documented in `tools/sim/SIM_FINDINGS.md`. Blocks batch-mode work.
 - **d=3 levels lack recorded sim pair files** — only the d=1/d=2 levels have them in `tools/sim/behaviors/level/`. Catalog incomplete.
