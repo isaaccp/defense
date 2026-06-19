@@ -4,6 +4,7 @@ class_name Run
 
 var ui_layer: GameplayUILayer
 var run_save_state: RunSaveState
+var milestone_manager: MilestoneManager
 
 var level_provider: LevelProvider:
 	get:
@@ -21,10 +22,6 @@ var CHARACTER_SELECTION = state.add("character_selection")
 var WITHIN_LEVEL = state.add("within_level")
 var REWARD_STAGE = state.add("reward_stage")
 var RUN_SUMMARY = state.add("run_summary")
-
-# TODO: Make this configurale, or move full meta_xp calculation
-# to some helper class.
-const meta_xp_per_level = 50
 
 # State-dependent variables.
 # If in WITHIN_LEVEL, current level being played.
@@ -57,9 +54,10 @@ func _ready():
 func _exit_tree():
 	ui_layer.state_machine_stack.remove_state_machine(state)
 
-func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer):
-	self.ui_layer = ui_layer
+func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer, milestone_manager: MilestoneManager):
 	self.run_save_state = run_save_state
+	self.ui_layer = ui_layer
+	self.milestone_manager = milestone_manager
 	# Technically only needed during LEVEL state, but easier than connect/disconnect.
 	ui_layer.restart_requested.connect(_on_restart_requested)
 	ui_layer.reset_requested.connect(_on_reset_requested)
@@ -106,7 +104,7 @@ func _on_within_level_entered(save_snapshot: bool = true):
 		state.change_state.call_deferred(RUN_SUMMARY)
 		return
 	level = level_scene.instantiate()
-	level.initialize(gameplay_characters)
+	level.initialize(gameplay_characters, run_save_state.unlocked_milestones)
 	level.selected_relics = []
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
@@ -140,8 +138,12 @@ func _on_level_failed():
 func _on_level_finished():
 	# Record xp gains here but apply and show them visually in REWARD_STAGE.
 	level_xp = level.granted_xp()
+	var level_stats = level.get_aggregate_stats()
+	if milestone_manager:
+		milestone_manager.evaluate_level_end(level_stats)
 	# Needs to be recorded here in case it's the last level.
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
+	run_save_state.stats.add(level_stats)
 	run_save_state.current_phase = RunSaveState.Phase.REWARD
 	# Call this in the same frame explicitly so we update all the
 	# bits of the RunSaveState in the same frame.
@@ -209,7 +211,7 @@ func _on_reward_stage_exited():
 	pass
 
 func _on_run_summary_entered():
-	ui_layer.show_run_summary_screen(_meta_xp_text())
+	ui_layer.show_run_summary_screen(_run_stats_text())
 	ui_layer.run_summary_continue_selected.connect(_on_run_summary_continue_selected, CONNECT_ONE_SHOT)
 
 func _on_run_summary_exited():
@@ -241,15 +243,11 @@ func _on_abandon_run_requested():
 	get_tree().paused = false
 	state.change_state.call_deferred(RUN_SUMMARY)
 
-func _meta_xp_text() -> String:
-	var meta_xp_text = ""
-	meta_xp_text += "Meta XP\n"
-	meta_xp_text += "Levels Beaten: %d * %d\n" % [run_save_state.stats.get_value(Stat.LevelsBeaten), meta_xp_per_level]
-	meta_xp_text += "Total: %d" % meta_xp()
-	return meta_xp_text
-
-func meta_xp() -> int:
-	return run_save_state.stats.get_value(Stat.LevelsBeaten) * 50
+func _run_stats_text() -> String:
+	var text = "Run Complete\n"
+	text += "Levels Beaten: %d\n" % run_save_state.stats.get_value(Stat.LevelsBeaten)
+	text += "Enemies Destroyed: %d\n" % run_save_state.stats.get_value(Stat.EnemiesDestroyed)
+	return text
 
 func paused():
 	return state.is_state(WITHIN_LEVEL) and level.paused()

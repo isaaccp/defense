@@ -12,6 +12,7 @@ class_name LevelProvider
 @export var levels: Array[PackedScene]
 @export var available_characters: Array[GameplayCharacter]
 @export var relic_library: RelicLibrary
+@export var milestone_library: MilestoneLibrary
 ## Reward types available at reward stages. The run picks 2 different
 ## types per stage (currently uniformly at random from the pool).
 @export var available_rewards: Array[RewardDef]

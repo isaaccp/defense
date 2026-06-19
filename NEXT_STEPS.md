@@ -35,6 +35,11 @@ Active backburner from the reward-stage + relic batch sessions. Older notes belo
 
 ### Content + tooling gaps
 
+- **Meta Progression UI / `meta_xp` cleanup:** `meta_xp` has been ripped out of the state model and documentation, but `skill_tree_ui.gd` still tries to use it in `Mode.UNLOCK` (Meta Progression screen). We need to answer three design questions to finish the refactor:
+  - *Automatic vs Manual:* Do milestone-gated skills unlock automatically, or do players still "click" to claim them in the UI?
+  - *Status Display:* How should a locked skill represent its milestone condition to the player (e.g. "Locked: Complete 5 runs")? Should we add `required_milestone` directly to `Skill`?
+  - *Status Bar:* What should replace the old `Meta XP: 0 | Cost: X` text at the bottom? Total Milestones Completed?
+
 - **Chest substrate is built but unused in any main_levels level.** Drop a chest into a real campaign level so the Interactable/Open/Gold flow gets exercised in actual play.
   - **Design Decision (2026-06-17):** Chests should be placed on *fixed, predictable stages* (e.g., Stage 3 of every run) to remove RNG and allow players to program behaviors for them.
   - **Meta-Unlock:** They will be locked behind an early meta-progression milestone (e.g., accumulating total account XP) to avoid overwhelming new players on Run 1, acting as a "fail-forward" mechanic that opens up the economy.

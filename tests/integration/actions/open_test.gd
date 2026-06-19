@@ -13,7 +13,7 @@ var character: Node2D
 
 func before_each():
 	level = chest_test_level_scene.instantiate()
-	level.initialize([test_character])
+	level.initialize([test_character], {&"gold_chests_unlock": true})
 	add_child_autoqfree(level)
 	character = level.characters.get_child(0)
 

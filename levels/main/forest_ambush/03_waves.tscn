@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_provider_config.gd" id="4_prov"]
 [ext_resource type="PackedScene" uid="uid://ck2tfnr0oy6s4" path="res://enemies/orc_grunt/orc_grunt.tscn" id="5_grunt"]
 [ext_resource type="Script" path="res://spawners/components/data_types/spawn_placer_config.gd" id="6_plac"]
+[ext_resource type="PackedScene" uid="uid://bchestscn001" path="res://interactables/chest/chest.tscn" id="7_chest"]
 
 [sub_resource type="Resource" id="Resource_prov"]
 script = ExtResource("4_prov")
@@ -69,3 +70,6 @@ placement_node = NodePath("../../Enemies")
 [node name="SpawnConfigComponent" parent="YSorted/Spawners/PocketWave" index="5" instance=ExtResource("3_cfg")]
 spawn_provider_config = SubResource("Resource_prov")
 spawn_placer_config = SubResource("Resource_placPocket")
+
+[node name="Chest" parent="YSorted/Interactables" index="0" instance=ExtResource("7_chest")]
+position = Vector2(200, 150)

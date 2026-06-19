@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="3_apwm0"]
 [ext_resource type="Script" path="res://behavior/rule_def.gd" id="3_dkr0d"]
 [ext_resource type="Script" path="res://behavior/behavior.gd" id="4_uoups"]
+[ext_resource type="Resource" path="res://milestones/milestone_library.tres" id="99_milestone"]
 
 [sub_resource type="Resource" id="Resource_dh08c"]
 script = ExtResource("3_ajx3i")
@@ -92,6 +93,7 @@ unlocked_skills = Array[StringName]([])
 full_acquired = false
 full_unlocked = false
 
+
 [resource]
 script = ExtResource("2_dmu74")
 players = 1
@@ -99,3 +101,4 @@ levels = Array[PackedScene]([ExtResource("1_61jmt")])
 available_characters = Array[Resource("res://gameplay_character.gd")]([])
 skill_tree_state = SubResource("Resource_dk353")
 behavior = SubResource("Resource_nat2w")
+milestone_library = ExtResource("99_milestone")

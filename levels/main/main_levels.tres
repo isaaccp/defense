@@ -17,6 +17,8 @@
 [ext_resource type="Resource" uid="uid://drestreward01" path="res://run/rewards/rest.tres" id="17_rest"]
 [ext_resource type="Resource" uid="uid://drelicreward01" path="res://run/rewards/relic.tres" id="18_relic"]
 [ext_resource type="Resource" uid="uid://dtrainerrward01" path="res://run/rewards/trainer.tres" id="19_train"]
+[ext_resource type="Resource" path="res://milestones/milestone_library.tres" id="99_milestone"]
+
 
 [resource]
 script = ExtResource("2_3n011")
@@ -26,3 +28,4 @@ levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"),
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 relic_library = ExtResource("15_0q7yn")
 available_rewards = Array[ExtResource("16_rwdef")]([ExtResource("17_rest"), ExtResource("18_relic"), ExtResource("19_train")])
+milestone_library = ExtResource("99_milestone")

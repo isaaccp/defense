@@ -11,6 +11,7 @@ const behavior_library_meta_skill = preload("res://skill_tree/meta_skills/behavi
 @export_group("Debug")
 @export var level_provider: LevelProvider
 var save_state: SaveState
+var milestone_manager: MilestoneManager
 var force_behavior_library = false
 
 var state = StateMachine.new(Constants.GameplayStateMachineName)
@@ -42,6 +43,7 @@ func initialize(game_mode: GameMode, save_state: SaveState):
 	if game_mode.dev_behavior_library:
 		save_state.behavior_library = game_mode.dev_behavior_library
 		force_behavior_library = true
+	milestone_manager = MilestoneManager.new(save_state, level_provider.milestone_library)
 
 func _on_menu_entered():
 	ui_layer.show_gameplay_menu_screen(save_state.run_save_state != null)
@@ -53,15 +55,19 @@ func _on_run_entered():
 	if force_behavior_library or save_state.unlocked_skills.available(behavior_library_meta_skill):
 		ui_layer.hud.set_behavior_library(save_state.behavior_library)
 	run = run_scene.instantiate() as Run
-	run.initialize(save_state.run_save_state, ui_layer)
+	run.initialize(save_state.run_save_state, ui_layer, milestone_manager)
 	run.run_finished.connect(_on_run_finished)
 	run.save_requested.connect(_on_run_save_requested)
 	%RunParent.add_child(run)
 
 func _on_run_exited():
-	save_state.meta_xp += run.meta_xp()
+	if save_state.run_save_state:
+		milestone_manager.evaluate_run_end()
+		save_state.global_stats.add(save_state.run_save_state.stats)
 	run.queue_free()
 	run = null
+
+
 
 func _on_run_finished():
 	save_state.run_save_state = null
@@ -92,7 +98,7 @@ func _on_gameplay_ui_layer_save_and_quit_requested():
 	save_and_quit_requested.emit(save_state)
 
 func _on_gameplay_ui_layer_new_run():
-	save_state.run_save_state = RunSaveState.make([], level_provider, save_state.unlocked_skills)
+	save_state.run_save_state = RunSaveState.make([], level_provider, save_state.unlocked_skills, save_state.unlocked_milestones)
 	if save_state.first_run:
 		save_state.first_run = false
 		state.change_state.call_deferred(RUN)

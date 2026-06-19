@@ -102,7 +102,6 @@ Levels are validated via Mode A/B/C sim runs (see [LEVEL_DESIGN.md](levels/LEVEL
 |---|---|---|
 | `base_xp` (per level) | level .tscn `XPComponent` | Run-level XP grant |
 | Time-bonus multipliers | [levels/components/xp_component.gd](levels/components/xp_component.gd) | 2x / 1.5x / 1x / 0.5x at 15s / 30s / 60s / >60s since last spawn |
-| `meta_xp_per_level` | [run/run.gd:27](run/run.gd#L27) | Meta XP for skill tree unlocks |
 | `Attributes.recovery` (default) | [game_logic/attributes/attributes.gd](game_logic/attributes/attributes.gd) | Post-level HP heal fraction. Flat across classes. |
 | `base_acquired_skills` | [constants.gd](constants.gd) | Skills every character starts with at run start |
 | Starting kit (per-character) | character .tres `acquired_skills` | Per-class run-start skill set |
@@ -114,9 +113,6 @@ Levels are validated via Mode A/B/C sim runs (see [LEVEL_DESIGN.md](levels/LEVEL
 
 [constants.gd](constants.gd):
 - `base_acquired_skills` — universal starting skills (Enemy, Ally, Tower, Move To, Closest First)
-
-[run/run.gd](run/run.gd):
-- `meta_xp_per_level = 50`
 
 ---
 

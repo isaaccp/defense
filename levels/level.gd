@@ -101,13 +101,19 @@ func exit():
 	get_tree().paused = false
 	queue_free()
 
-func initialize(gameplay_characters: Array[GameplayCharacter]):
+func initialize(gameplay_characters: Array[GameplayCharacter], unlocked_milestones: Dictionary = {}):
 	source_gameplay_characters = gameplay_characters
 	# Forward each chest's gold reward to the level-level signal so Run
 	# (which already connects to level signals) can aggregate onto
 	# RunSaveState. Chests are placed under YSorted/Interactables.
 	if interactables:
 		for child in interactables.get_children():
+			var interactable = child as Interactable
+			if interactable:
+				if not interactable.meets_requirements(unlocked_milestones):
+					interactable.queue_free()
+					continue
+			
 			var chest := child as Chest
 			if chest and not chest.gold_earned.is_connected(_on_chest_gold_earned):
 				chest.gold_earned.connect(_on_chest_gold_earned)
@@ -210,6 +216,30 @@ func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType
 func granted_xp() -> int:
 	var xp = XPComponent.get_or_die(self).xp()
 	return xp.amount if xp else 0
+
+func get_aggregate_stats() -> AggregateStats:
+	var aggregate = AggregateStats.new()
+	for child in characters.get_children():
+		var log_comp = Component.get_or_null(child, LoggingComponent.component) as LoggingComponent
+		if log_comp:
+			var char_comp = child as Character
+			var gc = source_gameplay_characters[char_comp.idx]
+			for stat_name in log_comp.stats.stats:
+				aggregate.add_stat(Stat.make(stat_name, log_comp.stats.stats[stat_name]), gc.scene_id)
+				
+	for child in towers.get_children():
+		var log_comp = Component.get_or_null(child, LoggingComponent.component) as LoggingComponent
+		if log_comp:
+			for stat_name in log_comp.stats.stats:
+				aggregate.add_stat(Stat.make(stat_name, log_comp.stats.stats[stat_name]))
+				
+	for child in enemies.get_children():
+		var log_comp = Component.get_or_null(child, LoggingComponent.component) as LoggingComponent
+		if log_comp:
+			for stat_name in log_comp.stats.stats:
+				aggregate.add_stat(Stat.make(stat_name, log_comp.stats.stats[stat_name]))
+
+	return aggregate
 
 func _on_play_pressed():
 	is_paused = false
@@ -322,7 +352,7 @@ func _standalone_ready_next_frame(parent: Node):
 	# No type to prevent pulling in deps.
 	var gameplay = load("res://gameplay.tscn").instantiate()
 	var save_state = SaveState.make_new() # ignore-dep
-	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider, save_state.unlocked_skills) # ignore-dep
+	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider, save_state.unlocked_skills, save_state.unlocked_milestones) # ignore-dep
 	gameplay.initialize(game_mode, save_state)
 	parent.add_child(gameplay)
 	# initialize() calls deferred to set state to MENU, so need

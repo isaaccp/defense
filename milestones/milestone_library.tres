@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MilestoneLibrary" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://milestones/milestone_library.gd" id="1_lib"]
+[ext_resource type="Resource" path="res://milestones/defs/gold_chests_unlock.tres" id="2_ach"]
+
+[resource]
+script = ExtResource("1_lib")
+milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach")])

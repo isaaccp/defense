@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="5_6s65h"]
 [ext_resource type="Script" uid="uid://c8dvjpcaa6dpo" path="res://levels/level_provider.gd" id="7_4xswo"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="7_cb8qh"]
+[ext_resource type="Resource" path="res://milestones/milestone_library.tres" id="99_milestone"]
 
 [sub_resource type="Resource" id="Resource_h13ej"]
 script = ExtResource("3_4yb6m")
@@ -78,9 +79,11 @@ action = SubResource("Resource_k7jyb")
 script = ExtResource("2_cwces")
 stored_rules = Array[ExtResource("5_6s65h")]([SubResource("Resource_66hom"), SubResource("Resource_0vv00"), SubResource("Resource_8cr5j")])
 
+
 [resource]
 script = ExtResource("7_4xswo")
 players = 1
 levels = Array[PackedScene]([ExtResource("7_cb8qh")])
 available_characters = Array[ExtResource("1_jouxj")]([ExtResource("1_dv7bi")])
 behavior = SubResource("Resource_4lrpe")
+milestone_library = ExtResource("99_milestone")

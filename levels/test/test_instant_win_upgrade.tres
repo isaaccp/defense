@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_glaws"]
 [ext_resource type="Script" path="res://run/rewards/reward_def.gd" id="3_rwdef"]
 [ext_resource type="Resource" uid="uid://drestreward01" path="res://run/rewards/rest.tres" id="4_rest"]
+[ext_resource type="Resource" path="res://milestones/milestone_library.tres" id="99_milestone"]
+
 
 [resource]
 script = ExtResource("2_glaws")
@@ -15,3 +17,4 @@ total_stages = 2
 levels = Array[PackedScene]([ExtResource("1_iqt4n"), ExtResource("1_iqt4d2")])
 available_characters = Array[ExtResource("1_d8pux")]([ExtResource("1_gnsko")])
 available_rewards = Array[ExtResource("3_rwdef")]([ExtResource("4_rest")])
+milestone_library = ExtResource("99_milestone")

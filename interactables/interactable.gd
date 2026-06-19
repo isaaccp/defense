@@ -21,3 +21,7 @@ var opened: bool = false
 func open(_actor: Actor) -> void:
 	opened = true
 	destroyed = true
+
+## Returns true if this interactable should be spawned based on unlocked milestones.
+func meets_requirements(_unlocked_milestones: Dictionary) -> bool:
+	return true

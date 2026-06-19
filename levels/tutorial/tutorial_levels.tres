@@ -7,9 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://bbo0hd6gduxbc" path="res://levels/tutorial/tutorial_attack.tscn" id="2_tnyg3"]
 [ext_resource type="PackedScene" uid="uid://bp5rg1x0lq2e" path="res://levels/tutorial/tutorial_charge.tscn" id="3_jixjt"]
 [ext_resource type="PackedScene" uid="uid://d4hqegyynx7qn" path="res://levels/tutorial/tutorial_heal.tscn" id="4_omot4"]
+[ext_resource type="Resource" path="res://milestones/milestone_library.tres" id="99_milestone"]
+
 
 [resource]
 script = ExtResource("1_mhg3q")
 players = 1
 levels = Array[PackedScene]([ExtResource("1_u2h2n"), ExtResource("2_tnyg3"), ExtResource("3_jixjt"), ExtResource("4_omot4")])
 available_characters = Array[ExtResource("1_h14g6")]([ExtResource("1_t4dnx")])
+milestone_library = ExtResource("99_milestone")

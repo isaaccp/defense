@@ -16,7 +16,7 @@ enum Phase {
 @export var current_stage: int = 1
 @export var current_phase: Phase = Phase.FIGHT
 @export var relic_library_state: RelicLibraryState
-@export var stats: Stats
+@export var stats: AggregateStats
 ## Shared between all characters. Earned from chests, spent at shops.
 @export var gold: int = 0
 ## Run-wide RNG seed. Used for level pool picks and the reward schedule.
@@ -24,8 +24,9 @@ enum Phase {
 ## Pre-generated reward schedule, one StageRewards per stage. Built at
 ## `make()` time so saves restore the exact same offers.
 @export var reward_schedule: Array[StageRewards]
+@export var unlocked_milestones: Dictionary
 
-static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider, unlocked_skills: SkillTreeState) -> RunSaveState:
+static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider, unlocked_skills: SkillTreeState, unlocked_milestones: Dictionary) -> RunSaveState:
 	var err := level_provider.validate_runnable()
 	if not err.is_empty():
 		push_error("LevelProvider is not runnable: %s" % err)
@@ -36,8 +37,9 @@ static func make(gameplay_characters: Array[GameplayCharacter], level_provider: 
 	run_save_state.current_stage = 1
 	run_save_state.current_phase = Phase.FIGHT
 	run_save_state.relic_library_state = RelicLibraryState.from_relic_library(level_provider.relic_library)
-	run_save_state.stats = Stats.new()
+	run_save_state.stats = AggregateStats.new()
 	run_save_state.seed = _make_seed()
+	run_save_state.unlocked_milestones = unlocked_milestones
 	run_save_state.reward_schedule = _generate_schedule(run_save_state, level_provider, unlocked_skills)
 	return run_save_state
 

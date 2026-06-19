@@ -1,8 +1,11 @@
 [gd_resource type="Resource" script_class="LevelProvider" load_steps=2 format=3 uid="uid://b0yoqi26vefv2"]
 
 [ext_resource type="Script" path="res://levels/level_provider.gd" id="2_ntxql"]
+[ext_resource type="Resource" path="res://milestones/milestone_library.tres" id="99_milestone"]
+
 
 [resource]
 script = ExtResource("2_ntxql")
 players = 0
 levels = Array[PackedScene]([])
+milestone_library = ExtResource("99_milestone")
