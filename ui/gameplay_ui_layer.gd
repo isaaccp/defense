@@ -7,6 +7,7 @@ class_name GameplayUILayer
 @export var hud: Hud
 
 var save_state: SaveState
+var level_provider: LevelProvider
 
 # Keeps track of the stack of states, e.g. gameplay/run/etc, so it
 # can be used for UI decisions easily.
@@ -80,7 +81,7 @@ func show_gameplay_menu_screen(existing_run: bool):
 	show_screen(%GameplayMenuScreen, {"existing_run": existing_run})
 
 func start_character_selection(level_provider: LevelProvider):
-	character_selection_screen.set_characters(level_provider.players, level_provider.available_characters)
+	character_selection_screen.set_characters(level_provider.players, level_provider.available_characters, save_state)
 	show_screen(character_selection_screen)
 
 func end_character_selection():
@@ -108,7 +109,7 @@ func hide_log_viewer():
 
 
 func show_pre_run_screen():
-	show_screen(%PreRunScreen, {"save_state": save_state})
+	show_screen(%PreRunScreen, {"save_state": save_state, "level_provider": level_provider})
 
 func show_run_summary_screen(text: String):
 	show_screen(%RunSummaryScreen, {"text": text})

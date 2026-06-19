@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="2_07jyu"]
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="2_wv48f"]
 [ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="2_xm6an"]
+[ext_resource type="Resource" uid="uid://delxp5bkiebwu" path="res://skill_tree/meta_skills/priest_class.tres" id="3_meta"]
 [ext_resource type="Script" uid="uid://cjxs7ysk0yiya" path="res://skill_tree/skill_tree_state.gd" id="3_ro8tn"]
 
 [sub_resource type="Resource" id="Resource_ha8jy"]
@@ -21,5 +22,7 @@ starting_kit = "Healer"
 scene_id = 4
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
 acquired_skills = SubResource("Resource_ha8jy")
+unlock_meta_skill = ExtResource("3_meta")
+available_skill_trees = Array[int]([6])
 attributes = SubResource("Resource_x24g2")
 relics = Array[StringName]([&"Unyielding Hope", &"Hallowed Vestments"])

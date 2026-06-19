@@ -16,6 +16,10 @@ class_name GameplayCharacter
 @export var behavior: StoredBehavior
 ## Initial acquired skills.
 @export var acquired_skills: SkillTreeState
+## The meta skill required to unlock this character.
+@export var unlock_meta_skill: Skill
+## The skill trees this character has access to (in addition to GENERAL).
+@export var available_skill_trees: Array[Skill.TreeType]
 ## Attributes.
 @export var attributes: Attributes
 
@@ -56,3 +60,8 @@ func after_level_heal():
 
 func add_relic(relic_name: StringName):
 	relics.append(relic_name)
+
+func is_unlocked(unlocked_skills: SkillTreeState) -> bool:
+	if unlock_meta_skill and not unlocked_skills.available(unlock_meta_skill):
+		return false
+	return true

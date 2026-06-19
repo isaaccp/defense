@@ -25,6 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_44fad")
+test_mode = 1
 test_character = SubResource("Resource_bwe5d")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=379721788]

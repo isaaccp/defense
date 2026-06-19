@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MetaSkill" format=3 uid="uid://b40uy67s2k6om"]
+
+[ext_resource type="Script" uid="uid://q4if1fl2gj7l" path="res://meta/meta_skill.gd" id="1_ms"]
+
+[resource]
+script = ExtResource("1_ms")
+description_text = "Unlocks the Knight character class."
+skill_name = &"Knight Class"
+skill_type = 5
+tree_type = 6

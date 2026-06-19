@@ -49,6 +49,11 @@ func load_save_state() -> SaveState:
 				var skill = SkillManager.lookup_skill(skill_name)
 				if not save_state.unlocked_skills.available(skill):
 					save_state.unlocked_skills.mark_available(skill)
+		
+		# Also unlock any skills explicitly marked as starting unlocks in the level provider.
+		for skill in game_mode.level_provider.starting_unlocked_skills:
+			if not save_state.unlocked_skills.available(skill):
+				save_state.unlocked_skills.mark_available(skill)
 	return save_state
 
 @rpc("authority", "call_local")

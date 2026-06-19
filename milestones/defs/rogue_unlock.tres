@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RunsCompletedWithClassMilestone" format=3 uid="uid://jk4injvj3bnw"]
+
+[ext_resource type="Script" path="res://milestones/runs_completed_with_class_milestone.gd" id="1_ms"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_skill"]
+[ext_resource type="Resource" uid="uid://brogueclass01" path="res://skill_tree/meta_skills/rogue_class.tres" id="3_skill"]
+
+[resource]
+script = ExtResource("1_ms")
+required_classes = Array[int]([1, 4])
+required_count = 1
+id = &"rogue_unlock"
+name = "Stealth Operative"
+description = "Win a run with Knight and Cleric to unlock the Rogue class."
+phase = 1
+visibility = 0
+reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_skill")])

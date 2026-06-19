@@ -14,10 +14,12 @@ var sorted_players: Array
 var selections = {}
 var selections_wanted: int
 var available_characters: Array[GameplayCharacter]
+var save_state: SaveState
 
-func set_characters(num_characters: int, available_characters_: Array[GameplayCharacter]) -> void:
+func set_characters(num_characters: int, available_characters_: Array[GameplayCharacter], save_state_: SaveState) -> void:
 	selections_wanted = num_characters
 	available_characters = available_characters_
+	save_state = save_state_
 	selections.clear()
 
 func _on_show(_info: Dictionary = {}) -> void:
@@ -35,7 +37,7 @@ func clear_characters() -> void:
 func add_character(character_idx: int, session_id: String) -> void:
 	var character_selector = character_selector_scene.instantiate()
 	character_selector.name = session_id
-	character_selector.initialize(character_idx, available_characters)
+	character_selector.initialize(character_idx, available_characters, save_state)
 	characters_container.add_child(character_selector)
 	if session_id == "local" or session_id == OnlineMatch.get_my_session_id():
 		character_selector.character_selected.connect(_on_character_selected.bind(character_idx))

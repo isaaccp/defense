@@ -32,6 +32,7 @@ func _ready():
 	# TODO: Encapsulate all the hud business better.
 	Global.subviewport = %SubViewport
 	ui_layer.set_save_state(save_state)
+	ui_layer.level_provider = level_provider
 	ui_layer.initialize_state_machine_stack(state)
 	state.change_state.call_deferred(MENU)
 

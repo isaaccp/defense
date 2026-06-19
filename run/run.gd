@@ -143,6 +143,8 @@ func _on_level_finished():
 		milestone_manager.evaluate_level_end(level_stats)
 	# Needs to be recorded here in case it's the last level.
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
+	for gc in gameplay_characters:
+		run_save_state.stats.add_character_stat(Stat.make(Stat.LevelsBeaten, 1), gc.scene_id)
 	run_save_state.stats.add(level_stats)
 	run_save_state.current_phase = RunSaveState.Phase.REWARD
 	# Call this in the same frame explicitly so we update all the
@@ -233,6 +235,8 @@ func finish_run():
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
 	run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
+	for gc in gameplay_characters:
+		run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), gc.scene_id)
 	run_finished.emit()
 
 func _on_restart_requested():

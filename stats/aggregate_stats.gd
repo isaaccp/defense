@@ -16,6 +16,12 @@ func add_stat(stat: Stat, character_id: Enum.CharacterSceneId = Enum.CharacterSc
 			character_stats[character_id] = Stats.new()
 		character_stats[character_id].add_stat(stat)
 
+func add_character_stat(stat: Stat, character_id: Enum.CharacterSceneId):
+	if character_id != Enum.CharacterSceneId.UNSPECIFIED:
+		if not character_stats.has(character_id):
+			character_stats[character_id] = Stats.new()
+		character_stats[character_id].add_stat(stat)
+
 func add(other: AggregateStats):
 	aggregate.add(other.aggregate)
 	for character_id in other.character_stats:

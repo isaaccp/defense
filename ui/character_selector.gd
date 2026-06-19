@@ -10,15 +10,19 @@ signal character_selected(character_idx: int)
 
 var player_id: int
 var available_characters: Array[GameplayCharacter]
+var save_state: SaveState
 
-func initialize(player_id_: int, available_characters_: Array[GameplayCharacter]):
+func initialize(player_id_: int, available_characters_: Array[GameplayCharacter], save_state_: SaveState):
 	player_id = player_id_
 	available_characters = available_characters_
+	save_state = save_state_
 
 func _ready():
 	%Label.text = "Player %d" % player_id
 	for i in range(available_characters.size()):
 		var character = available_characters[i]
+		if not character.is_unlocked(save_state.unlocked_skills):
+			continue
 		var description = _description(character)
 		var button = rich_button_scene.instantiate()
 		button.set_meta("character_idx", i)

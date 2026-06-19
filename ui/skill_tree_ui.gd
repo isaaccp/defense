@@ -42,8 +42,9 @@ enum Mode { ACQUIRE, VIEW_META }
 
 var mode: Mode
 var save_state: SaveState
-var unlocked_skills: SkillTreeState
+var level_provider: LevelProvider
 var character: GameplayCharacter
+var unlocked_skills: SkillTreeState
 var acquired_skills: SkillTreeState
 
 # Until we vary cost by skill, one flat number for everything.
@@ -71,17 +72,33 @@ func _ready() -> void:
 			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/charge.tres"))
 			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/cleave.tres"))
 			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sweeping_attack.tres"))
-			initialize(test_mode, ss, null, true)
+			var lp = LevelProvider.new()
+			if test_character:
+				if test_character.available_skill_trees == null or test_character.available_skill_trees.is_empty():
+					var test_arr: Array[Skill.TreeType] = [Skill.TreeType.WARRIOR, Skill.TreeType.ROGUE]
+					test_character.available_skill_trees = test_arr
+				var chars: Array[GameplayCharacter] = [test_character]
+				lp.available_characters = chars
+			initialize(test_mode, ss, lp, null, true)
 		elif test_mode == Mode.ACQUIRE:
 			ss.unlocked_skills.full = true
 			assert(test_character)
-			initialize(test_mode, ss, test_character)
-func initialize(mode_: Mode, save_state_: SaveState, character_: GameplayCharacter = null, show_all: bool = false) -> void:
+			var rs = RunSaveState.new()
+			if test_character.available_skill_trees == null or test_character.available_skill_trees.is_empty():
+				var test_arr: Array[Skill.TreeType] = [Skill.TreeType.WARRIOR, Skill.TreeType.ROGUE]
+				test_character.available_skill_trees = test_arr
+			var chars: Array[GameplayCharacter] = [test_character]
+			rs.gameplay_characters = chars
+			ss.run_save_state = rs
+			initialize(test_mode, ss, null, test_character)
+
+func initialize(mode_: Mode, save_state_: SaveState, level_provider_: LevelProvider = null, character_: GameplayCharacter = null, show_all: bool = false) -> void:
 	assert(save_state_)
 	if mode_ == Mode.ACQUIRE:
 		assert(character_)
 	mode = mode_
 	save_state = save_state_
+	level_provider = level_provider_
 	character = character_
 	unlocked_skills = save_state.unlocked_skills
 	assert(unlocked_skills)
@@ -100,14 +117,29 @@ func _build_tabs() -> void:
 		child.queue_free()
 	_panes.clear()
 	%Title.text = "Skill Tree" if mode == Mode.ACQUIRE else "View Meta Progression"
+	
+	var visible_trees = { Skill.TreeType.GENERAL: true }
+	if mode == Mode.VIEW_META:
+		visible_trees[Skill.TreeType.META] = true
+		if level_provider:
+			for c in level_provider.available_characters:
+				if c.is_unlocked(save_state.unlocked_skills):
+					for t in c.available_skill_trees:
+						visible_trees[t] = true
+	elif mode == Mode.ACQUIRE:
+		if save_state.run_save_state and save_state.run_save_state.gameplay_characters:
+			for c in save_state.run_save_state.gameplay_characters:
+				for t in c.available_skill_trees:
+					visible_trees[t] = true
+					
 	for t in skill_tree_collection.skill_trees:
-		# Skip META tree in ACQUIRE mode (meta skills are unlocked between runs).
-		if mode == Mode.ACQUIRE and t.tree_type == Skill.TreeType.META:
+		if not visible_trees.has(t.tree_type):
 			continue
 		var pane := TreePane.new(self, t)
 		pane.name = Skill.TreeType.keys()[t.tree_type]
 		tabs.add_child(pane)
 		_panes.append(pane)
+			
 	_refresh()
 	hover_skill(null)
 

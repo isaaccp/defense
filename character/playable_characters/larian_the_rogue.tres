@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="2_ld1pl"]
 [ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="2_rlskg"]
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="3_b60i4"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_skill"]
+[ext_resource type="Resource" uid="uid://brogueclass01" path="res://skill_tree/meta_skills/rogue_class.tres" id="3_meta"]
 
 [sub_resource type="Resource" id="Resource_2impa"]
 script = ExtResource("1_gc03e")
@@ -23,5 +25,7 @@ starting_kit = "Rogue"
 scene_id = 3
 description = "A forest elf on a secret mission"
 acquired_skills = SubResource("Resource_2impa")
+unlock_meta_skill = ExtResource("3_meta")
+available_skill_trees = Array[int]([5])
 attributes = SubResource("Resource_60uxt")
 relics = Array[StringName]([&"Killer\'s Edge", &"Killer\'s Insight"])

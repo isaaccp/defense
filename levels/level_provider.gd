@@ -11,6 +11,8 @@ class_name LevelProvider
 ## pool at load time; the run picks one from the matching pool per stage.
 @export var levels: Array[PackedScene]
 @export var available_characters: Array[GameplayCharacter]
+## Skills that are automatically unlocked at the start of a new save (e.g. starter classes)
+@export var starting_unlocked_skills: Array[Skill]
 @export var relic_library: RelicLibrary
 @export var milestone_library: MilestoneLibrary
 ## Reward types available at reward stages. The run picks 2 different

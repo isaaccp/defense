@@ -238,7 +238,7 @@ func _open_skill_tree_for(gc: GameplayCharacter) -> void:
 	for child in %SkillTreeSlot.get_children():
 		child.queue_free()
 	var skill_tree := skill_tree_scene.instantiate() as SkillTreeUI
-	skill_tree.initialize(SkillTreeUI.Mode.ACQUIRE, _save_state, gc, false)
+	skill_tree.initialize(SkillTreeUI.Mode.ACQUIRE, _save_state, _run_save_state.level_provider, gc, false)
 	%SkillTreeSlot.add_child(skill_tree)
 	await skill_tree.ok_pressed
 	skill_tree.queue_free()

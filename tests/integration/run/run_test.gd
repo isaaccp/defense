@@ -62,6 +62,9 @@ func test_end_to_end():
 	await wait_frames(2)
 
 	gut.p("Reward Stage")
+	assert_eq(run.run_save_state.stats.aggregate.get_value(Stat.LevelsBeaten), 1)
+	assert_eq(run.run_save_state.stats.character_stats[instant_win_level_provider.available_characters[0].scene_id].get_value(Stat.LevelsBeaten), 1)
+
 	assert_eq(run.run_save_state.current_stage, 1, "Stage doesn't advance until reward continue")
 	assert_eq(run.run_save_state.current_phase, RunSaveState.Phase.REWARD)
 	assert(run.state.is_state(run.REWARD_STAGE))
@@ -74,6 +77,18 @@ func test_end_to_end():
 	assert_eq(run.run_save_state.current_phase, RunSaveState.Phase.FIGHT)
 	assert(run.state.is_state(run.WITHIN_LEVEL))
 	assert_eq(run.level.difficulty, 2, "Stage 2 should load a d=2 level")
+	
+	run.level.level_finished.emit()
+	await wait_frames(2)
+	ui_layer.reward_stage_continue_selected.emit()
+	await wait_frames(2)
+	
+	# After second level, run is complete (max_levels = 2 in test_instant_win_upgrade.tres)
+	assert(run.state.is_state(run.RUN_SUMMARY))
+	assert_eq(run.run_save_state.stats.aggregate.get_value(Stat.LevelsBeaten), 2)
+	assert_eq(run.run_save_state.stats.aggregate.get_value(Stat.RunsCompleted), 1)
+	assert_eq(run.run_save_state.stats.character_stats[instant_win_level_provider.available_characters[0].scene_id].get_value(Stat.LevelsBeaten), 2)
+	assert_eq(run.run_save_state.stats.character_stats[instant_win_level_provider.available_characters[0].scene_id].get_value(Stat.RunsCompleted), 1)
 
 	# TODO: Test end-of-run (no levels at stage 3 → RUN_SUMMARY).
 	# TODO: Test failure condition.
