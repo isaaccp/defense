@@ -46,6 +46,7 @@ signal try_again_selected
 signal pre_run_continue_pressed
 ## Continue pressed on run sumary screen.
 signal run_summary_continue_selected
+signal milestone_summary_continue_selected
 ## Continue pressed on between levels screen.
 signal between_levels_continue_selected
 signal reward_stage_continue_selected
@@ -112,6 +113,9 @@ func show_pre_run_screen():
 func show_run_summary_screen(text: String):
 	show_screen(%RunSummaryScreen, {"text": text})
 
+func show_milestone_summary_screen(unlocked_milestones: Array[MilestoneManager.MilestoneProgressDelta]):
+	show_screen(%MilestoneSummaryScreen, {"unlocked_milestones": unlocked_milestones})
+
 func show_between_levels_screen(title: String, text: String):
 	show_screen(%BetweenLevelsScreen, {"title": title, "text": text})
 
@@ -173,6 +177,10 @@ func _on_pre_run_screen_continue_pressed():
 
 func _on_run_summary_screen_continue_selected():
 	run_summary_continue_selected.emit()
+	hide_screen()
+
+func _on_milestone_summary_screen_continue_selected():
+	milestone_summary_continue_selected.emit()
 	hide_screen()
 
 func _on_between_levels_screen_continue_selected():

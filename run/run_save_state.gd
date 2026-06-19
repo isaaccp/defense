@@ -25,8 +25,9 @@ enum Phase {
 ## `make()` time so saves restore the exact same offers.
 @export var reward_schedule: Array[StageRewards]
 @export var unlocked_milestones: Dictionary
+@export var starting_milestone_progress: Dictionary[StringName, int]
 
-static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider, unlocked_skills: SkillTreeState, unlocked_milestones: Dictionary) -> RunSaveState:
+static func make(gameplay_characters: Array[GameplayCharacter], level_provider: LevelProvider, unlocked_skills: SkillTreeState, unlocked_milestones: Dictionary, starting_milestone_progress: Dictionary) -> RunSaveState:
 	var err := level_provider.validate_runnable()
 	if not err.is_empty():
 		push_error("LevelProvider is not runnable: %s" % err)
@@ -40,6 +41,8 @@ static func make(gameplay_characters: Array[GameplayCharacter], level_provider: 
 	run_save_state.stats = AggregateStats.new()
 	run_save_state.seed = _make_seed()
 	run_save_state.unlocked_milestones = unlocked_milestones
+	# Deep-copy the progress so mid-run evaluation mutations don't alter the snapshot
+	run_save_state.starting_milestone_progress = starting_milestone_progress.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
 	run_save_state.reward_schedule = _generate_schedule(run_save_state, level_provider, unlocked_skills)
 	return run_save_state
 

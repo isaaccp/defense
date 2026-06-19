@@ -218,6 +218,14 @@ func _on_run_summary_exited():
 	pass
 
 func _on_run_summary_continue_selected():
+	var newly_unlocked: Array[MilestoneManager.MilestoneProgressDelta] = []
+	if milestone_manager:
+		newly_unlocked = milestone_manager.process_unlocks(run_save_state)
+	
+	ui_layer.show_milestone_summary_screen(newly_unlocked)
+	ui_layer.milestone_summary_continue_selected.connect(_on_milestone_summary_continue_selected, CONNECT_ONE_SHOT)
+
+func _on_milestone_summary_continue_selected():
 	finish_run.call_deferred()
 
 func finish_run():

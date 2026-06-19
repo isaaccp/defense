@@ -1,5 +1,13 @@
 class_name MilestoneManager
 
+class MilestoneProgressDelta extends RefCounted:
+	var def: MilestoneDef
+	var previous: int
+	var current: int
+	var required: int
+	var unlocked: bool
+	var was_unlocked: bool
+
 var defs: Array[MilestoneDef] = []
 var save_state: SaveState
 
@@ -30,6 +38,30 @@ func _evaluate_def(def: MilestoneDef, level_stats: AggregateStats):
 		var current = save_state.milestone_progress.get(def.id, 0)
 		current += progress
 		save_state.milestone_progress[def.id] = current
-		if current >= def.required_count:
+
+## Called at the end of the run to officially unlock milestones.
+## Returns a list of milestones that gained progress this run, including their unlock status.
+func process_unlocks(run_save_state: RunSaveState) -> Array[MilestoneProgressDelta]:
+	var deltas: Array[MilestoneProgressDelta] = []
+	for def in defs:
+		var previous = run_save_state.starting_milestone_progress.get(def.id, 0)
+		var current = save_state.milestone_progress.get(def.id, 0)
+		var was_unlocked = run_save_state.unlocked_milestones.get(def.id, false)
+		
+		var delta = MilestoneProgressDelta.new()
+		delta.def = def
+		delta.previous = previous
+		delta.current = current
+		delta.required = def.required_count
+		delta.was_unlocked = was_unlocked
+		delta.unlocked = was_unlocked
+		
+		# Only unlock if it wasn't already unlocked, and we met the requirement
+		if current >= def.required_count and not save_state.unlocked_milestones.get(def.id, false):
 			save_state.unlocked_milestones[def.id] = true
+			delta.unlocked = true
 			print("Milestone unlocked: ", def.id)
+			
+		deltas.append(delta)
+		
+	return deltas

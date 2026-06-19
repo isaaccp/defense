@@ -352,7 +352,7 @@ func _standalone_ready_next_frame(parent: Node):
 	# No type to prevent pulling in deps.
 	var gameplay = load("res://gameplay.tscn").instantiate()
 	var save_state = SaveState.make_new() # ignore-dep
-	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider, save_state.unlocked_skills, save_state.unlocked_milestones) # ignore-dep
+	save_state.run_save_state = RunSaveState.make(test_gameplay_characters, game_mode.level_provider, save_state.unlocked_skills, save_state.unlocked_milestones, save_state.milestone_progress) # ignore-dep
 	gameplay.initialize(game_mode, save_state)
 	parent.add_child(gameplay)
 	# initialize() calls deferred to set state to MENU, so need
