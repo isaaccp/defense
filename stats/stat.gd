@@ -15,6 +15,7 @@ const FocusSpent: StringName = &"focus_spent"
 
 # Run Stats.
 const LevelsBeaten: StringName = &"levels_beaten"
+const RunsCompleted: StringName = &"runs_completed"
 
 @export var name: StringName
 @export var int_value: IntValue

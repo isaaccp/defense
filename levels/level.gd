@@ -101,7 +101,7 @@ func exit():
 	get_tree().paused = false
 	queue_free()
 
-func initialize(gameplay_characters: Array[GameplayCharacter], unlocked_milestones: Dictionary = {}):
+func initialize(gameplay_characters: Array[GameplayCharacter], unlocked_skills: SkillTreeState = null):
 	source_gameplay_characters = gameplay_characters
 	# Forward each chest's gold reward to the level-level signal so Run
 	# (which already connects to level signals) can aggregate onto
@@ -110,7 +110,7 @@ func initialize(gameplay_characters: Array[GameplayCharacter], unlocked_mileston
 		for child in interactables.get_children():
 			var interactable = child as Interactable
 			if interactable:
-				if not interactable.meets_requirements(unlocked_milestones):
+				if not interactable.meets_requirements(unlocked_skills):
 					interactable.queue_free()
 					continue
 			

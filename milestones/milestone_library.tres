@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" path="res://milestones/milestone_library.gd" id="1_lib"]
 [ext_resource type="Resource" path="res://milestones/defs/gold_chests_unlock.tres" id="2_ach"]
+[ext_resource type="Resource" path="res://milestones/defs/behavior_library_unlock.tres" id="3_ach"]
+[ext_resource type="Resource" path="res://milestones/defs/compound_conditions_unlock.tres" id="4_ach"]
+[ext_resource type="Resource" path="res://milestones/defs/triple_conditions_unlock.tres" id="5_ach"]
 
 [resource]
 script = ExtResource("1_lib")
-milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach")])
+milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach"), ExtResource("3_ach"), ExtResource("4_ach"), ExtResource("5_ach")])

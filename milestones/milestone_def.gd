@@ -19,6 +19,7 @@ enum Visibility {
 @export var phase: EvaluationPhase
 @export var visibility: Visibility = Visibility.VISIBLE
 @export var required_count: int = 1
+@export var reward_skills: Array[Skill] = []
 
 # Returns how much progress was made toward this achievement during this evaluation.
 func evaluate(level_stats: AggregateStats, run_stats: AggregateStats, global_stats: AggregateStats) -> int:

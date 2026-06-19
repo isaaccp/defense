@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="RunsCompletedMilestone" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://milestones/runs_completed_milestone.gd" id="1_ach"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_skill"]
+[ext_resource type="Resource" uid="uid://bj12af7xsthcs" path="res://skill_tree/meta_skills/behavior_library.tres" id="3_skill"]
+
+[resource]
+script = ExtResource("1_ach")
+id = &"behavior_library_unlock"
+name = "Tactician"
+description = "Complete 1 full run to unlock the AI Behavior Library, allowing you to edit and save custom hero behaviors."
+phase = 1
+visibility = 0
+required_count = 1
+reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_skill")])

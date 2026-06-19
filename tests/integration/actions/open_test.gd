@@ -13,7 +13,9 @@ var character: Node2D
 
 func before_each():
 	level = chest_test_level_scene.instantiate()
-	level.initialize([test_character], {&"gold_chests_unlock": true})
+	var unlocked_skills = SkillTreeState.new()
+	unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/gold_chests.tres"))
+	level.initialize([test_character], unlocked_skills)
 	add_child_autoqfree(level)
 	character = level.characters.get_child(0)
 
@@ -21,7 +23,7 @@ func _chest_target() -> TargetSelectionDef:
 	# Clone the shared resource so test mutations of `params.interactable_kind`
 	# don't bleed into other tests / future load uses.
 	var target := interactable_target_src.duplicate(true) as TargetSelectionDef
-	target.params.set_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND, Interactable.Kind.CHEST)
+	target.params.set_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND, Enum.InteractableKind.CHEST)
 	return target
 
 func test_character_opens_chest_and_gold_is_emitted():

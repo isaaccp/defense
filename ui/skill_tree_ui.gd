@@ -40,17 +40,17 @@ const STATE_COLORS := {
 
 
 
-enum Mode { ACQUIRE, UNLOCK }
+enum Mode { ACQUIRE, VIEW_META }
 
 var mode: Mode
 var save_state: SaveState
 var unlocked_skills: SkillTreeState
 var character: GameplayCharacter
 var acquired_skills: SkillTreeState
-var hide_locked_skills: bool = false
 
 # Until we vary cost by skill, one flat number for everything.
 var purchase_cost: int = 150
+var hide_locked_skills: bool = false
 
 var _panes: Array = []
 var _hovered_skill: Skill
@@ -64,8 +64,7 @@ signal ok_pressed
 func _ready() -> void:
 	if get_parent() == get_tree().root:
 		var ss := SaveState.make_new()
-		if test_mode == Mode.UNLOCK:
-			ss.meta_xp = 600
+		if test_mode == Mode.VIEW_META:
 			initialize(test_mode, ss)
 		elif test_mode == Mode.ACQUIRE:
 			ss.unlocked_skills = SkillTreeState.new()
@@ -97,7 +96,7 @@ func _build_tabs() -> void:
 	for child in tabs.get_children():
 		child.queue_free()
 	_panes.clear()
-	%Title.text = "Skill Tree" if mode == Mode.ACQUIRE else "Unlock Skills"
+	%Title.text = "Skill Tree" if mode == Mode.ACQUIRE else "View Meta Progression"
 	for t in skill_tree_collection.skill_trees:
 		# Skip META tree in ACQUIRE mode (meta skills are unlocked between runs).
 		if mode == Mode.ACQUIRE and t.tree_type == Skill.TreeType.META:
@@ -116,10 +115,10 @@ func _refresh() -> void:
 	_refresh_tab_badges()
 
 func _refresh_status() -> void:
-	if mode == Mode.ACQUIRE:
-		%Status.text = "XP: %d   |   Cost: %d per skill" % [character.xp, purchase_cost]
-	else:
-		%Status.text = "Meta XP: %d   |   Cost: %d per unlock" % [save_state.meta_xp, purchase_cost]
+	if mode == Mode.VIEW_META:
+		%Status.text = "Skills Unlocked: %d / %d" % [save_state.unlocked_skills.skills.size(), SkillManager.all_skills.size()]
+	elif character:
+		%Status.text = "Run XP: %d   |   Cost: %d per pick" % [character.xp, purchase_cost]
 
 func _refresh_tab_badges() -> void:
 	for pane in _panes:
@@ -147,9 +146,9 @@ func hover_skill(skill: Skill) -> void:
 	lines.append("")
 	lines.append("[b]State:[/b] %s" % _state_label(skill))
 	if skill.parent:
-		var parent_state := "✓" if (_is_acquired(skill.parent) or (mode == Mode.UNLOCK and _is_unlocked(skill.parent))) else "✗"
+		var parent_state := "✓" if (_is_acquired(skill.parent) or (mode == Mode.VIEW_META and _is_unlocked(skill.parent))) else "✗"
 		lines.append("[b]Requires:[/b] %s (%s)" % [skill.parent.name(), parent_state])
-	lines.append("[b]Cost:[/b] %d %s" % [purchase_cost, "XP" if mode == Mode.ACQUIRE else "Meta XP"])
+	lines.append("[b]Cost:[/b] %d %s" % [purchase_cost, "XP"])
 	lines.append("")
 	lines.append(skill.description())
 	info.text = "\n".join(lines)
@@ -194,13 +193,11 @@ func _state(s: Skill) -> SkillState:
 		if not character.has_xp(purchase_cost):
 			return SkillState.NEED_XP
 		return SkillState.BUYABLE
-	else:  # UNLOCK
+	else:  # VIEW_META
 		if _is_unlocked(s):
 			return SkillState.OWNED
 		if s.parent and not _is_unlocked(s.parent):
 			return SkillState.NEED_PARENT
-		if save_state.meta_xp < purchase_cost:
-			return SkillState.NEED_XP
 		return SkillState.BUYABLE
 
 func _state_label(s: Skill) -> String:
@@ -237,10 +234,6 @@ func buy_skill(s: Skill) -> void:
 		assert(character.has_xp(purchase_cost))
 		character.use_xp(purchase_cost)
 		acquired_skills.mark_available(s)
-	else:
-		assert(save_state.meta_xp >= purchase_cost)
-		save_state.meta_xp -= purchase_cost
-		unlocked_skills.mark_available(s)
 	_refresh()
 	# Re-hover the same skill so the sidebar reflects the new state.
 	if _hovered_skill:
@@ -255,18 +248,57 @@ func _on_ok_pressed() -> void:
 class TreePane extends ScrollContainer:
 	var ui: SkillTreeUI
 	var tree: SkillTree
-	var canvas: TreeCanvas
+	var canvas: Control
 
 	func _init(ui_: SkillTreeUI, tree_: SkillTree):
 		ui = ui_
 		tree = tree_
 		horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 		vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-		canvas = TreeCanvas.new(ui, tree)
-		add_child(canvas)
+		if tree.tree_type == Skill.TreeType.META:
+			var margin = MarginContainer.new()
+			margin.add_theme_constant_override("margin_left", 20)
+			margin.add_theme_constant_override("margin_top", 20)
+			margin.add_theme_constant_override("margin_right", 20)
+			margin.add_theme_constant_override("margin_bottom", 20)
+			margin.size_flags_horizontal = SIZE_EXPAND_FILL
+			add_child(margin)
+			canvas = MetaCanvas.new(ui, tree)
+			margin.add_child(canvas)
+		else:
+			canvas = TreeCanvas.new(ui, tree)
+			add_child(canvas)
 
 	func refresh() -> void:
 		canvas.refresh()
+
+# ============================================================================
+# MetaCanvas — flat layout for meta skills (HFlowContainer).
+# ============================================================================
+class MetaCanvas extends HFlowContainer:
+	var ui: SkillTreeUI
+	var tree: SkillTree
+	var cards: Dictionary = {}
+
+	func _init(ui_: SkillTreeUI, tree_: SkillTree):
+		ui = ui_
+		tree = tree_
+		size_flags_horizontal = SIZE_EXPAND_FILL
+		add_theme_constant_override("h_separation", 20)
+		add_theme_constant_override("v_separation", 20)
+		_build()
+
+	func _build() -> void:
+		for s in tree.skills:
+			if ui.mode == Mode.VIEW_META and ui.hide_locked_skills and not ui._is_unlocked(s):
+				continue
+			var card = SkillCard.new(ui, s)
+			add_child(card)
+			cards[s] = card
+
+	func refresh() -> void:
+		for s in cards:
+			(cards[s] as SkillCard).refresh()
 
 # ============================================================================
 # TreeCanvas — places SkillCards in a column-by-depth layout and draws edges.
@@ -283,16 +315,22 @@ class TreeCanvas extends Control:
 		_build()
 
 	func _build() -> void:
+		var skills_to_render = []
+		for s in tree.skills:
+			if ui.mode == Mode.VIEW_META and not ui._is_unlocked(s):
+				continue
+			skills_to_render.append(s)
+
 		# Depth memo (column index per skill).
 		var depth: Dictionary = {}
-		for s in tree.skills:
-			_compute_depth(s, depth)
+		for s in skills_to_render:
+			_compute_depth(s, depth, skills_to_render)
 		# Child index: parent -> sorted list of children (in our tree).
 		var children: Dictionary = {}
-		for s in tree.skills:
+		for s in skills_to_render:
 			if not children.has(s):
 				children[s] = []
-			if s.parent and tree.skills.has(s.parent):
+			if s.parent and skills_to_render.has(s.parent):
 				if not children.has(s.parent):
 					children[s.parent] = []
 				children[s.parent].append(s)
@@ -300,8 +338,8 @@ class TreeCanvas extends Control:
 			(children[k] as Array).sort_custom(func(a, b): return String(a.name()) < String(b.name()))
 		# Roots in this tree (no parent OR parent not in this tree).
 		var roots: Array[Skill] = []
-		for s in tree.skills:
-			if s.parent == null or not tree.skills.has(s.parent):
+		for s in skills_to_render:
+			if s.parent == null or not skills_to_render.has(s.parent):
 				roots.append(s)
 		roots.sort_custom(func(a, b): return String(a.name()) < String(b.name()))
 		# Assign rows depth-first so each subtree's rows are contiguous and
@@ -314,7 +352,7 @@ class TreeCanvas extends Control:
 		# Place cards.
 		var max_col := 0
 		var max_row := 0
-		for s in tree.skills:
+		for s in skills_to_render:
 			var col: int = depth[s]
 			var row: int = row_of[s]
 			max_col = max(max_col, col)
@@ -351,12 +389,12 @@ class TreeCanvas extends Control:
 		row_of[s] = (first_child_row + last_child_row) / 2
 		return cursor
 
-	func _compute_depth(s: Skill, memo: Dictionary) -> int:
+	func _compute_depth(s: Skill, memo: Dictionary, skills_to_render: Array) -> int:
 		if memo.has(s):
 			return memo[s]
 		var d := 0
-		if s.parent and tree.skills.has(s.parent):
-			d = _compute_depth(s.parent, memo) + 1
+		if s.parent and skills_to_render.has(s.parent):
+			d = _compute_depth(s.parent, memo, skills_to_render) + 1
 		memo[s] = d
 		return d
 
@@ -388,7 +426,6 @@ class SkillCard extends PanelContainer:
 	var _name_chip: PanelContainer
 	var _name_label: Label
 	var _status_label: Label
-	var _cost_label: Label
 	var _buy_button: Button
 	var _shroud_label: Label
 	var _content_vb: VBoxContainer
@@ -446,9 +483,6 @@ class SkillCard extends PanelContainer:
 		_buy_button.size_flags_vertical = SIZE_SHRINK_CENTER
 		_buy_button.pressed.connect(_on_buy_pressed)
 		hb.add_child(_buy_button)
-		# We don't keep a separate _cost_label — the cost lives inside the
-		# buy button text ("Buy 150").
-		_cost_label = null
 		# Shroud overlay — replaces content when SHROUDED.
 		_shroud_label = Label.new()
 		_shroud_label.text = "?"
@@ -473,6 +507,19 @@ class SkillCard extends PanelContainer:
 		sb.set_corner_radius_all(5)
 		sb.set_content_margin_all(0)
 		add_theme_stylebox_override("panel", sb)
+
+		# Tooltip / sidebar description
+		# Shrouded node hides description
+		if ui._is_shrouded(skill):
+			self.tooltip_text = "???"
+		else:
+			var req_skills = skill.required_skills()
+			var tip = ""
+			if not req_skills.is_empty() and skill.tree_type != Skill.TreeType.META:
+				tip += "[Requires: %s]\n\n" % ", ".join(req_skills)
+			tip += skill.description()
+			self.tooltip_text = tip
+
 		if state == SkillTreeUI.SkillState.SHROUDED:
 			_content_vb.visible = false
 			_shroud_label.visible = true
@@ -482,7 +529,9 @@ class SkillCard extends PanelContainer:
 		_name_label.text = String(skill.name())
 		_status_label.text = ui._state_label(skill)
 		_buy_button.text = "Buy %d" % ui.purchase_cost
-		_buy_button.visible = (state == SkillTreeUI.SkillState.BUYABLE)
+		# Buy button only shows up if the state is BUYABLE.
+		# In VIEW_META, we don't buy skills.
+		_buy_button.visible = (state == SkillTreeUI.SkillState.BUYABLE and ui.mode != SkillTreeUI.Mode.VIEW_META)
 		
 		# Style the name chip dynamically based on type
 		var profile = SkillStyles.profile_for_skill_type(skill.skill_type)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelsBeatenMilestone" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://milestones/levels_beaten_milestone.gd" id="1_ach"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_skill"]
+[ext_resource type="Resource" uid="uid://bcompconds001" path="res://skill_tree/meta_skills/compound_conditions.tres" id="3_skill"]
+
+[resource]
+script = ExtResource("1_ach")
+id = &"compound_conditions_unlock"
+name = "Complex Logic"
+description = "Complete 3 levels to unlock the ability to use two conditions in a single AI rule."
+phase = 1
+visibility = 0
+required_count = 3
+reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_skill")])

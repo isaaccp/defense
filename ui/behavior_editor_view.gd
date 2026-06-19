@@ -770,14 +770,14 @@ class SkillCell extends PanelContainer:
 				opt.set_item_disabled(0, true)
 				opt.fit_to_longest_item = false
 
-				var values: Array[Interactable.Kind] = []
-				for v in Interactable.Kind.values():
-					if v == Interactable.Kind.UNSPECIFIED:
+				var values: Array[Enum.InteractableKind] = []
+				for v in Enum.InteractableKind.values():
+					if v == Enum.InteractableKind.UNSPECIFIED:
 						continue
 					values.append(v)
-					opt.add_item(Interactable.Kind.keys()[v])
+					opt.add_item(Enum.InteractableKind.keys()[v])
 				if _skill.params.placeholder_set(SkillParams.PlaceholderId.INTERACTABLE_KIND):
-					var current_kind: Interactable.Kind = _skill.params.get_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND)
+					var current_kind: Enum.InteractableKind = _skill.params.get_placeholder_value(SkillParams.PlaceholderId.INTERACTABLE_KIND)
 					opt.select(values.find(current_kind) + 1)
 				else:
 					opt.select(0)
@@ -834,7 +834,7 @@ class SkillCell extends PanelContainer:
 		_skill.params.set_placeholder_value(placeholder, sort)
 		rule_widget.on_cell_changed()
 
-	func _on_interactable_kind_selected(selection: int, placeholder: SkillParams.PlaceholderId, values: Array[Interactable.Kind]):
+	func _on_interactable_kind_selected(selection: int, placeholder: SkillParams.PlaceholderId, values: Array[Enum.InteractableKind]):
 		_skill.params.set_placeholder_value(placeholder, values[selection-1])
 		rule_widget.on_cell_changed()
 

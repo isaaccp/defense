@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="LevelsBeatenMilestone" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://milestones/levels_beaten_milestone.gd" id="1_ach"]
+[ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_skill"]
+[ext_resource type="Resource" uid="uid://goldchests001" path="res://skill_tree/meta_skills/gold_chests.tres" id="3_gc"]
 
 [resource]
 script = ExtResource("1_ach")
@@ -10,3 +12,4 @@ description = "Complete 5 levels across all your runs to start encountering Gold
 phase = 1
 visibility = 0
 required_count = 5
+reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_gc")])

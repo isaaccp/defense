@@ -10,3 +10,8 @@ enum CharacterSceneId {
 	ROGUE,
 	CLERIC,
 }
+
+enum InteractableKind {
+	UNSPECIFIED,
+	CHEST,
+}

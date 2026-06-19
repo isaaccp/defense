@@ -104,7 +104,7 @@ func _on_within_level_entered(save_snapshot: bool = true):
 		state.change_state.call_deferred(RUN_SUMMARY)
 		return
 	level = level_scene.instantiate()
-	level.initialize(gameplay_characters, run_save_state.unlocked_milestones)
+	level.initialize(gameplay_characters, run_save_state.unlocked_skills)
 	level.selected_relics = []
 	level.level_failed.connect(_on_level_failed)
 	level.level_finished.connect(_on_level_finished)
@@ -232,6 +232,7 @@ func finish_run():
 	# TODO: Differentiate failure vs success.
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
+	run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
 	run_finished.emit()
 
 func _on_restart_requested():

@@ -3,15 +3,7 @@ extends Actor
 
 class_name Interactable
 
-## What kind of interactable this is. Used by target selectors to filter.
-## Keep strictly to what's currently in use — add values only when adding the
-## corresponding game content.
-enum Kind {
-	UNSPECIFIED,
-	CHEST,
-}
-
-@export var kind: Kind = Kind.UNSPECIFIED
+@export var kind: Enum.InteractableKind = Enum.InteractableKind.UNSPECIFIED
 
 # True once it has been opened and shouldn't be a valid target anymore.
 var opened: bool = false
@@ -22,6 +14,6 @@ func open(_actor: Actor) -> void:
 	opened = true
 	destroyed = true
 
-## Returns true if this interactable should be spawned based on unlocked milestones.
-func meets_requirements(_unlocked_milestones: Dictionary) -> bool:
+## Returns true if this interactable should be spawned based on unlocked skills.
+func meets_requirements(_unlocked_skills: SkillTreeState) -> bool:
 	return true

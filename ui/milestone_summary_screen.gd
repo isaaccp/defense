@@ -38,6 +38,13 @@ func _on_show(info: Dictionary):
 		text += "--- Newly Unlocked ---\n"
 		for delta in categorized.newly_unlocked:
 			text += "- %s: %d/%d (+%d) [UNLOCKED!]\n" % [delta.def.name, delta.current, delta.required, delta.current - delta.previous]
+			if not delta.def.reward_skills.is_empty():
+				var skill_names = []
+				for s in delta.def.reward_skills:
+					if s:
+						skill_names.append(s.name())
+				if not skill_names.is_empty():
+					text += "  Rewards unlocked: %s\n" % ", ".join(skill_names)
 		text += "\n"
 		
 	if not categorized.in_progress.is_empty():
@@ -50,6 +57,13 @@ func _on_show(info: Dictionary):
 		text += "--- Previously Unlocked ---\n"
 		for delta in categorized.previously_unlocked:
 			text += "- %s: Completed\n" % [delta.def.name]
+			if not delta.def.reward_skills.is_empty():
+				var skill_names = []
+				for s in delta.def.reward_skills:
+					if s:
+						skill_names.append(s.name())
+				if not skill_names.is_empty():
+					text += "  Rewards: %s\n" % ", ".join(skill_names)
 		text += "\n"
 		
 	if not categorized.visible_no_progress.is_empty():

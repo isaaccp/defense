@@ -5,8 +5,9 @@
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_suivl"]
 [ext_resource type="Resource" uid="uid://bcompconds001" path="res://skill_tree/meta_skills/compound_conditions.tres" id="3_cc"]
 [ext_resource type="Resource" uid="uid://btripconds001" path="res://skill_tree/meta_skills/triple_conditions.tres" id="4_tc"]
+[ext_resource type="Resource" uid="uid://goldchests001" path="res://skill_tree/meta_skills/gold_chests.tres" id="5_gc"]
 
 [resource]
 script = ExtResource("1_t8g4s")
 tree_type = 6
-skills = Array[ExtResource("2_suivl")]([ExtResource("2_dpmq8"), ExtResource("3_cc"), ExtResource("4_tc")])
+skills = Array[ExtResource("2_suivl")]([ExtResource("2_dpmq8"), ExtResource("3_cc"), ExtResource("4_tc"), ExtResource("5_gc")])

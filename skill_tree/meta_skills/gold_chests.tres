@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://goldchests001"]
+
+[ext_resource type="Script" uid="uid://c6lhwwn1syl8o" path="res://meta/meta_skill.gd" id="1_gc"]
+
+[resource]
+script = ExtResource("1_gc")
+skill_name = &"Gold Chests"
+skill_type = 5
+tree_type = 6
+description_text = "Enables Gold Chests to spawn in combat levels."

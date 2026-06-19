@@ -4,7 +4,7 @@ class_name InteractableTargetSelector
 
 func select_targets(_action: Action, _actor: Actor, side_component: SideComponent) -> Array[Actor]:
 	var wanted_kind := def.params.interactable_kind
-	if wanted_kind == Interactable.Kind.UNSPECIFIED:
+	if wanted_kind == Enum.InteractableKind.UNSPECIFIED:
 		return []
 	var targets: Array[Actor] = []
 	for node in side_component.interactables():

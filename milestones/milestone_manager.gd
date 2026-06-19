@@ -60,7 +60,10 @@ func process_unlocks(run_save_state: RunSaveState) -> Array[MilestoneProgressDel
 		if current >= def.required_count and not save_state.unlocked_milestones.get(def.id, false):
 			save_state.unlocked_milestones[def.id] = true
 			delta.unlocked = true
-			print("Milestone unlocked: ", def.id)
+			
+			for skill in def.reward_skills:
+				if skill and not save_state.unlocked_skills.available(skill):
+					save_state.unlocked_skills.mark_available(skill)
 			
 		deltas.append(delta)
 		

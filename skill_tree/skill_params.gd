@@ -36,7 +36,7 @@ enum CmpOp {
 @export var int_value: IntValue
 @export var float_value: FloatValue
 @export var sort: StoredSkill
-@export var interactable_kind: Interactable.Kind
+@export var interactable_kind: Enum.InteractableKind
 @export var bool_value: BoolValue
 @export var status: StatusDef
 
@@ -66,7 +66,7 @@ func set_placeholder_value(placeholder: PlaceholderId, value: Variant):
 			sort = StoredSkill.from_skill(value)
 		PlaceholderId.INTERACTABLE_KIND:
 			assert(typeof(value) == TYPE_INT)
-			interactable_kind = value as Interactable.Kind
+			interactable_kind = value as Enum.InteractableKind
 		PlaceholderId.BOOL_VALUE:
 			assert(typeof(value) == TYPE_BOOL)
 			bool_value = BoolValue.make(value)
@@ -85,7 +85,7 @@ func get_placeholder_string(placeholder: PlaceholderId) -> String:
 		PlaceholderId.SORT:
 			return str(sort)
 		PlaceholderId.INTERACTABLE_KIND:
-			return Interactable.Kind.keys()[interactable_kind]
+			return Enum.InteractableKind.keys()[interactable_kind]
 		PlaceholderId.BOOL_VALUE:
 			return "Is" if bool_value.value else "Is not"
 		PlaceholderId.STATUS:
@@ -153,7 +153,7 @@ func placeholder_set(placeholder: PlaceholderId) -> bool:
 		PlaceholderId.SORT:
 			return sort != null
 		PlaceholderId.INTERACTABLE_KIND:
-			return interactable_kind != Interactable.Kind.UNSPECIFIED
+			return interactable_kind != Enum.InteractableKind.UNSPECIFIED
 		PlaceholderId.BOOL_VALUE:
 			return bool_value and bool_value.defined
 		PlaceholderId.STATUS:
