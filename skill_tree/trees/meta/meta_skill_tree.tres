@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=6 format=3 uid="uid://texer0y616o"]
+[gd_resource type="Resource" script_class="SkillTree" format=3 uid="uid://texer0y616o"]
 
 [ext_resource type="Script" uid="uid://c1djrnxq4hwmu" path="res://skill_tree/skill_tree.gd" id="1_t8g4s"]
 [ext_resource type="Resource" uid="uid://bj12af7xsthcs" path="res://skill_tree/meta_skills/behavior_library.tres" id="2_dpmq8"]
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_suivl"]
 [ext_resource type="Resource" uid="uid://bcompconds001" path="res://skill_tree/meta_skills/compound_conditions.tres" id="3_cc"]
 [ext_resource type="Resource" uid="uid://btripconds001" path="res://skill_tree/meta_skills/triple_conditions.tres" id="4_tc"]
-[ext_resource type="Resource" uid="uid://goldchests001" path="res://skill_tree/meta_skills/gold_chests.tres" id="5_gc"]
+[ext_resource type="Resource" uid="uid://cs6hqfhkal5aa" path="res://skill_tree/meta_skills/gold_chests.tres" id="5_gc"]
 
 [resource]
 script = ExtResource("1_t8g4s")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6b6ijc8m8kca"]
+[gd_scene format=3 uid="uid://b6b6ijc8m8kca"]
 
 [ext_resource type="Script" uid="uid://367x3hti1q41" path="res://ui/skill_tree_ui.gd" id="1_44fad"]
 [ext_resource type="Script" uid="uid://mdbfwabhp3w8" path="res://gameplay_character.gd" id="2_5stfg"]
@@ -17,7 +17,7 @@ xp = 600
 [sub_resource type="LabelSettings" id="LabelSettings_6lxjg"]
 font_size = 14
 
-[node name="SkillTree" type="Control"]
+[node name="SkillTree" type="Control" unique_id=272414624]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_44fad")
 test_character = SubResource("Resource_bwe5d")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=379721788]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,43 +35,42 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=914021509]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1244451762]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=108370355]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Skill Tree"
 
-[node name="Status" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Status" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1535106369]
 unique_name_in_owner = true
 layout_mode = 2
 text = "XP: 0"
 label_settings = SubResource("LabelSettings_6lxjg")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=342175340]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Trees" type="TabContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="Trees" type="TabContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer" unique_id=1996714438]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 1.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer" unique_id=524061081]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Info" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer/MarginContainer" unique_id=1840478377]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Info" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HSplitContainer/MarginContainer/VBoxContainer" unique_id=1156760375]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -79,12 +78,12 @@ size_flags_vertical = 3
 bbcode_enabled = true
 text = "Hover a skill for details."
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1483046983]
 layout_mode = 2
 size_flags_horizontal = 8
 alignment = 2
 
-[node name="OK" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OK" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1350954771]
 layout_mode = 2
 text = "OK"
 

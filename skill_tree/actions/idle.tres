@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="ActionDef" format=3]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://drpbqy84nil1e"]
 
-[ext_resource type="Script" path="res://behavior/actions/idle_action.gd" id="1_gd"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_gd"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_gd"]
+[ext_resource type="Script" uid="uid://b4131tfg4qxrl" path="res://behavior/actions/idle_action.gd" id="1_gd"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="2_gd"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="3_gd"]
 
 [sub_resource type="Resource" id="Resource_params"]
 script = ExtResource("3_gd")

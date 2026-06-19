@@ -1,23 +1,18 @@
-[gd_resource type="Resource" script_class="ConditionDef" format=3]
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://3jesl1d2vjs6"]
 
-[ext_resource type="Script" path="res://behavior/conditions/focus_condition.gd" id="1_gd"]
-[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="2_gd"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_gd"]
-[ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="4_gd"]
+[ext_resource type="Script" uid="uid://dcyviw8nie5gy" path="res://behavior/conditions/condition_def.gd" id="2_gd"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="3_gd"]
+[ext_resource type="Script" uid="uid://v5liyqorqa7c" path="res://behavior/conditions/int_value.gd" id="4_gd"]
 
 [sub_resource type="Resource" id="Resource_val"]
 script = ExtResource("4_gd")
-value = 0
 
 [sub_resource type="Resource" id="Resource_params"]
 script = ExtResource("3_gd")
-cmp = 0
 int_value = SubResource("Resource_val")
 
 [resource]
 script = ExtResource("2_gd")
-condition_script = ExtResource("1_gd")
-supported_target_types = Array[int]([])
 params = SubResource("Resource_params")
 skill_name = &"Focus"
 skill_type = 3

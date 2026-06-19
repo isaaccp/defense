@@ -26,7 +26,6 @@ enum SkillState {
 	NEED_XP,
 	NEED_PARENT,
 	LOCKED_ADJACENT,
-	SHROUDED,
 }
 
 const STATE_COLORS := {
@@ -35,7 +34,6 @@ const STATE_COLORS := {
 	SkillState.NEED_XP: Color(0.75, 0.62, 0.18, 1.0),
 	SkillState.NEED_PARENT: Color(0.28, 0.46, 0.72, 1.0),
 	SkillState.LOCKED_ADJACENT: Color(0.50, 0.30, 0.62, 1.0),
-	SkillState.SHROUDED: Color(0.10, 0.10, 0.12, 1.0),
 }
 
 
@@ -64,15 +62,20 @@ signal ok_pressed
 func _ready() -> void:
 	if get_parent() == get_tree().root:
 		var ss := SaveState.make_new()
+		ss.unlocked_skills = SkillTreeState.new()
 		if test_mode == Mode.VIEW_META:
-			initialize(test_mode, ss)
+			ss.unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/behavior_library.tres"))
+			ss.unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/gold_chests.tres"))
+			# Add mock data for regular trees so they aren't empty in standalone mode
+			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sword_attack.tres"))
+			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/charge.tres"))
+			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/cleave.tres"))
+			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sweeping_attack.tres"))
+			initialize(test_mode, ss, null, true)
 		elif test_mode == Mode.ACQUIRE:
-			ss.unlocked_skills = SkillTreeState.new()
 			ss.unlocked_skills.full = true
 			assert(test_character)
 			initialize(test_mode, ss, test_character)
-	_build_tabs()
-
 func initialize(mode_: Mode, save_state_: SaveState, character_: GameplayCharacter = null, show_all: bool = false) -> void:
 	assert(save_state_)
 	if mode_ == Mode.ACQUIRE:
@@ -121,14 +124,19 @@ func _refresh_status() -> void:
 		%Status.text = "Run XP: %d   |   Cost: %d per pick" % [character.xp, purchase_cost]
 
 func _refresh_tab_badges() -> void:
+	var tabs := %Trees as TabContainer
 	for pane in _panes:
 		var count := 0
 		for s in pane.tree.skills:
 			if _state(s) == SkillState.BUYABLE:
 				count += 1
 		var base: String = Skill.TreeType.keys()[pane.tree.tree_type]
-		pane.name = "%s (%d)" % [base, count] if count > 0 else base
-
+		var title: String
+		if mode == Mode.VIEW_META:
+			title = base
+		else:
+			title = "%s (%d)" % [base, count] if count > 0 else base
+		tabs.set_tab_title(pane.get_index(), title)
 func hover_skill(skill: Skill) -> void:
 	_hovered_skill = skill
 	var info := %Info as RichTextLabel
@@ -136,19 +144,16 @@ func hover_skill(skill: Skill) -> void:
 	if not skill:
 		info.text = "[i]Hover a skill for details.[/i]"
 		return
-	# Shrouded skills don't get a detail panel — that's the point.
-	if _is_shrouded(skill):
-		info.text = "[i]Unknown skill. Unlock prerequisites to reveal.[/i]"
-		return
 	var lines: PackedStringArray = []
 	lines.append("[b]%s[/b]" % skill.name())
 	lines.append("[color=#bbbbbb]%s[/color]" % skill.type_name())
 	lines.append("")
-	lines.append("[b]State:[/b] %s" % _state_label(skill))
-	if skill.parent:
-		var parent_state := "✓" if (_is_acquired(skill.parent) or (mode == Mode.VIEW_META and _is_unlocked(skill.parent))) else "✗"
-		lines.append("[b]Requires:[/b] %s (%s)" % [skill.parent.name(), parent_state])
-	lines.append("[b]Cost:[/b] %d %s" % [purchase_cost, "XP"])
+	if mode == Mode.ACQUIRE:
+		lines.append("[b]State:[/b] %s" % _state_label(skill))
+		if skill.parent:
+			var parent_state := "✓" if _is_acquired(skill.parent) else "✗"
+			lines.append("[b]Requires:[/b] %s (%s)" % [skill.parent.name(), parent_state])
+		lines.append("[b]Cost:[/b] %d %s" % [purchase_cost, "XP"])
 	lines.append("")
 	lines.append(skill.description())
 	info.text = "\n".join(lines)
@@ -163,31 +168,12 @@ func _is_acquired(s: Skill) -> bool:
 func _is_unlocked(s: Skill) -> bool:
 	return unlocked_skills != null and unlocked_skills.available(s)
 
-# 0 = self is known; 1 = parent known (or root); 2+ = farther.
-func _distance_to_known(s: Skill) -> int:
-	if _is_acquired(s) or _is_unlocked(s):
-		return 0
-	var current: Skill = s.parent
-	var d := 1
-	while current:
-		if _is_acquired(current) or _is_unlocked(current):
-			return d
-		current = current.parent
-		d += 1
-	return d
-
-func _is_shrouded(s: Skill) -> bool:
-	# Unlocked skills are ALWAYS shown in full, regardless of distance.
-	if _is_unlocked(s):
-		return false
-	return _distance_to_known(s) >= 2
-
 func _state(s: Skill) -> SkillState:
 	if mode == Mode.ACQUIRE:
 		if _is_acquired(s):
 			return SkillState.OWNED
 		if not _is_unlocked(s):
-			return SkillState.SHROUDED if _is_shrouded(s) else SkillState.LOCKED_ADJACENT
+			return SkillState.LOCKED_ADJACENT
 		if s.parent and not _is_acquired(s.parent):
 			return SkillState.NEED_PARENT
 		if not character.has_xp(purchase_cost):
@@ -196,9 +182,7 @@ func _state(s: Skill) -> SkillState:
 	else:  # VIEW_META
 		if _is_unlocked(s):
 			return SkillState.OWNED
-		if s.parent and not _is_unlocked(s.parent):
-			return SkillState.NEED_PARENT
-		return SkillState.BUYABLE
+		return SkillState.LOCKED_ADJACENT
 
 func _state_label(s: Skill) -> String:
 	match _state(s):
@@ -212,8 +196,6 @@ func _state_label(s: Skill) -> String:
 			return "Need: %s" % (s.parent.name() if s.parent else "?")
 		SkillState.LOCKED_ADJACENT:
 			return "Locked"
-		SkillState.SHROUDED:
-			return "???"
 	return "?"
 
 func _state_color(s: Skill) -> Color:
@@ -290,7 +272,7 @@ class MetaCanvas extends HFlowContainer:
 
 	func _build() -> void:
 		for s in tree.skills:
-			if ui.mode == Mode.VIEW_META and ui.hide_locked_skills and not ui._is_unlocked(s):
+			if ui.mode == Mode.VIEW_META and not ui._is_unlocked(s):
 				continue
 			var card = SkillCard.new(ui, s)
 			add_child(card)
@@ -407,10 +389,6 @@ class TreeCanvas extends Control:
 		for s in cards:
 			if not s.parent or not cards.has(s.parent):
 				continue
-			# Both parent and child shrouded → don't draw the edge at all
-			# (the parent silhouette already implies "something further out").
-			if ui._is_shrouded(s) and ui._is_shrouded(s.parent):
-				continue
 			var from: Vector2 = positions[s.parent] + Vector2(SkillTreeUI.CARD_WIDTH, SkillTreeUI.CARD_HEIGHT / 2.0)
 			var to: Vector2 = positions[s] + Vector2(0, SkillTreeUI.CARD_HEIGHT / 2.0)
 			# Edge color reflects the child's state — "this is what you'd be moving toward."
@@ -427,7 +405,6 @@ class SkillCard extends PanelContainer:
 	var _name_label: Label
 	var _status_label: Label
 	var _buy_button: Button
-	var _shroud_label: Label
 	var _content_vb: VBoxContainer
 
 	func _init(ui_: SkillTreeUI, skill_: Skill):
@@ -483,17 +460,6 @@ class SkillCard extends PanelContainer:
 		_buy_button.size_flags_vertical = SIZE_SHRINK_CENTER
 		_buy_button.pressed.connect(_on_buy_pressed)
 		hb.add_child(_buy_button)
-		# Shroud overlay — replaces content when SHROUDED.
-		_shroud_label = Label.new()
-		_shroud_label.text = "?"
-		_shroud_label.add_theme_font_size_override("font_size", 24)
-		_shroud_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_shroud_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		_shroud_label.anchor_right = 1.0
-		_shroud_label.anchor_bottom = 1.0
-		_shroud_label.add_theme_color_override("font_color", Color(0.45, 0.45, 0.5, 1.0))
-		_shroud_label.visible = false
-		add_child(_shroud_label)
 		refresh()
 
 	func refresh() -> void:
@@ -509,25 +475,19 @@ class SkillCard extends PanelContainer:
 		add_theme_stylebox_override("panel", sb)
 
 		# Tooltip / sidebar description
-		# Shrouded node hides description
-		if ui._is_shrouded(skill):
-			self.tooltip_text = "???"
-		else:
-			var req_skills = skill.required_skills()
-			var tip = ""
-			if not req_skills.is_empty() and skill.tree_type != Skill.TreeType.META:
-				tip += "[Requires: %s]\n\n" % ", ".join(req_skills)
-			tip += skill.description()
-			self.tooltip_text = tip
+		var req_skills = skill.required_skills()
+		var tip = ""
+		if not req_skills.is_empty() and skill.tree_type != Skill.TreeType.META:
+			tip += "[Requires: %s]\n\n" % ", ".join(req_skills)
+		tip += skill.description()
+		self.tooltip_text = tip
 
-		if state == SkillTreeUI.SkillState.SHROUDED:
-			_content_vb.visible = false
-			_shroud_label.visible = true
-			return
 		_content_vb.visible = true
-		_shroud_label.visible = false
-		_name_label.text = String(skill.name())
-		_status_label.text = ui._state_label(skill)
+		_name_label.text = skill.name()
+		if ui.mode == Mode.VIEW_META:
+			_status_label.text = ""
+		else:
+			_status_label.text = ui._state_label(skill)
 		_buy_button.text = "Buy %d" % ui.purchase_cost
 		# Buy button only shows up if the state is BUYABLE.
 		# In VIEW_META, we don't buy skills.
@@ -546,7 +506,10 @@ class SkillCard extends PanelContainer:
 		chip_style.bg_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.15)
 		chip_style.border_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.4)
 		chip_style.set_border_width_all(1)
-		chip_style.set_content_margin_individual(6, 2, 6, 2)
+		chip_style.content_margin_left = 6
+		chip_style.content_margin_top = 2
+		chip_style.content_margin_right = 6
+		chip_style.content_margin_bottom = 2
 		_name_chip.add_theme_stylebox_override("panel", chip_style)
 		_name_label.add_theme_color_override("font_color", profile.text_color_filled())
 
