@@ -100,6 +100,10 @@ What this means in practice when working on this codebase:
 - Use `%UniqueNodeName` syntax to reference nodes inside scenes.
 - Signals drive all UI ↔ game logic communication.
 
+### Progression & Stat Tracking
+- `SkillTreeState` acts as the source of truth for global meta-skill unlocks. Character availability is determined by `GameplayCharacter.is_unlocked(unlocked_skills)`.
+- When tracking metrics that apply to the whole run but must also be tracked per-character (like `RunsCompleted`, `LevelsBeaten`), call `add_stat(stat)` ONCE for the global aggregate, and then loop through the party using `add_character_stat(stat, character_id)`. Do NOT call `add_stat(stat, character_id)` inside the party loop, as it will erroneously double-count the global aggregate for each party member.
+
 ## Directory Map
 ```
 actor/          Base Actor, Unit, Enemy, Tower classes
