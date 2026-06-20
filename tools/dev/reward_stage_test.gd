@@ -1,12 +1,12 @@
 @tool
-extends Node
+extends Control
 
 ## Quick-test scene for the reward stage screen.
 ##
 ## Open `reward_stage_test.tscn`, set the exports below to whatever you
 ## want to see, then press F6. The script synthesizes a minimal
 ## RunSaveState + party + roll'd reward sets and shows the
-## RewardChoiceScreen exactly as it would appear after a fight.
+## MapScreen exactly as it would appear after a fight.
 ##
 ## To test specific scenarios:
 ## - **Rest outcome**: set `damage_each_character > 0` so you can see HP
@@ -43,6 +43,11 @@ extends Node
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	
+	# Force full screen regardless of scene setup
+	size = get_viewport_rect().size
+	get_tree().get_root().size_changed.connect(func(): size = get_viewport_rect().size)
+	
 	if characters.is_empty():
 		push_error("reward_stage_test: at least one character is required")
 		return
@@ -52,7 +57,7 @@ func _ready() -> void:
 	var rss := _build_run_save_state()
 	var save_state := _build_save_state()
 	var stage_rewards := _build_stage_rewards(rss, save_state.unlocked_skills)
-	var screen_scene := preload("res://ui/reward_choice_screen.tscn")
+	var screen_scene := preload("res://ui/map_screen.tscn")
 	var screen = screen_scene.instantiate()
 	add_child(screen)
 	screen._on_show({

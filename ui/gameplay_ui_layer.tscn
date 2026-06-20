@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://wfrxew4t25e2" path="res://ui/gameplay_menu.tscn" id="5_wda70"]
 [ext_resource type="PackedScene" uid="uid://b2n7enfg1pc6a" path="res://ui/run_summary_screen.tscn" id="6_3etjm"]
 [ext_resource type="PackedScene" uid="uid://dx0jn3360qga6" path="res://ui/between_levels_screen.tscn" id="7_ngnnb"]
-[ext_resource type="PackedScene" uid="uid://drwdchoicescr01" path="res://ui/reward_choice_screen.tscn" id="11_rwdchc"]
+[ext_resource type="PackedScene" uid="uid://drwdchoicescr01" path="res://ui/map_screen.tscn" id="11_rwdchc"]
 [ext_resource type="PackedScene" path="res://ui/milestone_summary_screen.tscn" id="12_mlsn"]
 [ext_resource type="PackedScene" uid="uid://cnlvjh7aefr5h" path="res://ui/level_end.tscn" id="7_ymkay"]
 
@@ -62,7 +62,7 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[node name="RewardChoiceScreen" parent="Screens" instance=ExtResource("11_rwdchc")]
+[node name="MapScreen" parent="Screens" instance=ExtResource("11_rwdchc")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -106,7 +106,7 @@ visible = false
 [connection signal="continue_selected" from="Screens/RunSummaryScreen" to="." method="_on_run_summary_screen_continue_selected"]
 [connection signal="continue_selected" from="Screens/MilestoneSummaryScreen" to="." method="_on_milestone_summary_screen_continue_selected"]
 [connection signal="continue_selected" from="Screens/BetweenLevelsScreen" to="." method="_on_between_levels_screen_continue_selected"]
-[connection signal="continue_pressed" from="Screens/RewardChoiceScreen" to="." method="_on_reward_choice_screen_continue_pressed"]
+[connection signal="continue_pressed" from="Screens/MapScreen" to="." method="_on_map_screen_continue_pressed"]
 [connection signal="behavior_modified" from="Overlay/HUD" to="." method="_on_behavior_modified"]
 [connection signal="play_controls_pause_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_pause_pressed"]
 [connection signal="play_controls_play_pressed" from="Overlay/HUD" to="." method="_on_hud_play_controls_play_pressed"]

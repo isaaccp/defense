@@ -64,13 +64,14 @@ static func _generate_schedule(rss: RunSaveState, level_provider: LevelProvider,
 		var pool := level_provider.available_rewards.duplicate()
 		pool.shuffle()
 		for set_idx in range(level_provider.SETS_PER_STAGE):
-			if pool.is_empty():
-				pool = level_provider.available_rewards.duplicate()
-				pool.shuffle()
-			var template: RewardDef = pool.pop_front()
-			var rolled := template.roll(rng, rss.relic_library_state, level_provider.relic_library, unlocked_skills)
 			var reward_set := RewardSet.new()
-			var rewards: Array[RewardDef] = [rolled]
+			var rewards: Array[RewardDef] = []
+			for node_idx in range(level_provider.REWARDS_PER_PATH):
+				if pool.is_empty():
+					pool = level_provider.available_rewards.duplicate()
+					pool.shuffle()
+				var template: RewardDef = pool.pop_front()
+				rewards.append(template.roll(rng, rss.relic_library_state, level_provider.relic_library, unlocked_skills))
 			reward_set.rewards = rewards
 			stage_rewards.sets.append(reward_set)
 		schedule.append(stage_rewards)

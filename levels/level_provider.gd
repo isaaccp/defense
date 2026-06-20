@@ -31,6 +31,7 @@ class_name LevelProvider
 # but lifted out as a constant so the schedule generation doesn't have a
 # magic number sprinkled through it.
 const SETS_PER_STAGE: int = 2
+const REWARDS_PER_PATH: int = 2
 
 var _levels_by_difficulty: Dictionary = {}
 var _index_built: bool = false

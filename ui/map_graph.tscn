@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://df7w2t3t2q7xw"]
+
+[ext_resource type="Script" path="res://ui/map_graph.gd" id="1_m4qwx"]
+[ext_resource type="PackedScene" uid="uid://mapvisual_forest" path="res://ui/map_visuals/forest_map.tscn" id="2_visual"]
+
+[node name="MapGraph" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_m4qwx")
+
+[node name="Path0_HoverArea" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Path1_HoverArea" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ForestMap" parent="." instance=ExtResource("2_visual")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

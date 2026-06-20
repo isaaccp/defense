@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://drwdchoicescr01"]
+[gd_scene format=3 uid="uid://cf5w34denl1tk"]
 
-[ext_resource type="Script" path="res://ui/reward_choice_screen.gd" id="1_rcs"]
+[ext_resource type="Script" path="res://ui/map_screen.gd" id="1_rcs"]
+[ext_resource type="Texture2D" path="res://assets/kenney-cartography/Textures/parchmentFoldedCrinkled.png" id="2_bg"]
+[ext_resource type="PackedScene" uid="uid://df7w2t3t2q7xw" path="res://ui/map_graph.tscn" id="3_graph_scene"]
 
-[node name="RewardChoiceScreen" type="Control"]
+[node name="MapScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +34,7 @@ layout_mode = 2
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Choose Your Reward"
+text = "Choose Your Path"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -64,6 +66,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
+[node name="HoverPanel" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 150)
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn/HoverPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn/HoverPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HoverTitle" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn/HoverPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.4, 1)
+text = "Reward Title"
+
+[node name="HoverDesc" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/LeftColumn/HoverPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reward Description"
+autowrap_mode = 3
+
 [node name="RightColumn" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -77,11 +106,40 @@ theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="SetPanels" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
-unique_name_in_owner = true
+[node name="MapArea" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 10
+size_flags_horizontal = 3
+
+[node name="MapBackground" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MapArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MapGraph" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MapArea" instance=ExtResource("3_graph_scene")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InputBlocker" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MapArea"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
 
 [node name="RelicReveal" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
 unique_name_in_owner = true

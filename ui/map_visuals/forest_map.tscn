@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://bo1bclkny6u4c"]
+
+[ext_resource type="Script" uid="uid://c74cyhls65n5s" path="res://ui/map_visual.gd" id="1_m4qwx"]
+[ext_resource type="Shader" uid="uid://dhr4e53ptkffy" path="res://effects/shaders/dashed_line.gdshader" id="2_shader"]
+[ext_resource type="Texture2D" uid="uid://cb282tyxd0urb" path="res://assets/kenney-cartography/PNG/lake.png" id="3_lake"]
+[ext_resource type="Texture2D" uid="uid://dyp6ejas7647o" path="res://assets/kenney-cartography/PNG/treePineTall.png" id="5_tree1"]
+[ext_resource type="Texture2D" uid="uid://c03c34mpuqkox" path="res://assets/kenney-cartography/PNG/rocks.png" id="6_rocks"]
+[ext_resource type="Texture2D" uid="uid://c3fhim56ttw47" path="res://assets/kenney-cartography/PNG/graveyard.png" id="7_76pbq"]
+[ext_resource type="Texture2D" uid="uid://cx5fwlb1nx46x" path="res://assets/kenney-cartography/PNG/houses.png" id="8_h41ev"]
+[ext_resource type="Texture2D" uid="uid://dkaxvr1ygua1k" path="res://assets/kenney-cartography/PNG/church.png" id="9_a4bjm"]
+[ext_resource type="Texture2D" uid="uid://ukkehr510axw" path="res://assets/kenney-cartography/PNG/mine.png" id="9_mine"]
+[ext_resource type="Texture2D" uid="uid://eeuosf5vq8rw" path="res://assets/kenney-cartography/PNG/rocksMountain.png" id="10_fmg2h"]
+[ext_resource type="Texture2D" uid="uid://cr7q2v42e2bry" path="res://assets/kenney-cartography/PNG/tower.png" id="10_tower"]
+[ext_resource type="Texture2D" uid="uid://bcskmgua72s25" path="res://assets/kenney-cartography/PNG/vulcano.png" id="11_j6v3r"]
+
+[sub_resource type="Curve2D" id="Curve2D_path0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 250, 100, 100, -100, -100, -387, 94, -9.09091, 79.0909, 9.09091, -79.0909, -250, -50, -33.6364, 67.2727, 33.6364, -67.2727, -350, -172, 0, 0, 0, 0, 0, -250)
+}
+point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dashed"]
+shader = ExtResource("2_shader")
+shader_parameter/dash_length = 6.0
+shader_parameter/gap_length = 6.0
+
+[sub_resource type="Curve2D" id="Curve2D_path1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 250, -100, 100, 100, -100, 400, 100, 100, 50, -100, -50, 250, -50, -50, 100, 50, -100, 350, -200, 0, 0, 0, 0, 0, -250)
+}
+point_count = 5
+
+[node name="ForestMap" type="Control" unique_id=559734531 node_paths=PackedStringArray("path_0_slots", "path_1_slots", "next_stage_slot")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_m4qwx")
+path_0_slots = [NodePath("Path0_Visuals/RewardSlots/Slot0"), NodePath("Path0_Visuals/RewardSlots/Slot1"), NodePath("Path0_Visuals/RewardSlots/Slot2")]
+path_1_slots = [NodePath("Path1_Visuals/RewardSlots/Slot0"), NodePath("Path1_Visuals/RewardSlots/Slot1"), NodePath("Path1_Visuals/RewardSlots/Slot2")]
+next_stage_slot = NodePath("NextStage_Slot")
+
+[node name="Decorations" type="Node2D" parent="." unique_id=489723212]
+
+[node name="Lake" type="Sprite2D" parent="Decorations" unique_id=1978866866]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(-500, 130)
+texture = ExtResource("3_lake")
+
+[node name="Tree1" type="Sprite2D" parent="Decorations" unique_id=767265826]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(-566, -47)
+texture = ExtResource("5_tree1")
+
+[node name="Tree2" type="Sprite2D" parent="Decorations" unique_id=1920109802]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(-517, -34)
+texture = ExtResource("5_tree1")
+
+[node name="Tree3" type="Sprite2D" parent="Decorations" unique_id=1415339813]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(-458, -47)
+texture = ExtResource("5_tree1")
+
+[node name="Rocks1" type="Sprite2D" parent="Decorations" unique_id=578573364]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(-338, -88)
+texture = ExtResource("6_rocks")
+
+[node name="Mine" type="Sprite2D" parent="Decorations" unique_id=1523788755]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(159, 115)
+texture = ExtResource("9_mine")
+
+[node name="Tower" type="Sprite2D" parent="Decorations" unique_id=2076681825]
+modulate = Color(0.8, 0.8, 0.8, 0.9)
+position = Vector2(468, 25)
+texture = ExtResource("10_tower")
+
+[node name="Graveyard" type="Sprite2D" parent="Decorations" unique_id=446852073]
+position = Vector2(144, -118)
+texture = ExtResource("7_76pbq")
+
+[node name="Houses" type="Sprite2D" parent="Decorations" unique_id=1904824843]
+position = Vector2(572, 41)
+texture = ExtResource("8_h41ev")
+
+[node name="Church" type="Sprite2D" parent="Decorations" unique_id=467171861]
+position = Vector2(704, 38)
+texture = ExtResource("9_a4bjm")
+
+[node name="RocksMountain" type="Sprite2D" parent="Decorations" unique_id=918727620]
+position = Vector2(635, -252)
+texture = ExtResource("10_fmg2h")
+
+[node name="Vulcano" type="Sprite2D" parent="Decorations" unique_id=1374744851]
+position = Vector2(737, -345)
+texture = ExtResource("11_j6v3r")
+
+[node name="RocksMountain2" type="Sprite2D" parent="Decorations" unique_id=1207939669]
+position = Vector2(-605, -325)
+texture = ExtResource("10_fmg2h")
+
+[node name="RocksMountain3" type="Sprite2D" parent="Decorations" unique_id=649853605]
+position = Vector2(-718, -325)
+texture = ExtResource("10_fmg2h")
+
+[node name="Path0_Visuals" type="Node2D" parent="." unique_id=383131658]
+
+[node name="PathLine" type="Path2D" parent="Path0_Visuals" unique_id=1242681899]
+curve = SubResource("Curve2D_path0")
+
+[node name="PathLineDraw" type="Line2D" parent="Path0_Visuals/PathLine" unique_id=1968978728]
+material = SubResource("ShaderMaterial_dashed")
+points = PackedVector2Array(0, 250, -156, 209.5, -284.34375, 160.5625, -341.66016, 129.41406, -366.17432, 112.231445, -387, 94, -395.431, 85.01317, -402.0408, 76.77224, -406.92944, 69.231575, -408.75964, 65.70957, -410.19708, 62.345524, -411.2543, 59.13372, -411.94382, 56.068455, -412.27814, 53.14402, -412.26974, 50.354713, -411.93118, 47.694828, -411.275, 45.15866, -410.31366, 42.74051, -409.05966, 40.434658, -407.52554, 38.23541, -405.72385, 36.137054, -403.66705, 34.133892, -401.36768, 32.220215, -396.09125, 28.638485, -389.9947, 25.346233, -375.74152, 19.44757, -359.4091, 14.159086, -289.30396, -8.196029, -274.5882, -15.910827, -268.20248, -20.338165, -262.5984, -25.206326, -260.12067, -27.819973, -257.87595, -30.560944, -255.87668, -33.43494, -254.13535, -36.447666, -252.66449, -39.60483, -251.47665, -42.91214, -250.58432, -46.375294, -250, -50, -249.58249, -57.117634, -249.99445, -63.664814, -251.1758, -69.67726, -253.0664, -75.1907, -255.60623, -80.24084, -258.73514, -84.86341, -262.39307, -89.09414, -266.5199, -92.96875, -271.05554, -96.52295, -275.93994, -99.79248, -286.5146, -105.62039, -309.20456, -115.43182, -330.74396, -124.68929, -339.8804, -129.82472, -343.82996, -132.64413, -347.28696, -135.67899, -348.81198, -137.28836, -350.1913, -138.965, -351.41748, -140.71335, -352.48294, -142.53787, -353.3802, -144.44305, -354.1017, -146.43335, -354.64, -148.51323, -354.98758, -150.68715, -355.1369, -152.95958, -355.08044, -155.33499, -354.8107, -157.81784, -354.3202, -160.4126, -352.64673, -165.95569, -350, -172, -348.2185, -175.11215, -346.03656, -178.14255, -343.4679, -181.09222, -340.5262, -183.96217, -333.57867, -189.46725, -325.3036, -194.66618, -305.20972, -204.17914, -281.12213, -212.56818, -224.4762, -226.24289, -162.38635, -236.22726, 0, -250)
+width = 4.0
+texture_mode = 1
+
+[node name="RewardSlots" type="Node2D" parent="Path0_Visuals" unique_id=1592996636]
+
+[node name="Slot0" type="Marker2D" parent="Path0_Visuals/RewardSlots" unique_id=1903411199]
+position = Vector2(-400, 100)
+
+[node name="Slot1" type="Marker2D" parent="Path0_Visuals/RewardSlots" unique_id=1817052267]
+position = Vector2(-250, -50)
+
+[node name="Slot2" type="Marker2D" parent="Path0_Visuals/RewardSlots" unique_id=1925646663]
+position = Vector2(-350, -200)
+
+[node name="Path1_Visuals" type="Node2D" parent="." unique_id=744232531]
+
+[node name="PathLine" type="Path2D" parent="Path1_Visuals" unique_id=90209578]
+curve = SubResource("Curve2D_path1")
+
+[node name="PathLineDraw" type="Line2D" parent="Path1_Visuals/PathLine" unique_id=1871349248]
+material = SubResource("ShaderMaterial_dashed")
+points = PackedVector2Array(0, 250, 162.5, 212.5, 295.3125, 165.625, 354.10156, 135.15625, 379.02832, 118.16406, 400, 100, 415.89355, 82.385254, 421.7804, 74.38812, 426.3672, 66.89453, 429.70886, 59.877014, 430.92993, 56.5382, 431.86035, 53.308105, 432.50696, 50.183296, 432.8766, 47.16034, 432.97614, 44.2358, 432.8125, 41.40625, 432.39252, 38.66825, 431.72302, 36.01837, 430.8109, 33.45318, 429.6631, 30.969238, 428.28638, 28.563118, 426.68762, 26.231384, 422.85156, 21.777344, 418.20984, 17.57965, 412.81738, 13.61084, 400, 6.25, 289.2578, -33.30078, 250, -50, 234.09424, -58.825684, 228.1784, -62.867737, 223.53516, -66.69922, 221.67072, -68.54458, 220.1004, -70.347595, 218.8162, -72.1117, 217.81006, -73.84033, 217.074, -75.53692, 216.60004, -77.204895, 216.38013, -78.847694, 216.40625, -80.46875, 216.67041, -82.071495, 217.16461, -83.65936, 217.88083, -85.23579, 218.81104, -86.8042, 219.94724, -88.368034, 221.28143, -89.930725, 224.51172, -93.06641, 232.9956, -99.4751, 243.75, -106.25, 299.21875, -141.40625, 313.63525, -153.3081, 327.2461, -166.89453, 339.53857, -182.38525, 345.0302, -190.91339, 350, -200, 352.0174, -204.5784, 353.39508, -208.94165, 354.1525, -213.09433, 354.30908, -217.04102, 353.8843, -220.78629, 352.89764, -224.33472, 351.36853, -227.69089, 349.3164, -230.85938, 346.76074, -233.84476, 343.721, -236.65161, 340.21664, -239.28452, 336.2671, -241.74805, 327.1103, -246.1853, 316.40625, -250, 290.979, -255.9082, 261.23047, -259.76563, 193.75, -262.5, 0, -250)
+width = 4.0
+texture_mode = 1
+
+[node name="RewardSlots" type="Node2D" parent="Path1_Visuals" unique_id=828895374]
+
+[node name="Slot0" type="Marker2D" parent="Path1_Visuals/RewardSlots" unique_id=1397091717]
+position = Vector2(400, 100)
+
+[node name="Slot1" type="Marker2D" parent="Path1_Visuals/RewardSlots" unique_id=1217840219]
+position = Vector2(250, -50)
+
+[node name="Slot2" type="Marker2D" parent="Path1_Visuals/RewardSlots" unique_id=32363169]
+position = Vector2(350, -200)
+
+[node name="NextStage_Slot" type="Marker2D" parent="." unique_id=1168397825]
+position = Vector2(0, -300)

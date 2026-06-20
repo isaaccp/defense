@@ -120,14 +120,14 @@ func show_milestone_summary_screen(unlocked_milestones: Array[MilestoneManager.M
 func show_between_levels_screen(title: String, text: String):
 	show_screen(%BetweenLevelsScreen, {"title": title, "text": text})
 
-func show_reward_choice_screen(stage_rewards: StageRewards, run_save_state: RunSaveState):
-	show_screen(%RewardChoiceScreen, {
+func show_map_screen(stage_rewards: StageRewards, run_save_state: RunSaveState):
+	show_screen(%MapScreen, {
 		"save_state": save_state,
 		"run_save_state": run_save_state,
 		"stage_rewards": stage_rewards,
 	})
 
-func _on_reward_choice_screen_continue_pressed():
+func _on_map_screen_continue_pressed():
 	reward_stage_continue_selected.emit()
 
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):

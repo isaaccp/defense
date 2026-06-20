@@ -10,7 +10,13 @@
 [ext_resource type="Resource" uid="uid://ic0hy7kikmrw" path="res://effects/relics/relic_library.tres" id="8_lib"]
 [ext_resource type="Resource" uid="uid://dgdem2tdco4a3" path="res://run/rewards/relic.tres" id="8_mlym1"]
 
-[node name="RewardStageTest" type="Node" unique_id=2032416321]
+[node name="RewardStageTest" type="Control" unique_id=1125900792]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_test")
 characters = Array[ExtResource("2_gc")]([ExtResource("3_knight"), ExtResource("4_cleric")])
 set_a = Array[ExtResource("5_rwdef")]([ExtResource("6_rest")])

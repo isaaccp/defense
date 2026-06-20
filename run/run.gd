@@ -198,7 +198,7 @@ func _on_reward_stage_entered():
 	level_xp = 0
 	save_requested.emit()
 	var stage_rewards: StageRewards = run_save_state.reward_schedule[run_save_state.current_stage - 1]
-	ui_layer.show_reward_choice_screen(stage_rewards, run_save_state)
+	ui_layer.show_map_screen(stage_rewards, run_save_state)
 	ui_layer.reward_stage_continue_selected.connect(_on_reward_stage_continue_selected, CONNECT_ONE_SHOT)
 
 func _on_reward_stage_continue_selected():
