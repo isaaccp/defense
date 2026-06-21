@@ -39,7 +39,7 @@ func _on_show(info: Dictionary):
 	else:
 		%Title.text = base_title
 
-	%Prompt.text = "Click a node to lock in that path. You must claim all rewards on the path to proceed."
+	%Prompt.text = "Click a path to select your route for the next battle."
 	%RelicReveal.text = ""
 	%Continue.hide()
 	%Continue.disabled = false
@@ -76,6 +76,7 @@ func _build_map() -> void:
 		map_graph.node_clicked.connect(_on_node_clicked)
 		map_graph.node_hovered.connect(_on_node_hovered)
 		map_graph.node_unhovered.connect(_on_node_unhovered)
+		map_graph.path_locked.connect(_on_path_locked)
 	
 	map_graph.setup(_stage_rewards)
 
@@ -94,7 +95,6 @@ func _on_node_unhovered(_node: RewardNode) -> void:
 func _on_node_clicked(node: RewardNode) -> void:
 	if not _has_claimed_any_reward and not node.is_next_stage:
 		_has_claimed_any_reward = true
-		%Prompt.text = "Claim rewards along your path. Order doesn't matter."
 	
 	if node.is_next_stage:
 		_on_continue_pressed()
@@ -129,7 +129,10 @@ func _check_all_done() -> void:
 	for node in nodes:
 		if node.state != RewardNode.State.DONE:
 			return
-	%Prompt.text = "Path clear. Advance to the next battle."
+	%Prompt.text = "All rewards claimed. Click the battle node to proceed."
+
+func _on_path_locked(_path_idx: int) -> void:
+	%Prompt.text = "Path locked. Claim your rewards, or click the battle node to proceed."
 
 # --- Sub-flows used by interactive reward types ---
 

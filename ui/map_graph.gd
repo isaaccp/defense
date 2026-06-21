@@ -4,6 +4,7 @@ class_name MapGraph
 signal node_clicked(node: RewardNode)
 signal node_hovered(node: RewardNode)
 signal node_unhovered(node: RewardNode)
+signal path_locked(path_idx: int)
 
 const reward_node_scene = preload("res://ui/reward_node.tscn")
 
@@ -135,6 +136,7 @@ func _on_node_clicked(path_idx: int, node: RewardNode) -> void:
 	if _chosen_path_idx == -1:
 		_chosen_path_idx = path_idx
 		_update_node_states()
+		path_locked.emit(path_idx)
 	
 	if path_idx == _chosen_path_idx:
 		node_clicked.emit(node)
@@ -146,6 +148,7 @@ func _on_next_stage_clicked() -> void:
 func lock_path(path_idx: int) -> void:
 	_chosen_path_idx = path_idx
 	_update_node_states()
+	path_locked.emit(path_idx)
 
 func update_all_nodes() -> void:
 	_update_node_states()

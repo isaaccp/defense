@@ -122,13 +122,13 @@ texture_mode = 1
 [node name="RewardSlots" type="Node2D" parent="Path0_Visuals" unique_id=1592996636]
 
 [node name="Slot0" type="Marker2D" parent="Path0_Visuals/RewardSlots" unique_id=1903411199]
-position = Vector2(-400, 100)
+position = Vector2(-284, 106)
 
 [node name="Slot1" type="Marker2D" parent="Path0_Visuals/RewardSlots" unique_id=1817052267]
-position = Vector2(-250, -50)
+position = Vector2(-203, -50)
 
 [node name="Slot2" type="Marker2D" parent="Path0_Visuals/RewardSlots" unique_id=1925646663]
-position = Vector2(-350, -200)
+position = Vector2(-369, -218)
 
 [node name="Path1_Visuals" type="Node2D" parent="." unique_id=744232531]
 
@@ -144,13 +144,13 @@ texture_mode = 1
 [node name="RewardSlots" type="Node2D" parent="Path1_Visuals" unique_id=828895374]
 
 [node name="Slot0" type="Marker2D" parent="Path1_Visuals/RewardSlots" unique_id=1397091717]
-position = Vector2(400, 100)
+position = Vector2(340, 84)
 
 [node name="Slot1" type="Marker2D" parent="Path1_Visuals/RewardSlots" unique_id=1217840219]
-position = Vector2(250, -50)
+position = Vector2(297, -62)
 
 [node name="Slot2" type="Marker2D" parent="Path1_Visuals/RewardSlots" unique_id=32363169]
-position = Vector2(350, -200)
+position = Vector2(398, -229)
 
 [node name="NextStage_Slot" type="Marker2D" parent="." unique_id=1168397825]
 position = Vector2(0, -300)
