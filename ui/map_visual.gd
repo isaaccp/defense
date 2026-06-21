@@ -16,8 +16,8 @@ func _enter_tree() -> void:
 func _draw() -> void:
 	if Engine.is_editor_hint():
 		var tex = preload("res://assets/kenney-cartography/Textures/parchmentFoldedCrinkled.png")
-		# MapScreen container size is 1650x842. This draws the boundary centered at 0,0
-		var rect = Rect2(Vector2(-1650/2.0, -842/2.0), Vector2(1650, 842))
+		# MapScreen container size is exactly 1650x824 natively
+		var rect = Rect2(Vector2(-1650/2.0, -824/2.0), Vector2(1650, 824))
 		draw_texture_rect(tex, rect, false, Color(1.0, 1.0, 1.0, 0.6))
 		# Draw a faint red border to show the absolute max bounds
 		draw_rect(rect, Color(1, 0, 0, 0.4), false, 4.0)

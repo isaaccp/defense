@@ -48,7 +48,7 @@ func _init():
 
 # Skill.
 func lookup_skill(name: StringName) -> Skill:
-	return skill_by_name[name]
+		return skill_by_name[name]
 
 func restore_rule(stored_rule: RuleDef) -> Rule:
 	var rule = Rule.new()

@@ -127,6 +127,9 @@ func show_map_screen(stage_rewards: StageRewards, run_save_state: RunSaveState):
 		"stage_rewards": stage_rewards,
 	})
 
+func hide_map_screen():
+	%MapScreen.hide()
+
 func _on_map_screen_continue_pressed():
 	reward_stage_continue_selected.emit()
 

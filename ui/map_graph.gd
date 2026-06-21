@@ -177,15 +177,7 @@ func _update_node_states() -> void:
 					node.set_state(RewardNode.State.GREYED)
 		
 		if _next_stage_node:
-			var all_claimed = true
-			for n in _paths[_chosen_path_idx]:
-				if n.state != RewardNode.State.DONE:
-					all_claimed = false
-					break
-			if all_claimed:
-				_next_stage_node.set_state(RewardNode.State.PENDING)
-			else:
-				_next_stage_node.set_state(RewardNode.State.GREYED)
+			_next_stage_node.set_state(RewardNode.State.PENDING)
 			
 	_update_visuals()
 
@@ -243,4 +235,11 @@ func _update_visuals() -> void:
 			
 		# Highlight next stage if all rewards claimed
 		if _next_stage_node and _next_stage_node.state == RewardNode.State.PENDING:
-			_next_stage_node.set_highlighted(true)
+			var all_claimed = true
+			if _chosen_path_idx >= 0 and _chosen_path_idx < _paths.size():
+				for n in _paths[_chosen_path_idx]:
+					if n.state != RewardNode.State.DONE:
+						all_claimed = false
+						break
+			if all_claimed:
+				_next_stage_node.set_highlighted(true)

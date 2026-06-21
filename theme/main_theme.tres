@@ -13,5 +13,6 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [resource]
+default_font_size = 18
 OverlayPanel/base_type = &"PanelContainer"
 OverlayPanel/styles/panel = SubResource("StyleBoxFlat_overlay")

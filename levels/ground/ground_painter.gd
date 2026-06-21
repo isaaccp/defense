@@ -40,8 +40,8 @@ func paint() -> void:
 	tile_map.clear_layer(GROUND_LAYER)
 
 	var base_cells: Array[Vector2i] = []
-	for x in map_size.x:
-		for y in map_size.y:
+	for x in range(-1, map_size.x + 1):
+		for y in range(-1, map_size.y + 1):
 			base_cells.append(Vector2i(x, y))
 	tile_map.set_cells_terrain_connect(GROUND_LAYER, base_cells, TERRAIN_SET, base_terrain)
 

@@ -7,7 +7,7 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1t4ka"]
 resource_name = "Tiles"
 texture = ExtResource("1_sl2ql")
-use_texture_padding = false
+use_texture_padding = true
 5:7/0 = 0
 5:7/0/terrain_set = 0
 5:7/0/terrain = 0

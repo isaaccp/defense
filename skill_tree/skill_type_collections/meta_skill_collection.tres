@@ -5,7 +5,11 @@
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_ht1sp"]
 [ext_resource type="Resource" uid="uid://bcompconds001" path="res://skill_tree/meta_skills/compound_conditions.tres" id="3_cc"]
 [ext_resource type="Resource" uid="uid://btripconds001" path="res://skill_tree/meta_skills/triple_conditions.tres" id="4_tc"]
+[ext_resource type="Resource" uid="uid://b40uy67s2k6om" path="res://skill_tree/meta_skills/knight_class.tres" id="5_knight"]
+[ext_resource type="Resource" uid="uid://delxp5bkiebwu" path="res://skill_tree/meta_skills/priest_class.tres" id="6_priest"]
+[ext_resource type="Resource" uid="uid://brogueclass01" path="res://skill_tree/meta_skills/rogue_class.tres" id="7_rogue"]
+[ext_resource type="Resource" uid="uid://cfa3ikg2dykfc" path="res://skill_tree/meta_skills/wizard_class.tres" id="8_wizard"]
 
 [resource]
 script = ExtResource("1_tv1xd")
-skills = Array[ExtResource("2_ht1sp")]([ExtResource("2_05xne"), ExtResource("3_cc"), ExtResource("4_tc")])
+skills = Array[ExtResource("2_ht1sp")]([ExtResource("2_05xne"), ExtResource("3_cc"), ExtResource("4_tc"), ExtResource("5_knight"), ExtResource("6_priest"), ExtResource("7_rogue"), ExtResource("8_wizard")])

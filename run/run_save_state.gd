@@ -58,20 +58,22 @@ static func _generate_schedule(rss: RunSaveState, level_provider: LevelProvider,
 		var rng := RandomNumberGenerator.new()
 		rng.seed = hash("%d:%d:schedule" % [rss.seed, stage])
 		var stage_rewards := StageRewards.new()
-		# Pick `SETS_PER_STAGE` reward types from the catalog. Distinct
-		# when the catalog has enough types; duplicates allowed only as a
-		# fallback when the pool is too small.
+		var required_total = level_provider.SETS_PER_STAGE * level_provider.REWARDS_PER_PATH
+		var chosen_templates: Array[RewardDef] = []
 		var pool := level_provider.available_rewards.duplicate()
 		pool.shuffle()
+		for i in range(required_total):
+			if pool.is_empty():
+				pool = level_provider.available_rewards.duplicate()
+				pool.shuffle()
+			chosen_templates.append(pool.pop_front())
+			
 		for set_idx in range(level_provider.SETS_PER_STAGE):
 			var reward_set := RewardSet.new()
 			var rewards: Array[RewardDef] = []
 			for node_idx in range(level_provider.REWARDS_PER_PATH):
-				if pool.is_empty():
-					pool = level_provider.available_rewards.duplicate()
-					pool.shuffle()
-				var template: RewardDef = pool.pop_front()
-				rewards.append(template.roll(rng, rss.relic_library_state, level_provider.relic_library, unlocked_skills))
+				var tmpl = chosen_templates[node_idx * level_provider.SETS_PER_STAGE + set_idx]
+				rewards.append(tmpl.roll(rng, rss.relic_library_state, level_provider.relic_library, unlocked_skills))
 			reward_set.rewards = rewards
 			stage_rewards.sets.append(reward_set)
 		schedule.append(stage_rewards)

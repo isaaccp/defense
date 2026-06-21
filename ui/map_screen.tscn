@@ -107,6 +107,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="MapArea" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_horizontal = 3
@@ -141,7 +142,11 @@ grow_horizontal = 2
 grow_vertical = 2
 visible = false
 
-[node name="RelicReveal" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+[node name="MessagesArea" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 150)
+
+[node name="RelicReveal" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MessagesArea"]
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
@@ -149,17 +154,17 @@ fit_content = true
 custom_minimum_size = Vector2(0, 60)
 text = ""
 
-[node name="Outcome" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+[node name="Outcome" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MessagesArea"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TrainerControls" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn"]
+[node name="TrainerControls" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MessagesArea"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 2
 visible = false
 
-[node name="TrainerFinish" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/TrainerControls"]
+[node name="TrainerFinish" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MessagesArea/TrainerControls"]
 layout_mode = 2
 text = "Finish trainer"
 
@@ -192,5 +197,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/TrainerControls/TrainerFinish" to="." method="_on_trainer_finish_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Main/RightColumn/MessagesArea/TrainerControls/TrainerFinish" to="." method="_on_trainer_finish_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]

@@ -210,7 +210,7 @@ func _on_reward_stage_continue_selected():
 		state.change_state.call_deferred(RUN_SUMMARY)
 
 func _on_reward_stage_exited():
-	pass
+	ui_layer.hide_map_screen()
 
 func _on_run_summary_entered():
 	ui_layer.show_run_summary_screen(_run_stats_text())
