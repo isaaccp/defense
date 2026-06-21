@@ -62,35 +62,40 @@ signal ok_pressed
 
 func _ready() -> void:
 	if get_parent() == get_tree().root:
-		var ss := SaveState.make_new()
-		ss.unlocked_skills = SkillTreeState.new()
-		if test_mode == Mode.VIEW_META:
-			ss.unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/behavior_library.tres"))
-			ss.unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/gold_chests.tres"))
-			# Add mock data for regular trees so they aren't empty in standalone mode
-			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sword_attack.tres"))
-			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/charge.tres"))
-			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/cleave.tres"))
-			ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sweeping_attack.tres"))
-			var lp = LevelProvider.new()
-			if test_character:
-				if test_character.available_skill_trees == null or test_character.available_skill_trees.is_empty():
-					var test_arr: Array[Skill.TreeType] = [Skill.TreeType.WARRIOR, Skill.TreeType.ROGUE]
-					test_character.available_skill_trees = test_arr
-				var chars: Array[GameplayCharacter] = [test_character]
-				lp.available_characters = chars
-			initialize(test_mode, ss, lp, null, true)
-		elif test_mode == Mode.ACQUIRE:
-			ss.unlocked_skills.full = true
-			assert(test_character)
-			var rs = RunSaveState.new()
+		_ready_standalone()
+		return
+	_build_tabs()
+
+func _ready_standalone() -> void:
+	var ss := SaveState.make_new()
+	ss.unlocked_skills = SkillTreeState.new()
+	if test_mode == Mode.VIEW_META:
+		ss.unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/behavior_library.tres"))
+		ss.unlocked_skills.mark_available(preload("res://skill_tree/meta_skills/gold_chests.tres"))
+		# Add mock data for regular trees so they aren't empty in standalone mode
+		ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sword_attack.tres"))
+		ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/charge.tres"))
+		ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/cleave.tres"))
+		ss.unlocked_skills.mark_available(preload("res://skill_tree/actions/sweeping_attack.tres"))
+		var lp = LevelProvider.new()
+		if test_character:
 			if test_character.available_skill_trees == null or test_character.available_skill_trees.is_empty():
 				var test_arr: Array[Skill.TreeType] = [Skill.TreeType.WARRIOR, Skill.TreeType.ROGUE]
 				test_character.available_skill_trees = test_arr
 			var chars: Array[GameplayCharacter] = [test_character]
-			rs.gameplay_characters = chars
-			ss.run_save_state = rs
-			initialize(test_mode, ss, null, test_character)
+			lp.available_characters = chars
+		initialize(test_mode, ss, lp, null, true)
+	elif test_mode == Mode.ACQUIRE:
+		ss.unlocked_skills.full = true
+		assert(test_character)
+		var rs = RunSaveState.new()
+		if test_character.available_skill_trees == null or test_character.available_skill_trees.is_empty():
+			var test_arr: Array[Skill.TreeType] = [Skill.TreeType.WARRIOR, Skill.TreeType.ROGUE]
+			test_character.available_skill_trees = test_arr
+		var chars: Array[GameplayCharacter] = [test_character]
+		rs.gameplay_characters = chars
+		ss.run_save_state = rs
+		initialize(test_mode, ss, null, test_character)
 
 func initialize(mode_: Mode, save_state_: SaveState, level_provider_: LevelProvider = null, character_: GameplayCharacter = null, show_all: bool = false) -> void:
 	assert(save_state_)
