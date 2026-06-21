@@ -6,6 +6,7 @@
   - Note: This involves utilizing unused enemies (Skeleton Warrior & Mage) as needed to create tactical puzzles. 
   - Note: This will likely require fixing/adding some behavior substrate first to ensure classes can beat them.
   - Note: Any new level we add (or existing levels lacking them) must include **sim pair files** for all valid character pairs.
+- **Reward Distribution Algorithm:** As we add more reward types, we need a smarter system to assign rewards across levels (e.g., guaranteeing a trainer every N levels) rather than pure randomness.
 - **Finish the Economy Loop (Chests + Gold UI):** The chest substrate is built but unused, and gold accumulates invisibly. Place chests in predictable campaign levels (e.g., Stage 3) and add a HUD element for gold.
 - **Multiple behavior tables with jumps (function-like):** Might be needed as a core system to scale up to 15 levels. 
   - **Idea:** allow multiple named rule tables, plus a meta-skill that jumps to a different table, plus a condition to return to the main table.
@@ -17,6 +18,7 @@
 - **More Reward Types:** Rest / Relic / Trainer is the shipped set. Add events, shops, etc. (Requires Map UI & Gold UI first).
 - **UX Polish:** General UI cleanup across the board (e.g., the trainer overlay currently hides the party and breaks context).
 - **Cosmetic Distinctions:** Visually distinguish class-relics vs earned-relics on the character card.
+- **Cosmetics (Map):** Support different `map_visuals` per level/stage rather than reusing the exact same forest map everywhere.
 
 ## Priority 4: Run Variety
 - **Pre-Stage 1 (Stage 0):** Add a specialized reward stage before the first fight where players choose starting relics or environmental effects. Make sure the Map UI supports this easily.
