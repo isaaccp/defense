@@ -92,6 +92,8 @@ func _on_character_selection_exited():
 
 func _on_behavior_modified(character_idx: int, behavior: StoredBehavior):
 	gameplay_characters[character_idx].behavior = behavior
+	BehaviorComponent.get_or_die(level.characters.get_child(character_idx)).stored_behavior = behavior
+
 	# TODO: Fix and uncomment for multiplayer.
 	# _on_peer_behavior_modified.rpc(character_idx, behavior.serialize())
 
