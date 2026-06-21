@@ -49,6 +49,12 @@ func disable_and_show_selection(character_idx: int):
 		else:
 			child.modulate = Color(1, 1, 1, 0.1)
 
+func disable_character_option(character_idx: int):
+	for child in options.get_children():
+		if child.get_meta("character_idx") == character_idx:
+			child.disabled = true
+			child.modulate = Color(1, 1, 1, 0.3)
+
 func enable(enabled: bool):
 	for child in options.get_children():
 		child.disabled = !enabled

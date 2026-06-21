@@ -49,15 +49,24 @@ func _on_character_selected(gameplay_character_idx: int, character_idx: int):
 
 @rpc("any_peer", "call_local")
 func _notify_selection(character_idx: int, gameplay_character_idx: int):
+	if selections.has(character_idx): return
+	if selections.values().has(gameplay_character_idx): return
+	
 	selections[character_idx] = gameplay_character_idx
+	
+	var character_container = characters_container.get_child(character_idx)
+	character_container.disable_and_show_selection(gameplay_character_idx)
+	
+	for i in characters_container.get_child_count():
+		if i != character_idx:
+			var other_container = characters_container.get_child(i)
+			other_container.disable_character_option(gameplay_character_idx)
+	
 	if sorted_players.is_empty() or selections.size() == selections_wanted:
 		var selection_array: Array[int] = []
 		for i in range(selections.size()):
 			selection_array.append(selections[i])
 		selection_ready.emit(selection_array)
-	else:
-		var character_container = characters_container.get_child(character_idx)
-		character_container.disable_and_show_selection(character_idx)
 
 # For testing.
 func character_selector_count() -> int:
