@@ -127,10 +127,9 @@ func _build_tabs() -> void:
 					for t in c.available_skill_trees:
 						visible_trees[t] = true
 	elif mode == Mode.ACQUIRE:
-		if save_state.run_save_state and save_state.run_save_state.gameplay_characters:
-			for c in save_state.run_save_state.gameplay_characters:
-				for t in c.available_skill_trees:
-					visible_trees[t] = true
+		if character and character.available_skill_trees != null:
+			for t in character.available_skill_trees:
+				visible_trees[t] = true
 					
 	for t in skill_tree_collection.skill_trees:
 		if not visible_trees.has(t.tree_type):
