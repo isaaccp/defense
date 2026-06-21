@@ -23,6 +23,7 @@ script = ExtResource("1_xf4ix")
 test_character = ExtResource("2_wilel")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1390760550]
+theme_type_variation = &"OverlayPanel"
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
