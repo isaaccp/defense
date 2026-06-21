@@ -19,7 +19,7 @@ func target_position() -> Vector2:
 			if position_type == Target.PositionType.HURTBOX:
 				var hurtbox = HurtboxComponent.get_or_null(target.actor)
 				if hurtbox:
-					return hurtbox.global_position
+					return hurtbox.get_target_position()
 			return target.actor.position
 		Target.Type.POSITION:
 			return target.pos

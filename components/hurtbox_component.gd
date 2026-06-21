@@ -59,6 +59,12 @@ func handle_collision(owner_name: String, hitbox_name: String, hit_effect: HitEf
 		effect_actuator_component.notify_damage_taken(hit_result.damage, owner_name)
 	return hit_result
 
+func get_target_position() -> Vector2:
+	var shape = get_node_or_null("CollisionShape2D")
+	if shape:
+		return shape.global_position
+	return global_position
+
 func _log(message: String, tooltip: String = ""):
 	if not logging_component:
 		return

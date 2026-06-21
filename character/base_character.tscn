@@ -84,6 +84,7 @@ status_component = NodePath("../StatusComponent")
 effect_actuator_component = NodePath("../EffectActuatorComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_4y0tt")
 
 [node name="SideComponent" parent="." instance=ExtResource("9_4wyt1")]

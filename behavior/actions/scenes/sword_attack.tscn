@@ -61,8 +61,8 @@ status_on_damage_only = false
 action_name = &""
 damage_multiplier = 1.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_khm1e"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_khm1e"]
+radius = 20.0
 
 [node name="SwordAttack" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
 script = ExtResource("1_sepy6")
@@ -89,9 +89,7 @@ hit_effect = SubResource("Resource_l3jok")
 hits = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(5, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_khm1e")
+shape = SubResource("CircleShape2D_khm1e")
 
 [node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("9_2r54y")]
 animation_component = NodePath("../AnimationComponent")
