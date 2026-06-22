@@ -15,7 +15,7 @@ acquired_skills = SubResource("Resource_jl0re")
 xp = 600
 
 [sub_resource type="LabelSettings" id="LabelSettings_6lxjg"]
-font_size = 14
+font_size = 20
 
 [node name="SkillTree" type="Control" unique_id=272414624]
 layout_mode = 3
@@ -77,6 +77,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
 text = "Hover a skill for details."
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1483046983]

@@ -5,8 +5,8 @@ class_name SkillTreeUI
 const skill_tree_collection = preload("res://skill_tree/trees/skill_tree_collection.tres")
 
 # Card / layout sizing — referenced from inner classes via SkillTreeUI.*.
-const CARD_WIDTH := 150.0
-const CARD_HEIGHT := 54.0
+const CARD_WIDTH := 240.0
+const CARD_HEIGHT := 80.0
 const COLUMN_W := CARD_WIDTH + 40.0
 const ROW_H := CARD_HEIGHT + 14.0
 const TREE_PADDING := 12.0
@@ -471,7 +471,10 @@ class SkillCard extends PanelContainer:
 		_content_vb.add_child(_name_chip)
 		
 		_name_label = Label.new()
-		_name_label.add_theme_font_size_override("font_size", 10)
+		_name_label.add_theme_font_size_override("font_size", 18)
+		_name_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+		_name_label.add_theme_constant_override("shadow_offset_x", 1)
+		_name_label.add_theme_constant_override("shadow_offset_y", 2)
 		_name_label.clip_text = true
 		_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		_name_chip.add_child(_name_label)
@@ -484,15 +487,15 @@ class SkillCard extends PanelContainer:
 		hb.size_flags_vertical = SIZE_EXPAND_FILL
 		_content_vb.add_child(hb)
 		_status_label = Label.new()
-		_status_label.add_theme_font_size_override("font_size", 10)
+		_status_label.add_theme_font_size_override("font_size", 16)
 		_status_label.add_theme_color_override("font_color", Color(1, 1, 1, 0.85))
 		_status_label.size_flags_horizontal = SIZE_EXPAND_FILL
 		_status_label.size_flags_vertical = SIZE_SHRINK_CENTER
 		_status_label.clip_text = true
 		hb.add_child(_status_label)
 		_buy_button = Button.new()
-		_buy_button.add_theme_font_size_override("font_size", 10)
-		_buy_button.custom_minimum_size = Vector2(60, 20)
+		_buy_button.add_theme_font_size_override("font_size", 16)
+		_buy_button.custom_minimum_size = Vector2(90, 28)
 		_buy_button.size_flags_vertical = SIZE_SHRINK_CENTER
 		_buy_button.pressed.connect(_on_buy_pressed)
 		hb.add_child(_buy_button)
@@ -539,8 +542,8 @@ class SkillCard extends PanelContainer:
 		chip_style.corner_radius_bottom_left = profile.corner_radius_bottom_left
 		
 		var theme_color = profile.color_theme
-		chip_style.bg_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.15)
-		chip_style.border_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.4)
+		chip_style.bg_color = Color(theme_color.r * 0.2, theme_color.g * 0.2, theme_color.b * 0.2, 0.8)
+		chip_style.border_color = Color(theme_color.r, theme_color.g, theme_color.b, 0.8)
 		chip_style.set_border_width_all(1)
 		chip_style.content_margin_left = 6
 		chip_style.content_margin_top = 2
