@@ -161,6 +161,14 @@ func get_nodes_in_path(path_idx: int) -> Array[RewardNode]:
 		return _paths[path_idx].duplicate()
 	return []
 
+func restore_state(path_chosen: int, claimed_indices: Array[int]) -> void:
+	_chosen_path_idx = path_chosen
+	if _chosen_path_idx != -1 and _chosen_path_idx < _paths.size():
+		for i in claimed_indices:
+			if i >= 0 and i < _paths[_chosen_path_idx].size():
+				_paths[_chosen_path_idx][i].set_state(RewardNode.State.DONE)
+	_update_node_states()
+
 func _update_node_states() -> void:
 	if _chosen_path_idx == -1:
 		for path in _paths:

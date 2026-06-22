@@ -49,7 +49,10 @@ func _ready():
 	if gameplay_characters.size() == 0:
 		state.change_state(CHARACTER_SELECTION)
 	else:
-		state.change_state(WITHIN_LEVEL)
+		if run_save_state.current_phase == RunSaveState.Phase.REWARD:
+			state.change_state(REWARD_STAGE)
+		else:
+			state.change_state(WITHIN_LEVEL)
 
 func _exit_tree():
 	ui_layer.state_machine_stack.remove_state_machine(state)
@@ -64,6 +67,7 @@ func initialize(run_save_state: RunSaveState, ui_layer: GameplayUILayer, milesto
 	ui_layer.abandon_run_requested.connect(_on_abandon_run_requested)
 	ui_layer.behavior_modified.connect(_on_behavior_modified)
 	ui_layer.relic_selected.connect(_on_relic_selected)
+	ui_layer.reward_state_changed.connect(func(): save_requested.emit())
 
 func _on_gold_earned(amount: int) -> void:
 	run_save_state.gold += amount
@@ -131,10 +135,16 @@ func _on_within_level_entered(save_snapshot: bool = true):
 	# TODO: Add a MultiplayerSpawner here so scenes get spawned.
 	%StateParent.add_child(level, true)
 
-func _on_level_failed():
+func _destroy_current_level():
 	_cleanup_level_connections()
-	level.exit()
+	if is_instance_valid(level):
+		ui_layer.state_machine_stack.remove_state_machine(level.state)
+		level.exit()
 	%StateParent.remove_child(level)
+	level = null
+
+func _on_level_failed():
+	_destroy_current_level()
 	# Run _on_within_level_entered but don't save snapshot.
 	_on_within_level_entered(false)
 
@@ -155,13 +165,8 @@ func _on_level_finished():
 	state.change_state(REWARD_STAGE, false)
 
 func _on_within_level_exited():
-	_cleanup_level_connections()
-	if is_instance_valid(level):
-		ui_layer.state_machine_stack.remove_state_machine(level.state)
-		ui_layer.hud.hide()
-		level.exit()
-	%StateParent.remove_child(level)
-	level = null
+	_destroy_current_level()
+	ui_layer.hud.hide()
 	level_scene = null
 
 func _cleanup_level_connections():
@@ -205,6 +210,8 @@ func _on_reward_stage_entered():
 	ui_layer.reward_stage_continue_selected.connect(_on_reward_stage_continue_selected, CONNECT_ONE_SHOT)
 
 func _on_reward_stage_continue_selected():
+	run_save_state.reward_path_chosen = -1
+	run_save_state.reward_nodes_claimed.clear()
 	run_save_state.current_stage += 1
 	run_save_state.current_phase = RunSaveState.Phase.FIGHT
 	if level_provider.has_levels_at_difficulty(run_save_state.current_stage):

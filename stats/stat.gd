@@ -10,6 +10,7 @@ class_name Stat
 const EnemiesDestroyed: StringName = &"enemies_destroyed"
 const DamageDealt: StringName = &"damage_dealt"
 const DamageHealed: StringName = &"damage_healed"
+const NaturalRecovery: StringName = &"natural_recovery"
 const FocusGenerated: StringName = &"focus_generated"
 const FocusSpent: StringName = &"focus_spent"
 

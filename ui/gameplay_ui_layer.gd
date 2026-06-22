@@ -51,6 +51,7 @@ signal milestone_summary_continue_selected
 ## Continue pressed on between levels screen.
 signal between_levels_continue_selected
 signal reward_stage_continue_selected
+signal reward_state_changed
 
 func _ready():
 	super()
@@ -132,6 +133,9 @@ func hide_map_screen():
 
 func _on_map_screen_continue_pressed():
 	reward_stage_continue_selected.emit()
+
+func _on_map_screen_reward_state_changed():
+	reward_state_changed.emit()
 
 func show_level_end(win: bool, character_node: Node, granted_xp_text: String):
 	%LevelEnd.prepare(win, character_node, granted_xp_text)

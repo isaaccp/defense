@@ -119,3 +119,4 @@ visible = false
 [connection signal="save_and_quit_requested" from="Overlay/GameplayMenu" to="." method="_on_gameplay_menu_save_and_quit_requested"]
 [connection signal="play_next_selected" from="Overlay/LevelEnd" to="." method="_on_level_end_play_next_selected"]
 [connection signal="try_again_selected" from="Overlay/LevelEnd" to="." method="_on_level_end_try_again_selected"]
+[connection signal="reward_state_changed" from="Screens/MapScreen" to="." method="_on_map_screen_reward_state_changed"]

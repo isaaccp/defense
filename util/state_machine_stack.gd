@@ -11,19 +11,28 @@ var sm_by_name: Dictionary[String, StateMachine]
 func _init(root_sm: StateMachine):
 	state_machines.append(root_sm)
 	sm_by_name[root_sm.name] = root_sm
+	_print_stack("Init")
 
 func add_state_machine(sm: StateMachine):
 	state_machines.append(sm)
 	sm_by_name[sm.name] = sm
+	_print_stack("Add")
 
 func remove_state_machine(sm: StateMachine):
 	assert(state_machines[-1] == sm)
 	assert(sm.name in sm_by_name)
 	sm_by_name.erase(sm.name)
 	state_machines.pop_back()
+	_print_stack("Remove")
 
 func has_state_machine(name: String) -> bool:
 	return name in sm_by_name
 
 func get_state_machine(name: String) -> StateMachine:
 	return sm_by_name.get(name)
+
+func _print_stack(action: String) -> void:
+	var names: Array[String] = []
+	for sm in state_machines:
+		names.append(sm.name)
+	print("StateMachineStack [%s]: %s" % [action, " -> ".join(names)])

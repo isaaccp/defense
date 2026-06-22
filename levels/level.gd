@@ -225,7 +225,7 @@ func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType
 				var actual_healed = actual_update.current_value - actual_update.prev_value
 				var log_comp = Component.get_or_null(character, LoggingComponent.component) as LoggingComponent
 				if log_comp and log_comp.track_stats:
-					log_comp.stats.add_stat(Stat.make(Stat.DamageHealed, actual_healed))
+					log_comp.stats.add_stat(Stat.make(Stat.NaturalRecovery, actual_healed))
 					
 	state.change_state.call_deferred(SUMMARY)
 

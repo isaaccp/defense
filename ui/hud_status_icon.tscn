@@ -17,3 +17,5 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2_4d71c")
+expand_mode = 1
+stretch_mode = 5

@@ -9,6 +9,7 @@ const map_graph_scene = preload("res://ui/map_graph.gd") # Note: map_graph is ju
 signal continue_pressed
 signal _character_picked(gc: GameplayCharacter)
 signal _trainer_outcome(picked: GameplayCharacter)
+signal reward_state_changed
 
 var _save_state: SaveState
 var _run_save_state: RunSaveState
@@ -79,6 +80,10 @@ func _build_map() -> void:
 		map_graph.path_locked.connect(_on_path_locked)
 	
 	map_graph.setup(_stage_rewards)
+	if _run_save_state.reward_path_chosen != -1:
+		map_graph.restore_state(_run_save_state.reward_path_chosen, _run_save_state.reward_nodes_claimed)
+		if not _run_save_state.reward_nodes_claimed.is_empty():
+			_has_claimed_any_reward = true
 
 func _on_node_hovered(node: RewardNode) -> void:
 	if node.is_next_stage:
@@ -110,6 +115,14 @@ func _on_node_clicked(node: RewardNode) -> void:
 		_apply_context
 	)
 	node.set_state(RewardNode.State.DONE)
+	
+	# Save progress
+	var nodes_in_path = map_graph.get_nodes_in_path(map_graph.get_chosen_path_idx())
+	var node_idx = nodes_in_path.find(node)
+	if node_idx != -1 and not _run_save_state.reward_nodes_claimed.has(node_idx):
+		_run_save_state.reward_nodes_claimed.append(node_idx)
+	reward_state_changed.emit()
+	
 	refresh_character_cards()
 	map_graph.update_all_nodes()
 	
@@ -132,6 +145,8 @@ func _check_all_done() -> void:
 	%Prompt.text = "All rewards claimed. Click the battle node to proceed."
 
 func _on_path_locked(_path_idx: int) -> void:
+	_run_save_state.reward_path_chosen = _path_idx
+	reward_state_changed.emit()
 	%Prompt.text = "Path locked. Claim your rewards, or click the battle node to proceed."
 
 # --- Sub-flows used by interactive reward types ---

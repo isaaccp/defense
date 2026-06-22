@@ -19,6 +19,10 @@ enum Phase {
 @export var stats: AggregateStats
 ## Shared between all characters. Earned from chests, spent at shops.
 @export var gold: int = 0
+## The index of the path chosen on the map screen (0 or 1). -1 if no path chosen yet.
+@export var reward_path_chosen: int = -1
+## Indices of nodes on the chosen path that have been claimed.
+@export var reward_nodes_claimed: Array[int] = []
 ## Run-wide RNG seed. Used for level pool picks and the reward schedule.
 @export var seed: int = 0
 ## Pre-generated reward schedule, one StageRewards per stage. Built at

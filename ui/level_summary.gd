@@ -7,6 +7,7 @@ const stat_names: Array[StringName] = [
 	Stat.EnemiesDestroyed,
 	Stat.DamageDealt,
 	Stat.DamageHealed,
+	Stat.NaturalRecovery,
 ]
 
 func prepare(character_node: Node):
