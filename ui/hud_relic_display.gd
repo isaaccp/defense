@@ -14,4 +14,8 @@ func _add_icon(icon: Texture, tooltip: String):
 	add_child(relic_icon)
 
 func add_relic(relic: RelicDef):
-	_add_icon(relic.icon, "%s\n%s" % [relic.name, relic.description])
+	var tex = relic.icon
+	if not tex:
+		tex = PlaceholderTexture2D.new()
+		tex.size = Vector2(32, 32)
+	_add_icon(tex, "%s\n%s" % [relic.name, relic.description])

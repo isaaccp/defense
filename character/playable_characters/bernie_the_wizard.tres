@@ -25,6 +25,6 @@ scene_id = 2
 description = "An aspiring wizard on its way to the Wizard's College in the capital"
 acquired_skills = SubResource("Resource_1uxd1")
 unlock_meta_skill = ExtResource("3_meta")
-available_skill_trees = Array[int]([4])
+available_skill_trees = Array[int]([5])
 attributes = SubResource("Resource_101em")
 relics = Array[StringName]([&"Meditation", &"Arcane Battery"])

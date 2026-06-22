@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_rdef")
-description = "+30 max focus. (Wizard starting bonus — extra headroom for burst casts.)"
+description = "+30 max focus."
 class_relic = true
 name = &"Arcane Battery"
 effect_types = Array[int]([1])

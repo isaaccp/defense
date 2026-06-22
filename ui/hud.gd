@@ -113,6 +113,9 @@ func show_play_controls(show: bool = true):
 func show_level_options(show: bool = true):
 	%LevelOptions.visible = show
 
+func set_stage(stage: int):
+	%StageLabel.text = "Stage %d " % stage
+
 func set_victory_loss(victory_loss: VictoryLossConditionComponent):
 	%VictoryLoss.initialize(victory_loss)
 	show_victory_loss_text()

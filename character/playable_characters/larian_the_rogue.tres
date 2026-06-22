@@ -26,6 +26,6 @@ scene_id = 3
 description = "A forest elf on a secret mission"
 acquired_skills = SubResource("Resource_2impa")
 unlock_meta_skill = ExtResource("3_meta")
-available_skill_trees = Array[int]([5])
+available_skill_trees = Array[int]([3])
 attributes = SubResource("Resource_60uxt")
 relics = Array[StringName]([&"Killer\'s Edge", &"Killer\'s Insight"])

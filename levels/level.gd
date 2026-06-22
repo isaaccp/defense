@@ -211,6 +211,22 @@ func _on_level_failed(_loss_type: VictoryLossConditionComponent.LossType):
 func _on_level_finished(_victory_type: VictoryLossConditionComponent.VictoryType):
 	win = true
 	stop()
+	
+	# Apply end-of-level natural recovery.
+	for i in characters.get_child_count():
+		var character = characters.get_child(i)
+		var gc = source_gameplay_characters[i]
+		var vitals = character.get_component_or_die(VitalsComponent) as VitalsComponent
+		var max_hp = gc.attributes.health
+		var recovery_amount = int(round(max_hp * gc.attributes.recovery))
+		if recovery_amount > 0:
+			var actual_update = vitals.apply_vital_change(VitalsComponent.VitalType.HEALTH, recovery_amount, false)
+			if actual_update and actual_update.current_value > actual_update.prev_value:
+				var actual_healed = actual_update.current_value - actual_update.prev_value
+				var log_comp = Component.get_or_null(character, LoggingComponent.component) as LoggingComponent
+				if log_comp and log_comp.track_stats:
+					log_comp.stats.add_stat(Stat.make(Stat.DamageHealed, actual_healed))
+					
 	state.change_state.call_deferred(SUMMARY)
 
 func granted_xp() -> int:

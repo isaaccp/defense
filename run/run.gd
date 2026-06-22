@@ -126,6 +126,7 @@ func _on_within_level_entered(save_snapshot: bool = true):
 	
 	ui_layer.state_machine_stack.add_state_machine(level.state)
 	ui_layer.show()
+	ui_layer.hud.set_stage(run_save_state.current_stage)
 	ui_layer.hud.show()
 	# TODO: Add a MultiplayerSpawner here so scenes get spawned.
 	%StateParent.add_child(level, true)

@@ -308,7 +308,7 @@ class MetaCanvas extends HFlowContainer:
 
 	func _build() -> void:
 		for s in tree.skills:
-			if ui.mode == Mode.VIEW_META and not ui._is_unlocked(s):
+			if ui.hide_locked_skills and not ui._is_unlocked(s):
 				continue
 			var card = SkillCard.new(ui, s)
 			add_child(card)
@@ -335,7 +335,7 @@ class TreeCanvas extends Control:
 	func _build() -> void:
 		var skills_to_render = []
 		for s in tree.skills:
-			if ui.mode == Mode.VIEW_META and not ui._is_unlocked(s):
+			if ui.hide_locked_skills and not ui._is_unlocked(s):
 				continue
 			skills_to_render.append(s)
 

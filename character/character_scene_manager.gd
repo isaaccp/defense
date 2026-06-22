@@ -36,7 +36,6 @@ static func make(gameplay_character: GameplayCharacter) -> Character:
 			if relic_def:
 				effect_actuator.add_relic(relic_def)
 				
-	# TODO: Can this just be removed or is it still needed with Vitalscomponent?
-	# var health_component = HealthComponent.get_or_die(character)
-	# health_component.initial_health = gameplay_character.health
+	var vitals_component = character.get_component_or_die(VitalsComponent) as VitalsComponent
+	vitals_component.initial_health = gameplay_character.health
 	return character

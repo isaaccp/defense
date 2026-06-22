@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_rdef")
-description = "-50% damage from ranged attacks. (Priest starting bonus — survives archer pressure without being tanky overall.)"
+description = "-50% damage from ranged attacks."
 class_relic = true
 name = &"Hallowed Vestments"
 effect_types = Array[int]([1])

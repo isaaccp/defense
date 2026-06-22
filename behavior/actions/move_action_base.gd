@@ -47,6 +47,6 @@ func _start_target_position_refresh():
 
 func action_finished():
 	super()
-	if is_instance_valid(navigation_agent):
+	if is_instance_valid(navigation_agent) and navigation_agent.velocity_computed.is_connected(_on_velocity_computed):
 		navigation_agent.velocity_computed.disconnect(_on_velocity_computed)
 	body.velocity = Vector2.ZERO

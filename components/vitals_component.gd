@@ -29,6 +29,9 @@ signal vital_depleted(type: VitalType)
 @export_group("Optional")
 @export var logging_component: LoggingComponent
 
+# Health value to use when initializing. If < 0, uses max health.
+var initial_health: float = -1.0
+
 # A dictionary to hold the current and max values for all vital types.
 # This makes the component data-driven and easy to extend.
 # Format: { VitalType.HEALTH: {current: 100.0, max: 100.0}, ... }
@@ -50,7 +53,10 @@ func _initialize() -> void:
 	_vitals_data[VitalType.HEALTH] = {"current": 0.0, "max": max_health}
 	
 	if max_health > 0:
-		apply_vital_change(VitalType.HEALTH, max_health, false)
+		if initial_health >= 0:
+			apply_vital_change(VitalType.HEALTH, initial_health, false)
+		else:
+			apply_vital_change(VitalType.HEALTH, max_health, false)
 	
 	var max_focus = float(attributes_component.focus)
 	_vitals_data[VitalType.FOCUS] = {"current": 0.0, "max": max_focus}
