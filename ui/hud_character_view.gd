@@ -30,9 +30,11 @@ func initialize_from_gameplay_character(gc: GameplayCharacter, relic_library: Re
 	%HealthBar.value = gc.health
 	%HealthBar.get_child(0).text = "%d / %d" % [gc.health, gc.attributes.health]
 	# Hide combat-only stuff.
-	%ActionLabel.hide()
-	%PreferredTargetLabel.hide()
+	%HSeparator1.hide()
+	%ActionPanel.hide()
 	%ConfigContainer.hide()
+	%HSeparator2.hide()
+	%StatusTitle.hide()
 	%HudStatusDisplay.clear()
 	%HudStatusDisplay.hide()
 	# XP.
