@@ -184,16 +184,16 @@ func _on_pre_run_screen_continue_pressed():
 	pre_run_continue_pressed.emit()
 
 func _on_run_summary_screen_continue_selected():
-	run_summary_continue_selected.emit()
 	hide_screen()
+	run_summary_continue_selected.emit()
 
 func _on_milestone_summary_screen_continue_selected():
-	milestone_summary_continue_selected.emit()
 	hide_screen()
+	milestone_summary_continue_selected.emit()
 
 func _on_between_levels_screen_continue_selected():
-	between_levels_continue_selected.emit()
 	hide_screen()
+	between_levels_continue_selected.emit()
 
 func _on_hud_relic_selected(relic_name: String, gc: GameplayCharacter):
 	relic_selected.emit(relic_name, gc)
