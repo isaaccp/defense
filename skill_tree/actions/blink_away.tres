@@ -15,4 +15,4 @@ tags = Array[int]([1, 2])
 params = SubResource("Resource_sl318")
 skill_name = &"Blink Away"
 skill_type = 1
-tree_type = 5
+tree_type = 3

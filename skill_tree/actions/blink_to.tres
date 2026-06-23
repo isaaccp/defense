@@ -17,4 +17,4 @@ params = SubResource("Resource_cxw7u")
 skill_name = &"Blink To"
 skill_type = 1
 parent = ExtResource("2_yu2jp")
-tree_type = 5
+tree_type = 3

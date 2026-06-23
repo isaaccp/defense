@@ -15,4 +15,4 @@ tags = Array[int]([1, 4])
 params = SubResource("Resource_b00lk")
 skill_name = &"Magic Armor"
 skill_type = 1
-tree_type = 4
+tree_type = 5
