@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://heavystrike_1"]
+[gd_resource type="Resource" script_class="ActionDef" format=3]
 
 [ext_resource type="Script" path="res://behavior/actions/heavy_strike_action.gd" id="1_act"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_d31p3"]
 [ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_def"]
+[ext_resource type="Resource" path="res://skill_tree/actions/sword_attack.tres" id="3_hu2qe"]
+
+[sub_resource type="Resource" id="Resource_8885w"]
+script = ExtResource("2_d31p3")
 
 [resource]
 script = ExtResource("2_def")
-supported_target_types = Array[int]([1])
 action_script = ExtResource("1_act")
-description_text = "Heavy Strike"
+supported_target_types = Array[int]([1])
 tags = Array[int]([3])
+params = SubResource("Resource_8885w")
 skill_name = &"Heavy Strike"
+skill_type = 1
+parent = ExtResource("3_hu2qe")

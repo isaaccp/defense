@@ -36,13 +36,21 @@ class_name GameplayCharacter
 
 var peer_id: int
 
-func initialize(name: String, peer_id: int, behavior: StoredBehavior = null):
+func initialize(name: String, peer_id: int, behavior: StoredBehavior = null, unlocked_skills: SkillTreeState = null):
 	self.name = name
 	self.peer_id = peer_id
 	health = attributes.health
 	if behavior:
 		self.behavior = behavior
 	acquired_skills.add_skill_names(Constants.base_acquired_skills)
+	
+	if unlocked_skills:
+		var general_skills: Array[StringName] = []
+		for skill_name in unlocked_skills.skills:
+			var skill = SkillManager.lookup_skill(skill_name)
+			if skill and skill.tree_type == Skill.TreeType.GENERAL:
+				general_skills.append(skill_name)
+		acquired_skills.add_skill_names(general_skills)
 
 func use_xp(amount: int) -> void:
 	assert(xp >= amount, "Tried to use more XP than possible")

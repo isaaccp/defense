@@ -223,6 +223,8 @@ func _state(s: Skill) -> SkillState:
 func _state_label(s: Skill) -> String:
 	match _state(s):
 		SkillState.OWNED:
+			if mode == Mode.ACQUIRE and s.tree_type == Skill.TreeType.GENERAL:
+				return "Auto-Acquired"
 			return "Owned" if mode == Mode.ACQUIRE else "Unlocked"
 		SkillState.BUYABLE:
 			return "Available"
@@ -284,8 +286,23 @@ class TreePane extends ScrollContainer:
 			canvas = MetaCanvas.new(ui, tree)
 			margin.add_child(canvas)
 		else:
+			var wrapper = VBoxContainer.new()
+			wrapper.size_flags_horizontal = SIZE_EXPAND_FILL
+			wrapper.size_flags_vertical = SIZE_EXPAND_FILL
+			add_child(wrapper)
+			if tree.tree_type == Skill.TreeType.GENERAL and ui.mode == Mode.ACQUIRE:
+				var margin = MarginContainer.new()
+				margin.add_theme_constant_override("margin_left", 20)
+				margin.add_theme_constant_override("margin_top", 10)
+				margin.add_theme_constant_override("margin_bottom", 10)
+				var lbl = Label.new()
+				lbl.text = "General skills are automatically acquired when unlocked globally, and cost 0 XP."
+				lbl.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
+				lbl.add_theme_font_size_override("font_size", 18)
+				margin.add_child(lbl)
+				wrapper.add_child(margin)
 			canvas = TreeCanvas.new(ui, tree)
-			add_child(canvas)
+			wrapper.add_child(canvas)
 
 	func refresh() -> void:
 		canvas.refresh()
