@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://bwizardclass01" path="res://skill_tree/meta_skills/wizard_class.tres" id="3_meta"]
 [sub_resource type="Resource" id="Resource_1uxd1"]
 script = ExtResource("2_2bsii")
-skills = Array[StringName]([&"Enemy", &"Self", &"Closest First", &"Move To", &"Seeking Bolt", &"Fire Burst", &"Chilling Sphere", &"Magic Armor", &"Teleport Away"])
+skills = Array[StringName]([&"Enemy", &"Self", &"Closest First", &"Move To", &"Seeking Bolt", &"Fire Burst"])
 
 [sub_resource type="Resource" id="Resource_101em"]
 script = ExtResource("2_wmfby")

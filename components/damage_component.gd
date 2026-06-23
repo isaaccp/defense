@@ -91,6 +91,8 @@ func process_hit(hit_effect: HitEffect) -> HitResult:
 		return hit_result
 	vitals_component.apply_vital_change(VitalsComponent.VitalType.HEALTH, -after_resistance_damage, true)
 	_log_damage(damage_str)
+	if logging_component and logging_component.track_stats:
+		logging_component.stats.add_stat(Stat.make(Stat.DamageTaken, after_resistance_damage))
 	hit_result.damage = after_resistance_damage
 	var actor = get_parent()
 	hit_result.destroyed = actor.destroyed

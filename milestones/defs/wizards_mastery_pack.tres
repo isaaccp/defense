@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ClassStatMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/actions/chilling_sphere.tres" id="ext_0"]
+[ext_resource type="Resource" path="res://skill_tree/actions/magic_armor.tres" id="ext_1"]
+[ext_resource type="Resource" path="res://skill_tree/actions/teleport_away.tres" id="ext_2"]
+[ext_resource type="Script" path="res://milestones/class_stat_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"wizards_mastery_pack"
+title = "Wizard's Mastery Pack"
+description = "Deal 2000 damage with Bernie"
+required_count = 2000
+reward_skills = Array[Resource](
+[ExtResource("ext_0"),
+ExtResource("ext_1"),
+ExtResource("ext_2")]
+)
+stat_name = &"damage_dealt"
+character_scene_id = 2

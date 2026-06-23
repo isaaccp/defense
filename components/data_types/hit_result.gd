@@ -17,7 +17,8 @@ func stats_update() -> Array[Stat]:
 		updates.append(Stat.make(Stat.DamageDealt, damage))
 	elif damage < 0:
 		updates.append(Stat.make(Stat.DamageHealed, -damage))
-	# TODO: Status.
+	if status != "":
+		updates.append(Stat.make(Stat.StatusEffectsApplied, 1))
 	# TODO: Damage per damage type.
 	if destroyed:
 		updates.append(Stat.make(Stat.EnemiesDestroyed, 1))

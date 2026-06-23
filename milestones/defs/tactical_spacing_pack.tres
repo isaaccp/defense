@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="TowerStatLevelMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/actions/move_away.tres" id="ext_0"]
+[ext_resource type="Resource" path="res://skill_tree/target_sorts/farthest_first.tres" id="ext_1"]
+[ext_resource type="Resource" path="res://skill_tree/conditions/target_distance.tres" id="ext_2"]
+[ext_resource type="Script" path="res://milestones/tower_stat_level_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"tactical_spacing_pack"
+title = "Tactical Spacing Pack"
+description = "Beat 5 levels without the tower taking damage"
+required_count = 5
+reward_skills = Array[Resource](
+[ExtResource("ext_0"),
+ExtResource("ext_1"),
+ExtResource("ext_2")]
+)
+stat_name = &"damage_taken"
+target_value = 0

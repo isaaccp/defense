@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ClassStatMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/actions/multi_shot.tres" id="ext_0"]
+[ext_resource type="Resource" path="res://skill_tree/actions/blink_away.tres" id="ext_1"]
+[ext_resource type="Resource" path="res://skill_tree/actions/blink_to.tres" id="ext_2"]
+[ext_resource type="Script" path="res://milestones/class_stat_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"rogues_agility_pack"
+title = "Rogue's Agility Pack"
+description = "Defeat 50 enemies with Larian"
+required_count = 50
+reward_skills = Array[Resource](
+[ExtResource("ext_0"),
+ExtResource("ext_1"),
+ExtResource("ext_2")]
+)
+stat_name = &"enemies_destroyed"
+character_scene_id = 3

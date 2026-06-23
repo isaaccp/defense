@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ClassStatMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/actions/sweeping_attack.tres" id="ext_0"]
+[ext_resource type="Resource" path="res://skill_tree/actions/cleave.tres" id="ext_1"]
+[ext_resource type="Resource" path="res://skill_tree/actions/projectile_ward.tres" id="ext_2"]
+[ext_resource type="Script" path="res://milestones/class_stat_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"knights_vigor_pack"
+title = "Knight's Vigor Pack"
+description = "Receive 500 damage with Godric"
+required_count = 500
+reward_skills = Array[Resource](
+[ExtResource("ext_0"),
+ExtResource("ext_1"),
+ExtResource("ext_2")]
+)
+stat_name = &"damage_taken"
+character_scene_id = 1

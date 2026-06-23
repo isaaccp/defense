@@ -10,6 +10,8 @@ class_name Stat
 const EnemiesDestroyed: StringName = &"enemies_destroyed"
 const DamageDealt: StringName = &"damage_dealt"
 const DamageHealed: StringName = &"damage_healed"
+const DamageTaken: StringName = &"damage_taken"
+const StatusEffectsApplied: StringName = &"status_effects_applied"
 const NaturalRecovery: StringName = &"natural_recovery"
 const FocusGenerated: StringName = &"focus_generated"
 const FocusSpent: StringName = &"focus_spent"
@@ -17,6 +19,7 @@ const FocusSpent: StringName = &"focus_spent"
 # Run Stats.
 const LevelsBeaten: StringName = &"levels_beaten"
 const RunsCompleted: StringName = &"runs_completed"
+const RunsLost: StringName = &"runs_lost"
 
 @export var name: StringName
 @export var int_value: IntValue

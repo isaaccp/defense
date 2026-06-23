@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StatMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/conditions/target_health.tres" id="ext_0"]
+[ext_resource type="Resource" path="res://skill_tree/targets/most_enemies_position.tres" id="ext_1"]
+[ext_resource type="Resource" path="res://skill_tree/targets/center.tres" id="ext_2"]
+[ext_resource type="Script" path="res://milestones/stat_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"target_priority_pack"
+title = "Target Priority Pack"
+description = "Defeat 250 enemies"
+required_count = 250
+reward_skills = Array[Resource](
+[ExtResource("ext_0"),
+ExtResource("ext_1"),
+ExtResource("ext_2")]
+)
+stat_name = &"enemies_destroyed"

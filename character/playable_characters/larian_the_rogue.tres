@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_2impa"]
 script = ExtResource("1_gc03e")
-skills = Array[StringName]([&"Enemy", &"Closest First", &"Farthest First", &"Move To", &"Move Away", &"Bow Attack", &"Multi Shot", &"Dagger Attack", &"Blink Away"])
+skills = Array[StringName]([&"Enemy", &"Closest First", &"Move To", &"Bow Attack", &"Dagger Attack"])
 
 [sub_resource type="Resource" id="Resource_60uxt"]
 script = ExtResource("2_ld1pl")

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ClassStatMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/actions/hold_person.tres" id="ext_0"]
+[ext_resource type="Resource" path="res://skill_tree/targets/self_or_ally.tres" id="ext_1"]
+[ext_resource type="Script" path="res://milestones/class_stat_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"clerics_domain_pack_1"
+title = "Cleric's Domain Pack 1"
+description = "Heal 500 damage with Puffin"
+required_count = 500
+reward_skills = Array[Resource](
+[ExtResource("ext_0"),
+ExtResource("ext_1")]
+)
+stat_name = &"damage_healed"
+character_scene_id = 4

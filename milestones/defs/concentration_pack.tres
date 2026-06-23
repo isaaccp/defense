@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LevelsBeatenInRunRepeatedMilestone" format=3]
+
+[ext_resource type="Resource" path="res://skill_tree/conditions/focus.tres" id="ext_0"]
+[ext_resource type="Script" path="res://milestones/levels_beaten_in_run_repeated_milestone.gd" id="script_0"]
+
+[resource]
+script = ExtResource("script_0")
+id = &"concentration_pack"
+title = "Concentration Pack"
+description = "Beat 3 levels in a single run"
+required_count = 1
+reward_skills = Array[Resource](
+[ExtResource("ext_0")]
+)
+levels_in_run = 3

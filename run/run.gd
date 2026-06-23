@@ -230,9 +230,17 @@ func _on_run_summary_exited():
 	pass
 
 func _on_run_summary_continue_selected():
-	run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
-	for gc in gameplay_characters:
-		run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), gc.scene_id)
+	var max_stage = level_provider.max_difficulty()
+	var run_won = run_save_state.current_stage >= max_stage and level_scene == null
+	
+	if run_won:
+		run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
+		for gc in gameplay_characters:
+			run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), gc.scene_id)
+	else:
+		run_save_state.stats.add_stat(Stat.make(Stat.RunsLost, 1))
+		for gc in gameplay_characters:
+			run_save_state.stats.add_character_stat(Stat.make(Stat.RunsLost, 1), gc.scene_id)
 		
 	var newly_unlocked: Array[MilestoneManager.MilestoneProgressDelta] = []
 	if milestone_manager:

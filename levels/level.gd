@@ -247,7 +247,7 @@ func get_aggregate_stats() -> AggregateStats:
 		var log_comp = Component.get_or_null(child, LoggingComponent.component) as LoggingComponent
 		if log_comp:
 			for stat_name in log_comp.stats.stats:
-				aggregate.add_stat(Stat.make(stat_name, log_comp.stats.stats[stat_name]))
+				aggregate.add_tower_stat(Stat.make(stat_name, log_comp.stats.stats[stat_name]))
 				
 	for child in enemies.get_children():
 		var log_comp = Component.get_or_null(child, LoggingComponent.component) as LoggingComponent

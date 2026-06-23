@@ -8,7 +8,17 @@
 [ext_resource type="Resource" uid="uid://mrogueunlock01" path="res://milestones/defs/rogue_unlock.tres" id="6_ach"]
 [ext_resource type="Resource" uid="uid://mwizardunlock01" path="res://milestones/defs/wizard_unlock.tres" id="7_ach"]
 [ext_resource type="Resource" path="res://milestones/defs/veteran_survivor.tres" id="8_ach"]
+[ext_resource type="Resource" path="res://milestones/defs/knights_vigor_pack.tres" id="ext_knights_vigor_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/clerics_domain_pack_1.tres" id="ext_clerics_domain_pack_1"]
+[ext_resource type="Resource" path="res://milestones/defs/clerics_domain_pack_2.tres" id="ext_clerics_domain_pack_2"]
+[ext_resource type="Resource" path="res://milestones/defs/second_steps_pack.tres" id="ext_second_steps_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/objective_defense_pack.tres" id="ext_objective_defense_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/concentration_pack.tres" id="ext_concentration_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/rogues_agility_pack.tres" id="ext_rogues_agility_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/tactical_spacing_pack.tres" id="ext_tactical_spacing_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/target_priority_pack.tres" id="ext_target_priority_pack"]
+[ext_resource type="Resource" path="res://milestones/defs/wizards_mastery_pack.tres" id="ext_wizards_mastery_pack"]
 
 [resource]
 script = ExtResource("1_lib")
-milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach"), ExtResource("3_ach"), ExtResource("4_ach"), ExtResource("5_ach"), ExtResource("6_ach"), ExtResource("7_ach"), ExtResource("8_ach")])
+milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach"), ExtResource("3_ach"), ExtResource("4_ach"), ExtResource("5_ach"), ExtResource("6_ach"), ExtResource("7_ach"), ExtResource("8_ach"), ExtResource("ext_knights_vigor_pack"), ExtResource("ext_clerics_domain_pack_1"), ExtResource("ext_clerics_domain_pack_2"), ExtResource("ext_second_steps_pack"), ExtResource("ext_objective_defense_pack"), ExtResource("ext_concentration_pack"), ExtResource("ext_rogues_agility_pack"), ExtResource("ext_tactical_spacing_pack"), ExtResource("ext_target_priority_pack"), ExtResource("ext_wizards_mastery_pack")])
