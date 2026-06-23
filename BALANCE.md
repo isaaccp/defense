@@ -54,10 +54,12 @@ Per-action **damage / heal amounts** live in each action's script (e.g. [behavio
 
 **Focus cost reference** (current values, see action `_init()` for source of truth):
 - 0: move_to, move_away, meditate
-- 1: sword_attack, bow_attack
-- 2: seeking_bolt, heal, magic_armor, charge, blink_away, blink_to
-- 3: cleave, sweeping_attack, projectile_ward
-- 4: multi_shot, fire_burst, hold_person, teleport_away, teleport_to
+- 1: sword_attack, bow_attack, dagger_attack, mace_attack
+- 2: seeking_bolt, heal, magic_armor, charge, blink_away, blink_to, poison_dart, smite, crippling_shot
+- 3: cleave, sweeping_attack, projectile_ward, shield_wall, fan_of_knives, arcane_blast, chilling_sphere
+- 4: multi_shot, fire_burst, hold_person, teleport_away, teleport_to, whirlwind, blessing_of_haste, frost_nova, heavy_strike
+- 5: holy_nova
+- 6: lightning_strike, consecrate
 
 If a new spell needs to be "always available," set `focus_cost = 0` and use cooldown as the gate. If it needs to be a "burn focus to win" cast, set it ≥3.
 

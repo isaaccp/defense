@@ -5,6 +5,9 @@ class_name ProjectileAttackActionBase
 var projectile_scene: PackedScene
 var last_target_pos: Vector2
 
+# Time to wait to finish the action after spawning the projectile.
+var duration: float = -1.0
+
 # Could provide more stuff here, e.g. multiple shots, wait times before/after,
 # etc. For now keep it simple.
 
@@ -26,6 +29,14 @@ func spawn_projectile():
 	projectile.look_at(projectile.position + dir)
 	projectile.position += dir * 35
 	action_sprites.add_child(projectile)
+
+
+func post_prepare():
+	spawn_projectile()
+	if duration > 0:
+		Engine.get_main_loop().create_timer(duration, false).timeout.connect(action_finished)
+	else:
+		action_finished()
 
 func description() -> String:
 	assert(false, "Must be implemented in subclass")

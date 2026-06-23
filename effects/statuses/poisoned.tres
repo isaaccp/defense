@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusDef" format=3 uid="uid://statpsn0001"]
+
+[ext_resource type="Script" path="res://effects/statuses/poisoned.gd" id="1_scr"]
+[ext_resource type="Script" path="res://effects/status_def.gd" id="2_scr"]
+
+[resource]
+script = ExtResource("2_scr")
+status_type = 4
+description = "Takes damage over time."
+name = &"Poisoned"
+effect_types = Array[int]([10])
+effect_script = ExtResource("1_scr")

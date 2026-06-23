@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_ajjie"]
+[ext_resource type="Texture2D" path="res://assets/kyrises_rpg_icon_pack/icons/16x16/arrow_01a.png" id="2_13kum"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/projectile_motion_component.tscn" id="3_njqll"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/projectile_motion_component.gd" id="4_13ofd"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="5_3bk4j"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/hitbox_component.gd" id="6_qtmre"]
+[ext_resource type="Resource" path="res://game_logic/damage_types/piercing.tres" id="7_vsico"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="8_lb3xq"]
+[ext_resource type="Resource" path="res://effects/statuses/poisoned.tres" id="9_qt3x2"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="10_pjsdr"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="11_kjdcj"]
+
+[sub_resource type="Resource" id="Resource_w564k"]
+script = ExtResource("8_lb3xq")
+damage = 3
+damage_type = ExtResource("7_vsico")
+status = ExtResource("9_qt3x2")
+status_duration = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x3mii"]
+radius = 5.0
+
+[node name="PoisonDart" type="Node2D" unique_id=1426235860 node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_ajjie")
+target_position_type = 2
+hitbox_component = NodePath("HitboxComponent")
+actor_name = "PoisonDart"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1265231972]
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("2_13kum")
+
+[node name="ProjectileMotionComponent" type="Node2D" parent="." unique_id=396669112 instance=ExtResource("3_njqll")]
+script = ExtResource("4_13ofd")
+speed = 250.0
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1000674925 instance=ExtResource("5_3bk4j")]
+collision_layer = 2
+collision_mask = 4
+input_pickable = false
+monitorable = false
+script = ExtResource("6_qtmre")
+hit_effect = SubResource("Resource_w564k")
+hits = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=54803048]
+shape = SubResource("CircleShape2D_x3mii")
+
+[node name="AutoFreeComponent" type="Node" parent="." unique_id=1458632543 node_paths=PackedStringArray("motion_component") instance=ExtResource("10_pjsdr")]
+script = ExtResource("11_kjdcj")
+motion_component = NodePath("../ProjectileMotionComponent")
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/fan_of_knives_action.gd" id="1_xa54m"]
+[ext_resource type="Resource" path="res://game_logic/attack_types/ranged.tres" id="2_7a16n"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_kaejt"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_gp5nu"]
+
+[sub_resource type="Resource" id="Resource_14sf5"]
+script = ExtResource("3_kaejt")
+
+[resource]
+script = ExtResource("4_gp5nu")
+action_script = ExtResource("1_xa54m")
+supported_target_types = Array[int]([2, 3])
+attack_type = ExtResource("2_7a16n")
+params = SubResource("Resource_14sf5")
+skill_name = &"Fan of Knives"
+skill_type = 1

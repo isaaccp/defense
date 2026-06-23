@@ -9,7 +9,13 @@
 [ext_resource type="Resource" uid="uid://b1mkr4txcdkal" path="res://effects/statuses/swiftness.tres" id="7_yw7qa"]
 [ext_resource type="Resource" uid="uid://botrau3jqgx65" path="res://effects/statuses/slowed.tres" id="8_chld"]
 [ext_resource type="Resource" uid="uid://c1kc5nfjhng53" path="res://effects/statuses/taunted.tres" id="9_tnt"]
+[ext_resource type="Resource" uid="uid://statpsn0001" path="res://effects/statuses/poisoned.tres" id="ext_psn"]
+[ext_resource type="Resource" uid="uid://stathst0001" path="res://effects/statuses/hasted.tres" id="ext_hst"]
+[ext_resource type="Resource" uid="uid://statfrt0001" path="res://effects/statuses/fortified.tres" id="ext_frt"]
 
 [resource]
 script = ExtResource("1_yu84l")
-statuses = Array[ExtResource("2_fs4ks")]([ExtResource("3_hudq7"), ExtResource("4_2mexg"), ExtResource("5_th37v"), ExtResource("6_pb216"), ExtResource("7_yw7qa"), ExtResource("8_chld"), ExtResource("9_tnt")])
+statuses = Array[ExtResource("2_fs4ks")]([ExtResource("3_hudq7"), ExtResource("4_2mexg"), ExtResource("5_th37v"), ExtResource("6_pb216"), ExtResource("7_yw7qa"), ExtResource("8_chld"), ExtResource("9_tnt")]),
+ExtResource("ext_psn"),
+ExtResource("ext_hst"),
+ExtResource("ext_frt")

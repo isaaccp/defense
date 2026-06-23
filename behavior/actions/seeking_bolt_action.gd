@@ -2,6 +2,7 @@ extends ProjectileAttackActionBase
 
 func _init():
 	super()
+	duration = 1.0
 	projectile_scene = preload("res://behavior/actions/scenes/seeking_bolt.tscn")
 	min_distance = 100
 	max_distance = 300
@@ -10,10 +11,6 @@ func _init():
 	# Ideally this would be automatically set based on the type of target or similar.
 	need_valid_target_after_prepare = true
 	focus_cost = 2
-
-func post_prepare():
-	spawn_projectile()
-	Global.get_tree().create_timer(1.0, false).timeout.connect(action_finished)
 
 func description():
 	return "Fires a seeking bolt at a target, causing 5 arcane damage.\nThe bolt will only hit its intended target."

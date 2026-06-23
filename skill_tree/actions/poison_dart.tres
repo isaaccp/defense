@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/poison_dart_action.gd" id="1_ncila"]
+[ext_resource type="Resource" path="res://game_logic/attack_types/ranged.tres" id="2_w2ton"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_drqmh"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_i0lro"]
+
+[sub_resource type="Resource" id="Resource_yk814"]
+script = ExtResource("3_drqmh")
+
+[resource]
+script = ExtResource("4_i0lro")
+action_script = ExtResource("1_ncila")
+supported_target_types = Array[int]([2])
+attack_type = ExtResource("2_w2ton")
+params = SubResource("Resource_yk814")
+skill_name = &"Poison Dart"
+skill_type = 1

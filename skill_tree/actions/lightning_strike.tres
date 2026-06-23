@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/lightning_strike_action.gd" id="1_x6s14"]
+[ext_resource type="Resource" path="res://game_logic/attack_types/magical.tres" id="2_v80r2"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_r6x8w"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_0yxch"]
+
+[sub_resource type="Resource" id="Resource_6njfm"]
+script = ExtResource("3_r6x8w")
+
+[resource]
+script = ExtResource("4_0yxch")
+action_script = ExtResource("1_x6s14")
+supported_target_types = Array[int]([2, 3])
+attack_type = ExtResource("2_v80r2")
+params = SubResource("Resource_6njfm")
+skill_name = &"Lightning Strike"
+skill_type = 1

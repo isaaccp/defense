@@ -1,0 +1,54 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_u7s3m"]
+[ext_resource type="PackedScene" path="res://components/animation_component.tscn" id="2_xrroj"]
+[ext_resource type="Script" path="res://components/animation_component.gd" id="3_lfdrh"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="4_0bdnj"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/hitbox_component.gd" id="5_43iis"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="6_y8ljx"]
+[ext_resource type="Resource" path="res://effects/statuses/hasted.tres" id="7_wfmk2"]
+[ext_resource type="Script" path="res://effects/statuses/hasted_params.gd" id="8_4f1gf"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="9_pp3kb"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="10_5idiw"]
+
+[sub_resource type="Resource" id="Resource_g63v1"]
+script = ExtResource("8_4f1gf")
+
+[sub_resource type="Resource" id="Resource_jbgxl"]
+script = ExtResource("6_y8ljx")
+status = ExtResource("7_wfmk2")
+status_params = SubResource("Resource_g63v1")
+status_duration = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
+radius = 5.0
+
+[node name="BlessingOfHaste" type="Node2D" unique_id=528791020 node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_u7s3m")
+hitbox_component = NodePath("HitboxComponent")
+actor_name = "BlessingOfHaste"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1639735287]
+scale = Vector2(2, 2)
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=1503620588 instance=ExtResource("2_xrroj")]
+script = ExtResource("3_lfdrh")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=538496897 instance=ExtResource("4_0bdnj")]
+collision_layer = 2
+collision_mask = 4
+input_pickable = false
+monitorable = false
+script = ExtResource("5_43iis")
+is_heal = true
+hit_effect = SubResource("Resource_jbgxl")
+hits = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=500068083]
+shape = SubResource("CircleShape2D_rcqhs")
+
+[node name="AutoFreeComponent" type="Node" parent="." unique_id=1621046217 node_paths=PackedStringArray("animation_component") instance=ExtResource("9_pp3kb")]
+script = ExtResource("10_5idiw")
+animation_component = NodePath("../AnimationComponent")
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

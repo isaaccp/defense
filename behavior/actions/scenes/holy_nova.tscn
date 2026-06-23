@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_jsp50"]
+[ext_resource type="Texture2D" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 A.png" id="2_047ym"]
+[ext_resource type="PackedScene" path="res://components/animation_component.tscn" id="3_j76yy"]
+[ext_resource type="Script" path="res://components/animation_component.gd" id="4_dsp3f"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="5_rmxun"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/hitbox_component.gd" id="6_665oe"]
+[ext_resource type="Resource" path="res://game_logic/damage_types/holy.tres" id="7_853v1"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="8_e1qc8"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="9_w387k"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="10_vqq88"]
+
+[sub_resource type="Animation" id="Animation_kmppt"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(4, 10), Vector2i(5, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6y7ee"]
+_data = {
+&"auto": SubResource("Animation_kmppt")
+}
+
+[sub_resource type="Resource" id="Resource_vne5t"]
+script = ExtResource("8_e1qc8")
+damage = 10
+damage_type = ExtResource("7_853v1")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxxje"]
+radius = 60.0
+
+[node name="HolyNova" type="Node2D" unique_id=1580523527 node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_jsp50")
+target_position_type = 1
+hitbox_component = NodePath("HitboxComponent")
+actor_name = "HolyNova"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2134064726]
+scale = Vector2(2, 2)
+texture = ExtResource("2_047ym")
+hframes = 6
+vframes = 30
+frame = 60
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=888423822 node_paths=PackedStringArray("animation_player") instance=ExtResource("3_j76yy")]
+script = ExtResource("4_dsp3f")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" unique_id=125613743]
+root_node = NodePath("../../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_6y7ee")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=612960653 instance=ExtResource("5_rmxun")]
+collision_layer = 2
+collision_mask = 4
+input_pickable = false
+monitorable = false
+script = ExtResource("6_665oe")
+hit_effect = SubResource("Resource_vne5t")
+hits = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1898667560]
+shape = SubResource("CircleShape2D_xxxje")
+
+[node name="AutoFreeComponent" type="Node" parent="." unique_id=1611849015 node_paths=PackedStringArray("animation_component") instance=ExtResource("9_w387k")]
+script = ExtResource("10_vqq88")
+animation_component = NodePath("../AnimationComponent")
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

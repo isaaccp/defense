@@ -26,6 +26,14 @@
 [ext_resource type="Resource" uid="uid://new_start_uid_102" path="res://skill_tree/actions/smite.tres" id="102_start"]
 [ext_resource type="Resource" uid="uid://new_start_uid_103" path="res://skill_tree/actions/crippling_shot.tres" id="103_start"]
 [ext_resource type="Resource" uid="uid://new_start_uid_104" path="res://skill_tree/actions/arcane_blast.tres" id="104_start"]
+[ext_resource type="Resource" path="res://skill_tree/actions/shield_wall.tres" id="ext_sw2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/whirlwind.tres" id="ext_ww2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/holy_nova.tres" id="ext_hn2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/blessing_of_haste.tres" id="ext_bh2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/poison_dart.tres" id="ext_pd2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/fan_of_knives.tres" id="ext_fk2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/lightning_strike.tres" id="ext_ls2"]
+[ext_resource type="Resource" path="res://skill_tree/actions/frost_nova.tres" id="ext_fn2"]
 
 [resource]
 script = ExtResource("2_3n011")
@@ -33,7 +41,7 @@ players = 2
 total_stages = 3
 levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"), ExtResource("7_ambush"), ExtResource("8_warpress"), ExtResource("9_waves"), ExtResource("10_archers")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
-starting_unlocked_skills = Array[ExtResource("2_suivl")]([ExtResource("22_knight"), ExtResource("23_priest"), ExtResource("100_start"), ExtResource("101_start"), ExtResource("102_start"), ExtResource("103_start"), ExtResource("104_start")])
+starting_unlocked_skills = Array[ExtResource("2_suivl")]([ExtResource("22_knight"), ExtResource("23_priest"), ExtResource("100_start"), ExtResource("101_start"), ExtResource("102_start"), ExtResource("103_start"), ExtResource("104_start"), ExtResource("ext_sw2"), ExtResource("ext_ww2"), ExtResource("ext_hn2"), ExtResource("ext_bh2"), ExtResource("ext_pd2"), ExtResource("ext_fk2"), ExtResource("ext_ls2"), ExtResource("ext_fn2")])
 relic_library = ExtResource("15_0q7yn")
 available_rewards = Array[ExtResource("16_rwdef")]([ExtResource("17_rest"), ExtResource("18_relic"), ExtResource("19_train")])
 milestone_library = ExtResource("99_milestone")

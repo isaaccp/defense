@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/shield_wall_action.gd" id="1_vdjcp"]
+[ext_resource type="Resource" path="res://game_logic/attack_types/magical.tres" id="2_wkdp6"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_fj7v6"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_jlhtc"]
+
+[sub_resource type="Resource" id="Resource_jdprj"]
+script = ExtResource("3_fj7v6")
+
+[resource]
+script = ExtResource("4_jlhtc")
+action_script = ExtResource("1_vdjcp")
+supported_target_types = Array[int]([2])
+attack_type = ExtResource("2_wkdp6")
+tags = Array[int]([0])
+params = SubResource("Resource_jdprj")
+skill_name = &"Shield Wall"
+skill_type = 1

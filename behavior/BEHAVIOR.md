@@ -112,7 +112,7 @@ action_finished()            # marks finished=true; cooldown recorded by Behavio
 
 ## Available Skills
 
-**Actions:** Blink Away, Blink To, Bow Attack, Charge, Cleave, Fire Burst, Heal, Hold Person, Magic Armor, Meditate, Move Away, Move To, Multi Shot, Projectile Ward, Seeking Bolt, Sweeping Attack, Sword Attack, Teleport Away, Teleport To
+**Actions:** Arcane Blast, Blink Away, Blink To, Blessing of Haste, Bow Attack, Charge, Chilling Sphere, Cleave, Consecrate, Crippling Shot, Dagger Attack, Fan of Knives, Fire Burst, Frost Nova, Heal, Heavy Strike, Hold Person, Holy Nova, Lightning Strike, Mace Attack, Magic Armor, Meditate, Move Away, Move To, Multi Shot, Poison Dart, Projectile Ward, Seeking Bolt, Shield Wall, Smite, Sweeping Attack, Sword Attack, Teleport Away, Teleport To, Whirlwind
 
 **Conditions:** Once, Self, Target Distance, Target Health, Times. A rule with no conditions fires unconditionally — there is no longer a separate "Always" skill.
 

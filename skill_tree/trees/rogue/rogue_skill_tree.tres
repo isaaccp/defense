@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_sus2f"]
 [ext_resource type="Resource" uid="uid://eabogtefjj05" path="res://skill_tree/actions/multi_shot.tres" id="4_usutt"]
 [ext_resource type="Resource" uid="uid://new_uid_5" path="res://skill_tree/actions/crippling_shot.tres" id="5_new"]
+[ext_resource type="Resource" path="res://skill_tree/actions/poison_dart.tres" id="ext_pd"]
+[ext_resource type="Resource" path="res://skill_tree/actions/fan_of_knives.tres" id="ext_fk"]
 
 [resource]
 script = ExtResource("1_n1yi2")

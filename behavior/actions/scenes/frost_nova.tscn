@@ -1,0 +1,82 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_034ku"]
+[ext_resource type="Texture2D" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 A.png" id="2_tj5dl"]
+[ext_resource type="PackedScene" path="res://components/animation_component.tscn" id="3_l0e16"]
+[ext_resource type="Script" path="res://components/animation_component.gd" id="4_7wud2"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="5_d4oa1"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/hitbox_component.gd" id="6_c4wab"]
+[ext_resource type="Resource" path="res://game_logic/damage_types/cold.tres" id="7_286x7"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="8_lnb8l"]
+[ext_resource type="Resource" path="res://effects/statuses/slowed.tres" id="9_ajoq2"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="10_ulq7s"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="11_br744"]
+
+[sub_resource type="Animation" id="Animation_7jiw7"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(4, 10), Vector2i(5, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0g8kl"]
+_data = {
+&"auto": SubResource("Animation_7jiw7")
+}
+
+[sub_resource type="Resource" id="Resource_d3bks"]
+script = ExtResource("8_lnb8l")
+damage = 4
+damage_type = ExtResource("7_286x7")
+status = ExtResource("9_ajoq2")
+status_duration = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vf6p3"]
+radius = 80.0
+
+[node name="FrostNova" type="Node2D" unique_id=1968949484 node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_034ku")
+target_position_type = 1
+hitbox_component = NodePath("HitboxComponent")
+actor_name = "FrostNova"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=953935954]
+scale = Vector2(2, 2)
+texture = ExtResource("2_tj5dl")
+hframes = 6
+vframes = 30
+frame = 60
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=1842268278 node_paths=PackedStringArray("animation_player") instance=ExtResource("3_l0e16")]
+script = ExtResource("4_7wud2")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" unique_id=639175086]
+root_node = NodePath("../../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_0g8kl")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=984279324 instance=ExtResource("5_d4oa1")]
+collision_layer = 2
+collision_mask = 4
+input_pickable = false
+monitorable = false
+script = ExtResource("6_c4wab")
+hit_effect = SubResource("Resource_d3bks")
+hits = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=42122650]
+shape = SubResource("CircleShape2D_vf6p3")
+
+[node name="AutoFreeComponent" type="Node" parent="." unique_id=1552657300 node_paths=PackedStringArray("animation_component") instance=ExtResource("10_ulq7s")]
+script = ExtResource("11_br744")
+animation_component = NodePath("../AnimationComponent")
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

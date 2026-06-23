@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_jlnql"]
+[ext_resource type="Texture2D" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 A.png" id="2_5iewp"]
+[ext_resource type="PackedScene" path="res://components/animation_component.tscn" id="3_6y24d"]
+[ext_resource type="Script" path="res://components/animation_component.gd" id="4_udnl4"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="5_6psoo"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/hitbox_component.gd" id="6_6jv8a"]
+[ext_resource type="Resource" path="res://game_logic/damage_types/slashing.tres" id="7_6rpea"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="8_mtc1h"]
+[ext_resource type="PackedScene" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="9_e45bc"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/components/auto_free_component.gd" id="10_35hme"]
+
+[sub_resource type="Animation" id="Animation_vxbi6"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2i(0, 10), Vector2i(1, 10), Vector2i(2, 10), Vector2i(3, 10), Vector2i(4, 10), Vector2i(5, 10)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgp1j"]
+_data = {
+&"auto": SubResource("Animation_vxbi6")
+}
+
+[sub_resource type="Resource" id="Resource_wl45o"]
+script = ExtResource("8_mtc1h")
+damage = 10
+damage_type = ExtResource("7_6rpea")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p1xi8"]
+radius = 45.0
+
+[node name="Whirlwind" type="Node2D" unique_id=508136657 node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_jlnql")
+target_position_type = 1
+hitbox_component = NodePath("HitboxComponent")
+actor_name = "Whirlwind"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=606506223]
+scale = Vector2(2, 2)
+texture = ExtResource("2_5iewp")
+hframes = 6
+vframes = 30
+frame = 60
+
+[node name="AnimationComponent" type="Node2D" parent="." unique_id=1433468480 node_paths=PackedStringArray("animation_player") instance=ExtResource("3_6y24d")]
+script = ExtResource("4_udnl4")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" unique_id=296014262]
+root_node = NodePath("../../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_mgp1j")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=554256053 instance=ExtResource("5_6psoo")]
+collision_layer = 2
+collision_mask = 4
+input_pickable = false
+monitorable = false
+script = ExtResource("6_6jv8a")
+hit_effect = SubResource("Resource_wl45o")
+hits = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1915099414]
+shape = SubResource("CircleShape2D_p1xi8")
+
+[node name="AutoFreeComponent" type="Node" parent="." unique_id=1672376901 node_paths=PackedStringArray("animation_component") instance=ExtResource("9_e45bc")]
+script = ExtResource("10_35hme")
+animation_component = NodePath("../AnimationComponent")
+
+[connection signal="area_entered" from="HitboxComponent" to="HitboxComponent" method="_on_area_entered"]

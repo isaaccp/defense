@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://b01kxudyjuv78" path="res://skill_tree/actions/hold_person.tres" id="3_4uof3"]
 [ext_resource type="Resource" uid="uid://blxoeo676uvmd" path="res://skill_tree/actions/projectile_ward.tres" id="5_6r2cx"]
 [ext_resource type="Resource" uid="uid://new_uid_6" path="res://skill_tree/actions/smite.tres" id="6_new"]
+[ext_resource type="Resource" path="res://skill_tree/actions/holy_nova.tres" id="ext_hn"]
+[ext_resource type="Resource" path="res://skill_tree/actions/blessing_of_haste.tres" id="ext_bh"]
 
 [resource]
 script = ExtResource("1_50w7a")

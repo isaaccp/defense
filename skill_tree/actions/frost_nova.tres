@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3]
+
+[ext_resource type="Script" path="res://behavior/actions/frost_nova_action.gd" id="1_lyrok"]
+[ext_resource type="Resource" path="res://game_logic/attack_types/magical.tres" id="2_ordby"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_o68nc"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_hmbi5"]
+
+[sub_resource type="Resource" id="Resource_q8ns3"]
+script = ExtResource("3_o68nc")
+
+[resource]
+script = ExtResource("4_hmbi5")
+action_script = ExtResource("1_lyrok")
+supported_target_types = Array[int]([2, 3])
+attack_type = ExtResource("2_ordby")
+tags = Array[int]([1])
+params = SubResource("Resource_q8ns3")
+skill_name = &"Frost Nova"
+skill_type = 1

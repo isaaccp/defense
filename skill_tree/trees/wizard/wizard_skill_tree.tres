@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://dvdw68ldlqcxe" path="res://skill_tree/actions/magic_armor.tres" id="7_marmor"]
 [ext_resource type="Resource" uid="uid://bchillingsk01" path="res://skill_tree/actions/chilling_sphere.tres" id="8_csph"]
 [ext_resource type="Resource" uid="uid://new_uid_9" path="res://skill_tree/actions/arcane_blast.tres" id="9_new"]
+[ext_resource type="Resource" path="res://skill_tree/actions/lightning_strike.tres" id="ext_ls"]
+[ext_resource type="Resource" path="res://skill_tree/actions/frost_nova.tres" id="ext_fn"]
 
 [resource]
 script = ExtResource("1_iburd")

@@ -8,6 +8,8 @@
 [ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="4_bfwp5"]
 [ext_resource type="Resource" uid="uid://new_uid_5" path="res://skill_tree/actions/taunt.tres" id="5_new"]
 [ext_resource type="Resource" uid="uid://new_uid_6" path="res://skill_tree/actions/heavy_strike.tres" id="6_new"]
+[ext_resource type="Resource" path="res://skill_tree/actions/shield_wall.tres" id="ext_sw"]
+[ext_resource type="Resource" path="res://skill_tree/actions/whirlwind.tres" id="ext_ww"]
 
 [resource]
 script = ExtResource("1_61adr")

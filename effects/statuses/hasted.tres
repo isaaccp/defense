@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusDef" format=3 uid="uid://stathst0001"]
+
+[ext_resource type="Script" path="res://effects/statuses/hasted.gd" id="1_scr"]
+[ext_resource type="Script" path="res://effects/status_def.gd" id="2_scr"]
+
+[resource]
+script = ExtResource("2_scr")
+status_type = 2
+description = "Move and act faster."
+name = &"Hasted"
+effect_types = Array[int]([1, 4])
+effect_script = ExtResource("1_scr")
