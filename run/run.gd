@@ -230,8 +230,13 @@ func _on_run_summary_exited():
 	pass
 
 func _on_run_summary_continue_selected():
+	run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
+	for gc in gameplay_characters:
+		run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), gc.scene_id)
+		
 	var newly_unlocked: Array[MilestoneManager.MilestoneProgressDelta] = []
 	if milestone_manager:
+		milestone_manager.evaluate_run_end()
 		newly_unlocked = milestone_manager.process_unlocks(run_save_state)
 	
 	ui_layer.show_milestone_summary_screen(newly_unlocked)
@@ -244,9 +249,6 @@ func finish_run():
 	# TODO: Differentiate failure vs success.
 	ui_layer.hud.show_main_message("You rolled credits!", 5.0)
 	print("Finished the game")
-	run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
-	for gc in gameplay_characters:
-		run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), gc.scene_id)
 	run_finished.emit()
 
 func _on_restart_requested():

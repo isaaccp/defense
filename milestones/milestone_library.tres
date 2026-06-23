@@ -7,7 +7,8 @@
 [ext_resource type="Resource" path="res://milestones/defs/triple_conditions_unlock.tres" id="5_ach"]
 [ext_resource type="Resource" uid="uid://mrogueunlock01" path="res://milestones/defs/rogue_unlock.tres" id="6_ach"]
 [ext_resource type="Resource" uid="uid://mwizardunlock01" path="res://milestones/defs/wizard_unlock.tres" id="7_ach"]
+[ext_resource type="Resource" path="res://milestones/defs/veteran_survivor.tres" id="8_ach"]
 
 [resource]
 script = ExtResource("1_lib")
-milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach"), ExtResource("3_ach"), ExtResource("4_ach"), ExtResource("5_ach"), ExtResource("6_ach"), ExtResource("7_ach")])
+milestones = Array[Resource("res://milestones/milestone_def.gd")]([ExtResource("2_ach"), ExtResource("3_ach"), ExtResource("4_ach"), ExtResource("5_ach"), ExtResource("6_ach"), ExtResource("7_ach"), ExtResource("8_ach")])

@@ -33,11 +33,10 @@ func evaluate_run_end():
 func _evaluate_def(def: MilestoneDef, level_stats: AggregateStats):
 	if save_state.unlocked_milestones.get(def.id, false):
 		return
-	var progress = def.evaluate(level_stats, save_state.run_save_state.stats, save_state.global_stats)
-	if progress > 0:
-		var current = save_state.milestone_progress.get(def.id, 0)
-		current += progress
-		save_state.milestone_progress[def.id] = current
+	var current = save_state.milestone_progress.get(def.id, 0)
+	var new_progress = def.evaluate(current, level_stats, save_state.run_save_state.stats, save_state.global_stats)
+	if new_progress != current:
+		save_state.milestone_progress[def.id] = new_progress
 
 ## Called at the end of the run to officially unlock milestones.
 ## Returns a list of milestones that gained progress this run, including their unlock status.

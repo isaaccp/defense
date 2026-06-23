@@ -12,5 +12,5 @@ id = &"wizard_unlock"
 name = "Arcane Aspirations"
 description = "Win a run with Rogue to unlock the Wizard class."
 phase = 1
-visibility = 0
+visibility = 2
 reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_skill")])

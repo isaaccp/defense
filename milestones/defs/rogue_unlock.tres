@@ -12,5 +12,5 @@ id = &"rogue_unlock"
 name = "Stealth Operative"
 description = "Win a run with Knight and Cleric to unlock the Rogue class."
 phase = 1
-visibility = 0
+visibility = 2
 reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_skill")])

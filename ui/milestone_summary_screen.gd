@@ -30,6 +30,7 @@ static func categorize_milestones(unlocked_milestones: Array[MilestoneManager.Mi
 func _on_show(info: Dictionary):
 	var unlocked_milestones: Array[MilestoneManager.MilestoneProgressDelta] = info.get("unlocked_milestones", [])
 	var categorized = MilestoneSummaryScreen.categorize_milestones(unlocked_milestones)
+	print("Categorized milestones: ", categorized)
 	var container = %SummaryContainer
 	
 	for child in container.get_children():

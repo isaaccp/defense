@@ -10,6 +10,6 @@ id = &"behavior_library_unlock"
 name = "Tactician"
 description = "Complete 1 full run to unlock the AI Behavior Library, allowing you to edit and save custom hero behaviors."
 phase = 1
-visibility = 0
+visibility = 2
 required_count = 1
 reward_skills = Array[ExtResource("2_skill")]([ExtResource("3_skill")])

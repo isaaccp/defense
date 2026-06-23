@@ -62,15 +62,14 @@ func _on_run_entered():
 	%RunParent.add_child(run)
 
 func _on_run_exited():
-	if save_state.run_save_state:
-		milestone_manager.evaluate_run_end()
-		save_state.global_stats.add(save_state.run_save_state.stats)
 	run.queue_free()
 	run = null
 
 
 
 func _on_run_finished():
+	if save_state.run_save_state:
+		save_state.global_stats.add(save_state.run_save_state.stats)
 	save_state.run_save_state = null
 	save_requested.emit(save_state)
 	state.change_state.call_deferred(MENU)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelsBeatenInRunRepeatedMilestone" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://milestones/levels_beaten_in_run_repeated_milestone.gd" id="1_ach"]
+
+[resource]
+script = ExtResource("1_ach")
+levels_in_run = 3
+id = &"veteran_survivor_unlock"
+name = "Veteran Survivor"
+description = "Beat 3 levels in a single run, 3 times."
+phase = 1
+visibility = 2
+required_count = 3
+reward_skills = Array[Resource]([])
