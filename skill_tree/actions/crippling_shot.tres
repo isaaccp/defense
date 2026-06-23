@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://criplingshot_1"]
+
+[ext_resource type="Script" path="res://behavior/actions/crippling_shot_action.gd" id="1_act"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="2_def"]
+
+[resource]
+script = ExtResource("2_def")
+supported_target_types = Array[int]([1])
+action_script = ExtResource("1_act")
+description_text = "Crippling Shot"
+tags = Array[int]([1, 2])
+skill_name = &"Crippling Shot"

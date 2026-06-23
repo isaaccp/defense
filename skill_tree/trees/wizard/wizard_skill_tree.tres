@@ -10,8 +10,9 @@
 [ext_resource type="Resource" uid="uid://wi55i11ogew5" path="res://skill_tree/actions/teleport_to.tres" id="6_mqqjo"]
 [ext_resource type="Resource" uid="uid://dvdw68ldlqcxe" path="res://skill_tree/actions/magic_armor.tres" id="7_marmor"]
 [ext_resource type="Resource" uid="uid://bchillingsk01" path="res://skill_tree/actions/chilling_sphere.tres" id="8_csph"]
+[ext_resource type="Resource" uid="uid://new_uid_9" path="res://skill_tree/actions/arcane_blast.tres" id="9_new"]
 
 [resource]
 script = ExtResource("1_iburd")
 tree_type = 5
-skills = Array[ExtResource("2_f6fti")]([ExtResource("2_nl8en"), ExtResource("3_ffeml"), ExtResource("4_pi1j4"), ExtResource("4_vhtuk"), ExtResource("5_rswv1"), ExtResource("6_mqqjo"), ExtResource("7_marmor"), ExtResource("8_csph")])
+skills = Array[ExtResource("2_f6fti")]([ExtResource("2_nl8en"), ExtResource("3_ffeml"), ExtResource("4_pi1j4"), ExtResource("4_vhtuk"), ExtResource("5_rswv1"), ExtResource("6_mqqjo"), ExtResource("7_marmor"), ExtResource("8_csph"), ExtResource("9_new")])

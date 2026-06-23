@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://d1mfjkx7ca01j" path="res://effects/statuses/paralyzed.tres" id="5_th37v"]
 [ext_resource type="Resource" uid="uid://qrowjxk0qh01" path="res://effects/statuses/strength_surge.tres" id="6_pb216"]
 [ext_resource type="Resource" uid="uid://b1mkr4txcdkal" path="res://effects/statuses/swiftness.tres" id="7_yw7qa"]
-[ext_resource type="Resource" uid="uid://botrau3jqgx65" path="res://effects/statuses/chilled.tres" id="8_chld"]
+[ext_resource type="Resource" uid="uid://botrau3jqgx65" path="res://effects/statuses/slowed.tres" id="8_chld"]
 [ext_resource type="Resource" uid="uid://c1kc5nfjhng53" path="res://effects/statuses/taunted.tres" id="9_tnt"]
 
 [resource]

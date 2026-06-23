@@ -4,8 +4,9 @@
 [ext_resource type="Resource" uid="uid://b0cx6ra6s8077" path="res://skill_tree/actions/bow_attack.tres" id="2_oxsdu"]
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_sus2f"]
 [ext_resource type="Resource" uid="uid://eabogtefjj05" path="res://skill_tree/actions/multi_shot.tres" id="4_usutt"]
+[ext_resource type="Resource" uid="uid://new_uid_5" path="res://skill_tree/actions/crippling_shot.tres" id="5_new"]
 
 [resource]
 script = ExtResource("1_n1yi2")
 tree_type = 3
-skills = Array[ExtResource("2_sus2f")]([ExtResource("2_oxsdu"), ExtResource("4_usutt")])
+skills = Array[ExtResource("2_sus2f")]([ExtResource("2_oxsdu"), ExtResource("4_usutt"), ExtResource("5_new")])

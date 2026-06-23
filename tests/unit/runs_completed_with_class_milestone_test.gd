@@ -9,9 +9,9 @@ func test_evaluate_returns_zero_when_character_stats_missing():
 	var global_stats = AggregateStats.new()
 	# KNIGHT is not in global_stats
 	
-	assert_eq(milestone.evaluate(null, null, global_stats), 0)
+	assert_eq(milestone.evaluate(0, null, global_stats, null), 0)
 
-func test_evaluate_returns_zero_when_runs_completed_is_less_than_required():
+func test_evaluate_returns_current_progress_plus_one_when_runs_completed():
 	var milestone = preload("res://milestones/runs_completed_with_class_milestone.gd").new()
 	var arr: Array[Enum.CharacterSceneId] = [Enum.CharacterSceneId.KNIGHT]
 	milestone.required_classes = arr
@@ -20,7 +20,7 @@ func test_evaluate_returns_zero_when_runs_completed_is_less_than_required():
 	var global_stats = AggregateStats.new()
 	global_stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), Enum.CharacterSceneId.KNIGHT)
 	
-	assert_eq(milestone.evaluate(null, null, global_stats), 0)
+	assert_eq(milestone.evaluate(0, null, global_stats, null), 1)
 
 func test_evaluate_returns_required_count_when_condition_met():
 	var milestone = preload("res://milestones/runs_completed_with_class_milestone.gd").new()
@@ -31,7 +31,7 @@ func test_evaluate_returns_required_count_when_condition_met():
 	var global_stats = AggregateStats.new()
 	global_stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), Enum.CharacterSceneId.KNIGHT)
 	
-	assert_eq(milestone.evaluate(null, null, global_stats), 1)
+	assert_eq(milestone.evaluate(0, null, global_stats, null), 1)
 
 func test_evaluate_requires_all_classes():
 	var milestone = preload("res://milestones/runs_completed_with_class_milestone.gd").new()
@@ -43,8 +43,8 @@ func test_evaluate_requires_all_classes():
 	global_stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), Enum.CharacterSceneId.KNIGHT)
 	
 	# Missing CLERIC
-	assert_eq(milestone.evaluate(null, null, global_stats), 0)
+	assert_eq(milestone.evaluate(0, null, global_stats, null), 0)
 	
 	# Add CLERIC
 	global_stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), Enum.CharacterSceneId.CLERIC)
-	assert_eq(milestone.evaluate(null, null, global_stats), 1)
+	assert_eq(milestone.evaluate(0, null, global_stats, null), 1)

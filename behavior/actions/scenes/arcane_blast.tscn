@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://c8da3a379710"]
+
+[ext_resource type="Script" uid="uid://85ko3gixouso" path="res://behavior/actions/scenes/action_scene.gd" id="1_kb4ja"]
+[ext_resource type="Texture2D" uid="uid://sqtp0mrj1hdp" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 5 C.png" id="2_1n6kg"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="2_qnqde"]
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_uo1ut"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="3_x2rxh"]
+[ext_resource type="Script" uid="uid://cj6nn7jgnsowq" path="res://components/data_types/hit_effect.gd" id="4_0qlfr"]
+[ext_resource type="Resource" uid="uid://dmghnagotxd0y" path="res://game_logic/damage_types/arcane.tres" id="5_336ys"]
+[ext_resource type="PackedScene" uid="uid://b8cssn6uqugfw" path="res://behavior/actions/scenes/components/projectile_motion_component.tscn" id="7_f22s3"]
+[ext_resource type="PackedScene" uid="uid://cdlj1oerwesae" path="res://components/target_component.tscn" id="8_aeh0a"]
+
+[sub_resource type="Animation" id="Animation_f78vc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_1m342"]
+resource_name = "auto"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 8), Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8), Vector2i(4, 8), Vector2i(5, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2cvi"]
+_data = {
+&"RESET": SubResource("Animation_f78vc"),
+&"auto": SubResource("Animation_1m342")
+}
+
+[sub_resource type="Resource" id="Resource_aci18"]
+script = ExtResource("4_0qlfr")
+damage = 10
+damage_type = ExtResource("5_336ys")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rcqhs"]
+radius = 5.0
+
+[node name="ArcaneBlast" type="Node2D" unique_id=641242782 node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_kb4ja")
+hitbox_component = NodePath("HitboxComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1577983164]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_1n6kg")
+hframes = 9
+vframes = 30
+frame = 72
+
+[node name="AnimationComponent" parent="." unique_id=1781530035 node_paths=PackedStringArray("animation_player") instance=ExtResource("3_uo1ut")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" unique_id=1355666355]
+libraries/ = SubResource("AnimationLibrary_s2cvi")
+speed_scale = 1.5
+
+[node name="HitboxComponent" parent="." unique_id=1402124713 node_paths=PackedStringArray("target_component") instance=ExtResource("2_qnqde")]
+hit_effect = SubResource("Resource_aci18")
+hits = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1408514571]
+position = Vector2(15, 0)
+shape = SubResource("CircleShape2D_rcqhs")
+
+[node name="AutoFreeComponent" parent="." unique_id=2027490438 node_paths=PackedStringArray("hitbox_component", "motion_component") instance=ExtResource("3_x2rxh")]
+hitbox_component = NodePath("../HitboxComponent")
+motion_component = NodePath("../ProjectileMotionComponent")
+
+[node name="ProjectileMotionComponent" parent="." unique_id=456597231 node_paths=PackedStringArray("target_component", "action_scene") instance=ExtResource("7_f22s3")]
+speed = 400.0
+action_scene = NodePath("..")
+
+[node name="TargetComponent" parent="." unique_id=1303626725 instance=ExtResource("8_aeh0a")]

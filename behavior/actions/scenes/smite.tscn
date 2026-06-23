@@ -1,0 +1,94 @@
+[gd_scene load_steps=18 format=3 uid="uid://58c69535d4ad"]
+
+[ext_resource type="Texture2D" uid="uid://dwxn6iingnvfv" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 A.png" id="1_h20pf"]
+[ext_resource type="Script" path="res://behavior/actions/scenes/action_scene.gd" id="1_sepy6"]
+
+[ext_resource type="PackedScene" uid="uid://dqmpaqiqs8bxi" path="res://components/animation_component.tscn" id="3_nyv2x"]
+[ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="8_kcqxb"]
+[ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="9_2r54y"]
+[ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="9_g2oh2"]
+[ext_resource type="Resource" uid="uid://dmgholy0001" path="res://game_logic/damage_types/holy.tres" id="10_d28bf"]
+
+[sub_resource type="Animation" id="Animation_4x5cj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_4cdsn"]
+resource_name = "auto"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5), Vector2i(5, 5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3rrca"]
+_data = {
+"RESET": SubResource("Animation_4x5cj"),
+"auto": SubResource("Animation_4cdsn")
+}
+
+[sub_resource type="Resource" id="Resource_l3jok"]
+script = ExtResource("9_g2oh2")
+damage = 8
+damage_type = ExtResource("10_d28bf")
+fraction_armor_pen = 0.0
+flat_armor_pen = 0
+status_duration = 0.0
+status_on_damage_only = false
+action_name = &""
+damage_multiplier = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khm1e"]
+radius = 20.0
+
+[node name="SwordAttack" type="Node2D" node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("1_sepy6")
+target_position_type = 1
+hitbox_component = NodePath("HitboxComponent")
+actor_name = "Smite"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_h20pf")
+hframes = 6
+vframes = 30
+frame = 30
+
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("3_nyv2x")]
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent"]
+root_node = NodePath("../../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_3rrca")
+}
+speed_scale = 2.0
+
+[node name="HitboxComponent" parent="." instance=ExtResource("8_kcqxb")]
+hit_effect = SubResource("Resource_l3jok")
+hits = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_khm1e")
+
+[node name="AutoFreeComponent" parent="." node_paths=PackedStringArray("animation_component") instance=ExtResource("9_2r54y")]
+animation_component = NodePath("../AnimationComponent")

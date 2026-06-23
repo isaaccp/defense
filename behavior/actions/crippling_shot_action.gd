@@ -1,0 +1,17 @@
+extends ProjectileAttackActionBase
+
+func _init():
+	super()
+	projectile_scene = preload("res://behavior/actions/scenes/crippling_arrow.tscn")
+	min_distance = 100
+	max_distance = 300
+	prepare_time = 0.4
+	focus_cost = 2
+	cooldown = 5.0
+
+func post_prepare():
+	spawn_projectile()
+	Global.get_tree().create_timer(0.7, false).timeout.connect(action_finished)
+
+func description():
+	return "Fires an arrow at a single target, causing 2 piercing damage and slowing them for 3 seconds."

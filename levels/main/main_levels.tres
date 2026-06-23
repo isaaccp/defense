@@ -21,6 +21,11 @@
 [ext_resource type="Script" path="res://skill_tree/skill.gd" id="2_suivl"]
 [ext_resource type="Resource" uid="uid://bknightclass01" path="res://skill_tree/meta_skills/knight_class.tres" id="22_knight"]
 [ext_resource type="Resource" uid="uid://bpriestclass01" path="res://skill_tree/meta_skills/priest_class.tres" id="23_priest"]
+[ext_resource type="Resource" uid="uid://new_start_uid_100" path="res://skill_tree/actions/taunt.tres" id="100_start"]
+[ext_resource type="Resource" uid="uid://new_start_uid_101" path="res://skill_tree/actions/heavy_strike.tres" id="101_start"]
+[ext_resource type="Resource" uid="uid://new_start_uid_102" path="res://skill_tree/actions/smite.tres" id="102_start"]
+[ext_resource type="Resource" uid="uid://new_start_uid_103" path="res://skill_tree/actions/crippling_shot.tres" id="103_start"]
+[ext_resource type="Resource" uid="uid://new_start_uid_104" path="res://skill_tree/actions/arcane_blast.tres" id="104_start"]
 
 [resource]
 script = ExtResource("2_3n011")
@@ -28,7 +33,7 @@ players = 2
 total_stages = 3
 levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"), ExtResource("7_ambush"), ExtResource("8_warpress"), ExtResource("9_waves"), ExtResource("10_archers")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
-starting_unlocked_skills = Array[ExtResource("2_suivl")]([ExtResource("22_knight"), ExtResource("23_priest")])
+starting_unlocked_skills = Array[ExtResource("2_suivl")]([ExtResource("22_knight"), ExtResource("23_priest"), ExtResource("100_start"), ExtResource("101_start"), ExtResource("102_start"), ExtResource("103_start"), ExtResource("104_start")])
 relic_library = ExtResource("15_0q7yn")
 available_rewards = Array[ExtResource("16_rwdef")]([ExtResource("17_rest"), ExtResource("18_relic"), ExtResource("19_train")])
 milestone_library = ExtResource("99_milestone")

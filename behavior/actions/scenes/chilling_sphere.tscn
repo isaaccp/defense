@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bvmemn0jjbp2a" path="res://behavior/actions/scenes/components/hitbox_component.tscn" id="4_hit"]
 [ext_resource type="Script" path="res://components/data_types/hit_effect.gd" id="5_he"]
 [ext_resource type="PackedScene" uid="uid://buar5p2nbmhkd" path="res://behavior/actions/scenes/components/auto_free_component.tscn" id="6_af"]
-[ext_resource type="Resource" uid="uid://bchilledstat01" path="res://effects/statuses/chilled.tres" id="7_chld"]
+[ext_resource type="Resource" uid="uid://bchilledstat01" path="res://effects/statuses/slowed.tres" id="7_chld"]
 [ext_resource type="Resource" path="res://game_logic/damage_types/arcane.tres" id="8_dmg"]
 
 [sub_resource type="Animation" id="Animation_reset"]
