@@ -57,7 +57,7 @@ var _preferred_target_marker: Node2D
 func _ready():
 	if Engine.is_editor_hint():
 		return
-	var config = get_parent().config
+	var config = get_parent().get("config")
 	if config:
 		var behavior_component_config = config.get("behavior_component_config") as BehaviorComponentConfig
 		if behavior_component_config:

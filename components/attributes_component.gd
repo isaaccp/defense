@@ -47,7 +47,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 		
-	var config = get_parent().config
+	var config = get_parent().get("config")
 	if config:
 		var attributes_component_config = config.get("attributes_component_config") as AttributesComponentConfig
 		if attributes_component_config:

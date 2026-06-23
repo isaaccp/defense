@@ -6,7 +6,7 @@ const attributes_component_scene = preload("res://components/attributes_componen
 const vitals_component_scene = preload("res://components/vitals_component.tscn")
 const damage_component_scene = preload("res://components/damage_component.tscn")
 
-var unit: Node
+var unit: Actor
 var status_component: StatusComponent
 var effect_actuator_component: EffectActuatorComponent
 var attributes_component: AttributesComponent
@@ -14,11 +14,7 @@ var vitals_component: VitalsComponent
 var damage_component: DamageComponent
 
 func before_each():
-	var unit_script = GDScript.new()
-	unit_script.source_code = "extends Node\nvar config\nvar destroyed = false"
-	unit_script.reload()
-	unit = Node.new()
-	unit.set_script(unit_script)
+	unit = Actor.new()
 	
 	status_component = status_component_scene.instantiate()
 	status_component.name = "StatusComponent"
@@ -54,9 +50,7 @@ func before_each():
 	add_child_autoqfree(unit)
 	
 	vitals_component._initialize()
-	vitals_component.run()
-	damage_component.run()
-	effect_actuator_component.run()
+	unit.run()
 
 func test_poisoned_status():
 	vitals_component.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 100)

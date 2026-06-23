@@ -22,7 +22,7 @@ signal hit(hit_effect: HitEffect)
 @export var effect_actuator_component: EffectActuatorComponent
 
 func _ready():
-	var config = get_parent().config
+	var config = get_parent().get("config")
 	if config:
 		var hurtbox_component_config = config.get("hurtbox_component_config") as HurtboxComponentConfig
 		if hurtbox_component_config:
