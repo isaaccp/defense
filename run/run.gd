@@ -157,8 +157,12 @@ func _on_level_finished():
 		milestone_manager.evaluate_level_end(level_stats)
 	# Needs to be recorded here in case it's the last level.
 	run_save_state.stats.add_stat(Stat.make(Stat.LevelsBeaten, 1))
+	var unique_classes: Array[int] = []
 	for gc in gameplay_characters:
-		run_save_state.stats.add_character_stat(Stat.make(Stat.LevelsBeaten, 1), gc.scene_id)
+		if not gc.scene_id in unique_classes:
+			unique_classes.append(gc.scene_id)
+	for scene_id in unique_classes:
+		run_save_state.stats.add_character_stat(Stat.make(Stat.LevelsBeaten, 1), scene_id)
 	run_save_state.stats.add(level_stats)
 	run_save_state.current_phase = RunSaveState.Phase.REWARD
 	# Call this in the same frame explicitly so we update all the
@@ -224,6 +228,23 @@ func _on_reward_stage_exited():
 	ui_layer.hide_map_screen()
 
 func _on_run_summary_entered():
+	var max_stage = level_provider.total_stages
+	var run_won = run_save_state.current_stage >= max_stage and level_scene == null
+	
+	var unique_classes: Array[int] = []
+	for gc in gameplay_characters:
+		if not gc.scene_id in unique_classes:
+			unique_classes.append(gc.scene_id)
+			
+	if run_won:
+		run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
+		for scene_id in unique_classes:
+			run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), scene_id)
+	else:
+		run_save_state.stats.add_stat(Stat.make(Stat.RunsLost, 1))
+		for scene_id in unique_classes:
+			run_save_state.stats.add_character_stat(Stat.make(Stat.RunsLost, 1), scene_id)
+
 	ui_layer.show_run_summary_screen(_run_stats_text())
 	ui_layer.run_summary_continue_selected.connect(_on_run_summary_continue_selected, CONNECT_ONE_SHOT)
 
@@ -231,18 +252,6 @@ func _on_run_summary_exited():
 	pass
 
 func _on_run_summary_continue_selected():
-	var max_stage = level_provider.max_difficulty()
-	var run_won = run_save_state.current_stage >= max_stage and level_scene == null
-	
-	if run_won:
-		run_save_state.stats.add_stat(Stat.make(Stat.RunsCompleted, 1))
-		for gc in gameplay_characters:
-			run_save_state.stats.add_character_stat(Stat.make(Stat.RunsCompleted, 1), gc.scene_id)
-	else:
-		run_save_state.stats.add_stat(Stat.make(Stat.RunsLost, 1))
-		for gc in gameplay_characters:
-			run_save_state.stats.add_character_stat(Stat.make(Stat.RunsLost, 1), gc.scene_id)
-		
 	var newly_unlocked: Array[MilestoneManager.MilestoneProgressDelta] = []
 	if milestone_manager:
 		milestone_manager.evaluate_run_end()

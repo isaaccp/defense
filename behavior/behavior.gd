@@ -21,6 +21,8 @@ var pre_selection_evaluators: Array = []
 
 static func restore(stored_behavior: StoredBehavior) -> Behavior:
 	var behavior = Behavior.new()
+	if stored_behavior == null:
+		return behavior
 	for stored_rule in stored_behavior.stored_rules:
 		var rule = SkillManager.restore_rule(stored_rule)
 		behavior.rules.append(rule)

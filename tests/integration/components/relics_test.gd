@@ -98,7 +98,7 @@ func test_blood_frenzy_relic():
 	effect_actuator_component.add_relic(relic)
 	var test_action = preload("res://skill_tree/actions/sword_attack.tres")
 	behavior_component.action_cooldowns[test_action.name] = 5.0
-	var mod_cd = effect_actuator_component.modified_cooldown(test_action.name, behavior_component.action_cooldowns[test_action.name])
+	effect_actuator_component.notify_damage_taken(10, "attacker")
 	assert_eq(behavior_component.action_cooldowns[test_action.name], 4.5)
 
 func test_bracelet_of_focus_relic():
@@ -345,6 +345,7 @@ func test_unyielding_hope_relic():
 	unit.add_child(side)
 	
 	var ally = Actor.new()
+	ally.add_to_group("characters")
 	var a_side = SideC.instantiate()
 	a_side.side = 1 # Player side
 	ally.add_child(a_side)
@@ -359,7 +360,6 @@ func test_unyielding_hope_relic():
 	a_vitals._initialize()
 	a_vitals.run()
 	a_vitals.test_set_vital_current(VitalsComponent.VitalType.HEALTH, 50) # 50% missing
-	
 	effect_actuator_component._process(1.0)
 	
 	assert_eq(int(vitals_component.get_vital_current(VitalsComponent.VitalType.FOCUS)), 1)

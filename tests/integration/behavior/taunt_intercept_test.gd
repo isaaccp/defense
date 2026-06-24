@@ -3,7 +3,7 @@ extends GutTest
 const basic_test_level_scene = preload("res://tests/integration/actions/basic_test_level.tscn")
 const test_character = preload("res://character/playable_characters/test_character.tres")
 const sword_attack = preload("res://skill_tree/actions/sword_attack.tres")
-const hero_target = preload("res://skill_tree/targets/hero.tres")
+const hero_target = preload("res://skill_tree/targets/enemy.tres")
 const closest_first = preload("res://skill_tree/target_sorts/closest_first.tres")
 const taunted_status = preload("res://effects/statuses/taunted.tres")
 
@@ -49,9 +49,9 @@ func before_each():
 func test_taunted_intercepts_target():
 	enemy_bc.stored_behavior = make_enemy_behavior()
 	
-	# Position hero_a closer to enemy than hero_b
-	hero_a.position = Vector2(50, 0)
-	hero_b.position = Vector2(100, 0)
+	# Position hero_a closer to enemy than hero_b, both in range (40) of sword attack
+	hero_a.position = Vector2(20, 0)
+	hero_b.position = Vector2(30, 0)
 	enemy.position = Vector2(0, 0)
 	
 	level.start()
@@ -63,6 +63,9 @@ func test_taunted_intercepts_target():
 	# Apply taunted status from hero_b
 	var enemy_status = Component.get_or_die(enemy, StatusComponent.component) as StatusComponent
 	enemy_status.set_status(&"test_taunt", taunted_status, TauntedParams.make(hero_b), 5.0)
+	
+	if enemy_bc.action:
+		enemy_bc.action.finished = true
 	
 	await wait_process_frames(5)
 	
