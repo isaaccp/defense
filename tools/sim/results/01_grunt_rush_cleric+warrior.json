@@ -7,7 +7,7 @@
       "enemies_killed": 8,
       "focus_generated": 80,
       "focus_spent": 16,
-      "hp_final": 11.3,
+      "hp_final": 26.3,
       "hp_max": 60.0,
       "name": "Godrick",
       "position": {
@@ -178,7 +178,7 @@
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 13.51
+      "t": 13.52
     },
     {
       "actor": "Orc Grunt",
@@ -220,7 +220,7 @@
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 17.58
+      "t": 17.57
     },
     {
       "actor": "Godrick",
@@ -231,7 +231,7 @@
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 19.46
+      "t": 19.47
     },
     {
       "actor": "Orc Grunt",
@@ -242,7 +242,7 @@
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 19.61
+      "t": 19.62
     },
     {
       "actor": "Orc Grunt",
@@ -253,7 +253,7 @@
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 21.65
+      "t": 21.66
     },
     {
       "actor": "Orc Grunt",
@@ -275,7 +275,7 @@
       },
       "hp_pct": 25,
       "kind": "low_hp",
-      "t": 24.46
+      "t": 24.47
     },
     {
       "actor": "Orc Grunt",
@@ -286,11 +286,11 @@
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 25.71
+      "t": 25.72
     },
     {
       "kind": "victory",
-      "t": 25.71,
+      "t": 25.72,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=7 format=3 uid="uid://cqeainxeyjmyr"]
+[gd_resource type="Resource" script_class="SkillTree" format=3 uid="uid://cqeainxeyjmyr"]
 
 [ext_resource type="Script" uid="uid://c1djrnxq4hwmu" path="res://skill_tree/skill_tree.gd" id="1_61adr"]
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_2q57w"]
@@ -6,10 +6,8 @@
 [ext_resource type="Resource" uid="uid://y4mv5gjqjdex" path="res://skill_tree/actions/cleave.tres" id="3_wjkha"]
 [ext_resource type="Resource" uid="uid://qmjj1eacb88f" path="res://skill_tree/actions/sweeping_attack.tres" id="4_a2nut"]
 [ext_resource type="Resource" uid="uid://cv6d4t5ga1m38" path="res://skill_tree/actions/sword_attack.tres" id="4_bfwp5"]
-[ext_resource type="Resource" uid="uid://new_uid_5" path="res://skill_tree/actions/taunt.tres" id="5_new"]
-[ext_resource type="Resource" uid="uid://new_uid_6" path="res://skill_tree/actions/heavy_strike.tres" id="6_new"]
-[ext_resource type="Resource" path="res://skill_tree/actions/shield_wall.tres" id="ext_sw"]
-[ext_resource type="Resource" path="res://skill_tree/actions/whirlwind.tres" id="ext_ww"]
+[ext_resource type="Resource" path="res://skill_tree/actions/taunt.tres" id="5_new"]
+[ext_resource type="Resource" uid="uid://cq24gmuxufqfh" path="res://skill_tree/actions/heavy_strike.tres" id="6_new"]
 
 [resource]
 script = ExtResource("1_61adr")

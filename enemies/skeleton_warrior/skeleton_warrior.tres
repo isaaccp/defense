@@ -1,0 +1,366 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3]
+
+[ext_resource type="Texture2D" path="res://enemies/skeleton_warrior/Death.png" id="1_56k61"]
+[ext_resource type="Texture2D" path="res://enemies/skeleton_warrior/Run.png" id="2_hdlsy"]
+[ext_resource type="Script" path="res://components/data_types/animation_component_config.gd" id="3_7nbl8"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="4_vup6s"]
+[ext_resource type="Resource" path="res://game_logic/damage_types/piercing.tres" id="5_541sl"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="6_74lbd"]
+[ext_resource type="Script" path="res://components/data_types/attributes_component_config.gd" id="7_kdy1o"]
+[ext_resource type="Script" path="res://components/data_types/behavior_component_config.gd" id="8_vi12w"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="9_rsd3k"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="10_bp1ah"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="11_d31kx"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="12_m6j2a"]
+[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="13_x1e4d"]
+[ext_resource type="Script" path="res://components/data_types/hurtbox_component_config.gd" id="14_hv1jo"]
+[ext_resource type="Script" path="res://components/data_types/enemy_config.gd" id="15_xvykm"]
+
+[sub_resource type="Animation" id="Animation_kolb5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_2r5l0"]
+resource_name = "death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_56k61")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_weh13"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hdlsy")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_8afmj"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hdlsy")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tjxkn"]
+_data = {
+&"RESET": SubResource("Animation_kolb5"),
+&"death": SubResource("Animation_2r5l0"),
+&"idle": SubResource("Animation_weh13"),
+&"run": SubResource("Animation_8afmj")
+}
+
+[sub_resource type="Resource" id="Resource_mqiio"]
+script = ExtResource("3_7nbl8")
+animation_library = SubResource("AnimationLibrary_tjxkn")
+
+[sub_resource type="Resource" id="Resource_e6m2r"]
+script = ExtResource("4_vup6s")
+damage_type = ExtResource("5_541sl")
+percentage = 50
+
+[sub_resource type="Resource" id="Resource_sch4n"]
+script = ExtResource("6_74lbd")
+speed = 30.0
+health = 8
+focus = 100
+focus_regen = 10.0
+armor = 2
+resistance = Array[ExtResource("4_vup6s")]([SubResource("Resource_e6m2r")])
+
+[sub_resource type="Resource" id="Resource_6c0uc"]
+script = ExtResource("7_kdy1o")
+attributes = SubResource("Resource_sch4n")
+
+[sub_resource type="Resource" id="Resource_ys3y8"]
+script = ExtResource("11_d31kx")
+
+[sub_resource type="Resource" id="Resource_5cogd"]
+script = ExtResource("12_m6j2a")
+params = SubResource("Resource_ys3y8")
+name = &"Sword Attack"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_b5wv8"]
+script = ExtResource("13_x1e4d")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_fp3e0"]
+script = ExtResource("11_d31kx")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_b5wv8")
+
+[sub_resource type="Resource" id="Resource_fgv34"]
+script = ExtResource("12_m6j2a")
+params = SubResource("Resource_fp3e0")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_64udw"]
+script = ExtResource("10_bp1ah")
+target_selection = SubResource("Resource_fgv34")
+action = SubResource("Resource_5cogd")
+
+[sub_resource type="Resource" id="Resource_rw00x"]
+script = ExtResource("11_d31kx")
+
+[sub_resource type="Resource" id="Resource_sk7sd"]
+script = ExtResource("12_m6j2a")
+params = SubResource("Resource_rw00x")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_trrnx"]
+script = ExtResource("12_m6j2a")
+params = SubResource("Resource_fp3e0")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_v0d6y"]
+script = ExtResource("10_bp1ah")
+target_selection = SubResource("Resource_trrnx")
+action = SubResource("Resource_sk7sd")
+
+[sub_resource type="Resource" id="Resource_a00mj"]
+script = ExtResource("9_rsd3k")
+stored_rules = Array[ExtResource("10_bp1ah")]([SubResource("Resource_64udw"), SubResource("Resource_v0d6y")])
+
+[sub_resource type="Resource" id="Resource_ok421"]
+script = ExtResource("8_vi12w")
+stored_behavior = SubResource("Resource_a00mj")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sacmo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jgwl7"]
+
+[sub_resource type="Resource" id="Resource_6h1jn"]
+script = ExtResource("14_hv1jo")
+collision_shape = SubResource("CapsuleShape2D_jgwl7")
+
+[resource]
+script = ExtResource("15_xvykm")
+name = "Base Enemy"
+attributes_component_config = SubResource("Resource_6c0uc")
+behavior_component_config = SubResource("Resource_ok421")
+collision_shape = SubResource("CircleShape2D_sacmo")
+animation_component_config = SubResource("Resource_mqiio")
+hurtbox_component_config = SubResource("Resource_6h1jn")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=12 format=3 uid="uid://bubctjjwg0rlo"]
+[gd_resource type="Resource" script_class="SkillTree" format=3 uid="uid://bubctjjwg0rlo"]
 
 [ext_resource type="Script" uid="uid://c1djrnxq4hwmu" path="res://skill_tree/skill_tree.gd" id="1_iburd"]
 [ext_resource type="Script" uid="uid://crwqec7ts1ywn" path="res://skill_tree/skill.gd" id="2_f6fti"]
@@ -10,9 +10,7 @@
 [ext_resource type="Resource" uid="uid://wi55i11ogew5" path="res://skill_tree/actions/teleport_to.tres" id="6_mqqjo"]
 [ext_resource type="Resource" uid="uid://dvdw68ldlqcxe" path="res://skill_tree/actions/magic_armor.tres" id="7_marmor"]
 [ext_resource type="Resource" uid="uid://bchillingsk01" path="res://skill_tree/actions/chilling_sphere.tres" id="8_csph"]
-[ext_resource type="Resource" uid="uid://new_uid_9" path="res://skill_tree/actions/arcane_blast.tres" id="9_new"]
-[ext_resource type="Resource" path="res://skill_tree/actions/lightning_strike.tres" id="ext_ls"]
-[ext_resource type="Resource" path="res://skill_tree/actions/frost_nova.tres" id="ext_fn"]
+[ext_resource type="Resource" path="res://skill_tree/actions/arcane_blast.tres" id="9_new"]
 
 [resource]
 script = ExtResource("1_iburd")

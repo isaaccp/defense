@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dhj4bxcrw0i0h"]
+[gd_scene format=3 uid="uid://dhj4bxcrw0i0h"]
 
 [ext_resource type="PackedScene" uid="uid://i0ffjyhoyu76" path="res://spawners/spawner.tscn" id="1_45wlo"]
 [ext_resource type="Script" uid="uid://du1ohbhufgg6v" path="res://spawners/components/data_types/spawn_provider_config.gd" id="2_l8a5y"]
 [ext_resource type="Resource" uid="uid://co503cnfuc53i" path="res://enemies/orc_warrior/orc_warrior.tres" id="3_b7qe0"]
 [ext_resource type="Texture2D" uid="uid://d1g08qh7vyfxf" path="res://assets/retro-impact-effect-pack-all/Retro Impact Effect Pack 4 F.png" id="4_hs7d1"]
 [ext_resource type="PackedScene" uid="uid://dndkag2tc2ltn" path="res://spawners/components/spawn_config_component.tscn" id="5_b7qe0"]
-[ext_resource type="Script" uid="uid://ui3ihdjqg05n" path="res://spawners/components/spawn_config_component.gd" id="6_lpox0"]
 
 [sub_resource type="Resource" id="Resource_rttpn"]
 script = ExtResource("2_l8a5y")
@@ -102,7 +101,7 @@ _data = {
 &"spawn": SubResource("Animation_5pulm")
 }
 
-[node name="OrcWarriorSpawner" instance=ExtResource("1_45wlo")]
+[node name="OrcWarriorSpawner" unique_id=77811106 instance=ExtResource("1_45wlo")]
 actor_name = "Orc Warrior Spawner"
 
 [node name="SpawnProviderComponent" parent="." index="0"]
@@ -111,15 +110,13 @@ config = SubResource("Resource_rttpn")
 [node name="AnimationComponent" parent="." index="3" node_paths=PackedStringArray("animation_player")]
 animation_player = NodePath("AnimationPlayer")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
-libraries = {
-&"": SubResource("AnimationLibrary_sj4er")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0" unique_id=625419839]
+libraries/ = SubResource("AnimationLibrary_sj4er")
 
-[node name="GlowPivot" type="Node2D" parent="AnimationComponent" index="1"]
+[node name="GlowPivot" type="Node2D" parent="AnimationComponent" index="1" unique_id=68001363]
 scale = Vector2(2, 1)
 
-[node name="Glow" type="Sprite2D" parent="AnimationComponent/GlowPivot" index="0"]
+[node name="Glow" type="Sprite2D" parent="AnimationComponent/GlowPivot" index="0" unique_id=1049864711]
 texture = ExtResource("4_hs7d1")
 centered = false
 offset = Vector2(-16, -32)
@@ -127,7 +124,4 @@ hframes = 6
 vframes = 30
 frame = 89
 
-[node name="SpawnConfigComponent" parent="." index="5" instance=ExtResource("5_b7qe0")]
-
-[node name="@Node@22938" type="Node" parent="." index="6" instance=ExtResource("5_b7qe0")]
-script = ExtResource("6_lpox0")
+[node name="SpawnConfigComponent" parent="." index="5" unique_id=767116236 instance=ExtResource("5_b7qe0")]

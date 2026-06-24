@@ -12,12 +12,8 @@ const enemy_scene = preload("res://enemies/enemy.tscn")
 @export var config: SpawnProviderConfig
 
 func new_spawn() -> Node2D:
-	var spawn: Node2D
-	if config.spawn:
-		spawn = config.spawn.instantiate() as Enemy
-	else:
-		spawn = enemy_scene.instantiate() as Enemy
-		spawn.config = config.spawn_enemy_config
+	var spawn := enemy_scene.instantiate() as Enemy
+	spawn.config = config.spawn_enemy_config
 	return spawn
 
 static func get_or_null(node: Node) -> SpawnProviderComponent:

@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="ActionDef" format=3]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://qq205atk5sfc"]
 
-[ext_resource type="Script" path="res://behavior/actions/fan_of_knives_action.gd" id="1_xa54m"]
-[ext_resource type="Resource" path="res://game_logic/attack_types/ranged.tres" id="2_7a16n"]
-[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_kaejt"]
-[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_gp5nu"]
+[ext_resource type="Script" uid="uid://d0rrfh6lcg1mf" path="res://behavior/actions/fan_of_knives_action.gd" id="1_xa54m"]
+[ext_resource type="Resource" uid="uid://otw5l7yl4p65" path="res://game_logic/attack_types/ranged.tres" id="2_7a16n"]
+[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="3_kaejt"]
+[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="4_gp5nu"]
 
 [sub_resource type="Resource" id="Resource_14sf5"]
 script = ExtResource("3_kaejt")

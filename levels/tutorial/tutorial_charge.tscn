@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp5rg1x0lq2e"]
+[gd_scene load_steps=7 format=3 uid="uid://bp5rg1x0lq2e"]
 
 [ext_resource type="PackedScene" uid="uid://dl8b780p2i84w" path="res://levels/base_level.tscn" id="1_43dw4"]
-[ext_resource type="PackedScene" uid="uid://7eu1g5y0ekfn" path="res://enemies/orc_archer/orc_archer.tscn" id="3_gmahj"]
-[ext_resource type="Script" uid="uid://bhnk22wcf01ia" path="res://actor/enemy.gd" id="3_hkl18"]
-[ext_resource type="Resource" uid="uid://co503cnfuc53i" path="res://enemies/orc_warrior/orc_warrior.tres" id="4_dfpwm"]
-[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="4_tnd1e"]
+[ext_resource type="PackedScene" uid="uid://bjqptry8tjren" path="res://enemies/enemy.tscn" id="2_enemy"]
+[ext_resource type="Resource" path="res://enemies/orc_archer/orc_archer.tres" id="3_archer_cfg"]
+[ext_resource type="Resource" uid="uid://co503cnfuc53i" path="res://enemies/orc_warrior/orc_warrior.tres" id="4_warrior_cfg"]
+[ext_resource type="PackedScene" uid="uid://camb4jx7y3ygt" path="res://towers/column.tscn" id="5_column"]
 
 [node name="Level3" instance=ExtResource("1_43dw4")]
 players = 1
@@ -12,19 +12,17 @@ players = 1
 [node name="First" parent="StartingPositions" index="0"]
 position = Vector2(331.2, 253.6)
 
-[node name="OrcArcher" parent="YSorted/Enemies" index="0" instance=ExtResource("3_gmahj")]
+[node name="OrcArcher" parent="YSorted/Enemies" index="0" instance=ExtResource("2_enemy")]
 position = Vector2(146.4, 195.2)
-actor_name = ""
+config = ExtResource("3_archer_cfg")
 
-[node name="OrcArcher2" parent="YSorted/Enemies" index="1" instance=ExtResource("3_gmahj")]
+[node name="OrcArcher2" parent="YSorted/Enemies" index="1" instance=ExtResource("2_enemy")]
 position = Vector2(146.4, 293.6)
-actor_name = ""
+config = ExtResource("3_archer_cfg")
 
-[node name="OrcWarrior" type="Node2D" parent="YSorted/Enemies" index="2"]
+[node name="OrcWarrior" parent="YSorted/Enemies" index="2" instance=ExtResource("2_enemy")]
 position = Vector2(203.2, 248.8)
-script = ExtResource("3_hkl18")
-config = ExtResource("4_dfpwm")
-metadata/_custom_type_script = "uid://bhnk22wcf01ia"
+config = ExtResource("4_warrior_cfg")
 
-[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("4_tnd1e")]
+[node name="Column" parent="YSorted/Towers" index="0" instance=ExtResource("5_column")]
 position = Vector2(444, 258.4)

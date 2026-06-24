@@ -1,20 +1,23 @@
-[gd_scene load_steps=41 format=3 uid="uid://7eu1g5y0ekfn"]
+[gd_resource type="Resource" script_class="EnemyConfig" format=3]
 
-[ext_resource type="PackedScene" uid="uid://dkxmuee84wtoj" path="res://enemies/base_enemy.tscn" id="1_rbnrp"]
-[ext_resource type="Texture2D" uid="uid://bg3cobr6fkys6" path="res://enemies/orc_archer/Idle.png" id="2_duwxp"]
-[ext_resource type="Texture2D" uid="uid://dcavx0naa8mgn" path="res://enemies/orc_archer/Death.png" id="2_qlkp2"]
-[ext_resource type="Texture2D" uid="uid://e61vy14vtwyo" path="res://enemies/orc_archer/Run.png" id="3_c2ix8"]
-[ext_resource type="Script" uid="uid://b3pmva37g23pt" path="res://behavior/stored_behavior.gd" id="5_ppmrm"]
-[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="6_2kkh2"]
-[ext_resource type="Script" uid="uid://c2obyw4bqtprd" path="res://behavior/stored_param_skill.gd" id="6_ae2gu"]
-[ext_resource type="Script" uid="uid://c52285iobrpw2" path="res://behavior/rule_def.gd" id="7_174ti"]
-[ext_resource type="Script" uid="uid://bhqo018swx4s7" path="res://behavior/stored_skill.gd" id="9_17oqu"]
-[ext_resource type="Script" uid="uid://b4rb5xjrb26kl" path="res://game_logic/attributes/attributes.gd" id="10_cxdft"]
-[ext_resource type="Script" uid="uid://qvsg753rso4n" path="res://game_logic/attributes/resistance.gd" id="10_g5ild"]
+[ext_resource type="Texture2D" path="res://enemies/orc_archer/Death.png" id="1_slinj"]
+[ext_resource type="Texture2D" path="res://enemies/orc_archer/Idle.png" id="2_4i4qj"]
+[ext_resource type="Texture2D" path="res://enemies/orc_archer/Run.png" id="3_md8m6"]
+[ext_resource type="Script" path="res://components/data_types/animation_component_config.gd" id="4_pu5n7"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="5_543ph"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="6_iwij6"]
+[ext_resource type="Script" path="res://components/data_types/attributes_component_config.gd" id="7_rqtfj"]
+[ext_resource type="Script" path="res://components/data_types/behavior_component_config.gd" id="8_httt8"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="9_n3fw2"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="10_rjmeu"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="11_dwjd7"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="12_2csb0"]
+[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="13_ge7j3"]
+[ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="14_3xtwq"]
+[ext_resource type="Script" path="res://components/data_types/hurtbox_component_config.gd" id="15_5svnm"]
+[ext_resource type="Script" path="res://components/data_types/enemy_config.gd" id="16_fqbd1"]
 
-[ext_resource type="Script" uid="uid://clb4qabgcoyo5" path="res://behavior/conditions/float_value.gd" id="11_fv1"]
-
-[sub_resource type="Animation" id="Animation_sy2pk"]
+[sub_resource type="Animation" id="Animation_w8yal"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -29,7 +32,7 @@ tracks/0/keys = {
 "values": [Vector2(0, -16)]
 }
 
-[sub_resource type="Animation" id="Animation_cvx86"]
+[sub_resource type="Animation" id="Animation_xthor"]
 resource_name = "death"
 length = 0.6
 tracks/0/type = "value"
@@ -42,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_qlkp2")]
+"values": [ExtResource("1_slinj")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -105,7 +108,7 @@ tracks/5/keys = {
 "values": [Vector2(0, -16)]
 }
 
-[sub_resource type="Animation" id="Animation_jx203"]
+[sub_resource type="Animation" id="Animation_0k67o"]
 resource_name = "idle"
 length = 0.4
 loop_mode = 1
@@ -119,7 +122,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_duwxp")]
+"values": [ExtResource("2_4i4qj")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -182,7 +185,7 @@ tracks/5/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_1ki3q"]
+[sub_resource type="Animation" id="Animation_g8v44"]
 resource_name = "run"
 length = 0.6
 loop_mode = 1
@@ -196,7 +199,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_c2ix8")]
+"values": [ExtResource("3_md8m6")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -259,147 +262,127 @@ tracks/5/keys = {
 "values": [Vector2(0, -16)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ia46g"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_th1fi"]
 _data = {
-&"RESET": SubResource("Animation_sy2pk"),
-&"death": SubResource("Animation_cvx86"),
-&"idle": SubResource("Animation_jx203"),
-&"run": SubResource("Animation_1ki3q")
+&"RESET": SubResource("Animation_w8yal"),
+&"death": SubResource("Animation_xthor"),
+&"idle": SubResource("Animation_0k67o"),
+&"run": SubResource("Animation_g8v44")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ktmw4"]
+[sub_resource type="Resource" id="Resource_irplv"]
+script = ExtResource("4_pu5n7")
+animation_library = SubResource("AnimationLibrary_th1fi")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxrkp"]
-
-[sub_resource type="Resource" id="Resource_upbo7"]
-script = ExtResource("6_2kkh2")
-
-[sub_resource type="Resource" id="Resource_v6m3v"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_upbo7")
-name = &"Bow Attack"
-skill_type = 1
-
-[sub_resource type="Resource" id="Resource_8lwyn"]
-script = ExtResource("6_2kkh2")
-
-[sub_resource type="Resource" id="Resource_i8xrd"]
-script = ExtResource("9_17oqu")
-name = &"Closest First"
-skill_type = 4
-
-[sub_resource type="Resource" id="Resource_km7cd"]
-script = ExtResource("6_2kkh2")
-editor_string = "Enemy ({sort})"
-sort = SubResource("Resource_i8xrd")
-
-[sub_resource type="Resource" id="Resource_fhy25"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_km7cd")
-name = &"Enemy"
-skill_type = 2
-
-[sub_resource type="Resource" id="Resource_861in"]
-script = ExtResource("7_174ti")
-target_selection = SubResource("Resource_fhy25")
-action = SubResource("Resource_v6m3v")
-[sub_resource type="Resource" id="Resource_78hjn"]
-script = ExtResource("6_2kkh2")
-
-[sub_resource type="Resource" id="Resource_14hje"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_78hjn")
-name = &"Move To"
-skill_type = 1
-
-[sub_resource type="Resource" id="Resource_wrai3"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_km7cd")
-name = &"Enemy"
-skill_type = 2
-
-[sub_resource type="Resource" id="Resource_yx63r"]
-script = ExtResource("7_174ti")
-target_selection = SubResource("Resource_wrai3")
-action = SubResource("Resource_14hje")
-[sub_resource type="Resource" id="Resource_fv120"]
-script = ExtResource("11_fv1")
-defined = true
-value = 120.0
-
-[sub_resource type="Resource" id="Resource_maway_p"]
-script = ExtResource("6_2kkh2")
-editor_string = "max {float_value}"
-float_value = SubResource("Resource_fv120")
-
-[sub_resource type="Resource" id="Resource_maway_a"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_maway_p")
-name = &"Move Away"
-skill_type = 1
-
-[sub_resource type="Resource" id="Resource_maway_t"]
-script = ExtResource("6_ae2gu")
-params = SubResource("Resource_km7cd")
-name = &"Enemy"
-skill_type = 2
-
-[sub_resource type="Resource" id="Resource_maway_r"]
-script = ExtResource("7_174ti")
-target_selection = SubResource("Resource_maway_t")
-action = SubResource("Resource_maway_a")
-[sub_resource type="Resource" id="Resource_g1623"]
-script = ExtResource("5_ppmrm")
-stored_rules = Array[ExtResource("7_174ti")]([SubResource("Resource_861in"), SubResource("Resource_maway_r"), SubResource("Resource_yx63r")])
-
-[sub_resource type="Resource" id="Resource_ln4r5"]
-script = ExtResource("10_cxdft")
+[sub_resource type="Resource" id="Resource_8c77w"]
+script = ExtResource("6_iwij6")
 speed = 30.0
 health = 5
 focus = 100
 focus_regen = 10.0
 
-[node name="OrcArcher" instance=ExtResource("1_rbnrp")]
-actor_name = "Orc Archer"
+[sub_resource type="Resource" id="Resource_bwfp6"]
+script = ExtResource("7_rqtfj")
+attributes = SubResource("Resource_8c77w")
 
-[node name="Sprite2D" parent="." index="1"]
-position = Vector2(0, -16)
-texture = ExtResource("2_qlkp2")
-offset = Vector2(0, -16)
-hframes = 3
-vframes = 2
-metadata/_aseprite_wizard_config_ = {
-"i_mode": -1,
-"keep_anim_length": false,
-"layer": "",
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"op_exp": false,
-"player": "Sprite2D/AnimationPlayer",
-"source": "res://assets/pixel-crawler/Enemy/Orc Crew/Orc - Rogue/Death/Death.aseprite"
-}
+[sub_resource type="Resource" id="Resource_4y4e1"]
+script = ExtResource("11_dwjd7")
 
-[node name="AnimationComponent" parent="." index="2" node_paths=PackedStringArray("animation_player")]
-animation_player = NodePath("AnimationPlayer")
+[sub_resource type="Resource" id="Resource_lrt1m"]
+script = ExtResource("12_2csb0")
+params = SubResource("Resource_4y4e1")
+name = &"Bow Attack"
+skill_type = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationComponent" index="0"]
-root_node = NodePath("../../Sprite2D")
-libraries = {
-&"": SubResource("AnimationLibrary_ia46g")
-}
+[sub_resource type="Resource" id="Resource_ktf3x"]
+script = ExtResource("13_ge7j3")
+name = &"Closest First"
+skill_type = 4
 
-[node name="CollisionShape2D" parent="." index="3"]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_ktmw4")
+[sub_resource type="Resource" id="Resource_cm57d"]
+script = ExtResource("11_dwjd7")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_ktf3x")
 
-[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
-position = Vector2(0, -13)
-shape = SubResource("CapsuleShape2D_wxrkp")
+[sub_resource type="Resource" id="Resource_d6ci8"]
+script = ExtResource("12_2csb0")
+params = SubResource("Resource_cm57d")
+name = &"Enemy"
+skill_type = 2
 
-[node name="BehaviorComponent" parent="." index="7"]
-stored_behavior = SubResource("Resource_g1623")
+[sub_resource type="Resource" id="Resource_mclqn"]
+script = ExtResource("10_rjmeu")
+target_selection = SubResource("Resource_d6ci8")
+action = SubResource("Resource_lrt1m")
 
-[node name="AttributesComponent" parent="." index="10"]
-base_attributes = SubResource("Resource_ln4r5")
+[sub_resource type="Resource" id="Resource_tt713"]
+script = ExtResource("14_3xtwq")
+defined = true
+value = 120.0
+
+[sub_resource type="Resource" id="Resource_vots3"]
+script = ExtResource("11_dwjd7")
+editor_string = "max {float_value}"
+float_value = SubResource("Resource_tt713")
+
+[sub_resource type="Resource" id="Resource_5x55r"]
+script = ExtResource("12_2csb0")
+params = SubResource("Resource_vots3")
+name = &"Move Away"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_m2vga"]
+script = ExtResource("12_2csb0")
+params = SubResource("Resource_cm57d")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_l6sq5"]
+script = ExtResource("10_rjmeu")
+target_selection = SubResource("Resource_m2vga")
+action = SubResource("Resource_5x55r")
+
+[sub_resource type="Resource" id="Resource_21mqw"]
+script = ExtResource("11_dwjd7")
+
+[sub_resource type="Resource" id="Resource_yq8h0"]
+script = ExtResource("12_2csb0")
+params = SubResource("Resource_21mqw")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_annma"]
+script = ExtResource("12_2csb0")
+params = SubResource("Resource_cm57d")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_6pxie"]
+script = ExtResource("10_rjmeu")
+target_selection = SubResource("Resource_annma")
+action = SubResource("Resource_yq8h0")
+
+[sub_resource type="Resource" id="Resource_1jyww"]
+script = ExtResource("9_n3fw2")
+stored_rules = Array[ExtResource("10_rjmeu")]([SubResource("Resource_mclqn"), SubResource("Resource_l6sq5"), SubResource("Resource_6pxie")])
+
+[sub_resource type="Resource" id="Resource_l1q45"]
+script = ExtResource("8_httt8")
+stored_behavior = SubResource("Resource_1jyww")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oqf4x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r085b"]
+
+[sub_resource type="Resource" id="Resource_y2v2d"]
+script = ExtResource("15_5svnm")
+collision_shape = SubResource("CapsuleShape2D_r085b")
+
+[resource]
+script = ExtResource("16_fqbd1")
+name = "Orc Archer"
+attributes_component_config = SubResource("Resource_bwfp6")
+behavior_component_config = SubResource("Resource_l1q45")
+collision_shape = SubResource("CircleShape2D_oqf4x")
+animation_component_config = SubResource("Resource_irplv")
+hurtbox_component_config = SubResource("Resource_y2v2d")

@@ -1,0 +1,357 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3]
+
+[ext_resource type="Texture2D" path="res://enemies/orc_grunt/Death.png" id="1_2j8ww"]
+[ext_resource type="Texture2D" path="res://enemies/orc_grunt/Run.png" id="2_0pogw"]
+[ext_resource type="Script" path="res://components/data_types/animation_component_config.gd" id="3_h3uqr"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="4_yhu1i"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="5_sjujp"]
+[ext_resource type="Script" path="res://components/data_types/attributes_component_config.gd" id="6_ojm0k"]
+[ext_resource type="Script" path="res://components/data_types/behavior_component_config.gd" id="7_el4al"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="8_ipqh1"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="9_ocebo"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="10_e0bnj"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="11_vsu6t"]
+[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="12_k7rsr"]
+[ext_resource type="Script" path="res://components/data_types/hurtbox_component_config.gd" id="13_x3vbo"]
+[ext_resource type="Script" path="res://components/data_types/enemy_config.gd" id="14_8jxr1"]
+
+[sub_resource type="Animation" id="Animation_lhkud"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cyslq"]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_2j8ww")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_erull"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pogw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sxcha"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pogw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0iq7y"]
+_data = {
+&"RESET": SubResource("Animation_lhkud"),
+&"default": SubResource("Animation_cyslq"),
+&"idle": SubResource("Animation_erull"),
+&"run": SubResource("Animation_sxcha")
+}
+
+[sub_resource type="Resource" id="Resource_7xxjy"]
+script = ExtResource("3_h3uqr")
+animation_library = SubResource("AnimationLibrary_0iq7y")
+
+[sub_resource type="Resource" id="Resource_c3v5t"]
+script = ExtResource("5_sjujp")
+speed = 35.0
+health = 6
+focus = 100
+focus_regen = 10.0
+
+[sub_resource type="Resource" id="Resource_wk50k"]
+script = ExtResource("6_ojm0k")
+attributes = SubResource("Resource_c3v5t")
+
+[sub_resource type="Resource" id="Resource_jg2i1"]
+script = ExtResource("10_e0bnj")
+
+[sub_resource type="Resource" id="Resource_rle5i"]
+script = ExtResource("11_vsu6t")
+params = SubResource("Resource_jg2i1")
+name = &"Sword Attack"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_6awf8"]
+script = ExtResource("12_k7rsr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_hrftu"]
+script = ExtResource("10_e0bnj")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_6awf8")
+
+[sub_resource type="Resource" id="Resource_g7v4e"]
+script = ExtResource("11_vsu6t")
+params = SubResource("Resource_hrftu")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_w2rlj"]
+script = ExtResource("9_ocebo")
+target_selection = SubResource("Resource_g7v4e")
+action = SubResource("Resource_rle5i")
+
+[sub_resource type="Resource" id="Resource_cpee5"]
+script = ExtResource("10_e0bnj")
+
+[sub_resource type="Resource" id="Resource_l1h3x"]
+script = ExtResource("11_vsu6t")
+params = SubResource("Resource_cpee5")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_c2w62"]
+script = ExtResource("11_vsu6t")
+params = SubResource("Resource_hrftu")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_tfll6"]
+script = ExtResource("9_ocebo")
+target_selection = SubResource("Resource_c2w62")
+action = SubResource("Resource_l1h3x")
+
+[sub_resource type="Resource" id="Resource_xqatx"]
+script = ExtResource("8_ipqh1")
+stored_rules = Array[ExtResource("9_ocebo")]([SubResource("Resource_w2rlj"), SubResource("Resource_tfll6")])
+
+[sub_resource type="Resource" id="Resource_jpum0"]
+script = ExtResource("7_el4al")
+stored_behavior = SubResource("Resource_xqatx")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oowyo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6kctf"]
+
+[sub_resource type="Resource" id="Resource_qca2o"]
+script = ExtResource("13_x3vbo")
+collision_shape = SubResource("CapsuleShape2D_6kctf")
+
+[resource]
+script = ExtResource("14_8jxr1")
+name = "Orc Grunt"
+attributes_component_config = SubResource("Resource_wk50k")
+behavior_component_config = SubResource("Resource_jpum0")
+collision_shape = SubResource("CircleShape2D_oowyo")
+animation_component_config = SubResource("Resource_7xxjy")
+hurtbox_component_config = SubResource("Resource_qca2o")

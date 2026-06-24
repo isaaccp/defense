@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DamageType" format=3 uid="uid://dmgcld0001"]
 
-[ext_resource type="Script" path="res://game_logic/damage_types/damage_type.gd" id="1_0amv7"]
+[ext_resource type="Script" uid="uid://458at5gj7x0n" path="res://game_logic/damage_types/damage_type.gd" id="1_0amv7"]
 
 [resource]
 script = ExtResource("1_0amv7")
