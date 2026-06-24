@@ -1,113 +1,65 @@
-# Creating a New Enemy
+# Creating a New Enemy Type (Config-Centric Workflow)
 
-Use `enemies/orc_berserker/orc_berserker.tscn` as a reference — it was written by hand with readable sub_resource IDs.
+In this project, individual enemy types **do not have their own scene files (`.tscn`)**. Instead, there is a single generic [enemy.tscn](file:///data/godot/games/defense/enemies/enemy.tscn) scene that is dynamically populated at runtime with a resource file of type [EnemyConfig](file:///data/godot/games/defense/components/data_types/enemy_config.gd) (`.tres`).
 
-## Steps
+All visual creation, editing, and configuration of enemies is done using the visual editor scene [enemy_editor.tscn](file:///data/godot/games/defense/enemies/enemy_editor.tscn).
 
-### 1. Create a directory and scene file
+---
 
-```
-enemies/my_enemy/my_enemy.tscn
-```
+## Use Cases
 
-Copy `orc_berserker.tscn` as a starting point. You need to change:
+### 1. Editing an Existing Enemy Config
 
-- The scene-level `uid=` to something fresh (or delete the attribute — Godot will assign one on first load)
-- `[node name="OrcBerserker" ...]` → your new node name
-- `actor_name = "Orc Berserker"` → your display name
-- Sprite textures and frame counts (see below)
-- Behavior rules (see below)
-- Stats (see below)
+If you want to modify stats, shapes, or behavior for an existing enemy:
 
-### 2. Wire up sprites
+1. Open [enemy_editor.tscn](file:///data/godot/games/defense/enemies/enemy_editor.tscn) in the Godot Editor.
+2. In the Inspector, select the `EnemyEditor` root node.
+3. Drag and drop the enemy's `.tres` file (e.g. [orc_grunt.tres](file:///data/godot/games/defense/enemies/orc_grunt/orc_grunt.tres)) into the `Config` property slot.
+4. The tool will automatically instantiate the enemy preview in the 2D Viewport and expose its component nodes in the editor **Scene dock** (e.g. `CollisionShape2D`, `AnimationPlayer`, `AttributesComponent`, `BehaviorComponent`).
+5. Perform edits:
+   * **Collision Shapes**: Select `CollisionShape2D` (for movement) or `HurtboxComponent/CollisionShape2D` (for hit detection) and modify/resize shapes in the viewport.
+   * **Attributes**: Select `AttributesComponent` and edit fields in `base_attributes` (health, speed, armor, etc.) in the Inspector.
+   * **Behaviors**: Select `BehaviorComponent` and edit the rule definitions under `stored_behavior` in the Inspector.
+   * **Animations**: Select `AnimationComponent/AnimationPlayer` and edit keyframes, textures, or frame coordinates using the native Godot **Animation panel** at the bottom of the editor.
+6. Once finished, toggle the `save_config` checkbox on the `EnemyEditor` inspector properties. The tool will serialize all overrides from the preview nodes back into the loaded `.tres` resource file.
 
-Add three `ext_resource` entries for your textures. Get the UID from the `.import` file next to each PNG:
+### 2. Creating a New Enemy Config from Scratch
 
-```
-head -5 path/to/Sprite-Sheet.png.import   # → uid="uid://..."
-```
+If you want to design a completely new enemy type:
 
-Then in each animation sub_resource, set the texture, `hframes`, `vframes`, and `frame` keyframes to match your sheet.
+1. Open [enemy_editor.tscn](file:///data/godot/games/defense/enemies/enemy_editor.tscn) in the Godot Editor.
+2. Select the `EnemyEditor` root node.
+3. Click the dropdown on the `Config` property and select **New EnemyConfig**.
+4. The editor will automatically spawn a generic preview enemy under the `EnemyEditor` node and initialize blank/default configurations for all sub-resources (shapes, attributes, behaviors, animation library) so you can edit them immediately.
+5. In the Scene Tree dock, configure your new enemy:
+   * Set the enemy's display name by editing `actor_name` on the instantiated `Enemy` node.
+   * Assign and resize shapes for the root `CollisionShape2D` and `HurtboxComponent/CollisionShape2D`.
+   * On the `AttributesComponent`, assign a new `Attributes` resource and define its base health, speed, and armor.
+   * On the `BehaviorComponent`, assign a new `StoredBehavior` resource and add rule definitions (defining conditions, target selectors, and actions).
+   * Select `AnimationComponent/AnimationPlayer`, add a new `AnimationLibrary`, and create animations named `idle` (looping), `run` (looping), and `death` (non-looping) mapping to your sprite sheet textures.
+6. Enter your new save path in the `save_as_path` field (e.g. `res://enemies/orc_grunt/orc_shaman.tres`).
+7. Toggle the `save_as_new_config` checkbox. The visual setup will be serialized and saved as a new `.tres` resource at the specified path.
 
-| Animation key | Loop? | Notes |
+---
+
+## EnemyConfig Structural Fields
+
+The [EnemyConfig](file:///data/godot/games/defense/components/data_types/enemy_config.gd) resource contains the following fields:
+
+| Field | Type | Description |
 |---|---|---|
-| `RESET` | — | Just sets `offset`; sets the resting state |
-| `death` | No | Plays once on death |
-| `idle` | Yes | Shown when no movement action is running |
-| `run` | Yes | Shown while moving |
+| `name` | `String` | The display name of the enemy type (e.g., `"Orc Berserker"`). |
+| `collision_shape` | `Shape2D` | The physical boundary used for movement collisions. |
+| `attributes_component_config` | `AttributesComponentConfig` | Wraps an `Attributes` resource defining base health, speed, focus, focus regen, and armor. |
+| `behavior_component_config` | `BehaviorComponentConfig` | Wraps a `StoredBehavior` resource defining the rule-based AI logic. |
+| `hurtbox_component_config` | `HurtboxComponentConfig` | Wraps a `Shape2D` used for hit detection. |
+| `animation_component_config` | `AnimationComponentConfig` | Wraps an `AnimationLibrary` containing the sprite animations. |
 
-All animation track paths are relative to AnimationComponent (the AnimationPlayer's parent), so they look like `NodePath("../Sprite2D:texture")`.
+---
 
-Frame keyframes example for a 6-frame run strip at 0.1s each:
-```gdscript
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"values": [0, 1, 2, 3, 4, 5]
-```
+## Registering and Spawning the Enemy
 
-### 3. Define the behavior
+Once you have created your `.tres` config file:
 
-Rules are evaluated top-to-bottom each frame; the first one that passes wins. Each rule has three parts — condition, target, action — all looked up by **StringName** at runtime. No UIDs or paths needed.
-
-**skill_type values:** `1` = Action, `2` = Target, `3` = Condition, `4` = Target Sort
-
-Minimal rule (sub_resources in the scene):
-
-```
-[sub_resource type="Resource" id="Resource_my_params"]
-script = ExtResource("6_params")       # skill_params.gd
-
-[sub_resource type="Resource" id="Resource_my_action"]
-script = ExtResource("7_spskill")      # stored_param_skill.gd
-params = SubResource("Resource_my_params")
-name = &"Sword Attack"                 # must match skill_name in the .tres
-skill_type = 1
-
-[sub_resource type="Resource" id="Resource_cf"]
-script = ExtResource("9_sskill")       # stored_skill.gd
-name = &"Closest First"
-skill_type = 4
-
-[sub_resource type="Resource" id="Resource_my_target_params"]
-script = ExtResource("6_params")
-editor_string = "Enemy ({sort})"
-sort = SubResource("Resource_cf")
-
-[sub_resource type="Resource" id="Resource_my_target"]
-script = ExtResource("7_spskill")
-params = SubResource("Resource_my_target_params")
-name = &"Enemy"
-skill_type = 2
-
-[sub_resource type="Resource" id="Resource_my_rule"]
-script = ExtResource("8_ruledef")      # rule_def.gd
-target_selection = SubResource("Resource_my_target")
-action = SubResource("Resource_my_action")
-# Omit `condition` (or use an empty `conditions` array) for rules that fire unconditionally.
-```
-
-You can share `params` and `sort` sub_resources across multiple rules (orc_berserker.tscn does this).
-
-Then wire all rules into the behavior:
-
-```
-[sub_resource type="Resource" id="Resource_behavior"]
-script = ExtResource("5_behav")        # stored_behavior.gd
-stored_rules = Array[ExtResource("8_ruledef")]([SubResource("Resource_rule1"), SubResource("Resource_rule2")])
-```
-
-See `behavior/BEHAVIOR.md` for the full list of available skills and how action params (range, cooldown, etc.) and condition params work.
-
-### 4. Set attributes
-
-```
-[sub_resource type="Resource" id="Resource_attributes"]
-script = ExtResource("10_attr")        # attributes.gd
-speed = 35.0
-health = 6
-```
-
-To add armor, add `resistance.gd` as an ext_resource and set a `resistance` property on the attributes resource — see `skeleton_warrior.tscn` for the pattern.
-
-### 5. Document it
-
-Add an entry to `enemies/ENEMIES.md` with the stat table and behavior list.
+1. **Roster Documentation**: Add the stats and behavior descriptions to [ENEMIES.md](file:///data/godot/games/defense/enemies/ENEMIES.md).
+2. **Level Spawning**: To spawn this enemy in a level, add a spawner to your level scene (under the `Spawners` node) and assign your new `.tres` config to the spawner's `enemy_config` property.

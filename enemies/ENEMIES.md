@@ -2,10 +2,12 @@
 
 All enemies use the same behavior engine as player characters. Each enemy type has a fixed behavior that is consistent across all levels it appears in — players can learn and rely on these patterns.
 
-## Current Enemy Types
+All enemies are instantiated using the generic [enemy.tscn](file:///data/godot/games/defense/enemies/enemy.tscn) scene and populated via their `.tres` configuration resources.
+
+## Current Enemy Roster
 
 ### Orc Grunt
-**File:** `orc_grunt/orc_grunt.tscn`
+**File:** `orc_grunt/orc_grunt.tres`
 
 | Stat | Value |
 |------|-------|
@@ -22,7 +24,7 @@ The weakest and fastest enemy. Will rush the nearest character and swing. Lowest
 ---
 
 ### Orc Warrior
-**File:** `orc_warrior/orc_warrior.tres` (used via `enemy.tscn`)
+**File:** `orc_warrior/orc_warrior.tres`
 
 | Stat | Value |
 |------|-------|
@@ -39,7 +41,7 @@ Standard melee frontliner. Tougher than the grunt and slightly slower. The armor
 ---
 
 ### Orc Archer
-**File:** `orc_archer/orc_archer.tscn`
+**File:** `orc_archer/orc_archer.tres`
 
 | Stat | Value |
 |------|-------|
@@ -57,7 +59,7 @@ Kiting ranged attacker. Fires from distance, backs away when an enemy enters 120
 ---
 
 ### Orc Berserker
-**File:** `orc_berserker/orc_berserker.tscn`
+**File:** `orc_berserker/orc_berserker.tres`
 
 | Stat | Value |
 |------|-------|
@@ -75,7 +77,7 @@ Fastest enemy in the roster. Charges from range, briefly becoming even faster an
 ---
 
 ### Skeleton Warrior
-**File:** `skeleton_warrior/skeleton_warrior.tscn`
+**File:** `skeleton_warrior/skeleton_warrior.tres`
 
 | Stat | Value |
 |------|-------|
@@ -92,7 +94,7 @@ The most physically resilient frontliner — armor 2 makes physical attacks hit 
 ---
 
 ### Skeleton Mage
-**File:** `skeleton_mage/skeleton_mage.tscn`
+**File:** `skeleton_mage/skeleton_mage.tres`
 
 | Stat | Value |
 |------|-------|
