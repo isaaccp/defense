@@ -8,6 +8,8 @@ var condition_evaluators: Array = []
 
 ## Whether the target still meets all initial conditions.
 func meets_condition() -> bool:
+	if not valid():
+		return false
 	if condition_evaluators.is_empty():
 		return true
 	match type:

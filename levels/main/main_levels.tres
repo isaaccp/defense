@@ -34,12 +34,14 @@
 [ext_resource type="Resource" path="res://skill_tree/actions/fan_of_knives.tres" id="ext_fk2"]
 [ext_resource type="Resource" path="res://skill_tree/actions/lightning_strike.tres" id="ext_ls2"]
 [ext_resource type="Resource" path="res://skill_tree/actions/frost_nova.tres" id="ext_fn2"]
+[ext_resource type="PackedScene" uid="uid://co3v3n3jfnf0j" path="res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn" id="20_shaman_choke"]
+[ext_resource type="PackedScene" uid="uid://bambushhorde04" path="res://levels/main/forest_ambush/04_orc_horde.tscn" id="21_horde_ambush"]
 
 [resource]
 script = ExtResource("2_3n011")
 players = 2
-total_stages = 3
-levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"), ExtResource("7_ambush"), ExtResource("8_warpress"), ExtResource("9_waves"), ExtResource("10_archers")])
+total_stages = 4
+levels = Array[PackedScene]([ExtResource("5_chrush"), ExtResource("6_archrush"), ExtResource("7_ambush"), ExtResource("8_warpress"), ExtResource("9_waves"), ExtResource("10_archers"), ExtResource("20_shaman_choke"), ExtResource("21_horde_ambush")])
 available_characters = Array[ExtResource("1_rhg10")]([ExtResource("1_ug4xc"), ExtResource("2_84oyx"), ExtResource("3_fnt7r"), ExtResource("4_muu8k")])
 starting_unlocked_skills = Array[ExtResource("2_suivl")]([ExtResource("22_knight"), ExtResource("23_priest"), ExtResource("100_start"), ExtResource("101_start"), ExtResource("102_start"), ExtResource("103_start"), ExtResource("104_start"), ExtResource("ext_sw2"), ExtResource("ext_ww2"), ExtResource("ext_hn2"), ExtResource("ext_bh2"), ExtResource("ext_pd2"), ExtResource("ext_fk2"), ExtResource("ext_ls2"), ExtResource("ext_fn2")])
 relic_library = ExtResource("15_0q7yn")

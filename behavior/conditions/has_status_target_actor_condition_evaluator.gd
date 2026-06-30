@@ -3,6 +3,8 @@ extends TargetActorConditionEvaluator
 class_name HasStatusTargetActorConditionEvaluator
 
 func evaluate(target: Actor) -> bool:
+	if not is_instance_valid(target) or target == null or target.destroyed:
+		return false
 	var status_comp = Component.get_or_null(target, StatusComponent.component) as StatusComponent
 	var has = false
 	var status_def = def.params.status if def.params.placeholder_set(SkillParams.PlaceholderId.STATUS) else null

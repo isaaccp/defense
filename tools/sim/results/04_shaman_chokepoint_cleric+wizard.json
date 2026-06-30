@@ -1,0 +1,633 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 44,
+      "damage_healed": 120,
+      "enemies_killed": 4,
+      "focus_generated": 27,
+      "focus_spent": 55,
+      "hp_final": 13.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 511,
+        "y": 238
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 92,
+      "damage_healed": 0,
+      "enemies_killed": 9,
+      "focus_generated": 13,
+      "focus_spent": 48,
+      "hp_final": 19.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 341,
+        "y": 314
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Smite"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Mace Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+    "max_seconds": 60.0,
+    "notes": "shaman_chokepoint — cleric+wizard. Both stay near the Tower. Cleric heals self or allies, shields self/allies when targeted, and Consecrates. Wizard uses chilling sphere / fire burst, holds close enemies, and bolts closest.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_shaman_chokepoint/cleric+wizard.json",
+  "elapsed_seconds": 46.9,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.01
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.5
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#3",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 529,
+        "y": 303
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 10.87
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.03
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 516,
+        "y": 255
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 14.35
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#6",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#3",
+      "at": {
+        "x": 505,
+        "y": 228
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 15.1
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.54
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 488,
+        "y": 241
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 18.78
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.05
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 508,
+        "y": 234
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 20.22
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#8",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 478,
+        "y": 238
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 23.32
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 458,
+        "y": 234
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 25.24
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 495,
+        "y": 242
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 25.82
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 501,
+        "y": 233
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 27.39
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 474,
+        "y": 234
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 28.68
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 511,
+        "y": 234
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 30.46
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 721,
+        "y": 270
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 31.15
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#0",
+      "at": {
+        "x": 511,
+        "y": 238
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 33.06
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 512,
+        "y": 291
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 39.57
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 636,
+        "y": 266
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 42.63
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 342,
+        "y": 315
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 44.63
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 640,
+        "y": 285
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 46.19
+    },
+    {
+      "kind": "victory",
+      "t": 46.9,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 52.9,
+  "notes": "shaman_chokepoint — cleric+wizard. Both stay near the Tower. Cleric heals self or allies, shields self/allies when targeted, and Consecrates. Wizard uses chilling sphere / fire burst, holds close enemies, and bolts closest.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 46,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

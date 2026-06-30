@@ -78,6 +78,20 @@ Context: replay of the original session's setup, now with events digest + loss a
 
 ---
 
+## 2026-06-30 — Level 4 (shaman_chokepoint) Verification & Bug Fixes
+
+Context: optimizing and verifying Level 4 chokepoint (`04_shaman_chokepoint`) for all 6 character combinations.
+
+### Bug Fixes / Engine Robustness
+- **Target Actor Condition Evaluator Crashes on Dead Targets**: Evaluators like `IntTargetActorConditionEvaluator`, `FloatTargetActorConditionEvaluator`, and `HasStatusTargetActorConditionEvaluator` could crash with `Nil` instance access errors when target actors were freed or destroyed mid-frame before condition evaluations finished. Resolved by adding target validity guards (`if not is_instance_valid(target) or target == null or target.destroyed: return false`) at the start of their `evaluate` methods.
+- **Integer vs Float Parameter Mismatches (`int_value` vs `float_value`)**: Specifying `"float_value": 45.0` in behavior JSON configs for integer-based conditions (e.g., `Target Health`) left their `int_value` property uninitialized (`null`), causing runtime comparison crashes inside the evaluator. Solved by aligning JSON behaviors to use `"int_value"` for integer parameters and `"float_value"` only for floats (like `Target Distance`).
+
+### Tactics & Team Synergy
+- **Knight Dive Strategy via Charge min_distance**: On chokepoint maps where ranged enemies (Orc Shamans) park behind melee grunts, melee characters need to close distance to stop backline sniping. By configuring Godric the Knight's `Charge` action to `Target Distance < 350.0`, he leverages the action's natural `min_distance = 50` constraint to naturally ignore adjacent melee grunts and dive straight into the backline shamans, resolving the threat.
+- **Priority Gating for Focus-constrained Support**: Support/Tank combinations (like Warrior + Wizard) have no healer and must rely on shielding. If the Wizard's `Magic Armor` rule is placed below AoE spells in priority, he spends all focus on damage and leaves the tank to die. Placing `Magic Armor` at Rule #0 guarantees focus is reserved to keep the frontline alive.
+
+---
+
 ## How to add entries
 
 When a sim session reveals something:

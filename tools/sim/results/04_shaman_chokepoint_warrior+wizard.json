@@ -1,0 +1,662 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 60,
+      "damage_healed": 0,
+      "enemies_killed": 7,
+      "focus_generated": 110,
+      "focus_spent": 41,
+      "hp_final": 32.8,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 530,
+        "y": 255
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 88,
+      "damage_healed": 0,
+      "enemies_killed": 6,
+      "focus_generated": 8,
+      "focus_spent": 61,
+      "hp_final": 9.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 367,
+        "y": 312
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Shield Wall"
+              },
+              "condition": {
+                "name": "Target Health",
+                "params": {
+                  "cmp": "<",
+                  "int_value": 45.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+    "max_seconds": 60.0,
+    "notes": "shaman_chokepoint — warrior+wizard. Both stay near the Tower. They engage enemies within 350 units. Knight charges, cleaves, sweeps, and uses Shield Wall when low. Wizard prioritizes Magic Armor to shield targeted allies first, then uses chilling sphere / fire burst, and bolts closest.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_shaman_chokepoint/warrior+wizard.json",
+  "elapsed_seconds": 46.53,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.02
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.51
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#3",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.53
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#6",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.04
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 405,
+        "y": 312
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 12.27
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#6",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 491,
+        "y": 268
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 15.27
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.55
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#3",
+      "at": {
+        "x": 463,
+        "y": 254
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 16.28
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 497,
+        "y": 258
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 18.62
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.06
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 467,
+        "y": 255
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 20.4
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#8",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 510,
+        "y": 266
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.83
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 484,
+        "y": 255
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 23.87
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 475,
+        "y": 257
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 23.88
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 513,
+        "y": 253
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 25.42
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 530,
+        "y": 255
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 26.93
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 569,
+        "y": 253
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 28.75
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 530,
+        "y": 255
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 28.77
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 544,
+        "y": 289
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 32.97
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 661,
+        "y": 276
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 39.15
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 367,
+        "y": 312
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 39.42
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 661,
+        "y": 257
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 42.1
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 367,
+        "y": 312
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 42.3
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 367,
+        "y": 312
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 44.85
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 646,
+        "y": 285
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 45.82
+    },
+    {
+      "kind": "victory",
+      "t": 46.53,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 87.9,
+  "notes": "shaman_chokepoint — warrior+wizard. Both stay near the Tower. They engage enemies within 350 units. Knight charges, cleaves, sweeps, and uses Shield Wall when low. Wizard prioritizes Magic Armor to shield targeted allies first, then uses chilling sphere / fire burst, and bolts closest.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 46,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

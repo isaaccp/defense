@@ -1,0 +1,595 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 87,
+      "damage_healed": 0,
+      "enemies_killed": 7,
+      "focus_generated": 18,
+      "focus_spent": 54,
+      "hp_final": 31.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 337,
+        "y": 204
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 70,
+      "damage_healed": 0,
+      "enemies_killed": 6,
+      "focus_generated": 10,
+      "focus_spent": 44,
+      "hp_final": 34.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 336,
+        "y": 310
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fan of Knives"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+    "max_seconds": 60.0,
+    "notes": "shaman_chokepoint — rogue+wizard. Both stay near the Tower. They only move to enemies within 350 units. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first. Wizard shields, uses chilling sphere / fire burst, and bolts closest.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_shaman_chokepoint/rogue+wizard.json",
+  "elapsed_seconds": 37.21,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.02
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.51
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#3",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 481,
+        "y": 212
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.42
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#6",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.03
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 540,
+        "y": 230
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 13.51
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#5",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#6",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.54
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#3",
+      "at": {
+        "x": 516,
+        "y": 229
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 15.72
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 548,
+        "y": 213
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 18.08
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.05
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 457,
+        "y": 214
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.59
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#7",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 478,
+        "y": 228
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 22.11
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 445,
+        "y": 220
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 23.82
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 474,
+        "y": 212
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 25.68
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 539,
+        "y": 226
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 27.67
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 627,
+        "y": 216
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 29.24
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 327,
+        "y": 202
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 30.12
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 624,
+        "y": 235
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 31.17
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 536,
+        "y": 272
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 34.52
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 630,
+        "y": 262
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 36.49
+    },
+    {
+      "kind": "victory",
+      "t": 37.2,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 46.4,
+  "notes": "shaman_chokepoint — rogue+wizard. Both stay near the Tower. They only move to enemies within 350 units. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first. Wizard shields, uses chilling sphere / fire burst, and bolts closest.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 37,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

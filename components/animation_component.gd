@@ -17,6 +17,8 @@ signal default_animation_finished
 signal animation_finished(anim: String)
 
 func _ready():
+	if not animation_player:
+		return
 	# TODO: Implement this in some trait.
 	# AnimationComponent is used across multiple types of resources.
 	var parent = get_parent()
@@ -32,10 +34,14 @@ func _ready():
 func run():
 	if Engine.is_editor_hint():
 		return
+	if not animation_player:
+		return
 	if animation_player.has_animation(default_auto_animation):
 		animation_player.play(default_auto_animation)
 
 func play_animation(animation: String, wait: bool = true) -> bool:
+	if not animation_player:
+		return false
 	if animation_player.has_animation(animation):
 		animation_player.play(animation)
 		if wait:
@@ -44,6 +50,8 @@ func play_animation(animation: String, wait: bool = true) -> bool:
 	return false
 
 func stop_animation(animation: String) -> bool:
+	if not animation_player:
+		return false
 	if animation_player.current_animation == animation:
 		animation_player.stop()
 		return true

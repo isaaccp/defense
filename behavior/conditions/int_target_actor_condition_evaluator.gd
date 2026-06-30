@@ -30,5 +30,7 @@ func _comparison(value: int) -> bool:
 	return false
 
 func evaluate(target: Actor) -> bool:
+	if not is_instance_valid(target) or target == null or target.destroyed:
+		return false
 	var value = get_value(target)
 	return _comparison(value)

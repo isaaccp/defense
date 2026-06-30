@@ -1,0 +1,603 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 103,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 15,
+      "focus_spent": 74,
+      "hp_final": 16.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 352,
+        "y": 205
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 32,
+      "damage_healed": 120,
+      "enemies_killed": 4,
+      "focus_generated": 24,
+      "focus_spent": 58,
+      "hp_final": 13.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 536,
+        "y": 271
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fan of Knives"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Smite"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Mace Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+    "max_seconds": 60.0,
+    "notes": "shaman_chokepoint — cleric+rogue. Both stay near the Tower. Cleric uses Magic Armor, Heal, Consecrate, and fights close enemies. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_shaman_chokepoint/cleric+rogue.json",
+  "elapsed_seconds": 47.46,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.01
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.5
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#3",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 529,
+        "y": 216
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 10.88
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.03
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#6",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 497,
+        "y": 266
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 14.99
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.54
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#3",
+      "at": {
+        "x": 429,
+        "y": 291
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.14
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.05
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 466,
+        "y": 269
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.28
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 437,
+        "y": 287
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 19.9
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#8",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 478,
+        "y": 279
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 23.05
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 464,
+        "y": 280
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 24.13
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 483,
+        "y": 285
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 26.15
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 475,
+        "y": 283
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 29.1
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 524,
+        "y": 282
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 29.25
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 529,
+        "y": 272
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 32.86
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 536,
+        "y": 271
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 33.08
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 528,
+        "y": 231
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 36.81
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 646,
+        "y": 241
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 38.39
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 352,
+        "y": 205
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 42.93
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#1",
+      "at": {
+        "x": 649,
+        "y": 243
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 43.7
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 352,
+        "y": 205
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 45.8
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 646,
+        "y": 261
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 46.74
+    },
+    {
+      "kind": "victory",
+      "t": 47.45,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 30.3,
+  "notes": "shaman_chokepoint — cleric+rogue. Both stay near the Tower. Cleric uses Magic Armor, Heal, Consecrate, and fights close enemies. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 47,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

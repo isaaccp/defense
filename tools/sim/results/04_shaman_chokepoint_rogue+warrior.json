@@ -1,0 +1,599 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 97,
+      "damage_healed": 0,
+      "enemies_killed": 4,
+      "focus_generated": 12,
+      "focus_spent": 62,
+      "hp_final": 21.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 371,
+        "y": 209
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 45,
+      "damage_healed": 0,
+      "enemies_killed": 6,
+      "focus_generated": 75,
+      "focus_spent": 32,
+      "hp_final": 30.2,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 591,
+        "y": 258
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fan of Knives"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+    "max_seconds": 60.0,
+    "notes": "shaman_chokepoint — rogue+warrior. Both stay near the Tower. They only move to enemies within 350 units. Knight charges, sweeps, and cleaves. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_shaman_chokepoint/rogue+warrior.json",
+  "elapsed_seconds": 44.3,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.01
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.51
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#3",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#6",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.03
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 423,
+        "y": 208
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 12.06
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#6",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 490,
+        "y": 256
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 15.2
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.54
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 461,
+        "y": 272
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 15.6
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 512,
+        "y": 264
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 18.09
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 18.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.05
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 491,
+        "y": 268
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 19.25
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#7",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 513,
+        "y": 263
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 21.58
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 509,
+        "y": 262
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 23.27
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 534,
+        "y": 268
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 23.98
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#1",
+      "at": {
+        "x": 541,
+        "y": 266
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 25.31
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 584,
+        "y": 267
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 26.53
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#1",
+      "at": {
+        "x": 545,
+        "y": 266
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 27.23
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#1",
+      "at": {
+        "x": 591,
+        "y": 258
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 29.13
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 487,
+        "y": 224
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 34.82
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 666,
+        "y": 242
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 36.9
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 371,
+        "y": 209
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 40.0
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#1",
+      "at": {
+        "x": 668,
+        "y": 242
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 40.56
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 371,
+        "y": 209
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 43.03
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 665,
+        "y": 262
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 43.58
+    },
+    {
+      "kind": "victory",
+      "t": 44.29,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 79.9,
+  "notes": "shaman_chokepoint — rogue+warrior. Both stay near the Tower. They only move to enemies within 350 units. Knight charges, sweeps, and cleaves. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 44,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

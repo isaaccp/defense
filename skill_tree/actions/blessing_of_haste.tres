@@ -11,7 +11,7 @@ script = ExtResource("3_7yt24")
 [resource]
 script = ExtResource("4_tc03l")
 action_script = ExtResource("1_ml2ud")
-supported_target_types = Array[int]([2])
+supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_i8vjj")
 tags = Array[int]([0])
 params = SubResource("Resource_vyne0")

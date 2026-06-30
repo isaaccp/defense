@@ -11,7 +11,7 @@ script = ExtResource("3_drqmh")
 [resource]
 script = ExtResource("4_i0lro")
 action_script = ExtResource("1_ncila")
-supported_target_types = Array[int]([2])
+supported_target_types = Array[int]([1])
 attack_type = ExtResource("2_w2ton")
 params = SubResource("Resource_yk814")
 skill_name = &"Poison Dart"

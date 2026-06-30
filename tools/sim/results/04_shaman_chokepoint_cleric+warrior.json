@@ -1,0 +1,575 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 62,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 150,
+      "focus_spent": 32,
+      "hp_final": 22.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 638,
+        "y": 241
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 73,
+      "damage_healed": 150,
+      "enemies_killed": 8,
+      "focus_generated": 24,
+      "focus_spent": 64,
+      "hp_final": 48.0,
+      "hp_max": 50.0,
+      "name": "Puffin",
+      "position": {
+        "x": 669,
+        "y": 250
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 150.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "cleric_chokepoint_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Heal"
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Consecrate"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Smite"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Mace Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/puffin_the_cleric.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+    "max_seconds": 60.0,
+    "notes": "shaman_chokepoint — cleric+warrior. Both characters stay at the Tower (Follow Tower) and hold the chokepoint. They only move to enemies within 350 units, allowing them to engage Shamans but not charge deep initially.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_shaman_chokepoint/cleric+warrior.json",
+  "elapsed_seconds": 44.38,
+  "enemies": {
+    "alive_final": [],
+    "killed": 13,
+    "spawned": 13
+  },
+  "events": [
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.01
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.5
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#3",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#2",
+      "at": {
+        "x": 528,
+        "y": 220
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 10.9
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.03
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#6",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 493,
+        "y": 222
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 15.17
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.54
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#3",
+      "at": {
+        "x": 464,
+        "y": 227
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 17.08
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#7",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 18.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#8",
+      "at": {
+        "x": 900,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.05
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 498,
+        "y": 224
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 19.39
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#5",
+      "at": {
+        "x": 478,
+        "y": 234
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 19.95
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#8",
+      "at": {
+        "x": 920,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 20.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 525,
+        "y": 225
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 22.25
+    },
+    {
+      "actor": "Orc Berserker",
+      "actor_key": "Orc Berserker#4",
+      "at": {
+        "x": 494,
+        "y": 228
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 23.5
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 485,
+        "y": 226
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 23.57
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 525,
+        "y": 225
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 25.59
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 506,
+        "y": 251
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 29.77
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 544,
+        "y": 246
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 29.97
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 570,
+        "y": 245
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 33.14
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 532,
+        "y": 235
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 33.9
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 751,
+        "y": 238
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 34.38
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 638,
+        "y": 241
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 37.4
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#1",
+      "at": {
+        "x": 800,
+        "y": 252
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 38.68
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#0",
+      "at": {
+        "x": 740,
+        "y": 249
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 43.66
+    },
+    {
+      "kind": "victory",
+      "t": 44.37,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 89.9,
+  "notes": "shaman_chokepoint — cleric+warrior. Both characters stay at the Tower (Follow Tower) and hold the chokepoint. They only move to enemies within 350 units, allowing them to engage Shamans but not charge deep initially.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 44,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
+}

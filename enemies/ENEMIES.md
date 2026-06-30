@@ -110,10 +110,28 @@ Slowest enemy in the roster. Fires a homing bolt that tracks its intended target
 
 ---
 
+### Orc Shaman
+**File:** `orc_shaman/orc_shaman.tres`
+
+| Stat | Value |
+|------|-------|
+| HP | 8 |
+| Speed | 30 |
+| Armor | 0 |
+
+**Behavior (in priority order):**
+1. Target Health < 15 → Heal → Self Or Ally (heals 15 HP, cooldown 3s, range 200, lowest health first)
+2. Always → Seeking Bolt → closest Enemy (min range 100, max range 300, 5 arcane damage, homing)
+3. Always → Move To → closest Enemy
+
+Support enemy type. Focuses on keeping other Orc frontliners healthy by casting Heal, and uses Seeking Bolt from range if no allies need healing.
+
+---
+
 ## Notes on Current State
 
-- Every enemy targets the **closest enemy** with no other priority logic.
-- No enemy has conditional behavior (e.g., reacting to low HP, targeting healers, grouping up).
+- Most enemies target the **closest enemy** with no other priority logic, though support enemies like the Orc Shaman target allies by lowest health.
+- The Orc Shaman is the first enemy with conditional behavior, healing allies when their HP falls below 15.
 - The Skeleton Warrior and Skeleton Mage are fully implemented but absent from main level content.
 - All enemies share the same Move To fallback when their primary action is out of range or on cooldown.
 - The Orc Archer is the only enemy that actively maintains distance (kiting behavior).

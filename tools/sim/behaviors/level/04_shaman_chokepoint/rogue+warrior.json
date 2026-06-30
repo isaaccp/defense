@@ -1,0 +1,200 @@
+{
+  "level": "res://levels/main/forest_chokepoint/04_shaman_chokepoint.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "shaman_chokepoint \u2014 rogue+warrior. Both stay near the Tower. They only move to enemies within 350 units. Knight charges, sweeps, and cleaves. Rogue uses Poison Dart, Fan of Knives (when close), and Bow Attack targeting closest first.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "rogue_chokepoint_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Move Away",
+              "params": {
+                "float_value": 100.0
+              }
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 100.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Fan of Knives"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Poison Dart"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 350.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 120.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "knight_chokepoint_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Sweeping Attack"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Charge"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 150.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 350.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 80.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

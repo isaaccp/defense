@@ -1,33 +1,43 @@
 {
   "characters": [
     {
-      "alive": true,
-      "damage_dealt": 90,
+      "alive": false,
+      "damage_dealt": 54,
       "damage_healed": 0,
-      "enemies_killed": 15,
-      "focus_generated": 30,
-      "focus_spent": 52,
-      "hp_final": 45.0,
+      "death_position": {
+        "x": 322,
+        "y": 192
+      },
+      "enemies_killed": 9,
+      "focus_generated": 18,
+      "focus_spent": 18,
+      "hp_final": 0.0,
       "hp_max": 45.0,
+      "killed_by": "Orc Grunt",
       "name": "Larian",
       "position": {
-        "x": 300,
-        "y": 483
+        "x": 322,
+        "y": 192
       }
     },
     {
-      "alive": true,
+      "alive": false,
       "damage_dealt": 0,
-      "damage_healed": 135,
+      "damage_healed": 150,
+      "death_position": {
+        "x": 310,
+        "y": 300
+      },
       "enemies_killed": 0,
-      "focus_generated": 0,
-      "focus_spent": 24,
-      "hp_final": 35.0,
+      "focus_generated": 32,
+      "focus_spent": 38,
+      "hp_final": 0.0,
       "hp_max": 50.0,
+      "killed_by": "Orc Grunt",
       "name": "Puffin",
       "position": {
-        "x": 329,
-        "y": 336
+        "x": 310,
+        "y": 300
       }
     }
   ],
@@ -36,65 +46,11 @@
       {
         "acquired_skills": "full",
         "behavior": {
-          "name": "rogue_fancy_kite",
+          "name": "rogue_snipe_closest",
           "rules": [
             {
               "action": {
-                "name": "Blink Away"
-              },
-              "condition": {
-                "name": "Target Distance",
-                "params": {
-                  "cmp": "<",
-                  "float_value": 150.0
-                }
-              },
-              "sort": {
-                "name": "Closest First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
-                "name": "Multi Shot"
-              },
-              "sort": {
-                "name": "Lowest Health First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
                 "name": "Bow Attack"
-              },
-              "sort": {
-                "name": "Lowest Health First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
-                "name": "Dagger Attack"
-              },
-              "sort": {
-                "name": "Lowest Health First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
-                "name": "Move Away",
-                "params": {
-                  "float_value": 150.0
-                }
               },
               "sort": {
                 "name": "Closest First"
@@ -174,10 +130,53 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/03_waves/cleric+rogue.json",
-  "elapsed_seconds": 33.52,
+  "elapsed_seconds": 44.71,
   "enemies": {
-    "alive_final": [],
-    "killed": 15,
+    "alive_final": [
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 274,
+          "y": 252
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 266,
+          "y": 235
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 250,
+          "y": 223
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 264,
+          "y": 284
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 277,
+          "y": 268
+        }
+      },
+      {
+        "name": "Orc Grunt",
+        "position": {
+          "x": 283,
+          "y": 287
+        }
+      }
+    ],
+    "killed": 9,
     "spawned": 15
   },
   "events": [
@@ -219,51 +218,51 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 3.05
+      "t": 3.04
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 588,
-        "y": 251
+        "x": 559,
+        "y": 248
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 3.16
+      "t": 4.03
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 566,
-        "y": 250
+        "x": 514,
+        "y": 238
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 4.4
+      "t": 5.89
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 523,
-        "y": 243
+        "x": 469,
+        "y": 236
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 6.25
+      "t": 7.74
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 510,
-        "y": 241
+        "x": 425,
+        "y": 230
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 7.25
+      "t": 9.61
     },
     {
       "actor": "Orc Grunt",
@@ -297,18 +296,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
-      "at": {
-        "x": 600,
-        "y": 253
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 11.88
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#2",
+      "actor_key": "Orc Grunt#3",
       "at": {
         "x": 650,
         "y": 260
@@ -320,27 +308,27 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 577,
-        "y": 251
+        "x": 566,
+        "y": 250
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 13.08
+      "t": 12.72
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 534,
-        "y": 244
+        "x": 523,
+        "y": 241
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 14.94
+      "t": 14.58
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
+      "actor_key": "Orc Grunt#2",
       "at": {
         "x": 250,
         "y": 100
@@ -350,18 +338,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
-      "at": {
-        "x": 521,
-        "y": 242
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 15.94
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
+      "actor_key": "Orc Grunt#3",
       "at": {
         "x": 250,
         "y": 100
@@ -371,7 +348,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#2",
+      "actor_key": "Orc Grunt#4",
       "at": {
         "x": 250,
         "y": 100
@@ -381,18 +358,29 @@
     },
     {
       "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 290,
+        "y": 151
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.32
+    },
+    {
+      "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 262,
+        "x": 416,
         "y": 229
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 19.61
+      "t": 18.26
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#2",
+      "actor_key": "Orc Grunt#3",
       "at": {
         "x": 650,
         "y": 260
@@ -402,18 +390,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
-      "at": {
-        "x": 258,
-        "y": 227
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 20.68
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#2",
+      "actor_key": "Orc Grunt#4",
       "at": {
         "x": 650,
         "y": 260
@@ -423,7 +400,7 @@
     },
     {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#3",
+      "actor_key": "Orc Grunt#5",
       "at": {
         "x": 650,
         "y": 260
@@ -432,8 +409,19 @@
       "t": 21.53
     },
     {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 322,
+        "y": 192
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 21.96
+    },
+    {
       "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#4",
+      "actor_key": "Orc Grunt#6",
       "at": {
         "x": 650,
         "y": 260
@@ -442,91 +430,129 @@
       "t": 22.04
     },
     {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
+      "actor": "Larian",
+      "actor_key": "Larian#0",
       "at": {
-        "x": 240,
-        "y": 219
+        "x": 322,
+        "y": 192
       },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 22.08
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 22.76
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#3",
       "at": {
-        "x": 443,
-        "y": 314
+        "x": 550,
+        "y": 238
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 28.26
+      "t": 23.38
     },
     {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#2",
+      "actor": "Larian",
+      "actor_key": "Larian#0",
       "at": {
-        "x": 386,
-        "y": 326
+        "x": 322,
+        "y": 192
       },
-      "killed_by": "Puffin",
+      "killed_by": "Orc Grunt",
       "kind": "death",
-      "t": 30.44
+      "t": 23.4
     },
     {
       "actor": "Puffin",
       "actor_key": "Puffin#1",
       "at": {
-        "x": 329,
-        "y": 336
+        "x": 310,
+        "y": 300
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 32.29
+      "t": 32.63
     },
     {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
+      "actor": "Column",
+      "actor_key": "Column#0",
       "at": {
-        "x": 367,
-        "y": 334
+        "x": 235,
+        "y": 259
       },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 32.43
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 36.15
     },
     {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
       "at": {
-        "x": 363,
-        "y": 317
+        "x": 310,
+        "y": 300
       },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 33.51
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 38.29
     },
     {
-      "kind": "victory",
-      "t": 33.51,
-      "victory_type": "KILL_ALL_ENEMIES"
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 310,
+        "y": 300
+      },
+      "killed_by": "Orc Grunt",
+      "kind": "death",
+      "t": 39.31
+    },
+    {
+      "actor": "Column",
+      "actor_key": "Column#0",
+      "at": {
+        "x": 235,
+        "y": 259
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 41.21
+    },
+    {
+      "kind": "loss",
+      "loss_type": "TOWER_DIED",
+      "t": 44.7
+    },
+    {
+      "actor": "Column",
+      "actor_key": "Column#0",
+      "at": {
+        "x": 235,
+        "y": 259
+      },
+      "killed_by": "Orc Grunt",
+      "kind": "death",
+      "t": 44.7
     }
   ],
-  "loss_type": null,
-  "min_focus": 82.3,
+  "loss_type": "TOWER_DIED",
+  "min_focus": 94.0,
   "notes": "ambush_waves substrate — knight uses preferred-target commitment + Sweeping Attack on Most Enemies Position + Charge; cleric uses Consecrate when 2+ enemies near + heals lowest HP. Tests AoE-trigger frequency under wave spawn pattern (should be much higher than trickle).",
-  "outcome": "victory",
+  "outcome": "loss",
   "towers": [
     {
-      "alive": true,
+      "alive": false,
       "damage_dealt": 0,
       "damage_healed": 0,
+      "death_position": {
+        "x": 235,
+        "y": 259
+      },
       "enemies_killed": 0,
-      "focus_generated": 33,
+      "focus_generated": 44,
       "focus_spent": 0,
-      "hp_final": 190.0,
+      "hp_final": 0.0,
       "hp_max": 200.0,
+      "killed_by": "Orc Grunt",
       "name": "Column",
       "position": {
         "x": 235,
@@ -534,6 +560,6 @@
       }
     }
   ],
-  "victory_type": "KILL_ALL_ENEMIES",
-  "xp_gained": 200
+  "victory_type": null,
+  "xp_gained": 0
 }
