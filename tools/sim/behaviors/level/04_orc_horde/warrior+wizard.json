@@ -1,0 +1,303 @@
+{
+  "level": "res://levels/main/forest_ambush/04_orc_horde.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "orc_horde \u2014 warrior+wizard. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn. Wizard prioritizes Magic Armor to shield targeted allies first.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "knight_horde_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Sweeping Attack"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Shield Wall"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Target Health",
+              "params": {
+                "cmp": "<",
+                "int_value": 45
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Charge"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 350.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 80.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "wizard_horde_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            },
+            "condition": {
+              "name": "Targeted By Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 1
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Chilling Sphere"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 250.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 120.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

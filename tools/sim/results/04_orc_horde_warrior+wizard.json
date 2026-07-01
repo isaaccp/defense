@@ -1,0 +1,731 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 72,
+      "damage_healed": 0,
+      "enemies_killed": 10,
+      "focus_generated": 37,
+      "focus_spent": 37,
+      "hp_final": 60.0,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 316,
+        "y": 143
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 85,
+      "damage_healed": 0,
+      "enemies_killed": 7,
+      "focus_generated": 3,
+      "focus_spent": 39,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 310,
+        "y": 300
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_horde_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Shield Wall"
+              },
+              "condition": {
+                "name": "Target Health",
+                "params": {
+                  "cmp": "<",
+                  "int_value": 45.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_horde_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/04_orc_horde.tscn",
+    "max_seconds": 60.0,
+    "notes": "orc_horde — warrior+wizard. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn. Wizard prioritizes Magic Armor to shield targeted allies first.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_orc_horde/warrior+wizard.json",
+  "elapsed_seconds": 26.98,
+  "enemies": {
+    "alive_final": [],
+    "killed": 17,
+    "spawned": 17
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 510,
+        "y": 244
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 5.54
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 491,
+        "y": 241
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 7.73
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#5",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.03
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 490,
+        "y": 241
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 9.21
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#5",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.54
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#6",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 494,
+        "y": 242
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 11.75
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#7",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.05
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#7",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 12.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 492,
+        "y": 255
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 12.77
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 496,
+        "y": 229
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 12.77
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 496,
+        "y": 241
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 13.78
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#5",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.5
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#6",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Orc Shaman",
+      "kind": "death",
+      "t": 16.26
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#8",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.52
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#8",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 18.51
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.28
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 379,
+        "y": 201
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.83
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 348,
+        "y": 166
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 21.5
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 21.71
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 349,
+        "y": 166
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.73
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 365,
+        "y": 159
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.73
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 23.23
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 26.26
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 351,
+        "y": 157
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 26.28
+    },
+    {
+      "kind": "victory",
+      "t": 26.97,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 74.3,
+  "notes": "orc_horde — warrior+wizard. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn. Wizard prioritizes Magic Armor to shield targeted allies first.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 26,
+      "focus_spent": 0,
+      "hp_final": 130.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

@@ -1,0 +1,762 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 82,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 18,
+      "focus_spent": 56,
+      "hp_final": 28.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 333,
+        "y": 218
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 55,
+      "damage_healed": 0,
+      "enemies_killed": 5,
+      "focus_generated": 40,
+      "focus_spent": 33,
+      "hp_final": 58.5,
+      "hp_max": 60.0,
+      "name": "Godrick",
+      "position": {
+        "x": 399,
+        "y": 207
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_horde_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Move Away",
+                "params": {
+                  "float_value": 100.0
+                }
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 100.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Fan of Knives"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "knight_horde_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Sweeping Attack"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Shield Wall"
+              },
+              "condition": {
+                "name": "Target Health",
+                "params": {
+                  "cmp": "<",
+                  "int_value": 45.0
+                }
+              },
+              "target": {
+                "name": "Self"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Cleave"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Sword Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Charge"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 200.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 350.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 80.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/godric_the_knight.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/04_orc_horde.tscn",
+    "max_seconds": 60.0,
+    "notes": "orc_horde — rogue+warrior. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_orc_horde/rogue+warrior.json",
+  "elapsed_seconds": 22.71,
+  "enemies": {
+    "alive_final": [],
+    "killed": 17,
+    "spawned": 17
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.01
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 563,
+        "y": 262
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 4.03
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.5
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 545,
+        "y": 270
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.03
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.03
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 554,
+        "y": 269
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 7.26
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.55
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.06
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 531,
+        "y": 273
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 9.25
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 526,
+        "y": 257
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 10.17
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 531,
+        "y": 272
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.1
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.08
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#5",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 12.5
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 528,
+        "y": 275
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 12.77
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.97
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#5",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#6",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 485,
+        "y": 255
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 14.74
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 15.59
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 484,
+        "y": 255
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 15.77
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.52
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 16.82
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.66
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 487,
+        "y": 253
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 17.8
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 333,
+        "y": 218
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 18.08
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 18.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 484,
+        "y": 233
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 18.9
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 20.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 434,
+        "y": 224
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 22.1
+    },
+    {
+      "kind": "victory",
+      "t": 22.7,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 77.2,
+  "notes": "orc_horde — rogue+warrior. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 22,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}

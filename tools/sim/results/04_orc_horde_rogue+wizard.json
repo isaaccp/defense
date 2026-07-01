@@ -1,0 +1,694 @@
+{
+  "characters": [
+    {
+      "alive": true,
+      "damage_dealt": 75,
+      "damage_healed": 0,
+      "enemies_killed": 8,
+      "focus_generated": 18,
+      "focus_spent": 45,
+      "hp_final": 31.0,
+      "hp_max": 45.0,
+      "name": "Larian",
+      "position": {
+        "x": 310,
+        "y": 215
+      }
+    },
+    {
+      "alive": true,
+      "damage_dealt": 43,
+      "damage_healed": 0,
+      "enemies_killed": 4,
+      "focus_generated": 3,
+      "focus_spent": 37,
+      "hp_final": 35.0,
+      "hp_max": 35.0,
+      "name": "Bernie",
+      "position": {
+        "x": 310,
+        "y": 300
+      }
+    }
+  ],
+  "config": {
+    "characters": [
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "rogue_horde_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Fan of Knives"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Poison Dart"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Bow Attack"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/larian_the_rogue.tres"
+      },
+      {
+        "acquired_skills": "full",
+        "behavior": {
+          "name": "wizard_horde_defense",
+          "rules": [
+            {
+              "action": {
+                "name": "Magic Armor"
+              },
+              "condition": {
+                "name": "Targeted By Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 1.0
+                }
+              },
+              "sort": {
+                "name": "Lowest Health First"
+              },
+              "target": {
+                "name": "Self Or Ally"
+              }
+            },
+            {
+              "action": {
+                "name": "Chilling Sphere"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Fire Burst"
+              },
+              "condition": {
+                "name": "Can Hit Enemies",
+                "params": {
+                  "cmp": ">=",
+                  "int_value": 2.0
+                }
+              },
+              "target": {
+                "name": "Most Enemies Position"
+              }
+            },
+            {
+              "action": {
+                "name": "Hold Person"
+              },
+              "condition": {
+                "name": "Target Distance",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 250.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Seeking Bolt"
+              },
+              "sort": {
+                "name": "Closest First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Move To"
+              },
+              "condition": {
+                "name": "Target Near Tower",
+                "params": {
+                  "cmp": "<",
+                  "float_value": 120.0
+                }
+              },
+              "sort": {
+                "name": "Closest To Tower First"
+              },
+              "target": {
+                "name": "Enemy"
+              }
+            },
+            {
+              "action": {
+                "name": "Follow",
+                "params": {
+                  "float_value": 120.0
+                }
+              },
+              "target": {
+                "name": "Tower"
+              }
+            }
+          ]
+        },
+        "character": "res://character/playable_characters/bernie_the_wizard.tres"
+      }
+    ],
+    "level": "res://levels/main/forest_ambush/04_orc_horde.tscn",
+    "max_seconds": 60.0,
+    "notes": "orc_horde — rogue+wizard. Both characters stay right next to the Tower (Follow Tower) and act as a double-turret defense. They only engage enemies within 250 units, ensuring they stay grouped and immediately destroy the flank spawn.",
+    "seed": 1.0
+  },
+  "config_path": "tools/sim/behaviors/level/04_orc_horde/rogue+wizard.json",
+  "elapsed_seconds": 22.57,
+  "enemies": {
+    "alive_final": [],
+    "killed": 17,
+    "spawned": 17
+  },
+  "events": [
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 1.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 3.02
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 557,
+        "y": 270
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 4.2
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 4.53
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 5.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 557,
+        "y": 270
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 5.7
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 6.04
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 567,
+        "y": 270
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 6.9
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#2",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 7.55
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 8.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 9.06
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 540,
+        "y": 269
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 9.58
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 552,
+        "y": 275
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 9.94
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 10.57
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 535,
+        "y": 272
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 11.07
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 11.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 12.08
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#5",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 12.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 500,
+        "y": 277
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 12.99
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 13.98
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#5",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#6",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 14.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#7",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 14.53
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 16.23
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#7",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 16.52
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 391,
+        "y": 290
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 16.69
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 436,
+        "y": 285
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 16.71
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 17.46
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 18.3
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 18.51
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
+      "at": {
+        "x": 457,
+        "y": 282
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.35
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 427,
+        "y": 284
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.96
+    },
+    {
+      "actor": "Larian",
+      "actor_key": "Larian#0",
+      "at": {
+        "x": 310,
+        "y": 215
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 20.3
+    },
+    {
+      "actor": "Orc Shaman",
+      "actor_key": "Orc Shaman#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 20.54
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
+      "at": {
+        "x": 429,
+        "y": 285
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 21.95
+    },
+    {
+      "kind": "victory",
+      "t": 22.56,
+      "victory_type": "KILL_ALL_ENEMIES"
+    }
+  ],
+  "loss_type": null,
+  "min_focus": 52.2,
+  "notes": "orc_horde — rogue+wizard. Both characters stay right next to the Tower (Follow Tower) and act as a double-turret defense. They only engage enemies within 250 units, ensuring they stay grouped and immediately destroy the flank spawn.",
+  "outcome": "victory",
+  "towers": [
+    {
+      "alive": true,
+      "damage_dealt": 0,
+      "damage_healed": 0,
+      "enemies_killed": 0,
+      "focus_generated": 22,
+      "focus_spent": 0,
+      "hp_final": 200.0,
+      "hp_max": 200.0,
+      "name": "Column",
+      "position": {
+        "x": 235,
+        "y": 259
+      }
+    }
+  ],
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 200
+}
