@@ -1,7 +1,6 @@
 # Next Steps — Making the Game Fun
 
 ## Priority 1: Core Systems & The Campaign Spine
-- **Map UI rendering:** The actual on-screen map (current node, future nodes, branching). Fundamental to the roguelike progression loop.
 - **Campaign Backbone (Level Content):** We currently lack the full suite of levels. Target an intermediate milestone: **Build 3 levels for each difficulty (1-4), plus one difficulty 5 boss level**. 
   - Note: This involves utilizing unused enemies (Skeleton Warrior & Mage) as needed to create tactical puzzles. 
   - Note: This will likely require fixing/adding some behavior substrate first to ensure classes can beat them.
@@ -34,6 +33,10 @@
 The core problem is that levels feel samey: a plain field, identical enemy behavior, and no meaningful player decisions during setup. The infrastructure for fixing all of this exists — it mainly needs content and one missing UI feature.
 
 **What was recently done:**
+- Orc Shaman support enemy type implemented (healing allies + kiting/bolt kiting).
+- Two Difficulty 4 levels (`04_shaman_chokepoint` and `04_orc_horde`) fully registered and verified.
+- Created and verified 12 simulation behavior config JSONs for all 6 character pairings on both Level 4 levels.
+- Engine robustness bug fixes: resolved Dead Target evaluation crashes, added AnimationComponent null guards, and aligned int vs float parameters in behavior loader.
 - Meta-progression unlocks for Characters and Skill Trees.
 - Standalone UI test scenes correctly populate and load data.
 - Orc Archer now kites (Bow Attack min 100, Move Away max 120, Move To fallback)
