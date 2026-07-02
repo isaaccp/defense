@@ -128,6 +128,26 @@ Support enemy type. Focuses on keeping other Orc frontliners healthy by casting 
 
 ---
 
+### Orc Warlord (Boss)
+**File:** `orc_warlord/orc_warlord.tres`
+
+| Stat | Value |
+|------|-------|
+| HP | 80 |
+| Speed | 25 |
+| Armor | 2 |
+| Scale | 1.5x |
+
+**Behavior (in priority order):**
+1. Target Health < 50 → Shield Wall → Self (reduces damage taken by 50% for 5s, cooldown 10s)
+2. Always → Taunt → closest Enemy (forces players to attack the Warlord for 5s, range 250, cooldown 8s)
+3. Always → Sword Attack → closest Enemy (melee, slashing damage, scaled range and hitbox area)
+4. Always → Move To → closest Enemy
+
+First campaign boss. Extremely tanky command unit who draws aggro from player characters to shield his supporting shamans/archers.
+
+---
+
 ## Notes on Current State
 
 - Most enemies target the **closest enemy** with no other priority logic, though support enemies like the Orc Shaman target allies by lowest health.

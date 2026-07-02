@@ -1,0 +1,310 @@
+{
+  "level": "res://levels/main/forest_ambush/05_boss_warlord.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "boss_warlord \u2014 cleric+warrior. Standard front-line tank and healer layout, pivoting to protect the column and target the boss's support shamans/archers first.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/godric_the_knight.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "knight_horde_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Sweeping Attack"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Shield Wall"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Target Health",
+              "params": {
+                "cmp": "<",
+                "int_value": 45
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Cleave"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Sword Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Charge"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 350.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 80.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/puffin_the_cleric.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "cleric_horde_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Heal"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            }
+          },
+          {
+            "action": {
+              "name": "Consecrate"
+            },
+            "target": {
+              "name": "Self"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 1
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Smite"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Smite"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Mace Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Mace Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 200.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 350.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 80.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

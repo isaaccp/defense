@@ -1,0 +1,416 @@
+[gd_resource type="Resource" script_class="EnemyConfig" format=3]
+
+[ext_resource type="Texture2D" path="res://enemies/orc_warrior/Death.png" id="1_ikwgq"]
+[ext_resource type="Texture2D" path="res://enemies/orc_warrior/Idle.png" id="2_wmq7j"]
+[ext_resource type="Texture2D" path="res://enemies/orc_warrior/Run.png" id="3_rlp3o"]
+[ext_resource type="Script" path="res://components/data_types/animation_component_config.gd" id="4_7ekyf"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="5_xx4ry"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="6_bqaek"]
+[ext_resource type="Script" path="res://components/data_types/attributes_component_config.gd" id="7_i7y5r"]
+[ext_resource type="Script" path="res://components/data_types/behavior_component_config.gd" id="8_3jqx0"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="9_ugtw7"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="10_0knxq"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="11_cjo1v"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="12_8mtpq"]
+[ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="13_08q7g"]
+[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="14_l4khg"]
+[ext_resource type="Script" path="res://components/data_types/hurtbox_component_config.gd" id="15_giect"]
+[ext_resource type="Script" path="res://components/data_types/enemy_config.gd" id="16_id2il"]
+
+[sub_resource type="Animation" id="Animation_wt2ik"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+
+[sub_resource type="Animation" id="Animation_empr5"]
+resource_name = "death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ikwgq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+
+[sub_resource type="Animation" id="Animation_au4fp"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_wmq7j")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8plry"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_rlp3o")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rteiu"]
+_data = {
+&"RESET": SubResource("Animation_wt2ik"),
+&"death": SubResource("Animation_empr5"),
+&"idle": SubResource("Animation_au4fp"),
+&"run": SubResource("Animation_8plry")
+}
+
+[sub_resource type="Resource" id="Resource_yc8nv"]
+script = ExtResource("4_7ekyf")
+animation_library = SubResource("AnimationLibrary_rteiu")
+metadata/_custom_type_script = "uid://yy5k82isui3p"
+
+[sub_resource type="Resource" id="Resource_ys8hy"]
+script = ExtResource("6_bqaek")
+speed = 25.0
+health = 80
+focus = 100
+focus_regen = 10.0
+armor = 2
+
+[sub_resource type="Resource" id="Resource_s1f6u"]
+script = ExtResource("7_i7y5r")
+attributes = SubResource("Resource_ys8hy")
+
+[sub_resource type="Resource" id="Resource_jdprj"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_j7k1b"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_jdprj")
+name = &"Shield Wall"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_be38f"]
+script = ExtResource("13_08q7g")
+defined = true
+value = 50
+
+[sub_resource type="Resource" id="Resource_e7tbt"]
+script = ExtResource("11_cjo1v")
+editor_string = "health {cmp} {int_value}"
+cmp = 1
+int_value = SubResource("Resource_be38f")
+
+[sub_resource type="Resource" id="Resource_wurpy"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_e7tbt")
+name = &"Target Health"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_7ir3x"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_6xnlm"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_7ir3x")
+name = &"Self"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_bxns4"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_6xnlm")
+action = SubResource("Resource_j7k1b")
+conditions = Array[ExtResource("12_8mtpq")]([SubResource("Resource_wurpy")])
+
+[sub_resource type="Resource" id="Resource_uecnl"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_fc4pc"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_uecnl")
+name = &"Taunt"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_cg4js"]
+script = ExtResource("14_l4khg")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_xm5n1"]
+script = ExtResource("11_cjo1v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_cg4js")
+
+[sub_resource type="Resource" id="Resource_6knap"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_xm5n1")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_xoacr"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_6knap")
+action = SubResource("Resource_fc4pc")
+
+[sub_resource type="Resource" id="Resource_t8063"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_x20el"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_t8063")
+name = &"Sword Attack"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_3c11g"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_6knap")
+action = SubResource("Resource_x20el")
+
+[sub_resource type="Resource" id="Resource_6kuty"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_eyt0e"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_6kuty")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_6j1cn"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_6knap")
+action = SubResource("Resource_eyt0e")
+
+[sub_resource type="Resource" id="Resource_0qekf"]
+script = ExtResource("9_ugtw7")
+stored_rules = Array[ExtResource("10_0knxq")]([SubResource("Resource_bxns4"), SubResource("Resource_xoacr"), SubResource("Resource_3c11g"), SubResource("Resource_6j1cn")])
+
+[sub_resource type="Resource" id="Resource_5s8jr"]
+script = ExtResource("8_3jqx0")
+stored_behavior = SubResource("Resource_0qekf")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rteiu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vq0ws"]
+radius = 11.0
+height = 32.0
+
+[sub_resource type="Resource" id="Resource_68yto"]
+script = ExtResource("15_giect")
+collision_shape = SubResource("CapsuleShape2D_vq0ws")
+metadata/_custom_type_script = "uid://v6beg7kksewm"
+
+[resource]
+script = ExtResource("16_id2il")
+name = "Orc Warlord"
+attributes_component_config = SubResource("Resource_s1f6u")
+behavior_component_config = SubResource("Resource_5s8jr")
+collision_shape = SubResource("CircleShape2D_rteiu")
+animation_component_config = SubResource("Resource_yc8nv")
+hurtbox_component_config = SubResource("Resource_68yto")
+visual_scale = 1.5

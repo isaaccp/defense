@@ -1,0 +1,255 @@
+{
+  "level": "res://levels/main/forest_ambush/05_boss_warlord.tscn",
+  "seed": 1,
+  "max_seconds": 60,
+  "notes": "boss_warlord \u2014 rogue+wizard. Both characters stay right next to the Tower (Follow Tower) and act as a double-turret defense. They only engage enemies within 250 units, ensuring they stay grouped and immediately destroy the flank spawn.",
+  "characters": [
+    {
+      "character": "res://character/playable_characters/larian_the_rogue.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "rogue_horde_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Fan of Knives"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Poison Dart"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 250.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Poison Dart"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 250.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Bow Attack"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 120.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "character": "res://character/playable_characters/bernie_the_wizard.tres",
+      "acquired_skills": "full",
+      "behavior": {
+        "name": "wizard_horde_defense",
+        "rules": [
+          {
+            "action": {
+              "name": "Magic Armor"
+            },
+            "target": {
+              "name": "Self Or Ally"
+            },
+            "sort": {
+              "name": "Lowest Health First"
+            },
+            "condition": {
+              "name": "Targeted By Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 1
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Chilling Sphere"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Fire Burst"
+            },
+            "target": {
+              "name": "Most Enemies Position"
+            },
+            "condition": {
+              "name": "Can Hit Enemies",
+              "params": {
+                "cmp": ">=",
+                "int_value": 2
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Hold Person"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            },
+            "condition": {
+              "name": "Target Distance",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 250.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Seeking Bolt"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest First"
+            }
+          },
+          {
+            "action": {
+              "name": "Move To"
+            },
+            "target": {
+              "name": "Enemy"
+            },
+            "sort": {
+              "name": "Closest To Tower First"
+            },
+            "condition": {
+              "name": "Target Near Tower",
+              "params": {
+                "cmp": "<",
+                "float_value": 120.0
+              }
+            }
+          },
+          {
+            "action": {
+              "name": "Follow",
+              "params": {
+                "float_value": 120.0
+              }
+            },
+            "target": {
+              "name": "Tower"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
