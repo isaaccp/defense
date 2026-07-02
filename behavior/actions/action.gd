@@ -191,6 +191,18 @@ func target_position(position_type: Target.PositionType = Target.PositionType.DE
 	var action_target = ActionTarget.new(target, position_type)
 	return action_target.target_position()
 
+func spawn_melee_attack(scene: PackedScene, offset_distance: float) -> ActionScene:
+	var spawned = scene.instantiate() as ActionScene
+	_initialize_action_scene(spawned)
+	var dir = attack_direction()
+	spawned.look_at(spawned.position + dir)
+	action_sprites.add_child(spawned)
+	
+	# Scale the world offset and action scene by the actor's visual scale
+	var scaled_offset = offset_distance * actor.visual_scale
+	spawned.global_position = actor.attack_position() + dir * scaled_offset
+	return spawned
+
 # True if the current target is still within this action's [min_distance,
 # max_distance] from the actor. Handy for channeled / multi-tick actions
 # that need to verify the target hasn't drifted out of range between checks.

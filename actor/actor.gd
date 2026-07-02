@@ -13,6 +13,7 @@ var stopped = false
 
 # True if destroyed, subclasses should set it.
 var destroyed = false
+var visual_scale: float = 1.0
 
 func get_component_or_die(component_class: Object) -> Node:
 	var component = get_component_or_null(component_class)

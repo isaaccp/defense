@@ -7,3 +7,4 @@ class_name UnitConfig
 @export var collision_shape: Shape2D
 @export var animation_component_config: AnimationComponentConfig
 @export var hurtbox_component_config: HurtboxComponentConfig
+@export var visual_scale: float = 1.0

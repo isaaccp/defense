@@ -15,6 +15,8 @@ signal died
 func _ready():
 	if Engine.is_editor_hint():
 		return
+	if config:
+		visual_scale = config.visual_scale
 	var death_handler_component: DeathHandlerComponent = get_component_or_die(DeathHandlerComponent)
 	death_handler_component.died.connect(_on_died)
 

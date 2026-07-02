@@ -14,6 +14,8 @@ func _ready():
 		actor_name = enemy_config.name
 		var collision_shape_2d = $CollisionShape2D
 		collision_shape_2d.shape = enemy_config.collision_shape
+		if visual_scale != 1.0:
+			self.scale = Vector2(visual_scale, visual_scale)
 	$PickableComponent.selected.connect(selected.emit)
 
 func _get_configuration_warnings():
