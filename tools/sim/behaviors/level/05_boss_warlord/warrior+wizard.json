@@ -222,24 +222,6 @@
           },
           {
             "action": {
-              "name": "Hold Person"
-            },
-            "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
-            },
-            "condition": {
-              "name": "Target Distance",
-              "params": {
-                "cmp": "<",
-                "float_value": 120.0
-              }
-            }
-          },
-          {
-            "action": {
               "name": "Seeking Bolt"
             },
             "target": {

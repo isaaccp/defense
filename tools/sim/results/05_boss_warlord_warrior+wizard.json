@@ -2,26 +2,26 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 78,
+      "damage_dealt": 113,
       "damage_healed": 0,
-      "enemies_killed": 6,
-      "focus_generated": 110,
-      "focus_spent": 36,
-      "hp_final": 35.7,
+      "enemies_killed": 9,
+      "focus_generated": 130,
+      "focus_spent": 57,
+      "hp_final": 29.9,
       "hp_max": 60.0,
       "name": "Godrick",
       "position": {
-        "x": 539,
-        "y": 247
+        "x": 520,
+        "y": 249
       }
     },
     {
       "alive": true,
-      "damage_dealt": 118,
+      "damage_dealt": 93,
       "damage_healed": 0,
-      "enemies_killed": 7,
-      "focus_generated": 15,
-      "focus_spent": 82,
+      "enemies_killed": 5,
+      "focus_generated": 5,
+      "focus_spent": 49,
       "hp_final": 35.0,
       "hp_max": 35.0,
       "name": "Bernie",
@@ -250,24 +250,6 @@
             },
             {
               "action": {
-                "name": "Hold Person"
-              },
-              "condition": {
-                "name": "Target Distance",
-                "params": {
-                  "cmp": "<",
-                  "float_value": 120.0
-                }
-              },
-              "sort": {
-                "name": "Closest First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
                 "name": "Seeking Bolt"
               },
               "condition": {
@@ -335,18 +317,10 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/warrior+wizard.json",
-  "elapsed_seconds": 60.0,
+  "elapsed_seconds": 36.61,
   "enemies": {
-    "alive_final": [
-      {
-        "name": "Orc Warlord",
-        "position": {
-          "x": 387,
-          "y": 290
-        }
-      }
-    ],
-    "killed": 13,
+    "alive_final": [],
+    "killed": 14,
     "spawned": 14
   },
   "events": [
@@ -399,7 +373,7 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 5.57
+      "t": 5.55
     },
     {
       "actor": "Orc Grunt",
@@ -443,30 +417,41 @@
       "t": 8.51
     },
     {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 522,
-        "y": 245
+        "x": 507,
+        "y": 239
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 9.55
+      "t": 10.14
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 515,
-        "y": 220
+        "x": 504,
+        "y": 223
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 10.87
+      "t": 11.15
+    },
+    {
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
+      "at": {
+        "x": 507,
+        "y": 256
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 11.15
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#3",
+      "actor_key": "Orc Berserker#2",
       "at": {
         "x": 650,
         "y": 260
@@ -476,47 +461,36 @@
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#2",
+      "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 475,
+        "x": 474,
         "y": 245
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 11.55
+      "t": 11.59
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
         "x": 506,
-        "y": 234
+        "y": 239
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 12.37
-    },
-    {
-      "actor": "Orc Warrior",
-      "actor_key": "Orc Warrior#0",
-      "at": {
-        "x": 503,
-        "y": 254
-      },
-      "killed_by": "Godrick",
-      "kind": "death",
-      "t": 14.15
+      "t": 12.17
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#1",
+      "actor_key": "Orc Berserker#0",
       "at": {
-        "x": 478,
-        "y": 237
+        "x": 487,
+        "y": 240
       },
-      "killed_by": "Bernie",
+      "killed_by": "",
       "kind": "death",
-      "t": 14.57
+      "t": 13.39
     },
     {
       "actor": "Orc Warlord",
@@ -567,7 +541,7 @@
       },
       "killed_by": "",
       "kind": "death",
-      "t": 19.3
+      "t": 19.27
     },
     {
       "actor": "Orc Archer",
@@ -577,7 +551,7 @@
         "y": 100
       },
       "kind": "spawn",
-      "t": 19.51
+      "t": 19.52
     },
     {
       "actor": "Orc Warrior",
@@ -593,23 +567,12 @@
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 561,
-        "y": 250
+        "x": 542,
+        "y": 251
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 19.75
-    },
-    {
-      "actor": "Godrick",
-      "actor_key": "Godrick#0",
-      "at": {
-        "x": 539,
-        "y": 247
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 19.92
+      "t": 19.84
     },
     {
       "actor": "Orc Archer",
@@ -620,64 +583,80 @@
       },
       "killed_by": "",
       "kind": "death",
-      "t": 21.73
+      "t": 21.72
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 576,
-        "y": 244
+        "x": 559,
+        "y": 249
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 21.79
+      "t": 22.02
     },
     {
       "actor": "Godrick",
       "actor_key": "Godrick#0",
       "at": {
-        "x": 539,
-        "y": 247
+        "x": 520,
+        "y": 249
       },
-      "hp_pct": 25,
+      "hp_pct": 50,
       "kind": "low_hp",
-      "t": 21.92
-    },
-    {
-      "actor": "Godrick",
-      "actor_key": "Godrick#0",
-      "at": {
-        "x": 539,
-        "y": 247
-      },
-      "killed_by": "Orc Warlord",
-      "kind": "death",
-      "t": 24.3
+      "t": 25.14
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 568,
-        "y": 245
+        "x": 556,
+        "y": 248
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 26.09
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 520,
+        "y": 249
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 34.54
+    },
+    {
+      "actor": "Orc Warlord",
+      "actor_key": "Orc Warlord#0",
+      "at": {
+        "x": 555,
+        "y": 266
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 25.32
+      "t": 35.99
+    },
+    {
+      "kind": "victory",
+      "t": 36.6,
+      "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 81.4,
+  "min_focus": 89.0,
   "notes": "boss_warlord — warrior+wizard. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn. Wizard prioritizes Magic Armor to shield targeted allies first.",
-  "outcome": "timeout",
+  "outcome": "victory",
   "towers": [
     {
       "alive": true,
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 59,
+      "focus_generated": 36,
       "focus_spent": 0,
       "hp_final": 185.0,
       "hp_max": 200.0,
@@ -688,6 +667,6 @@
       }
     }
   ],
-  "victory_type": null,
-  "xp_gained": 0
+  "victory_type": "KILL_ALL_ENEMIES",
+  "xp_gained": 150
 }

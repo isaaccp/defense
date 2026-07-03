@@ -111,6 +111,7 @@ Every skill slot (`action`, `target`, `sort`, `condition`) is an object with `na
 - `condition` is omitted when the rule should fire unconditionally. (There is no longer a separate "Always" condition skill — an absent condition means always.)
 - `conditions` (array, ANDed) can be used instead of `condition` for compound rules.
 - Skill `name` values match the in-game skill name (`Heal`, `Sword Attack`, etc.) — same identifiers the editor uses, resolved via `SkillManager`.
+- **Class-Appropriate Actions**: Ensure that behavior rules only assign class-appropriate actions to characters (e.g., only assign Cleric skills to a Cleric, Wizard skills to a Wizard). Refer to the character's `.tres` definition file (under `character/playable_characters/`) and check their `available_skill_trees` field to see which skill trees they have access to. The simulator does not restrict or validate class alignment at parse time, so cross-class assignments (e.g. giving `Hold Person` to a Wizard) will execute but are illegal in live gameplay.
 
 **Why JSON not `.tres`:** `.tres` behavior files have many cross-referenced sub_resource IDs, ext_resource ordering, etc. — hand-authoring them produces syntax-error churn. JSON is grep-friendly, diff-friendly, easy for the AI to author. If a sim experiment produces a behavior worth keeping in production, the user recreates it as a proper `.tres` in the editor.
 

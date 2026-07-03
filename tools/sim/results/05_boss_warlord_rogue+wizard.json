@@ -2,10 +2,10 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 96,
+      "damage_dealt": 98,
       "damage_healed": 0,
-      "enemies_killed": 7,
-      "focus_generated": 21,
+      "enemies_killed": 8,
+      "focus_generated": 24,
       "focus_spent": 83,
       "hp_final": 45.0,
       "hp_max": 45.0,
@@ -17,17 +17,17 @@
     },
     {
       "alive": true,
-      "damage_dealt": 88,
+      "damage_dealt": 78,
       "damage_healed": 0,
-      "enemies_killed": 6,
+      "enemies_killed": 5,
       "focus_generated": 8,
-      "focus_spent": 51,
-      "hp_final": 32.0,
+      "focus_spent": 43,
+      "hp_final": 18.0,
       "hp_max": 35.0,
       "name": "Bernie",
       "position": {
-        "x": 340,
-        "y": 289
+        "x": 337,
+        "y": 292
       }
     }
   ],
@@ -202,24 +202,6 @@
             },
             {
               "action": {
-                "name": "Hold Person"
-              },
-              "condition": {
-                "name": "Target Distance",
-                "params": {
-                  "cmp": "<",
-                  "float_value": 120.0
-                }
-              },
-              "sort": {
-                "name": "Closest First"
-              },
-              "target": {
-                "name": "Enemy"
-              }
-            },
-            {
-              "action": {
                 "name": "Seeking Bolt"
               },
               "condition": {
@@ -287,7 +269,7 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/rogue+wizard.json",
-  "elapsed_seconds": 36.26,
+  "elapsed_seconds": 36.21,
   "enemies": {
     "alive_final": [],
     "killed": 14,
@@ -323,7 +305,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 4.2
+      "t": 4.19
     },
     {
       "actor": "Orc Warrior",
@@ -354,7 +336,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 5.72
+      "t": 5.7
     },
     {
       "actor": "Orc Grunt",
@@ -385,11 +367,11 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 7.9
+      "t": 7.88
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#4",
+      "actor_key": "Orc Berserker#3",
       "at": {
         "x": 650,
         "y": 260
@@ -401,19 +383,19 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 561,
+        "x": 560,
         "y": 265
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 8.9
+      "t": 8.91
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 546,
-        "y": 279
+        "x": 545,
+        "y": 278
       },
       "killed_by": "Bernie",
       "kind": "death",
@@ -423,12 +405,12 @@
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 431,
-        "y": 296
+        "x": 430,
+        "y": 297
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 11.3
+      "t": 11.28
     },
     {
       "actor": "Orc Berserker",
@@ -445,22 +427,22 @@
       "actor_key": "Orc Warrior#0",
       "at": {
         "x": 454,
-        "y": 273
+        "y": 274
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 13.34
+      "t": 13.33
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#0",
       "at": {
-        "x": 409,
+        "x": 410,
         "y": 288
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 14.24
+      "t": 14.23
     },
     {
       "actor": "Orc Warlord",
@@ -511,7 +493,18 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 18.73
+      "t": 18.72
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 489,
+        "y": 278
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 19.5
     },
     {
       "actor": "Orc Archer",
@@ -534,17 +527,6 @@
       "t": 19.52
     },
     {
-      "actor": "Orc Warrior",
-      "actor_key": "Orc Warrior#1",
-      "at": {
-        "x": 488,
-        "y": 279
-      },
-      "killed_by": "Bernie",
-      "kind": "death",
-      "t": 19.53
-    },
-    {
       "actor": "Orc Archer",
       "actor_key": "Orc Archer#2",
       "at": {
@@ -553,49 +535,60 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 20.95
+      "t": 20.93
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 399,
+        "x": 366,
         "y": 299
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 28.86
+      "t": 28.2
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 361,
-        "y": 298
+        "x": 358,
+        "y": 295
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 30.78
+      "t": 28.91
+    },
+    {
+      "actor": "Bernie",
+      "actor_key": "Bernie#1",
+      "at": {
+        "x": 337,
+        "y": 292
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 34.78
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 349,
-        "y": 286
+        "x": 347,
+        "y": 289
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 35.63
+      "t": 35.59
     },
     {
       "kind": "victory",
-      "t": 36.25,
+      "t": 36.21,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 22.4,
+  "min_focus": 34.0,
   "notes": "boss_warlord — rogue+wizard. Both characters stay right next to the Tower (Follow Tower) and act as a double-turret defense. They only engage enemies within 250 units, ensuring they stay grouped and immediately destroy the flank spawn.",
   "outcome": "victory",
   "towers": [
