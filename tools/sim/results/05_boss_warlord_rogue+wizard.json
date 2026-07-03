@@ -2,12 +2,12 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 88,
+      "damage_dealt": 96,
       "damage_healed": 0,
-      "enemies_killed": 8,
-      "focus_generated": 24,
-      "focus_spent": 82,
-      "hp_final": 44.0,
+      "enemies_killed": 7,
+      "focus_generated": 21,
+      "focus_spent": 83,
+      "hp_final": 45.0,
       "hp_max": 45.0,
       "name": "Larian",
       "position": {
@@ -17,17 +17,17 @@
     },
     {
       "alive": true,
-      "damage_dealt": 69,
+      "damage_dealt": 88,
       "damage_healed": 0,
-      "enemies_killed": 4,
-      "focus_generated": 7,
-      "focus_spent": 50,
-      "hp_final": 35.0,
+      "enemies_killed": 6,
+      "focus_generated": 8,
+      "focus_spent": 51,
+      "hp_final": 32.0,
       "hp_max": 35.0,
       "name": "Bernie",
       "position": {
-        "x": 310,
-        "y": 300
+        "x": 340,
+        "y": 289
       }
     }
   ],
@@ -287,11 +287,11 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/rogue+wizard.json",
-  "elapsed_seconds": 36.71,
+  "elapsed_seconds": 36.26,
   "enemies": {
     "alive_final": [],
-    "killed": 12,
-    "spawned": 12
+    "killed": 14,
+    "spawned": 14
   },
   "events": [
     {
@@ -323,7 +323,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 4.21
+      "t": 4.2
     },
     {
       "actor": "Orc Warrior",
@@ -354,7 +354,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 5.7
+      "t": 5.72
     },
     {
       "actor": "Orc Grunt",
@@ -381,15 +381,15 @@
       "actor_key": "Orc Warrior#0",
       "at": {
         "x": 560,
-        "y": 272
+        "y": 271
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 7.88
+      "t": 7.9
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#3",
+      "actor_key": "Orc Berserker#4",
       "at": {
         "x": 650,
         "y": 260
@@ -401,34 +401,34 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 560,
+        "x": 561,
         "y": 265
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 8.92
+      "t": 8.9
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 542,
-        "y": 285
+        "x": 546,
+        "y": 279
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 9.87
+      "t": 9.86
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 419,
-        "y": 281
+        "x": 431,
+        "y": 296
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 11.24
+      "t": 11.3
     },
     {
       "actor": "Orc Berserker",
@@ -444,19 +444,19 @@
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 464,
-        "y": 289
+        "x": 454,
+        "y": 273
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 13.08
+      "t": 13.34
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#0",
       "at": {
         "x": 409,
-        "y": 287
+        "y": 288
       },
       "killed_by": "Larian",
       "kind": "death",
@@ -490,70 +490,112 @@
         "y": 100
       },
       "kind": "spawn",
-      "t": 17.5
+      "t": 17.51
     },
     {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#3",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 17.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 18.73
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
       "at": {
         "x": 250,
         "y": 100
       },
       "kind": "spawn",
-      "t": 17.5
+      "t": 19.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.52
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 531,
-        "y": 273
+        "x": 488,
+        "y": 279
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 18.37
+      "t": 19.53
     },
     {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#2",
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
       "at": {
         "x": 250,
         "y": 100
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 19.69
+      "t": 20.95
     },
     {
-      "actor": "Orc Archer",
-      "actor_key": "Orc Archer#1",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 250,
-        "y": 100
+        "x": 399,
+        "y": 299
       },
-      "killed_by": "Bernie",
+      "killed_by": "Larian",
       "kind": "death",
-      "t": 20.3
+      "t": 28.86
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 361,
+        "y": 298
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 30.78
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 387,
-        "y": 290
+        "x": 349,
+        "y": 286
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 36.09
+      "t": 35.63
     },
     {
       "kind": "victory",
-      "t": 36.7,
+      "t": 36.25,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 27.1,
+  "min_focus": 22.4,
   "notes": "boss_warlord — rogue+wizard. Both characters stay right next to the Tower (Follow Tower) and act as a double-turret defense. They only engage enemies within 250 units, ensuring they stay grouped and immediately destroy the flank spawn.",
   "outcome": "victory",
   "towers": [

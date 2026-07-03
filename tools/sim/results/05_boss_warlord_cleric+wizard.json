@@ -2,11 +2,11 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 94,
+      "damage_dealt": 85,
       "damage_healed": 0,
-      "enemies_killed": 5,
-      "focus_generated": 20,
-      "focus_spent": 71,
+      "enemies_killed": 6,
+      "focus_generated": 27,
+      "focus_spent": 72,
       "hp_final": 35.0,
       "hp_max": 35.0,
       "name": "Bernie",
@@ -17,17 +17,17 @@
     },
     {
       "alive": true,
-      "damage_dealt": 102,
-      "damage_healed": 180,
-      "enemies_killed": 7,
-      "focus_generated": 9,
-      "focus_spent": 109,
-      "hp_final": 50.0,
+      "damage_dealt": 133,
+      "damage_healed": 210,
+      "enemies_killed": 8,
+      "focus_generated": 12,
+      "focus_spent": 126,
+      "hp_final": 39.0,
       "hp_max": 50.0,
       "name": "Puffin",
       "position": {
-        "x": 313,
-        "y": 271
+        "x": 333,
+        "y": 277
       }
     }
   ],
@@ -321,11 +321,19 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/cleric+wizard.json",
-  "elapsed_seconds": 53.08,
+  "elapsed_seconds": 60.01,
   "enemies": {
-    "alive_final": [],
-    "killed": 12,
-    "spawned": 12
+    "alive_final": [
+      {
+        "name": "Orc Warlord",
+        "position": {
+          "x": 371,
+          "y": 290
+        }
+      }
+    ],
+    "killed": 13,
+    "spawned": 14
   },
   "events": [
     {
@@ -356,7 +364,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 4.51
+      "t": 4.5
     },
     {
       "actor": "Orc Grunt",
@@ -377,7 +385,7 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 5.26
+      "t": 5.28
     },
     {
       "actor": "Orc Grunt",
@@ -397,7 +405,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 6.52
+      "t": 6.51
     },
     {
       "actor": "Orc Berserker",
@@ -418,18 +426,18 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 9.06
+      "t": 9.08
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 529,
-        "y": 249
+        "x": 526,
+        "y": 247
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 9.48
+      "t": 9.58
     },
     {
       "actor": "Orc Berserker",
@@ -445,30 +453,30 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 447,
-        "y": 274
+        "x": 446,
+        "y": 273
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 12.35
+      "t": 12.36
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
         "x": 465,
-        "y": 253
+        "y": 254
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 12.35
+      "t": 12.36
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 363,
-        "y": 289
+        "x": 364,
+        "y": 288
       },
       "killed_by": "Bernie",
       "kind": "death",
@@ -483,7 +491,7 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 15.38
+      "t": 15.4
     },
     {
       "actor": "Orc Warlord",
@@ -513,28 +521,28 @@
         "y": 100
       },
       "kind": "spawn",
-      "t": 17.5
+      "t": 17.51
     },
     {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#4",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
       "at": {
-        "x": 250,
-        "y": 100
+        "x": 650,
+        "y": 260
       },
       "kind": "spawn",
-      "t": 17.5
+      "t": 17.51
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 384,
-        "y": 278
+        "x": 382,
+        "y": 279
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 17.62
+      "t": 17.63
     },
     {
       "actor": "Orc Archer",
@@ -543,71 +551,108 @@
         "x": 250,
         "y": 100
       },
-      "killed_by": "Orc Shaman",
+      "killed_by": "",
       "kind": "death",
-      "t": 18.75
+      "t": 18.7
     },
     {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#2",
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
       "at": {
         "x": 250,
         "y": 100
       },
-      "killed_by": "Orc Warlord",
+      "kind": "spawn",
+      "t": 19.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#4",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.52
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
       "kind": "death",
-      "t": 21.68
+      "t": 21.11
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 496,
+        "y": 271
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 22.93
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 363,
-        "y": 279
+        "x": 391,
+        "y": 276
       },
       "killed_by": "Puffin",
       "kind": "death",
-      "t": 36.0
+      "t": 24.91
     },
     {
       "actor": "Puffin",
       "actor_key": "Puffin#1",
       "at": {
-        "x": 324,
-        "y": 273
+        "x": 333,
+        "y": 277
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 46.0
+      "t": 33.99
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 372,
+        "y": 269
+      },
+      "killed_by": "Orc Warlord",
+      "kind": "death",
+      "t": 39.48
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 359,
-        "y": 258
+        "x": 371,
+        "y": 290
       },
       "killed_by": "Puffin",
       "kind": "death",
-      "t": 52.46
-    },
-    {
-      "kind": "victory",
-      "t": 53.07,
-      "victory_type": "KILL_ALL_ENEMIES"
+      "t": 59.9
     }
   ],
   "loss_type": null,
   "min_focus": 0.0,
   "notes": "boss_warlord — cleric+wizard. Wizard stays next to the Tower but uses Move Away to kite melee rushers when they get within 90 units, keeping himself within the Cleric's 200-unit healing range while avoiding melee strikes.",
-  "outcome": "victory",
+  "outcome": "timeout",
   "towers": [
     {
       "alive": true,
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 53,
+      "focus_generated": 59,
       "focus_spent": 0,
       "hp_final": 200.0,
       "hp_max": 200.0,
@@ -618,6 +663,6 @@
       }
     }
   ],
-  "victory_type": "KILL_ALL_ENEMIES",
-  "xp_gained": 100
+  "victory_type": null,
+  "xp_gained": 0
 }

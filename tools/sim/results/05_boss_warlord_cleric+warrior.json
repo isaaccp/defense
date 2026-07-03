@@ -2,32 +2,32 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 116,
+      "damage_dealt": 136,
       "damage_healed": 0,
-      "enemies_killed": 6,
-      "focus_generated": 185,
-      "focus_spent": 65,
+      "enemies_killed": 8,
+      "focus_generated": 170,
+      "focus_spent": 74,
       "hp_final": 60.0,
       "hp_max": 60.0,
       "name": "Godrick",
       "position": {
-        "x": 536,
-        "y": 247
+        "x": 524,
+        "y": 245
       }
     },
     {
       "alive": true,
-      "damage_dealt": 74,
-      "damage_healed": 165,
+      "damage_dealt": 82,
+      "damage_healed": 180,
       "enemies_killed": 6,
-      "focus_generated": 10,
-      "focus_spent": 48,
-      "hp_final": 50.0,
+      "focus_generated": 19,
+      "focus_spent": 58,
+      "hp_final": 46.0,
       "hp_max": 50.0,
       "name": "Puffin",
       "position": {
-        "x": 481,
-        "y": 227
+        "x": 471,
+        "y": 223
       }
     }
   ],
@@ -342,11 +342,11 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/cleric+warrior.json",
-  "elapsed_seconds": 42.64,
+  "elapsed_seconds": 47.15,
   "enemies": {
     "alive_final": [],
-    "killed": 12,
-    "spawned": 12
+    "killed": 14,
+    "spawned": 14
   },
   "events": [
     {
@@ -367,7 +367,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 3.02
+      "t": 3.01
     },
     {
       "actor": "Orc Grunt",
@@ -378,7 +378,7 @@
       },
       "killed_by": "",
       "kind": "death",
-      "t": 3.24
+      "t": 3.25
     },
     {
       "actor": "Orc Warrior",
@@ -388,7 +388,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 4.51
+      "t": 4.5
     },
     {
       "actor": "Orc Grunt",
@@ -429,7 +429,7 @@
       },
       "killed_by": "",
       "kind": "death",
-      "t": 7.47
+      "t": 7.46
     },
     {
       "actor": "Orc Berserker",
@@ -450,7 +450,7 @@
       },
       "killed_by": "Puffin",
       "kind": "death",
-      "t": 9.85
+      "t": 9.84
     },
     {
       "actor": "Orc Berserker",
@@ -461,22 +461,11 @@
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 10.8
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#1",
-      "at": {
-        "x": 502,
-        "y": 248
-      },
-      "killed_by": "Godrick",
-      "kind": "death",
-      "t": 11.16
+      "t": 11.24
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#2",
+      "actor_key": "Orc Berserker#4",
       "at": {
         "x": 650,
         "y": 260
@@ -486,40 +475,40 @@
     },
     {
       "actor": "Orc Warrior",
-      "actor_key": "Orc Warrior#1",
+      "actor_key": "Orc Warrior#2",
       "at": {
-        "x": 502,
-        "y": 245
+        "x": 503,
+        "y": 248
       },
-      "killed_by": "Puffin",
+      "killed_by": "Godrick",
       "kind": "death",
-      "t": 12.18
+      "t": 12.26
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 464,
+        "y": 239
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 14.4
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#1",
+      "actor_key": "Orc Berserker#2",
       "at": {
         "x": 473,
         "y": 241
       },
-      "killed_by": "Godrick",
+      "killed_by": "Puffin",
       "kind": "death",
-      "t": 13.71
-    },
-    {
-      "actor": "Orc Grunt",
-      "actor_key": "Orc Grunt#0",
-      "at": {
-        "x": 498,
-        "y": 226
-      },
-      "killed_by": "Godrick",
-      "kind": "death",
-      "t": 14.98
+      "t": 14.82
     },
     {
       "actor": "Orc Warlord",
-      "actor_key": "Orc Warlord#0",
+      "actor_key": "Orc Warlord#3",
       "at": {
         "x": 650,
         "y": 260
@@ -529,7 +518,7 @@
     },
     {
       "actor": "Orc Warrior",
-      "actor_key": "Orc Warrior#1",
+      "actor_key": "Orc Warrior#4",
       "at": {
         "x": 650,
         "y": 260
@@ -538,88 +527,163 @@
       "t": 15.51
     },
     {
-      "actor": "Orc Archer",
-      "actor_key": "Orc Archer#2",
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 250,
-        "y": 100
+        "x": 500,
+        "y": 227
       },
-      "kind": "spawn",
-      "t": 17.51
-    },
-    {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#3",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "kind": "spawn",
-      "t": 17.51
-    },
-    {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#3",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "killed_by": "Orc Shaman",
+      "killed_by": "Puffin",
       "kind": "death",
-      "t": 20.38
+      "t": 15.83
     },
     {
-      "actor": "Godrick",
-      "actor_key": "Godrick#0",
+      "actor": "Orc Grunt",
+      "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 536,
-        "y": 247
+        "x": 490,
+        "y": 211
       },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 25.09
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 15.83
     },
     {
       "actor": "Orc Archer",
       "actor_key": "Orc Archer#2",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 17.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 17.51
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 19.51
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 545,
+        "y": 248
+      },
+      "killed_by": "Puffin",
+      "kind": "death",
+      "t": 20.63
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
       "at": {
         "x": 250,
         "y": 100
       },
       "killed_by": "",
       "kind": "death",
-      "t": 25.67
+      "t": 21.8
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#2",
+      "at": {
+        "x": 556,
+        "y": 263
+      },
+      "killed_by": "Godrick",
+      "kind": "death",
+      "t": 23.68
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#0",
+      "at": {
+        "x": 524,
+        "y": 245
+      },
+      "hp_pct": 25,
+      "kind": "low_hp",
+      "t": 25.93
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#1",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "killed_by": "",
+      "kind": "death",
+      "t": 26.06
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 556,
-        "y": 249
+        "x": 558,
+        "y": 265
       },
       "killed_by": "Orc Warlord",
       "kind": "death",
-      "t": 29.04
+      "t": 27.5
+    },
+    {
+      "actor": "Puffin",
+      "actor_key": "Puffin#1",
+      "at": {
+        "x": 490,
+        "y": 220
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 44.73
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 575,
-        "y": 251
+        "x": 564,
+        "y": 248
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 42.02
+      "t": 46.53
     },
     {
       "kind": "victory",
-      "t": 42.63,
+      "t": 47.14,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 88.8,
+  "min_focus": 86.5,
   "notes": "boss_warlord — cleric+warrior. Standard front-line tank and healer layout, pivoting to protect the column and target the boss's support shamans/archers first.",
   "outcome": "victory",
   "towers": [
@@ -628,9 +692,9 @@
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 42,
+      "focus_generated": 47,
       "focus_spent": 0,
-      "hp_final": 169.0,
+      "hp_final": 173.0,
       "hp_max": 200.0,
       "name": "Column",
       "position": {

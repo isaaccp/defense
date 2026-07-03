@@ -2,31 +2,31 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 78,
+      "damage_dealt": 103,
       "damage_healed": 0,
-      "enemies_killed": 6,
-      "focus_generated": 19,
-      "focus_spent": 85,
-      "hp_final": 42.0,
+      "enemies_killed": 7,
+      "focus_generated": 25,
+      "focus_spent": 106,
+      "hp_final": 45.0,
       "hp_max": 45.0,
       "name": "Larian",
       "position": {
-        "x": 341,
-        "y": 219
+        "x": 179,
+        "y": 190
       }
     },
     {
       "alive": true,
-      "damage_dealt": 80,
+      "damage_dealt": 57,
       "damage_healed": 0,
-      "enemies_killed": 5,
-      "focus_generated": 95,
-      "focus_spent": 49,
-      "hp_final": 40.2,
+      "enemies_killed": 4,
+      "focus_generated": 100,
+      "focus_spent": 32,
+      "hp_final": 35.8,
       "hp_max": 60.0,
       "name": "Godrick",
       "position": {
-        "x": 527,
+        "x": 514,
         "y": 268
       }
     }
@@ -355,11 +355,11 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/rogue+warrior.json",
-  "elapsed_seconds": 35.77,
+  "elapsed_seconds": 44.93,
   "enemies": {
     "alive_final": [],
-    "killed": 12,
-    "spawned": 12
+    "killed": 14,
+    "spawned": 14
   },
   "events": [
     {
@@ -449,11 +449,11 @@
       "actor_key": "Orc Warrior#0",
       "at": {
         "x": 515,
-        "y": 273
+        "y": 274
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 8.4
+      "t": 8.42
     },
     {
       "actor": "Orc Berserker",
@@ -474,7 +474,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 9.35
+      "t": 9.33
     },
     {
       "actor": "Orc Grunt",
@@ -483,24 +483,24 @@
         "x": 517,
         "y": 274
       },
-      "killed_by": "Godrick",
+      "killed_by": "Larian",
       "kind": "death",
-      "t": 9.98
+      "t": 9.99
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 490,
+        "x": 487,
         "y": 279
       },
-      "killed_by": "Godrick",
+      "killed_by": "Larian",
       "kind": "death",
-      "t": 10.51
+      "t": 11.02
     },
     {
       "actor": "Orc Berserker",
-      "actor_key": "Orc Berserker#1",
+      "actor_key": "Orc Berserker#2",
       "at": {
         "x": 650,
         "y": 260
@@ -512,23 +512,23 @@
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 516,
-        "y": 270
+        "x": 515,
+        "y": 268
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 12.06
+      "t": 12.03
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#0",
       "at": {
-        "x": 498,
-        "y": 276
+        "x": 487,
+        "y": 277
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 13.25
+      "t": 13.6
     },
     {
       "actor": "Orc Warlord",
@@ -561,29 +561,49 @@
       "t": 17.5
     },
     {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#3",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#3",
       "at": {
-        "x": 250,
-        "y": 100
+        "x": 650,
+        "y": 260
       },
       "kind": "spawn",
-      "t": 17.5
+      "t": 17.51
     },
     {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#3",
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#2",
       "at": {
         "x": 250,
         "y": 100
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 19.4
+      "t": 19.02
     },
     {
       "actor": "Orc Archer",
-      "actor_key": "Orc Archer#2",
+      "actor_key": "Orc Archer#4",
+      "at": {
+        "x": 250,
+        "y": 100
+      },
+      "kind": "spawn",
+      "t": 19.52
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#5",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 19.52
+    },
+    {
+      "actor": "Orc Archer",
+      "actor_key": "Orc Archer#3",
       "at": {
         "x": 250,
         "y": 100
@@ -593,46 +613,90 @@
       "t": 20.25
     },
     {
+      "actor": "Godrick",
+      "actor_key": "Godrick#1",
+      "at": {
+        "x": 514,
+        "y": 268
+      },
+      "hp_pct": 50,
+      "kind": "low_hp",
+      "t": 20.58
+    },
+    {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 547,
+        "x": 536,
         "y": 266
       },
       "killed_by": "Godrick",
       "kind": "death",
-      "t": 20.39
+      "t": 21.65
     },
     {
       "actor": "Godrick",
       "actor_key": "Godrick#1",
       "at": {
-        "x": 527,
+        "x": 514,
         "y": 268
       },
-      "hp_pct": 50,
+      "hp_pct": 25,
       "kind": "low_hp",
-      "t": 30.26
+      "t": 21.86
+    },
+    {
+      "actor": "Godrick",
+      "actor_key": "Godrick#1",
+      "at": {
+        "x": 514,
+        "y": 268
+      },
+      "killed_by": "Orc Warlord",
+      "kind": "death",
+      "t": 24.11
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 495,
+        "y": 262
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 26.3
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 457,
+        "y": 247
+      },
+      "killed_by": "Larian",
+      "kind": "death",
+      "t": 28.1
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 567,
-        "y": 265
+        "x": 269,
+        "y": 240
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 35.14
+      "t": 44.31
     },
     {
       "kind": "victory",
-      "t": 35.76,
+      "t": 44.92,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 86.9,
+  "min_focus": 74.5,
   "notes": "boss_warlord — rogue+warrior. Both hold the front line and pivot back to eliminate flankers closest to the Tower when they spawn.",
   "outcome": "victory",
   "towers": [
@@ -641,9 +705,9 @@
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 35,
+      "focus_generated": 44,
       "focus_spent": 0,
-      "hp_final": 200.0,
+      "hp_final": 175.0,
       "hp_max": 200.0,
       "name": "Column",
       "position": {
