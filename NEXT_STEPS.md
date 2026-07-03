@@ -1,7 +1,7 @@
 # Next Steps — Making the Game Fun
 
 ## Priority 1: Core Systems & The Campaign Spine
-- **Campaign Backbone (Level Content):** We currently lack the full suite of levels. Target an intermediate milestone: **Build 3 levels for each difficulty (1-4), plus one difficulty 5 boss level**. 
+- **Campaign Backbone (Level Content):** We currently lack the full suite of levels. Target an intermediate milestone: **Build 3 levels for each difficulty (1-4)**, and maintain the **completed difficulty 5 boss level**. 
   - Note: This involves utilizing unused enemies (Skeleton Warrior & Mage) as needed to create tactical puzzles. 
   - Note: This will likely require fixing/adding some behavior substrate first to ensure classes can beat them.
   - Note: Any new level we add (or existing levels lacking them) must include **sim pair files** for all valid character pairs.
@@ -33,6 +33,10 @@
 The core problem is that levels feel samey: a plain field, identical enemy behavior, and no meaningful player decisions during setup. The infrastructure for fixing all of this exists — it mainly needs content and one missing UI feature.
 
 **What was recently done:**
+- **Gruul the Orc Warlord** boss level (`05_boss_warlord.tscn`) fully implemented, balanced, and verified.
+- **Conceptually Precise Self-Targeting**: Updated targeting substrate to resolve `Type.SELF` targeting natively (in `conditional_target.gd`, `self_target_selector.gd`, and `action_target.gd`).
+- **`Can Affect Allies` Condition**: Implemented a reusable `AoeUnitCountConditionBase` and decoupled `AoeTargetingHelper.best_placement()` to support both allies and enemies.
+- **Simulator Behavior Cleared**: Removed illegal/out-of-class skill configurations from test behavior files (e.g. removing `Hold Person` from the Wizard) ensuring all 6 pairings win cleanly.
 - Orc Shaman support enemy type implemented (healing allies + kiting/bolt kiting).
 - Two Difficulty 4 levels (`04_shaman_chokepoint` and `04_orc_horde`) fully registered and verified.
 - Created and verified 12 simulation behavior config JSONs for all 6 character pairings on both Level 4 levels.
