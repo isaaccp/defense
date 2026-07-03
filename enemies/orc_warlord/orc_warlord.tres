@@ -287,16 +287,39 @@ armor = 2
 script = ExtResource("7_i7y5r")
 attributes = SubResource("Resource_ys8hy")
 
-[sub_resource type="Resource" id="Resource_jdprj"]
+[sub_resource type="Resource" id="Resource_vyne0"]
 script = ExtResource("11_cjo1v")
 
 [sub_resource type="Resource" id="Resource_j7k1b"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_vyne0")
+name = &"Battle Cry"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_7ir3x"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_be38f"]
+script = ExtResource("12_8mtpq")
+params = SubResource("Resource_7ir3x")
+name = &"Self"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_wurpy"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_be38f")
+action = SubResource("Resource_j7k1b")
+
+[sub_resource type="Resource" id="Resource_jdprj"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_6xnlm"]
 script = ExtResource("12_8mtpq")
 params = SubResource("Resource_jdprj")
 name = &"Shield Wall"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_be38f"]
+[sub_resource type="Resource" id="Resource_bxns4"]
 script = ExtResource("13_08q7g")
 defined = true
 value = 50
@@ -305,39 +328,30 @@ value = 50
 script = ExtResource("11_cjo1v")
 editor_string = "health {cmp} {int_value}"
 cmp = 1
-int_value = SubResource("Resource_be38f")
+int_value = SubResource("Resource_bxns4")
 
-[sub_resource type="Resource" id="Resource_wurpy"]
+[sub_resource type="Resource" id="Resource_uecnl"]
 script = ExtResource("12_8mtpq")
 params = SubResource("Resource_e7tbt")
 name = &"Target Health"
 skill_type = 3
 
-[sub_resource type="Resource" id="Resource_7ir3x"]
-script = ExtResource("11_cjo1v")
-
-[sub_resource type="Resource" id="Resource_6xnlm"]
-script = ExtResource("12_8mtpq")
-params = SubResource("Resource_7ir3x")
-name = &"Self"
-skill_type = 2
-
-[sub_resource type="Resource" id="Resource_bxns4"]
-script = ExtResource("10_0knxq")
-target_selection = SubResource("Resource_6xnlm")
-action = SubResource("Resource_j7k1b")
-conditions = Array[ExtResource("12_8mtpq")]([SubResource("Resource_wurpy")])
-
-[sub_resource type="Resource" id="Resource_uecnl"]
-script = ExtResource("11_cjo1v")
-
 [sub_resource type="Resource" id="Resource_fc4pc"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_be38f")
+action = SubResource("Resource_6xnlm")
+conditions = Array[ExtResource("12_8mtpq")]([SubResource("Resource_uecnl")])
+
+[sub_resource type="Resource" id="Resource_cg4js"]
+script = ExtResource("11_cjo1v")
+
+[sub_resource type="Resource" id="Resource_6knap"]
 script = ExtResource("12_8mtpq")
-params = SubResource("Resource_uecnl")
+params = SubResource("Resource_cg4js")
 name = &"Taunt"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_cg4js"]
+[sub_resource type="Resource" id="Resource_xoacr"]
 script = ExtResource("14_l4khg")
 name = &"Closest First"
 skill_type = 4
@@ -345,54 +359,54 @@ skill_type = 4
 [sub_resource type="Resource" id="Resource_xm5n1"]
 script = ExtResource("11_cjo1v")
 editor_string = "Enemy ({sort})"
-sort = SubResource("Resource_cg4js")
+sort = SubResource("Resource_xoacr")
 
-[sub_resource type="Resource" id="Resource_6knap"]
+[sub_resource type="Resource" id="Resource_x20el"]
 script = ExtResource("12_8mtpq")
 params = SubResource("Resource_xm5n1")
 name = &"Enemy"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_xoacr"]
+[sub_resource type="Resource" id="Resource_3c11g"]
 script = ExtResource("10_0knxq")
-target_selection = SubResource("Resource_6knap")
-action = SubResource("Resource_fc4pc")
+target_selection = SubResource("Resource_x20el")
+action = SubResource("Resource_6knap")
 
 [sub_resource type="Resource" id="Resource_t8063"]
 script = ExtResource("11_cjo1v")
 
-[sub_resource type="Resource" id="Resource_x20el"]
+[sub_resource type="Resource" id="Resource_eyt0e"]
 script = ExtResource("12_8mtpq")
 params = SubResource("Resource_t8063")
 name = &"Sword Attack"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_3c11g"]
+[sub_resource type="Resource" id="Resource_6j1cn"]
 script = ExtResource("10_0knxq")
-target_selection = SubResource("Resource_6knap")
-action = SubResource("Resource_x20el")
+target_selection = SubResource("Resource_x20el")
+action = SubResource("Resource_eyt0e")
 
 [sub_resource type="Resource" id="Resource_6kuty"]
 script = ExtResource("11_cjo1v")
 
-[sub_resource type="Resource" id="Resource_eyt0e"]
+[sub_resource type="Resource" id="Resource_0qekf"]
 script = ExtResource("12_8mtpq")
 params = SubResource("Resource_6kuty")
 name = &"Move To"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_6j1cn"]
-script = ExtResource("10_0knxq")
-target_selection = SubResource("Resource_6knap")
-action = SubResource("Resource_eyt0e")
-
-[sub_resource type="Resource" id="Resource_0qekf"]
-script = ExtResource("9_ugtw7")
-stored_rules = Array[ExtResource("10_0knxq")]([SubResource("Resource_bxns4"), SubResource("Resource_xoacr"), SubResource("Resource_3c11g"), SubResource("Resource_6j1cn")])
-
 [sub_resource type="Resource" id="Resource_5s8jr"]
+script = ExtResource("10_0knxq")
+target_selection = SubResource("Resource_x20el")
+action = SubResource("Resource_0qekf")
+
+[sub_resource type="Resource" id="Resource_vqlj1"]
+script = ExtResource("9_ugtw7")
+stored_rules = Array[ExtResource("10_0knxq")]([SubResource("Resource_wurpy"), SubResource("Resource_fc4pc"), SubResource("Resource_3c11g"), SubResource("Resource_6j1cn"), SubResource("Resource_5s8jr")])
+
+[sub_resource type="Resource" id="Resource_wbdya"]
 script = ExtResource("8_3jqx0")
-stored_behavior = SubResource("Resource_0qekf")
+stored_behavior = SubResource("Resource_vqlj1")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rteiu"]
 
@@ -409,7 +423,7 @@ metadata/_custom_type_script = "uid://v6beg7kksewm"
 script = ExtResource("16_id2il")
 name = "Orc Warlord"
 attributes_component_config = SubResource("Resource_s1f6u")
-behavior_component_config = SubResource("Resource_5s8jr")
+behavior_component_config = SubResource("Resource_wbdya")
 collision_shape = SubResource("CircleShape2D_rteiu")
 animation_component_config = SubResource("Resource_yc8nv")
 hurtbox_component_config = SubResource("Resource_68yto")

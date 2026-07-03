@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b05bosswarlord"]
+[gd_scene format=3 uid="uid://b56mxx4ibkkev"]
 
 [ext_resource type="PackedScene" uid="uid://bfambsh0stg01" path="res://levels/stages/forest_ambush.tscn" id="1_stage"]
 [ext_resource type="PackedScene" uid="uid://cnsf1muqgpiu1" path="res://spawners/portal_spawner.tscn" id="2_spawner"]
@@ -61,15 +61,21 @@ amount = 1
 interval = 1.0
 initial_delay = 15.0
 
+[sub_resource type="Resource" id="Resource_placWarlordGuard"]
+script = ExtResource("11_plac")
+amount = 1
+interval = 2.0
+initial_delay = 15.0
+
 [sub_resource type="Resource" id="Resource_placArcher"]
 script = ExtResource("11_plac")
-amount = 2
+amount = 1
 interval = 2.0
 initial_delay = 17.0
 
 [sub_resource type="Resource" id="Resource_placShaman"]
 script = ExtResource("11_plac")
-amount = 2
+amount = 1
 interval = 2.0
 initial_delay = 17.0
 
@@ -108,7 +114,15 @@ placement_node = NodePath("../../Enemies")
 spawn_provider_config = SubResource("Resource_provWarlord")
 spawn_placer_config = SubResource("Resource_placWarlord")
 
-[node name="ArcherSpawner" parent="YSorted/Spawners" index="4" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
+[node name="WarlordGuardSpawner" parent="YSorted/Spawners" index="4" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
+position = Vector2(650, 260)
+placement_node = NodePath("../../Enemies")
+
+[node name="SpawnConfigComponent" parent="YSorted/Spawners/WarlordGuardSpawner" index="5" instance=ExtResource("3_cfg")]
+spawn_provider_config = SubResource("Resource_provWarrior")
+spawn_placer_config = SubResource("Resource_placWarlordGuard")
+
+[node name="ArcherSpawner" parent="YSorted/Spawners" index="5" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
 position = Vector2(250, 100)
 placement_node = NodePath("../../Enemies")
 
@@ -116,7 +130,7 @@ placement_node = NodePath("../../Enemies")
 spawn_provider_config = SubResource("Resource_provArcher")
 spawn_placer_config = SubResource("Resource_placArcher")
 
-[node name="ShamanSpawner" parent="YSorted/Spawners" index="5" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
+[node name="ShamanSpawner" parent="YSorted/Spawners" index="6" node_paths=PackedStringArray("placement_node") instance=ExtResource("2_spawner")]
 position = Vector2(250, 100)
 placement_node = NodePath("../../Enemies")
 

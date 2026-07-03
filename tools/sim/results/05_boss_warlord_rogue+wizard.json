@@ -2,12 +2,12 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 90,
+      "damage_dealt": 88,
       "damage_healed": 0,
-      "enemies_killed": 6,
-      "focus_generated": 22,
-      "focus_spent": 90,
-      "hp_final": 28.0,
+      "enemies_killed": 8,
+      "focus_generated": 24,
+      "focus_spent": 82,
+      "hp_final": 44.0,
       "hp_max": 45.0,
       "name": "Larian",
       "position": {
@@ -17,11 +17,11 @@
     },
     {
       "alive": true,
-      "damage_dealt": 66,
+      "damage_dealt": 69,
       "damage_healed": 0,
-      "enemies_killed": 5,
-      "focus_generated": 16,
-      "focus_spent": 44,
+      "enemies_killed": 4,
+      "focus_generated": 7,
+      "focus_spent": 50,
       "hp_final": 35.0,
       "hp_max": 35.0,
       "name": "Bernie",
@@ -287,11 +287,11 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/rogue+wizard.json",
-  "elapsed_seconds": 39.89,
+  "elapsed_seconds": 36.71,
   "enemies": {
     "alive_final": [],
-    "killed": 13,
-    "spawned": 13
+    "killed": 12,
+    "spawned": 12
   },
   "events": [
     {
@@ -323,7 +323,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 4.2
+      "t": 4.21
     },
     {
       "actor": "Orc Warrior",
@@ -333,7 +333,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 4.51
+      "t": 4.5
     },
     {
       "actor": "Orc Grunt",
@@ -374,13 +374,13 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 6.52
+      "t": 6.51
     },
     {
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 561,
+        "x": 560,
         "y": 272
       },
       "killed_by": "Larian",
@@ -401,7 +401,7 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 561,
+        "x": 560,
         "y": 265
       },
       "killed_by": "Bernie",
@@ -412,23 +412,23 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 545,
-        "y": 276
+        "x": 542,
+        "y": 285
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 9.88
+      "t": 9.87
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 431,
-        "y": 296
+        "x": 419,
+        "y": 281
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 11.28
+      "t": 11.24
     },
     {
       "actor": "Orc Berserker",
@@ -444,23 +444,23 @@
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 454,
-        "y": 272
+        "x": 464,
+        "y": 289
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 13.36
+      "t": 13.08
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#0",
       "at": {
-        "x": 410,
-        "y": 288
+        "x": 409,
+        "y": 287
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 14.22
+      "t": 14.24
     },
     {
       "actor": "Orc Warlord",
@@ -473,44 +473,45 @@
       "t": 15.51
     },
     {
-      "actor": "Orc Archer",
-      "actor_key": "Orc Archer#1",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 250,
-        "y": 100
+        "x": 650,
+        "y": 260
       },
       "kind": "spawn",
-      "t": 17.51
-    },
-    {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#2",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "kind": "spawn",
-      "t": 17.51
+      "t": 15.51
     },
     {
       "actor": "Orc Archer",
-      "actor_key": "Orc Archer#3",
+      "actor_key": "Orc Archer#2",
       "at": {
         "x": 250,
         "y": 100
       },
       "kind": "spawn",
-      "t": 19.51
+      "t": 17.5
     },
     {
       "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#4",
+      "actor_key": "Orc Shaman#3",
       "at": {
         "x": 250,
         "y": 100
       },
       "kind": "spawn",
-      "t": 19.51
+      "t": 17.5
+    },
+    {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 531,
+        "y": 273
+      },
+      "killed_by": "Bernie",
+      "kind": "death",
+      "t": 18.37
     },
     {
       "actor": "Orc Shaman",
@@ -521,29 +522,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 19.84
-    },
-    {
-      "actor": "Orc Archer",
-      "actor_key": "Orc Archer#1",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 20.75
-    },
-    {
-      "actor": "Larian",
-      "actor_key": "Larian#0",
-      "at": {
-        "x": 310,
-        "y": 215
-      },
-      "hp_pct": 50,
-      "kind": "low_hp",
-      "t": 21.28
+      "t": 19.69
     },
     {
       "actor": "Orc Archer",
@@ -554,38 +533,27 @@
       },
       "killed_by": "Bernie",
       "kind": "death",
-      "t": 21.37
-    },
-    {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#1",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 22.6
+      "t": 20.3
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 381,
-        "y": 291
+        "x": 387,
+        "y": 290
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 39.28
+      "t": 36.09
     },
     {
       "kind": "victory",
-      "t": 39.89,
+      "t": 36.7,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 36.8,
+  "min_focus": 27.1,
   "notes": "boss_warlord — rogue+wizard. Both characters stay right next to the Tower (Follow Tower) and act as a double-turret defense. They only engage enemies within 250 units, ensuring they stay grouped and immediately destroy the flank spawn.",
   "outcome": "victory",
   "towers": [
@@ -594,7 +562,7 @@
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 39,
+      "focus_generated": 36,
       "focus_spent": 0,
       "hp_final": 200.0,
       "hp_max": 200.0,

@@ -1,9 +1,12 @@
 [gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://c673kk6v3io7b"]
 
-[ext_resource type="Script" uid="uid://kd04k0ylxi71" path="res://behavior/actions/frost_nova_action.gd" id="1_lyrok"]
-[ext_resource type="Resource" uid="uid://dmi8jfkld1td3" path="res://game_logic/attack_types/magical.tres" id="2_ordby"]
-[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="3_o68nc"]
-[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="4_hmbi5"]
+[ext_resource type="Script" path="res://behavior/actions/frost_nova_action.gd" id="1_lyrok"]
+[ext_resource type="Resource" path="res://game_logic/attack_types/magical.tres" id="2_ordby"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="3_o68nc"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="4_hmbi5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_frost_nova_aoe"]
+radius = 80.0
 
 [sub_resource type="Resource" id="Resource_q8ns3"]
 script = ExtResource("3_o68nc")
@@ -11,9 +14,11 @@ script = ExtResource("3_o68nc")
 [resource]
 script = ExtResource("4_hmbi5")
 action_script = ExtResource("1_lyrok")
-supported_target_types = Array[int]([1, 3])
+supported_target_types = Array[int]([4, 3])
 attack_type = ExtResource("2_ordby")
 tags = Array[int]([1])
+aoe_shape = SubResource("CircleShape2D_frost_nova_aoe")
+aoe_placement = 1
 params = SubResource("Resource_q8ns3")
 skill_name = &"Frost Nova"
 skill_type = 1

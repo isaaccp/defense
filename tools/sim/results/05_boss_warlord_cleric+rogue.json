@@ -2,32 +2,32 @@
   "characters": [
     {
       "alive": true,
-      "damage_dealt": 76,
+      "damage_dealt": 75,
       "damage_healed": 0,
       "enemies_killed": 3,
-      "focus_generated": 11,
-      "focus_spent": 81,
+      "focus_generated": 13,
+      "focus_spent": 82,
       "hp_final": 45.0,
       "hp_max": 45.0,
       "name": "Larian",
       "position": {
-        "x": 348,
-        "y": 220
+        "x": 341,
+        "y": 219
       }
     },
     {
       "alive": true,
-      "damage_dealt": 74,
-      "damage_healed": 135,
-      "enemies_killed": 4,
-      "focus_generated": 8,
-      "focus_spent": 70,
-      "hp_final": 40.0,
+      "damage_dealt": 76,
+      "damage_healed": 120,
+      "enemies_killed": 6,
+      "focus_generated": 6,
+      "focus_spent": 74,
+      "hp_final": 27.0,
       "hp_max": 50.0,
       "name": "Puffin",
       "position": {
-        "x": 477,
-        "y": 271
+        "x": 473,
+        "y": 274
       }
     }
   ],
@@ -344,11 +344,11 @@
     "seed": 1.0
   },
   "config_path": "tools/sim/behaviors/level/05_boss_warlord/cleric+rogue.json",
-  "elapsed_seconds": 35.72,
+  "elapsed_seconds": 37.78,
   "enemies": {
     "alive_final": [],
-    "killed": 13,
-    "spawned": 13
+    "killed": 12,
+    "spawned": 12
   },
   "events": [
     {
@@ -369,7 +369,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 3.01
+      "t": 3.02
     },
     {
       "actor": "Orc Grunt",
@@ -380,7 +380,7 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 3.41
+      "t": 3.4
     },
     {
       "actor": "Orc Warrior",
@@ -390,7 +390,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 4.5
+      "t": 4.51
     },
     {
       "actor": "Orc Grunt",
@@ -406,12 +406,12 @@
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 576,
-        "y": 270
+        "x": 577,
+        "y": 269
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 5.14
+      "t": 5.11
     },
     {
       "actor": "Orc Grunt",
@@ -421,7 +421,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 6.02
+      "t": 6.03
     },
     {
       "actor": "Orc Warrior",
@@ -431,18 +431,18 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 6.51
+      "t": 6.52
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#1",
       "at": {
-        "x": 549,
+        "x": 550,
         "y": 271
       },
       "killed_by": "",
       "kind": "death",
-      "t": 7.87
+      "t": 7.86
     },
     {
       "actor": "Orc Berserker",
@@ -458,34 +458,34 @@
       "actor": "Orc Warrior",
       "actor_key": "Orc Warrior#0",
       "at": {
-        "x": 495,
+        "x": 497,
         "y": 277
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 8.97
+      "t": 8.98
     },
     {
       "actor": "Orc Grunt",
       "actor_key": "Orc Grunt#0",
       "at": {
-        "x": 519,
+        "x": 518,
         "y": 275
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 9.79
+      "t": 9.78
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#1",
       "at": {
-        "x": 486,
+        "x": 488,
         "y": 284
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 11.34
+      "t": 11.33
     },
     {
       "actor": "Orc Berserker",
@@ -495,7 +495,7 @@
         "y": 260
       },
       "kind": "spawn",
-      "t": 11.51
+      "t": 11.52
     },
     {
       "actor": "Orc Warrior",
@@ -506,18 +506,18 @@
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 12.35
+      "t": 12.34
     },
     {
       "actor": "Orc Berserker",
       "actor_key": "Orc Berserker#0",
       "at": {
-        "x": 473,
+        "x": 474,
         "y": 282
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 13.93
+      "t": 13.92
     },
     {
       "actor": "Orc Warlord",
@@ -530,8 +530,18 @@
       "t": 15.51
     },
     {
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
+      "at": {
+        "x": 650,
+        "y": 260
+      },
+      "kind": "spawn",
+      "t": 15.51
+    },
+    {
       "actor": "Orc Archer",
-      "actor_key": "Orc Archer#1",
+      "actor_key": "Orc Archer#2",
       "at": {
         "x": 250,
         "y": 100
@@ -541,7 +551,7 @@
     },
     {
       "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#2",
+      "actor_key": "Orc Shaman#3",
       "at": {
         "x": 250,
         "y": 100
@@ -550,99 +560,68 @@
       "t": 17.51
     },
     {
-      "actor": "Orc Archer",
-      "actor_key": "Orc Archer#3",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "kind": "spawn",
-      "t": 19.52
-    },
-    {
       "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#4",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "kind": "spawn",
-      "t": 19.52
-    },
-    {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#2",
+      "actor_key": "Orc Shaman#3",
       "at": {
         "x": 250,
         "y": 100
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 19.63
+      "t": 19.4
     },
     {
       "actor": "Orc Archer",
-      "actor_key": "Orc Archer#1",
+      "actor_key": "Orc Archer#2",
       "at": {
         "x": 250,
         "y": 100
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 20.86
+      "t": 20.23
     },
     {
-      "actor": "Orc Archer",
-      "actor_key": "Orc Archer#1",
+      "actor": "Orc Warrior",
+      "actor_key": "Orc Warrior#1",
       "at": {
-        "x": 250,
-        "y": 100
+        "x": 508,
+        "y": 271
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 22.1
-    },
-    {
-      "actor": "Orc Shaman",
-      "actor_key": "Orc Shaman#2",
-      "at": {
-        "x": 250,
-        "y": 100
-      },
-      "killed_by": "Larian",
-      "kind": "death",
-      "t": 22.71
+      "t": 21.86
     },
     {
       "actor": "Puffin",
       "actor_key": "Puffin#1",
       "at": {
-        "x": 494,
-        "y": 272
+        "x": 473,
+        "y": 274
       },
       "hp_pct": 50,
       "kind": "low_hp",
-      "t": 28.99
+      "t": 34.35
     },
     {
       "actor": "Orc Warlord",
       "actor_key": "Orc Warlord#0",
       "at": {
-        "x": 534,
-        "y": 269
+        "x": 511,
+        "y": 271
       },
       "killed_by": "Larian",
       "kind": "death",
-      "t": 35.1
+      "t": 37.16
     },
     {
       "kind": "victory",
-      "t": 35.72,
+      "t": 37.78,
       "victory_type": "KILL_ALL_ENEMIES"
     }
   ],
   "loss_type": null,
-  "min_focus": 0.1,
+  "min_focus": 0.0,
   "notes": "boss_warlord — cleric+rogue. Both hold the front line normally, but pivot back to eliminate flankers closest to the Tower when they spawn.",
   "outcome": "victory",
   "towers": [
@@ -651,7 +630,7 @@
       "damage_dealt": 0,
       "damage_healed": 0,
       "enemies_killed": 0,
-      "focus_generated": 35,
+      "focus_generated": 37,
       "focus_spent": 0,
       "hp_final": 200.0,
       "hp_max": 200.0,

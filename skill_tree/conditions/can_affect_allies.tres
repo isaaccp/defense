@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ConditionDef" format=3 uid="uid://bvyx2th0qkwq6"]
+
+[ext_resource type="Script" path="res://behavior/conditions/can_affect_allies_condition.gd" id="1_c_allies"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Script" path="res://behavior/conditions/condition_def.gd" id="4_cdef"]
+
+[sub_resource type="Resource" id="Resource_c_allies_params"]
+script = ExtResource("2_params")
+editor_string = "allies in best AoE placement {cmp} {int_value}"
+
+[resource]
+script = ExtResource("4_cdef")
+type = 4
+evaluator_script = ExtResource("1_c_allies")
+description_text = "Checks how many allies the action's AoE shape would catch in its best in-range placement, vs a count."
+params = SubResource("Resource_c_allies_params")
+skill_name = &"Can Affect Allies"
+skill_type = 3
+tree_type = 1

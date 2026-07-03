@@ -30,19 +30,16 @@
           },
           {
             "action": {
-              "name": "Hold Person"
+              "name": "Frost Nova"
             },
             "target": {
-              "name": "Enemy"
-            },
-            "sort": {
-              "name": "Closest First"
+              "name": "Self"
             },
             "condition": {
-              "name": "Target Distance",
+              "name": "Can Hit Enemies",
               "params": {
-                "cmp": "<",
-                "float_value": 120.0
+                "cmp": ">=",
+                "int_value": 1
               }
             }
           },
@@ -78,10 +75,7 @@
           },
           {
             "action": {
-              "name": "Move Away",
-              "params": {
-                "float_value": 100.0
-              }
+              "name": "Hold Person"
             },
             "target": {
               "name": "Enemy"
@@ -93,10 +87,11 @@
               "name": "Target Distance",
               "params": {
                 "cmp": "<",
-                "float_value": 90.0
+                "float_value": 120.0
               }
             }
           },
+
           {
             "action": {
               "name": "Seeking Bolt"
@@ -273,7 +268,7 @@
               "name": "Target Near Tower",
               "params": {
                 "cmp": "<",
-                "float_value": 120.0
+                "float_value": 250.0
               }
             }
           },

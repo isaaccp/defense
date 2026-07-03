@@ -17,40 +17,41 @@ class Placement:
 # Cache key: [actor_id, action_name]. Value: { "frame": int, "placement": Placement }.
 static var _cache: Dictionary = {}
 
-static func best_placement(actor: Actor, action: Action, side: SideComponent) -> Placement:
+static func best_placement(actor: Actor, action: Action, side: SideComponent, is_ally: bool = false) -> Placement:
 	var frame := Engine.get_physics_frames()
-	var key = [actor.get_instance_id(), action.def.skill_name]
+	var key = [actor.get_instance_id(), action.def.skill_name, is_ally]
 	var cached = _cache.get(key)
 	if cached and cached.frame == frame:
 		return cached.placement
-	var placement := _compute(actor, action, side)
+	var placement := _compute(actor, action, side, is_ally)
 	_cache[key] = {"frame": frame, "placement": placement}
 	return placement
 
-static func _compute(actor: Actor, action: Action, side: SideComponent) -> Placement:
+static func _compute(actor: Actor, action: Action, side: SideComponent, is_ally: bool = false) -> Placement:
 	var def := action.def
 	if def.aoe_placement == ActionDef.AoePlacement.NONE or not def.aoe_shape:
 		push_error("AoeTargetingHelper: action '%s' missing aoe_shape / aoe_placement" % def.name())
 		return Placement.new()
 
-	var enemies: Array[Vector2] = []
-	for e in side.enemies():
-		if is_instance_valid(e) and not (e as Actor).destroyed:
-			enemies.append((e as Node2D).global_position)
-	if enemies.is_empty():
+	var targets: Array[Vector2] = []
+	var units = side.allies() if is_ally else side.enemies()
+	for u in units:
+		if is_instance_valid(u) and not (u as Actor).destroyed:
+			targets.append((u as Node2D).global_position)
+	if targets.is_empty():
 		return Placement.new()
 
-	var candidates := _candidate_transforms(actor, action, enemies)
+	var candidates := _candidate_transforms(actor, action, targets)
 	if candidates.is_empty():
 		return Placement.new()
 
-	# Spatial grid keyed by cell coord -> indices into `enemies`. Cell size
+	# Spatial grid keyed by cell coord -> indices into `targets`. Cell size
 	# matches the shape's bounding radius so a candidate only needs to
 	# consult cells whose AABB overlaps the bounding circle.
 	var cell_size: float = max(_shape_bounding_radius(def.aoe_shape), 16.0)
 	var grid: Dictionary = {}
-	for i in enemies.size():
-		var p := enemies[i]
+	for i in targets.size():
+		var p := targets[i]
 		var c := Vector2i(int(floor(p.x / cell_size)), int(floor(p.y / cell_size)))
 		if not grid.has(c):
 			grid[c] = PackedInt32Array()
@@ -58,7 +59,7 @@ static func _compute(actor: Actor, action: Action, side: SideComponent) -> Place
 
 	var best := Placement.new()
 	for t in candidates:
-		var count := _count_in_shape_via_grid(def.aoe_shape, t, enemies, grid, cell_size)
+		var count := _count_in_shape_via_grid(def.aoe_shape, t, targets, grid, cell_size)
 		if count > best.count:
 			best.transform = t
 			best.count = count

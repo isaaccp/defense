@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://bvyx2th0qkwq5"]
 
-[ext_resource type="Script" uid="uid://c3uj0vllnss00" path="res://behavior/actions/consecrate_action.gd" id="1_acsc"]
-[ext_resource type="Script" uid="uid://dvampci5h4cfw" path="res://skill_tree/skill_params.gd" id="2_params"]
-[ext_resource type="Script" uid="uid://crhkt0fu3f7d8" path="res://behavior/actions/action_def.gd" id="3_adef"]
+[ext_resource type="Script" path="res://behavior/actions/consecrate_action.gd" id="1_acsc"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="2_params"]
+[ext_resource type="Script" path="res://behavior/actions/action_def.gd" id="3_adef"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_acsc_aoe"]
 radius = 60.0
@@ -13,7 +13,7 @@ script = ExtResource("2_params")
 [resource]
 script = ExtResource("3_adef")
 action_script = ExtResource("1_acsc")
-supported_target_types = Array[int]([1])
+supported_target_types = Array[int]([4])
 tags = Array[int]([1, 3, 4])
 aoe_shape = SubResource("CircleShape2D_acsc_aoe")
 aoe_placement = 1

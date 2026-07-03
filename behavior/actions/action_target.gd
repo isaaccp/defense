@@ -14,8 +14,10 @@ func _init(target: Target, position_type: Target.PositionType):
 # It can't be done in Action either because then it'd require Action to be passed
 # to ActionScene.
 func target_position() -> Vector2:
+	if not target.valid():
+		return Vector2.ZERO
 	match target.type:
-		Target.Type.ACTOR:
+		Target.Type.ACTOR, Target.Type.SELF:
 			if position_type == Target.PositionType.HURTBOX:
 				var hurtbox = HurtboxComponent.get_or_null(target.actor)
 				if hurtbox:

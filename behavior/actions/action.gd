@@ -192,6 +192,9 @@ func target_position(position_type: Target.PositionType = Target.PositionType.DE
 	return action_target.target_position()
 
 func spawn_melee_attack(scene: PackedScene, offset_distance: float) -> ActionScene:
+	if not target.valid():
+		action_finished()
+		return null
 	var spawned = scene.instantiate() as ActionScene
 	_initialize_action_scene(spawned)
 	var dir = attack_direction()

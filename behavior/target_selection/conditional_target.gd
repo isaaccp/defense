@@ -38,6 +38,13 @@ static func make_actor_conditional_target(actor_: Actor, evaluators: Array[Targe
 	target.condition_evaluators = evaluators
 	return target
 
+static func make_self_conditional_target(actor_: Actor, evaluators: Array[TargetActorConditionEvaluator]) -> ConditionalTarget:
+	var target = ConditionalTarget.new()
+	target.type = Type.SELF
+	target.actor = actor_
+	target.condition_evaluators = evaluators
+	return target
+
 # Implement
 static func make_actors_conditional_target(_actors: Array[Actor]) -> ConditionalTarget:
 	return null
