@@ -10,3 +10,6 @@ webrtc/lib/~lib*
 # Output of deps.py
 Digraph.*
 .antigravitycli/
+tools/sim/campaign_save_log.txt
+tools/sim/behaviors/cleric_heal.json
+tools/sim/behaviors/knight_closest.json

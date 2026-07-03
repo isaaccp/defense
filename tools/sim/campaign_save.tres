@@ -1,0 +1,325 @@
+[gd_resource type="Resource" script_class="RunSaveState" format=3]
+
+[ext_resource type="Script" path="res://gameplay_character.gd" id="1_2tbda"]
+[ext_resource type="Script" path="res://skill_tree/skill_tree_state.gd" id="2_ii142"]
+[ext_resource type="Script" path="res://game_logic/attributes/resistance.gd" id="3_n283k"]
+[ext_resource type="Script" path="res://game_logic/attributes/attributes.gd" id="4_al20v"]
+[ext_resource type="Script" path="res://behavior/stored_behavior.gd" id="5_h1duj"]
+[ext_resource type="Script" path="res://behavior/rule_def.gd" id="6_miohr"]
+[ext_resource type="Script" path="res://skill_tree/skill_params.gd" id="7_al20v"]
+[ext_resource type="Resource" path="res://skill_tree/meta_skills/priest_class.tres" id="7_kd33f"]
+[ext_resource type="Resource" path="res://skill_tree/meta_skills/knight_class.tres" id="8_6ata8"]
+[ext_resource type="Script" path="res://behavior/stored_param_skill.gd" id="8_h1duj"]
+[ext_resource type="Script" path="res://behavior/stored_skill.gd" id="9_miohr"]
+[ext_resource type="Resource" path="res://levels/main/main_levels.tres" id="9_qhvdy"]
+[ext_resource type="Script" path="res://run/relic_library_state.gd" id="10_1awcd"]
+[ext_resource type="Script" path="res://run/rewards/stage_rewards.gd" id="11_lqkam"]
+[ext_resource type="Script" path="res://run/rewards/reward_set.gd" id="12_5fek4"]
+[ext_resource type="Script" path="res://run/rewards/reward_def.gd" id="13_3cs3p"]
+[ext_resource type="Resource" path="res://run/rewards/rest.tres" id="14_xl8dg"]
+[ext_resource type="Script" path="res://run/rewards/relic_reward_def.gd" id="15_ior71"]
+[ext_resource type="Resource" path="res://run/rewards/trainer.tres" id="16_mknrj"]
+[ext_resource type="Script" path="res://run/run_save_state.gd" id="17_x5rd4"]
+[ext_resource type="Script" path="res://stats/stats.gd" id="18_ahrln"]
+[ext_resource type="Script" path="res://stats/aggregate_stats.gd" id="19_lqmtr"]
+
+[sub_resource type="Resource" id="Resource_s03gy"]
+script = ExtResource("2_ii142")
+skills = Array[StringName]([&"Ally", &"Enemy", &"Move To", &"Heal", &"Mace Attack", &"Closest First", &"Self", &"Idle", &"Hold Person", &"Holy Nova"])
+
+[sub_resource type="Resource" id="Resource_urbna"]
+script = ExtResource("4_al20v")
+speed = 30.0
+health = 50
+
+[sub_resource type="Resource" id="Resource_al20v"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_h1duj"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_al20v")
+name = &"Heal"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_miohr"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_kd33f"]
+script = ExtResource("7_al20v")
+editor_string = "Ally ({sort})"
+sort = SubResource("Resource_miohr")
+
+[sub_resource type="Resource" id="Resource_6ata8"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_kd33f")
+name = &"Ally"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_qhvdy"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_6ata8")
+action = SubResource("Resource_h1duj")
+
+[sub_resource type="Resource" id="Resource_1awcd"]
+script = ExtResource("5_h1duj")
+name = "cleric_heal_always"
+stored_rules = Array[ExtResource("6_miohr")]([SubResource("Resource_qhvdy")])
+
+[sub_resource type="Resource" id="Resource_qhv3w"]
+script = ExtResource("1_2tbda")
+name = "Puffin"
+starting_kit = "Healer"
+scene_id = 4
+description = "A healer frustrated with her previous life who recently left her town in search of adventure"
+behavior = SubResource("Resource_1awcd")
+acquired_skills = SubResource("Resource_s03gy")
+unlock_meta_skill = ExtResource("7_kd33f")
+available_skill_trees = Array[int]([4])
+attributes = SubResource("Resource_urbna")
+health = 26
+xp = 200
+relics = Array[StringName]([&"Healer\'s Joy"])
+relic_state = Dictionary[StringName, Dictionary]({
+&"Healer\'s Joy": {
+"healed_so_far": 75
+}
+})
+
+[sub_resource type="Resource" id="Resource_34pkj"]
+script = ExtResource("2_ii142")
+skills = Array[StringName]([&"Enemy", &"Ally", &"Closest First", &"Move To", &"Sword Attack", &"Charge", &"Self", &"Idle", &"Cleave", &"Shield Wall"])
+
+[sub_resource type="Resource" id="Resource_vj8fv"]
+script = ExtResource("4_al20v")
+speed = 30.0
+health = 60
+armor = 1
+
+[sub_resource type="Resource" id="Resource_lqkam"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_5fek4"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_lqkam")
+name = &"Heavy Strike"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_3cs3p"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_xl8dg"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_3cs3p")
+
+[sub_resource type="Resource" id="Resource_ior71"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_xl8dg")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_mknrj"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_ior71")
+action = SubResource("Resource_5fek4")
+
+[sub_resource type="Resource" id="Resource_x5rd4"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_ahrln"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_x5rd4")
+name = &"Sword Attack"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_lqmtr"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_j07ds"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_lqmtr")
+
+[sub_resource type="Resource" id="Resource_c8s3b"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_j07ds")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_8dtxr"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_c8s3b")
+action = SubResource("Resource_ahrln")
+
+[sub_resource type="Resource" id="Resource_16j30"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_cta18"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_16j30")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_p3bfq"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_pg4j5"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_p3bfq")
+
+[sub_resource type="Resource" id="Resource_diehb"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_pg4j5")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_p4yd5"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_diehb")
+action = SubResource("Resource_cta18")
+
+[sub_resource type="Resource" id="Resource_ikxa2"]
+script = ExtResource("5_h1duj")
+name = "knight_attack_closest"
+stored_rules = Array[ExtResource("6_miohr")]([SubResource("Resource_mknrj"), SubResource("Resource_8dtxr"), SubResource("Resource_p4yd5")])
+
+[sub_resource type="Resource" id="Resource_3jg4k"]
+script = ExtResource("1_2tbda")
+name = "Godrick"
+starting_kit = "Warrior"
+scene_id = 1
+description = "A young knight who had to flee the city guard after a sad misunderstanding"
+behavior = SubResource("Resource_ikxa2")
+acquired_skills = SubResource("Resource_34pkj")
+unlock_meta_skill = ExtResource("8_6ata8")
+available_skill_trees = Array[int]([2])
+attributes = SubResource("Resource_vj8fv")
+health = 60
+xp = 200
+relics = Array[StringName]([&"Giant\'s Belt"])
+relic_state = Dictionary[StringName, Dictionary]({
+&"Giant\'s Belt": {}
+})
+
+[sub_resource type="Resource" id="Resource_pdywq"]
+script = ExtResource("10_1awcd")
+available_relics = Array[StringName]([&"Vorpal Blade", &"Bracelet of Focus", &"Second Wind", &"Opportunist", &"Arcane Conduit", &"Collector", &"Ember Brand", &"Igniter Quiver", &"Echoing Ward", &"Blood Frenzy", &"Focused Mind", &"Momentum Crystal", &"Overflowing Chalice", &"Vampire\'s Tooth"])
+
+[sub_resource type="Resource" id="Resource_s3cdh"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([ExtResource("14_xl8dg")])
+
+[sub_resource type="Resource" id="Resource_xlqk4"]
+script = ExtResource("15_ior71")
+rolled_relic = &"Giant\'s Belt"
+display_name = "Sacred Chest"
+description = "Inside waits a relic of forgotten power."
+
+[sub_resource type="Resource" id="Resource_37yom"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([SubResource("Resource_xlqk4")])
+
+[sub_resource type="Resource" id="Resource_veyka"]
+script = ExtResource("11_lqkam")
+sets = Array[ExtResource("12_5fek4")]([SubResource("Resource_s3cdh"), SubResource("Resource_37yom")])
+
+[sub_resource type="Resource" id="Resource_kmqde"]
+script = ExtResource("15_ior71")
+rolled_relic = &"Healer\'s Joy"
+display_name = "Sacred Chest"
+description = "Inside waits a relic of forgotten power."
+
+[sub_resource type="Resource" id="Resource_463qv"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([SubResource("Resource_kmqde")])
+
+[sub_resource type="Resource" id="Resource_frd0i"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([ExtResource("14_xl8dg")])
+
+[sub_resource type="Resource" id="Resource_2jw5u"]
+script = ExtResource("11_lqkam")
+sets = Array[ExtResource("12_5fek4")]([SubResource("Resource_463qv"), SubResource("Resource_frd0i")])
+
+[sub_resource type="Resource" id="Resource_l34jb"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([ExtResource("16_mknrj")])
+
+[sub_resource type="Resource" id="Resource_07vyw"]
+script = ExtResource("15_ior71")
+rolled_relic = &"Spiked Pauldrons"
+display_name = "Sacred Chest"
+description = "Inside waits a relic of forgotten power."
+
+[sub_resource type="Resource" id="Resource_kvyfg"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([SubResource("Resource_07vyw")])
+
+[sub_resource type="Resource" id="Resource_5kh48"]
+script = ExtResource("11_lqkam")
+sets = Array[ExtResource("12_5fek4")]([SubResource("Resource_l34jb"), SubResource("Resource_kvyfg")])
+
+[sub_resource type="Resource" id="Resource_mdpaa"]
+script = ExtResource("15_ior71")
+rolled_relic = &"Reagent Pouch"
+display_name = "Sacred Chest"
+description = "Inside waits a relic of forgotten power."
+
+[sub_resource type="Resource" id="Resource_osmqr"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([SubResource("Resource_mdpaa")])
+
+[sub_resource type="Resource" id="Resource_2hp0l"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([ExtResource("16_mknrj")])
+
+[sub_resource type="Resource" id="Resource_uanoe"]
+script = ExtResource("11_lqkam")
+sets = Array[ExtResource("12_5fek4")]([SubResource("Resource_osmqr"), SubResource("Resource_2hp0l")])
+
+[sub_resource type="Resource" id="Resource_iwasv"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([ExtResource("16_mknrj")])
+
+[sub_resource type="Resource" id="Resource_8h3g1"]
+script = ExtResource("12_5fek4")
+rewards = Array[ExtResource("13_3cs3p")]([ExtResource("14_xl8dg")])
+
+[sub_resource type="Resource" id="Resource_82fmg"]
+script = ExtResource("11_lqkam")
+sets = Array[ExtResource("12_5fek4")]([SubResource("Resource_iwasv"), SubResource("Resource_8h3g1")])
+
+[sub_resource type="Resource" id="Resource_da7p4"]
+script = ExtResource("18_ahrln")
+
+[sub_resource type="Resource" id="Resource_j57no"]
+script = ExtResource("18_ahrln")
+
+[sub_resource type="Resource" id="Resource_8g5ja"]
+script = ExtResource("19_lqmtr")
+aggregate = SubResource("Resource_da7p4")
+tower_stats = SubResource("Resource_j57no")
+
+[sub_resource type="Resource" id="Resource_1yxli"]
+script = ExtResource("2_ii142")
+skills = Array[StringName]([&"Enemy", &"Ally", &"Self", &"Move To", &"Idle", &"Closest First"])
+
+[resource]
+script = ExtResource("17_x5rd4")
+gameplay_characters = Array[ExtResource("1_2tbda")]([SubResource("Resource_qhv3w"), SubResource("Resource_3jg4k")])
+level_provider = ExtResource("9_qhvdy")
+current_stage = 4
+relic_library_state = SubResource("Resource_pdywq")
+stats = SubResource("Resource_8g5ja")
+seed = 123
+reward_schedule = Array[ExtResource("11_lqkam")]([SubResource("Resource_veyka"), SubResource("Resource_2jw5u"), SubResource("Resource_5kh48"), SubResource("Resource_uanoe"), SubResource("Resource_82fmg")])
+unlocked_skills = SubResource("Resource_1yxli")
