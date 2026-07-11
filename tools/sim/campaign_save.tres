@@ -13,8 +13,10 @@
 [ext_resource type="Script" path="res://behavior/stored_skill.gd" id="9_miohr"]
 [ext_resource type="Resource" path="res://levels/main/main_levels.tres" id="9_qhvdy"]
 [ext_resource type="Script" path="res://run/relic_library_state.gd" id="10_1awcd"]
+[ext_resource type="Script" path="res://behavior/conditions/float_value.gd" id="10_miohr"]
 [ext_resource type="Script" path="res://run/rewards/stage_rewards.gd" id="11_lqkam"]
 [ext_resource type="Script" path="res://run/rewards/reward_set.gd" id="12_5fek4"]
+[ext_resource type="Script" path="res://behavior/conditions/int_value.gd" id="12_kd33f"]
 [ext_resource type="Script" path="res://run/rewards/reward_def.gd" id="13_3cs3p"]
 [ext_resource type="Resource" path="res://run/rewards/rest.tres" id="14_xl8dg"]
 [ext_resource type="Script" path="res://run/rewards/relic_reward_def.gd" id="15_ior71"]
@@ -25,47 +27,263 @@
 
 [sub_resource type="Resource" id="Resource_s03gy"]
 script = ExtResource("2_ii142")
-skills = Array[StringName]([&"Ally", &"Enemy", &"Move To", &"Heal", &"Mace Attack", &"Closest First", &"Self", &"Idle", &"Hold Person", &"Holy Nova"])
+skills = Array[StringName]([&"Ally", &"Enemy", &"Move To", &"Heal", &"Mace Attack", &"Closest First", &"Self", &"Idle", &"Hold Person", &"Holy Nova", &"Blessing of Haste", &"Smite"])
 
 [sub_resource type="Resource" id="Resource_urbna"]
 script = ExtResource("4_al20v")
 speed = 30.0
 health = 50
 
-[sub_resource type="Resource" id="Resource_al20v"]
+[sub_resource type="Resource" id="Resource_miohr"]
 script = ExtResource("7_al20v")
 
-[sub_resource type="Resource" id="Resource_h1duj"]
+[sub_resource type="Resource" id="Resource_kd33f"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_al20v")
+params = SubResource("Resource_miohr")
 name = &"Heal"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_miohr"]
+[sub_resource type="Resource" id="Resource_6ata8"]
 script = ExtResource("9_miohr")
 name = &"Closest First"
 skill_type = 4
 
-[sub_resource type="Resource" id="Resource_kd33f"]
+[sub_resource type="Resource" id="Resource_qhvdy"]
 script = ExtResource("7_al20v")
 editor_string = "Ally ({sort})"
-sort = SubResource("Resource_miohr")
+sort = SubResource("Resource_6ata8")
 
-[sub_resource type="Resource" id="Resource_6ata8"]
+[sub_resource type="Resource" id="Resource_1awcd"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_kd33f")
+params = SubResource("Resource_qhvdy")
 name = &"Ally"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_qhvdy"]
+[sub_resource type="Resource" id="Resource_lqkam"]
 script = ExtResource("6_miohr")
-target_selection = SubResource("Resource_6ata8")
-action = SubResource("Resource_h1duj")
+target_selection = SubResource("Resource_1awcd")
+action = SubResource("Resource_kd33f")
 
-[sub_resource type="Resource" id="Resource_1awcd"]
+[sub_resource type="Resource" id="Resource_5fek4"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_3cs3p"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_5fek4")
+name = &"Holy Nova"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_xl8dg"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_ior71"]
+script = ExtResource("7_al20v")
+editor_string = "Ally ({sort})"
+sort = SubResource("Resource_xl8dg")
+
+[sub_resource type="Resource" id="Resource_mknrj"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_ior71")
+name = &"Ally"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_x5rd4"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_mknrj")
+action = SubResource("Resource_3cs3p")
+
+[sub_resource type="Resource" id="Resource_ahrln"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_lqmtr"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_ahrln")
+name = &"Blessing of Haste"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_j07ds"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_c8s3b"]
+script = ExtResource("7_al20v")
+editor_string = "Ally ({sort})"
+sort = SubResource("Resource_j07ds")
+
+[sub_resource type="Resource" id="Resource_8dtxr"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_c8s3b")
+name = &"Ally"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_16j30"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_8dtxr")
+action = SubResource("Resource_lqmtr")
+
+[sub_resource type="Resource" id="Resource_cta18"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_p3bfq"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_cta18")
+name = &"Hold Person"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_pg4j5"]
+script = ExtResource("10_miohr")
+defined = true
+value = 200.0
+
+[sub_resource type="Resource" id="Resource_diehb"]
+script = ExtResource("7_al20v")
+editor_string = "distance {cmp} {float_value}"
+cmp = 1
+float_value = SubResource("Resource_pg4j5")
+
+[sub_resource type="Resource" id="Resource_p4yd5"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_diehb")
+name = &"Target Distance"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_ikxa2"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_vpio7"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_ikxa2")
+
+[sub_resource type="Resource" id="Resource_300hv"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_vpio7")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_qb5ng"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_300hv")
+action = SubResource("Resource_p3bfq")
+conditions = Array[ExtResource("8_h1duj")]([SubResource("Resource_p4yd5")])
+
+[sub_resource type="Resource" id="Resource_0v2t3"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_kvmkw"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_0v2t3")
+name = &"Smite"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_xciti"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_seq1b"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_xciti")
+
+[sub_resource type="Resource" id="Resource_od7j2"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_seq1b")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_02k41"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_od7j2")
+action = SubResource("Resource_kvmkw")
+
+[sub_resource type="Resource" id="Resource_ew5x5"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_8g1mt"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_ew5x5")
+name = &"Mace Attack"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_y3ixd"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_6bkip"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_y3ixd")
+
+[sub_resource type="Resource" id="Resource_h0jsm"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_6bkip")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_ai52h"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_h0jsm")
+action = SubResource("Resource_8g1mt")
+
+[sub_resource type="Resource" id="Resource_shcwn"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_ifya4"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_shcwn")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_hcq2h"]
+script = ExtResource("10_miohr")
+defined = true
+value = 130.0
+
+[sub_resource type="Resource" id="Resource_qw8ri"]
+script = ExtResource("7_al20v")
+editor_string = "distance {cmp} {float_value}"
+cmp = 5
+float_value = SubResource("Resource_hcq2h")
+
+[sub_resource type="Resource" id="Resource_o3idn"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_qw8ri")
+name = &"Target Distance"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_0dawg"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_1g4m7"]
+script = ExtResource("7_al20v")
+editor_string = "Ally ({sort})"
+sort = SubResource("Resource_0dawg")
+
+[sub_resource type="Resource" id="Resource_78s0t"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_1g4m7")
+name = &"Ally"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_jfxv4"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_78s0t")
+action = SubResource("Resource_ifya4")
+conditions = Array[ExtResource("8_h1duj")]([SubResource("Resource_o3idn")])
+
+[sub_resource type="Resource" id="Resource_xsyfs"]
 script = ExtResource("5_h1duj")
 name = "cleric_heal_always"
-stored_rules = Array[ExtResource("6_miohr")]([SubResource("Resource_qhvdy")])
+stored_rules = Array[ExtResource("6_miohr")]([SubResource("Resource_lqkam"), SubResource("Resource_x5rd4"), SubResource("Resource_16j30"), SubResource("Resource_qb5ng"), SubResource("Resource_02k41"), SubResource("Resource_ai52h"), SubResource("Resource_jfxv4")])
 
 [sub_resource type="Resource" id="Resource_qhv3w"]
 script = ExtResource("1_2tbda")
@@ -73,23 +291,23 @@ name = "Puffin"
 starting_kit = "Healer"
 scene_id = 4
 description = "A healer frustrated with her previous life who recently left her town in search of adventure"
-behavior = SubResource("Resource_1awcd")
+behavior = SubResource("Resource_xsyfs")
 acquired_skills = SubResource("Resource_s03gy")
 unlock_meta_skill = ExtResource("7_kd33f")
 available_skill_trees = Array[int]([4])
 attributes = SubResource("Resource_urbna")
-health = 26
+health = 50
 xp = 200
 relics = Array[StringName]([&"Healer\'s Joy"])
 relic_state = Dictionary[StringName, Dictionary]({
 &"Healer\'s Joy": {
-"healed_so_far": 75
+"healed_so_far": 375
 }
 })
 
 [sub_resource type="Resource" id="Resource_34pkj"]
 script = ExtResource("2_ii142")
-skills = Array[StringName]([&"Enemy", &"Ally", &"Closest First", &"Move To", &"Sword Attack", &"Charge", &"Self", &"Idle", &"Cleave", &"Shield Wall"])
+skills = Array[StringName]([&"Enemy", &"Ally", &"Closest First", &"Move To", &"Sword Attack", &"Charge", &"Self", &"Idle", &"Cleave", &"Shield Wall", &"Taunt", &"Whirlwind"])
 
 [sub_resource type="Resource" id="Resource_vj8fv"]
 script = ExtResource("4_al20v")
@@ -97,100 +315,338 @@ speed = 30.0
 health = 60
 armor = 1
 
-[sub_resource type="Resource" id="Resource_lqkam"]
+[sub_resource type="Resource" id="Resource_i1v4n"]
 script = ExtResource("7_al20v")
 
-[sub_resource type="Resource" id="Resource_5fek4"]
+[sub_resource type="Resource" id="Resource_vo1wa"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_lqkam")
+params = SubResource("Resource_i1v4n")
+name = &"Shield Wall"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_1b2e2"]
+script = ExtResource("12_kd33f")
+defined = true
+value = 80
+
+[sub_resource type="Resource" id="Resource_jbf2u"]
+script = ExtResource("7_al20v")
+editor_string = "health {cmp} {int_value}"
+cmp = 1
+int_value = SubResource("Resource_1b2e2")
+
+[sub_resource type="Resource" id="Resource_igccx"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_jbf2u")
+name = &"Target Health"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_4b5sj"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_y00pc"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_4b5sj")
+name = &"Self"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_wsxr3"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_y00pc")
+action = SubResource("Resource_vo1wa")
+conditions = Array[ExtResource("8_h1duj")]([SubResource("Resource_igccx")])
+
+[sub_resource type="Resource" id="Resource_rqql2"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_sqj45"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_rqql2")
+name = &"Taunt"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_epkpw"]
+script = ExtResource("12_kd33f")
+defined = true
+value = 50
+
+[sub_resource type="Resource" id="Resource_sje7v"]
+script = ExtResource("7_al20v")
+editor_string = "health {cmp} {int_value}"
+cmp = 5
+int_value = SubResource("Resource_epkpw")
+
+[sub_resource type="Resource" id="Resource_stcqm"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_sje7v")
+name = &"Target Health"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_o8yet"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_bv7yh"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_o8yet")
+
+[sub_resource type="Resource" id="Resource_x3f7t"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_bv7yh")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_i1ocx"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_x3f7t")
+action = SubResource("Resource_sqj45")
+conditions = Array[ExtResource("8_h1duj")]([SubResource("Resource_stcqm")])
+
+[sub_resource type="Resource" id="Resource_8vf82"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_7aov2"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_8vf82")
+name = &"Whirlwind"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_7aajo"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_8cedp"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_7aajo")
+
+[sub_resource type="Resource" id="Resource_62wfi"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_8cedp")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_ecpj1"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_62wfi")
+action = SubResource("Resource_7aov2")
+
+[sub_resource type="Resource" id="Resource_tliw4"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_ww0gx"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_tliw4")
+name = &"Cleave"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_xk4j1"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_x1niw"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_xk4j1")
+
+[sub_resource type="Resource" id="Resource_00sd8"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_x1niw")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_dmi5f"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_00sd8")
+action = SubResource("Resource_ww0gx")
+
+[sub_resource type="Resource" id="Resource_6fp3a"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_xtws7"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_6fp3a")
 name = &"Heavy Strike"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_3cs3p"]
+[sub_resource type="Resource" id="Resource_ts1nr"]
 script = ExtResource("9_miohr")
 name = &"Closest First"
 skill_type = 4
 
-[sub_resource type="Resource" id="Resource_xl8dg"]
+[sub_resource type="Resource" id="Resource_os5w4"]
 script = ExtResource("7_al20v")
 editor_string = "Enemy ({sort})"
-sort = SubResource("Resource_3cs3p")
+sort = SubResource("Resource_ts1nr")
 
-[sub_resource type="Resource" id="Resource_ior71"]
+[sub_resource type="Resource" id="Resource_2n3kv"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_xl8dg")
+params = SubResource("Resource_os5w4")
 name = &"Enemy"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_mknrj"]
+[sub_resource type="Resource" id="Resource_8wgxk"]
 script = ExtResource("6_miohr")
-target_selection = SubResource("Resource_ior71")
-action = SubResource("Resource_5fek4")
+target_selection = SubResource("Resource_2n3kv")
+action = SubResource("Resource_xtws7")
 
-[sub_resource type="Resource" id="Resource_x5rd4"]
+[sub_resource type="Resource" id="Resource_847y6"]
 script = ExtResource("7_al20v")
 
-[sub_resource type="Resource" id="Resource_ahrln"]
+[sub_resource type="Resource" id="Resource_d2xt7"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_x5rd4")
+params = SubResource("Resource_847y6")
 name = &"Sword Attack"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_lqmtr"]
+[sub_resource type="Resource" id="Resource_yhevy"]
 script = ExtResource("9_miohr")
 name = &"Closest First"
 skill_type = 4
 
-[sub_resource type="Resource" id="Resource_j07ds"]
+[sub_resource type="Resource" id="Resource_0r64d"]
 script = ExtResource("7_al20v")
 editor_string = "Enemy ({sort})"
-sort = SubResource("Resource_lqmtr")
+sort = SubResource("Resource_yhevy")
 
-[sub_resource type="Resource" id="Resource_c8s3b"]
+[sub_resource type="Resource" id="Resource_ue3u6"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_j07ds")
+params = SubResource("Resource_0r64d")
 name = &"Enemy"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_8dtxr"]
+[sub_resource type="Resource" id="Resource_ns3ei"]
 script = ExtResource("6_miohr")
-target_selection = SubResource("Resource_c8s3b")
-action = SubResource("Resource_ahrln")
+target_selection = SubResource("Resource_ue3u6")
+action = SubResource("Resource_d2xt7")
 
-[sub_resource type="Resource" id="Resource_16j30"]
+[sub_resource type="Resource" id="Resource_88isv"]
 script = ExtResource("7_al20v")
 
-[sub_resource type="Resource" id="Resource_cta18"]
+[sub_resource type="Resource" id="Resource_b5h48"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_16j30")
+params = SubResource("Resource_88isv")
+name = &"Charge"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_i1683"]
+script = ExtResource("10_miohr")
+defined = true
+value = 150.0
+
+[sub_resource type="Resource" id="Resource_4lvqw"]
+script = ExtResource("7_al20v")
+editor_string = "distance {cmp} {float_value}"
+cmp = 1
+float_value = SubResource("Resource_i1683")
+
+[sub_resource type="Resource" id="Resource_w0rc1"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_4lvqw")
+name = &"Target Distance"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_ddx31"]
+script = ExtResource("9_miohr")
+name = &"Closest First"
+skill_type = 4
+
+[sub_resource type="Resource" id="Resource_pidd1"]
+script = ExtResource("7_al20v")
+editor_string = "Enemy ({sort})"
+sort = SubResource("Resource_ddx31")
+
+[sub_resource type="Resource" id="Resource_lfmdt"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_pidd1")
+name = &"Enemy"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_eipot"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_lfmdt")
+action = SubResource("Resource_b5h48")
+conditions = Array[ExtResource("8_h1duj")]([SubResource("Resource_w0rc1")])
+
+[sub_resource type="Resource" id="Resource_ci2mh"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_6rm8w"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_ci2mh")
 name = &"Move To"
 skill_type = 1
 
-[sub_resource type="Resource" id="Resource_p3bfq"]
+[sub_resource type="Resource" id="Resource_f40cw"]
+script = ExtResource("10_miohr")
+defined = true
+value = 350.0
+
+[sub_resource type="Resource" id="Resource_d4vwl"]
+script = ExtResource("7_al20v")
+editor_string = "distance {cmp} {float_value}"
+cmp = 1
+float_value = SubResource("Resource_f40cw")
+
+[sub_resource type="Resource" id="Resource_hxbax"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_d4vwl")
+name = &"Target Distance"
+skill_type = 3
+
+[sub_resource type="Resource" id="Resource_3lrsn"]
 script = ExtResource("9_miohr")
 name = &"Closest First"
 skill_type = 4
 
-[sub_resource type="Resource" id="Resource_pg4j5"]
+[sub_resource type="Resource" id="Resource_ugtki"]
 script = ExtResource("7_al20v")
 editor_string = "Enemy ({sort})"
-sort = SubResource("Resource_p3bfq")
+sort = SubResource("Resource_3lrsn")
 
-[sub_resource type="Resource" id="Resource_diehb"]
+[sub_resource type="Resource" id="Resource_2yr7m"]
 script = ExtResource("8_h1duj")
-params = SubResource("Resource_pg4j5")
+params = SubResource("Resource_ugtki")
 name = &"Enemy"
 skill_type = 2
 
-[sub_resource type="Resource" id="Resource_p4yd5"]
+[sub_resource type="Resource" id="Resource_hc5ef"]
 script = ExtResource("6_miohr")
-target_selection = SubResource("Resource_diehb")
-action = SubResource("Resource_cta18")
+target_selection = SubResource("Resource_2yr7m")
+action = SubResource("Resource_6rm8w")
+conditions = Array[ExtResource("8_h1duj")]([SubResource("Resource_hxbax")])
 
-[sub_resource type="Resource" id="Resource_ikxa2"]
+[sub_resource type="Resource" id="Resource_esgrp"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_5w3ju"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_esgrp")
+name = &"Move To"
+skill_type = 1
+
+[sub_resource type="Resource" id="Resource_guorp"]
+script = ExtResource("7_al20v")
+
+[sub_resource type="Resource" id="Resource_y475h"]
+script = ExtResource("8_h1duj")
+params = SubResource("Resource_guorp")
+name = &"Tower"
+skill_type = 2
+
+[sub_resource type="Resource" id="Resource_k2x04"]
+script = ExtResource("6_miohr")
+target_selection = SubResource("Resource_y475h")
+action = SubResource("Resource_5w3ju")
+
+[sub_resource type="Resource" id="Resource_tpd1a"]
 script = ExtResource("5_h1duj")
 name = "knight_attack_closest"
-stored_rules = Array[ExtResource("6_miohr")]([SubResource("Resource_mknrj"), SubResource("Resource_8dtxr"), SubResource("Resource_p4yd5")])
+stored_rules = Array[ExtResource("6_miohr")]([SubResource("Resource_wsxr3"), SubResource("Resource_i1ocx"), SubResource("Resource_ecpj1"), SubResource("Resource_dmi5f"), SubResource("Resource_8wgxk"), SubResource("Resource_ns3ei"), SubResource("Resource_eipot"), SubResource("Resource_hc5ef"), SubResource("Resource_k2x04")])
 
 [sub_resource type="Resource" id="Resource_3jg4k"]
 script = ExtResource("1_2tbda")
@@ -198,7 +654,7 @@ name = "Godrick"
 starting_kit = "Warrior"
 scene_id = 1
 description = "A young knight who had to flee the city guard after a sad misunderstanding"
-behavior = SubResource("Resource_ikxa2")
+behavior = SubResource("Resource_tpd1a")
 acquired_skills = SubResource("Resource_34pkj")
 unlock_meta_skill = ExtResource("8_6ata8")
 available_skill_trees = Array[int]([2])
@@ -207,7 +663,12 @@ health = 60
 xp = 200
 relics = Array[StringName]([&"Giant\'s Belt"])
 relic_state = Dictionary[StringName, Dictionary]({
-&"Giant\'s Belt": {}
+&"Fortified": {},
+&"Giant\'s Belt": {},
+&"Hasted": {},
+&"Strength Surge": {},
+&"Swiftness": {},
+&"Taunted": {}
 })
 
 [sub_resource type="Resource" id="Resource_pdywq"]
@@ -317,7 +778,8 @@ skills = Array[StringName]([&"Enemy", &"Ally", &"Self", &"Move To", &"Idle", &"C
 script = ExtResource("17_x5rd4")
 gameplay_characters = Array[ExtResource("1_2tbda")]([SubResource("Resource_qhv3w"), SubResource("Resource_3jg4k")])
 level_provider = ExtResource("9_qhvdy")
-current_stage = 4
+current_stage = 5
+current_phase = 1
 relic_library_state = SubResource("Resource_pdywq")
 stats = SubResource("Resource_8g5ja")
 seed = 123
